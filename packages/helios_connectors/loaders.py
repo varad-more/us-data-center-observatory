@@ -20,7 +20,7 @@ from geoalchemy2 import WKTElement
 from sqlalchemy import select
 
 from helios_common.logging import get_logger
-from helios_common.vocabulary import AssertionClass, EvidencePolarity, ExtractionMethod
+from helios_common.vocabulary import AssertionClass, EvidencePolarity
 from helios_domain.models import (
     DocumentVersion,
     EvidenceRecord,
@@ -39,7 +39,7 @@ from helios_entity_resolution.names import OwnerClassification
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
 
-    from helios_connectors.types import NormalizedRecord
+    from helios_connectors.types import EvidenceItem, ExtractedField, NormalizedRecord
 
 logger = get_logger(__name__)
 
@@ -141,7 +141,7 @@ def load_parcel(
     document: SourceDocument,
     version: DocumentVersion,
     create_evidence: bool,
-) -> tuple[Parcel, EvidenceRecord | None]:
+) -> tuple[Parcel, list[EvidenceRecord]]:
     """Upsert a parcel and its ownership event, optionally recording evidence.
 
     Args:
@@ -153,7 +153,7 @@ def load_parcel(
         create_evidence: Whether this version is new and therefore worth citing.
 
     Returns:
-        The parcel and the evidence record, if one was created.
+        The parcel and any evidence records created.
     """
     payload = record.payload
     apn = payload["apn"]
@@ -199,19 +199,22 @@ def load_parcel(
 
     session.flush()
 
-    evidence = None
-    if create_evidence and record.evidence_kind:
-        evidence = _create_evidence(
-            session,
-            record=record,
-            document=document,
-            version=version,
-            parcel_id=parcel.id,
-            organization_id=organization.id if organization else None,
-        )
+    created: list[EvidenceRecord] = []
+    if create_evidence:
+        created = [
+            _create_evidence(
+                session,
+                item=item,
+                document=document,
+                version=version,
+                parcel_id=parcel.id,
+                organization_id=organization.id if organization else None,
+            )
+            for item in record.evidence
+        ]
 
-    _load_ownership_event(session, parcel, payload, evidence)
-    return parcel, evidence
+    _load_ownership_event(session, parcel, payload, created[0] if created else None)
+    return parcel, created
 
 
 def _resolve_parcel_owner(
@@ -367,7 +370,7 @@ def load_transmission_line(
 def _create_evidence(
     session: Session,
     *,
-    record: NormalizedRecord,
+    item: EvidenceItem,
     document: SourceDocument,
     version: DocumentVersion,
     parcel_id: uuid.UUID | None = None,
@@ -375,62 +378,47 @@ def _create_evidence(
     site_id: uuid.UUID | None = None,
 ) -> EvidenceRecord:
     """Create an evidence record citing a specific immutable document version."""
-    if record.observed_at is None:
-        raise ValueError(
-            f"Cannot create evidence for {record.source_native_id!r} without an observation date"
-        )
-
     evidence = EvidenceRecord(
         document_id=document.id,
         document_version_id=version.id,
         parcel_id=parcel_id,
         organization_id=organization_id,
         site_id=site_id,
-        evidence_kind=record.evidence_kind or "unclassified",
-        summary=record.evidence_summary or "",
-        snippet=_build_snippet(record),
-        snippet_locator=record.payload.get("locator"),
-        observed_at=record.observed_at,
-        assertion_class=str(AssertionClass.EXTRACTED),
-        extraction_method=str(ExtractionMethod.STRUCTURED_FEED),
+        evidence_kind=item.kind,
+        summary=item.summary,
+        snippet=item.snippet or _render_fields(item.fields),
+        snippet_locator=item.locator,
+        observed_at=item.observed_at,
+        assertion_class=str(item.assertion_class),
+        extraction_method=str(item.extraction_method),
         polarity=str(EvidencePolarity.SUPPORTING),
-        confidence=_aggregate_confidence(record),
+        confidence=item.confidence,
         parser_version=version.parser_version or "0.1.0",
-        normalized_values={"fields": [f.to_json() for f in record.fields]},
+        normalized_values={
+            "fields": [f.to_json() for f in item.fields],
+            "is_standing_condition": item.is_standing_condition,
+        },
     )
     session.add(evidence)
     session.flush()
     return evidence
 
 
-def _build_snippet(record: NormalizedRecord) -> str:
-    """Render a human-readable quotation of the extracted values.
+def _render_fields(fields: list[ExtractedField]) -> str:
+    """Render extracted values as a readable quotation.
 
     Structured feeds have no prose to quote, so the snippet is a faithful
-    rendering of the exact source fields that were read, each labelled with the
-    unit as printed. That still answers "show me where you read that".
+    rendering of the exact source fields that were read, each labelled with its
+    unit. That still answers "show me where you read that".
     """
     parts: list[str] = []
-    for extracted in record.fields:
+    for extracted in fields:
         if extracted.value is None and extracted.snippet:
             parts.append(extracted.snippet)
             continue
         unit = f" {extracted.normalized_unit}" if extracted.normalized_unit else ""
         parts.append(f"{extracted.name} = {extracted.value}{unit}")
     return "; ".join(parts)
-
-
-def _aggregate_confidence(record: NormalizedRecord) -> float:
-    """Combine per-field confidences into an evidence-level confidence.
-
-    The minimum is used rather than the mean: an evidence record is only as
-    trustworthy as its weakest constituent extraction, and averaging would let a
-    cluster of certain fields mask one that is a guess.
-    """
-    confidences = [f.confidence for f in record.fields if f.value is not None]
-    if not confidences:
-        return 0.5
-    return min(confidences)
 
 
 ENTITY_LOADERS = {

@@ -369,7 +369,7 @@ class IngestionPipeline:
                 version=version,
                 create_evidence=create_evidence,
             )
-            return 1 if evidence else 0
+            return len(evidence)
         if record.entity_type == "substation":
             load_substation(self.session, record, source=source, document=document)
             return 0

@@ -46,6 +46,7 @@ from helios_connectors.types import (
     ConnectorMetadata,
     DateRange,
     DiscoveryResult,
+    EvidenceItem,
     ExtractedField,
     FetchResult,
     HealthCheckResult,
@@ -58,7 +59,11 @@ from helios_connectors.types import (
 )
 from helios_document_intelligence.units import acres_from_sqft
 from helios_domain.ontology import StageEvidenceKind
-from helios_entity_resolution.names import analyze_owner_name, apply_pii_policy
+from helios_entity_resolution.names import (
+    OwnerAnalysis,
+    analyze_owner_name,
+    apply_pii_policy,
+)
 
 logger = get_logger(__name__)
 
@@ -430,14 +435,6 @@ class MaricopaAssessorConnector(BaseConnector):
             acres = acres_from_sqft(float(sqft))
             acres_assertion = AssertionClass.CALCULATED
 
-        use_description = (attributes.get("PropertyUseDescription") or "").strip().upper()
-        evidence_kind, evidence_summary = self._classify_evidence(
-            use_description=use_description,
-            acres=float(acres) if acres else None,
-            owner_is_organization=not owner_analysis.classification.is_personal,
-            deed_date=deed_date.date() if deed_date else None,
-        )
-
         fields = self._build_fields(
             attributes=attributes,
             locator=locator,
@@ -447,8 +444,15 @@ class MaricopaAssessorConnector(BaseConnector):
             owner_redacted=was_redacted,
         )
 
-        observed_source = deed_date or sale_date
-        observed = observed_source.date() if observed_source is not None else None
+        evidence = self._build_evidence(
+            attributes=attributes,
+            locator=locator,
+            fields=fields,
+            acres=float(acres) if acres else None,
+            owner_analysis=owner_analysis,
+            deed_date=deed_date.date() if deed_date else None,
+            sale_date=sale_date.date() if sale_date else None,
+        )
 
         payload: dict[str, Any] = {
             "apn": apn,
@@ -492,49 +496,120 @@ class MaricopaAssessorConnector(BaseConnector):
             source_native_id=apn,
             payload=payload,
             fields=fields,
-            evidence_kind=evidence_kind,
-            evidence_summary=evidence_summary,
-            observed_at=observed,
+            evidence=evidence,
             geometry_wkt=_esri_polygon_to_wkt(attributes.get("_geometry")),
             redactions_applied=["owner_name"] if was_redacted else [],
         )
 
-    def _classify_evidence(
+    def _build_evidence(
         self,
         *,
-        use_description: str,
+        attributes: dict[str, Any],
+        locator: str,
+        fields: list[ExtractedField],
         acres: float | None,
-        owner_is_organization: bool,
+        owner_analysis: OwnerAnalysis,
         deed_date: date | None,
-    ) -> tuple[str | None, str | None]:
-        """Decide what, if anything, makes this parcel evidentially interesting.
+        sale_date: date | None,
+    ) -> list[EvidenceItem]:
+        """Derive every distinct assertion this parcel row supports.
 
-        Returns ``(None, None)`` for ordinary parcels so that the overwhelming
-        majority of the county generates no evidence records at all.
+        One assessor row can carry three separable facts, each with its own date:
+        the transfer that happened, the entity that took title, and how the county
+        classifies the property *today*. Ordinary parcels yield none of them, so
+        the overwhelming majority of the county produces no evidence at all.
         """
+        use_description = (attributes.get("PropertyUseDescription") or "").strip().upper()
+        owner_is_organization = not owner_analysis.classification.is_personal
+        items: list[EvidenceItem] = []
+
         if DATA_CENTER_USE_DESCRIPTION in use_description:
-            return (
-                str(StageEvidenceKind.ASSESSOR_DATA_CENTER_CLASSIFICATION),
-                "County assessor classifies this parcel's property use as DATA CENTERS.",
+            # A standing condition, not an event: the county asserts this is the
+            # current use, so it is observed as of retrieval rather than as of the
+            # last deed. Dating it to the deed would make an operating facility
+            # look abandoned once the purchase aged.
+            items.append(
+                EvidenceItem(
+                    kind=str(StageEvidenceKind.ASSESSOR_DATA_CENTER_CLASSIFICATION),
+                    summary=(
+                        "Maricopa County Assessor currently classifies this parcel's "
+                        f"property use as {DATA_CENTER_USE_DESCRIPTION} "
+                        f"(use code {attributes.get('PropertyUseCode') or 'unknown'})."
+                    ),
+                    observed_at=self._as_of_date,
+                    confidence=0.95,
+                    assertion_class=AssertionClass.REPORTED,
+                    locator=f"{locator}.attributes.PropertyUseDescription",
+                    snippet=f"PropertyUseDescription = {attributes.get('PropertyUseDescription')}",
+                    fields=[f for f in fields if f.name == "land_use_description"],
+                    is_standing_condition=True,
+                )
             )
 
+        transfer_date = deed_date or sale_date
         is_industrial = any(hint in use_description for hint in _INDUSTRIAL_USE_HINTS)
         if (
-            acres is not None
+            transfer_date is not None
+            and acres is not None
             and acres >= LARGE_PARCEL_ACRE_THRESHOLD
             and is_industrial
             and owner_is_organization
         ):
-            when = f" recorded {deed_date.isoformat()}" if deed_date else ""
-            return (
-                str(StageEvidenceKind.LARGE_INDUSTRIAL_PARCEL_ACQUISITION),
-                (
-                    f"Organization-held industrial parcel of {acres:.1f} acres"
-                    f"{when}, at or above the {LARGE_PARCEL_ACRE_THRESHOLD:.0f}-acre "
-                    "campus-scale threshold."
-                ),
+            price = attributes.get("SalePrice")
+            price_text = f" for ${price:,.0f}" if price else ""
+            items.append(
+                EvidenceItem(
+                    kind=str(StageEvidenceKind.LARGE_INDUSTRIAL_PARCEL_ACQUISITION),
+                    summary=(
+                        f"Organization-held industrial parcel of {acres:.1f} acres "
+                        f"transferred{price_text} on {transfer_date.isoformat()}, at or above "
+                        f"the {LARGE_PARCEL_ACRE_THRESHOLD:.0f}-acre campus-scale threshold."
+                    ),
+                    observed_at=transfer_date,
+                    confidence=0.9,
+                    assertion_class=AssertionClass.REPORTED,
+                    locator=f"{locator}.attributes.DeedDate",
+                    snippet=(
+                        f"DeedNumber = {attributes.get('DeedNumber')}; "
+                        f"DeedDate = {transfer_date.isoformat()}; "
+                        f"LotSize_Acre = {acres}"
+                    ),
+                    fields=[f for f in fields if f.name in {"lot_size_acres", "deed_number"}],
+                )
             )
-        return None, None
+
+        if owner_analysis.is_suspected_shell and transfer_date is not None:
+            items.append(
+                EvidenceItem(
+                    kind=str(StageEvidenceKind.SHELL_ENTITY_OWNERSHIP),
+                    summary=(
+                        f"Title is held by {owner_analysis.raw_name}, whose name shows "
+                        f"single-purpose-entity characteristics "
+                        f"({'; '.join(owner_analysis.shell_indicators)}). This is a weak "
+                        "signal only: project-specific entities are routine in ordinary "
+                        "commercial real estate and imply no particular parent."
+                    ),
+                    observed_at=transfer_date,
+                    # Held low on purpose. This must never approach an attribution.
+                    confidence=0.45,
+                    assertion_class=AssertionClass.INFERRED,
+                    extraction_method=ExtractionMethod.PATTERN_RULE,
+                    locator=f"{locator}.attributes.OwnerName",
+                    snippet=f"OwnerName = {owner_analysis.raw_name}",
+                    fields=[f for f in fields if f.name == "owner_name"],
+                )
+            )
+
+        return items
+
+    @property
+    def _as_of_date(self) -> date:
+        """The date on which standing conditions are observed.
+
+        Retrieval time, because "the county classifies this parcel as X" is a
+        statement about the present that Helios verified when it fetched the row.
+        """
+        return utcnow().date()
 
     def _build_fields(
         self,

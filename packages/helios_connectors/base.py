@@ -144,14 +144,19 @@ class BaseConnector(ABC):
             issues.append(
                 ValidationIssue("source_native_id", "Source-native identifier is required")
             )
-        if record.evidence_kind and record.observed_at is None:
-            issues.append(
-                ValidationIssue(
-                    "observed_at",
-                    "Evidence-bearing records must carry an observation date so they can be "
-                    "placed on a timeline and correctly hidden by backtest cutoffs",
+        for item in record.evidence:
+            if item.observed_at is None:
+                issues.append(
+                    ValidationIssue(
+                        "observed_at",
+                        f"Evidence {item.kind!r} has no observation date, so it could not be "
+                        "placed on a timeline or correctly hidden by a backtest cutoff",
+                    )
                 )
-            )
+            if not item.summary:
+                issues.append(
+                    ValidationIssue(item.kind, "Evidence must carry a human-readable summary")
+                )
         for extracted in record.fields:
             if not 0.0 <= extracted.confidence <= 1.0:
                 issues.append(

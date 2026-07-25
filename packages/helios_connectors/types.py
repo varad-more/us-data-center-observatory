@@ -211,6 +211,32 @@ class ParseResult:
         return self.document is not None and self.error is None
 
 
+@dataclass(frozen=True, slots=True)
+class EvidenceItem:
+    """One dated, citable assertion derived from a source record.
+
+    A single source record routinely supports several distinct assertions with
+    different dates and different epistemic character. An assessor parcel row,
+    for example, reports both that a transfer occurred on a past date (an
+    **event**) and that the county currently classifies the property a certain
+    way (a **standing condition**). Collapsing those into one evidence record
+    would force a single observation date onto two facts and corrupt both the
+    timeline and any staleness reasoning.
+    """
+
+    kind: str
+    summary: str
+    observed_at: date
+    confidence: float = 0.8
+    assertion_class: AssertionClass = AssertionClass.EXTRACTED
+    extraction_method: ExtractionMethod = ExtractionMethod.STRUCTURED_FEED
+    locator: str | None = None
+    snippet: str | None = None
+    fields: list[ExtractedField] = field(default_factory=list)
+    is_standing_condition: bool = False
+    """True when the assertion describes a current state rather than a past event."""
+
+
 @dataclass(slots=True)
 class NormalizedRecord:
     """A source record mapped onto Helios domain concepts.
@@ -224,13 +250,16 @@ class NormalizedRecord:
     source_native_id: str
     payload: dict[str, Any]
     fields: list[ExtractedField] = field(default_factory=list)
-    evidence_kind: str | None = None
-    evidence_summary: str | None = None
-    observed_at: date | None = None
+    evidence: list[EvidenceItem] = field(default_factory=list)
     geometry_wkt: str | None = None
     warnings: list[str] = field(default_factory=list)
     redactions_applied: list[str] = field(default_factory=list)
     """Names of fields suppressed by PII policy, recorded for transparency."""
+
+    @property
+    def observed_at(self) -> date | None:
+        """Earliest observation date across this record's evidence."""
+        return min((e.observed_at for e in self.evidence), default=None)
 
 
 @dataclass(frozen=True, slots=True)
@@ -269,6 +298,7 @@ __all__ = [
     "ConnectorMetadata",
     "DateRange",
     "DiscoveryResult",
+    "EvidenceItem",
     "ExtractedField",
     "FetchResult",
     "HealthCheckResult",

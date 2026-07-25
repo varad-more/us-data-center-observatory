@@ -147,10 +147,36 @@ class TestNormalize:
         assert "recorder.maricopa.gov" in platypus.payload["last_deed_url"]
         assert platypus.payload["last_deed_number"] == "20130962087"
 
-    def test_flags_assessor_data_center_classification(self, records: list) -> None:
+    def test_separates_standing_classification_from_the_transfer_event(self, records: list) -> None:
+        """One assessor row carries facts with different dates and different natures."""
         platypus = _find(records, "PLATYPUS DEVELOPMENT LLC")
-        assert platypus.evidence_kind == str(StageEvidenceKind.ASSESSOR_DATA_CENTER_CLASSIFICATION)
-        assert platypus.evidence_summary is not None
+        by_kind = {e.kind: e for e in platypus.evidence}
+
+        classification = by_kind[str(StageEvidenceKind.ASSESSOR_DATA_CENTER_CLASSIFICATION)]
+        acquisition = by_kind[str(StageEvidenceKind.LARGE_INDUSTRIAL_PARCEL_ACQUISITION)]
+
+        assert classification.is_standing_condition is True
+        assert acquisition.is_standing_condition is False
+        assert acquisition.observed_at.isoformat() == "2013-11-04"
+        assert classification.observed_at > acquisition.observed_at
+
+    def test_shell_ownership_evidence_is_low_confidence_and_disclaims_attribution(
+        self, records: list
+    ) -> None:
+        platypus = _find(records, "PLATYPUS DEVELOPMENT LLC")
+        shell = next(
+            e for e in platypus.evidence if e.kind == str(StageEvidenceKind.SHELL_ENTITY_OWNERSHIP)
+        )
+        assert shell.confidence <= 0.5
+        assert shell.assertion_class is AssertionClass.INFERRED
+        assert "imply no particular parent" in shell.summary
+
+    def test_every_evidence_item_carries_a_locator_and_summary(self, records: list) -> None:
+        for record in records:
+            for item in record.evidence:
+                assert item.locator
+                assert item.summary
+                assert item.observed_at is not None
 
     def test_produces_multipolygon_wkt(self, records: list) -> None:
         platypus = _find(records, "PLATYPUS DEVELOPMENT LLC")
@@ -246,7 +272,7 @@ class TestPiiRedaction:
         parsed = connector.parse(residential_document)
         assert parsed.document is not None
         record = connector.normalize(parsed.document).records[0]
-        assert record.evidence_kind is None
+        assert record.evidence == []
 
 
 class TestLiveFetchIsBlockedInTests:

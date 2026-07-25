@@ -168,17 +168,47 @@ class TestParcelIngestion:
         assert version.version_number == 1
         assert version.content_length > 0
 
-    def test_creates_evidence_only_for_notable_parcels(
+    def test_creates_distinct_evidence_per_assertion(
         self,
         registered_sources: Session,
         assessor_connector: BaseConnector,
         store: FilesystemEvidenceStore,
     ) -> None:
+        """Each of the 14 parcels asserts a current classification; some also
+        assert a past transfer and single-purpose-entity ownership."""
         IngestionPipeline(registered_sources, assessor_connector, store, mode="fixture").run()
 
-        evidence = registered_sources.scalars(select(EvidenceRecord)).all()
-        assert len(evidence) == 14
-        assert all(e.evidence_kind == "assessor_data_center_classification" for e in evidence)
+        by_kind: dict[str, int] = {}
+        for record in registered_sources.scalars(select(EvidenceRecord)).all():
+            by_kind[record.evidence_kind] = by_kind.get(record.evidence_kind, 0) + 1
+
+        assert by_kind["assessor_data_center_classification"] == 14
+        assert by_kind["large_industrial_parcel_acquisition"] >= 1
+        assert by_kind["shell_entity_ownership"] >= 1
+
+    def test_standing_conditions_are_dated_to_observation_not_the_deed(
+        self,
+        registered_sources: Session,
+        assessor_connector: BaseConnector,
+        store: FilesystemEvidenceStore,
+    ) -> None:
+        """A current-use classification must not inherit a decade-old deed date."""
+        IngestionPipeline(registered_sources, assessor_connector, store, mode="fixture").run()
+
+        parcel = registered_sources.scalar(select(Parcel).where(Parcel.apn == "30433005S"))
+        assert parcel is not None
+        records = {
+            r.evidence_kind: r
+            for r in registered_sources.scalars(
+                select(EvidenceRecord).where(EvidenceRecord.parcel_id == parcel.id)
+            ).all()
+        }
+        classification = records["assessor_data_center_classification"]
+        acquisition = records["large_industrial_parcel_acquisition"]
+
+        assert acquisition.observed_at.isoformat() == "2013-11-04"
+        assert classification.observed_at > acquisition.observed_at
+        assert classification.normalized_values["is_standing_condition"] is True
 
     def test_every_evidence_record_has_complete_provenance(
         self,
@@ -267,6 +297,7 @@ class TestIdempotency:
         store: FilesystemEvidenceStore,
     ) -> None:
         """Duplicate evidence would inflate confidence scores without new information."""
+        counts = []
         for _ in range(2):
             connector = _replay(
                 MaricopaAssessorConnector,
@@ -274,8 +305,12 @@ class TestIdempotency:
                 "parcel-query:test:offset:0",
             )
             IngestionPipeline(registered_sources, connector, store, mode="fixture").run()
+            counts.append(
+                registered_sources.scalar(select(func.count()).select_from(EvidenceRecord))
+            )
 
-        assert registered_sources.scalar(select(func.count()).select_from(EvidenceRecord)) == 14
+        assert counts[0] == counts[1]
+        assert counts[0] > 0
 
     def test_second_identical_run_creates_no_duplicate_parcels(
         self,
