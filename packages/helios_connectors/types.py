@@ -268,6 +268,13 @@ class NormalizationResult:
 
     records: list[NormalizedRecord]
     rejected: int = 0
+    """Records that *should* have normalized but could not. A health signal."""
+
+    filtered: int = 0
+    """Records deliberately excluded by connector scope, such as distribution-voltage
+    circuits. Counted separately from ``rejected`` so that normal filtering does not
+    make a healthy connector look like it is failing."""
+
     warnings: list[str] = field(default_factory=list)
     error: str | None = None
 

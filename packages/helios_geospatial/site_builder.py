@@ -24,24 +24,33 @@ from __future__ import annotations
 import re
 import uuid
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING
+from decimal import Decimal
+from typing import TYPE_CHECKING, cast
 
 from geoalchemy2 import WKTElement
 from sqlalchemy import func, select, text
 
 from helios_common.logging import get_logger
-from helios_common.vocabulary import AssertionClass
+from helios_common.vocabulary import AssertionClass, EvidencePolarity, ExtractionMethod
 from helios_domain.models import (
+    DocumentVersion,
     EvidenceRecord,
     InfrastructureDependency,
     Parcel,
     Site,
     SiteParcelLink,
+    Substation,
 )
-from helios_domain.ontology import DevelopmentStage, InfrastructureKind, SiteKind
+from helios_domain.ontology import (
+    DevelopmentStage,
+    InfrastructureKind,
+    SiteKind,
+    StageEvidenceKind,
+)
 from helios_geospatial.correlation import (
     ADJACENCY_TOLERANCE_METERS,
     SUBSTATION_PROXIMITY_METERS,
+    SpatialMatch,
     compute_site_geometry,
     find_nearby_substations,
     find_nearby_transmission_lines,
@@ -254,6 +263,10 @@ def build_sites(
         session.flush()
 
         _refresh_site_geometry(session, site)
+        # The boundary must reach the database before infrastructure linking, which
+        # runs spatial SQL against `sites.boundary` rather than the ORM object.
+        session.flush()
+
         result.evidence_attached += _attach_parcel_evidence(session, site, cluster)
         result.dependencies_created += link_infrastructure(session, site)
 
@@ -372,7 +385,7 @@ def _refresh_site_geometry(session: Session, site: Site) -> None:
         return
     site.boundary = WKTElement(str(geometry["boundary_wkt"]), srid=4326)
     site.centroid = WKTElement(str(geometry["centroid_wkt"]), srid=4326)
-    site.total_acres = geometry["total_acres"]
+    site.total_acres = cast("Decimal | None", geometry["total_acres"])
 
 
 def _attach_parcel_evidence(session: Session, site: Site, cluster: list[Parcel]) -> int:
@@ -404,6 +417,14 @@ def _attach_parcel_evidence(session: Session, site: Site, cluster: list[Parcel])
     return attached
 
 
+MAX_DEPENDENCIES_PER_KIND = 8
+"""Cap on dependency rows per infrastructure kind.
+
+The East Valley grid is dense: an unbounded 3 km search returns tens of
+substations per site, which buries the two or three that matter. Keeping the
+nearest few preserves the signal without pretending the rest do not exist."""
+
+
 def link_infrastructure(
     session: Session,
     site: Site,
@@ -426,8 +447,9 @@ def link_infrastructure(
         Number of dependency rows created.
     """
     created = 0
+    substation_matches = find_nearby_substations(session, site.id, radius_meters=radius_meters)
 
-    for match in find_nearby_substations(session, site.id, radius_meters=radius_meters):
+    for index, match in enumerate(substation_matches[:MAX_DEPENDENCIES_PER_KIND]):
         existing = session.scalar(
             select(InfrastructureDependency).where(
                 InfrastructureDependency.site_id == site.id,
@@ -463,7 +485,13 @@ def link_infrastructure(
         )
         created += 1
 
-    for match in find_nearby_transmission_lines(session, site.id):
+        # Only the nearest substation, and only when it is close enough to be a
+        # plausible dedicated connection, earns an evidence record. Recording all
+        # of them would let ordinary urban grid density inflate confidence.
+        if index == 0 and is_blocking:
+            _record_substation_proximity_evidence(session, site, match)
+
+    for match in find_nearby_transmission_lines(session, site.id)[:MAX_DEPENDENCIES_PER_KIND]:
         existing = session.scalar(
             select(InfrastructureDependency).where(
                 InfrastructureDependency.site_id == site.id,
@@ -493,9 +521,79 @@ def link_infrastructure(
     return created
 
 
+def _record_substation_proximity_evidence(
+    session: Session, site: Site, match: SpatialMatch
+) -> EvidenceRecord | None:
+    """Create a citable evidence record for a close, transmission-class substation.
+
+    The evidence cites the OpenStreetMap document the substation came from, so
+    the claim remains traceable to a source even though the *proximity* itself is
+    a Helios calculation rather than something any source reported.
+    """
+    substation = session.get(Substation, match.target_id)
+    if substation is None or substation.source_document_id is None:
+        return None
+
+    existing = session.scalar(
+        select(EvidenceRecord).where(
+            EvidenceRecord.site_id == site.id,
+            EvidenceRecord.evidence_kind == str(StageEvidenceKind.DEDICATED_SUBSTATION_PROXIMITY),
+        )
+    )
+    if existing is not None:
+        return existing
+
+    version = session.scalars(
+        select(DocumentVersion)
+        .where(DocumentVersion.document_id == substation.source_document_id)
+        .order_by(DocumentVersion.version_number.desc())
+        .limit(1)
+    ).first()
+    if version is None:
+        return None
+
+    voltage = substation.max_voltage_kv
+    voltage_text = f" tagged {voltage:.0f} kV" if voltage else " with no recorded voltage"
+
+    evidence = EvidenceRecord(
+        document_id=substation.source_document_id,
+        document_version_id=version.id,
+        site_id=site.id,
+        evidence_kind=str(StageEvidenceKind.DEDICATED_SUBSTATION_PROXIMITY),
+        summary=(
+            f"{match.target_label}{voltage_text} lies {match.distance_meters:.0f} m from the "
+            "site boundary, close enough for a dedicated connection to be practical. "
+            "Proximity is a locational precondition, not evidence that this substation "
+            "serves the site."
+        ),
+        snippet=(
+            f"name = {substation.name}; operator = {substation.operator_name or 'unknown'}; "
+            f"max_voltage_kv = {voltage if voltage is not None else 'unknown'}"
+        ),
+        snippet_locator=(substation.attributes or {}).get("osm_url"),
+        observed_at=version.retrieved_at.date(),
+        assertion_class=str(AssertionClass.CALCULATED),
+        extraction_method=str(ExtractionMethod.GEOMETRY_OPERATION),
+        polarity=str(EvidencePolarity.SUPPORTING),
+        confidence=round(match.spatial_confidence, 4),
+        parser_version=version.parser_version or "0.1.0",
+        normalized_values={
+            "distance_meters": match.distance_meters,
+            "max_voltage_kv": voltage,
+            "operator_name": substation.operator_name,
+            "match_method": match.match_method,
+            "is_standing_condition": True,
+        },
+    )
+    session.add(evidence)
+    session.flush()
+    return evidence
+
+
 __all__ = [
     "CANDIDATE_MIN_ACRES",
     "HYPERSCALE_CAMPUS_MIN_ACRES",
+    "MAX_DEPENDENCIES_PER_KIND",
     "SiteBuildResult",
     "build_sites",
     "find_candidate_parcels",

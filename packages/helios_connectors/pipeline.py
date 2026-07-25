@@ -64,6 +64,7 @@ class RunSummary:
     items_parsed: int = 0
     items_normalized: int = 0
     items_rejected: int = 0
+    items_filtered: int = 0
     items_unchanged: int = 0
     documents_created: int = 0
     versions_created: int = 0
@@ -83,6 +84,7 @@ class RunSummary:
             "items_parsed": self.items_parsed,
             "items_normalized": self.items_normalized,
             "items_rejected": self.items_rejected,
+            "items_filtered": self.items_filtered,
             "items_unchanged": self.items_unchanged,
             "documents_created": self.documents_created,
             "versions_created": self.versions_created,
@@ -210,6 +212,7 @@ class IngestionPipeline:
 
             normalization = self.connector.normalize(parsed)
             summary.items_rejected += normalization.rejected
+            summary.items_filtered += normalization.filtered
 
             for record in normalization.records:
                 validation = self.connector.validate(record)
@@ -432,6 +435,7 @@ class IngestionPipeline:
         run.items_parsed = summary.items_parsed
         run.items_normalized = summary.items_normalized
         run.items_rejected = summary.items_rejected
+        run.items_filtered = summary.items_filtered
         run.items_unchanged = summary.items_unchanged
         run.documents_created = summary.documents_created
         run.versions_created = summary.versions_created

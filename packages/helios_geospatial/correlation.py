@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from sqlalchemy import text
 
@@ -299,7 +299,7 @@ def parcels_in_bbox(
     land_use_filter: str | None = None,
     min_acres: float | None = None,
     limit: int = 500,
-) -> list[dict[str, object]]:
+) -> list[dict[str, Any]]:
     """Query parcels intersecting a bounding box.
 
     Args:
@@ -349,7 +349,7 @@ def parcels_in_bbox(
     return [dict(row) for row in rows]
 
 
-def compute_site_geometry(session: Session, site_id: uuid.UUID) -> dict[str, object] | None:
+def compute_site_geometry(session: Session, site_id: uuid.UUID) -> dict[str, Any] | None:
     """Recompute a site's boundary, centroid, and acreage from its parcels.
 
     The boundary is the union of linked parcel geometries rather than a convex

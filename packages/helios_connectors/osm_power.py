@@ -271,6 +271,7 @@ class OsmPowerConnector(BaseConnector):
         """Map OSM elements onto substation and transmission-line records."""
         records: list[NormalizedRecord] = []
         rejected = 0
+        filtered = 0
         warnings = list(document.warnings)
 
         for element in document.records:
@@ -281,6 +282,7 @@ class OsmPowerConnector(BaseConnector):
                 elif power_type == "line":
                     record = self._normalize_line(element)
                 else:
+                    filtered += 1
                     continue
             except (ValueError, TypeError, KeyError) as exc:
                 rejected += 1
@@ -288,7 +290,9 @@ class OsmPowerConnector(BaseConnector):
                 continue
 
             if record is None:
-                rejected += 1
+                # Out of scope rather than broken: a distribution circuit or an
+                # element with no usable location.
+                filtered += 1
                 continue
             records.append(record)
 
@@ -296,9 +300,12 @@ class OsmPowerConnector(BaseConnector):
             "osm_power.normalized",
             substations=sum(1 for r in records if r.entity_type == "substation"),
             lines=sum(1 for r in records if r.entity_type == "transmission_line"),
+            filtered=filtered,
             rejected=rejected,
         )
-        return NormalizationResult(records=records, rejected=rejected, warnings=warnings)
+        return NormalizationResult(
+            records=records, rejected=rejected, filtered=filtered, warnings=warnings
+        )
 
     def _normalize_substation(self, element: dict[str, Any]) -> NormalizedRecord | None:
         """Normalize one substation element."""

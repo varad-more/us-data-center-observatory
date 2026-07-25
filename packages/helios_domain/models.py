@@ -177,6 +177,12 @@ class ConnectorRun(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     items_parsed: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     items_normalized: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     items_rejected: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    """Records that should have loaded but did not. Non-zero means investigate."""
+
+    items_filtered: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    """Records deliberately excluded by connector scope. Expected to be large and
+    healthy; kept apart from ``items_rejected`` so alerting stays meaningful."""
+
     items_unchanged: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     documents_created: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     versions_created: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
