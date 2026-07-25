@@ -1,0 +1,148 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helios"
+version = "0.1.0"
+description = "Helios Open AI Infrastructure Observatory - evidence-backed detection of hyperscale data-center development"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Project Helios Contributors" }]
+keywords = ["geospatial", "data-centers", "public-records", "provenance", "osint"]
+
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "sqlalchemy>=2.0.36",
+  "geoalchemy2>=0.15",
+  "alembic>=1.14",
+  "psycopg[binary]>=3.2",
+  "httpx>=0.27",
+  "beautifulsoup4>=4.12",
+  "lxml>=5.3",
+  "shapely>=2.0",
+  "pyproj>=3.7",
+  "numpy>=1.26",
+  "python-dateutil>=2.9",
+  "structlog>=24.4",
+  "orjson>=3.10",
+  "typer>=0.15",
+  "rich>=13.9",
+  "tenacity>=9.0",
+  "boto3>=1.35",
+  "python-multipart>=0.0.17",
+  "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+documents = [
+  "pymupdf>=1.24",
+  "pdfplumber>=0.11",
+]
+dev = [
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "pytest-asyncio>=0.24",
+  "ruff>=0.8",
+  "black>=24.10",
+  "mypy>=1.13",
+  "types-python-dateutil",
+  "respx>=0.21",
+  "pre-commit>=4.0",
+]
+
+[project.scripts]
+helios = "helios_worker.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["packages", "apps/api", "apps/worker"]
+include = ["helios_*"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "*.json", "*.yaml", "*.yml", "*.sql"]
+
+# ---------------------------------------------------------------- tooling ----
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["database/migrations/versions", "apps/web"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "TID", "PTH", "RUF", "ANN", "D"]
+ignore = [
+  "D100", "D104", "D105", "D107",  # module/package/magic/init docstrings not mandated
+  "ANN401",                         # Any is permitted in narrow adapter code
+  "B008",                           # FastAPI Depends() in defaults is idiomatic
+  "RUF012",                         # ClassVar annotation noise on declarative models
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN", "E501"]
+"scripts/**" = ["D", "ANN"]
+"packages/helios_domain/models.py" = ["D101"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = [
+  "helios_api", "helios_worker", "helios_common", "helios_domain",
+  "helios_connectors", "helios_document_intelligence", "helios_entity_resolution",
+  "helios_geospatial", "helios_scoring", "helios_observability",
+]
+
+[tool.mypy]
+python_version = "3.12"
+# Without an explicit package base, mypy treats `packages/` as a source root and
+# reports helios_connectors/types.py as shadowing the stdlib `types` module.
+mypy_path = "packages:apps/api:apps/worker"
+explicit_package_bases = true
+namespace_packages = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = false
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+exclude = ["database/migrations/versions", "apps/web", "build"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*", "scripts.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+markers = [
+  "unit: fast isolated tests with no external dependencies",
+  "integration: tests requiring PostgreSQL/PostGIS",
+  "contract: connector contract tests against recorded fixtures",
+  "e2e: full pipeline tests",
+  "live: tests that reach live public sources (deselected by default)",
+]
+filterwarnings = ["ignore::DeprecationWarning:passlib.*"]
+
+[tool.coverage.run]
+source = ["packages", "apps/api", "apps/worker"]
+omit = ["*/tests/*", "*/migrations/*", "*/__main__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+  "@abstractmethod",
+  "\\.\\.\\.",
+]

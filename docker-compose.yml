@@ -1,0 +1,131 @@
+# Local development stack for Project Helios.
+#
+# Four services, deliberately: a database, an object store, an API, and a web
+# interface. There is no message broker and no orchestrator, because at this
+# scale neither solves a measured problem - see docs/adr/0002-no-kafka-no-kubernetes.md.
+#
+#   docker compose up --build          start everything
+#   docker compose run --rm worker helios bootstrap   load real public records
+
+name: helios
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: helios
+      POSTGRES_PASSWORD: helios
+      POSTGRES_DB: helios
+      # Trigram search is used for organization-name blocking during entity
+      # resolution; PostGIS for everything spatial.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U helios -d helios"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  minio:
+    image: minio/minio:RELEASE.2024-10-13T13-34-11Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: helios
+      MINIO_ROOT_PASSWORD: heliosminio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Creates the evidence bucket once, then exits. The evidence store is
+  # append-only in application code; in production the bucket should also carry
+  # a policy denying s3:DeleteObject.
+  minio-init:
+    image: minio/mc:RELEASE.2024-10-08T09-37-26Z
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 helios heliosminio &&
+      mc mb --ignore-existing local/helios-evidence &&
+      mc version enable local/helios-evidence &&
+      echo 'evidence bucket ready'
+      "
+
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      HELIOS_DATABASE_URL: postgresql+psycopg://helios:helios@postgres:5432/helios
+      HELIOS_EVIDENCE_BACKEND: filesystem
+      HELIOS_EVIDENCE_ROOT: /var/lib/helios/evidence
+      HELIOS_ENVIRONMENT: local
+      HELIOS_LOG_FORMAT: console
+      HELIOS_API_CORS_ORIGINS: '["http://localhost:3000"]'
+      # Development-only token. Admin routes are refused entirely when unset.
+      HELIOS_ADMIN_API_TOKEN: local-dev-token
+    ports:
+      - "8000:8000"
+    volumes:
+      - evidence-data:/var/lib/helios/evidence
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn helios_api.main:app --host 0.0.0.0 --port 8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # One-shot container for ingestion and maintenance commands.
+  worker:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      HELIOS_DATABASE_URL: postgresql+psycopg://helios:helios@postgres:5432/helios
+      HELIOS_EVIDENCE_BACKEND: filesystem
+      HELIOS_EVIDENCE_ROOT: /var/lib/helios/evidence
+      HELIOS_LOG_FORMAT: console
+    volumes:
+      - evidence-data:/var/lib/helios/evidence
+    profiles: ["tools"]
+    entrypoint: ["helios"]
+    command: ["status"]
+
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      NEXT_PUBLIC_HELIOS_API_URL: http://localhost:8000
+      HELIOS_API_URL: http://api:8000
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres-data:
+  minio-data:
+  evidence-data:
