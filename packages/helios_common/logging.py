@@ -46,11 +46,13 @@ def configure_logging(level: str = "INFO", fmt: str = "json") -> None:
     else:
         processors.append(structlog.dev.ConsoleRenderer(colors=sys.stderr.isatty()))
 
+    # The stdlib factory is required rather than PrintLoggerFactory because
+    # `add_logger_name` reads `logger.name`, which only stdlib loggers expose.
     structlog.configure(
         processors=processors,
         wrapper_class=structlog.make_filtering_bound_logger(numeric_level),
-        logger_factory=structlog.PrintLoggerFactory(file=sys.stderr),
-        cache_logger_on_first_use=True,
+        logger_factory=structlog.stdlib.LoggerFactory(),
+        cache_logger_on_first_use=False,
     )
     logging.basicConfig(level=numeric_level, stream=sys.stderr, format="%(message)s", force=True)
     _CONFIGURED = True

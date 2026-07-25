@@ -102,6 +102,11 @@ known-first-party = [
 
 [tool.mypy]
 python_version = "3.12"
+# Without an explicit package base, mypy treats `packages/` as a source root and
+# reports helios_connectors/types.py as shadowing the stdlib `types` module.
+mypy_path = "packages:apps/api:apps/worker"
+explicit_package_bases = true
+namespace_packages = true
 warn_unused_configs = true
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
