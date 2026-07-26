@@ -36,6 +36,7 @@ from helios_domain.models import (
 )
 from helios_domain.ontology import OrganizationRole
 from helios_entity_resolution.names import OwnerClassification
+from helios_geospatial.addresses import find_parcels_by_address
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
@@ -371,6 +372,31 @@ def load_permit(
     if record.geometry_wkt:
         permit.location = _geom(record.geometry_wkt)
 
+    # Address-only sources (e.g. Mesa permits) resolve onto parcels here so site
+    # building can attach their evidence through the parcel graph.
+    if permit.parcel_id is None and permit.address_raw:
+        matches = find_parcels_by_address(
+            session,
+            permit.address_raw,
+            city=permit.jurisdiction,
+        )
+        if matches:
+            best = matches[0]
+            permit.parcel_id = best.parcel_id
+            attrs = dict(permit.attributes or {})
+            attrs["address_match"] = {
+                "method": best.match_method,
+                "confidence": best.confidence,
+                "normalized": best.normalized_query,
+                "apn": best.apn,
+            }
+            permit.attributes = attrs
+            if permit.location is None:
+                parcel = session.get(Parcel, best.parcel_id)
+                # Permits store a point; never copy the parcel polygon.
+                if parcel is not None and parcel.centroid is not None:
+                    permit.location = parcel.centroid
+
     session.flush()
 
     created: list[EvidenceRecord] = []
@@ -381,6 +407,7 @@ def load_permit(
                 item=item,
                 document=document,
                 version=version,
+                parcel_id=permit.parcel_id,
                 site_id=permit.site_id,
             )
             for item in record.evidence
@@ -389,6 +416,8 @@ def load_permit(
         for evidence in created:
             values = dict(evidence.normalized_values or {})
             values["permit_id"] = str(permit.id)
+            if permit.attributes.get("address_match"):
+                values["address_match"] = permit.attributes["address_match"]
             evidence.normalized_values = values
 
     return permit, created

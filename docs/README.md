@@ -2,7 +2,8 @@
 
 | Doc | Audience |
 |---|---|
-| [HANDOFF.md](./HANDOFF.md) | Next engineer/agent taking over the MVP |
+| [HANDOFF.md](./HANDOFF.md) | Next engineer/agent taking over |
+| [phase-1-acceptance.md](./phase-1-acceptance.md) | Phase 1 DoD checklist |
 | [MULTI_AGENT_SUPPORT.md](./MULTI_AGENT_SUPPORT.md) | Parallel workstreams and PR protocol |
 | [architecture.md](./architecture.md) | System layers and data flow |
 | [methodology.md](./methodology.md) | Assertion classes, stages, scoring |

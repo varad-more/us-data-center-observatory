@@ -22,10 +22,12 @@ from helios_common.vocabulary import ConnectorStatus
 from helios_connectors.azcc_edocket import AzccEdocketConnector
 from helios_connectors.epa_echo import EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
+from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
 from helios_connectors.registry import SOURCE_REGISTRY, registry_coverage_summary
 from helios_connectors.sync import sync_registry
+from helios_scoring.backtest import run_backtest
 from helios_domain.models import (
     EvidenceRecord,
     Parcel,
@@ -57,6 +59,7 @@ CONNECTORS: dict[str, Any] = {
     "maricopa-assessor-parcels": MaricopaAssessorConnector,
     "osm-power-infrastructure": OsmPowerConnector,
     "epa-echo-air-facilities": EpaEchoAirConnector,
+    "mesa-building-permits": MesaBuildingPermitsConnector,
     "azcc-edocket": AzccEdocketConnector,
 }
 
@@ -337,6 +340,39 @@ def status() -> None:
         console.print(site_table)
 
 
+@app.command("backtest")
+def backtest(
+    cases: Annotated[
+        str | None,
+        typer.Option(help="Path to backtest cases JSON; defaults to East Valley fixture"),
+    ] = None,
+) -> None:
+    """Replay historical cutoffs without mutating live site stage."""
+    from pathlib import Path
+
+    with session_scope() as session:
+        report = run_backtest(session, cases_path=Path(cases) if cases else None)
+
+    table = Table(title="Backtest results")
+    table.add_column("Project", style="cyan")
+    table.add_column("As of")
+    table.add_column("Predicted", justify="right")
+    table.add_column("Expected")
+    table.add_column("OK")
+    for case in report.cases:
+        table.add_row(
+            case.project_code,
+            case.as_of.isoformat(),
+            "-" if case.predicted_stage is None else str(case.predicted_stage),
+            f"{case.expected_min_stage}-{case.expected_max_stage}",
+            "[green]pass[/green]" if case.passed else "[red]fail[/red]",
+        )
+    console.print(table)
+    console.print(f"Accuracy: {report.passed}/{report.total} ({report.accuracy:.0%})")
+    if report.passed < report.total:
+        raise typer.Exit(code=1)
+
+
 @app.command("bootstrap")
 def bootstrap(
     live: Annotated[
@@ -369,6 +405,14 @@ def bootstrap(
             "[yellow]EPA ECHO ingest failed (often rate-limit). "
             "Continuing with remaining sources; re-run "
             "`helios ingest epa-echo-air-facilities` later.[/yellow]"
+        )
+    # Mesa permits need assessor parcels already loaded for address matching.
+    try:
+        ingest("mesa-building-permits")
+    except typer.Exit:
+        console.print(
+            "[yellow]Mesa permits ingest failed. Continuing; re-run "
+            "`helios ingest mesa-building-permits` later.[/yellow]"
         )
     ingest("azcc-edocket")
 

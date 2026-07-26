@@ -1,6 +1,7 @@
 # Project Helios — Agent Handoff
 
 **Read this first** before changing code. Companion: [`MULTI_AGENT_SUPPORT.md`](./MULTI_AGENT_SUPPORT.md).
+**Phase 1 status:** complete — see [`phase-1-acceptance.md`](./phase-1-acceptance.md).
 
 | Field | Value |
 |---|---|
@@ -9,8 +10,7 @@
 | PR | https://github.com/varad-more/project-helios/pull/1 |
 | Prior agent run | https://cursor.com/agents/bc-a717266a-57bd-4918-a7b7-33556a138547 |
 | Repo | https://github.com/varad-more/project-helios |
-| Scope lock | **Phase 0 + first sprint only** — no ML, satellite, Kafka, Kubernetes, or national coverage |
-| Tip commit (at handoff) | See `git log -1` on this branch; Phase 0 docs + EPA/ACC connectors landed after `5630a89` |
+| Scope lock | **Phase 1 complete; Phase 2 must not add ML, satellite, Kafka, Kubernetes, or national coverage without a measured need** |
 
 ---
 
@@ -22,212 +22,82 @@ Product rule (non-negotiable): an inferred value must never be rendered like a r
 
 ---
 
-## 2. What works today (MVP state)
-
-Locally runnable stack with real East Valley (AZ) data loaded via `helios bootstrap`:
+## 2. Phase 1 capability matrix
 
 | Layer | Status |
 |---|---|
 | PostGIS schema + Alembic (`0001`, `0002`) | Working |
 | Immutable evidence store (filesystem / S3) | Working |
 | Source registry (13 entries; honesty about gaps) | Working |
-| Connector SDK + pipeline | Working |
-| Maricopa Assessor connector | **Implemented** (live + fixtures) |
-| OSM power / Overpass connector | **Implemented** (live + fixtures) |
-| EPA ECHO air connector | **Implemented** (live + fixtures; may 429) |
-| ACC eDocket connector | **Fixture-only** (parser + fixtures; no live scrape) |
-| Permit loader + spatial attach to sites | Working |
-| Site clustering + infrastructure dependencies | Working |
-| PII redaction (natural-person / mailing) | Working |
-| Explainable rule-based scoring + stage history | Working |
-| FastAPI (sites, timeline, map, sources, analytics, exports, admin) | Working |
-| CLI (`helios …`) | Working |
-| Next.js + MapLibre UI | Working |
-| Docker Compose + Makefile | Working |
-| Phase 0 docs (ADRs, architecture, inventory, limitations, risks) | Working |
-| Unit / contract / integration / e2e smoke + Vitest | Working |
+| Maricopa Assessor | **Implemented** |
+| OSM power / Overpass | **Implemented** |
+| EPA ECHO air | **Implemented** (fixtures for CI; live may 429) |
+| Mesa building permits | **Implemented** (address→parcel match) |
+| ACC eDocket | **Fixture-only** |
+| Site clustering + infra + permit attach | Working |
+| PII redaction | Working |
+| Explainable scoring + `helios backtest` | Working |
+| FastAPI + CLI + Next.js/MapLibre | Working |
+| Phase 0/1 docs + acceptance checklist | Working |
+| Tests | unit / contract / integration / e2e + Vitest |
 
-**Live demo snapshot** (when DB is bootstrapped): ~13 sites, ~14 parcels, ~175 substations, ~42 evidence records. Flagship profile: **`AZ-MESA-001`** (Platypus Development LLC, ~83 acres, Signal Butte Rd, Mesa) — stage Operational, ~41% confidence, operator **not established**.
+Flagship: **`AZ-MESA-001`** (Platypus Development LLC, Signal Butte Rd, Mesa).
 
 ```bash
 helios status
 helios explain AZ-MESA-001
+helios backtest
 ```
 
 ---
 
-## 3. Repository map
-
-```
-apps/
-  api/helios_api/          FastAPI app + routers
-  web/                     Next.js 15 + MapLibre frontend
-  worker/helios_worker/    Typer CLI (`helios` entry point)
-packages/
-  helios_common/           config, hashing, evidence store, vocabularies
-  helios_domain/           SQLAlchemy models, ontology, sessions
-  helios_connectors/       registry, SDK, Maricopa/OSM/ECHO/ACC, pipeline
-  helios_geospatial/       site builder, correlation
-  helios_scoring/          rules + scoring service
-  helios_entity_resolution/
-  helios_document_intelligence/
-  helios_observability/    thin (registry coverage helper)
-database/
-  migrations/              Alembic
-  init/                    PostGIS extensions on first boot
-tests/
-  unit/ contract/ integration/ end_to_end/ fixtures/
-docs/                      ADRs, architecture, methodology, limitations, …
-infrastructure/docker/     API + web Dockerfiles
-```
-
----
-
-## 4. Quick start (next agent)
+## 3. Quick start
 
 ```bash
-# 1. Dependencies
-make install                 # .venv + editable install + apps/web npm install
-cp .env.example .env         # defaults are fine for local
-
-# 2. Database
-make db-up                   # postgres + minio
-make migrate
-# Ensure helios_test exists for pytest (create once if missing):
-#   docker compose exec postgres createdb -U helios helios_test
-
-# 3. Load East Valley data
-make bootstrap               # registry-sync → ingest → build-sites → score
-
-# 4. Run
-make api                     # http://127.0.0.1:8000  (OpenAPI at /docs)
-make web                     # http://localhost:3000   (NEXT_PUBLIC_HELIOS_API_URL)
-
-# 5. Verify
+make install && cp .env.example .env
+make db-up && make migrate && make bootstrap
+make api    # :8000
+make web    # :3000
 .venv/bin/pytest
-cd apps/web && npx tsc --noEmit
+cd apps/web && npm test && npm run typecheck
 ```
 
-Admin routes need `HELIOS_ADMIN_API_TOKEN` set; if unset, admin is **refused** (safe default). Compose example often uses `local-dev-token`.
+---
 
-Live fetch kill-switch: `HELIOS_ALLOW_LIVE_FETCH=false`.
+## 4. Architecture invariants (do not break)
+
+1. Assertion class is persisted data, not UI reconstruction.
+2. Evidence is content-addressed and immutable.
+3. Registry before fetch; no false `IMPLEMENTED` / `FIXTURE_ONLY`.
+4. Sites are hypotheses with anonymous codes; cluster = adjacency ∧ related ownership.
+5. Standing conditions ≠ events for staleness.
+6. Historical scoring requires `is_backtest=True`.
+7. PII redaction on by default.
+8. No Kafka / K8s / ML / satellite without measured need (ADR 0002).
 
 ---
 
-## 5. Architecture invariants (do not break)
+## 5. Recommended Phase 2 work
 
-1. **Assertion class is data, not UI.** Persist `reported|extracted|calculated|inferred|predicted|unknown` on facts; UI only badges what the API returns (`helios_common.vocabulary.AssertionClass`).
-2. **Evidence is content-addressed and immutable.** Versions keyed by SHA-256; never mutate bytes in place (`helios_common.evidence_store`).
-3. **Registry before fetch.** Every source is declared in `packages/helios_connectors/registry.py` with license, rate limit, and access limitations — including sources we cannot read.
-4. **Connector honesty.** `IMPLEMENTED` only if live code exists. `FIXTURE_ONLY` only if parser + fixtures exist. `PLANNED` otherwise. Do not invent coverage.
-5. **Sites are hypotheses.** Anonymous codes (`AZ-MESA-001`), not company brand names as identity. Clustering = **adjacency AND related ownership** (conservative under-clustering preferred).
-6. **Standing conditions ≠ events.** Assessor “DATA CENTERS” classification is a standing condition; do not staleness-punish it like an old deed date.
-7. **Historical scoring is opt-in.** `score_site(..., as_of=..., is_backtest=True)` required for past cutoffs — never silently rewrite live stage with a historical replay.
-8. **PII redaction on by default.** Natural-person names and owner mailing streets suppressed before persistence.
-9. **No Kafka / K8s / ML / satellite in this sprint.** Compose comment references ADRs that are not written yet — write them rather than adding infra.
+1. Grow labelled backtest corpus beyond the three East Valley cases.
+2. Mesa planning / zoning PDF agendas (document intelligence).
+3. Dust-control attribute join if AQD publishes usable fields.
+4. Optional score split: “is DC?” vs “stage progression.”
+5. Compose CI smoke (full stack bootstrap → bundle.zip).
+
+Do **not** scrape ACC viewstate or add satellite/ML to paper over gaps.
 
 ---
 
-## 6. Bugs already fixed (do not reintroduce)
-
-| Symptom | Root cause | Fix location |
-|---|---|---|
-| False marker hits (`TR` in `TRAN`) | Substring markers | Word-boundary markers in classify/name code |
-| APN merge `30433005S` ↔ `30433005` | Digit-only stripping | Keep alphanumeric APNs |
-| APS misclassified as government | `PUBLIC SERVICE` marker | Removed overly broad marker |
-| `L.L.C.` broke suffix stripping | Punctuation | Dotted-acronym canonicalize |
-| Old deed → zero confidence | Standing condition dated to deed | Multi-evidence + standing exemption in scoring |
-| Historical `as_of` downgraded live sites | No backtest flag | Require `is_backtest=True` |
-| Zero infrastructure deps after build | Geometry not flushed before spatial SQL | Flush after geometry refresh in site builder |
-| Filtered OSM lines counted as rejected | No filtered counter | `items_filtered` column + migration `0002` |
-| EPA ECHO shown as implemented | Registry lie | Status set to `PLANNED` |
-
----
-
-## 7. Known gaps / honesty debt
-
-### Remaining product gaps
-
-- **ACC eDocket is fixture-only by design.** Live ASP.NET search is not automated. Stage 3 recall for *new* filings still depends on refreshing fixtures or an agency export.
-- **EPA ECHO rate limits** (~300/hour). Bootstrap continues if ECHO ingest fails; re-run `helios ingest epa-echo-air-facilities` later. CI uses fixtures.
-- Assessor exposes **current deed only** → ownership history truncated.
-- Score mixes “is this a DC?” with “how far along?” — may need split later; do not paper over with ML yet.
-- OSM transmission distances are centroid-approximate.
-- Coverage still skewed to Stage 7 (assessor labels existing facilities) unless ACC/ECHO evidence attaches.
-- Mesa permits / planning PDFs / dust-control attributes still planned.
-- `helios_observability` is intentionally thin.
-
-### Out of scope until this sprint’s acceptance criteria are closed
-
-Satellite/Copernicus, national expansion, Kafka, Kubernetes, trained models, water-use scenarios, ACC live scraping of stateful ASP.NET search.
-
----
-
-## 8. Recommended next work (priority order)
-
-1. **Mesa building permits** — Socrata; needs trustworthy address→parcel matching in `helios_geospatial.correlation`.
-2. **Backtest harness** — historical `is_backtest` path exists; need labelled timelines + metrics.
-3. **Richer frontend tests** — map/timeline interaction beyond AssertionBadge.
-4. **Compose e2e** — full `docker compose` bootstrap → bundle.zip download in CI.
-5. **Optional:** refresh ACC fixtures when a human captures a real docket export.
-
-Do **not** start satellite or ML to paper over early-warning gaps.
-
----
-
-## 9. Key files cheat sheet
+## 6. Key files
 
 | Concern | Start here |
 |---|---|
-| Stages 0–8 | `packages/helios_domain/ontology.py` |
-| Assertion / source enums | `packages/helios_common/vocabulary.py` |
-| ORM tables | `packages/helios_domain/models.py` |
-| Source inventory | `packages/helios_connectors/registry.py` |
-| Connector contract | `packages/helios_connectors/base.py`, `types.py` |
-| Ingest pipeline | `packages/helios_connectors/pipeline.py` |
-| Site building | `packages/helios_geospatial/site_builder.py` |
-| Scoring rules | `packages/helios_scoring/rules.py`, `service.py` |
-| API surface | `apps/api/helios_api/main.py` + `routers/` |
-| CLI | `apps/worker/helios_worker/cli.py` |
-| Fixtures | `tests/fixtures/maricopa_assessor/`, `tests/fixtures/osm_power/` |
-| Config knobs | `.env.example`, `packages/helios_common/config.py` |
+| Acceptance | `docs/phase-1-acceptance.md` |
+| Stages / evidence kinds | `packages/helios_domain/ontology.py` |
+| Registry | `packages/helios_connectors/registry.py` |
+| Address matching | `packages/helios_geospatial/addresses.py` |
+| Backtest | `packages/helios_scoring/backtest.py` |
+| Mesa permits | `packages/helios_connectors/mesa_permits.py` |
 
-### Useful API routes
-
-- `GET /health`, `GET /ready`
-- `GET /sites`, `GET /sites/{id}`, timeline / evidence / score explanation
-- `GET /map/...` GeoJSON layers
-- `GET /sources`
-- `GET /exports/site/{id}/bundle.zip`
-- `/admin/*` — bearer token; refused if token unset
-
-### CLI
-
-```
-helios registry-sync | registry-show | ingest | health-check
-helios build-sites | score | explain | status | bootstrap
-```
-
----
-
-## 10. Verification checklist before claiming “done”
-
-- [ ] `helios bootstrap` completes without inventing operator identity
-- [ ] `helios explain AZ-MESA-001` shows rule contributions + assertion-aware language
-- [ ] Map and site detail pages load against live API
-- [ ] Evidence bundle zip downloads and references content-addressed docs
-- [ ] Registry UI/API shows planned/fixture sources and why
-- [ ] `pytest` green; `npx tsc --noEmit` green in `apps/web`
-- [ ] No new `IMPLEMENTED` registry entry without a real connector module
-- [ ] No Kafka/K8s/ML/satellite added under “just scaffolding”
-
----
-
-## 11. Environment notes for cloud agents
-
-- Prefer `make` targets; Python **≥3.12**; Postgres 16 + PostGIS 3.4.
-- Integration tests use **`HELIOS_TEST_DATABASE_URL`** and drop/recreate schema — never point that at the primary `helios` DB.
-- Evidence store default: `./data/evidence-store` (gitignored).
-- Screenshots from prior UI verification may exist under `/tmp/shots/` on the prior agent machine — not in git.
-
-When you finish a meaningful chunk: commit on this branch (or a new `cursor/<name>-8547` branch), push, and update PR #1 (or open a focused follow-up PR). Keep handoff sections 6–8 updated if you discover new landmines.
+CLI: `registry-sync`, `ingest`, `build-sites`, `score`, `explain`, `backtest`, `bootstrap`, `status`.

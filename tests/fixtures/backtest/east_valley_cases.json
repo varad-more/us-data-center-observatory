@@ -1,0 +1,27 @@
+{
+  "schema_version": "helios-backtest-cases/1",
+  "description": "Sparse labelled expectations for East Valley flagship sites. Stages are bands, not point estimates, until a fuller corpus exists.",
+  "cases": [
+    {
+      "project_code": "AZ-MESA-001",
+      "as_of": "2010-01-01",
+      "expected_min_stage": 0,
+      "expected_max_stage": 0,
+      "notes": "Before the 2013 acquisition; no dated evidence should remain."
+    },
+    {
+      "project_code": "AZ-MESA-001",
+      "as_of": "2014-06-01",
+      "expected_min_stage": 1,
+      "expected_max_stage": 3,
+      "notes": "After campus-scale acquisition; assessor classification is a standing condition dated at retrieval and is excluded by the cutoff."
+    },
+    {
+      "project_code": "AZ-MESA-001",
+      "as_of": "today",
+      "expected_min_stage": 7,
+      "expected_max_stage": 8,
+      "notes": "Standing assessor classification is dated at retrieval; use today so it remains in scope."
+    }
+  ]
+}
