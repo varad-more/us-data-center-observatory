@@ -1,6 +1,6 @@
 # Project Helios — Agent Handoff
 
-**Read this first** before changing code. Companion: [`MULTI_AGENT_SUPPORT.md`](./MULTI_AGENT_SUPPORT.md).
+**Read this first** before changing code. Companions: [`MULTI_AGENT_SUPPORT.md`](./MULTI_AGENT_SUPPORT.md), [`implementation.md`](./implementation.md) (main prompt + phase map).
 **Phase 1 status:** complete — see [`phase-1-acceptance.md`](./phase-1-acceptance.md).
 
 | Field | Value |

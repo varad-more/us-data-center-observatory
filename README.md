@@ -8,6 +8,7 @@ Every claim carries an **assertion class** (`reported` / `extracted` / `calculat
 
 | Document | Purpose |
 |---|---|
+| [`docs/implementation.md`](docs/implementation.md) | Main prompt, Phase 0–6 roadmap, what shipped |
 | [`docs/HANDOFF.md`](docs/HANDOFF.md) | Current MVP state, invariants, known gaps, next priorities |
 | [`docs/MULTI_AGENT_SUPPORT.md`](docs/MULTI_AGENT_SUPPORT.md) | Parallel workstreams, branch protocol, conflict hotspots |
 | [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |

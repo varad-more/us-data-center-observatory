@@ -1,7 +1,11 @@
 # Phase 1 acceptance criteria
 
-Phase 1 = the locally runnable East Valley observatory described by the Phase 1
-schema (`packages/helios_domain/models.py`) and the first product sprint.
+This checklist closes **repo Phase 1**: the locally runnable East Valley observatory
+defined by the Phase 1 schema (`packages/helios_domain/models.py`) and the main
+prompt’s **first sprint** / Phase 0+1 MVP slice.
+
+For the full product charter, the main prompt’s Phase 0–6 roadmap, and how that
+maps to what shipped, see [`implementation.md`](./implementation.md).
 
 **Out of scope for Phase 1:** ML models, satellite/Copernicus, Kafka, Kubernetes, national coverage, ACC live ASP.NET scraping.
 
