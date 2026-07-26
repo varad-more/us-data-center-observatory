@@ -179,7 +179,7 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         category=SourceCategory.ENVIRONMENTAL,
         base_url="https://echodata.epa.gov/echo/air_rest_services.get_facilities",
         access_method=AccessMethod.REST_JSON,
-        connector_status=ConnectorStatus.IMPLEMENTED,
+        connector_status=ConnectorStatus.PLANNED,
         update_frequency="weekly",
         rate_limit_per_second=1.0,
         rate_limit_notes="No published limit; Helios self-imposes 1 rps.",
@@ -195,9 +195,14 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
             "results call. Facility coordinates are sometimes geocoded rather than surveyed, "
             "so spatial matches need a distance tolerance."
         ),
-        connector_slug="epa-echo-air-facilities",
-        connector_entry_point="helios_connectors.epa_echo:EpaEchoAirConnector",
-        tags=("air-permits", "generators", "federal"),
+        notes=(
+            "Endpoint reachability was verified (17 permitted facilities returned for Mesa), "
+            "but no connector has been written yet, so this source contributes nothing to "
+            "the current evidence base. Backup-generator air permits are the most "
+            "diagnostic non-spatial data-centre signal available, making this the highest-"
+            "value connector to build next."
+        ),
+        tags=("air-permits", "generators", "federal", "next-sprint"),
     ),
     SourceRegistryEntry(
         slug="maricopa-aqd-dust-control",
