@@ -3,8 +3,6 @@ import { StatusPill } from "@/components/AssertionBadge";
 import { listSources } from "@/lib/api";
 import type { Source } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = { title: "Data sources" };
 
 const STATUS_TONE: Record<string, "positive" | "caution" | "neutral"> = {

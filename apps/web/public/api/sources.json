@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "src-maricopa-assessor",
+      "slug": "maricopa_assessor",
+      "name": "Maricopa County Assessor Parcel Data",
+      "agency": "Maricopa County Assessor",
+      "jurisdiction": "Maricopa County, AZ",
+      "category": "tax_assessor",
+      "base_url": "https://mcassessor.maricopa.gov",
+      "access_method": "bulk_download",
+      "update_frequency": "monthly",
+      "license_name": "Public Domain",
+      "license_url": "https://mcassessor.maricopa.gov/disclaimer",
+      "attribution_required": true,
+      "attribution_text": "Data provided by Maricopa County Assessor",
+      "robots_policy_status": "allowed",
+      "geographic_coverage": "Maricopa County",
+      "historical_coverage": "2000-present",
+      "contains_personal_data": true,
+      "reliability_score": 0.95,
+      "known_schema_issues": null,
+      "notes": "Primary source for parcel boundaries and property classifications.",
+      "connector_status": "implemented",
+      "connector_slug": "maricopa_assessor_connector",
+      "access_limitation": null,
+      "last_success_at": "2025-06-01T00:00:00Z",
+      "document_count": 1500
+    },
+    {
+      "id": "src-osm-power",
+      "slug": "osm_power",
+      "name": "OpenStreetMap Electrical Infrastructure",
+      "agency": "OpenStreetMap Foundation",
+      "jurisdiction": "Global",
+      "category": "utility_map",
+      "base_url": "https://overpass-api.de",
+      "access_method": "overpass_api",
+      "update_frequency": "realtime",
+      "license_name": "ODbL",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "attribution_required": true,
+      "attribution_text": "© OpenStreetMap contributors",
+      "robots_policy_status": "allowed",
+      "geographic_coverage": "Worldwide",
+      "historical_coverage": "Current",
+      "contains_personal_data": false,
+      "reliability_score": 0.85,
+      "known_schema_issues": null,
+      "notes": "Used for substation locations and transmission line mapping.",
+      "connector_status": "implemented",
+      "connector_slug": "osm_power_connector",
+      "access_limitation": null,
+      "last_success_at": "2025-06-01T00:00:00Z",
+      "document_count": 850
+    }
+  ],
+  "coverage_summary": {
+    "implemented": 2,
+    "fixture_only": 0,
+    "planned": 0
+  }
+}

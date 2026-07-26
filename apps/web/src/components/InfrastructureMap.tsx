@@ -21,6 +21,7 @@ import Map, {
 } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 
+import Link from "next/link";
 import type { FeatureCollection } from "@/lib/types";
 
 const EAST_VALLEY_VIEW = {
@@ -214,7 +215,7 @@ function SitePopup({ properties }: { properties: Record<string, unknown> }) {
         {" · "}
         {String(properties.evidence_count ?? 0)} evidence records
       </div>
-      <a href={`/sites/${String(properties.id)}`}>Open site profile</a>
+      <Link href={`/sites/${String(properties.id)}`}>Open site profile</Link>
     </div>
   );
 }

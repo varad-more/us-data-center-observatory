@@ -20,10 +20,23 @@ import {
   getMapSites,
   getSite,
   getTimeline,
+  listSites,
 } from "@/lib/api";
 import type { Dependency, Parcel, SiteDetail } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  try {
+    const sites = await listSites({ limit: 200 });
+    return sites.items.map((site) => ({ siteId: site.id }));
+  } catch {
+    return [
+      { siteId: "AZ-MESA-001" },
+      { siteId: "f272c49f-e2d2-4975-9aa8-0077384ede69" },
+      { siteId: "AZ-CHANDLER-001" },
+      { siteId: "3822e5b6-60f4-4e89-8da2-c33907a89140" },
+    ];
+  }
+}
 
 const STAGE_COUNT = 9;
 

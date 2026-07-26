@@ -10,8 +10,6 @@ import {
 } from "@/lib/api";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 
-export const dynamic = "force-dynamic";
-
 export default async function ObservatoryHome() {
   let data;
   try {

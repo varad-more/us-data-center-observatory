@@ -17,10 +17,11 @@ import {
   type SiteDetail,
 } from "./types";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_HELIOS_API_URL ??
-  process.env.HELIOS_API_URL ??
-  "http://127.0.0.1:8000";
+import fs from "fs/promises";
+import path from "path";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "/project-helios";
+export const API_BASE = process.env.NEXT_PUBLIC_API_BASE || `${BASE_PATH}/api`;
 
 export class ApiError extends Error {
   constructor(
@@ -34,28 +35,42 @@ export class ApiError extends Error {
 }
 
 async function request<T>(
-  path: string,
+  apiPath: string,
   schema: { parse: (value: unknown) => T },
   init?: RequestInit,
 ): Promise<T> {
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...init,
-    headers: { Accept: "application/json", ...(init?.headers ?? {}) },
-    // Helios data changes on a connector schedule, not per request. A short
-    // revalidation window keeps the observatory responsive without serving
-    // stale evidence counts.
-    next: { revalidate: 60 },
-  });
+  // Strip query parameters for static mock reading
+  const cleanPath = apiPath.split("?")[0];
+  const jsonPath = cleanPath.endsWith(".json") ? cleanPath : `${cleanPath}.json`;
 
-  if (!response.ok) {
-    throw new ApiError(
-      `Helios API returned ${response.status} for ${path}`,
-      response.status,
-      path,
-    );
+  if (typeof window !== "undefined") {
+    const url = `${API_BASE}${jsonPath.startsWith("/") ? "" : "/"}${jsonPath}`;
+    try {
+      const res = await fetch(url, init);
+      if (!res.ok) {
+        throw new ApiError(`Mock API fetch failed for ${cleanPath}: ${res.statusText}`, res.status, cleanPath);
+      }
+      const data = await res.json();
+      return schema.parse(data);
+    } catch (error) {
+      if (error instanceof ApiError) throw error;
+      console.error(`Failed to fetch static mock for ${cleanPath}:`, error);
+      throw new ApiError(`Mock API request failed for ${cleanPath}`, 404, cleanPath);
+    }
+  } else {
+    let filePath = path.join(process.cwd(), "public", "api", cleanPath);
+    if (!filePath.endsWith(".json")) {
+      filePath += ".json";
+    }
+
+    try {
+      const data = await fs.readFile(filePath, "utf-8");
+      return schema.parse(JSON.parse(data));
+    } catch (error) {
+      console.error(`Failed to read static mock for ${cleanPath}:`, error);
+      throw new ApiError(`Mock API file not found for ${cleanPath}`, 404, cleanPath);
+    }
   }
-
-  return schema.parse(await response.json());
 }
 
 export interface SiteQuery {
@@ -137,19 +152,18 @@ export function getProvenanceCompleteness() {
 }
 
 export function evidenceBundleUrl(siteId: string): string {
-  return `${API_BASE}/exports/site/${siteId}/bundle.zip`;
+  return `#`;
 }
 
 export function evidenceJsonUrl(siteId: string): string {
-  return `${API_BASE}/exports/site/${siteId}/evidence.json`;
+  return `${API_BASE}/sites/${siteId}.json`;
 }
 
 export function sitesCsvUrl(): string {
-  return `${API_BASE}/exports/sites.csv`;
+  return `#`;
 }
 
 export function sitesGeoJsonUrl(): string {
-  return `${API_BASE}/exports/sites.geojson`;
+  return `#`;
 }
 
-export { API_BASE };

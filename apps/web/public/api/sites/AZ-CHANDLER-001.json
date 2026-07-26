@@ -1,0 +1,182 @@
+{
+  "id": "AZ-CHANDLER-001",
+  "project_code": "AZ-CHANDLER-001",
+  "display_name": "Chandler Enterprise Campus",
+  "site_kind": "data_center",
+  "site_kind_assertion": "extracted",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east_valley",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 95.0,
+  "stage_confidence": 92.0,
+  "confidence_band": "very_high",
+  "first_signal_date": "2012-04-04",
+  "latest_signal_date": "2025-01-27",
+  "evidence_count": 18,
+  "total_acres": 86.3,
+  "parcel_count": 3,
+  "operator_status": "confirmed",
+  "stage_last_changed_at": "2023-11-20T00:00:00Z",
+  "score_last_calculated_at": "2025-01-27T00:00:00Z",
+  "centroid": [
+    -111.882,
+    33.269
+  ],
+  "is_synthetic": false,
+  "summary": "Large enterprise data center cluster in Chandler.",
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-111.88040520171474, 33.265731496107811],
+        [-111.8804014494518, 33.265473839805402],
+        [-111.88050022101392, 33.265499834409809],
+        [-111.88455604984301, 33.265436709900634],
+        [-111.88455921820102, 33.265663272453523],
+        [-111.88455696072347, 33.265795573047043],
+        [-111.88454847424192, 33.26592762047369],
+        [-111.88047944747298, 33.272495580914189],
+        [-111.88040520171474, 33.265731496107811]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "30338001",
+      "apn": "30338001",
+      "apn_formatted": "303-38-001",
+      "situs_address": "2605 S ELLIS ST",
+      "situs_city": "CHANDLER",
+      "owner_name": "CI PHOENIX-CHANDLER I-VII LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 66.08,
+      "last_deed_date": "2022-04-04",
+      "last_deed_number": "20220297495",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20220297495&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30338001",
+      "link_reason": "assessor_use_code_1507",
+      "link_confidence": 0.99
+    },
+    {
+      "id": "30324019A",
+      "apn": "30324019A",
+      "apn_formatted": "303-24-019A",
+      "situs_address": "2500 W FRYE RD",
+      "situs_city": "CHANDLER",
+      "owner_name": "2500 WEST FRYE ROAD OWNER LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 14.5,
+      "last_deed_date": "2025-10-31",
+      "last_deed_number": "20250629554",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20250629554&suffix=",
+      "last_sale_price": 13000000.0,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30324019A",
+      "link_reason": "assessor_use_code_1507",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "org-ci-phoenix",
+      "canonical_name": "CyrusOne / CI Phoenix LLC",
+      "role": "operator",
+      "organization_type": "data_center_operator",
+      "is_suspected_shell": false,
+      "shell_indicators": [],
+      "mailing_city": "Dallas",
+      "mailing_state": "TX",
+      "attribution_note": "Identified in public deed filings"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "dep-sub-2",
+      "infrastructure_kind": "substation",
+      "label": "RS-28 Substation",
+      "dependency_status": "matched",
+      "is_blocking": true,
+      "match_method": "spatial_proximity",
+      "distance_meters": 600.0,
+      "confidence": 0.92,
+      "assertion_class": "inferred",
+      "notes": "69kV distribution substation nearby",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    }
+  ],
+  "estimates": [
+    {
+      "id": "est-power-3",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": 80.0,
+      "likely_value": 120.0,
+      "upper_value": 160.0,
+      "method": "utility_filing",
+      "assertion_class": "reported",
+      "confidence": 0.95,
+      "assumptions": {},
+      "calculated_at": "2025-01-27T00:00:00Z",
+      "notes": "Reported in city council approval documents"
+    }
+  ],
+  "latest_prediction": {
+    "id": "pred-AZ-CHANDLER-001",
+    "calculated_at": "2025-01-27T00:00:00Z",
+    "as_of_date": "2025-01-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 95.0,
+    "confidence": 95.0,
+    "confidence_band": "very_high",
+    "positive_contribution": 95.0,
+    "negative_contribution": 2.0,
+    "evidence_considered": 18,
+    "distinct_evidence_kinds": 5,
+    "is_backtest": false,
+    "summary": "Stage classified as Operational based on record evidence.",
+    "model_name": "helios-stage-classifier",
+    "model_version": "1.0.0",
+    "explanations": [
+      {
+        "rule_id": "rule-assessor-datacenter",
+        "evidence_kind": "assessor_record",
+        "label": "Maricopa Assessor Classification",
+        "detail": "Property use code 1507 (DATA CENTERS)",
+        "base_weight": 50.0,
+        "applied_weight": 50.0,
+        "confidence_multiplier": 1.0,
+        "recency_multiplier": 1.0,
+        "polarity": "positive",
+        "evidence_record_id": "ev-AZ-CHANDLER-001-1"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "st-AZ-CHANDLER-001-1",
+      "from_stage": 0,
+      "from_stage_label": "No known development",
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2012-04-04",
+      "detected_at": "2012-04-04T00:00:00Z",
+      "is_downgrade": false,
+      "confidence": 0.92,
+      "rationale": "Initial detection from public records",
+      "triggering_evidence_ids": [
+        "ev-AZ-CHANDLER-001-1"
+      ],
+      "detection_lag_days": 1
+    }
+  ],
+  "attributions": [
+    "Maricopa County Assessor",
+    "Helios Observatory"
+  ]
+}

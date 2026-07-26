@@ -1,0 +1,58 @@
+{
+  "site_id": "AZ-CHANDLER-001",
+  "project_code": "AZ-CHANDLER-001",
+  "first_signal_date": "2012-04-04",
+  "latest_signal_date": "2025-01-27",
+  "entries": [
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2012-04-04",
+      "title": "Initial Record Detection",
+      "detail": "Deed or Assessor classification recorded.",
+      "confidence_delta": 30.0,
+      "evidence": {
+        "id": "ev-AZ-CHANDLER-001-1",
+        "evidence_kind": "deed_record",
+        "summary": "Property document recorded",
+        "snippet": "Recorded in public registry",
+        "snippet_locator": "Page 1",
+        "observed_at": "2012-04-04T00:00:00Z",
+        "assertion_class": "extracted",
+        "extraction_method": "assessor_parser",
+        "polarity": "positive",
+        "confidence": 0.95,
+        "human_review_status": "verified",
+        "is_standing_condition": false,
+        "normalized_values": {},
+        "source": {
+          "document_id": "doc-AZ-CHANDLER-001-1",
+          "document_version_id": "docver-AZ-CHANDLER-001-1",
+          "source_slug": "maricopa_assessor",
+          "source_name": "Maricopa County Assessor",
+          "agency": "Maricopa County",
+          "source_url": "https://mcassessor.maricopa.gov",
+          "retrieved_at": "2012-04-04T00:00:00Z",
+          "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "parser_version": "1.0.0",
+          "attribution_text": "Data provided by Maricopa County Assessor"
+        }
+      },
+      "stage_transition": {
+        "id": "st-AZ-CHANDLER-001-1",
+        "from_stage": 0,
+        "from_stage_label": "No known development",
+        "to_stage": 7,
+        "to_stage_label": "Operational",
+        "effective_date": "2012-04-04",
+        "detected_at": "2012-04-04T00:00:00Z",
+        "is_downgrade": false,
+        "confidence": 0.92,
+        "rationale": "Detected from official filing",
+        "triggering_evidence_ids": [
+          "ev-AZ-CHANDLER-001-1"
+        ],
+        "detection_lag_days": 1
+      }
+    }
+  ]
+}

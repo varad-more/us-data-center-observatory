@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ─────────────────────────────── Backend (Python) ──────────────────────────
+  backend:
+    name: "Backend — ${{ matrix.check }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [ lint, typecheck, test ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -e ".[dev,documents]"
+
+    - name: Lint (ruff + black)
+      if: matrix.check == 'lint'
+      run: |
+        ruff check packages apps/api apps/worker tests scripts
+        black --check packages apps/api apps/worker tests scripts
+
+    - name: Type check (mypy)
+      if: matrix.check == 'typecheck'
+      run: mypy packages apps/api apps/worker
+
+    - name: Unit & contract tests (pytest)
+      if: matrix.check == 'test'
+      run: pytest -m "unit or contract" --tb=short -q
+
+  # ─────────────────────────────── Frontend (Node) ───────────────────────────
+  frontend:
+    name: "Frontend — ${{ matrix.check }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        check: [ lint, typecheck, test ]
+    defaults:
+      run:
+        working-directory: apps/web
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: apps/web/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint (eslint)
+      if: matrix.check == 'lint'
+      run: npm run lint
+
+    - name: Type check (tsc)
+      if: matrix.check == 'typecheck'
+      run: npm run typecheck
+
+    - name: Tests (vitest)
+      if: matrix.check == 'test'
+      run: npm test

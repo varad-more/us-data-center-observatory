@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { getStageDistribution, getProvenanceCompleteness } from "@/lib/api";
 
-export const dynamic = "force-dynamic";
-
 export default async function AnalyticsPage() {
   const [stages, provenance] = await Promise.all([
     getStageDistribution(),
