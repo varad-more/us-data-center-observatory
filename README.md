@@ -8,10 +8,19 @@ Every claim carries an **assertion class** (`reported` / `extracted` / `calculat
 
 | Document | Purpose |
 |---|---|
+| [`docs/implementation.md`](docs/implementation.md) | Main prompt, Phase 0–6 roadmap, what shipped |
 | [`docs/HANDOFF.md`](docs/HANDOFF.md) | Current MVP state, invariants, known gaps, next priorities |
 | [`docs/MULTI_AGENT_SUPPORT.md`](docs/MULTI_AGENT_SUPPORT.md) | Parallel workstreams, branch protocol, conflict hotspots |
+| [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |
+| [`docs/source-inventory.md`](docs/source-inventory.md) | Sources and connector status |
+| [`docs/limitations.md`](docs/limitations.md) | Honest coverage gaps |
+| [`docs/adr/`](docs/adr/) | Architecture decisions (incl. no Kafka/K8s) |
 
 **Scope lock for this sprint:** no ML, satellite, Kafka, Kubernetes, or national coverage.
+
+**Phase 1 status:** complete — see [`docs/phase-1-acceptance.md`](docs/phase-1-acceptance.md).
+
+**Connectors:** Maricopa Assessor, OSM power, EPA ECHO air, Mesa building permits (live + fixtures); ACC eDocket (fixture-only).
 
 ## Quick start
 
@@ -38,6 +47,7 @@ docker compose run --rm worker helios bootstrap
 ```bash
 helios status
 helios explain AZ-MESA-001
+helios backtest
 helios registry-show
 helios bootstrap
 ```

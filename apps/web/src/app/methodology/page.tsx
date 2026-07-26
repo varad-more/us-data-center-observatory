@@ -91,13 +91,13 @@ export default function MethodologyPage() {
         <h2 className="card-title">Known limitations</h2>
         <ul className="small muted" style={{ paddingLeft: "1.2rem" }}>
           <li>
-            <strong>Early-stage coverage is weak.</strong> The strongest early-warning
-            signals &mdash; transmission filings, substation applications, planning
-            applications &mdash; live in the Arizona Corporation Commission eDocket and
-            municipal agenda PDFs, neither of which Helios can currently read
-            automatically. Present coverage therefore concentrates at Stage 7, where the
-            assessor&rsquo;s classification arrives <em>after</em> a facility exists. This
-            is the single largest gap between what Helios does today and what it is for.
+            <strong>Early-stage coverage is still uneven.</strong> ACC eDocket
+            transmission and substation filings are parsed from recorded fixtures only
+            &mdash; Helios does not scrape the live ASP.NET search. Municipal planning
+            agenda PDFs are not yet automated. Mesa commercial building permits and EPA
+            air facilities improve construction and generator recall, but coverage can
+            still concentrate at Stage 7 when the assessor&rsquo;s DATA CENTERS label is
+            the dominant signal.
           </li>
           <li>
             <strong>Ownership history is truncated.</strong> The assessor exposes only the

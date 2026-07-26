@@ -28,6 +28,7 @@ from helios_domain.models import (
     OrganizationAlias,
     Parcel,
     ParcelOwnershipEvent,
+    Permit,
     Source,
     SourceDocument,
     Substation,
@@ -35,6 +36,7 @@ from helios_domain.models import (
 )
 from helios_domain.ontology import OrganizationRole
 from helios_entity_resolution.names import OwnerClassification
+from helios_geospatial.addresses import find_parcels_by_address
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
@@ -328,6 +330,99 @@ def load_substation(
     return substation
 
 
+def load_permit(
+    session: Session,
+    record: NormalizedRecord,
+    *,
+    source: Source,
+    document: SourceDocument,
+    version: DocumentVersion,
+    create_evidence: bool,
+) -> tuple[Permit, list[EvidenceRecord]]:
+    """Upsert a permit or regulatory filing and optionally create evidence.
+
+    Permits are initially unlinked from sites. Site building attaches nearby
+    permits by geometry so connectors do not need to know Helios site codes.
+    """
+    payload = record.payload
+    native_id = str(payload["source_native_id"])
+
+    permit = session.scalar(
+        select(Permit).where(
+            Permit.source_id == source.id,
+            Permit.source_native_id == native_id,
+        )
+    )
+    if permit is None:
+        permit = Permit(source_id=source.id, source_native_id=native_id)
+        session.add(permit)
+
+    permit.permit_number = payload.get("permit_number")
+    permit.category = str(payload.get("category") or "unknown")
+    permit.permit_type_raw = payload.get("permit_type_raw")
+    permit.description = payload.get("description")
+    permit.status = payload.get("status")
+    permit.issuing_authority = payload.get("issuing_authority")
+    permit.jurisdiction = payload.get("jurisdiction")
+    permit.applied_date = payload.get("applied_date")
+    permit.issued_date = payload.get("issued_date")
+    permit.address_raw = payload.get("address_raw")
+    permit.source_document_id = document.id
+    permit.attributes = dict(payload.get("attributes") or {})
+    if record.geometry_wkt:
+        permit.location = _geom(record.geometry_wkt)
+
+    # Address-only sources (e.g. Mesa permits) resolve onto parcels here so site
+    # building can attach their evidence through the parcel graph.
+    if permit.parcel_id is None and permit.address_raw:
+        matches = find_parcels_by_address(
+            session,
+            permit.address_raw,
+            city=permit.jurisdiction,
+        )
+        if matches:
+            best = matches[0]
+            permit.parcel_id = best.parcel_id
+            attrs = dict(permit.attributes or {})
+            attrs["address_match"] = {
+                "method": best.match_method,
+                "confidence": best.confidence,
+                "normalized": best.normalized_query,
+                "apn": best.apn,
+            }
+            permit.attributes = attrs
+            if permit.location is None:
+                parcel = session.get(Parcel, best.parcel_id)
+                # Permits store a point; never copy the parcel polygon.
+                if parcel is not None and parcel.centroid is not None:
+                    permit.location = parcel.centroid
+
+    session.flush()
+
+    created: list[EvidenceRecord] = []
+    if create_evidence:
+        created = [
+            _create_evidence(
+                session,
+                item=item,
+                document=document,
+                version=version,
+                parcel_id=permit.parcel_id,
+                site_id=permit.site_id,
+            )
+            for item in record.evidence
+        ]
+        # Stash permit id on evidence via normalized_values for later attachment.
+        for evidence in created:
+            values = dict(evidence.normalized_values or {})
+            values["permit_id"] = str(permit.id)
+            if permit.attributes.get("address_match"):
+                values["address_match"] = permit.attributes["address_match"]
+            evidence.normalized_values = values
+
+    return permit, created
+
+
 def load_transmission_line(
     session: Session,
     record: NormalizedRecord,
@@ -425,6 +520,7 @@ ENTITY_LOADERS = {
     "parcel": load_parcel,
     "substation": load_substation,
     "transmission_line": load_transmission_line,
+    "permit": load_permit,
 }
 """Dispatch table from ``NormalizedRecord.entity_type`` to its loader."""
 
@@ -433,6 +529,7 @@ __all__ = [
     "ENTITY_LOADERS",
     "get_or_create_organization",
     "load_parcel",
+    "load_permit",
     "load_substation",
     "load_transmission_line",
 ]

@@ -108,7 +108,7 @@ test-web: ## Run frontend tests
 	cd $(WEB) && npm test
 
 .PHONY: check
-check: lint typecheck test ## Run every check CI runs
+check: lint typecheck test test-web ## Run every check CI runs
 
 # ------------------------------------------------------------------ docker --
 
