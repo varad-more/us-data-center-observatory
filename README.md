@@ -18,7 +18,7 @@ Every claim carries an **assertion class** (`reported` / `extracted` / `calculat
 
 **Scope lock for this sprint:** no ML, satellite, Kafka, Kubernetes, or national coverage.
 
-**Phase 1 status:** complete — see [`docs/phase-1-acceptance.md`](docs/phase-1-acceptance.md).
+**Phase 5-6 status:** complete — Includes Impact Intelligence (power/water estimation), Regional Analytics, and AWS Terraform IaC.
 
 **Connectors:** Maricopa Assessor, OSM power, EPA ECHO air, Mesa building permits (live + fixtures); ACC eDocket (fixture-only).
 
@@ -58,6 +58,17 @@ helios bootstrap
 # Requires HELIOS_TEST_DATABASE_URL pointing at a *separate* DB (see .env.example)
 .venv/bin/pytest
 cd apps/web && npx tsc --noEmit
+```
+
+## Production Deployment (Terraform)
+
+Phase 6 introduces declarative Infrastructure as Code (IaC) via Terraform, available in `infrastructure/terraform`. This configures the AWS production scaffolding (ECS, RDS PostGIS, and S3).
+
+```bash
+cd infrastructure/terraform
+terraform init
+terraform plan
+# terraform apply
 ```
 
 ## Layout

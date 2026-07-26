@@ -22,6 +22,20 @@
       "expected_min_stage": 7,
       "expected_max_stage": 8,
       "notes": "Standing assessor classification is dated at retrieval; use today so it remains in scope."
+    },
+    {
+      "project_code": "AZ-CHANDLER-001",
+      "as_of": "2018-01-01",
+      "expected_min_stage": 0,
+      "expected_max_stage": 0,
+      "notes": "No evidence prior to 2018."
+    },
+    {
+      "project_code": "AZ-CHANDLER-001",
+      "as_of": "today",
+      "expected_min_stage": 6,
+      "expected_max_stage": 8,
+      "notes": "Modern status of Chandler site."
     }
   ]
 }

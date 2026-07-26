@@ -694,6 +694,7 @@ class Site(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
     current_stage: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=0, index=True)
     current_confidence: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    stage_confidence: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     stage_last_changed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     score_last_calculated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
