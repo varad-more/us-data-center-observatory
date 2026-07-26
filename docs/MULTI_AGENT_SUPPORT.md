@@ -2,7 +2,7 @@
 
 How multiple Cursor agents (or humans) can work this repo **in parallel without corrupting provenance, registry honesty, or each other’s branches**.
 
-Primary context: [`HANDOFF.md`](./HANDOFF.md). Scope lock: Phase 0 + first sprint — **no ML, satellite, Kafka, Kubernetes, or national coverage**.
+Primary context: [`HANDOFF.md`](./HANDOFF.md) and [`implementation.md`](./implementation.md) (main prompt + Phase 0–6 map). Scope lock: Phase 0 + first sprint / repo Phase 1 — **no ML, satellite, Kafka, Kubernetes, or national coverage** unless explicitly expanded.
 
 ---
 

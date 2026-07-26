@@ -52,6 +52,7 @@ _CONNECTOR_CLASSES: dict[str, str] = {
     "maricopa-assessor-parcels": "helios_connectors.maricopa_assessor:MaricopaAssessorConnector",
     "osm-power-infrastructure": "helios_connectors.osm_power:OsmPowerConnector",
     "epa-echo-air-facilities": "helios_connectors.epa_echo:EpaEchoAirConnector",
+    "mesa-building-permits": "helios_connectors.mesa_permits:MesaBuildingPermitsConnector",
     "azcc-edocket": "helios_connectors.azcc_edocket:AzccEdocketConnector",
 }
 

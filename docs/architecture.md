@@ -2,6 +2,12 @@
 
 Helios is a monorepo with a thin API/UI over domain packages that own provenance.
 
+**Requirements origin:** the main Project Helios product prompt (see
+[`implementation.md`](./implementation.md)). The referenced
+`Project_Helios_Architecture.pdf` was not in the workspace; the prompt is
+authoritative. This branch completed **Phase 0 + first-sprint / Phase 1 MVP**;
+later prompt phases (2–6) are roadmap only.
+
 ```text
 ┌────────────┐   ┌────────────┐
 │ apps/web   │──▶│ apps/api   │

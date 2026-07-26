@@ -241,26 +241,29 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         category=SourceCategory.MUNICIPAL_PLANNING,
         base_url="https://data.mesaaz.gov/resource/a2ui-hcuj.json",
         access_method=AccessMethod.SOCRATA,
-        connector_status=ConnectorStatus.PLANNED,
+        connector_status=ConnectorStatus.IMPLEMENTED,
         update_frequency="daily",
         rate_limit_per_second=2.0,
         rate_limit_notes="Socrata throttles unauthenticated clients; an app token raises limits.",
         license_name="City of Mesa open data",
         license_url="https://data.mesaaz.gov/",
         robots_policy_status="allowed",
-        geographic_coverage="Mesa, Arizona",
+        geographic_coverage="Mesa, Arizona (street-filtered for East Valley corridors)",
         historical_coverage="Permits from approximately 2015 onward.",
         reliability_score=0.75,
         known_schema_issues=(
             "The public view exposes only permit number, type, address, status, and three "
             "dates. There is no valuation, work description, or applicant, and no coordinates, "
-            "so permits must be matched to parcels by address string alone."
+            "so permits are matched to parcels by normalized address string alone."
         ),
         notes=(
-            "Deferred to the next sprint. Address-only matching needs the geospatial "
-            "correlation module to be trustworthy."
+            "Ingests commercial (COM) permits on East Valley corridors and matches them "
+            "onto assessor parcels via helios_geospatial.addresses. Residential permits "
+            "are excluded as noise."
         ),
-        tags=("permits", "municipal"),
+        connector_slug="mesa-building-permits",
+        connector_entry_point="helios_connectors.mesa_permits:MesaBuildingPermitsConnector",
+        tags=("permits", "municipal", "construction-signal"),
     ),
     SourceRegistryEntry(
         slug="mesa-planning-cases",
