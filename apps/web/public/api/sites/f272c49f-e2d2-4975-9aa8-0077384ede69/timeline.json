@@ -1,0 +1,58 @@
+{
+  "site_id": "f272c49f-e2d2-4975-9aa8-0077384ede69",
+  "project_code": "AZ-MESA-002",
+  "first_signal_date": "2020-08-12",
+  "latest_signal_date": "2025-04-25",
+  "entries": [
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2020-08-12",
+      "title": "Initial Record Detection",
+      "detail": "Deed or Assessor classification recorded.",
+      "confidence_delta": 30.0,
+      "evidence": {
+        "id": "ev-f272c49f-e2d2-4975-9aa8-0077384ede69-1",
+        "evidence_kind": "deed_record",
+        "summary": "Property document recorded",
+        "snippet": "Recorded in public registry",
+        "snippet_locator": "Page 1",
+        "observed_at": "2020-08-12T00:00:00Z",
+        "assertion_class": "extracted",
+        "extraction_method": "assessor_parser",
+        "polarity": "positive",
+        "confidence": 0.95,
+        "human_review_status": "verified",
+        "is_standing_condition": false,
+        "normalized_values": {},
+        "source": {
+          "document_id": "doc-f272c49f-e2d2-4975-9aa8-0077384ede69-1",
+          "document_version_id": "docver-f272c49f-e2d2-4975-9aa8-0077384ede69-1",
+          "source_slug": "maricopa_assessor",
+          "source_name": "Maricopa County Assessor",
+          "agency": "Maricopa County",
+          "source_url": "https://mcassessor.maricopa.gov",
+          "retrieved_at": "2020-08-12T00:00:00Z",
+          "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "parser_version": "1.0.0",
+          "attribution_text": "Data provided by Maricopa County Assessor"
+        }
+      },
+      "stage_transition": {
+        "id": "st-f272c49f-e2d2-4975-9aa8-0077384ede69-1",
+        "from_stage": 0,
+        "from_stage_label": "No known development",
+        "to_stage": 4,
+        "to_stage_label": "Construction initiated",
+        "effective_date": "2020-08-12",
+        "detected_at": "2020-08-12T00:00:00Z",
+        "is_downgrade": false,
+        "confidence": 0.75,
+        "rationale": "Detected from official filing",
+        "triggering_evidence_ids": [
+          "ev-f272c49f-e2d2-4975-9aa8-0077384ede69-1"
+        ],
+        "detection_lag_days": 1
+      }
+    }
+  ]
+}

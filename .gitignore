@@ -25,6 +25,7 @@ build/
 data/evidence-store/
 data/cache/
 *.sqlite3
+*.db
 
 # Node / Next.js
 node_modules/
@@ -47,3 +48,4 @@ apps/web/playwright-report/
 *.tfstate
 *.tfstate.*
 .terraform.lock.hcl
+.agents/

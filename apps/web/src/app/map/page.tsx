@@ -2,8 +2,6 @@ import { InfrastructureMap, MapLegend } from "@/components/InfrastructureMap";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { getMapInfrastructure, getMapSites } from "@/lib/api";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = { title: "Infrastructure map" };
 
 export default async function MapPage() {

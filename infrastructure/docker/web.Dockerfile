@@ -18,7 +18,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY apps/web ./
 
-ENV NEXT_TELEMETRY_DISABLED=1
+# Build in standalone mode for Docker (next.config.mjs reads this env var).
+# Clear basePath so the container serves from root — a reverse proxy or
+# NEXT_PUBLIC_BASE_PATH env var can add a prefix at deploy time.
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_OUTPUT_MODE=standalone \
+    NEXT_PUBLIC_BASE_PATH=""
 RUN npm run build
 
 # ------------------------------------------------------------------ runtime --
