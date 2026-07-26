@@ -18,6 +18,9 @@ from sqlalchemy import func, select
 from helios_common.config import get_settings
 from helios_common.evidence_store import build_evidence_store
 from helios_common.logging import configure_logging
+from helios_common.vocabulary import ConnectorStatus
+from helios_connectors.azcc_edocket import AzccEdocketConnector
+from helios_connectors.epa_echo import EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
@@ -53,6 +56,8 @@ EAST_VALLEY_CITY_SQL = (
 CONNECTORS: dict[str, Any] = {
     "maricopa-assessor-parcels": MaricopaAssessorConnector,
     "osm-power-infrastructure": OsmPowerConnector,
+    "epa-echo-air-facilities": EpaEchoAirConnector,
+    "azcc-edocket": AzccEdocketConnector,
 }
 
 
@@ -138,11 +143,20 @@ def ingest(
     elif where:
         kwargs["where"] = where
 
+    # Fixture-only connectors never take constructor kwargs meant for live queries.
+    if connector_slug == "azcc-edocket":
+        kwargs = {}
+
     connector = CONNECTORS[connector_slug](settings=settings, **kwargs)
+    mode = "fixture" if connector.get_metadata().status == ConnectorStatus.FIXTURE_ONLY else "live"
     try:
         with session_scope() as session:
             summary = IngestionPipeline(
-                session, connector, build_evidence_store(settings), trigger="cli"
+                session,
+                connector,
+                build_evidence_store(settings),
+                mode=mode,
+                trigger="cli",
             ).run()
     finally:
         connector.close()
@@ -346,6 +360,17 @@ def bootstrap(
 
     ingest("maricopa-assessor-parcels", east_valley_data_centers=True)
     ingest("osm-power-infrastructure")
+    # EPA may 429 under load; failures are non-fatal for bootstrap so the
+    # observatory still stands on assessor + OSM (+ ACC fixtures).
+    try:
+        ingest("epa-echo-air-facilities")
+    except typer.Exit:
+        console.print(
+            "[yellow]EPA ECHO ingest failed (often rate-limit). "
+            "Continuing with remaining sources; re-run "
+            "`helios ingest epa-echo-air-facilities` later.[/yellow]"
+        )
+    ingest("azcc-edocket")
 
     console.rule("[bold]3/4 Site construction")
     build_sites_command()

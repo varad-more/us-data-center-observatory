@@ -10,7 +10,7 @@
 | Prior agent run | https://cursor.com/agents/bc-a717266a-57bd-4918-a7b7-33556a138547 |
 | Repo | https://github.com/varad-more/project-helios |
 | Scope lock | **Phase 0 + first sprint only** — no ML, satellite, Kafka, Kubernetes, or national coverage |
-| Tip commit (at handoff) | `5630a89` — Next.js UI, Docker Compose, API integration tests |
+| Tip commit (at handoff) | See `git log -1` on this branch; Phase 0 docs + EPA/ACC connectors landed after `5630a89` |
 
 ---
 
@@ -34,6 +34,9 @@ Locally runnable stack with real East Valley (AZ) data loaded via `helios bootst
 | Connector SDK + pipeline | Working |
 | Maricopa Assessor connector | **Implemented** (live + fixtures) |
 | OSM power / Overpass connector | **Implemented** (live + fixtures) |
+| EPA ECHO air connector | **Implemented** (live + fixtures; may 429) |
+| ACC eDocket connector | **Fixture-only** (parser + fixtures; no live scrape) |
+| Permit loader + spatial attach to sites | Working |
 | Site clustering + infrastructure dependencies | Working |
 | PII redaction (natural-person / mailing) | Working |
 | Explainable rule-based scoring + stage history | Working |
@@ -41,7 +44,8 @@ Locally runnable stack with real East Valley (AZ) data loaded via `helios bootst
 | CLI (`helios …`) | Working |
 | Next.js + MapLibre UI | Working |
 | Docker Compose + Makefile | Working |
-| Unit / contract / integration tests | Substantial (~178 `test_*` defs); e2e folder empty |
+| Phase 0 docs (ADRs, architecture, inventory, limitations, risks) | Working |
+| Unit / contract / integration / e2e smoke + Vitest | Working |
 
 **Live demo snapshot** (when DB is bootstrapped): ~13 sites, ~14 parcels, ~175 substations, ~42 evidence records. Flagship profile: **`AZ-MESA-001`** (Platypus Development LLC, ~83 acres, Signal Butte Rd, Mesa) — stage Operational, ~41% confidence, operator **not established**.
 
@@ -62,19 +66,18 @@ apps/
 packages/
   helios_common/           config, hashing, evidence store, vocabularies
   helios_domain/           SQLAlchemy models, ontology, sessions
-  helios_connectors/       registry, SDK, Maricopa + OSM connectors, pipeline
+  helios_connectors/       registry, SDK, Maricopa/OSM/ECHO/ACC, pipeline
   helios_geospatial/       site builder, correlation
   helios_scoring/          rules + scoring service
   helios_entity_resolution/
   helios_document_intelligence/
-  helios_observability/    mostly placeholder
+  helios_observability/    thin (registry coverage helper)
 database/
   migrations/              Alembic
   init/                    PostGIS extensions on first boot
 tests/
-  unit/ contract/ integration/ fixtures/
-  end_to_end/              empty — fill later
-docs/                      ← you are here
+  unit/ contract/ integration/ end_to_end/ fixtures/
+docs/                      ADRs, architecture, methodology, limitations, …
 infrastructure/docker/     API + web Dockerfiles
 ```
 
@@ -143,17 +146,18 @@ Live fetch kill-switch: `HELIOS_ALLOW_LIVE_FETCH=false`.
 
 ## 7. Known gaps / honesty debt
 
-### Incomplete vs registry
+### Remaining product gaps
 
-- **`azcc-edocket`** is marked `FIXTURE_ONLY` with entry point `helios_connectors.azcc_edocket:AzccEdocketConnector`, but **`azcc_edocket.py` does not exist**. Either implement fixture-backed parser or downgrade to `PLANNED`. Highest-weight scoring signal is currently unavailable → weak Stage 3 recall / early warning.
-- **EPA ECHO** endpoint was probed (Mesa returns facilities); connector not written. Tagged `next-sprint` in registry — best next connector for generator/air-permit signal.
+- **ACC eDocket is fixture-only by design.** Live ASP.NET search is not automated. Stage 3 recall for *new* filings still depends on refreshing fixtures or an agency export.
+- **EPA ECHO rate limits** (~300/hour). Bootstrap continues if ECHO ingest fails; re-run `helios ingest epa-echo-air-facilities` later. CI uses fixtures.
 - Assessor exposes **current deed only** → ownership history truncated.
 - Score mixes “is this a DC?” with “how far along?” — may need split later; do not paper over with ML yet.
 - OSM transmission distances are centroid-approximate.
-- Coverage skewed to Stage 7 (assessor already labels existing facilities).
-- Phase 0 docs thin: `docs/adr/` is empty; `README.md` is a stub; compose references missing ADR files.
+- Coverage still skewed to Stage 7 (assessor labels existing facilities) unless ACC/ECHO evidence attaches.
+- Mesa permits / planning PDFs / dust-control attributes still planned.
+- `helios_observability` is intentionally thin.
 
-### Out of scope until acceptance criteria for this sprint are closed
+### Out of scope until this sprint’s acceptance criteria are closed
 
 Satellite/Copernicus, national expansion, Kafka, Kubernetes, trained models, water-use scenarios, ACC live scraping of stateful ASP.NET search.
 
@@ -161,15 +165,13 @@ Satellite/Copernicus, national expansion, Kafka, Kubernetes, trained models, wat
 
 ## 8. Recommended next work (priority order)
 
-1. **Docs debt (this sprint)** — ADRs for no-Kafka/no-K8s and evidence store; fill `README.md` with setup; methodology page already in UI but needs matching backend docs.
-2. **Registry honesty** — fix ACC eDocket status vs missing module.
-3. **EPA ECHO connector** — highest-value new evidence; two-step QueryID API; spatial match with tolerance.
-4. **Mesa building permits** — Socrata; needs trustworthy address→parcel matching in `helios_geospatial.correlation`.
-5. **Backtest harness** — historical `is_backtest` path exists; need labelled timelines + metrics.
-6. **Frontend tests** — Vitest scaffolding light; add map/timeline smoke tests.
-7. **Fill `tests/end_to_end/`** — compose bootstrap → API → one site bundle download.
+1. **Mesa building permits** — Socrata; needs trustworthy address→parcel matching in `helios_geospatial.correlation`.
+2. **Backtest harness** — historical `is_backtest` path exists; need labelled timelines + metrics.
+3. **Richer frontend tests** — map/timeline interaction beyond AssertionBadge.
+4. **Compose e2e** — full `docker compose` bootstrap → bundle.zip download in CI.
+5. **Optional:** refresh ACC fixtures when a human captures a real docket export.
 
-Do **not** start satellite or ML until 1–3 are in good shape and early-warning sources have a honest path (fixture ACC or live EPA/Mesa).
+Do **not** start satellite or ML to paper over early-warning gaps.
 
 ---
 

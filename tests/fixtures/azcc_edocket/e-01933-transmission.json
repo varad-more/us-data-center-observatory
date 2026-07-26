@@ -1,0 +1,28 @@
+{
+  "schema_version": "helios-azcc-edocket-fixture/1",
+  "captured_note": "Synthetic but schema-faithful fixture for parser/contract tests. Not a live scrape.",
+  "docket": {
+    "docket_number": "E-01933A-21-0099",
+    "docket_url": "https://edocket.azcc.gov/search/docket-search",
+    "utility_name": "Salt River Project Agricultural Improvement and Power District",
+    "company_id": "E-01933A",
+    "docket_type": "Transmission Line Siting",
+    "description": "Application concerning a 230 kV transmission rebuild and new tap serving industrial load in the East Valley.",
+    "status": "Closed - Order Issued",
+    "opened_date": "2021-03-22",
+    "county": "Maricopa",
+    "nearest_city": "Chandler",
+    "latitude": 33.2771,
+    "longitude": -111.8852,
+    "filings": [
+      {
+        "filing_id": "E-01933A-21-0099-001",
+        "filed_date": "2021-03-22",
+        "filing_type": "Application",
+        "title": "230 kV transmission line siting application",
+        "description": "Proposes rebuild and tap of a 230 kV circuit to serve projected large industrial load south of the Loop 202.",
+        "category": "transmission_filing"
+      }
+    ]
+  }
+}
