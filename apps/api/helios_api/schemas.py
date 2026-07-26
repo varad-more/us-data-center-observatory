@@ -86,6 +86,7 @@ class SiteSummary(HeliosModel):
     current_stage: int
     current_stage_label: str
     current_confidence: float
+    stage_confidence: float
     confidence_band: str
 
     first_signal_date: date | None

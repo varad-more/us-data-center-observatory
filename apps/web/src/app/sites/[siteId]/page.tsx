@@ -9,7 +9,8 @@ import {
 } from "@/components/AssertionBadge";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { InfrastructureMap } from "@/components/InfrastructureMap";
-import { Metric, ScoreExplanation } from "@/components/ScoreExplanation";
+import { ScoreExplanation, Metric } from "@/components/ScoreExplanation";
+import { SatelliteComparison } from "@/components/SatelliteComparison";
 import { Timeline } from "@/components/Timeline";
 import {
   ApiError,
@@ -82,8 +83,8 @@ export default async function SiteDetailPage({ params }: PageProps) {
 
       <div className="grid grid-4">
         <Metric
-          label="Confidence"
-          value={`${site.current_confidence.toFixed(0)}%`}
+          label="Confidence (Id. / Stage)"
+          value={`${site.current_confidence.toFixed(0)}% / ${site.stage_confidence.toFixed(0)}%`}
           sub={site.confidence_band.replace("_", " ")}
         />
         <Metric
@@ -102,8 +103,20 @@ export default async function SiteDetailPage({ params }: PageProps) {
         />
         <Metric
           label="Estimated load"
-          value="Not established"
-          sub="requires a utility filing Helios cannot yet read"
+          value={(() => {
+            const powerEst = site.estimates?.find((e) => e.estimate_type === "power_capacity");
+            return powerEst && powerEst.likely_value !== null
+              ? `${powerEst.likely_value} ${powerEst.unit}`
+              : "Not established";
+          })()}
+          sub={(() => {
+            const powerEst = site.estimates?.find((e) => e.estimate_type === "power_capacity");
+            const waterEst = site.estimates?.find((e) => e.estimate_type === "water_usage");
+            if (powerEst && waterEst && waterEst.likely_value !== null) {
+              return `+ ~${waterEst.likely_value.toLocaleString()} ${waterEst.unit} water (heuristic)`;
+            }
+            return "requires a utility filing Helios cannot yet read";
+          })()}
         />
       </div>
 
@@ -137,6 +150,14 @@ export default async function SiteDetailPage({ params }: PageProps) {
               <ScoreExplanation prediction={site.latest_prediction} />
             </section>
           )}
+
+          {/* SATELLITE COMPARISON */}
+          <section className="card">
+            <div className="card-header">
+              <h2 className="card-title">Remote Sensing (Copernicus)</h2>
+            </div>
+            <SatelliteComparison projectCode={site.project_code} />
+          </section>
         </div>
 
         <div className="stack">

@@ -46,7 +46,7 @@ export default async function SitesPage() {
             <th className="num">Acres</th>
             <th className="num">Evidence</th>
             <th>First signal</th>
-            <th>Confidence</th>
+            <th>Identity Conf.</th>
             <th>Operator</th>
           </tr>
         </thead>

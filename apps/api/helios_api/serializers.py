@@ -78,6 +78,7 @@ def serialize_site_summary(site: Site, *, parcel_count: int = 0) -> SiteSummary:
         current_stage=site.current_stage,
         current_stage_label=stage.label,
         current_confidence=round(site.current_confidence, 2),
+        stage_confidence=round(site.stage_confidence, 2),
         confidence_band=str(ConfidenceBand.from_score(site.current_confidence)),
         first_signal_date=site.first_signal_date,
         latest_signal_date=site.latest_signal_date,

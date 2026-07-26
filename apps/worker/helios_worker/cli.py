@@ -239,9 +239,9 @@ def score(
             table.add_row(
                 site.project_code,
                 f"{outcome.new_stage.value} {outcome.new_stage.label}",
-                f"{outcome.score.confidence:.1f}%",
-                str(outcome.score.evidence_considered),
-                str(outcome.score.distinct_kinds),
+                f"{outcome.identity_score.confidence:.1f}% / {outcome.stage_score.confidence:.1f}%",
+                str(outcome.identity_score.evidence_considered),
+                str(outcome.identity_score.distinct_kinds),
             )
 
     console.print(table)
@@ -265,20 +265,22 @@ def explain(
             raise typer.Exit(code=1)
 
         evidence = load_evidence_inputs(session, site.id, as_of=cutoff)
-        result = score_site(evidence, as_of=cutoff or date.today())
+        identity_result = score_site(evidence, as_of=cutoff or date.today(), target="identity")
+        stage_result = score_site(evidence, as_of=cutoff or date.today(), target="stage")
 
         console.print(f"\n[bold cyan]{site.project_code}[/bold cyan] - {site.jurisdiction}")
         console.print(f"  {site.summary}\n")
-        console.print(f"  Stage      : {result.implied_stage.value} {result.implied_stage.label}")
-        console.print(f"  Confidence : {result.confidence:.1f}% ({result.band})")
-        console.print(f"  As of      : {result.as_of.isoformat()}\n")
+        console.print(f"  Stage      : {stage_result.implied_stage.value} {stage_result.implied_stage.label}")
+        console.print(f"  Id. Conf.  : {identity_result.confidence:.1f}% ({identity_result.band})")
+        console.print(f"  Stage Conf.: {stage_result.confidence:.1f}% ({stage_result.band})")
+        console.print(f"  As of      : {identity_result.as_of.isoformat()}\n")
 
-        table = Table(title="Why Helios believes this")
+        table = Table(title="Identity Score Contributions")
         table.add_column("Weight", justify="right")
         table.add_column("Rule", style="cyan")
         table.add_column("Detail", max_width=70)
 
-        for contribution in result.contributions:
+        for contribution in identity_result.contributions:
             colour = "green" if contribution.applied_weight > 0 else "red"
             table.add_row(
                 f"[{colour}]{contribution.applied_weight:+.2f}[/{colour}]",
@@ -286,9 +288,25 @@ def explain(
                 contribution.detail,
             )
         console.print(table)
+        
+        stage_table = Table(title="Stage Score Contributions")
+        stage_table.add_column("Weight", justify="right")
+        stage_table.add_column("Rule", style="cyan")
+        stage_table.add_column("Detail", max_width=70)
 
-        for note in result.notes:
-            console.print(f"  [yellow]note[/yellow] {note}")
+        for contribution in stage_result.contributions:
+            colour = "green" if contribution.applied_weight > 0 else "red"
+            stage_table.add_row(
+                f"[{colour}]{contribution.applied_weight:+.2f}[/{colour}]",
+                contribution.label,
+                contribution.detail,
+            )
+        console.print(stage_table)
+
+        for note in identity_result.notes:
+            console.print(f"  [yellow]note (identity)[/yellow] {note}")
+        for note in stage_result.notes:
+            console.print(f"  [yellow]note (stage)[/yellow] {note}")
 
 
 # -------------------------------------------------------------------- status --
@@ -346,12 +364,25 @@ def backtest(
         str | None,
         typer.Option(help="Path to backtest cases JSON; defaults to East Valley fixture"),
     ] = None,
+    time_sliced: Annotated[
+        bool,
+        typer.Option(help="Evaluate history in quarterly slices up to target date"),
+    ] = False,
+    report: Annotated[
+        bool,
+        typer.Option(help="Generate a markdown research report to research_report.md"),
+    ] = False,
 ) -> None:
     """Replay historical cutoffs without mutating live site stage."""
     from pathlib import Path
+    from helios_scoring.backtest import run_time_sliced_backtest, run_backtest
 
     with session_scope() as session:
-        report = run_backtest(session, cases_path=Path(cases) if cases else None)
+        cases_path = Path(cases) if cases else None
+        if time_sliced:
+            report_data = run_time_sliced_backtest(session, cases_path=cases_path)
+        else:
+            report_data = run_backtest(session, cases_path=cases_path)
 
     table = Table(title="Backtest results")
     table.add_column("Project", style="cyan")
@@ -359,7 +390,7 @@ def backtest(
     table.add_column("Predicted", justify="right")
     table.add_column("Expected")
     table.add_column("OK")
-    for case in report.cases:
+    for case in report_data.cases:
         table.add_row(
             case.project_code,
             case.as_of.isoformat(),
@@ -368,8 +399,15 @@ def backtest(
             "[green]pass[/green]" if case.passed else "[red]fail[/red]",
         )
     console.print(table)
-    console.print(f"Accuracy: {report.passed}/{report.total} ({report.accuracy:.0%})")
-    if report.passed < report.total:
+    console.print(f"Accuracy: {report_data.passed}/{report_data.total} ({report_data.accuracy:.0%})")
+    console.print(f"Precision: {report_data.precision:.0%} | Recall: {report_data.recall:.0%}")
+    
+    if report:
+        report_path = Path("research_report.md")
+        report_path.write_text(report_data.generate_research_report(), encoding="utf-8")
+        console.print(f"[green]Research report written to {report_path}[/green]")
+
+    if report_data.passed < report_data.total and not time_sliced:
         raise typer.Exit(code=1)
 
 
