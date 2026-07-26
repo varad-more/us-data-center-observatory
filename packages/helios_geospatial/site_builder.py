@@ -37,6 +37,7 @@ from helios_domain.models import (
     EvidenceRecord,
     InfrastructureDependency,
     Parcel,
+    Permit,
     Site,
     SiteParcelLink,
     Substation,
@@ -49,9 +50,11 @@ from helios_domain.ontology import (
 )
 from helios_geospatial.correlation import (
     ADJACENCY_TOLERANCE_METERS,
+    PERMIT_PROXIMITY_METERS,
     SUBSTATION_PROXIMITY_METERS,
     SpatialMatch,
     compute_site_geometry,
+    find_nearby_permits,
     find_nearby_substations,
     find_nearby_transmission_lines,
 )
@@ -268,6 +271,7 @@ def build_sites(
         session.flush()
 
         result.evidence_attached += _attach_parcel_evidence(session, site, cluster)
+        result.evidence_attached += _attach_nearby_permit_evidence(session, site)
         result.dependencies_created += link_infrastructure(session, site)
 
     session.flush()
@@ -423,6 +427,57 @@ MAX_DEPENDENCIES_PER_KIND = 8
 The East Valley grid is dense: an unbounded 3 km search returns tens of
 substations per site, which buries the two or three that matter. Keeping the
 nearest few preserves the signal without pretending the rest do not exist."""
+
+
+def _attach_nearby_permit_evidence(
+    session: Session,
+    site: Site,
+    *,
+    radius_meters: float = PERMIT_PROXIMITY_METERS,
+) -> int:
+    """Link geocoded permits (and their evidence) to a site by proximity.
+
+    Connectors persist permits without knowing Helios site codes. Attachment is
+    therefore a calculated spatial join: close enough to cite, never a claim that
+    the permit names the project.
+    """
+    attached = 0
+    for match in find_nearby_permits(session, site.id, radius_meters=radius_meters):
+        permit = session.get(Permit, match.target_id)
+        if permit is None:
+            continue
+        if permit.site_id != site.id:
+            permit.site_id = site.id
+            attached += 1
+
+        permit_id = str(permit.id)
+        evidence_rows = list(
+            session.execute(
+                text("""
+                    SELECT id FROM evidence_records
+                    WHERE normalized_values->>'permit_id' = :permit_id
+                    """),
+                {"permit_id": permit_id},
+            ).scalars()
+        )
+        for evidence_id in evidence_rows:
+            record = session.get(EvidenceRecord, evidence_id)
+            if record is None:
+                continue
+            if record.site_id != site.id:
+                record.site_id = site.id
+                attached += 1
+
+    site_evidence = session.scalars(
+        select(EvidenceRecord)
+        .where(EvidenceRecord.site_id == site.id)
+        .order_by(EvidenceRecord.observed_at)
+    ).all()
+    if site_evidence:
+        site.first_signal_date = site_evidence[0].observed_at
+        site.latest_signal_date = site_evidence[-1].observed_at
+        site.evidence_count = len(site_evidence)
+    return attached
 
 
 def link_infrastructure(

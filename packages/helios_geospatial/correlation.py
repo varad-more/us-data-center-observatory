@@ -45,6 +45,12 @@ confidence."""
 
 TRANSMISSION_PROXIMITY_METERS = 2000.0
 
+PERMIT_PROXIMITY_METERS = 750.0
+"""Search radius for attaching air/ACC permits to a site by coordinates.
+
+ECHO coordinates are often geocoded to an address centroid. 750 m covers a
+campus block without leaping across unrelated industrial parks."""
+
 
 @dataclass(frozen=True, slots=True)
 class SpatialMatch:
@@ -292,6 +298,58 @@ def find_nearby_transmission_lines(
     return matches
 
 
+def find_nearby_permits(
+    session: Session,
+    site_id: uuid.UUID,
+    *,
+    radius_meters: float = PERMIT_PROXIMITY_METERS,
+) -> list[SpatialMatch]:
+    """Find geocoded permits near a site boundary.
+
+    Args:
+        session: Open database session.
+        site_id: Site to search around.
+        radius_meters: Search radius.
+
+    Returns:
+        Permits ordered by distance.
+    """
+    rows = session.execute(
+        text("""
+            SELECT
+                permit.id,
+                permit.permit_number,
+                permit.description,
+                permit.category,
+                ST_Distance(site.boundary::geography, permit.location::geography) AS distance_m
+            FROM sites AS site
+            JOIN permits AS permit
+              ON ST_DWithin(site.boundary::geography, permit.location::geography, :radius)
+            WHERE site.id = :site_id
+              AND site.boundary IS NOT NULL
+              AND permit.location IS NOT NULL
+            ORDER BY distance_m
+            """),
+        {"site_id": site_id, "radius": radius_meters},
+    ).mappings()
+
+    return [
+        SpatialMatch(
+            target_id=row["id"],
+            target_label=row["permit_number"] or row["description"] or "permit",
+            match_method="permit_proximity",
+            distance_meters=round(float(row["distance_m"]), 2),
+            spatial_confidence=_confidence_from_distance(float(row["distance_m"]), radius_meters),
+            detail={
+                "permit_number": row["permit_number"],
+                "description": row["description"],
+                "category": row["category"],
+            },
+        )
+        for row in rows
+    ]
+
+
 def parcels_in_bbox(
     session: Session,
     bbox: tuple[float, float, float, float],
@@ -398,11 +456,13 @@ def compute_site_geometry(session: Session, site_id: uuid.UUID) -> dict[str, Any
 
 __all__ = [
     "ADJACENCY_TOLERANCE_METERS",
+    "PERMIT_PROXIMITY_METERS",
     "SUBSTATION_PROXIMITY_METERS",
     "TRANSMISSION_PROXIMITY_METERS",
     "SpatialMatch",
     "compute_site_geometry",
     "find_adjacent_parcels",
+    "find_nearby_permits",
     "find_nearby_substations",
     "find_nearby_transmission_lines",
     "parcels_in_bbox",

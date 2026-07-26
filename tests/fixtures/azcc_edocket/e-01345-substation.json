@@ -1,0 +1,36 @@
+{
+  "schema_version": "helios-azcc-edocket-fixture/1",
+  "captured_note": "Synthetic but schema-faithful fixture for parser/contract tests. Not a live scrape of eDocket HTML. Field names mirror the public docket header and filing list as documented on edocket.azcc.gov.",
+  "docket": {
+    "docket_number": "E-01345A-22-0148",
+    "docket_url": "https://edocket.azcc.gov/search/docket-search",
+    "utility_name": "Arizona Public Service Company",
+    "company_id": "E-01345A",
+    "docket_type": "Line Siting / Certificate of Environmental Compatibility",
+    "description": "Application for a Certificate of Environmental Compatibility for the Signal Butte 230/69 kV substation and associated transmission facilities serving projected East Valley load growth.",
+    "status": "Open",
+    "opened_date": "2022-06-14",
+    "county": "Maricopa",
+    "nearest_city": "Mesa",
+    "latitude": 33.3462,
+    "longitude": -111.6032,
+    "filings": [
+      {
+        "filing_id": "E-01345A-22-0148-001",
+        "filed_date": "2022-06-14",
+        "filing_type": "Application for Certificate of Environmental Compatibility",
+        "title": "Initial CEC application — Signal Butte Substation",
+        "description": "Requests approval to construct a 230/69 kV substation and short loop-in of an existing 230 kV circuit near S Signal Butte Road, Mesa.",
+        "category": "substation_application"
+      },
+      {
+        "filing_id": "E-01345A-22-0148-014",
+        "filed_date": "2023-01-09",
+        "filing_type": "Amended Application",
+        "title": "Amended single-line and site plan",
+        "description": "Updates the proposed substation footprint and confirms 230 kV loop-in alignment.",
+        "category": "substation_application"
+      }
+    ]
+  }
+}

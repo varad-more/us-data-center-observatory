@@ -20,7 +20,7 @@ from helios_api.schemas import PredictionResponse
 from helios_api.serializers import serialize_prediction
 from helios_common.evidence_store import build_evidence_store
 from helios_common.time import utcnow
-from helios_common.vocabulary import HumanReviewStatus
+from helios_common.vocabulary import ConnectorStatus, HumanReviewStatus
 from helios_connectors.pipeline import IngestionPipeline
 from helios_connectors.registry import get_entry
 from helios_connectors.sync import sync_registry
@@ -51,6 +51,8 @@ class ConnectorRunRequest(BaseModel):
 _CONNECTOR_CLASSES: dict[str, str] = {
     "maricopa-assessor-parcels": "helios_connectors.maricopa_assessor:MaricopaAssessorConnector",
     "osm-power-infrastructure": "helios_connectors.osm_power:OsmPowerConnector",
+    "epa-echo-air-facilities": "helios_connectors.epa_echo:EpaEchoAirConnector",
+    "azcc-edocket": "helios_connectors.azcc_edocket:AzccEdocketConnector",
 }
 
 
@@ -110,20 +112,26 @@ def run_connector(
     connector_class = _load_connector_class(_CONNECTOR_CLASSES[connector_slug])
 
     kwargs: dict[str, Any] = {}
-    if request.where is not None:
-        kwargs["where"] = request.where
-    if request.bbox is not None:
-        if len(request.bbox) != 4:
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="bbox must contain exactly four values",
-            )
-        kwargs["bbox"] = tuple(request.bbox)
+    if connector_slug != "azcc-edocket":
+        if request.where is not None:
+            kwargs["where"] = request.where
+        if request.bbox is not None:
+            if len(request.bbox) != 4:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail="bbox must contain exactly four values",
+                )
+            kwargs["bbox"] = tuple(request.bbox)
 
     connector = connector_class(settings=settings, **kwargs)
+    mode = "fixture" if connector.get_metadata().status == ConnectorStatus.FIXTURE_ONLY else "live"
     try:
         summary = IngestionPipeline(
-            session, connector, build_evidence_store(settings), trigger="api"
+            session,
+            connector,
+            build_evidence_store(settings),
+            mode=mode,
+            trigger="api",
         ).run()
         session.commit()
     finally:

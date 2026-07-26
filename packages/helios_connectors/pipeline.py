@@ -31,6 +31,7 @@ from helios_common.logging import bind_run_context, clear_run_context, get_logge
 from helios_common.time import utcnow
 from helios_connectors.loaders import (
     load_parcel,
+    load_permit,
     load_substation,
     load_transmission_line,
 )
@@ -365,6 +366,16 @@ class IngestionPipeline:
         """
         if record.entity_type == "parcel":
             _, evidence = load_parcel(
+                self.session,
+                record,
+                source=source,
+                document=document,
+                version=version,
+                create_evidence=create_evidence,
+            )
+            return len(evidence)
+        if record.entity_type == "permit":
+            _, evidence = load_permit(
                 self.session,
                 record,
                 source=source,

@@ -179,10 +179,13 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         category=SourceCategory.ENVIRONMENTAL,
         base_url="https://echodata.epa.gov/echo/air_rest_services.get_facilities",
         access_method=AccessMethod.REST_JSON,
-        connector_status=ConnectorStatus.PLANNED,
+        connector_status=ConnectorStatus.IMPLEMENTED,
         update_frequency="weekly",
         rate_limit_per_second=1.0,
-        rate_limit_notes="No published limit; Helios self-imposes 1 rps.",
+        rate_limit_notes=(
+            "ECHO publishes informal throttle guidance (~300/hour, ~1500/day). "
+            "Helios self-imposes 1 rps and one merged query document per run."
+        ),
         license_name="US Government public domain",
         license_url="https://www.epa.gov/privacy/privacy-and-security-notice",
         licensing_notes="Federal public-domain data, freely redistributable.",
@@ -191,18 +194,19 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         historical_coverage="Active and historical Clean Air Act permitted facilities.",
         reliability_score=0.85,
         known_schema_issues=(
-            "Two-step API: a query call returns a QueryID that must be passed to the "
-            "results call. Facility coordinates are sometimes geocoded rather than surveyed, "
-            "so spatial matches need a distance tolerance."
+            "Two-step API: get_facilities returns a QueryID consumed by get_qid. "
+            "Facility coordinates are sometimes geocoded rather than surveyed, so "
+            "spatial matches use a distance tolerance. Public endpoints may return "
+            "HTTP 429 under load."
         ),
         notes=(
-            "Endpoint reachability was verified (17 permitted facilities returned for Mesa), "
-            "but no connector has been written yet, so this source contributes nothing to "
-            "the current evidence base. Backup-generator air permits are the most "
-            "diagnostic non-spatial data-centre signal available, making this the highest-"
-            "value connector to build next."
+            "Connector keeps facilities whose NAICS/name indicate data-processing or "
+            "hosting and emits backup_generator_air_permit evidence. Ordinary industrial "
+            "air permits are filtered. Fixtures cover CI when the live API throttles."
         ),
-        tags=("air-permits", "generators", "federal", "next-sprint"),
+        connector_slug="epa-echo-air-facilities",
+        connector_entry_point="helios_connectors.epa_echo:EpaEchoAirConnector",
+        tags=("air-permits", "generators", "federal"),
     ),
     SourceRegistryEntry(
         slug="maricopa-aqd-dust-control",
