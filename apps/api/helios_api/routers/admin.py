@@ -209,7 +209,7 @@ def recalculate(
     outcome = recalculate_site(session, site)
     session.commit()
 
-    prediction = session.get(Prediction, outcome.prediction_id)
+    prediction = session.get(Prediction, outcome.identity_prediction_id)
     if prediction is None:  # pragma: no cover
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

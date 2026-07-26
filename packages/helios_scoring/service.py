@@ -26,6 +26,7 @@ from helios_domain.models import (
     Prediction,
     PredictionExplanation,
     Site,
+    SiteEstimate,
     SiteStageHistory,
 )
 from helios_domain.ontology import DevelopmentStage
@@ -38,6 +39,7 @@ from helios_scoring.rules import (
     model_parameters_hash,
     score_site,
 )
+from helios_scoring.impact import estimate_power_mw, estimate_water_gpd
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
@@ -49,8 +51,10 @@ logger = get_logger(__name__)
 class RecalculationOutcome:
     """What a recalculation produced."""
 
-    prediction_id: uuid.UUID
-    score: ScoreResult
+    identity_prediction_id: uuid.UUID
+    stage_prediction_id: uuid.UUID
+    identity_score: ScoreResult
+    stage_score: ScoreResult
     stage_changed: bool
     previous_stage: DevelopmentStage | None
     new_stage: DevelopmentStage
@@ -179,32 +183,72 @@ def recalculate_site(
 
     model = get_or_create_model_version(session)
     evidence = load_evidence_inputs(session, site.id, as_of=cutoff)
-    result = score_site(evidence, as_of=cutoff)
+    identity_result = score_site(evidence, as_of=cutoff, target="identity")
+    stage_result = score_site(evidence, as_of=cutoff, target="stage")
 
-    prediction = Prediction(
+    identity_prediction = Prediction(
         site_id=site.id,
         model_version_id=model.id,
-        prediction_type="site_confidence",
+        prediction_type="identity_confidence",
         calculated_at=utcnow(),
         as_of_date=cutoff,
-        predicted_stage=int(result.implied_stage),
-        raw_score=result.raw_score,
-        confidence=result.confidence,
-        confidence_band=str(result.band),
-        positive_contribution=result.positive_total,
-        negative_contribution=result.negative_total,
-        evidence_considered=result.evidence_considered,
-        distinct_evidence_kinds=result.distinct_kinds,
+        predicted_stage=int(identity_result.implied_stage),
+        raw_score=identity_result.raw_score,
+        confidence=identity_result.confidence,
+        confidence_band=str(identity_result.band),
+        positive_contribution=identity_result.positive_total,
+        negative_contribution=identity_result.negative_total,
+        evidence_considered=identity_result.evidence_considered,
+        distinct_evidence_kinds=identity_result.distinct_kinds,
         is_backtest=is_backtest,
-        summary=result.summary,
+        summary=identity_result.summary,
     )
-    session.add(prediction)
+    
+    stage_prediction = Prediction(
+        site_id=site.id,
+        model_version_id=model.id,
+        prediction_type="stage_confidence",
+        calculated_at=utcnow(),
+        as_of_date=cutoff,
+        predicted_stage=int(stage_result.implied_stage),
+        raw_score=stage_result.raw_score,
+        confidence=stage_result.confidence,
+        confidence_band=str(stage_result.band),
+        positive_contribution=stage_result.positive_total,
+        negative_contribution=stage_result.negative_total,
+        evidence_considered=stage_result.evidence_considered,
+        distinct_evidence_kinds=stage_result.distinct_kinds,
+        is_backtest=is_backtest,
+        summary=stage_result.summary,
+    )
+
+    session.add_all([identity_prediction, stage_prediction])
     session.flush()
 
-    for order, contribution in enumerate(result.contributions):
+    for order, contribution in enumerate(identity_result.contributions):
         session.add(
             PredictionExplanation(
-                prediction_id=prediction.id,
+                prediction_id=identity_prediction.id,
+                evidence_record_id=(
+                    uuid.UUID(contribution.evidence_id) if contribution.evidence_id else None
+                ),
+                rule_id=contribution.rule_id,
+                evidence_kind=contribution.evidence_kind,
+                label=contribution.label,
+                detail=contribution.detail,
+                base_weight=contribution.base_weight,
+                applied_weight=contribution.applied_weight,
+                confidence_multiplier=contribution.confidence_multiplier,
+                recency_multiplier=contribution.recency_multiplier,
+                polarity=str(contribution.polarity),
+                display_order=order,
+            )
+        )
+
+    for order, contribution in enumerate(stage_result.contributions):
+        session.add(
+            PredictionExplanation(
+                prediction_id=stage_prediction.id,
                 evidence_record_id=(
                     uuid.UUID(contribution.evidence_id) if contribution.evidence_id else None
                 ),
@@ -222,35 +266,67 @@ def recalculate_site(
         )
 
     previous_stage = DevelopmentStage(site.current_stage)
-    new_stage = result.implied_stage
+    new_stage = stage_result.implied_stage
     stage_changed = new_stage != previous_stage
 
     if not is_backtest:
-        site.current_confidence = result.confidence
-        site.score_last_calculated_at = prediction.calculated_at
+        site.current_confidence = identity_result.confidence
+        site.stage_confidence = stage_result.confidence
+        site.score_last_calculated_at = identity_prediction.calculated_at
         if stage_changed:
             _record_stage_transition(
                 session,
                 site=site,
                 previous=previous_stage,
                 new=new_stage,
-                result=result,
+                result=stage_result,
                 model=model,
             )
+
+        # Update estimates
+        session.query(SiteEstimate).filter(SiteEstimate.site_id == site.id).delete()
+        
+        power_mw = estimate_power_mw(site.total_acres, int(new_stage))
+        if power_mw is not None:
+            session.add(
+                SiteEstimate(
+                    site_id=site.id,
+                    estimate_type="power_capacity",
+                    unit="MW",
+                    likely_value=power_mw,
+                    method="Heuristic based on acreage and stage",
+                    calculated_at=utcnow(),
+                )
+            )
+            water_gpd = estimate_water_gpd(power_mw)
+            if water_gpd is not None:
+                session.add(
+                    SiteEstimate(
+                        site_id=site.id,
+                        estimate_type="water_usage",
+                        unit="GPD",
+                        likely_value=water_gpd,
+                        method="Industry average 0.5 gal/kWh",
+                        calculated_at=utcnow(),
+                    )
+                )
 
     session.flush()
     logger.info(
         "scoring.recalculated",
         site=site.project_code,
-        confidence=result.confidence,
+        identity_confidence=identity_result.confidence,
+        stage_confidence=stage_result.confidence,
         stage=int(new_stage),
         stage_changed=stage_changed,
         as_of=cutoff.isoformat(),
     )
 
     return RecalculationOutcome(
-        prediction_id=prediction.id,
-        score=result,
+        identity_prediction_id=identity_prediction.id,
+        stage_prediction_id=stage_prediction.id,
+        identity_score=identity_result,
+        stage_score=stage_result,
         stage_changed=stage_changed,
         previous_stage=previous_stage,
         new_stage=new_stage,

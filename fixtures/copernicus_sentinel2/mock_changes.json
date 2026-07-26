@@ -1,0 +1,23 @@
+[
+  {
+    "parcel_id": "AZ-MESA-001",
+    "observation_date": "2023-05-15",
+    "ndsi_change": 0.45,
+    "ndvi_change": -0.35,
+    "cloud_cover": 5.0
+  },
+  {
+    "parcel_id": "AZ-CHANDLER-001",
+    "observation_date": "2022-08-20",
+    "ndsi_change": 0.38,
+    "ndvi_change": -0.28,
+    "cloud_cover": 10.0
+  },
+  {
+    "parcel_id": "AZ-MESA-001",
+    "observation_date": "2023-12-01",
+    "ndsi_change": 0.05,
+    "ndvi_change": -0.02,
+    "cloud_cover": 85.0
+  }
+]

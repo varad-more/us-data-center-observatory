@@ -47,6 +47,7 @@ export const siteSummarySchema = z.object({
   current_stage: z.number(),
   current_stage_label: z.string(),
   current_confidence: z.number(),
+  stage_confidence: z.number(),
   confidence_band: confidenceBandSchema,
   first_signal_date: z.string().nullable(),
   latest_signal_date: z.string().nullable(),

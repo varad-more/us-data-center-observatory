@@ -109,6 +109,7 @@ class TestExplainability:
                 ev(StageEvidenceKind.PROJECT_CANCELLATION, date(2026, 2, 1)),
             ],
             as_of=AS_OF,
+            target="stage",
         )
         assert result.positive_total > 0
         assert result.negative_total < 0
@@ -244,6 +245,7 @@ class TestRecencyAndStaleness:
         result = score_site(
             [ev(StageEvidenceKind.LARGE_INDUSTRIAL_PARCEL_ACQUISITION, date(2013, 11, 4))],
             as_of=AS_OF,
+            target="stage",
         )
         penalties = [
             c for c in result.contributions if c.polarity is EvidencePolarity.CONTRADICTING

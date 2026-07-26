@@ -266,20 +266,24 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         tags=("permits", "municipal", "construction-signal"),
     ),
     SourceRegistryEntry(
-        slug="mesa-planning-cases",
-        name="City of Mesa Planning and Zoning Cases",
+        slug="mesa-agendas",
+        name="City of Mesa Planning and Zoning Agendas",
         agency="City of Mesa Development Services",
         jurisdiction="Mesa, Arizona",
         category=SourceCategory.MUNICIPAL_PLANNING,
-        base_url="https://www.mesaaz.gov/business-development/planning-zoning",
-        access_method=AccessMethod.HTML_PAGE,
-        connector_status=ConnectorStatus.PLANNED,
+        base_url="https://www.mesaaz.gov/government/advisory-boards-committees/planning-zoning-board",
+        access_method=AccessMethod.MANUAL_UPLOAD,
+        connector_status=ConnectorStatus.FIXTURE_ONLY,
+        update_frequency="monthly",
         geographic_coverage="Mesa, Arizona",
+        historical_coverage="Various",
+        reliability_score=0.9,
         access_limitation=(
             "Planning cases are published as council and commission agenda attachments rather "
-            "than a queryable dataset. Extraction requires PDF agenda parsing, which is "
-            "scheduled for the document-intelligence sprint."
+            "than a queryable dataset. Uses FixtureBackedConnector to parse downloaded PDF agendas."
         ),
+        connector_slug="mesa-agendas",
+        connector_entry_point="helios_connectors.mesa_agendas:MesaAgendasConnector",
         tags=("zoning", "agendas", "pdf"),
     ),
     # ------------------------------------------------ utility and regulatory --
@@ -377,7 +381,7 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         category=SourceCategory.REMOTE_SENSING,
         base_url="https://catalogue.dataspace.copernicus.eu/",
         access_method=AccessMethod.REST_JSON,
-        connector_status=ConnectorStatus.PLANNED,
+        connector_status=ConnectorStatus.FIXTURE_ONLY,
         requires_authentication=True,
         authentication_notes="Requires a free registered Copernicus Data Space account.",
         license_name="Copernicus open licence",
@@ -385,9 +389,10 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         historical_coverage="2015 onward.",
         access_limitation=(
             "No Copernicus credentials are configured in this environment, so no satellite "
-            "imagery has been acquired or analysed. Remote sensing is out of scope for this "
-            "sprint and no satellite observations exist in the database."
+            "imagery has been acquired or analysed. Fixture-backed mock is available."
         ),
+        connector_slug="copernicus-sentinel2",
+        connector_entry_point="helios_connectors.copernicus_sentinel2:CopernicusSentinel2Connector",
         tags=("satellite", "future-phase"),
     ),
     # -------------------------------------------------------------- water ----

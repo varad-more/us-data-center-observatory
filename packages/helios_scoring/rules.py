@@ -54,7 +54,8 @@ class ScoringRule:
 
     rule_id: str
     evidence_kind: StageEvidenceKind
-    base_weight: float
+    identity_weight: float
+    stage_weight: float
     label: str
     rationale: str
     implies_stage: DevelopmentStage | None = None
@@ -66,12 +67,12 @@ class ScoringRule:
     occurrence_decay: float = 0.5
     """Multiplier applied to each additional occurrence beyond the first."""
 
-    @property
-    def polarity(self) -> EvidencePolarity:
-        """Whether this rule argues for or against development."""
-        return (
-            EvidencePolarity.SUPPORTING if self.base_weight >= 0 else EvidencePolarity.CONTRADICTING
-        )
+    def get_weight(self, target: str) -> float:
+        return self.identity_weight if target == "identity" else self.stage_weight
+
+    def get_polarity(self, target: str) -> EvidencePolarity:
+        weight = self.get_weight(target)
+        return EvidencePolarity.SUPPORTING if weight >= 0 else EvidencePolarity.CONTRADICTING
 
 
 # The weights follow the reference specification. They are starting points chosen
@@ -81,7 +82,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="transmission-or-substation-filing",
         evidence_kind=StageEvidenceKind.SUBSTATION_APPLICATION,
-        base_weight=25.0,
+        identity_weight=25.0,
+        stage_weight=25.0,
         label="Dedicated substation application",
         rationale=(
             "A utility filing for dedicated substation capacity is the most specific "
@@ -93,7 +95,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="transmission-filing",
         evidence_kind=StageEvidenceKind.TRANSMISSION_FILING,
-        base_weight=25.0,
+        identity_weight=25.0,
+        stage_weight=25.0,
         label="Transmission filing",
         rationale="A transmission extension filing indicates committed large-load service.",
         implies_stage=DevelopmentStage.REGULATORY_COMMITMENT,
@@ -101,7 +104,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="planning-application-data-center",
         evidence_kind=StageEvidenceKind.PLANNING_APPLICATION_DATA_CENTER,
-        base_weight=20.0,
+        identity_weight=20.0,
+        stage_weight=20.0,
         label="Planning application naming data-center use",
         rationale="An applicant stating the intended use on the record is direct evidence.",
         implies_stage=DevelopmentStage.INFRASTRUCTURE_INTENT,
@@ -109,7 +113,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="assessor-data-center-classification",
         evidence_kind=StageEvidenceKind.ASSESSOR_DATA_CENTER_CLASSIFICATION,
-        base_weight=20.0,
+        identity_weight=20.0,
+        stage_weight=20.0,
         label="Assessor classifies property use as data centre",
         rationale=(
             "The county assigns this class after a facility is built and assessed, so "
@@ -121,7 +126,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="large-industrial-parcel-acquisition",
         evidence_kind=StageEvidenceKind.LARGE_INDUSTRIAL_PARCEL_ACQUISITION,
-        base_weight=18.0,
+        identity_weight=10.0,
+        stage_weight=18.0,
         label="Large industrial parcel acquisition",
         rationale=(
             "Campus-scale industrial land bought by an organization is the earliest "
@@ -132,7 +138,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="backup-generator-air-permit",
         evidence_kind=StageEvidenceKind.BACKUP_GENERATOR_AIR_PERMIT,
-        base_weight=17.0,
+        identity_weight=17.0,
+        stage_weight=17.0,
         label="Backup-generator air permit",
         rationale=(
             "Permits for large arrays of emergency generators are close to diagnostic: "
@@ -143,7 +150,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="water-or-cooling-permit",
         evidence_kind=StageEvidenceKind.WATER_OR_COOLING_PERMIT,
-        base_weight=14.0,
+        identity_weight=14.0,
+        stage_weight=14.0,
         label="Large water or cooling permit",
         rationale="Industrial cooling water demand at this scale narrows the plausible uses.",
         implies_stage=DevelopmentStage.REGULATORY_COMMITMENT,
@@ -151,7 +159,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="data-center-compatible-zoning",
         evidence_kind=StageEvidenceKind.DATA_CENTER_COMPATIBLE_ZONING,
-        base_weight=12.0,
+        identity_weight=8.0,
+        stage_weight=12.0,
         label="Data-centre-compatible zoning",
         rationale="Permissive zoning is necessary but far from sufficient.",
         implies_stage=DevelopmentStage.INFRASTRUCTURE_INTENT,
@@ -159,7 +168,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="grading-or-construction-permit",
         evidence_kind=StageEvidenceKind.GRADING_OR_CONSTRUCTION_PERMIT,
-        base_weight=10.0,
+        identity_weight=2.0,
+        stage_weight=20.0,
         label="Grading or construction permit",
         rationale="Ground disturbance confirms the project has moved past paperwork.",
         implies_stage=DevelopmentStage.CONSTRUCTION_INITIATED,
@@ -167,7 +177,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="dust-control-registration",
         evidence_kind=StageEvidenceKind.DUST_CONTROL_REGISTRATION,
-        base_weight=10.0,
+        identity_weight=2.0,
+        stage_weight=15.0,
         label="Dust-control registration",
         rationale="Required before earth-moving in Maricopa County; a construction proxy.",
         implies_stage=DevelopmentStage.CONSTRUCTION_INITIATED,
@@ -175,7 +186,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="satellite-construction-change",
         evidence_kind=StageEvidenceKind.SATELLITE_CONSTRUCTION_CHANGE,
-        base_weight=8.0,
+        identity_weight=0.0,
+        stage_weight=15.0,
         label="Satellite-observed construction change",
         rationale=(
             "Imagery corroborates activity but cannot identify its purpose, so it "
@@ -186,7 +198,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="dedicated-substation-proximity",
         evidence_kind=StageEvidenceKind.DEDICATED_SUBSTATION_PROXIMITY,
-        base_weight=8.0,
+        identity_weight=8.0,
+        stage_weight=0.0,
         label="High-voltage substation in close proximity",
         rationale=(
             "Nearby transmission-class capacity makes a site viable. This is a "
@@ -196,14 +209,16 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="known-developer-relationship",
         evidence_kind=StageEvidenceKind.KNOWN_DEVELOPER_RELATIONSHIP,
-        base_weight=7.0,
+        identity_weight=15.0,
+        stage_weight=5.0,
         label="Relationship to a known data-centre developer",
         rationale="Prior developments by the same party raise the prior, weakly.",
     ),
     ScoringRule(
         rule_id="shell-entity-ownership",
         evidence_kind=StageEvidenceKind.SHELL_ENTITY_OWNERSHIP,
-        base_weight=6.0,
+        identity_weight=6.0,
+        stage_weight=6.0,
         label="Single-purpose entity holds title",
         rationale=(
             "Project-specific LLCs are routine in large development and also routine "
@@ -215,7 +230,8 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="hiring-or-procurement-signal",
         evidence_kind=StageEvidenceKind.HIRING_OR_PROCUREMENT_SIGNAL,
-        base_weight=5.0,
+        identity_weight=15.0,
+        stage_weight=20.0,
         label="Hiring or procurement activity",
         rationale="Staffing activity suggests an approach to operation.",
         implies_stage=DevelopmentStage.OPERATIONAL,
@@ -223,21 +239,24 @@ SCORING_RULES: tuple[ScoringRule, ...] = (
     ScoringRule(
         rule_id="conflicting-facility-classification",
         evidence_kind=StageEvidenceKind.CONFLICTING_FACILITY_CLASSIFICATION,
-        base_weight=-10.0,
+        identity_weight=-20.0,
+        stage_weight=0.0,
         label="Conflicting facility classification",
         rationale="A source describing a different land use undercuts the hypothesis.",
     ),
     ScoringRule(
         rule_id="project-cancellation",
         evidence_kind=StageEvidenceKind.PROJECT_CANCELLATION,
-        base_weight=-15.0,
+        identity_weight=0.0,
+        stage_weight=-20.0,
         label="Project cancellation or withdrawal",
         rationale="A withdrawn application is direct negative evidence.",
     ),
     ScoringRule(
         rule_id="stale-evidence-no-progression",
         evidence_kind=StageEvidenceKind.STALE_EVIDENCE_NO_PROGRESSION,
-        base_weight=-20.0,
+        identity_weight=0.0,
+        stage_weight=-20.0,
         label="Stale evidence with no progression",
         rationale=(
             "Applied automatically when the newest evidence is older than the "
@@ -381,6 +400,7 @@ def score_site(
     evidence: Sequence[EvidenceInput],
     *,
     as_of: date,
+    target: str = "identity",
     staleness_threshold_days: int = STALENESS_THRESHOLD_DAYS,
 ) -> ScoreResult:
     """Compute an explained confidence score for a site.
@@ -389,6 +409,7 @@ def score_site(
         evidence: Evidence records to consider. The caller is responsible for
             having already filtered by any backtest cutoff.
         as_of: The date the score is computed as of; drives recency and staleness.
+        target: Whether to calculate 'identity' (Is it a DC?) or 'stage' progression.
         staleness_threshold_days: Age beyond which a lack of progression penalises.
 
     Returns:
@@ -435,8 +456,9 @@ def score_site(
         recency_multiplier = (
             1.0 if record.is_standing_condition else _recency_multiplier(record.observed_at, as_of)
         )
+        base_weight = rule.get_weight(target)
         applied = (
-            rule.base_weight * confidence_multiplier * recency_multiplier * occurrence_multiplier
+            base_weight * confidence_multiplier * recency_multiplier * occurrence_multiplier
         )
 
         detail = record.summary or rule.rationale
@@ -450,15 +472,15 @@ def score_site(
                 evidence_kind=record.evidence_kind,
                 label=rule.label,
                 detail=detail,
-                base_weight=rule.base_weight,
+                base_weight=base_weight,
                 applied_weight=round(applied, 4),
                 confidence_multiplier=confidence_multiplier,
                 recency_multiplier=recency_multiplier,
-                polarity=rule.polarity,
+                polarity=rule.get_polarity(target),
             )
         )
 
-    staleness = _staleness_contribution(ordered, as_of, staleness_threshold_days)
+    staleness = _staleness_contribution(ordered, as_of, staleness_threshold_days, target)
     if staleness is not None:
         contributions.append(staleness)
         notes.append(
@@ -503,7 +525,7 @@ def score_site(
 
 
 def _staleness_contribution(
-    ordered_evidence: Sequence[EvidenceInput], as_of: date, threshold_days: int
+    ordered_evidence: Sequence[EvidenceInput], as_of: date, threshold_days: int, target: str
 ) -> ScoreContribution | None:
     """Build the staleness penalty when a site has stopped producing records.
 
@@ -522,6 +544,7 @@ def _staleness_contribution(
         return None
 
     rule = RULES_BY_KIND[str(StageEvidenceKind.STALE_EVIDENCE_NO_PROGRESSION)]
+    base_weight = rule.get_weight(target)
     return ScoreContribution(
         rule_id=rule.rule_id,
         evidence_id=None,
@@ -531,11 +554,11 @@ def _staleness_contribution(
             f"Most recent evidence is {age_days} days old "
             f"({newest.isoformat()}), beyond the {threshold_days}-day staleness threshold."
         ),
-        base_weight=rule.base_weight,
-        applied_weight=rule.base_weight,
+        base_weight=base_weight,
+        applied_weight=base_weight,
         confidence_multiplier=1.0,
         recency_multiplier=1.0,
-        polarity=EvidencePolarity.CONTRADICTING,
+        polarity=rule.get_polarity(target),
     )
 
 
@@ -574,7 +597,8 @@ def model_parameters() -> dict[str, object]:
             {
                 "rule_id": r.rule_id,
                 "evidence_kind": str(r.evidence_kind),
-                "base_weight": r.base_weight,
+                "identity_weight": r.identity_weight,
+                "stage_weight": r.stage_weight,
                 "implies_stage": r.implies_stage.value if r.implies_stage else None,
                 "max_occurrences": r.max_occurrences,
                 "occurrence_decay": r.occurrence_decay,
