@@ -8,7 +8,7 @@ Helios is an early-warning **observatory**, not a complete map of AI infrastruct
 2. **Assessor history is truncated.** The parcel layer exposes the current deed, not the full transfer chain, so land-assembly timelines understate intermediate buyers.
 3. **OSM is incomplete.** Missing substations are not evidence that none exist. Transmission geometries from Overpass `out center` are centroids; distances are approximate.
 4. **EPA ECHO rate limits.** The public API throttles aggressive clients. Helios self-limits and uses fixtures in CI; a throttled live run is a temporary gap, not proof of no generators.
-5. **Municipal permits and agendas** (Mesa building permits, planning PDFs, dust-control attributes) are not yet automated.
+5. **Mesa planning agendas and dust-control attributes** are not yet automated. Commercial building permits are ingested with address-only matching (no coordinates in source).
 6. **No satellite observations** in this sprint. Copernicus is registered as planned with credentials absent.
 7. **Study area is East Valley, Arizona.** National coverage is out of scope.
 
