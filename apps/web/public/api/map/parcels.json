@@ -1,0 +1,92 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "parcel-12331001F",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-111.97604759572974, 33.405694732530293],
+            [-111.97714215786917, 33.405688844256865],
+            [-111.97713308308813, 33.407170215385818],
+            [-111.97637700255454, 33.40717428356448],
+            [-111.97637756130665, 33.407247140300555],
+            [-111.97603808885907, 33.407246116695177],
+            [-111.97603434198604, 33.407246104696831],
+            [-111.97604360361663, 33.40569475427759],
+            [-111.97604759572974, 33.405694732530293]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "12331001F",
+        "apn": "12331001F",
+        "apn_formatted": "123-31-001F",
+        "situs_address": "2601 W BROADWAY RD",
+        "situs_city": "TEMPE",
+        "owner_name": "TIERRA DC ASSETS LLC",
+        "owner_is_redacted": false,
+        "land_use_description": "DATA CENTERS",
+        "lot_size_acres": 4.2,
+        "last_deed_date": "2022-04-01",
+        "last_deed_number": "20210833178",
+        "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20210833178&suffix=",
+        "last_sale_price": 22000000.0,
+        "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=12331001F",
+        "link_reason": "assessor_use_code_1507",
+        "link_confidence": 0.95
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "parcel-30168948",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-111.95118278292584, 33.305624032785495],
+            [-111.95344384159765, 33.305604916674781],
+            [-111.95344654373004, 33.305699868792345],
+            [-111.95344515257557, 33.305761810484675],
+            [-111.95343809039156, 33.305823363990804],
+            [-111.95342541662198, 33.305884011201165],
+            [-111.95340723794477, 33.305943241634687],
+            [-111.95315498023321, 33.306700945800912],
+            [-111.95228723012663, 33.306708975938498],
+            [-111.95143625156642, 33.30671740472927],
+            [-111.95132387861258, 33.306338702942654],
+            [-111.95121157842227, 33.305963173004372],
+            [-111.95119685141889, 33.305903497009574],
+            [-111.95118667963796, 33.305842878168797],
+            [-111.95118112133807, 33.305781663674708],
+            [-111.95118020835423, 33.305720204131553],
+            [-111.95118278292584, 33.305624032785495]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "30168948",
+        "apn": "30168948",
+        "apn_formatted": "301-68-948",
+        "situs_address": "240 N ROOSEVELT AVE",
+        "situs_city": "CHANDLER",
+        "owner_name": "FIRST DATA REAL ESTATE HOLDINGS L L C",
+        "owner_is_redacted": false,
+        "land_use_description": "DATA CENTERS",
+        "lot_size_acres": 5.72,
+        "last_deed_date": "2022-04-01",
+        "last_deed_number": "20071041807",
+        "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20071041807&suffix=",
+        "last_sale_price": null,
+        "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30168948",
+        "link_reason": "assessor_use_code_1507",
+        "link_confidence": 0.95
+      }
+    }
+  ],
+  "attributions": [
+    "Maricopa County Assessor"
+  ]
+}

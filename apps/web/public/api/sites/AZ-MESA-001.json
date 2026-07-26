@@ -1,0 +1,221 @@
+{
+  "id": "AZ-MESA-001",
+  "project_code": "AZ-MESA-001",
+  "display_name": "Mesa Data Center Campus",
+  "site_kind": "data_center",
+  "site_kind_assertion": "extracted",
+  "jurisdiction": "Mesa",
+  "county": "Maricopa",
+  "region_slug": "east_valley",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 92.0,
+  "stage_confidence": 88.0,
+  "confidence_band": "high",
+  "first_signal_date": "2021-08-03",
+  "latest_signal_date": "2025-06-29",
+  "evidence_count": 14,
+  "total_acres": 84.38,
+  "parcel_count": 2,
+  "operator_status": "confirmed",
+  "stage_last_changed_at": "2024-02-10T00:00:00Z",
+  "score_last_calculated_at": "2025-06-29T00:00:00Z",
+  "centroid": [
+    -111.604,
+    33.347
+  ],
+  "is_synthetic": false,
+  "summary": "Multi-building data center facility located on Signal Butte Rd in East Mesa.",
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-111.60129264309101, 33.349678604714647],
+        [-111.60122847373532, 33.343644927920273],
+        [-111.60133918929746, 33.343644167721948],
+        [-111.60158942130806, 33.343640925809723],
+        [-111.60184908383251, 33.34363756082481],
+        [-111.60185239951423, 33.343637518049569],
+        [-111.60185019684515, 33.343763524038827],
+        [-111.60185019684515, 33.343763564562686],
+        [-111.60185000370737, 33.34377459605345],
+        [-111.60198194376471, 33.343883668905121],
+        [-111.60220917800574, 33.343882204045173],
+        [-111.60220962536674, 33.34393105996412],
+        [-111.60233417408593, 33.343930428093543],
+        [-111.60233422528992, 33.343930427343096],
+        [-111.60402679591397, 33.343919747078083],
+        [-111.60618894288645, 33.343906068052149],
+        [-111.60621911999181, 33.346466451148117],
+        [-111.60729165813538, 33.346460798997263],
+        [-111.60729976363419, 33.346460755473046],
+        [-111.6073384370055, 33.349764670723999],
+        [-111.60732213797299, 33.349764594184222],
+        [-111.60326645287431, 33.349745439730107],
+        [-111.60314509766594, 33.349744864180984],
+        [-111.60314509946258, 33.349744667578761],
+        [-111.60314528002397, 33.349717379640389],
+        [-111.60313041021107, 33.34971731060449],
+        [-111.60132819840997, 33.349708820688427],
+        [-111.60129264309101, 33.349678604714647]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "30433005S",
+      "apn": "30433005S",
+      "apn_formatted": "304-33-005S",
+      "situs_address": "3740 S SIGNAL BUTTE RD",
+      "situs_city": "MESA",
+      "owner_name": "PLATYPUS DEVELOPMENT LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 83.17,
+      "last_deed_date": "2013-11-04",
+      "last_deed_number": "20130962087",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130962087&suffix=",
+      "last_sale_price": 113576875.0,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30433005S",
+      "link_reason": "assessor_use_code_1507",
+      "link_confidence": 0.98
+    },
+    {
+      "id": "14055293",
+      "apn": "14055293",
+      "apn_formatted": "140-55-293",
+      "situs_address": "4437 E HOLMES AVE",
+      "situs_city": "MESA",
+      "owner_name": "COX COMMUNICATIONS ARIZONA LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 1.21,
+      "last_deed_date": "2013-02-27",
+      "last_deed_number": "20130183962",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130183962&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=14055293",
+      "link_reason": "assessor_use_code_1507",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "org-platypus",
+      "canonical_name": "Platypus Development LLC",
+      "role": "owner",
+      "organization_type": "holding_company",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "Single-asset LLC structure"
+      ],
+      "mailing_city": "Cupertino",
+      "mailing_state": "CA",
+      "attribution_note": "Record owner per Maricopa County Assessor"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "dep-sub-1",
+      "infrastructure_kind": "substation",
+      "label": "Greenbone Substation",
+      "dependency_status": "matched",
+      "is_blocking": true,
+      "match_method": "spatial_proximity",
+      "distance_meters": 450.0,
+      "confidence": 0.9,
+      "assertion_class": "inferred",
+      "notes": "500kV/230kV transmission substation adjacent to site",
+      "voltage_kv": 500.0,
+      "operator_name": "Salt River Project"
+    }
+  ],
+  "estimates": [
+    {
+      "id": "est-power-1",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": 50.0,
+      "likely_value": 100.0,
+      "upper_value": 150.0,
+      "method": "heuristic_building_area",
+      "assertion_class": "inferred",
+      "confidence": 0.85,
+      "assumptions": {
+        "watts_per_sqft": 150
+      },
+      "calculated_at": "2025-06-29T00:00:00Z",
+      "notes": "Based on 600,000 sq ft building footprint"
+    },
+    {
+      "id": "est-water-1",
+      "estimate_type": "water_usage",
+      "unit": "AF/yr",
+      "lower_value": 200.0,
+      "likely_value": 450.0,
+      "upper_value": 700.0,
+      "method": "cooling_type_benchmark",
+      "assertion_class": "inferred",
+      "confidence": 0.75,
+      "assumptions": {
+        "cooling_system": "evaporative"
+      },
+      "calculated_at": "2025-06-29T00:00:00Z",
+      "notes": "Standard cooling consumption estimate"
+    }
+  ],
+  "latest_prediction": {
+    "id": "pred-AZ-MESA-001",
+    "calculated_at": "2025-06-29T00:00:00Z",
+    "as_of_date": "2025-06-29",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 92.0,
+    "confidence": 92.0,
+    "confidence_band": "high",
+    "positive_contribution": 90.0,
+    "negative_contribution": 5.0,
+    "evidence_considered": 14,
+    "distinct_evidence_kinds": 4,
+    "is_backtest": false,
+    "summary": "Stage classified as Operational based on record evidence.",
+    "model_name": "helios-stage-classifier",
+    "model_version": "1.0.0",
+    "explanations": [
+      {
+        "rule_id": "rule-assessor-datacenter",
+        "evidence_kind": "assessor_record",
+        "label": "Maricopa Assessor Classification",
+        "detail": "Property use code 1507 (DATA CENTERS)",
+        "base_weight": 50.0,
+        "applied_weight": 50.0,
+        "confidence_multiplier": 1.0,
+        "recency_multiplier": 1.0,
+        "polarity": "positive",
+        "evidence_record_id": "ev-AZ-MESA-001-1"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "st-AZ-MESA-001-1",
+      "from_stage": 0,
+      "from_stage_label": "No known development",
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2021-08-03",
+      "detected_at": "2021-08-03T00:00:00Z",
+      "is_downgrade": false,
+      "confidence": 0.88,
+      "rationale": "Initial detection from public records",
+      "triggering_evidence_ids": [
+        "ev-AZ-MESA-001-1"
+      ],
+      "detection_lag_days": 1
+    }
+  ],
+  "attributions": [
+    "Maricopa County Assessor",
+    "Helios Observatory"
+  ]
+}

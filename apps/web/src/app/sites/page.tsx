@@ -4,8 +4,6 @@ import { AssertionBadge, ConfidenceBadge } from "@/components/AssertionBadge";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { listSites, sitesCsvUrl, sitesGeoJsonUrl } from "@/lib/api";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = { title: "Sites" };
 
 export default async function SitesPage() {

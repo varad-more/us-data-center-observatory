@@ -1,0 +1,60 @@
+{
+  "region_slug": "east_valley",
+  "total_sites": 4,
+  "stages": [
+    {
+      "stage": 0,
+      "stage_label": "No known development",
+      "site_count": 0,
+      "mean_confidence": null
+    },
+    {
+      "stage": 1,
+      "stage_label": "Site speculation",
+      "site_count": 0,
+      "mean_confidence": null
+    },
+    {
+      "stage": 2,
+      "stage_label": "Land assembly",
+      "site_count": 0,
+      "mean_confidence": null
+    },
+    {
+      "stage": 3,
+      "stage_label": "Regulatory commitment",
+      "site_count": 0,
+      "mean_confidence": null
+    },
+    {
+      "stage": 4,
+      "stage_label": "Construction initiated",
+      "site_count": 1,
+      "mean_confidence": 78.0
+    },
+    {
+      "stage": 5,
+      "stage_label": "Shell complete",
+      "site_count": 0,
+      "mean_confidence": null
+    },
+    {
+      "stage": 6,
+      "stage_label": "Energization",
+      "site_count": 1,
+      "mean_confidence": 86.0
+    },
+    {
+      "stage": 7,
+      "stage_label": "Operational",
+      "site_count": 2,
+      "mean_confidence": 93.5
+    },
+    {
+      "stage": 8,
+      "stage_label": "Expansion",
+      "site_count": 0,
+      "mean_confidence": null
+    }
+  ]
+}

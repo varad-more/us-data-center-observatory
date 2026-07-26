@@ -47,3 +47,4 @@ apps/web/playwright-report/
 *.tfstate
 *.tfstate.*
 .terraform.lock.hcl
+.agents/

@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "substation-28808694",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5976846,
+          33.3555507
+        ]
+      },
+      "properties": {
+        "id": "28808694",
+        "name": "Greenbone Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 500.0,
+        "voltage_kv": 500.0,
+        "osm_url": "https://www.openstreetmap.org/way/28808694"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "substation-30140447",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7748881,
+          33.3205873
+        ]
+      },
+      "properties": {
+        "id": "30140447",
+        "name": "Tenney Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "voltage_kv": 69.0,
+        "osm_url": "https://www.openstreetmap.org/way/30140447"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "substation-30140734",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7049006,
+          33.3293805
+        ]
+      },
+      "properties": {
+        "id": "30140734",
+        "name": "Cooley Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "voltage_kv": 69.0,
+        "osm_url": "https://www.openstreetmap.org/way/30140734"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "substation-30568847",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9123547,
+          33.4390662
+        ]
+      },
+      "properties": {
+        "id": "30568847",
+        "name": "Brandow Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "voltage_kv": 230.0,
+        "osm_url": "https://www.openstreetmap.org/way/30568847"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "substation-106471938",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9420311,
+          33.3518247
+        ]
+      },
+      "properties": {
+        "id": "106471938",
+        "name": "Kyrene Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 500.0,
+        "voltage_kv": 500.0,
+        "osm_url": "https://www.openstreetmap.org/way/106471938"
+      }
+    }
+  ],
+  "attributions": [
+    "OpenStreetMap contributors"
+  ]
+}

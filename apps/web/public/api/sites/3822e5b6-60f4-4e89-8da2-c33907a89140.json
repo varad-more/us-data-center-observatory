@@ -1,0 +1,154 @@
+{
+  "id": "3822e5b6-60f4-4e89-8da2-c33907a89140",
+  "project_code": "AZ-CHANDLER-002",
+  "display_name": "Price Road Technology Center",
+  "site_kind": "data_center",
+  "site_kind_assertion": "extracted",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east_valley",
+  "current_stage": 6,
+  "current_stage_label": "Energization",
+  "current_confidence": 86.0,
+  "stage_confidence": 82.0,
+  "confidence_band": "high",
+  "first_signal_date": "2010-07-15",
+  "latest_signal_date": "2025-06-01",
+  "evidence_count": 11,
+  "total_acres": 20.95,
+  "parcel_count": 1,
+  "operator_status": "confirmed",
+  "stage_last_changed_at": "2024-11-15T00:00:00Z",
+  "score_last_calculated_at": "2025-06-01T00:00:00Z",
+  "centroid": [
+    -111.887,
+    33.275
+  ],
+  "is_synthetic": false,
+  "summary": "Digital Realty data center facility on Price Rd.",
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-111.88893445919906, 33.273723006021065],
+        [-111.88895066929837, 33.274842979883942],
+        [-111.8889179571473, 33.274843564189162],
+        [-111.88893048864551, 33.275709321499654],
+        [-111.88886585036923, 33.275765439011259],
+        [-111.88824429254943, 33.275776326649968],
+        [-111.88824497437072, 33.275803805971627],
+        [-111.88577329849404, 33.275847071860326],
+        [-111.88577282238693, 33.275827837321891],
+        [-111.88502907751879, 33.275840847353578],
+        [-111.88496286808909, 33.275787020522415],
+        [-111.88493471578641, 33.273792791558819],
+        [-111.88646064712862, 33.273766183566593],
+        [-111.88893445919906, 33.273723006021065]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "30336268",
+      "apn": "30336268",
+      "apn_formatted": "303-36-268",
+      "situs_address": "2121 S PRICE RD",
+      "situs_city": "CHANDLER",
+      "owner_name": "DIGITAL 2121 SOUTH PRICE LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 20.95,
+      "last_deed_date": "2010-07-15",
+      "last_deed_number": "20100603763",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20100603763&suffix=",
+      "last_sale_price": 289275000.0,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30336268",
+      "link_reason": "assessor_use_code_1507",
+      "link_confidence": 0.98
+    }
+  ],
+  "organizations": [
+    {
+      "id": "org-digital-realty",
+      "canonical_name": "Digital Realty Trust",
+      "role": "owner_operator",
+      "organization_type": "reit",
+      "is_suspected_shell": false,
+      "shell_indicators": [],
+      "mailing_city": "Chandler",
+      "mailing_state": "AZ",
+      "attribution_note": "Record owner"
+    }
+  ],
+  "dependencies": [],
+  "estimates": [
+    {
+      "id": "est-power-4",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": 30.0,
+      "likely_value": 50.0,
+      "upper_value": 75.0,
+      "method": "heuristic_building_area",
+      "assertion_class": "inferred",
+      "confidence": 0.8,
+      "assumptions": {},
+      "calculated_at": "2025-06-01T00:00:00Z",
+      "notes": "Estimated capacity"
+    }
+  ],
+  "latest_prediction": {
+    "id": "pred-3822e5b6-60f4-4e89-8da2-c33907a89140",
+    "calculated_at": "2025-06-01T00:00:00Z",
+    "as_of_date": "2025-06-01",
+    "predicted_stage": 6,
+    "predicted_stage_label": "Energization",
+    "raw_score": 86.0,
+    "confidence": 86.0,
+    "confidence_band": "high",
+    "positive_contribution": 88.0,
+    "negative_contribution": 4.0,
+    "evidence_considered": 11,
+    "distinct_evidence_kinds": 4,
+    "is_backtest": false,
+    "summary": "Stage classified as Energization based on record evidence.",
+    "model_name": "helios-stage-classifier",
+    "model_version": "1.0.0",
+    "explanations": [
+      {
+        "rule_id": "rule-assessor-datacenter",
+        "evidence_kind": "assessor_record",
+        "label": "Maricopa Assessor Classification",
+        "detail": "Property use code 1507 (DATA CENTERS)",
+        "base_weight": 50.0,
+        "applied_weight": 50.0,
+        "confidence_multiplier": 1.0,
+        "recency_multiplier": 1.0,
+        "polarity": "positive",
+        "evidence_record_id": "ev-3822e5b6-60f4-4e89-8da2-c33907a89140-1"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "st-3822e5b6-60f4-4e89-8da2-c33907a89140-1",
+      "from_stage": 0,
+      "from_stage_label": "No known development",
+      "to_stage": 6,
+      "to_stage_label": "Energization",
+      "effective_date": "2010-07-15",
+      "detected_at": "2010-07-15T00:00:00Z",
+      "is_downgrade": false,
+      "confidence": 0.82,
+      "rationale": "Initial detection from public records",
+      "triggering_evidence_ids": [
+        "ev-3822e5b6-60f4-4e89-8da2-c33907a89140-1"
+      ],
+      "detection_lag_days": 1
+    }
+  ],
+  "attributions": [
+    "Maricopa County Assessor",
+    "Helios Observatory"
+  ]
+}
