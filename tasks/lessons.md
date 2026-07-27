@@ -57,6 +57,30 @@ makes it `inferred`, not `calculated` — the formula is exact but the inputs ar
 industry assumptions. When choosing how strongly to label a derived value, pick
 the more conservative class.
 
+### Compute contrast, never eyeball it
+An audit of the new palette found seven failures, and five were the badge borders
+that the whole encoding depends on — borders measuring 1.73:1 and 2.49:1 still
+look like borders to whoever picked them. The failure mode is invisible by
+construction, so it needs a number. `make audit-contrast`.
+
+### A ramp built for one obligation may not clear another
+The sequential ramp is fine as a *fill*, which sits under a legible label and owes
+nothing. Reused as badge *borders* — a meaningful mark owing 3:1 — its pale end
+failed. Solving each step to the floor individually then collapsed them onto the
+same value. Purpose-built tokens solved across the legal band kept the scale both
+legible and monotonic. Ask what a token owes at each site it is used, not once.
+
+### Greyscale-check any encoding that claims to survive greyscale
+`unknown` and `predicted` both passed the contrast audit and were still the same
+mark once hue was removed: luminance 0.292 against 0.288. Contrast against the
+*background* says nothing about separation from a *sibling*. The fix was
+structural — dotted versus dashed — because that is what actually survives.
+
+### Testing Library cleanup does not self-register without `globals: true`
+Renders accumulated in the document, so the second test to query a testid found
+two and failed. One pre-existing test had passed only by being alone in its file.
+Register `afterEach(cleanup)` in the setup file, not per test.
+
 ### Rollups belong in a pass after all mutations
 Recomputing a denormalised counter inside the loop that mutates its inputs makes
 the result order-dependent: a later iteration reassigned evidence and left an

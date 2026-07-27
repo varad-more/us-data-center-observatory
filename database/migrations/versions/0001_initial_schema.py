@@ -1,4 +1,4 @@
-"""initial helios phase 1 schema
+"""initial helios schema
 
 Revision ID: 482380a47455
 Revises:

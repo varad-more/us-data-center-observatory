@@ -1,91 +1,97 @@
-# Simplify Helios and make it honestly hostable on GitHub Pages
+# Redesign the UI/UX along the lines of the Affordability Index
 
-Direction set by the user: keep the Python backend as the source of truth, publish
-a *real* export rather than hand-written mocks, and serve three audiences at once —
-portfolio demo, open-source project, and working tool.
+Direction set by the user: review `Tech-affordability-index` (published as
+`varad-more/affordability-index`), take its design language, and apply it here.
+Ivory default with a dark toggle; assertion class re-encoded as an ordinal ramp
+plus a border treatment. Repo rename deferred; the US-scope data expansion is a
+separate program.
 
 ## Plan
 
-- [x] **Phase 1 — Offline seeding as a first-class feature**
-  - [x] Lift `_replay` out of `tests/` into `packages/helios_connectors/replay.py`
-  - [x] Add `FIXTURE_REPLAYS` / `FIXTURE_INGEST_ORDER` / `build_fixture_connector`
-  - [x] Move `tests/fixtures/` → `fixtures/` (production code already depended on it)
-  - [x] Collapse three duplicate `_replay` definitions onto the package function
-  - [x] `helios ingest --fixture`; make `bootstrap --no-live` work; flip default to fixtures
-- [x] **Phase 2 — One honest exporter**
-  - [x] Delete `scripts/export_mock_json.py` (944 lines of fabricated data)
-  - [x] Harden `scripts/export_static_api.py`; key files on `project_code` for stable URLs
-  - [x] Export evidence bundles, `sites.csv`, `sites.geojson`, `meta.json`
-  - [x] Add `scripts/verify_static_export.py` + `make export-api`
-- [x] **Phase 3 — Provenance banner**
-  - [x] `DemoDataBanner` reading `meta.json`, rendered from the root layout
-  - [x] Route by `project_code`; wire the previously dead download links
-- [x] **Phase 4 — CI and infrastructure**
-  - [x] Delete `docker.yml`, `smoke.yml`, `docker-compose.yml`
-  - [x] `make db-up` → one `docker run postgis`; drop MinIO
-  - [x] Rewrite `ci.yml`: offline, PostGIS service, export-reproducibility job, terraform validate
-  - [x] Reduce `pages.yml` to an npm-only build; fix the trigger
-- [x] **Phase 5 — Dead code and docs**
-  - [x] Delete `helios_observability`, `helios_remote_sensing`, Copernicus connector, `SatelliteComparison`
-  - [x] Add `LICENSE`, `CONTRIBUTING.md`; rewrite `README.md`; delete agent scaffolding docs
-- [x] **Phase 6 — Verification** (see Review)
+- [x] **Tokens and typeface** — warm ivory ground, `light-dark()` throughout,
+      documented contrast rationale per token, Fraunces via `next/font/local`
+- [x] **Theme toggle** — persisted, guarded `localStorage`, blocking pre-paint script
+- [x] **Assertion class → ordinal ramp** — plus `data-evidence-basis` and its guard test
+- [x] **Construction stage → sequential ramp** — legend derived from the ramp,
+      theme-aware basemap, MapLibre popup restyled
+- [x] **Page chrome** — serif hero with an eyebrow, footer generated from the
+      source registry, freshness line
+- [x] **Accessibility** — contrast audit wired into CI, print styles,
+      `prefers-reduced-motion`, focus rings
+- [x] **Greyscale verification** — see Review
 
 ## Review
 
-### Outcome
+### What changed, and why it is not just a restyle
 
-| Gate | Before | After |
+The interface encoded two *ordinal* quantities as unrelated categorical hues.
+Assertion class ran sky → emerald → violet → amber → pink → slate; construction
+stage ran an eight-hue rainbow. A rainbow on ordered data implies categories where
+there is a progression, and it left colour carrying a distinction it cannot carry
+alone. Both now run along one sequential ramp.
+
+The assertion re-encoding had to *strengthen* the product rule, not dilute it, so
+the distinction is carried by three independent channels:
+
+| channel | carries | survives greyscale |
 |---|---|---|
-| Test suite | 9 failing / 236 passing | **247 passing, 0 failing** |
-| `ruff` / `black` / `mypy` | 145 / fail / 4 errors | **all clean** |
-| `npm run lint` | crashed (ESLint 9 vs eslintrc) | **clean** |
-| Fresh clone, no DB/extras/env | package unimportable | **148 tests pass** |
-| `helios bootstrap` offline | exited 1, "use pytest instead" | **13 sites, 147 evidence** |
-| Published data | 944 lines hand-written | **real API export, verified** |
+| the word | the class itself | yes |
+| the basis | observed / derived / unestablished | yes — solid, dashed, dotted |
+| the ramp | degree | partially |
 
-### Bugs found and fixed along the way
+The basis moved out of CSS into the component as `data-evidence-basis`. It had
+been three separate `border-style: dashed` declarations — an invariant nobody can
+see and any restyle could drop one of, and dropping one makes an inferred value
+look observed.
 
-All pre-existing; confirmed against baseline `HEAD` by stashing.
+### Verification
 
-1. **`helios_connectors` was unimportable on a default install.** `__init__.py` eagerly
-   imported a chain ending at `fitz` (PyMuPDF), which lives in the optional `documents`
-   extra. Fixed at the root: lazy import in `pdf_parser`, no eager re-exports.
-2. **`assertion_class="estimated"` escaped the closed vocabulary.** `SiteEstimate`
-   defaulted to a string that is not an `AssertionClass` member, so the UI could not badge
-   it. Power/water estimates apply *assumed* coefficients to measured acreage, so they are
-   `inferred`, not `calculated`. Guarded by `tests/unit/test_assertion_vocabulary.py`.
-   Only surfaced because we started exporting real data — the mock never emitted it.
-3. **Every site published `evidence_count: 0`** while carrying full evidence. The rollup
-   query ran before an explicit flush under `autoflush=False`, and per-site inside the
-   loop, so a later site claiming evidence left an earlier count stale. Now a single pass
-   after all attachments.
-4. **Tests did not mirror production session semantics** (`autoflush` on in tests, off in
-   production) — which is exactly why bug 3 shipped green. Aligned in `conftest.py`.
-5. **Tests could reach a developer's real database** via `get_engine()`. Pinned to the
-   test DB.
-6. **`AccessMethod.MANUAL_DOWNLOAD` does not exist** (`mesa_agendas.py`) — latent
-   `AttributeError`. Corrected to `MANUAL_UPLOAD`.
-7. **`DiscoveryResult(warnings=...)` is not a field** (`azcc_edocket.py`) — latent
-   `TypeError` on the missing-fixture path.
-8. **Nine stale tests** asserting contracts the code had outgrown (single prediction vs
-   the identity/stage split; `outcome.score`; a 3-case backtest corpus that had grown to
-   5). Updated to assert real behaviour, not weakened.
+| Gate | Result |
+|---|---|
+| `lint` / `typecheck` / `test` / `build` | clean after every commit |
+| Assertion guard test | **proved** — flipping `inferred` to observed fails 2 cases |
+| Contrast audit, both themes | 7 failures found and fixed; now all clear |
+| Greyscale separation | ramp monotonic in both themes; 1 collapse found and fixed |
+| Static export | all routes pre-render; both basemap variants ship |
+
+### Bugs and design faults found along the way
+
+1. **Badge borders at the pale end of the ramp failed 3:1** (1.73 and 2.49). These
+   were the borders on `predicted` and `inferred` — one of the three encoding
+   channels — so the encoding was silently collapsing to fill colour alone.
+   Solving each step to the floor individually pushed them onto nearly the same
+   value, so the badge edges got their own ramp solved across 3.05:1–9.5:1.
+2. **`unknown` and `predicted` were the same mark in greyscale** (luminance 0.292
+   vs 0.288). Both passed the contrast audit; the collapse only showed up when
+   measuring the classes against each other. Fixed structurally with a dotted
+   edge rather than by moving a colour.
+3. **The map legend had already drifted from the map** — it held its own copy of
+   the stage hex values and claimed stage 7 was gold where the map drew it amber.
+   The legend now reads out of the ramp.
+4. **`--unmeasured-edge` failed 3:1** in both themes (2.19, 1.81).
+5. **The light wordmark measured 4.48:1** against a 4.5 floor.
+6. **Testing Library's cleanup was never registered.** It self-registers only
+   under `globals: true`, which this project does not use, so renders accumulated
+   in the document and any second test querying a testid found two of them. The
+   pre-existing single test passed only because it was alone in the file.
 
 ### Deliberate decisions
 
-- **Byte-identical export diffing was not adopted.** Site UUIDs are random per bootstrap,
-  so `git diff --exit-code` could never pass. CI instead rebuilds the export and asserts
-  structural truth (flagship present, every advertised site fetchable, counts agree,
-  assertion classes valid), then *warns* on drift.
-- **Copernicus stays in the registry as `planned` with no connector.** Deleting the
-  fixture-backed stub is the honest move: the registry exists to make gaps visible.
-- **Terraform and the Dockerfiles were kept** (user's call) — they are a coherent pair,
-  since the ECS config deploys those images.
+- **Amber survives as `--brand`, confined to the wordmark.** Helios is the sun and
+  the identity is worth keeping, but the moment it grades a value it becomes a
+  second data hue — which is what the palette exists to avoid.
+- **Badge labels take `--ink-1`, never a ramp step.** Ramp steps are marks held to
+  3:1; as ink under 11px type they owe 4.5:1 and the pale end does not reach it.
+  Contrast lives in the text, grading in the fill and edge.
+- **The footer is generated from the source registry.** A hand-typed list is free
+  to drift toward claiming a source that is not feeding anything.
 
-### Known, not addressed (out of scope)
+### Known, not addressed
 
-- `helios explain` prints the rules' *implied* stage (4) while the site's persisted stage
-  is 7. Pre-existing; a modelling question about which is authoritative, not a defect I
-  could resolve confidently.
-- `mypy` notes an unused override section for `tests.*`/`scripts.*`. Harmless — it applies
-  when mypy is pointed at those trees.
+- **The basemap is still a third-party request.** Tiles come from
+  `basemaps.cartocdn.com`; the reference project makes a point of shipping its map
+  from its own repository. Self-hosting tiles is real work and separate from a
+  visual redesign.
+- Node-20-deprecated action versions in the workflows.
+- Four "phase" leftovers in the tree (migration filename, `models.py` docstring,
+  `backtest.py` report title, ADR 0002).

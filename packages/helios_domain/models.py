@@ -1,4 +1,4 @@
-"""Relational models for the Helios Phase 1 schema.
+"""Relational models for the Helios schema.
 
 Layered roughly in dependency order:
 

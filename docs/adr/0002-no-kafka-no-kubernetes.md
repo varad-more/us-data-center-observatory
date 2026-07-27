@@ -6,7 +6,7 @@ Accepted.
 
 ## Context
 
-The product vision mentions streaming ingestion and cloud-native deployment. For Phase 0 / first sprint the measured workload is:
+The product vision mentions streaming ingestion and cloud-native deployment. At the scale Helios actually runs at, the measured workload is:
 
 - one study region (East Valley, Arizona);
 - a handful of connectors run on demand or nightly;

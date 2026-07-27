@@ -106,7 +106,7 @@ class BacktestReport:
     def generate_research_report(self) -> str:
         """Generate a markdown report of the backtest evaluation."""
         lines = [
-            "# Helios Phase 4: Backtesting & Research Evaluation",
+            "# Helios Backtesting & Research Evaluation",
             "",
             "## Aggregate Metrics",
             f"- **Total Cases Evaluated**: {self.total}",
