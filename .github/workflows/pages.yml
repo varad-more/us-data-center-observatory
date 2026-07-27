@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - cursor/project-helios-observatory-8547
   workflow_dispatch:
 
 permissions:
