@@ -1,5 +1,5 @@
 {
-  "site_id": "274d665e-efa8-4a07-af5b-c3b0c9937b67",
+  "site_id": "cc182767-f805-4665-9596-119fb963d4c6",
   "project_code": "AZ-MESA-001",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by PLATYPUS DEVELOPMENT LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); minimal descriptive name). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "5a220dd1-1ce9-4704-a921-d6537799e771",
+        "id": "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by PLATYPUS DEVELOPMENT LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); minimal descriptive name). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = PLATYPUS DEVELOPMENT LLC",
@@ -37,8 +37,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
-          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
+          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -58,7 +58,7 @@
       "title": "Large industrial parcel acquisition",
       "detail": "Organization-held industrial parcel of 83.2 acres transferred for $113,576,875 on 2013-11-04, at or above the 20-acre campus-scale threshold.",
       "evidence": {
-        "id": "ff5ccea8-94ff-4db1-8548-f0f16d7112a2",
+        "id": "f5cbee6f-65f1-4241-a10d-6b5c66182a2c",
         "evidence_kind": "large_industrial_parcel_acquisition",
         "summary": "Organization-held industrial parcel of 83.2 acres transferred for $113,576,875 on 2013-11-04, at or above the 20-acre campus-scale threshold.",
         "snippet": "DeedNumber = 20130962087; DeedDate = 2013-11-04; LotSize_Acre = 83.17146",
@@ -98,8 +98,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
-          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
+          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -120,26 +120,26 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "evidence": null,
       "stage_transition": {
-        "id": "19352127-2d2a-4ab6-9187-b28f91eaa6b9",
+        "id": "6e1bc377-6627-4b35-84cf-08ea8a7265f3",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2013-11-04",
-        "detected_at": "2026-07-27T05:27:28.884553Z",
+        "detected_at": "2026-07-27T23:21:20.105640Z",
         "is_downgrade": false,
-        "confidence": 70.03,
+        "confidence": 70.04,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
         "triggering_evidence_ids": [
-          "d653221a-bae9-47d1-a753-083a06989cd2",
-          "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d",
-          "2924eab1-b2b7-4226-81a0-c5028bc2d242",
-          "8e687d18-595e-4854-8334-5dcf4642a5aa",
-          "fc566d35-51b2-4ae5-8e02-3ece90961bae",
-          "ff5ccea8-94ff-4db1-8548-f0f16d7112a2",
-          "2a893329-9929-4bd8-b63e-00dfb9f7de7a",
-          "66f270f1-c699-464b-aaba-c1b6c0715bf1",
-          "5a220dd1-1ce9-4704-a921-d6537799e771"
+          "f333faab-9981-48a1-99f0-ea71580b54ac",
+          "5d029e37-1b20-42c2-a045-d21a6d423cbf",
+          "86022632-93b6-4e3a-b234-aaae27a1355f",
+          "9ff74f24-a830-4b77-a230-27fbb5999288",
+          "77d7ee04-b57a-4f59-be22-febd119ad0fb",
+          "f5cbee6f-65f1-4241-a10d-6b5c66182a2c",
+          "0550d3cc-09c7-4262-97a9-95794fce612a",
+          "37806db2-2998-423a-8b0a-30039b8a790f",
+          "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2"
         ],
         "detection_lag_days": 4648
       },
@@ -151,7 +151,7 @@
       "title": "Substation application",
       "detail": "ACC docket E-01345A-22-0148: Initial CEC application \u2014 Signal Butte Substation. Filed by Arizona Public Service Company on 2022-06-14. Helios ingested a recorded fixture, not a live scrape.",
       "evidence": {
-        "id": "66f270f1-c699-464b-aaba-c1b6c0715bf1",
+        "id": "37806db2-2998-423a-8b0a-30039b8a790f",
         "evidence_kind": "substation_application",
         "summary": "ACC docket E-01345A-22-0148: Initial CEC application \u2014 Signal Butte Substation. Filed by Arizona Public Service Company on 2022-06-14. Helios ingested a recorded fixture, not a live scrape.",
         "snippet": "Requests approval to construct a 230/69 kV substation and short loop-in of an existing 230 kV circuit near S Signal Butte Road, Mesa.",
@@ -199,17 +199,17 @@
               "extraction_method": "pattern_rule"
             }
           ],
-          "permit_id": "e11da061-b811-40b3-80f6-8dade1e68851",
+          "permit_id": "a23b3bdc-e994-4ae3-a26b-859c5a82dad2",
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "d876326d-5ce9-4ed9-8648-ac4041295423",
-          "document_version_id": "47bfd30f-d30d-4d50-abde-4a4d9ecde4f9",
+          "document_id": "028de517-66b7-412c-82e0-ae27f52d4cf9",
+          "document_version_id": "5ece8565-8c47-49a7-b0fc-6d5f1fe65a69",
           "source_slug": "azcc-edocket",
           "source_name": "Arizona Corporation Commission eDocket",
           "agency": "Arizona Corporation Commission",
           "source_url": "https://edocket.azcc.gov/search/docket-search",
-          "retrieved_at": "2026-07-27T05:27:28.424633Z",
+          "retrieved_at": "2026-07-27T23:21:19.275614Z",
           "content_sha256": "c3c1150bf8f6907a483612a4f43d19afe9814f38215a0a65ce0d5b6f78128055",
           "parser_version": "0.1.0",
           "attribution_text": null
@@ -224,7 +224,7 @@
       "title": "Substation application",
       "detail": "ACC docket E-01345A-22-0148: Amended single-line and site plan. Filed by Arizona Public Service Company on 2023-01-09. Helios ingested a recorded fixture, not a live scrape.",
       "evidence": {
-        "id": "fc566d35-51b2-4ae5-8e02-3ece90961bae",
+        "id": "77d7ee04-b57a-4f59-be22-febd119ad0fb",
         "evidence_kind": "substation_application",
         "summary": "ACC docket E-01345A-22-0148: Amended single-line and site plan. Filed by Arizona Public Service Company on 2023-01-09. Helios ingested a recorded fixture, not a live scrape.",
         "snippet": "Updates the proposed substation footprint and confirms 230 kV loop-in alignment.",
@@ -272,17 +272,17 @@
               "extraction_method": "pattern_rule"
             }
           ],
-          "permit_id": "7c9e0912-4fe9-42b8-a1a9-9f0ff482dcf8",
+          "permit_id": "2be04b02-ba9d-4e26-8283-4340873a43bc",
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "d876326d-5ce9-4ed9-8648-ac4041295423",
-          "document_version_id": "47bfd30f-d30d-4d50-abde-4a4d9ecde4f9",
+          "document_id": "028de517-66b7-412c-82e0-ae27f52d4cf9",
+          "document_version_id": "5ece8565-8c47-49a7-b0fc-6d5f1fe65a69",
           "source_slug": "azcc-edocket",
           "source_name": "Arizona Corporation Commission eDocket",
           "agency": "Arizona Corporation Commission",
           "source_url": "https://edocket.azcc.gov/search/docket-search",
-          "retrieved_at": "2026-07-27T05:27:28.424633Z",
+          "retrieved_at": "2026-07-27T23:21:19.275614Z",
           "content_sha256": "c3c1150bf8f6907a483612a4f43d19afe9814f38215a0a65ce0d5b6f78128055",
           "parser_version": "0.1.0",
           "attribution_text": null
@@ -297,7 +297,7 @@
       "title": "Grading or construction permit",
       "detail": "City of Mesa commercial building permit PMT26-07994 at 3740 S SIGNAL BUTTE RD, opened 2026-04-27, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "evidence": {
-        "id": "2a893329-9929-4bd8-b63e-00dfb9f7de7a",
+        "id": "0550d3cc-09c7-4262-97a9-95794fce612a",
         "evidence_kind": "grading_or_construction_permit",
         "summary": "City of Mesa commercial building permit PMT26-07994 at 3740 S SIGNAL BUTTE RD, opened 2026-04-27, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
         "snippet": "PMT26-07994; COM; 3740 S SIGNAL BUTTE RD; Issued - Permit approved and issued and in inspection phase",
@@ -345,7 +345,7 @@
               "extraction_method": "structured_feed"
             }
           ],
-          "permit_id": "df2d9d2c-e0df-4714-9853-c24bb3968e04",
+          "permit_id": "1393b40a-9e42-40c4-8dc9-31a98a64883c",
           "address_match": {
             "apn": "30433005S",
             "method": "address_normalized_exact",
@@ -355,8 +355,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
-          "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+          "document_id": "256017be-bbdb-4fdc-b408-456a54553987",
+          "document_version_id": "8c4025c5-3778-48d1-8450-44019d9419dd",
           "source_slug": "mesa-building-permits",
           "source_name": "City of Mesa Building Permits",
           "agency": "City of Mesa",
@@ -376,7 +376,7 @@
       "title": "Grading or construction permit",
       "detail": "City of Mesa commercial building permit PMT26-12780 at 3740 S SIGNAL BUTTE RD, opened 2026-07-13, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "evidence": {
-        "id": "8e687d18-595e-4854-8334-5dcf4642a5aa",
+        "id": "9ff74f24-a830-4b77-a230-27fbb5999288",
         "evidence_kind": "grading_or_construction_permit",
         "summary": "City of Mesa commercial building permit PMT26-12780 at 3740 S SIGNAL BUTTE RD, opened 2026-07-13, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
         "snippet": "PMT26-12780; COM; 3740 S SIGNAL BUTTE RD; In Review - Plans are being reviewed or awaiting revisions",
@@ -424,7 +424,7 @@
               "extraction_method": "structured_feed"
             }
           ],
-          "permit_id": "8630529a-5f9c-4745-911f-f83fb37a8aba",
+          "permit_id": "35ab63fb-ec82-4abc-aff0-0322d4a560ac",
           "address_match": {
             "apn": "30433005S",
             "method": "address_normalized_exact",
@@ -434,8 +434,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
-          "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+          "document_id": "256017be-bbdb-4fdc-b408-456a54553987",
+          "document_version_id": "8c4025c5-3778-48d1-8450-44019d9419dd",
           "source_slug": "mesa-building-permits",
           "source_name": "City of Mesa Building Permits",
           "agency": "City of Mesa",
@@ -455,7 +455,7 @@
       "title": "Grading or construction permit",
       "detail": "City of Mesa commercial building permit PMT26-13495 at 3740 S SIGNAL BUTTE RD, opened 2026-07-23, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "evidence": {
-        "id": "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d",
+        "id": "5d029e37-1b20-42c2-a045-d21a6d423cbf",
         "evidence_kind": "grading_or_construction_permit",
         "summary": "City of Mesa commercial building permit PMT26-13495 at 3740 S SIGNAL BUTTE RD, opened 2026-07-23, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
         "snippet": "PMT26-13495; COM; 3740 S SIGNAL BUTTE RD; In Review - Plans are being reviewed or awaiting revisions",
@@ -503,7 +503,7 @@
               "extraction_method": "structured_feed"
             }
           ],
-          "permit_id": "c53ced9e-0854-4b2a-bb1e-bce70992c168",
+          "permit_id": "8cf660da-9452-4eba-a943-795d28543885",
           "address_match": {
             "apn": "30433005S",
             "method": "address_normalized_exact",
@@ -513,8 +513,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
-          "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+          "document_id": "256017be-bbdb-4fdc-b408-456a54553987",
+          "document_version_id": "8c4025c5-3778-48d1-8450-44019d9419dd",
           "source_slug": "mesa-building-permits",
           "source_name": "City of Mesa Building Permits",
           "agency": "City of Mesa",
@@ -534,7 +534,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Luna Substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "42b6286f-86e6-44ae-959d-11a346baed89",
+        "id": "44452fa6-e1e3-4c72-8260-875ef88edcbd",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Luna Substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = Luna Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -554,8 +554,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
-          "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+          "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
+          "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -571,16 +571,66 @@
     },
     {
       "entry_type": "evidence",
-      "occurred_on": "2026-07-26",
+      "occurred_on": "2026-07-27",
+      "title": "Assessor data center classification",
+      "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "evidence": {
+        "id": "f333faab-9981-48a1-99f0-ea71580b54ac",
+        "evidence_kind": "assessor_data_center_classification",
+        "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "snippet": "PropertyUseDescription = DATA CENTERS",
+        "snippet_locator": "$.features[6].attributes.PropertyUseDescription",
+        "observed_at": "2026-07-27",
+        "assertion_class": "reported",
+        "extraction_method": "structured_feed",
+        "polarity": "supporting",
+        "confidence": 0.95,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": true,
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "land_use_description",
+              "value": "DATA CENTERS",
+              "locator": "$.features[6].attributes.PropertyUseDescription",
+              "raw_text": "DATA CENTERS",
+              "raw_unit": null,
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "is_standing_condition": true
+        },
+        "source": {
+          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
+          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+          "source_slug": "maricopa-assessor-parcels",
+          "source_name": "Maricopa County Assessor Parcel Layer",
+          "agency": "Maricopa County Assessor / Maricopa County GIS",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+          "parser_version": "0.1.0",
+          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2026-07-27",
       "title": "Backup generator air permit",
       "detail": "EPA ECHO lists PLATYPUS CAMPUS EMERGENCY GENERATORS as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Title V; NESHAP Reciprocating Internal Combustion Engines.",
       "evidence": {
-        "id": "2924eab1-b2b7-4226-81a0-c5028bc2d242",
+        "id": "86022632-93b6-4e3a-b234-aaae27a1355f",
         "evidence_kind": "backup_generator_air_permit",
         "summary": "EPA ECHO lists PLATYPUS CAMPUS EMERGENCY GENERATORS as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Title V; NESHAP Reciprocating Internal Combustion Engines.",
         "snippet": "PLATYPUS CAMPUS EMERGENCY GENERATORS; Title V; NESHAP Reciprocating Internal Combustion Engines",
         "snippet_locator": "$.Results.Facilities[0]",
-        "observed_at": "2026-07-26",
+        "observed_at": "2026-07-27",
         "assertion_class": "extracted",
         "extraction_method": "structured_feed",
         "polarity": "supporting",
@@ -623,12 +673,12 @@
               "extraction_method": "structured_feed"
             }
           ],
-          "permit_id": "aa8b8f17-ae0d-4ac4-80a0-704cfdd815f5",
+          "permit_id": "0fe0de76-7ebf-43c0-8866-19f23e41ed5e",
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "a0c9cfea-b4f1-45db-9414-c7bc37dc9fba",
-          "document_version_id": "cef54ab8-3c51-425a-8c3f-9df275a6a9ac",
+          "document_id": "7f5b82a6-d61a-4151-94d3-814a645e3a8f",
+          "document_version_id": "606ed274-daca-4729-96cf-0875ee873c60",
           "source_slug": "epa-echo-air-facilities",
           "source_name": "EPA ECHO Air Facility Records",
           "agency": "United States Environmental Protection Agency",
@@ -637,56 +687,6 @@
           "content_sha256": "ed532dd1321900cdc6a4f6faad76e019dbb43cee816c3ff880f814aed3b99114",
           "parser_version": "0.1.0",
           "attribution_text": null
-        }
-      },
-      "stage_transition": null,
-      "confidence_delta": null
-    },
-    {
-      "entry_type": "evidence",
-      "occurred_on": "2026-07-27",
-      "title": "Assessor data center classification",
-      "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-      "evidence": {
-        "id": "d653221a-bae9-47d1-a753-083a06989cd2",
-        "evidence_kind": "assessor_data_center_classification",
-        "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-        "snippet": "PropertyUseDescription = DATA CENTERS",
-        "snippet_locator": "$.features[6].attributes.PropertyUseDescription",
-        "observed_at": "2026-07-27",
-        "assertion_class": "reported",
-        "extraction_method": "structured_feed",
-        "polarity": "supporting",
-        "confidence": 0.95,
-        "human_review_status": "not_reviewed",
-        "is_standing_condition": true,
-        "normalized_values": {
-          "fields": [
-            {
-              "name": "land_use_description",
-              "value": "DATA CENTERS",
-              "locator": "$.features[6].attributes.PropertyUseDescription",
-              "raw_text": "DATA CENTERS",
-              "raw_unit": null,
-              "confidence": 0.95,
-              "assertion_class": "reported",
-              "normalized_unit": null,
-              "extraction_method": "structured_feed"
-            }
-          ],
-          "is_standing_condition": true
-        },
-        "source": {
-          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
-          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
-          "source_slug": "maricopa-assessor-parcels",
-          "source_name": "Maricopa County Assessor Parcel Layer",
-          "agency": "Maricopa County Assessor / Maricopa County GIS",
-          "source_url": "https://example.invalid/recorded",
-          "retrieved_at": "2026-07-25T21:30:00Z",
-          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
-          "parser_version": "0.1.0",
-          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
         }
       },
       "stage_transition": null,

@@ -1,5 +1,5 @@
 {
-  "id": "1ef96cde-0dd7-44ec-bcc1-bfc0fcce0952",
+  "id": "2a543c32-ab41-4dd0-8eb2-1085f203e221",
   "project_code": "AZ-CHANDLER-002",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 20.9489,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T05:27:28.869679Z",
-  "score_last_calculated_at": "2026-07-27T05:27:28.868360Z",
+  "stage_last_changed_at": "2026-07-27T23:21:20.034791Z",
+  "score_last_calculated_at": "2026-07-27T23:21:20.032273Z",
   "centroid": [
     -111.886941,
     33.274785
@@ -93,7 +93,7 @@
   },
   "parcels": [
     {
-      "id": "59566ec1-cfc1-4140-9ad1-bb1f136553af",
+      "id": "2a3f1a72-9044-4b77-8c67-70f2aad1fcd1",
       "apn": "30336268",
       "apn_formatted": "303-36-268",
       "situs_address": "2121 S PRICE RD",
@@ -113,7 +113,7 @@
   ],
   "organizations": [
     {
-      "id": "49dc706a-dd71-42fc-a8af-d3ffd25885b2",
+      "id": "e0a1a6c1-36d2-4fb5-bef2-efd824eaf7c0",
       "canonical_name": "DIGITAL 2121 SOUTH PRICE LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -128,7 +128,7 @@
   ],
   "dependencies": [
     {
-      "id": "3f642a9a-959b-4118-b355-edb448d015a1",
+      "id": "12fa1b69-d0cb-4aae-a7fb-eed884c24294",
       "infrastructure_kind": "substation",
       "label": "RS-27",
       "dependency_status": "existing",
@@ -142,7 +142,7 @@
       "operator_name": null
     },
     {
-      "id": "b113ae2d-951d-404c-86ff-88f907d66c78",
+      "id": "ae5cc095-7506-4a8f-a235-d53d30e67489",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -156,7 +156,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "ad506a1e-9242-43cd-8b1c-651aa7574832",
+      "id": "dd548a2b-fda4-4aaa-b1fa-ae22303edba2",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -170,7 +170,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "7435cc77-4e21-4549-841d-c85959205e26",
+      "id": "68c85122-5967-4647-b87c-c9190aeae71f",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -184,7 +184,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "a55e8c6f-f7ee-43de-93ef-23e0902d3325",
+      "id": "c58b0891-da23-4d7d-a682-048c29480736",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -198,7 +198,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "189603dc-eaaf-44b8-b3b6-2eea38e90a7d",
+      "id": "d52e7bdb-21ef-40d2-9e7d-f0ba8c204505",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -212,7 +212,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "6398cab2-6239-4e4b-86aa-f238bf517529",
+      "id": "1fd3a401-9676-4733-85db-5c1bfcf008af",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -226,7 +226,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "7c5502ac-edf1-46f1-8832-438c95b1c360",
+      "id": "b4b0d2d8-3d1a-4660-9d3f-557fbcc7676a",
       "infrastructure_kind": "substation",
       "label": "Henshaw Substation",
       "dependency_status": "existing",
@@ -240,7 +240,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "19aa9771-3a7d-454b-9cc6-580fdd601dd6",
+      "id": "dad7e359-a3b4-44c3-9db6-1a5d110ed1bb",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -254,7 +254,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "d8303747-6e3b-4170-8dc2-0053f917fc38",
+      "id": "62144668-a611-43b7-92a1-e990dd732428",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -268,7 +268,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "87145a98-0088-4fc6-801a-6acd6240c250",
+      "id": "4133aea3-512c-40cc-bd20-2dc795df5854",
       "infrastructure_kind": "substation",
       "label": "Jones Substation",
       "dependency_status": "existing",
@@ -282,7 +282,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "42989a12-342f-4ea3-993d-63ae9957077d",
+      "id": "e2949387-a0a3-4207-a529-5163c07ad921",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -296,7 +296,7 @@
       "operator_name": null
     },
     {
-      "id": "ca81e858-1518-4c57-8163-6001968400c8",
+      "id": "e2628ac9-f876-4c63-b42f-c436492fe73b",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -310,7 +310,7 @@
       "operator_name": null
     },
     {
-      "id": "0451a713-52e4-4bed-81a9-cc08cd7f861e",
+      "id": "55526096-82ad-42fc-ba5c-b9c73dfc4daa",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -324,7 +324,7 @@
       "operator_name": null
     },
     {
-      "id": "b9dc9e39-5426-4909-81ac-b16199c436fc",
+      "id": "95e54e83-0e3b-4993-8520-0b05486d28d4",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -338,7 +338,7 @@
       "operator_name": null
     },
     {
-      "id": "bcfad137-253c-4d2e-af28-4ec7243d4848",
+      "id": "8021ba6a-1777-40ba-a32e-a030fa14263f",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -354,37 +354,53 @@
   ],
   "estimates": [
     {
-      "id": "a7b94a89-1993-49b6-80a9-9ab65a09d079",
+      "id": "6b129a88-a48e-4ebf-a3ab-0df5948cb7a9",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": null,
+      "lower_value": 25.1,
       "likely_value": 50.3,
-      "upper_value": null,
-      "method": "Heuristic based on acreage and stage",
+      "upper_value": 100.6,
+      "method": "Assembled acreage x assumed power density, adjusted for stage",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.870089Z",
+      "assumptions": {
+        "note": "Power density is an industry assumption, not a property of this site. Helios does not know the building footprint, rack density or how much of the assembled land will be built on.",
+        "stage": 7,
+        "total_acres": 20.9489,
+        "mw_per_acre_low": 1.0,
+        "mw_per_acre_high": 4.0,
+        "mw_per_acre_likely": 2.0,
+        "stage_density_multiplier": 1.2
+      },
+      "calculated_at": "2026-07-27T23:21:20.035511Z",
       "notes": null
     },
     {
-      "id": "a2c0424c-761a-417d-830c-e0cec0577add",
+      "id": "df2b1a71-5c3a-4f30-b9e1-b505e495d231",
       "estimate_type": "water_usage",
       "unit": "GPD",
-      "lower_value": null,
+      "lower_value": 60240.0,
       "likely_value": 603600.0,
-      "upper_value": null,
-      "method": "Industry average 0.5 gal/kWh",
+      "upper_value": 2414400.0,
+      "method": "Estimated power x assumed cooling water intensity",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.870111Z",
+      "assumptions": {
+        "note": "Cooling type is not recorded in any source Helios ingests. A closed-loop or air-cooled design approaches zero water use; evaporative cooling can exceed a gallon per kWh. The band is wide because the practice is.",
+        "power_mw_lower": 25.1,
+        "power_mw_upper": 100.6,
+        "gal_per_kwh_low": 0.1,
+        "power_mw_likely": 50.3,
+        "gal_per_kwh_high": 1.0,
+        "gal_per_kwh_likely": 0.5
+      },
+      "calculated_at": "2026-07-27T23:21:20.035609Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "78cb4b66-ded9-44db-8f87-b9975041bb68",
-    "calculated_at": "2026-07-27T05:27:28.868381Z",
+    "id": "3332d7e5-92f4-4819-b6e3-d13d10157642",
+    "calculated_at": "2026-07-27T23:21:20.032318Z",
     "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -410,7 +426,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "f6621ef2-948d-4ee4-a696-24e65960125b"
+        "evidence_record_id": "7b870fdc-39aa-45a9-806d-80bbe5f4b066"
       },
       {
         "rule_id": "large-industrial-parcel-acquisition",
@@ -422,7 +438,7 @@
         "confidence_multiplier": 0.9,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "53ca6256-06c0-47a6-a482-e362ca90286d"
+        "evidence_record_id": "9390e514-2fad-49e9-80b9-6f3a7008a5e9"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -434,7 +450,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c"
+        "evidence_record_id": "e5459f87-996a-4353-8607-f273a5ae8b21"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -446,26 +462,26 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "d5c3ab06-44b3-4268-9b70-67b9378cfb8a"
+        "evidence_record_id": "b83ce174-2862-4610-8fcd-9ebdc60344e8"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "f90b5fca-11cd-4a72-b8ae-3a2220314cc1",
+      "id": "0698ffff-e72e-4d29-a6e7-6fd930dda6ff",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2010-07-15",
-      "detected_at": "2026-07-27T05:27:28.869679Z",
+      "detected_at": "2026-07-27T23:21:20.034791Z",
       "is_downgrade": false,
       "confidence": 32.66,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "f6621ef2-948d-4ee4-a696-24e65960125b",
-        "53ca6256-06c0-47a6-a482-e362ca90286d",
-        "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c"
+        "7b870fdc-39aa-45a9-806d-80bbe5f4b066",
+        "9390e514-2fad-49e9-80b9-6f3a7008a5e9",
+        "e5459f87-996a-4353-8607-f273a5ae8b21"
       ],
       "detection_lag_days": 5856
     }

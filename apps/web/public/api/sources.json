@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "c61bc697-46ed-410a-86d3-1c2d234f40f1",
+      "id": "c4ef7218-e9ca-477a-98cf-14d9a1f26e00",
       "slug": "az-corporation-commission-entity-search",
       "name": "Arizona Corporation Commission Entity Search",
       "agency": "Arizona Corporation Commission",
@@ -28,7 +28,7 @@
       "document_count": 0
     },
     {
-      "id": "22b3409e-a551-4a13-b389-74490005cdaf",
+      "id": "97953d4f-10f3-4e67-b1a5-444a929068fb",
       "slug": "sec-edgar",
       "name": "SEC EDGAR Full-Text Search",
       "agency": "US Securities and Exchange Commission",
@@ -55,7 +55,7 @@
       "document_count": 0
     },
     {
-      "id": "41da47b2-1e3b-4acf-a2dc-b8bd4aa974e7",
+      "id": "4d24f212-e869-47d6-8494-d37d9b67bf93",
       "slug": "epa-echo-air-facilities",
       "name": "EPA ECHO Air Facility Records",
       "agency": "United States Environmental Protection Agency",
@@ -78,11 +78,11 @@
       "connector_status": "implemented",
       "connector_slug": "epa-echo-air-facilities",
       "access_limitation": null,
-      "last_success_at": "2026-07-27T05:27:28.240447Z",
+      "last_success_at": "2026-07-27T23:21:18.820941Z",
       "document_count": 1
     },
     {
-      "id": "96398866-58eb-4460-a3c9-9cbc74ce5aca",
+      "id": "6d693eb7-73e6-4700-b0c2-68fc32d920f8",
       "slug": "maricopa-aqd-dust-control",
       "name": "Maricopa County Air Quality Dust Control Sites",
       "agency": "Maricopa County Air Quality Department",
@@ -109,7 +109,7 @@
       "document_count": 0
     },
     {
-      "id": "60bd7b11-2cb6-45bd-a331-59b532427413",
+      "id": "62aa6e94-ab64-49f2-b63b-28c578245c5e",
       "slug": "osm-power-infrastructure",
       "name": "OpenStreetMap Power Infrastructure (Overpass API)",
       "agency": "OpenStreetMap contributors",
@@ -132,11 +132,11 @@
       "connector_status": "implemented",
       "connector_slug": "osm-power-infrastructure",
       "access_limitation": null,
-      "last_success_at": "2026-07-27T05:27:28.223968Z",
+      "last_success_at": "2026-07-27T23:21:18.788400Z",
       "document_count": 1
     },
     {
-      "id": "9685b385-9cbc-4640-9c41-b2de002a9c2c",
+      "id": "cbfe745c-5d12-4839-bbc4-945066e169a2",
       "slug": "maricopa-assessor-parcels",
       "name": "Maricopa County Assessor Parcel Layer",
       "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -159,11 +159,11 @@
       "connector_status": "implemented",
       "connector_slug": "maricopa-assessor-parcels",
       "access_limitation": null,
-      "last_success_at": "2026-07-27T05:27:27.990244Z",
+      "last_success_at": "2026-07-27T23:21:18.212103Z",
       "document_count": 1
     },
     {
-      "id": "17f1c84b-4b3a-4107-aaeb-dc5f98fbe48d",
+      "id": "b00a4699-ee46-4f38-869a-e21dcea25012",
       "slug": "maricopa-recorder-documents",
       "name": "Maricopa County Recorder Document Search",
       "agency": "Maricopa County Recorder",
@@ -190,7 +190,7 @@
       "document_count": 0
     },
     {
-      "id": "300ef641-e9a3-40c1-9c2e-b5ab9518ba73",
+      "id": "09ef7a25-91e6-47cc-8734-6ba0b5e2d228",
       "slug": "mesa-building-permits",
       "name": "City of Mesa Building Permits",
       "agency": "City of Mesa",
@@ -213,11 +213,11 @@
       "connector_status": "implemented",
       "connector_slug": "mesa-building-permits",
       "access_limitation": null,
-      "last_success_at": "2026-07-27T05:27:28.420209Z",
+      "last_success_at": "2026-07-27T23:21:19.266863Z",
       "document_count": 1
     },
     {
-      "id": "7d4d205d-4180-4f1a-823e-6bd94b1d295e",
+      "id": "d9fd0f5f-b1fd-4ada-8ef6-312b78abfcea",
       "slug": "mesa-agendas",
       "name": "City of Mesa Planning and Zoning Agendas",
       "agency": "City of Mesa Development Services",
@@ -244,7 +244,7 @@
       "document_count": 0
     },
     {
-      "id": "66fb30b8-29a4-484f-bc16-7630d648bb24",
+      "id": "3fed8868-c563-408c-abba-c0043d3b3c1d",
       "slug": "copernicus-sentinel2",
       "name": "Copernicus Sentinel-2 Surface Reflectance",
       "agency": "European Space Agency / Copernicus",
@@ -271,7 +271,7 @@
       "document_count": 0
     },
     {
-      "id": "af4cc6e9-86b6-45e3-a725-dcac486e9e5f",
+      "id": "396dfb56-4d91-4fc1-9046-a883c9deefe8",
       "slug": "azcc-edocket",
       "name": "Arizona Corporation Commission eDocket",
       "agency": "Arizona Corporation Commission",
@@ -294,11 +294,11 @@
       "connector_status": "fixture_only",
       "connector_slug": "azcc-edocket",
       "access_limitation": "eDocket search is a stateful ASP.NET interface requiring viewstate round-trips and offering no documented API or bulk export. Helios implements and tests the parser against fixtures built from the documented docket schema, and does not automate the search interface. Live coverage requires either an agency-provided export or manual docket retrieval.",
-      "last_success_at": "2026-07-27T05:27:28.434043Z",
+      "last_success_at": "2026-07-27T23:21:19.300199Z",
       "document_count": 2
     },
     {
-      "id": "4ca65107-ca7d-40af-a733-3b15a31b1687",
+      "id": "3aad740a-6e3c-478e-8df9-9742ac0831e4",
       "slug": "srp-infrastructure-projects",
       "name": "Salt River Project Infrastructure Projects",
       "agency": "Salt River Project",
@@ -325,7 +325,7 @@
       "document_count": 0
     },
     {
-      "id": "0b3b95c2-dd4a-461a-958d-f43c204240e2",
+      "id": "ee463ea8-d6d2-467a-9104-0f0dffe20909",
       "slug": "adwr-water-records",
       "name": "Arizona Department of Water Resources Data",
       "agency": "Arizona Department of Water Resources",

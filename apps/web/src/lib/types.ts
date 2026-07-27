@@ -241,6 +241,8 @@ export const estimateSchema = z.object({
   notes: z.string().nullable(),
 });
 
+export type Estimate = z.infer<typeof estimateSchema>;
+
 export const siteDetailSchema = siteSummarySchema.extend({
   summary: z.string().nullable(),
   boundary: z.record(z.unknown()).nullable(),

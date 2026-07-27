@@ -8,6 +8,7 @@ import {
   StatusPill,
 } from "@/components/AssertionBadge";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
+import { EstimateRange } from "@/components/EstimateRange";
 import { InfrastructureMap } from "@/components/InfrastructureMap";
 import { ScoreExplanation, Metric } from "@/components/ScoreExplanation";
 import { Timeline } from "@/components/Timeline";
@@ -30,6 +31,18 @@ export async function generateStaticParams() {
 }
 
 const STAGE_COUNT = 9;
+
+/**
+ * Estimate types this page knows how to label.
+ *
+ * Filtering on this rather than rendering every row means a new estimate type
+ * appears deliberately, with wording chosen for it, instead of leaking a raw
+ * database enum into the interface.
+ */
+const ESTIMATE_LABELS: Record<string, string> = {
+  power_capacity: "Power capacity",
+  water_usage: "Cooling water",
+};
 
 interface PageProps {
   params: Promise<{ siteId: string }>;
@@ -105,19 +118,15 @@ export default async function SiteDetailPage({ params }: PageProps) {
         <Metric
           label="Estimated load"
           value={(() => {
-            const powerEst = site.estimates?.find((e) => e.estimate_type === "power_capacity");
-            return powerEst && powerEst.likely_value !== null
-              ? `${powerEst.likely_value} ${powerEst.unit}`
-              : "Not established";
+            const power = site.estimates?.find((e) => e.estimate_type === "power_capacity");
+            if (!power || power.likely_value === null) return "Not established";
+            // The headline carries the band, not the midpoint. A single figure
+            // here would read as measured; the range is the honest summary.
+            return power.lower_value !== null && power.upper_value !== null
+              ? `${Math.round(power.lower_value)}–${Math.round(power.upper_value)} ${power.unit}`
+              : `${power.likely_value} ${power.unit}`;
           })()}
-          sub={(() => {
-            const powerEst = site.estimates?.find((e) => e.estimate_type === "power_capacity");
-            const waterEst = site.estimates?.find((e) => e.estimate_type === "water_usage");
-            if (powerEst && waterEst && waterEst.likely_value !== null) {
-              return `+ ~${waterEst.likely_value.toLocaleString()} ${waterEst.unit} water (heuristic)`;
-            }
-            return "requires a utility filing Helios cannot yet read";
-          })()}
+          sub="inferred from acreage — see the estimates panel"
         />
       </div>
 
@@ -170,6 +179,24 @@ export default async function SiteDetailPage({ params }: PageProps) {
               focusProjectCode={site.project_code}
             />
           </section>
+
+          {site.estimates && site.estimates.length > 0 && (
+            <section className="card">
+              <div className="card-header">
+                <h2 className="card-title">Estimated demand</h2>
+                <span className="card-note">none of this is a filed figure</span>
+              </div>
+              {site.estimates
+                .filter((e) => ESTIMATE_LABELS[e.estimate_type])
+                .map((estimate) => (
+                  <EstimateRange
+                    key={estimate.id}
+                    estimate={estimate}
+                    label={ESTIMATE_LABELS[estimate.estimate_type]}
+                  />
+                ))}
+            </section>
+          )}
 
           <section className="card">
             <div className="card-header">

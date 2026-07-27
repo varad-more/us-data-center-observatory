@@ -1,5 +1,5 @@
 {
-  "id": "1bc5fd64-a059-4bda-8eb4-63f3e3960bac",
+  "id": "81c368d2-da48-4684-b43a-895a7c05e07a",
   "project_code": "AZ-GILBERT-001",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 2.8053,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T05:27:28.874578Z",
-  "score_last_calculated_at": "2026-07-27T05:27:28.873380Z",
+  "stage_last_changed_at": "2026-07-27T23:21:20.055198Z",
+  "score_last_calculated_at": "2026-07-27T23:21:20.052996Z",
   "centroid": [
     -111.812616,
     33.374904
@@ -313,7 +313,7 @@
   },
   "parcels": [
     {
-      "id": "e623477a-39ec-4b3d-87ee-f85853117aef",
+      "id": "af99c73d-9446-40ae-b15c-1b2b98267afa",
       "apn": "30212690",
       "apn_formatted": "302-12-690",
       "situs_address": "1040 W MERRILL AVE",
@@ -333,7 +333,7 @@
   ],
   "organizations": [
     {
-      "id": "93639729-4122-4127-b1a0-a969e3b0ff80",
+      "id": "d0889544-5a87-478a-aa9e-a77eedc6567d",
       "canonical_name": "FOX CORPORATION",
       "role": "owner",
       "organization_type": "CORP",
@@ -346,7 +346,7 @@
   ],
   "dependencies": [
     {
-      "id": "16360784-4108-40e1-ac77-c9e30fe5e9c2",
+      "id": "cd7296c6-f7ba-4788-acd0-4b66a6783f29",
       "infrastructure_kind": "substation",
       "label": "Finley Substation",
       "dependency_status": "existing",
@@ -360,7 +360,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "c14d8af2-6bb0-4f20-88c4-9dd5ae0c4bc6",
+      "id": "cec4ec0a-77b6-4721-a591-f4ec9d1ccfb9",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -374,7 +374,7 @@
       "operator_name": null
     },
     {
-      "id": "e8b023b5-337e-4006-b6d1-92b5b0bd6b10",
+      "id": "b8f33210-e435-4e87-8acc-92ab85cddeed",
       "infrastructure_kind": "substation",
       "label": "Corbell Substation",
       "dependency_status": "existing",
@@ -388,7 +388,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "06e884c3-3604-4701-a078-b59ca52262c5",
+      "id": "8dc9f99a-d93e-41d4-b34f-5ddfe2e8901f",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -404,37 +404,53 @@
   ],
   "estimates": [
     {
-      "id": "087c8a6e-7f0d-450d-bada-08bb25e38f1e",
+      "id": "c21efb60-e6b9-4f7b-b3f2-671f36f316a2",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": null,
+      "lower_value": 3.4,
       "likely_value": 6.7,
-      "upper_value": null,
-      "method": "Heuristic based on acreage and stage",
+      "upper_value": 13.5,
+      "method": "Assembled acreage x assumed power density, adjusted for stage",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.874996Z",
+      "assumptions": {
+        "note": "Power density is an industry assumption, not a property of this site. Helios does not know the building footprint, rack density or how much of the assembled land will be built on.",
+        "stage": 7,
+        "total_acres": 2.8053,
+        "mw_per_acre_low": 1.0,
+        "mw_per_acre_high": 4.0,
+        "mw_per_acre_likely": 2.0,
+        "stage_density_multiplier": 1.2
+      },
+      "calculated_at": "2026-07-27T23:21:20.055937Z",
       "notes": null
     },
     {
-      "id": "f6d8cf72-a249-4d7f-a458-0b6bd84352d2",
+      "id": "86046b37-ef4a-4bfd-8e8e-642291f32124",
       "estimate_type": "water_usage",
       "unit": "GPD",
-      "lower_value": null,
+      "lower_value": 8160.0,
       "likely_value": 80400.0,
-      "upper_value": null,
-      "method": "Industry average 0.5 gal/kWh",
+      "upper_value": 324000.0,
+      "method": "Estimated power x assumed cooling water intensity",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.875017Z",
+      "assumptions": {
+        "note": "Cooling type is not recorded in any source Helios ingests. A closed-loop or air-cooled design approaches zero water use; evaporative cooling can exceed a gallon per kWh. The band is wide because the practice is.",
+        "power_mw_lower": 3.4,
+        "power_mw_upper": 13.5,
+        "gal_per_kwh_low": 0.1,
+        "power_mw_likely": 6.7,
+        "gal_per_kwh_high": 1.0,
+        "gal_per_kwh_likely": 0.5
+      },
+      "calculated_at": "2026-07-27T23:21:20.056031Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "372c5270-7f7d-4840-a1bf-8c5d5b0e6c60",
-    "calculated_at": "2026-07-27T05:27:28.873395Z",
+    "id": "f2f9d6e8-1a51-4054-8967-913390dd8c78",
+    "calculated_at": "2026-07-27T23:21:20.053040Z",
     "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -460,7 +476,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "dbbf5789-8416-425f-b2c7-af6d7d5e32df"
+        "evidence_record_id": "c049aa91-9d56-4fd4-8d61-5c9c844f9804"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -472,24 +488,24 @@
         "confidence_multiplier": 0.8932,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "251c91f9-b46a-444e-841c-5be0dcf21c76"
+        "evidence_record_id": "b737c2a9-af56-4b7c-a5a7-a5cc601f666b"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "1aeeb2a8-0e79-40b4-955f-fa45ffd0a5ba",
+      "id": "3db36e9c-7629-45e2-afef-4fe05db44b4e",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2026-07-27",
-      "detected_at": "2026-07-27T05:27:28.874578Z",
+      "detected_at": "2026-07-27T23:21:20.055198Z",
       "is_downgrade": false,
       "confidence": 27.14,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "dbbf5789-8416-425f-b2c7-af6d7d5e32df"
+        "c049aa91-9d56-4fd4-8d61-5c9c844f9804"
       ],
       "detection_lag_days": 0
     }

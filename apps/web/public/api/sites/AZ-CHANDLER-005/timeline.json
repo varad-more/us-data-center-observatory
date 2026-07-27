@@ -1,5 +1,5 @@
 {
-  "site_id": "f3d3dcf7-fbfa-42dc-b878-041d1245519d",
+  "site_id": "c3f0fcfe-4986-4006-bbc2-40dc91abb2e0",
   "project_code": "AZ-CHANDLER-005",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by FIRST DATA REAL ESTATE HOLDINGS L L C, whose name shows single-purpose-entity characteristics (holding-company naming). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "df8d3d94-2167-4ba2-898f-aadf5c388e34",
+        "id": "d32f2665-760f-4dc6-b68c-657557fa15cf",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by FIRST DATA REAL ESTATE HOLDINGS L L C, whose name shows single-purpose-entity characteristics (holding-company naming). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = FIRST DATA REAL ESTATE HOLDINGS L L C",
@@ -37,8 +37,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
-          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
+          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -59,19 +59,19 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "evidence": null,
       "stage_transition": {
-        "id": "26827bf7-0374-4ab3-9356-ceeb16192d0e",
+        "id": "f066ac3b-cec8-4b7f-960d-1b55a399584f",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2007-09-20",
-        "detected_at": "2026-07-27T05:27:28.924120Z",
+        "detected_at": "2026-07-27T23:21:20.085645Z",
         "is_downgrade": false,
         "confidence": 27.96,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
         "triggering_evidence_ids": [
-          "9f49b055-f121-4b8e-a421-8210426d0464",
-          "df8d3d94-2167-4ba2-898f-aadf5c388e34"
+          "32e62712-d485-42a3-baea-f2fce37b67a8",
+          "d32f2665-760f-4dc6-b68c-657557fa15cf"
         ],
         "detection_lag_days": 6885
       },
@@ -83,7 +83,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Gila Substation tagged 69 kV lies 163 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "40fee33b-7719-47a9-a431-4d66241bc255",
+        "id": "9b138ee0-798a-44df-a756-2c2879616600",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Gila Substation tagged 69 kV lies 163 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = Gila Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -103,8 +103,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
-          "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+          "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
+          "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -124,7 +124,7 @@
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "9f49b055-f121-4b8e-a421-8210426d0464",
+        "id": "32e62712-d485-42a3-baea-f2fce37b67a8",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -153,8 +153,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
-          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
+          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",

@@ -11,7 +11,7 @@
         ]
       },
       "properties": {
-        "id": "0257f89c-441e-4f40-a888-25f7a6b9b936",
+        "id": "9575e5ba-2e6d-443a-819f-cc30629ab10b",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -30,7 +30,7 @@
         ]
       },
       "properties": {
-        "id": "94f418a5-c996-4d4e-b2df-4b6c9ac74f8d",
+        "id": "053da816-bc56-474a-8994-3a9f94578586",
         "kind": "substation",
         "name": "Kyrene Substation",
         "operator_name": "Salt River Project",
@@ -49,7 +49,7 @@
         ]
       },
       "properties": {
-        "id": "86773b1d-28c3-4fe3-b322-78a54ed10a1f",
+        "id": "69bcf836-ee0c-40c3-bbd8-c1583991b449",
         "kind": "substation",
         "name": "Greenbone Substation",
         "operator_name": "Salt River Project",
@@ -68,7 +68,7 @@
         ]
       },
       "properties": {
-        "id": "085e8dd9-ed53-4dcb-9c31-f0f4aa0fd830",
+        "id": "c80f7905-5d70-4603-9635-c05f6564412e",
         "kind": "substation",
         "name": "Henshaw Substation",
         "operator_name": "Salt River Project",
@@ -87,7 +87,7 @@
         ]
       },
       "properties": {
-        "id": "8e2e5b1e-5f70-416e-af68-2afd2f5ed3f7",
+        "id": "14eb0331-acb8-4a5c-9989-b5b8c3e280bb",
         "kind": "substation",
         "name": null,
         "operator_name": "Arizona Public Service",
@@ -106,7 +106,7 @@
         ]
       },
       "properties": {
-        "id": "d2a9efb1-f944-4f6d-a2f7-14a613c65110",
+        "id": "5c26686f-82e0-4e7a-9575-ea55483df16a",
         "kind": "substation",
         "name": "Kyrene Substation II",
         "operator_name": "Salt River Project",
@@ -125,7 +125,7 @@
         ]
       },
       "properties": {
-        "id": "8e0023e6-8906-4bed-bd27-fc1fe694e6fb",
+        "id": "f6633d2b-bc48-4924-8bdd-47c8fca5ef91",
         "kind": "substation",
         "name": null,
         "operator_name": "Arizona Public Service",
@@ -144,7 +144,7 @@
         ]
       },
       "properties": {
-        "id": "29663f4c-c38d-4d86-991d-054608281d76",
+        "id": "3f269d8a-cedc-4eeb-9735-967c1a6a1109",
         "kind": "substation",
         "name": "Knox Substation",
         "operator_name": "SRP",
@@ -163,7 +163,7 @@
         ]
       },
       "properties": {
-        "id": "a5952c0f-189b-426c-b18f-d9cfd9504c46",
+        "id": "980ab827-495b-42e3-9b3a-5683293a307d",
         "kind": "substation",
         "name": "Intel Substation",
         "operator_name": null,
@@ -182,7 +182,7 @@
         ]
       },
       "properties": {
-        "id": "da19a7d0-e8c4-4177-a8c7-de112ff2fff7",
+        "id": "a69b8269-9e0c-401c-b84f-a5fe3c533bdd",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -201,7 +201,7 @@
         ]
       },
       "properties": {
-        "id": "c19e3720-3b1b-4a08-8c00-53c1b5a70409",
+        "id": "69da1401-7ec0-467a-bedb-c1f3d065f6ef",
         "kind": "substation",
         "name": "Scott Substation",
         "operator_name": "Salt River Project",
@@ -220,7 +220,7 @@
         ]
       },
       "properties": {
-        "id": "0fca4e37-c5bb-4b1d-a7d0-446732c534b5",
+        "id": "f6774f16-93af-4990-a231-c153d68bd5a3",
         "kind": "substation",
         "name": "Corbell Substation",
         "operator_name": "Salt River Project",
@@ -239,7 +239,7 @@
         ]
       },
       "properties": {
-        "id": "59ee677c-0688-4d4e-bbe6-0d69bd4fc40b",
+        "id": "59881575-05e6-4b1d-bceb-ece576175c10",
         "kind": "substation",
         "name": "Rogers Substation",
         "operator_name": "Salt River Project",
@@ -258,7 +258,7 @@
         ]
       },
       "properties": {
-        "id": "ce9499e8-5df7-4b58-8c70-f50aa39ec557",
+        "id": "75adfabd-275f-4bd3-988a-5e75e0cf6c03",
         "kind": "substation",
         "name": "Brandow Substation",
         "operator_name": "Salt River Project",
@@ -277,7 +277,7 @@
         ]
       },
       "properties": {
-        "id": "834f2fa0-19b6-4e35-afb8-380e1d34a05c",
+        "id": "b989fe54-0d12-4557-aab0-61affd209241",
         "kind": "substation",
         "name": "Prickly Pear Substation",
         "operator_name": "Salt River Project",
@@ -296,7 +296,7 @@
         ]
       },
       "properties": {
-        "id": "f1ff7fbf-9df7-4c66-b1b5-5b441118e982",
+        "id": "b7b5941f-d470-4dff-808c-321b0d9938d9",
         "kind": "substation",
         "name": "Thunderstone Substation",
         "operator_name": "Salt River Project",
@@ -315,7 +315,7 @@
         ]
       },
       "properties": {
-        "id": "e44fdc9c-92b2-4ad9-9028-44615d5ab3e3",
+        "id": "9a8773a3-1cf7-4cb7-b1fc-a525f1455034",
         "kind": "substation",
         "name": "Dinosaur Substation",
         "operator_name": "Salt River Project",
@@ -334,7 +334,7 @@
         ]
       },
       "properties": {
-        "id": "836d0a60-0acc-46e8-a9fa-a2b0ac3ff094",
+        "id": "c97fc2f8-16f9-4fa0-9f8c-8f8c1444cc46",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -353,7 +353,7 @@
         ]
       },
       "properties": {
-        "id": "401c9586-c56f-40ab-a816-0b9dfa18ad80",
+        "id": "6f614260-f141-4fe5-b9f8-689bc8a472e3",
         "kind": "substation",
         "name": "Santan Substation",
         "operator_name": null,
@@ -372,7 +372,7 @@
         ]
       },
       "properties": {
-        "id": "ba93eb88-cc67-446a-8aa1-f55306c6ca71",
+        "id": "0b670fa1-c6c2-4cb6-852e-3c6a54ab9eff",
         "kind": "substation",
         "name": "Thunderstone Substation II",
         "operator_name": "Salt River Project",
@@ -391,7 +391,7 @@
         ]
       },
       "properties": {
-        "id": "4440dfd0-c2ae-4faa-a399-8c77fc5aa7c3",
+        "id": "fc9f6656-e4a1-4e22-b6ac-4b4916780654",
         "kind": "substation",
         "name": "Goldfield Substation",
         "operator_name": null,
@@ -410,7 +410,7 @@
         ]
       },
       "properties": {
-        "id": "e606b4e4-72e4-49ec-8240-5c0d6b509d6f",
+        "id": "13ee5767-5702-4f47-a3b6-0837b5b4e6ef",
         "kind": "substation",
         "name": "Papago Buttes Substation",
         "operator_name": "Salt River Project",
@@ -429,7 +429,7 @@
         ]
       },
       "properties": {
-        "id": "6c531639-39c5-459f-a149-6459adfe2e99",
+        "id": "fbfe6f14-4bf0-4c25-accd-5536b5279b4d",
         "kind": "substation",
         "name": "Carrel Substation",
         "operator_name": "Salt River Project",
@@ -448,7 +448,7 @@
         ]
       },
       "properties": {
-        "id": "173fb9e3-3ac3-4b33-b270-a6b449fb0381",
+        "id": "e130c13d-4b47-425c-b8da-76472a5a685b",
         "kind": "substation",
         "name": "Spurlock Substation",
         "operator_name": null,
@@ -467,7 +467,7 @@
         ]
       },
       "properties": {
-        "id": "5dd19622-300c-458b-9be2-fcfdf66db329",
+        "id": "25a35310-be7b-4db1-9650-f38d2a0dcbaf",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -481,12 +481,31 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -111.6850944,
+          33.4137644
+        ]
+      },
+      "properties": {
+        "id": "c1f4e787-0718-4896-b018-df0654349fa4",
+        "kind": "substation",
+        "name": "Apache Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/176133355"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -111.6561018,
           33.4229596
         ]
       },
       "properties": {
-        "id": "bfc9b5b9-b0d9-419a-9c5a-705b300a4d5d",
+        "id": "d5e6bf22-e6cc-4caf-ab57-f90271b6152f",
         "kind": "substation",
         "name": "Noack Substation",
         "operator_name": "SRP",
@@ -505,7 +524,7 @@
         ]
       },
       "properties": {
-        "id": "df9dcec2-1649-4672-abde-cad47f3e3487",
+        "id": "5cdf3be1-c965-4753-bad6-ba4d6287fd89",
         "kind": "substation",
         "name": "Spook Hill Substation",
         "operator_name": "Salt River Project",
@@ -524,7 +543,7 @@
         ]
       },
       "properties": {
-        "id": "5c63c85e-a2c3-4eb9-8bf3-caefab245c56",
+        "id": "39978580-e29c-4776-8cca-62bf8ee7dc9f",
         "kind": "substation",
         "name": null,
         "operator_name": "Salt River Project",
@@ -543,7 +562,7 @@
         ]
       },
       "properties": {
-        "id": "63ee3698-61c2-43bc-9f22-c4e29c9130b0",
+        "id": "0da11027-e5e8-4d37-8588-0247bccc3563",
         "kind": "substation",
         "name": "Rittenhouse Substation",
         "operator_name": "Salt River Project",
@@ -562,7 +581,7 @@
         ]
       },
       "properties": {
-        "id": "a2fd8ce9-f615-4cc5-bda7-85fe488b8600",
+        "id": "f386d228-73f0-41ad-a548-2e3d540c256a",
         "kind": "substation",
         "name": "SRP Rohrig Substation",
         "operator_name": "Salt River Project",
@@ -581,7 +600,7 @@
         ]
       },
       "properties": {
-        "id": "90e6cc76-e9dd-4e29-a5b5-c0eba047b92b",
+        "id": "567f4ad9-1504-4ac3-836a-9b68736d8988",
         "kind": "substation",
         "name": "RS-28",
         "operator_name": null,
@@ -600,7 +619,7 @@
         ]
       },
       "properties": {
-        "id": "51345c05-45c6-4fde-b7ff-8b74c1e0c8eb",
+        "id": "e90908da-0abc-4306-818b-c7efe96d155c",
         "kind": "substation",
         "name": "Binary Substation",
         "operator_name": "Salt River Project",
@@ -619,7 +638,7 @@
         ]
       },
       "properties": {
-        "id": "f61921b0-bb84-4be8-bffa-5f595f6a41bf",
+        "id": "ced8592f-094d-4b31-bcfb-00989d357297",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -638,7 +657,7 @@
         ]
       },
       "properties": {
-        "id": "351225eb-1b95-4934-a07f-27dd94e23def",
+        "id": "cac4fbc2-11f4-4657-8cb1-de78128c0dd1",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -657,7 +676,7 @@
         ]
       },
       "properties": {
-        "id": "bf823b57-eee4-48e9-a557-0a926bf6be5f",
+        "id": "c21674fd-2513-4280-b465-0fd99e43cfb6",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -676,7 +695,7 @@
         ]
       },
       "properties": {
-        "id": "d2fe9372-23de-46a3-89cd-c0814b0635ee",
+        "id": "dfec5ec0-d9aa-41d8-9aeb-3e7553682a6d",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -695,7 +714,7 @@
         ]
       },
       "properties": {
-        "id": "bc96b78b-3ff0-4738-af76-39a6a836dcce",
+        "id": "fefdfb6e-0933-40f2-9c8d-cc1ce4920e8a",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -714,7 +733,7 @@
         ]
       },
       "properties": {
-        "id": "4bb1d43b-a940-4000-8601-b4a57ce87ea5",
+        "id": "04df0d02-e8b4-4c2e-b039-e3370dd19188",
         "kind": "substation",
         "name": "Kirk Substation",
         "operator_name": "Salt River Project",
@@ -733,7 +752,7 @@
         ]
       },
       "properties": {
-        "id": "c598c4b7-b5f4-4778-b384-367c552108c1",
+        "id": "f47c5a60-33f0-43e2-95c6-4d503a32a335",
         "kind": "substation",
         "name": "Baseline Substation",
         "operator_name": "Salt River Project",
@@ -752,7 +771,7 @@
         ]
       },
       "properties": {
-        "id": "f5f98e4b-4760-404f-b44e-2edc89f5f535",
+        "id": "aa7b71a8-02e4-42e6-9582-ccec940d374c",
         "kind": "substation",
         "name": "Sage Substation",
         "operator_name": "Salt River Project",
@@ -771,7 +790,7 @@
         ]
       },
       "properties": {
-        "id": "2d40424d-b432-4ae4-9abc-382f694e47e9",
+        "id": "6649b5e0-4ab3-40d1-bf0b-142f4e24f093",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -785,31 +804,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -111.9586971,
-          33.4906919
-        ]
-      },
-      "properties": {
-        "id": "6a2acfe3-a3a4-4ea2-a131-ca5e67ddd346",
-        "kind": "substation",
-        "name": "Arizona Falls",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 69.0,
-        "status": "operational",
-        "osm_url": "https://www.openstreetmap.org/way/256552437"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -111.9064819,
           33.5162368
         ]
       },
       "properties": {
-        "id": "969de17d-7fb3-4d7b-a64b-59907632f69d",
+        "id": "871e37bb-1100-4435-bb80-c535f39567a1",
         "kind": "substation",
         "name": "Indian Bend Substation",
         "operator_name": "Salt River Project",
@@ -828,7 +828,7 @@
         ]
       },
       "properties": {
-        "id": "825ed2c1-7ab1-4d18-a4a1-989ee92b31b4",
+        "id": "82a57ae3-31bf-4f1b-b737-9fd546a06be1",
         "kind": "substation",
         "name": "Stadium Substation",
         "operator_name": "Salt River Project",
@@ -847,7 +847,7 @@
         ]
       },
       "properties": {
-        "id": "4e0d8f57-a8c7-4d10-8ca9-d1f7748045f8",
+        "id": "3422e3e3-6176-4843-8301-4759418f31f3",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -866,7 +866,7 @@
         ]
       },
       "properties": {
-        "id": "015b3fa8-8243-4dce-8fe0-2e447cf42e68",
+        "id": "2f27d3dc-183b-47ea-947e-464bbf58cc75",
         "kind": "substation",
         "name": "Camelback Substation",
         "operator_name": "Arizona Public Service",
@@ -885,7 +885,7 @@
         ]
       },
       "properties": {
-        "id": "a8ea2a63-73ac-40f0-9b0c-9b57ee8270f8",
+        "id": "39ce50c7-9b33-409f-a04d-edea376dfa0c",
         "kind": "substation",
         "name": "Scottsdale Substation",
         "operator_name": "Salt River Project",
@@ -904,7 +904,7 @@
         ]
       },
       "properties": {
-        "id": "09dfaec5-5f35-4d06-b0a4-bb0991294028",
+        "id": "77314b2d-726b-4fe7-a497-be9afc7c7fca",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -923,7 +923,7 @@
         ]
       },
       "properties": {
-        "id": "c6c04ea0-c9a6-4702-8191-6ffaf9064269",
+        "id": "03035347-7b0e-4e41-a15c-214d3f1d4b41",
         "kind": "substation",
         "name": "Weiler Substation",
         "operator_name": "Salt River Project",
@@ -942,7 +942,7 @@
         ]
       },
       "properties": {
-        "id": "22c4ee88-4fd8-4438-998a-07572c0086ca",
+        "id": "bdd256e4-f74c-4430-9523-f291f9ec4de4",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -961,7 +961,7 @@
         ]
       },
       "properties": {
-        "id": "bc4ffbef-0e6c-4ff3-baa5-0b6e08df29ee",
+        "id": "0ddf557a-dca3-4f1c-91f9-4538a9f9d78d",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -980,7 +980,7 @@
         ]
       },
       "properties": {
-        "id": "6c4bf05c-3275-420d-ad71-583bc4030550",
+        "id": "385bd98e-ca44-453a-958b-e71fc3f21e85",
         "kind": "substation",
         "name": "Cooper Electrical Substation",
         "operator_name": "Salt River Project",
@@ -999,7 +999,7 @@
         ]
       },
       "properties": {
-        "id": "3156a21c-678d-4327-8497-133ea87decf3",
+        "id": "e6d4f33b-6a00-40ed-9210-aa0e03c82f3a",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1018,7 +1018,7 @@
         ]
       },
       "properties": {
-        "id": "ff08a8ad-c62e-484c-9a8f-770c6298e1c2",
+        "id": "1a96ed71-8191-45d8-abac-4b4f21978e90",
         "kind": "substation",
         "name": "Hunt Substation",
         "operator_name": "Salt River Project",
@@ -1037,7 +1037,7 @@
         ]
       },
       "properties": {
-        "id": "6074ca13-d97c-446c-95c6-fe226aa4de1d",
+        "id": "e2d1fff3-ea00-4e03-a959-83dc0d14347b",
         "kind": "substation",
         "name": "Willis Substation",
         "operator_name": null,
@@ -1056,7 +1056,7 @@
         ]
       },
       "properties": {
-        "id": "79d2e7c7-4299-4d13-be2b-67a578372eca",
+        "id": "c5720a3a-2fa6-4e7a-861a-6c5fee53897b",
         "kind": "substation",
         "name": "Hohokam Substation",
         "operator_name": "Arizona Public Service",
@@ -1075,7 +1075,7 @@
         ]
       },
       "properties": {
-        "id": "b15dc275-1725-4845-9f62-33442d187952",
+        "id": "e65c4923-6d85-4193-8c30-00db39c5301b",
         "kind": "substation",
         "name": "Griswold Substation",
         "operator_name": "Salt River Project",
@@ -1094,7 +1094,7 @@
         ]
       },
       "properties": {
-        "id": "9ca09d14-85a1-4c0f-9ece-2598afe328cd",
+        "id": "b1abdce4-01b2-49ec-bb69-12fe65a8ec92",
         "kind": "substation",
         "name": "Clemans Substation",
         "operator_name": "Salt River Project",
@@ -1113,7 +1113,7 @@
         ]
       },
       "properties": {
-        "id": "1dcf0e51-0b2a-45e7-9c3d-9ad9cfad1ae2",
+        "id": "e6875fee-ec2d-4f92-8c9f-44cc3a4bae82",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1132,7 +1132,7 @@
         ]
       },
       "properties": {
-        "id": "1e893f71-a55a-4b8b-8c8d-24c8988b2ae3",
+        "id": "f2964dac-a7eb-4d36-9b79-1e262dbec1c6",
         "kind": "substation",
         "name": "Jackrabit Substation",
         "operator_name": "Salt River Project",
@@ -1151,7 +1151,7 @@
         ]
       },
       "properties": {
-        "id": "574ce616-560f-4ff9-b851-c3cb5114e2fd",
+        "id": "1cad0374-b41d-4c80-a4ea-1d97cc8f8a29",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1170,7 +1170,7 @@
         ]
       },
       "properties": {
-        "id": "7bac72dd-72e9-4323-a77f-b1382f04326b",
+        "id": "3caba49f-7f15-42ee-94cb-9dc0d51454ff",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1189,7 +1189,7 @@
         ]
       },
       "properties": {
-        "id": "310c180b-ec53-4909-8d38-f941a79dac71",
+        "id": "240355e4-ceef-4ef6-bba1-a2cc91d8b935",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1208,7 +1208,7 @@
         ]
       },
       "properties": {
-        "id": "2bdf774e-a2d6-4fb3-9466-1851f3962b26",
+        "id": "97801646-c424-4228-8a2b-2bdeeb9e5140",
         "kind": "substation",
         "name": "Bassham Substation",
         "operator_name": "Salt River Project",
@@ -1227,7 +1227,7 @@
         ]
       },
       "properties": {
-        "id": "3590bb55-5d1b-4824-b985-74832cb16a88",
+        "id": "6c07e75d-caf1-4228-9d4b-218440920559",
         "kind": "substation",
         "name": "Tweedy Substation",
         "operator_name": "Salt River Project",
@@ -1246,7 +1246,7 @@
         ]
       },
       "properties": {
-        "id": "b251160f-fade-4daa-85cd-30094366c11e",
+        "id": "084e085d-7f4d-4eb5-b56b-58051efed087",
         "kind": "substation",
         "name": "Jones Substation",
         "operator_name": "Salt River Project",
@@ -1265,7 +1265,7 @@
         ]
       },
       "properties": {
-        "id": "2bd94b7e-0440-4e95-9b2b-a720a6f3e315",
+        "id": "147bfdcb-0358-479d-afed-7f855f982dc0",
         "kind": "substation",
         "name": "Lehi Substation",
         "operator_name": "Salt River Project",
@@ -1284,7 +1284,7 @@
         ]
       },
       "properties": {
-        "id": "a7790cd7-2055-4260-9b6c-5e3a9f04cec6",
+        "id": "f32bd81d-c191-4b33-8268-3005792e87d3",
         "kind": "substation",
         "name": "Wortman Substation",
         "operator_name": "Salt River Project",
@@ -1303,7 +1303,7 @@
         ]
       },
       "properties": {
-        "id": "98f85adc-de40-4cec-9789-502097c91361",
+        "id": "d9ed548b-2d8e-47c3-adfc-2ddc788db5b0",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1322,7 +1322,7 @@
         ]
       },
       "properties": {
-        "id": "38098a32-468c-4261-a412-dcae7b282ce6",
+        "id": "17a767b5-08f4-4525-97da-570d68785046",
         "kind": "substation",
         "name": "Miller Substation",
         "operator_name": "Salt River Project",
@@ -1341,7 +1341,7 @@
         ]
       },
       "properties": {
-        "id": "ee0fbc84-1b09-4307-9114-f572fc1d8826",
+        "id": "b99b51ff-5f40-4259-b587-cd74d39ba1d7",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1360,7 +1360,7 @@
         ]
       },
       "properties": {
-        "id": "b55e0aeb-aa87-433a-ac69-950de4026243",
+        "id": "5faf466f-452f-4615-8d77-6d0c95f02f34",
         "kind": "substation",
         "name": "RS-27",
         "operator_name": null,
@@ -1379,7 +1379,7 @@
         ]
       },
       "properties": {
-        "id": "ae81a117-565a-44ca-856c-9802515ebe06",
+        "id": "bab83f5c-2206-450c-ba07-28c2c47f2c1a",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1398,7 +1398,7 @@
         ]
       },
       "properties": {
-        "id": "9d44f063-5b74-4209-ba0a-ab7bec753aca",
+        "id": "aa00e1ed-5153-444b-bf23-5d2e6d0a778b",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1417,7 +1417,7 @@
         ]
       },
       "properties": {
-        "id": "f11c1b7f-84f3-457b-a036-96e3bdbd5be5",
+        "id": "530399fc-1721-4953-b9b0-18e1a8bced99",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1436,7 +1436,7 @@
         ]
       },
       "properties": {
-        "id": "f03ec200-ad10-4f6a-a411-1ff45bc51dd1",
+        "id": "25cd309f-723e-446d-8bb6-d1b81ea3b02e",
         "kind": "substation",
         "name": "Gila Substation",
         "operator_name": "Salt River Project",
@@ -1455,7 +1455,7 @@
         ]
       },
       "properties": {
-        "id": "94d1b2cf-04d3-4f4e-a3f3-10ce0d5abe74",
+        "id": "b1ac2527-1650-406c-8563-82995551a8b6",
         "kind": "substation",
         "name": "Manor Substation",
         "operator_name": "Salt River Project",
@@ -1474,7 +1474,7 @@
         ]
       },
       "properties": {
-        "id": "554512a9-9559-4423-a84e-378d65b3bd00",
+        "id": "40233998-bedf-42c9-a33e-f7a53f306c25",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1493,7 +1493,7 @@
         ]
       },
       "properties": {
-        "id": "89334684-aa6a-4ac9-a381-8b76258ac8ee",
+        "id": "c0b47d69-a9ca-496d-bf58-fd24edf6663a",
         "kind": "substation",
         "name": "Alameda Substation",
         "operator_name": "Salt River Project",
@@ -1512,7 +1512,7 @@
         ]
       },
       "properties": {
-        "id": "b82b553b-2dd7-4521-ac5a-6d88c9665102",
+        "id": "d39b6e81-1c50-4719-b174-c381d750a2ce",
         "kind": "substation",
         "name": "Hughes Substation",
         "operator_name": "Salt River Project",
@@ -1531,7 +1531,7 @@
         ]
       },
       "properties": {
-        "id": "59cb4a79-1973-4402-96dd-d2e9fbab9803",
+        "id": "c04626ba-b736-42ea-9437-2b081ee76e4d",
         "kind": "substation",
         "name": "Evergreen Substation",
         "operator_name": "Salt River Project",
@@ -1550,7 +1550,7 @@
         ]
       },
       "properties": {
-        "id": "b52cf43d-64dd-41fb-a094-fa0a7737fcc0",
+        "id": "fc199603-9f7b-4919-a5ea-ca97f093a453",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1569,7 +1569,7 @@
         ]
       },
       "properties": {
-        "id": "915d2004-ddfb-4e12-acef-97025458bef3",
+        "id": "cd1e4aea-aee4-4aa3-a031-ef3acee69a6e",
         "kind": "substation",
         "name": "Lacy Substation",
         "operator_name": "Salt River Project",
@@ -1588,7 +1588,7 @@
         ]
       },
       "properties": {
-        "id": "6a1352c8-bfe6-4059-bb1e-0f52a5c0133b",
+        "id": "2af51491-e6b7-458d-a906-654c8b98b331",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1607,7 +1607,7 @@
         ]
       },
       "properties": {
-        "id": "3fd2a9e2-1092-4e3c-a12c-41e605a5e1e9",
+        "id": "d33920ce-f912-41b9-a0ee-555269b667cd",
         "kind": "substation",
         "name": "Boone Substation",
         "operator_name": "Salt River Project",
@@ -1626,7 +1626,7 @@
         ]
       },
       "properties": {
-        "id": "01340e3a-302a-407d-9d4b-6b19706a5c59",
+        "id": "049d52f1-9e6c-4f73-95f1-7eb6d3a8505f",
         "kind": "substation",
         "name": "Pima Substation",
         "operator_name": "Salt River Project",
@@ -1645,7 +1645,7 @@
         ]
       },
       "properties": {
-        "id": "a6acad65-d9e4-4d42-9f82-8bec11043d4f",
+        "id": "5ba29335-5fbd-41ff-9acd-787883675cd7",
         "kind": "substation",
         "name": "Beeline Substation",
         "operator_name": "Salt River Project",
@@ -1664,7 +1664,7 @@
         ]
       },
       "properties": {
-        "id": "76561712-4ce2-4cc6-b914-70704b180f28",
+        "id": "2df52d0d-8d96-45f8-b9a3-1b85a6ce3537",
         "kind": "substation",
         "name": "Chambers Substation",
         "operator_name": "Salt River Project",
@@ -1683,7 +1683,7 @@
         ]
       },
       "properties": {
-        "id": "6aceab67-8806-45c7-8495-0f64b3097614",
+        "id": "5070669c-115d-4d40-a207-5a577e623290",
         "kind": "substation",
         "name": "Noble Substation",
         "operator_name": null,
@@ -1702,7 +1702,7 @@
         ]
       },
       "properties": {
-        "id": "2cbe9d4a-99d7-4d4f-9d78-74567a846f02",
+        "id": "68d3fb9b-15c8-4b59-aa2a-f21aadb65f2d",
         "kind": "substation",
         "name": null,
         "operator_name": "Arizona Public Service",
@@ -1721,7 +1721,7 @@
         ]
       },
       "properties": {
-        "id": "50f39c71-6765-4fd3-9c82-4e23ae83b3ef",
+        "id": "595a52a8-3a86-4ee6-a83c-22781df35b38",
         "kind": "substation",
         "name": "Tempe Substation",
         "operator_name": "Salt River Project",
@@ -1740,7 +1740,7 @@
         ]
       },
       "properties": {
-        "id": "ef360704-da56-491e-be63-2be642d9103e",
+        "id": "06caac98-c2df-4931-ad1c-bb85e33ba963",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1759,7 +1759,7 @@
         ]
       },
       "properties": {
-        "id": "e297436e-58ff-47d0-8195-8a39397af2af",
+        "id": "bc6abf73-d8cc-4548-ab03-c4e571af59b2",
         "kind": "substation",
         "name": "Hanger Substation",
         "operator_name": "Salt River Project",
@@ -1778,7 +1778,7 @@
         ]
       },
       "properties": {
-        "id": "91b6e9e4-5f93-4f75-a8e2-86b3c9f9cd94",
+        "id": "6d5db29c-6d23-4ad8-b00f-40bade1584fb",
         "kind": "substation",
         "name": "Neely Substation",
         "operator_name": "Salt River Project",
@@ -1797,7 +1797,7 @@
         ]
       },
       "properties": {
-        "id": "49d3fe8f-1822-4922-aa97-87c5429b497a",
+        "id": "13b84212-0ee9-4a62-85e1-5941ad2961e2",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1816,7 +1816,7 @@
         ]
       },
       "properties": {
-        "id": "1884a331-fe61-4569-9175-84fa50db8fc0",
+        "id": "845f9870-13f4-4fef-8be1-8867bb135b50",
         "kind": "substation",
         "name": "Luna Substation",
         "operator_name": "Salt River Project",
@@ -1835,7 +1835,7 @@
         ]
       },
       "properties": {
-        "id": "432c9a21-ab44-4ed2-b882-06e7dbdef752",
+        "id": "506c0408-0389-42c3-8e71-58e861a99acf",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1854,7 +1854,7 @@
         ]
       },
       "properties": {
-        "id": "95f90ebf-26f8-450c-9137-b4c003d30a61",
+        "id": "e5e59598-a11d-48ee-9801-089fb05db161",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1873,7 +1873,7 @@
         ]
       },
       "properties": {
-        "id": "978883f8-ef1b-4e2c-bd32-42d61de193ee",
+        "id": "8303c1a5-ff21-4c94-b59d-af60c68f658a",
         "kind": "substation",
         "name": "Bogle Substation",
         "operator_name": "Salt River Project",
@@ -1892,7 +1892,7 @@
         ]
       },
       "properties": {
-        "id": "5c572c19-e82e-4b95-b4da-c91496a461dc",
+        "id": "6b62c296-ce17-4ab5-8891-4baaca85eabf",
         "kind": "substation",
         "name": "Dobson Water - Power Facility",
         "operator_name": null,
@@ -1911,7 +1911,7 @@
         ]
       },
       "properties": {
-        "id": "ae574be4-b90b-490d-96ae-60c9738a2163",
+        "id": "f2576170-d855-47d8-a6fd-6b06d232805b",
         "kind": "substation",
         "name": "Greer Substation",
         "operator_name": "Salt River Project",
@@ -1930,7 +1930,7 @@
         ]
       },
       "properties": {
-        "id": "161808db-0752-48f0-ac10-f635bf5acb00",
+        "id": "d5852818-4d25-4a27-808c-1e489324b0e3",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1949,7 +1949,7 @@
         ]
       },
       "properties": {
-        "id": "a3f6e9f3-8e16-4df3-a6bc-0668f616efb6",
+        "id": "03a9d41b-8bf0-4b3e-809f-1d7f43cf67d1",
         "kind": "substation",
         "name": "Shultz Substation",
         "operator_name": "Salt River Project",
@@ -1968,7 +1968,7 @@
         ]
       },
       "properties": {
-        "id": "3c1edb83-47b4-4150-80af-a50b5b8de53e",
+        "id": "5454619e-6d0c-4bbe-851e-bbc9a055f18b",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -1987,7 +1987,7 @@
         ]
       },
       "properties": {
-        "id": "ba1c23e9-4671-438b-bc28-2801ba21edd3",
+        "id": "59bf8b58-b135-4446-83c6-d78d1e03827d",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2006,7 +2006,7 @@
         ]
       },
       "properties": {
-        "id": "32c7531b-32cb-4c28-825c-eec86cd4d081",
+        "id": "6a1cc23e-8ad5-4294-9293-0d2ed1857e22",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2025,7 +2025,7 @@
         ]
       },
       "properties": {
-        "id": "ff974bd3-2bab-44ee-807d-713819b24da0",
+        "id": "0f5f5ea6-2a95-4ff2-8f9f-36114067428e",
         "kind": "substation",
         "name": "Freestone Substation",
         "operator_name": "Salt River Project",
@@ -2044,7 +2044,7 @@
         ]
       },
       "properties": {
-        "id": "f0bbd30c-9022-454a-9e3d-03579d697c9c",
+        "id": "582a13d0-ea4c-48be-a5f9-025eca1de6f8",
         "kind": "substation",
         "name": "Clark Substation",
         "operator_name": "Salt River Project",
@@ -2063,7 +2063,7 @@
         ]
       },
       "properties": {
-        "id": "380a9b73-2816-476f-a149-e1113b8355bb",
+        "id": "bfa98dda-99d8-4a84-ad75-29be592446f4",
         "kind": "substation",
         "name": "Finley Substation",
         "operator_name": "Salt River Project",
@@ -2082,7 +2082,7 @@
         ]
       },
       "properties": {
-        "id": "7f43e579-9172-4550-bc66-2c82b340b1ed",
+        "id": "274ed928-612c-4935-a5ac-151125741f4e",
         "kind": "substation",
         "name": "Display Substation",
         "operator_name": "Salt River Project",
@@ -2101,7 +2101,7 @@
         ]
       },
       "properties": {
-        "id": "dff2d303-ff63-442d-a15a-71451b5248bd",
+        "id": "264cbbdc-0b7d-49fc-977f-60d49cd90118",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2120,7 +2120,7 @@
         ]
       },
       "properties": {
-        "id": "2315528b-23a2-40f4-a90e-57d049b3b0f6",
+        "id": "cb5236dd-0ebf-4106-be18-ba42af8e8647",
         "kind": "substation",
         "name": "Houston Substation",
         "operator_name": "Salt River Project",
@@ -2139,7 +2139,7 @@
         ]
       },
       "properties": {
-        "id": "309c627f-9aad-4dbe-9daa-d619e43d4d60",
+        "id": "30e3ba1b-9ab3-4427-84cc-94d36fc68d63",
         "kind": "substation",
         "name": "Quail Substation",
         "operator_name": "Salt River Project",
@@ -2158,7 +2158,7 @@
         ]
       },
       "properties": {
-        "id": "e02045f7-4b53-4bf1-8c8a-8e9dc1a3bf99",
+        "id": "af258c1e-da59-4aa4-af55-dc3298affadd",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2177,7 +2177,7 @@
         ]
       },
       "properties": {
-        "id": "6413d8ee-7c7f-4234-997a-fcb67dab245b",
+        "id": "18e3cbe2-66dc-462f-92a4-7298856c5c49",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2196,7 +2196,7 @@
         ]
       },
       "properties": {
-        "id": "0255c311-6772-421c-b4f1-e23e58a36a1e",
+        "id": "71e3ab51-6275-49f8-9fc5-2f0e397bbbcf",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2215,7 +2215,7 @@
         ]
       },
       "properties": {
-        "id": "fc38035a-6b03-4d14-87a2-230f80e9e083",
+        "id": "25400fe5-e450-4669-8c04-9fcca6fabe59",
         "kind": "substation",
         "name": "Webber Substation",
         "operator_name": "Salt River Project",
@@ -2234,7 +2234,7 @@
         ]
       },
       "properties": {
-        "id": "b72d32a8-24fa-45b1-972e-40ea79536645",
+        "id": "13c06791-aaf1-4da9-bc14-f945b4696685",
         "kind": "substation",
         "name": "Queen Creek Substation",
         "operator_name": "Salt River Project",
@@ -2253,7 +2253,7 @@
         ]
       },
       "properties": {
-        "id": "659f54f8-7539-45ae-91e8-34aecc0369c9",
+        "id": "cc78bfb3-7625-4a89-aa24-882c9aa54dc6",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2272,7 +2272,7 @@
         ]
       },
       "properties": {
-        "id": "6439c6a4-a173-4954-b5b0-4a629f79e998",
+        "id": "c6d39b12-0f49-4165-a84d-eed26c10ff37",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2291,7 +2291,7 @@
         ]
       },
       "properties": {
-        "id": "7bc4929d-8695-418d-88c3-eaab786a04dd",
+        "id": "ded45489-c311-46bb-bdd8-36d67b3cd152",
         "kind": "substation",
         "name": "Turpen Substation",
         "operator_name": "Salt River Project",
@@ -2310,7 +2310,7 @@
         ]
       },
       "properties": {
-        "id": "27287b33-e8f1-44a9-80a7-ec4ad96ffa7d",
+        "id": "88db2f52-a4e1-4eb9-8bea-c221e39dddc4",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2329,7 +2329,7 @@
         ]
       },
       "properties": {
-        "id": "fcde3ff4-14e8-4412-8f21-c2cf23cb57b3",
+        "id": "c3850d79-03c9-4740-9b53-5430a027fef8",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2348,7 +2348,7 @@
         ]
       },
       "properties": {
-        "id": "7ad7ecda-5270-4be8-91df-1bcc73eaab1a",
+        "id": "be8f6576-4582-4ff3-a180-123fc7856d6b",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2367,7 +2367,7 @@
         ]
       },
       "properties": {
-        "id": "3292c8b5-98cd-48e2-ba9f-6880008e9db5",
+        "id": "ab71df60-9d10-4bd1-8212-5f8296186e81",
         "kind": "substation",
         "name": "Southern Substation",
         "operator_name": "Salt River Project",
@@ -2386,7 +2386,7 @@
         ]
       },
       "properties": {
-        "id": "cc850318-0030-442c-9e51-9f917a9adb09",
+        "id": "41c14c79-f761-4e0f-aa51-9317b831dedc",
         "kind": "substation",
         "name": "Morcom Substation",
         "operator_name": "Salt River Project",
@@ -2405,7 +2405,7 @@
         ]
       },
       "properties": {
-        "id": "7fcfd51f-c832-45d4-92fc-f7d644bcf6fe",
+        "id": "8f3a7606-f675-446d-b56a-a7316dd9f8b2",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2424,7 +2424,7 @@
         ]
       },
       "properties": {
-        "id": "c42e3234-69cc-4d32-a752-a199c6e584a7",
+        "id": "6196dd81-f9a2-4fb4-9903-a077720a797c",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2443,7 +2443,7 @@
         ]
       },
       "properties": {
-        "id": "995a312b-7c1f-4027-94dc-ea53a95aabac",
+        "id": "8a71d77d-5768-4eeb-bde5-37d92bf695c7",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2462,7 +2462,7 @@
         ]
       },
       "properties": {
-        "id": "2d26fc59-809e-498f-8b3a-607c06ca72e3",
+        "id": "d6c76a2e-76c9-47d2-908b-407d146fccc9",
         "kind": "substation",
         "name": "University Substation",
         "operator_name": "Salt River Project",
@@ -2481,7 +2481,7 @@
         ]
       },
       "properties": {
-        "id": "618efcf2-e6d5-48ac-92a9-ebbfc2a94351",
+        "id": "3182e52a-010f-4c90-8ee4-bf53d3645751",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2500,7 +2500,7 @@
         ]
       },
       "properties": {
-        "id": "4da495fc-1274-4a44-8a82-e8a2cf84e795",
+        "id": "acc11264-f58f-4f6a-887f-f99fb7fa3cb7",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2519,7 +2519,7 @@
         ]
       },
       "properties": {
-        "id": "57134c92-52fd-4c84-9ce3-cd3396f6dd53",
+        "id": "d68e0832-869f-4c7b-b044-ec8697c3d9ef",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2538,7 +2538,7 @@
         ]
       },
       "properties": {
-        "id": "62387a26-9166-409f-8da8-e3c060c20b6e",
+        "id": "95748243-424f-4d86-aaf8-99e976a4b3dd",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2557,7 +2557,7 @@
         ]
       },
       "properties": {
-        "id": "ffb41b20-bb97-4a21-a016-f9c50555a949",
+        "id": "0fb7ddce-5f9d-49cd-acea-625180fa7dc9",
         "kind": "substation",
         "name": "Perales Substation",
         "operator_name": "Salt River Project",
@@ -2576,7 +2576,7 @@
         ]
       },
       "properties": {
-        "id": "83f7d558-7e64-479c-ab06-ec31b6f7113d",
+        "id": "f2030fd6-6b80-4cde-af51-fa0ea0eee351",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2595,7 +2595,7 @@
         ]
       },
       "properties": {
-        "id": "96a4e02b-0331-4d65-980f-f8c66b543a29",
+        "id": "ef5337b6-ea02-472b-807a-b628be417dc4",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2614,7 +2614,7 @@
         ]
       },
       "properties": {
-        "id": "13b05f46-3d6a-46f2-948d-41bb8333569a",
+        "id": "455c9a77-1185-4b98-804f-5f9e03f44bf4",
         "kind": "substation",
         "name": "Tenney Substation",
         "operator_name": "Salt River Project",
@@ -2633,7 +2633,7 @@
         ]
       },
       "properties": {
-        "id": "1c963090-8962-4fe0-bc8c-ee4e88448271",
+        "id": "ee7bc841-2c57-4afe-a7c4-ea682c2547bc",
         "kind": "substation",
         "name": "Cooley Substation",
         "operator_name": "Salt River Project",
@@ -2652,7 +2652,7 @@
         ]
       },
       "properties": {
-        "id": "6093e59d-a086-4709-b638-0debe458f455",
+        "id": "07d242e8-6ef7-4cf4-a574-b27da38b0205",
         "kind": "substation",
         "name": "Moody Substation",
         "operator_name": null,
@@ -2671,7 +2671,7 @@
         ]
       },
       "properties": {
-        "id": "bb923029-3f11-4103-a945-495f7d9cad5b",
+        "id": "0fa8ed94-890a-429d-97d8-8cc630604d68",
         "kind": "substation",
         "name": "Schrader Substation",
         "operator_name": null,
@@ -2690,7 +2690,7 @@
         ]
       },
       "properties": {
-        "id": "92d6c927-a526-4213-9f93-a254f7316df7",
+        "id": "b1e03f46-3f11-47e8-af37-c79a32425f41",
         "kind": "substation",
         "name": "Wilkins Substation",
         "operator_name": "Salt River Project",
@@ -2709,7 +2709,7 @@
         ]
       },
       "properties": {
-        "id": "a940e3ed-c992-4706-889f-a37a1e8e576c",
+        "id": "b87c61d4-8a92-45ef-89c8-297a22033541",
         "kind": "substation",
         "name": "Intel Substation",
         "operator_name": "Salt River Project",
@@ -2728,7 +2728,7 @@
         ]
       },
       "properties": {
-        "id": "052a5022-8997-4062-9f4f-a6f1c63231ab",
+        "id": "aa38923a-1f8a-46d9-91d1-1306622fab9a",
         "kind": "substation",
         "name": "Tovrea Substation",
         "operator_name": "Salt River Project",
@@ -2747,7 +2747,7 @@
         ]
       },
       "properties": {
-        "id": "78eeba54-d886-4625-aca0-5cb0d0e3690b",
+        "id": "683b8b7a-bb3c-447f-b3fb-82375f6b7a54",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2766,7 +2766,7 @@
         ]
       },
       "properties": {
-        "id": "a20e7379-3915-45b5-9836-040b390874ce",
+        "id": "10f28011-93ca-4daa-84c9-dd187103534c",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2785,7 +2785,7 @@
         ]
       },
       "properties": {
-        "id": "6582e206-9b56-44cd-9834-ac7d2071647a",
+        "id": "07bfcb6f-678d-4c17-bb0b-36c0de3b04a5",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2804,7 +2804,7 @@
         ]
       },
       "properties": {
-        "id": "c25d6d19-de88-406c-ad79-37e509b8f105",
+        "id": "03e9f716-3b5a-4192-9a08-2371ffcccbfd",
         "kind": "substation",
         "name": "Tempe Substation",
         "operator_name": "Arizona Public Service",
@@ -2823,7 +2823,7 @@
         ]
       },
       "properties": {
-        "id": "4d1c7ee3-048d-4017-8be4-d7245bfcd7b5",
+        "id": "c86bd2b7-bbc3-4935-8786-1629913146a8",
         "kind": "substation",
         "name": "Buckhorn Substation",
         "operator_name": "Salt River Project",
@@ -2842,7 +2842,7 @@
         ]
       },
       "properties": {
-        "id": "3b34060d-2507-4c51-979c-aa9a0bb8d009",
+        "id": "542594a2-a198-404a-8c91-886a45c0ccf2",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2856,12 +2856,31 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -111.9586971,
+          33.4906919
+        ]
+      },
+      "properties": {
+        "id": "81f59c1f-3ef9-42f7-a3c7-bd58c14e210b",
+        "kind": "substation",
+        "name": "Arizona Falls",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/256552437"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -111.7787505,
           33.4659222
         ]
       },
       "properties": {
-        "id": "700a5996-2c39-4419-860d-75e01a326ddc",
+        "id": "6f4e3f1c-020f-491b-be78-1ac2df72868c",
         "kind": "substation",
         "name": "Culbertson Substation",
         "operator_name": "Salt River Project",
@@ -2880,7 +2899,7 @@
         ]
       },
       "properties": {
-        "id": "63401498-e77a-446f-844a-023faa432590",
+        "id": "aa46970c-2fb9-4889-8fe2-5bac1e585cb8",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -2899,7 +2918,7 @@
         ]
       },
       "properties": {
-        "id": "6fd16211-4429-4521-acd6-40dfd1b452f2",
+        "id": "31c5666c-fe73-4506-97e0-558a9e4944c5",
         "kind": "substation",
         "name": "Shannon Substation",
         "operator_name": "Salt River Project",
@@ -2918,7 +2937,7 @@
         ]
       },
       "properties": {
-        "id": "362b272d-0b3b-4795-8a9c-021550217e6c",
+        "id": "f9cf8a6c-4ad5-4ace-b9b6-d50eda6afc77",
         "kind": "substation",
         "name": "Superstition Substation",
         "operator_name": "Salt River Project",
@@ -2937,7 +2956,7 @@
         ]
       },
       "properties": {
-        "id": "c33b48f5-29a2-4abc-8714-1f3221fd8074",
+        "id": "db234a59-a310-443f-bd6b-948e9d4b1787",
         "kind": "substation",
         "name": "Lewis Substation",
         "operator_name": "Salt River Project",
@@ -2956,7 +2975,7 @@
         ]
       },
       "properties": {
-        "id": "e589aebc-5e1b-458b-b498-81aad101aa3f",
+        "id": "1eb71a5e-fda6-4ebf-bdeb-a4bc6fd4aac0",
         "kind": "substation",
         "name": "Seaton Substation",
         "operator_name": "Salt River Project",
@@ -2975,7 +2994,7 @@
         ]
       },
       "properties": {
-        "id": "d0d76824-c445-41d9-80bb-d07ad614ca94",
+        "id": "75eb26cc-fe0b-4917-9f8a-4933b1d99c52",
         "kind": "substation",
         "name": "Cameron Substation",
         "operator_name": "Salt River Project",
@@ -2994,7 +3013,7 @@
         ]
       },
       "properties": {
-        "id": "b1095186-ae73-41b4-93d7-1599c6b08419",
+        "id": "9885c53c-179d-4823-9512-1fc1d3664d28",
         "kind": "substation",
         "name": "Signal Butte Substation",
         "operator_name": "Salt River Project",
@@ -3013,7 +3032,7 @@
         ]
       },
       "properties": {
-        "id": "75863342-bbcd-482e-b89c-c9ce1db5b4cb",
+        "id": "9a1db2e1-5a9c-4203-9d3e-e4b7fdd1d267",
         "kind": "substation",
         "name": "Mountain View Substation",
         "operator_name": "Salt River Project",
@@ -3032,7 +3051,7 @@
         ]
       },
       "properties": {
-        "id": "945efce1-12fd-4fd4-b5e4-3a74780e73d0",
+        "id": "b6c0f70c-7755-422a-8e7c-c3413823163c",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3046,31 +3065,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -111.6850944,
-          33.4137644
-        ]
-      },
-      "properties": {
-        "id": "75463edf-e133-4e84-9e09-b5f08d5a43c2",
-        "kind": "substation",
-        "name": "Apache Substation",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 69.0,
-        "status": "operational",
-        "osm_url": "https://www.openstreetmap.org/way/176133355"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -111.97792,
           33.4558508
         ]
       },
       "properties": {
-        "id": "3b6e00d3-44b0-4957-83e5-6d4d96620573",
+        "id": "506650a9-dae0-4582-8e84-ca5243580f0c",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3089,7 +3089,7 @@
         ]
       },
       "properties": {
-        "id": "2b6b1d61-64c8-406a-b985-d6a88abc0bbc",
+        "id": "53292f70-3aa6-4228-9aa6-61f5f2552bcd",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3108,7 +3108,7 @@
         ]
       },
       "properties": {
-        "id": "351bdd6e-7476-42c5-8f67-f5e2c2a8f4aa",
+        "id": "3e9b8aa7-51f5-4efb-b464-235beee43d26",
         "kind": "substation",
         "name": "Howard Substation",
         "operator_name": "Salt River Project",
@@ -3127,7 +3127,7 @@
         ]
       },
       "properties": {
-        "id": "4ef2cb87-2371-4b30-a113-20041e604863",
+        "id": "320d93e4-ee34-4b74-bdd2-852260691d87",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3146,7 +3146,7 @@
         ]
       },
       "properties": {
-        "id": "2bf736d1-3753-49cc-b0ba-30ec80118da0",
+        "id": "98b1ea08-1104-4c44-847c-a55390de5c93",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3165,7 +3165,7 @@
         ]
       },
       "properties": {
-        "id": "969f13dd-73ee-4530-8b91-e3dab36a7c2b",
+        "id": "2749a9ef-9306-46ce-b1e5-32ee2be9bc1a",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3184,7 +3184,7 @@
         ]
       },
       "properties": {
-        "id": "47c8557e-7d4e-49fd-9d59-0f47b3e6ffaf",
+        "id": "383a0d8e-e8e3-4e33-8036-cd16e66e3bcc",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3203,7 +3203,7 @@
         ]
       },
       "properties": {
-        "id": "1283beee-01a6-4510-b328-e65324f773c1",
+        "id": "a797337c-db2b-4441-a465-00e7f433d098",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3222,7 +3222,7 @@
         ]
       },
       "properties": {
-        "id": "a5270942-4cc6-4b78-8060-dd2884146aa0",
+        "id": "dc7116a6-01a5-4102-9def-484c379c1962",
         "kind": "substation",
         "name": "City of Mesa Fraser Substation",
         "operator_name": null,
@@ -3241,7 +3241,7 @@
         ]
       },
       "properties": {
-        "id": "c189674c-3910-420b-b7f0-bfa4f013e702",
+        "id": "7e89fa63-a22c-4a04-9b6b-1f2e16a4f2a7",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3260,7 +3260,7 @@
         ]
       },
       "properties": {
-        "id": "7b84dfbd-892b-4c6c-96c5-6b9a57d35bd1",
+        "id": "142366eb-8576-4d09-a320-2473b48c9d3a",
         "kind": "substation",
         "name": "SRP",
         "operator_name": "Salt River Project",
@@ -3279,7 +3279,7 @@
         ]
       },
       "properties": {
-        "id": "a56ed6b9-37e0-45fe-9a8b-5533c83a55ae",
+        "id": "ecf8c96b-56f8-4d7d-8b85-b1833a1e1b19",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3298,7 +3298,7 @@
         ]
       },
       "properties": {
-        "id": "5fa363af-0c3a-4a3d-ad48-161c27da8c4e",
+        "id": "4e8ebba1-0148-4de1-bf4b-378c5248f18f",
         "kind": "substation",
         "name": null,
         "operator_name": null,
@@ -3317,7 +3317,7 @@
         ]
       },
       "properties": {
-        "id": "e97933bc-adc8-4e62-baac-f2e6a4195329",
+        "id": "e5eeef8d-9933-49ef-ba7b-64f245ab5c33",
         "kind": "substation",
         "name": null,
         "operator_name": null,

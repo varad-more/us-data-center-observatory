@@ -1,5 +1,5 @@
 {
-  "id": "2f7963ad-ab00-4951-b36e-adf83bbedaa0",
+  "id": "e9a89997-1bfc-4daf-9ca2-69ff9fb70488",
   "project_code": "AZ-MESA-004",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 1.2114,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T05:27:28.897250Z",
-  "score_last_calculated_at": "2026-07-27T05:27:28.896112Z",
+  "stage_last_changed_at": "2026-07-27T23:21:20.135302Z",
+  "score_last_calculated_at": "2026-07-27T23:21:20.132945Z",
   "centroid": [
     -111.735264,
     33.387936
@@ -89,7 +89,7 @@
   },
   "parcels": [
     {
-      "id": "c1586732-6be0-4c45-af72-1013d511a941",
+      "id": "1340e674-9fe7-490a-8561-3aa26b86fd5a",
       "apn": "14055293",
       "apn_formatted": "140-55-293",
       "situs_address": "4437 E HOLMES AVE",
@@ -109,7 +109,7 @@
   ],
   "organizations": [
     {
-      "id": "ada30edc-abb3-4018-b633-6628eeab1751",
+      "id": "7e40b1af-2ef0-4b44-b81a-9384f812861c",
       "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
       "role": "utility",
       "organization_type": "LLC",
@@ -124,7 +124,7 @@
   ],
   "dependencies": [
     {
-      "id": "833865f8-e25e-44dc-a89b-e3862c0be623",
+      "id": "0e767783-8f50-4b9f-98a9-53e6ed75db37",
       "infrastructure_kind": "substation",
       "label": "Southern Substation",
       "dependency_status": "existing",
@@ -138,7 +138,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "436d9490-a8aa-4379-ad7e-770314151275",
+      "id": "cdc9b34b-bb8e-4de4-833f-83a602298b2e",
       "infrastructure_kind": "substation",
       "label": "Greer Substation",
       "dependency_status": "existing",
@@ -152,7 +152,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "2f47afd3-8f12-45f8-83dd-e8aca2b0bcfe",
+      "id": "645dac41-9c20-4c66-ba6a-41f5ec429599",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -168,37 +168,53 @@
   ],
   "estimates": [
     {
-      "id": "525265cb-4116-4bcd-bbd1-a0367692f12b",
+      "id": "13ee960b-784d-4882-941f-b1f927cf6f72",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": null,
+      "lower_value": 1.5,
       "likely_value": 2.9,
-      "upper_value": null,
-      "method": "Heuristic based on acreage and stage",
+      "upper_value": 5.8,
+      "method": "Assembled acreage x assumed power density, adjusted for stage",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.897628Z",
+      "assumptions": {
+        "note": "Power density is an industry assumption, not a property of this site. Helios does not know the building footprint, rack density or how much of the assembled land will be built on.",
+        "stage": 7,
+        "total_acres": 1.2114,
+        "mw_per_acre_low": 1.0,
+        "mw_per_acre_high": 4.0,
+        "mw_per_acre_likely": 2.0,
+        "stage_density_multiplier": 1.2
+      },
+      "calculated_at": "2026-07-27T23:21:20.135980Z",
       "notes": null
     },
     {
-      "id": "5e9dd8bd-f8ee-42e2-9f93-14a14cf3d559",
+      "id": "7e9fc26f-0ce9-4168-9113-33f6fd950e0b",
       "estimate_type": "water_usage",
       "unit": "GPD",
-      "lower_value": null,
+      "lower_value": 3600.0,
       "likely_value": 34800.0,
-      "upper_value": null,
-      "method": "Industry average 0.5 gal/kWh",
+      "upper_value": 139200.0,
+      "method": "Estimated power x assumed cooling water intensity",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.897647Z",
+      "assumptions": {
+        "note": "Cooling type is not recorded in any source Helios ingests. A closed-loop or air-cooled design approaches zero water use; evaporative cooling can exceed a gallon per kWh. The band is wide because the practice is.",
+        "power_mw_lower": 1.5,
+        "power_mw_upper": 5.8,
+        "gal_per_kwh_low": 0.1,
+        "power_mw_likely": 2.9,
+        "gal_per_kwh_high": 1.0,
+        "gal_per_kwh_likely": 0.5
+      },
+      "calculated_at": "2026-07-27T23:21:20.136039Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "accddf53-08b9-4bb8-946e-3b9e73a6f2e7",
-    "calculated_at": "2026-07-27T05:27:28.896128Z",
+    "id": "781f7fdc-c906-4fcb-8d7e-2e8810c853a2",
+    "calculated_at": "2026-07-27T23:21:20.132990Z",
     "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -224,7 +240,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "5a5dce18-6070-4e6f-aae4-76c22c1b48f5"
+        "evidence_record_id": "c3abf6c8-44f8-4993-a97f-0dc481ca5242"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -236,7 +252,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9962,
         "polarity": "supporting",
-        "evidence_record_id": "81474154-13b6-448b-a553-d8964b1a7264"
+        "evidence_record_id": "cf255201-2df9-4215-893c-7ec48c865c8c"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -248,7 +264,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9437,
         "polarity": "supporting",
-        "evidence_record_id": "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63"
+        "evidence_record_id": "28f77d8d-3c83-4a09-a01f-236c3d815902"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -260,7 +276,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+        "evidence_record_id": "d73ced7d-4222-470e-99bf-ac179c63ea6c"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -272,27 +288,27 @@
         "confidence_multiplier": 0.6685,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "1ca14112-348e-43ed-a1b1-7cdbae5d141c"
+        "evidence_record_id": "e8684b6c-40aa-4b19-bf35-fa5846b72506"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "f5098149-562f-48c9-b5a3-3bc72798f109",
+      "id": "7bbd6634-50bb-4731-a509-540583483a8a",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-27T05:27:28.897250Z",
+      "detected_at": "2026-07-27T23:21:20.135302Z",
       "is_downgrade": false,
       "confidence": 50.09,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "5a5dce18-6070-4e6f-aae4-76c22c1b48f5",
-        "81474154-13b6-448b-a553-d8964b1a7264",
-        "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63",
-        "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+        "c3abf6c8-44f8-4993-a97f-0dc481ca5242",
+        "cf255201-2df9-4215-893c-7ec48c865c8c",
+        "28f77d8d-3c83-4a09-a01f-236c3d815902",
+        "d73ced7d-4222-470e-99bf-ac179c63ea6c"
       ],
       "detection_lag_days": 4898
     }

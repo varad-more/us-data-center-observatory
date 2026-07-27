@@ -1,5 +1,5 @@
 {
-  "id": "274d665e-efa8-4a07-af5b-c3b0c9937b67",
+  "id": "cc182767-f805-4665-9596-119fb963d4c6",
   "project_code": "AZ-MESA-001",
   "display_name": null,
   "site_kind": "hyperscale_campus",
@@ -9,8 +9,8 @@
   "region_slug": "east-valley-az",
   "current_stage": 7,
   "current_stage_label": "Operational",
-  "current_confidence": 59.74,
-  "stage_confidence": 70.03,
+  "current_confidence": 59.75,
+  "stage_confidence": 70.04,
   "confidence_band": "moderate",
   "first_signal_date": "2013-11-04",
   "latest_signal_date": "2026-07-27",
@@ -18,8 +18,8 @@
   "total_acres": 83.1715,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T05:27:28.884553Z",
-  "score_last_calculated_at": "2026-07-27T05:27:28.883289Z",
+  "stage_last_changed_at": "2026-07-27T23:21:20.105640Z",
+  "score_last_calculated_at": "2026-07-27T23:21:20.102890Z",
   "centroid": [
     -111.604067,
     33.346951
@@ -149,7 +149,7 @@
   },
   "parcels": [
     {
-      "id": "8d8a1d98-df74-4953-95f7-7a5b4385527a",
+      "id": "7874e269-4a22-4f2c-b37a-8b8f49b0de08",
       "apn": "30433005S",
       "apn_formatted": "304-33-005S",
       "situs_address": "3740 S SIGNAL BUTTE RD",
@@ -169,7 +169,7 @@
   ],
   "organizations": [
     {
-      "id": "4409dcdf-f822-4f85-9622-5693133ef548",
+      "id": "4f07953d-4ce2-4ccf-975b-34d21bc28ad9",
       "canonical_name": "PLATYPUS DEVELOPMENT LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -185,7 +185,7 @@
   ],
   "dependencies": [
     {
-      "id": "d2c48a31-d652-4523-9cf9-a2685576beec",
+      "id": "528f15e1-ba15-4785-88ec-6298ca52565c",
       "infrastructure_kind": "substation",
       "label": "Luna Substation",
       "dependency_status": "existing",
@@ -199,7 +199,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "49c6f962-3c9e-4e75-b3b9-b6eada9bedaa",
+      "id": "2c018868-aa50-4d3e-a4cb-570621c30714",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -213,7 +213,7 @@
       "operator_name": null
     },
     {
-      "id": "3f41781f-286a-46ab-bf43-10b4c6005f44",
+      "id": "99be4764-a6b0-4a39-a102-1422b735b270",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -227,7 +227,7 @@
       "operator_name": null
     },
     {
-      "id": "792057b0-c6ee-4864-bf78-1abc8b525894",
+      "id": "9ca9b720-ec13-4e61-bab3-b265617b6e5c",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -241,7 +241,7 @@
       "operator_name": null
     },
     {
-      "id": "058f5531-1c7a-4be5-9d53-f3f65dd55898",
+      "id": "3bb92471-7403-42a6-a09b-14e0be6b825c",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -255,7 +255,7 @@
       "operator_name": null
     },
     {
-      "id": "a4f54b8f-72a1-4a41-a03f-165492e0fa84",
+      "id": "dc5466c3-7175-44e6-bbf2-e9f76e7d652c",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -269,7 +269,7 @@
       "operator_name": null
     },
     {
-      "id": "a2457aa5-efbd-4708-b202-362b014266e5",
+      "id": "3fa3c0d6-efb9-4942-8b0f-8db2a012c346",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -283,7 +283,7 @@
       "operator_name": null
     },
     {
-      "id": "b1a5112e-25e8-411b-a871-165c28cd25f0",
+      "id": "b69aa402-d050-4a91-9b41-b3cca5603552",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -297,7 +297,7 @@
       "operator_name": null
     },
     {
-      "id": "4aaed8f8-6015-44a0-b279-27f5840a7280",
+      "id": "a95e66f6-8460-4f42-af29-bf964a497096",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -311,7 +311,7 @@
       "operator_name": null
     },
     {
-      "id": "a214c391-ccb5-4f8c-b696-672c29cd00c3",
+      "id": "e22c0e1f-9307-4f1b-bcdd-0b081369e7e1",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -325,7 +325,7 @@
       "operator_name": null
     },
     {
-      "id": "ad7ba859-6960-4840-a056-3c9d04f050fc",
+      "id": "410a0bb6-eeda-4a61-94fa-56752635a6af",
       "infrastructure_kind": "substation",
       "label": "Greenbone Substation",
       "dependency_status": "existing",
@@ -339,7 +339,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "75cb8193-c92b-4278-be3b-06f4afb0eab5",
+      "id": "be34d002-bb02-40ed-aa42-17870132ff6c",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -353,7 +353,7 @@
       "operator_name": null
     },
     {
-      "id": "9026bd99-9b24-42d8-9592-7d9566401bb2",
+      "id": "0d210dc6-1be8-4d79-afa5-7d1b64c88953",
       "infrastructure_kind": "substation",
       "label": "Howard Substation",
       "dependency_status": "existing",
@@ -367,7 +367,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "2db190bb-ce47-4e82-8e51-c8ee386f09c9",
+      "id": "699a4e93-99ca-40d8-92b0-d8c194c31fbb",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -381,7 +381,7 @@
       "operator_name": null
     },
     {
-      "id": "4eb5cef9-007c-4f3d-8bfb-19bd0a48318a",
+      "id": "e9baf70e-06f1-4bc5-8c1f-e5083344add4",
       "infrastructure_kind": "substation",
       "label": "Prickly Pear Substation",
       "dependency_status": "existing",
@@ -395,7 +395,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "5b5033c8-63f9-4e40-ab83-2708914c2270",
+      "id": "cb658649-b07f-4741-b6cc-a065f3d851d7",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -411,44 +411,60 @@
   ],
   "estimates": [
     {
-      "id": "525f31ac-48a2-41df-bba7-def6620ba400",
+      "id": "4e902490-f5d9-46a2-9d8b-3191e9dcc684",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": null,
+      "lower_value": 99.8,
       "likely_value": 199.6,
-      "upper_value": null,
-      "method": "Heuristic based on acreage and stage",
+      "upper_value": 399.2,
+      "method": "Assembled acreage x assumed power density, adjusted for stage",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.884956Z",
+      "assumptions": {
+        "note": "Power density is an industry assumption, not a property of this site. Helios does not know the building footprint, rack density or how much of the assembled land will be built on.",
+        "stage": 7,
+        "total_acres": 83.1715,
+        "mw_per_acre_low": 1.0,
+        "mw_per_acre_high": 4.0,
+        "mw_per_acre_likely": 2.0,
+        "stage_density_multiplier": 1.2
+      },
+      "calculated_at": "2026-07-27T23:21:20.106316Z",
       "notes": null
     },
     {
-      "id": "de2f76ae-a161-4995-b499-b65eecdf0d39",
+      "id": "ac7739bd-f760-4136-969e-fcb05a5d82ae",
       "estimate_type": "water_usage",
       "unit": "GPD",
-      "lower_value": null,
+      "lower_value": 239520.0,
       "likely_value": 2395200.0,
-      "upper_value": null,
-      "method": "Industry average 0.5 gal/kWh",
+      "upper_value": 9580800.0,
+      "method": "Estimated power x assumed cooling water intensity",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.884971Z",
+      "assumptions": {
+        "note": "Cooling type is not recorded in any source Helios ingests. A closed-loop or air-cooled design approaches zero water use; evaporative cooling can exceed a gallon per kWh. The band is wide because the practice is.",
+        "power_mw_lower": 99.8,
+        "power_mw_upper": 399.2,
+        "gal_per_kwh_low": 0.1,
+        "power_mw_likely": 199.6,
+        "gal_per_kwh_high": 1.0,
+        "gal_per_kwh_likely": 0.5
+      },
+      "calculated_at": "2026-07-27T23:21:20.106386Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "0eb75711-1b5f-4940-a1d7-d39ac8eb3f50",
-    "calculated_at": "2026-07-27T05:27:28.883305Z",
+    "id": "df7143f9-76c4-4445-bc31-fb86b7ba4489",
+    "calculated_at": "2026-07-27T23:21:20.102936Z",
     "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
-    "raw_score": 72.2978,
-    "confidence": 70.03,
+    "raw_score": 72.31,
+    "confidence": 70.04,
     "confidence_band": "high",
-    "positive_contribution": 72.2978,
+    "positive_contribution": 72.31,
     "negative_contribution": 0.0,
     "evidence_considered": 10,
     "distinct_evidence_kinds": 6,
@@ -467,7 +483,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "d653221a-bae9-47d1-a753-083a06989cd2"
+        "evidence_record_id": "f333faab-9981-48a1-99f0-ea71580b54ac"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -479,7 +495,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9962,
         "polarity": "supporting",
-        "evidence_record_id": "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d"
+        "evidence_record_id": "5d029e37-1b20-42c2-a045-d21a6d423cbf"
       },
       {
         "rule_id": "backup-generator-air-permit",
@@ -487,11 +503,11 @@
         "label": "Backup-generator air permit",
         "detail": "EPA ECHO lists PLATYPUS CAMPUS EMERGENCY GENERATORS as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Title V; NESHAP Reciprocating Internal Combustion Engines.",
         "base_weight": 17.0,
-        "applied_weight": 13.5878,
+        "applied_weight": 13.6,
         "confidence_multiplier": 0.8,
-        "recency_multiplier": 0.9991,
+        "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "2924eab1-b2b7-4226-81a0-c5028bc2d242"
+        "evidence_record_id": "86022632-93b6-4e3a-b234-aaae27a1355f"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -503,7 +519,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9953,
         "polarity": "supporting",
-        "evidence_record_id": "8e687d18-595e-4854-8334-5dcf4642a5aa"
+        "evidence_record_id": "9ff74f24-a830-4b77-a230-27fbb5999288"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -515,7 +531,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.2924,
         "polarity": "supporting",
-        "evidence_record_id": "fc566d35-51b2-4ae5-8e02-3ece90961bae"
+        "evidence_record_id": "77d7ee04-b57a-4f59-be22-febd119ad0fb"
       },
       {
         "rule_id": "large-industrial-parcel-acquisition",
@@ -527,7 +543,7 @@
         "confidence_multiplier": 0.9,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "ff5ccea8-94ff-4db1-8548-f0f16d7112a2"
+        "evidence_record_id": "f5cbee6f-65f1-4241-a10d-6b5c66182a2c"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -539,7 +555,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9887,
         "polarity": "supporting",
-        "evidence_record_id": "2a893329-9929-4bd8-b63e-00dfb9f7de7a"
+        "evidence_record_id": "0550d3cc-09c7-4262-97a9-95794fce612a"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -551,7 +567,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "66f270f1-c699-464b-aaba-c1b6c0715bf1"
+        "evidence_record_id": "37806db2-2998-423a-8b0a-30039b8a790f"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -563,7 +579,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "5a220dd1-1ce9-4704-a921-d6537799e771"
+        "evidence_record_id": "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -575,32 +591,32 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "42b6286f-86e6-44ae-959d-11a346baed89"
+        "evidence_record_id": "44452fa6-e1e3-4c72-8260-875ef88edcbd"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "19352127-2d2a-4ab6-9187-b28f91eaa6b9",
+      "id": "6e1bc377-6627-4b35-84cf-08ea8a7265f3",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-27T05:27:28.884553Z",
+      "detected_at": "2026-07-27T23:21:20.105640Z",
       "is_downgrade": false,
-      "confidence": 70.03,
+      "confidence": 70.04,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "triggering_evidence_ids": [
-        "d653221a-bae9-47d1-a753-083a06989cd2",
-        "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d",
-        "2924eab1-b2b7-4226-81a0-c5028bc2d242",
-        "8e687d18-595e-4854-8334-5dcf4642a5aa",
-        "fc566d35-51b2-4ae5-8e02-3ece90961bae",
-        "ff5ccea8-94ff-4db1-8548-f0f16d7112a2",
-        "2a893329-9929-4bd8-b63e-00dfb9f7de7a",
-        "66f270f1-c699-464b-aaba-c1b6c0715bf1",
-        "5a220dd1-1ce9-4704-a921-d6537799e771"
+        "f333faab-9981-48a1-99f0-ea71580b54ac",
+        "5d029e37-1b20-42c2-a045-d21a6d423cbf",
+        "86022632-93b6-4e3a-b234-aaae27a1355f",
+        "9ff74f24-a830-4b77-a230-27fbb5999288",
+        "77d7ee04-b57a-4f59-be22-febd119ad0fb",
+        "f5cbee6f-65f1-4241-a10d-6b5c66182a2c",
+        "0550d3cc-09c7-4262-97a9-95794fce612a",
+        "37806db2-2998-423a-8b0a-30039b8a790f",
+        "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2"
       ],
       "detection_lag_days": 4648
     }

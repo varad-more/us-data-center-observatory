@@ -1,5 +1,5 @@
 {
-  "id": "02d5f9b8-e989-4540-bb00-2d537ae3b1e2",
+  "id": "c78ddddb-592f-4e75-a23c-b65e230772c6",
   "project_code": "AZ-TEMPE-001",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 4.2,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T05:27:28.861652Z",
-  "score_last_calculated_at": "2026-07-27T05:27:28.857895Z",
+  "stage_last_changed_at": "2026-07-27T23:21:20.095230Z",
+  "score_last_calculated_at": "2026-07-27T23:21:20.092972Z",
   "centroid": [
     -111.976583,
     33.406444
@@ -73,7 +73,7 @@
   },
   "parcels": [
     {
-      "id": "fa3746a7-690d-478a-aefc-2f76ecec8461",
+      "id": "671e108f-1aad-4cee-b6c2-20d861224788",
       "apn": "12331001F",
       "apn_formatted": "123-31-001F",
       "situs_address": "2601 W BROADWAY RD",
@@ -93,7 +93,7 @@
   ],
   "organizations": [
     {
-      "id": "f05554bf-e6c1-47d8-a1d0-3a1cc98d39a7",
+      "id": "c6f056d2-97da-46a1-a6da-0639fcee099b",
       "canonical_name": "TIERRA DC ASSETS LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -108,7 +108,7 @@
   ],
   "dependencies": [
     {
-      "id": "812839d8-f191-47e9-bcd1-d4cb5dc7e6fc",
+      "id": "1e40d5e7-e341-4c93-8129-8a8928ede43d",
       "infrastructure_kind": "substation",
       "label": "Binary Substation",
       "dependency_status": "existing",
@@ -122,7 +122,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "54bd74df-e97c-4ca3-b0cf-c2ea7acb36f0",
+      "id": "a861ed29-c73f-483f-a254-e5da332ca026",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -136,7 +136,7 @@
       "operator_name": null
     },
     {
-      "id": "4dfd86d9-699f-4eff-85bb-896ee9b21cc0",
+      "id": "ccfb58e2-aca8-43ce-914a-ee0789fba168",
       "infrastructure_kind": "substation",
       "label": "Weiler Substation",
       "dependency_status": "existing",
@@ -150,7 +150,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "0f91b659-11db-48e1-87d1-d41e4a81934d",
+      "id": "825d054e-6490-4a52-a572-fa2004e53d32",
       "infrastructure_kind": "substation",
       "label": "Wilkins Substation",
       "dependency_status": "existing",
@@ -164,7 +164,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "46c3b657-1c42-402f-b7fe-e124a828d4a9",
+      "id": "0bebda57-f33a-4f12-b5ce-e9f10e921f96",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -178,7 +178,7 @@
       "operator_name": null
     },
     {
-      "id": "d1860251-9d53-421d-bdf4-63e3c4ceb484",
+      "id": "0a53ee63-a3c5-4ab3-914c-f691cf345bf4",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -194,37 +194,53 @@
   ],
   "estimates": [
     {
-      "id": "b3b9797d-dee4-4474-9f8f-e3c8a4be303e",
+      "id": "f31a2ba4-b54e-4dea-b8a1-ae8de41b597e",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": null,
+      "lower_value": 5.0,
       "likely_value": 10.1,
-      "upper_value": null,
-      "method": "Heuristic based on acreage and stage",
+      "upper_value": 20.2,
+      "method": "Assembled acreage x assumed power density, adjusted for stage",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.862594Z",
+      "assumptions": {
+        "note": "Power density is an industry assumption, not a property of this site. Helios does not know the building footprint, rack density or how much of the assembled land will be built on.",
+        "stage": 7,
+        "total_acres": 4.2,
+        "mw_per_acre_low": 1.0,
+        "mw_per_acre_high": 4.0,
+        "mw_per_acre_likely": 2.0,
+        "stage_density_multiplier": 1.2
+      },
+      "calculated_at": "2026-07-27T23:21:20.095932Z",
       "notes": null
     },
     {
-      "id": "b93faf0e-07dd-474d-a20d-a1c5b3452e7c",
+      "id": "3572af3a-f557-4d2d-a54e-37b55622857b",
       "estimate_type": "water_usage",
       "unit": "GPD",
-      "lower_value": null,
+      "lower_value": 12000.0,
       "likely_value": 121200.0,
-      "upper_value": null,
-      "method": "Industry average 0.5 gal/kWh",
+      "upper_value": 484800.0,
+      "method": "Estimated power x assumed cooling water intensity",
       "assertion_class": "inferred",
       "confidence": 0.3,
-      "assumptions": {},
-      "calculated_at": "2026-07-27T05:27:28.862620Z",
+      "assumptions": {
+        "note": "Cooling type is not recorded in any source Helios ingests. A closed-loop or air-cooled design approaches zero water use; evaporative cooling can exceed a gallon per kWh. The band is wide because the practice is.",
+        "power_mw_lower": 5.0,
+        "power_mw_upper": 20.2,
+        "gal_per_kwh_low": 0.1,
+        "power_mw_likely": 10.1,
+        "gal_per_kwh_high": 1.0,
+        "gal_per_kwh_likely": 0.5
+      },
+      "calculated_at": "2026-07-27T23:21:20.096005Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "cdb0d192-c6df-4cef-8728-9b482581571f",
-    "calculated_at": "2026-07-27T05:27:28.857934Z",
+    "id": "23e8afe1-0d2c-4c55-a468-6d96826080d7",
+    "calculated_at": "2026-07-27T23:21:20.093018Z",
     "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -250,7 +266,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "e24b86b5-e205-4ff7-b4b3-8208beb72786"
+        "evidence_record_id": "23cbce2d-ced7-401c-a1c0-297fe317a6b6"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -262,7 +278,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "b2f6e229-6ea9-4326-a287-a86fbad862f2"
+        "evidence_record_id": "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -274,25 +290,25 @@
         "confidence_multiplier": 0.7017,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "b83b02ba-2b04-42a0-bfdd-ca7fe9373f86"
+        "evidence_record_id": "668a07cf-3f41-4a42-8ae8-6034033aa251"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "81501920-adc4-4a41-8763-152f4e4d18ff",
+      "id": "e7ce1c04-20bb-40b5-b7d8-4efca9e29757",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-27T05:27:28.861652Z",
+      "detected_at": "2026-07-27T23:21:20.095230Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "e24b86b5-e205-4ff7-b4b3-8208beb72786",
-        "b2f6e229-6ea9-4326-a287-a86fbad862f2"
+        "23cbce2d-ced7-401c-a1c0-297fe317a6b6",
+        "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
       ],
       "detection_lag_days": 1820
     }

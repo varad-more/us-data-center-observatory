@@ -30,7 +30,7 @@ from helios_domain.models import (
     SiteStageHistory,
 )
 from helios_domain.ontology import DevelopmentStage
-from helios_scoring.impact import estimate_power_mw, estimate_water_gpd
+from helios_scoring.impact import ImpactEstimate, estimate_power_mw, estimate_water_gpd
 from helios_scoring.rules import (
     SCORING_MODEL_NAME,
     SCORING_MODEL_VERSION,
@@ -288,30 +288,12 @@ def recalculate_site(
 
         # total_acres is a Decimal column; the estimator works in float.
         acres = float(site.total_acres) if site.total_acres is not None else None
-        power_mw = estimate_power_mw(acres, int(new_stage))
-        if power_mw is not None:
-            session.add(
-                SiteEstimate(
-                    site_id=site.id,
-                    estimate_type="power_capacity",
-                    unit="MW",
-                    likely_value=power_mw,
-                    method="Heuristic based on acreage and stage",
-                    calculated_at=utcnow(),
-                )
-            )
-            water_gpd = estimate_water_gpd(power_mw)
-            if water_gpd is not None:
-                session.add(
-                    SiteEstimate(
-                        site_id=site.id,
-                        estimate_type="water_usage",
-                        unit="GPD",
-                        likely_value=water_gpd,
-                        method="Industry average 0.5 gal/kWh",
-                        calculated_at=utcnow(),
-                    )
-                )
+        power = estimate_power_mw(acres, int(new_stage))
+        if power is not None:
+            session.add(_estimate_row(site.id, "power_capacity", power))
+            water = estimate_water_gpd(power)
+            if water is not None:
+                session.add(_estimate_row(site.id, "water_usage", water))
 
     session.flush()
     logger.info(
@@ -333,6 +315,31 @@ def recalculate_site(
         previous_stage=previous_stage,
         new_stage=new_stage,
         is_downgrade=new_stage < previous_stage,
+    )
+
+
+def _estimate_row(site_id: uuid.UUID, estimate_type: str, estimate: ImpactEstimate) -> SiteEstimate:
+    """Persist a ranged estimate with the assumptions that produced it.
+
+    `SiteEstimate` was built to carry a range, a method and its assumptions. It
+    had been receiving a bare `likely_value`, which rendered a heuristic as
+    though it were a measurement.
+
+    The class is `inferred` rather than `calculated` for the reason recorded in
+    tasks/lessons.md: the arithmetic is exact but the coefficients are industry
+    assumptions, and a value is only as strong as its weakest input.
+    """
+    return SiteEstimate(
+        site_id=site_id,
+        estimate_type=estimate_type,
+        unit=estimate.unit,
+        lower_value=estimate.lower,
+        likely_value=estimate.likely,
+        upper_value=estimate.upper,
+        method=estimate.method,
+        assumptions=estimate.assumptions,
+        assertion_class="inferred",
+        calculated_at=utcnow(),
     )
 
 

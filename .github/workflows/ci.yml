@@ -166,6 +166,22 @@ jobs:
           git diff --stat -- apps/web/public/api
         fi
 
+    # This job is the only place in the project that reliably has PostGIS, so the
+    # export it just built is worth keeping rather than discarding. Refreshing the
+    # committed snapshot otherwise requires a local database, which shuts out
+    # anyone working on the frontend alone.
+    - name: Publish the freshly built snapshot
+      uses: actions/upload-artifact@v7
+      with:
+        name: static-api-snapshot
+        path: apps/web/public/api
+        retention-days: 7
+        # The exporter writes a .nojekyll into the snapshot, and upload-artifact
+        # drops dotfiles unless told otherwise. Without this the downloaded
+        # snapshot is subtly incomplete and committing it deletes a file that the
+        # next export puts straight back — permanent phantom drift.
+        include-hidden-files: true
+
   # ─────────────────────────────── Frontend (Node) ───────────────────────────
   frontend:
     name: "Frontend — ${{ matrix.check }}"

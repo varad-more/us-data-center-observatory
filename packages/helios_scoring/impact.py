@@ -1,41 +1,161 @@
-"""Impact estimation models for power and water."""
+"""Impact estimation models for power and water.
+
+These are the weakest numbers Helios publishes, and the module is shaped to keep
+that visible. Each estimator returns a *range* and the coefficients it applied,
+rather than a single figure that looks like a measurement.
+
+The epistemic status is `inferred`, not `calculated`. The arithmetic is exact;
+the coefficients are industry assumptions applied to a site Helios has never
+visited. A value is only as strong as its weakest input.
+"""
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+from typing import Any
 
-def estimate_power_mw(total_acres: float | None, stage: int) -> float | None:
-    """Estimate the power capacity (MW) of a site based on acreage and stage.
+# Power density of a data-centre campus, MW per acre of assembled land.
+#
+# The spread is genuine rather than decorative. A sprawling single-storey campus
+# with large setbacks, substation yard and stormwater retention lands near the
+# low end; a dense multi-storey build with high rack density lands near the top.
+# Helios knows the acreage and almost never knows which of those it is looking
+# at, so the band stays wide until a filing narrows it.
+MW_PER_ACRE_LOW = 1.0
+MW_PER_ACRE_LIKELY = 2.0
+MW_PER_ACRE_HIGH = 4.0
 
-    A heuristic model where baseline is 2 MW / acre. This increases slightly
-    at higher confidence stages (e.g. operational might pack more density).
+# Cooling water, gallons per kWh.
+#
+# This band is enormous because the underlying practice is. Evaporative cooling
+# can exceed a gallon per kWh; a closed-loop or air-cooled design approaches
+# zero. Cooling type is not in any record Helios ingests, so the estimate cannot
+# be narrowed and should not be presented as though it could.
+GAL_PER_KWH_LOW = 0.10
+GAL_PER_KWH_LIKELY = 0.50
+GAL_PER_KWH_HIGH = 1.00
+
+_HOURS_PER_DAY = 24
+_KW_PER_MW = 1000
+
+
+@dataclass(frozen=True)
+class ImpactEstimate:
+    """A ranged estimate carrying the assumptions that produced it.
+
+    Maps onto the `SiteEstimate` columns, which were built for exactly this and
+    were previously being filled with a bare `likely_value`.
+    """
+
+    lower: float
+    likely: float
+    upper: float
+    unit: str
+    method: str
+    assumptions: dict[str, Any] = field(default_factory=dict)
+
+
+def _stage_density_multiplier(stage: int) -> float:
+    """Later stages imply a denser build than raw acreage suggests.
+
+    A site that has energised has committed to its footprint; one still in land
+    assembly may never build out what it bought.
+    """
+    if stage >= 8:
+        return 1.5
+    if stage >= 6:
+        return 1.2
+    return 1.0
+
+
+def estimate_power_mw(total_acres: float | None, stage: int) -> ImpactEstimate | None:
+    """Estimate power capacity in MW from assembled acreage and development stage.
+
+    Args:
+        total_acres: Assembled site acreage, or None when unknown.
+        stage: Current development stage, used only for the density multiplier.
+
+    Returns:
+        A ranged estimate, or None when there is no acreage to work from.
     """
     if total_acres is None or total_acres <= 0:
         return None
 
-    base_mw_per_acre = 2.0
+    acres = float(total_acres)
+    multiplier = _stage_density_multiplier(stage)
 
-    # Slight density multiplier for later stages (e.g. multi-story or higher utilization)
-    multiplier = 1.0
-    if stage >= 6:
-        multiplier = 1.2
-    if stage >= 8:
-        multiplier = 1.5
+    return ImpactEstimate(
+        lower=round(acres * MW_PER_ACRE_LOW * multiplier, 1),
+        likely=round(acres * MW_PER_ACRE_LIKELY * multiplier, 1),
+        upper=round(acres * MW_PER_ACRE_HIGH * multiplier, 1),
+        unit="MW",
+        method="Assembled acreage x assumed power density, adjusted for stage",
+        assumptions={
+            "total_acres": round(acres, 4),
+            "mw_per_acre_low": MW_PER_ACRE_LOW,
+            "mw_per_acre_likely": MW_PER_ACRE_LIKELY,
+            "mw_per_acre_high": MW_PER_ACRE_HIGH,
+            "stage": stage,
+            "stage_density_multiplier": multiplier,
+            "note": (
+                "Power density is an industry assumption, not a property of this "
+                "site. Helios does not know the building footprint, rack density "
+                "or how much of the assembled land will be built on."
+            ),
+        },
+    )
 
-    return round(float(total_acres) * base_mw_per_acre * multiplier, 1)
 
+def estimate_water_gpd(power: ImpactEstimate | None) -> ImpactEstimate | None:
+    """Estimate cooling water in gallons per day from a power estimate.
 
-def estimate_water_gpd(estimated_power_mw: float | None) -> float | None:
-    """Estimate water usage (Gallons Per Day) based on power.
+    The bounds compound deliberately: the low end pairs the low power figure with
+    the most efficient cooling, the high end pairs the high power figure with the
+    least. Presenting a narrower band would understate how little is known.
 
-    Uses an industry average heuristic: ~0.5 gallons per kWh for cooling.
-    1 MW = 1000 kW * 24 hours = 24,000 kWh per day.
-    24,000 * 0.5 = 12,000 GPD per MW.
+    Args:
+        power: The site's power estimate, or None.
+
+    Returns:
+        A ranged estimate, or None when there is no power estimate to work from.
     """
-    if estimated_power_mw is None or estimated_power_mw <= 0:
+    if power is None or power.likely <= 0:
         return None
 
-    gpd_per_mw = 12000.0
-    return round(estimated_power_mw * gpd_per_mw, 1)
+    def gpd(mw: float, gal_per_kwh: float) -> float:
+        return round(mw * _KW_PER_MW * _HOURS_PER_DAY * gal_per_kwh, 1)
+
+    return ImpactEstimate(
+        lower=gpd(power.lower, GAL_PER_KWH_LOW),
+        likely=gpd(power.likely, GAL_PER_KWH_LIKELY),
+        upper=gpd(power.upper, GAL_PER_KWH_HIGH),
+        unit="GPD",
+        method="Estimated power x assumed cooling water intensity",
+        assumptions={
+            "power_mw_lower": power.lower,
+            "power_mw_likely": power.likely,
+            "power_mw_upper": power.upper,
+            "gal_per_kwh_low": GAL_PER_KWH_LOW,
+            "gal_per_kwh_likely": GAL_PER_KWH_LIKELY,
+            "gal_per_kwh_high": GAL_PER_KWH_HIGH,
+            "note": (
+                "Cooling type is not recorded in any source Helios ingests. A "
+                "closed-loop or air-cooled design approaches zero water use; "
+                "evaporative cooling can exceed a gallon per kWh. The band is "
+                "wide because the practice is."
+            ),
+        },
+    )
 
 
-__all__ = ["estimate_power_mw", "estimate_water_gpd"]
+__all__ = [
+    "GAL_PER_KWH_HIGH",
+    "GAL_PER_KWH_LIKELY",
+    "GAL_PER_KWH_LOW",
+    "MW_PER_ACRE_HIGH",
+    "MW_PER_ACRE_LIKELY",
+    "MW_PER_ACRE_LOW",
+    "ImpactEstimate",
+    "estimate_power_mw",
+    "estimate_water_gpd",
+]
