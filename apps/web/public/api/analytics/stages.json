@@ -1,6 +1,6 @@
 {
-  "region_slug": "east_valley",
-  "total_sites": 4,
+  "region_slug": null,
+  "total_sites": 13,
   "stages": [
     {
       "stage": 0,
@@ -16,7 +16,7 @@
     },
     {
       "stage": 2,
-      "stage_label": "Land assembly",
+      "stage_label": "Infrastructure intent",
       "site_count": 0,
       "mean_confidence": null
     },
@@ -29,26 +29,26 @@
     {
       "stage": 4,
       "stage_label": "Construction initiated",
-      "site_count": 1,
-      "mean_confidence": 78.0
+      "site_count": 0,
+      "mean_confidence": null
     },
     {
       "stage": 5,
-      "stage_label": "Shell complete",
+      "stage_label": "Structural buildout",
       "site_count": 0,
       "mean_confidence": null
     },
     {
       "stage": 6,
       "stage_label": "Energization",
-      "site_count": 1,
-      "mean_confidence": 86.0
+      "site_count": 0,
+      "mean_confidence": null
     },
     {
       "stage": 7,
       "stage_label": "Operational",
-      "site_count": 2,
-      "mean_confidence": 93.5
+      "site_count": 13,
+      "mean_confidence": 40.28
     },
     {
       "stage": 8,

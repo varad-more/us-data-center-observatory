@@ -450,7 +450,9 @@ def _float_or_none(value: object) -> float | None:
     """Parse a float from ECHO's stringly-typed coordinates."""
     if value is None or value == "":
         return None
-    return float(value)
+    if isinstance(value, str | int | float):
+        return float(value)
+    return None
 
 
 __all__ = ["DEFAULT_CITIES", "EpaEchoAirConnector"]

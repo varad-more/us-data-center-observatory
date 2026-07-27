@@ -1,0 +1,304 @@
+{
+  "id": "2f7963ad-ab00-4951-b36e-adf83bbedaa0",
+  "project_code": "AZ-MESA-004",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Mesa",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 36.48,
+  "stage_confidence": 50.09,
+  "confidence_band": "low",
+  "first_signal_date": "2013-02-27",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 5,
+  "total_acres": 1.2114,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.897250Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.896112Z",
+  "centroid": [
+    -111.735264,
+    33.387936
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 1.2 acres near 4437 E HOLMES AVE, Mesa. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.73487162098638,
+            33.38816859639002
+          ],
+          [
+            -111.73487581611877,
+            33.38803122228174
+          ],
+          [
+            -111.73496574915681,
+            33.387883619373035
+          ],
+          [
+            -111.7349647888578,
+            33.38773246016768
+          ],
+          [
+            -111.73496388335599,
+            33.38758984392534
+          ],
+          [
+            -111.73563965809645,
+            33.3875868586718
+          ],
+          [
+            -111.735629875443,
+            33.38808997820246
+          ],
+          [
+            -111.73552749355174,
+            33.388090574499635
+          ],
+          [
+            -111.73552712164923,
+            33.38826957748326
+          ],
+          [
+            -111.73550864869372,
+            33.388284628892286
+          ],
+          [
+            -111.73486810767533,
+            33.3882836928203
+          ],
+          [
+            -111.73486912366991,
+            33.3882504135038
+          ],
+          [
+            -111.73487162098638,
+            33.38816859639002
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "c1586732-6be0-4c45-af72-1013d511a941",
+      "apn": "14055293",
+      "apn_formatted": "140-55-293",
+      "situs_address": "4437 E HOLMES AVE",
+      "situs_city": "Mesa",
+      "owner_name": "COX COMMUNICATIONS ARIZONA LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 1.2114,
+      "last_deed_date": "2013-02-27",
+      "last_deed_number": "20130183962",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130183962&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=14055293",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "ada30edc-abb3-4018-b633-6628eeab1751",
+      "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
+      "role": "utility",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "833865f8-e25e-44dc-a89b-e3862c0be623",
+      "infrastructure_kind": "substation",
+      "label": "Southern Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 938.31,
+      "confidence": 0.6685,
+      "assertion_class": "inferred",
+      "notes": "Southern Substation lies 938 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "436d9490-a8aa-4379-ad7e-770314151275",
+      "infrastructure_kind": "substation",
+      "label": "Greer Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2702.88,
+      "confidence": 0.1391,
+      "assertion_class": "inferred",
+      "notes": "Greer Substation lies 2703 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "2f47afd3-8f12-45f8-83dd-e8aca2b0bcfe",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2745.06,
+      "confidence": 0.1265,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2745 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "525265cb-4116-4bcd-bbd1-a0367692f12b",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 2.9,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.897628Z",
+      "notes": null
+    },
+    {
+      "id": "5e9dd8bd-f8ee-42e2-9f93-14a14cf3d559",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 34800.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.897647Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "accddf53-08b9-4bb8-946e-3b9e73a6f2e7",
+    "calculated_at": "2026-07-27T05:27:28.896128Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 41.6957,
+    "confidence": 50.09,
+    "confidence_band": "moderate",
+    "positive_contribution": 41.6957,
+    "negative_contribution": 0.0,
+    "evidence_considered": 5,
+    "distinct_evidence_kinds": 3,
+    "is_backtest": false,
+    "summary": "50% confidence from 5 evidence records across 3 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "5a5dce18-6070-4e6f-aae4-76c22c1b48f5"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+        "base_weight": 20.0,
+        "applied_weight": 14.943,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9962,
+        "polarity": "supporting",
+        "evidence_record_id": "81474154-13b6-448b-a553-d8964b1a7264"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 7.0777,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9437,
+        "polarity": "supporting",
+        "evidence_record_id": "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 0.675,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.6685,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "1ca14112-348e-43ed-a1b1-7cdbae5d141c"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "f5098149-562f-48c9-b5a3-3bc72798f109",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-27T05:27:28.897250Z",
+      "is_downgrade": false,
+      "confidence": 50.09,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
+      "triggering_evidence_ids": [
+        "5a5dce18-6070-4e6f-aae4-76c22c1b48f5",
+        "81474154-13b6-448b-a553-d8964b1a7264",
+        "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63",
+        "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+      ],
+      "detection_lag_days": 4898
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

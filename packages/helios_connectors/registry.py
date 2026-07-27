@@ -381,18 +381,18 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         category=SourceCategory.REMOTE_SENSING,
         base_url="https://catalogue.dataspace.copernicus.eu/",
         access_method=AccessMethod.REST_JSON,
-        connector_status=ConnectorStatus.FIXTURE_ONLY,
+        connector_status=ConnectorStatus.PLANNED,
         requires_authentication=True,
         authentication_notes="Requires a free registered Copernicus Data Space account.",
         license_name="Copernicus open licence",
         geographic_coverage="Global",
         historical_coverage="2015 onward.",
         access_limitation=(
-            "No Copernicus credentials are configured in this environment, so no satellite "
-            "imagery has been acquired or analysed. Fixture-backed mock is available."
+            "No Copernicus credentials are configured and no satellite imagery has been "
+            "acquired or analysed. Declared here so the gap stays visible; deliberately "
+            "has no connector, because a fixture-backed stub would have implied a "
+            "capability Helios does not have."
         ),
-        connector_slug="copernicus-sentinel2",
-        connector_entry_point="helios_connectors.copernicus_sentinel2:CopernicusSentinel2Connector",
         tags=("satellite", "future-phase"),
     ),
     # -------------------------------------------------------------- water ----

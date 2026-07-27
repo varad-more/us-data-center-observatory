@@ -1,0 +1,421 @@
+{
+  "generated_at": "2026-07-27T05:28:20.787759+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-MESA-003",
+    "jurisdiction": "Mesa",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 33.0,
+    "total_acres": 3.0003,
+    "first_signal_date": "2026-07-25",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 3.0 acres near 3223 S ELLSWORTH RD, Mesa. Title of record is held by COMARCH INC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.6356360062591,
+              33.35740468585283
+            ],
+            [
+              -111.63470707998339,
+              33.35739793068546
+            ],
+            [
+              -111.63472097422587,
+              33.356103793612014
+            ],
+            [
+              -111.63556314300808,
+              33.356110226235714
+            ],
+            [
+              -111.63561501532587,
+              33.35615337650035
+            ],
+            [
+              -111.6356360062591,
+              33.35740468585283
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "ed54912f-dd40-44a9-99d9-eb3f4092e2fc",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/1200014647",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.6284,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "distance_meters": 1071.9,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "538835a8-f948-455e-bc84-8e57fdd5f261",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[8].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[8].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "584bc985-1295-4b22-b4f5-dfc4bc4b4c47",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2026-07-27",
+      "detected_at": "2026-07-27T05:27:28.906063Z",
+      "is_downgrade": false,
+      "confidence": 27.14,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
+      "triggering_evidence_ids": [
+        "538835a8-f948-455e-bc84-8e57fdd5f261"
+      ],
+      "detection_lag_days": 0
+    }
+  ],
+  "predictions": [
+    {
+      "id": "f2f957e6-2958-4dcd-8484-3fd90ca3f574",
+      "calculated_at": "2026-07-27T05:27:28.905111Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 24.0272,
+      "confidence": 33.0,
+      "confidence_band": "low",
+      "positive_contribution": 24.0272,
+      "negative_contribution": 0.0,
+      "evidence_considered": 2,
+      "distinct_evidence_kinds": 2,
+      "is_backtest": false,
+      "summary": "33% confidence from 2 evidence records across 2 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "538835a8-f948-455e-bc84-8e57fdd5f261"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 5.0272,
+          "confidence_multiplier": 0.6284,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "ed54912f-dd40-44a9-99d9-eb3f4092e2fc"
+        }
+      ]
+    },
+    {
+      "id": "c568698d-0c67-42ff-9b90-073fc7b0f95a",
+      "calculated_at": "2026-07-27T05:27:28.905125Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 19.0,
+      "confidence": 27.14,
+      "confidence_band": "low",
+      "positive_contribution": 19.0,
+      "negative_contribution": 0.0,
+      "evidence_considered": 2,
+      "distinct_evidence_kinds": 1,
+      "is_backtest": false,
+      "summary": "27% confidence from 2 evidence records across 1 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "538835a8-f948-455e-bc84-8e57fdd5f261"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.6284,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "ed54912f-dd40-44a9-99d9-eb3f4092e2fc"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

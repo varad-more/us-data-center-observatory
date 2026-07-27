@@ -46,6 +46,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID as PgUUID  # noqa: N811
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from helios_common.vocabulary import AssertionClass
 from helios_domain.base import (
     Base,
     EffectiveDatingMixin,
@@ -1100,7 +1101,13 @@ class SiteEstimate(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     upper_value: Mapped[float | None] = mapped_column(Float)
 
     method: Mapped[str] = mapped_column(String(120), nullable=False)
-    assertion_class: Mapped[str] = mapped_column(String(20), nullable=False, default="estimated")
+    # Power and water estimates apply assumed industry coefficients (MW per acre,
+    # gallons per kWh) to a measured acreage. The arithmetic is deterministic but
+    # the coefficients are not stored facts, so this is an inference, not a
+    # calculation - and it must never be badged like a reported value.
+    assertion_class: Mapped[str] = mapped_column(
+        String(20), nullable=False, default=str(AssertionClass.INFERRED)
+    )
     confidence: Mapped[float] = mapped_column(Float, nullable=False, default=0.3)
     assumptions: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, nullable=False)
     evidence_record_ids: Mapped[list[str]] = mapped_column(JSONB, default=list, nullable=False)

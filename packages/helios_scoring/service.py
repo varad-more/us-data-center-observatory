@@ -30,6 +30,7 @@ from helios_domain.models import (
     SiteStageHistory,
 )
 from helios_domain.ontology import DevelopmentStage
+from helios_scoring.impact import estimate_power_mw, estimate_water_gpd
 from helios_scoring.rules import (
     SCORING_MODEL_NAME,
     SCORING_MODEL_VERSION,
@@ -39,7 +40,6 @@ from helios_scoring.rules import (
     model_parameters_hash,
     score_site,
 )
-from helios_scoring.impact import estimate_power_mw, estimate_water_gpd
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
@@ -203,7 +203,7 @@ def recalculate_site(
         is_backtest=is_backtest,
         summary=identity_result.summary,
     )
-    
+
     stage_prediction = Prediction(
         site_id=site.id,
         model_version_id=model.id,
@@ -285,8 +285,10 @@ def recalculate_site(
 
         # Update estimates
         session.query(SiteEstimate).filter(SiteEstimate.site_id == site.id).delete()
-        
-        power_mw = estimate_power_mw(site.total_acres, int(new_stage))
+
+        # total_acres is a Decimal column; the estimator works in float.
+        acres = float(site.total_acres) if site.total_acres is not None else None
+        power_mw = estimate_power_mw(acres, int(new_stage))
         if power_mw is not None:
             session.add(
                 SiteEstimate(

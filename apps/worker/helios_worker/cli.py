@@ -26,8 +26,12 @@ from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
 from helios_connectors.registry import SOURCE_REGISTRY, registry_coverage_summary
+from helios_connectors.replay import (
+    FIXTURE_INGEST_ORDER,
+    FixtureNotFoundError,
+    build_fixture_connector,
+)
 from helios_connectors.sync import sync_registry
-from helios_scoring.backtest import run_backtest
 from helios_domain.models import (
     EvidenceRecord,
     Parcel,
@@ -39,6 +43,7 @@ from helios_domain.models import (
 from helios_domain.ontology import DevelopmentStage
 from helios_domain.session import session_scope
 from helios_geospatial.site_builder import build_sites
+from helios_scoring.backtest import run_backtest
 from helios_scoring.service import recalculate_site
 
 app = typer.Typer(
@@ -131,8 +136,12 @@ def ingest(
             )
         ),
     ] = False,
+    fixture: Annotated[
+        bool,
+        typer.Option(help="Replay recorded fixtures instead of reaching the live source"),
+    ] = False,
 ) -> None:
-    """Run one connector against its live source."""
+    """Run one connector against its live source, or against recorded fixtures."""
     if connector_slug not in CONNECTORS:
         console.print(f"[red]Unknown connector[/red] {connector_slug!r}")
         console.print(f"Available: {', '.join(sorted(CONNECTORS))}")
@@ -141,17 +150,29 @@ def ingest(
     settings = get_settings()
     kwargs: dict[str, Any] = {}
 
-    if east_valley_data_centers:
-        kwargs["where"] = f"PropertyUseDescription='DATA CENTERS' AND {EAST_VALLEY_CITY_SQL}"
-    elif where:
-        kwargs["where"] = where
+    if fixture:
+        # Replay ignores live query narrowing: the recorded bytes already are
+        # the response the query would have produced.
+        try:
+            connector = build_fixture_connector(connector_slug, settings=settings)
+        except (KeyError, FixtureNotFoundError) as exc:
+            console.print(f"[red]No fixture available[/red] {exc}")
+            raise typer.Exit(code=1) from exc
+        mode = "fixture"
+    else:
+        if east_valley_data_centers:
+            kwargs["where"] = f"PropertyUseDescription='DATA CENTERS' AND {EAST_VALLEY_CITY_SQL}"
+        elif where:
+            kwargs["where"] = where
 
-    # Fixture-only connectors never take constructor kwargs meant for live queries.
-    if connector_slug == "azcc-edocket":
-        kwargs = {}
+        # Fixture-only connectors never take constructor kwargs meant for live queries.
+        if connector_slug == "azcc-edocket":
+            kwargs = {}
 
-    connector = CONNECTORS[connector_slug](settings=settings, **kwargs)
-    mode = "fixture" if connector.get_metadata().status == ConnectorStatus.FIXTURE_ONLY else "live"
+        connector = CONNECTORS[connector_slug](settings=settings, **kwargs)
+        mode = (
+            "fixture" if connector.get_metadata().status == ConnectorStatus.FIXTURE_ONLY else "live"
+        )
     try:
         with session_scope() as session:
             summary = IngestionPipeline(
@@ -270,7 +291,9 @@ def explain(
 
         console.print(f"\n[bold cyan]{site.project_code}[/bold cyan] - {site.jurisdiction}")
         console.print(f"  {site.summary}\n")
-        console.print(f"  Stage      : {stage_result.implied_stage.value} {stage_result.implied_stage.label}")
+        console.print(
+            f"  Stage      : {stage_result.implied_stage.value} {stage_result.implied_stage.label}"
+        )
         console.print(f"  Id. Conf.  : {identity_result.confidence:.1f}% ({identity_result.band})")
         console.print(f"  Stage Conf.: {stage_result.confidence:.1f}% ({stage_result.band})")
         console.print(f"  As of      : {identity_result.as_of.isoformat()}\n")
@@ -288,7 +311,7 @@ def explain(
                 contribution.detail,
             )
         console.print(table)
-        
+
         stage_table = Table(title="Stage Score Contributions")
         stage_table.add_column("Weight", justify="right")
         stage_table.add_column("Rule", style="cyan")
@@ -375,7 +398,8 @@ def backtest(
 ) -> None:
     """Replay historical cutoffs without mutating live site stage."""
     from pathlib import Path
-    from helios_scoring.backtest import run_time_sliced_backtest, run_backtest
+
+    from helios_scoring.backtest import run_time_sliced_backtest
 
     with session_scope() as session:
         cases_path = Path(cases) if cases else None
@@ -399,9 +423,11 @@ def backtest(
             "[green]pass[/green]" if case.passed else "[red]fail[/red]",
         )
     console.print(table)
-    console.print(f"Accuracy: {report_data.passed}/{report_data.total} ({report_data.accuracy:.0%})")
+    console.print(
+        f"Accuracy: {report_data.passed}/{report_data.total} ({report_data.accuracy:.0%})"
+    )
     console.print(f"Precision: {report_data.precision:.0%} | Recall: {report_data.recall:.0%}")
-    
+
     if report:
         report_path = Path("research_report.md")
         report_path.write_text(report_data.generate_research_report(), encoding="utf-8")
@@ -414,24 +440,47 @@ def backtest(
 @app.command("bootstrap")
 def bootstrap(
     live: Annotated[
-        bool, typer.Option(help="Fetch from live public sources rather than fixtures")
-    ] = True,
+        bool, typer.Option(help="Fetch from live public sources rather than recorded fixtures")
+    ] = False,
 ) -> None:
     """Run the full pipeline: registry, ingestion, site building, and scoring.
 
     This is the single command that takes an empty database to a browsable
     observatory.
+
+    Fixtures are the default so that a fresh clone, a test run, and CI never
+    put load on county servers, and so that the resulting database is
+    reproducible. Pass ``--live`` to fetch current records instead.
     """
     console.rule("[bold]1/4 Source registry")
     registry_sync()
 
     console.rule("[bold]2/4 Ingestion")
-    if not live:
-        console.print(
-            "[yellow]Fixture mode is intended for tests; use " "'pytest' instead.[/yellow]"
-        )
-        raise typer.Exit(code=1)
+    if live:
+        _ingest_live()
+    else:
+        _ingest_fixtures()
 
+    console.rule("[bold]3/4 Site construction")
+    build_sites_command()
+
+    console.rule("[bold]4/4 Scoring")
+    score()
+
+    console.rule("[bold]Done")
+    status()
+
+
+def _ingest_fixtures() -> None:
+    """Replay every recorded source, in dependency order."""
+    console.print("[cyan]Fixture mode[/cyan] - replaying recorded payloads, no network access.")
+    for slug in FIXTURE_INGEST_ORDER:
+        ingest(slug, fixture=True)
+
+
+def _ingest_live() -> None:
+    """Fetch from live public sources, tolerating the flaky ones."""
+    console.print("[yellow]Live mode[/yellow] - fetching from public sources.")
     ingest("maricopa-assessor-parcels", east_valley_data_centers=True)
     ingest("osm-power-infrastructure")
     # EPA may 429 under load; failures are non-fatal for bootstrap so the
@@ -453,15 +502,6 @@ def bootstrap(
             "`helios ingest mesa-building-permits` later.[/yellow]"
         )
     ingest("azcc-edocket")
-
-    console.rule("[bold]3/4 Site construction")
-    build_sites_command()
-
-    console.rule("[bold]4/4 Scoring")
-    score()
-
-    console.rule("[bold]Done")
-    status()
 
 
 if __name__ == "__main__":  # pragma: no cover

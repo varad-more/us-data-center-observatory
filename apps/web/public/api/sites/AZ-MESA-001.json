@@ -1,221 +1,612 @@
 {
-  "id": "AZ-MESA-001",
+  "id": "274d665e-efa8-4a07-af5b-c3b0c9937b67",
   "project_code": "AZ-MESA-001",
-  "display_name": "Mesa Data Center Campus",
-  "site_kind": "data_center",
-  "site_kind_assertion": "extracted",
+  "display_name": null,
+  "site_kind": "hyperscale_campus",
+  "site_kind_assertion": "reported",
   "jurisdiction": "Mesa",
   "county": "Maricopa",
-  "region_slug": "east_valley",
+  "region_slug": "east-valley-az",
   "current_stage": 7,
   "current_stage_label": "Operational",
-  "current_confidence": 92.0,
-  "stage_confidence": 88.0,
-  "confidence_band": "high",
-  "first_signal_date": "2021-08-03",
-  "latest_signal_date": "2025-06-29",
-  "evidence_count": 14,
-  "total_acres": 84.38,
-  "parcel_count": 2,
-  "operator_status": "confirmed",
-  "stage_last_changed_at": "2024-02-10T00:00:00Z",
-  "score_last_calculated_at": "2025-06-29T00:00:00Z",
+  "current_confidence": 59.74,
+  "stage_confidence": 70.03,
+  "confidence_band": "moderate",
+  "first_signal_date": "2013-11-04",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 10,
+  "total_acres": 83.1715,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.884553Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.883289Z",
   "centroid": [
-    -111.604,
-    33.347
+    -111.604067,
+    33.346951
   ],
   "is_synthetic": false,
-  "summary": "Multi-building data center facility located on Signal Butte Rd in East Mesa.",
+  "summary": "1 parcel(s) totalling 83.2 acres near 3740 S SIGNAL BUTTE RD, Mesa. Title of record is held by PLATYPUS DEVELOPMENT LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
   "boundary": {
-    "type": "Polygon",
+    "type": "MultiPolygon",
     "coordinates": [
       [
-        [-111.60129264309101, 33.349678604714647],
-        [-111.60122847373532, 33.343644927920273],
-        [-111.60133918929746, 33.343644167721948],
-        [-111.60158942130806, 33.343640925809723],
-        [-111.60184908383251, 33.34363756082481],
-        [-111.60185239951423, 33.343637518049569],
-        [-111.60185019684515, 33.343763524038827],
-        [-111.60185019684515, 33.343763564562686],
-        [-111.60185000370737, 33.34377459605345],
-        [-111.60198194376471, 33.343883668905121],
-        [-111.60220917800574, 33.343882204045173],
-        [-111.60220962536674, 33.34393105996412],
-        [-111.60233417408593, 33.343930428093543],
-        [-111.60233422528992, 33.343930427343096],
-        [-111.60402679591397, 33.343919747078083],
-        [-111.60618894288645, 33.343906068052149],
-        [-111.60621911999181, 33.346466451148117],
-        [-111.60729165813538, 33.346460798997263],
-        [-111.60729976363419, 33.346460755473046],
-        [-111.6073384370055, 33.349764670723999],
-        [-111.60732213797299, 33.349764594184222],
-        [-111.60326645287431, 33.349745439730107],
-        [-111.60314509766594, 33.349744864180984],
-        [-111.60314509946258, 33.349744667578761],
-        [-111.60314528002397, 33.349717379640389],
-        [-111.60313041021107, 33.34971731060449],
-        [-111.60132819840997, 33.349708820688427],
-        [-111.60129264309101, 33.349678604714647]
+        [
+          [
+            -111.60129264309101,
+            33.34967860471465
+          ],
+          [
+            -111.60122847373532,
+            33.34364492792027
+          ],
+          [
+            -111.60133918929746,
+            33.34364416772195
+          ],
+          [
+            -111.60158942130806,
+            33.34364092580972
+          ],
+          [
+            -111.6018490838325,
+            33.34363756082481
+          ],
+          [
+            -111.60185239951423,
+            33.34363751804957
+          ],
+          [
+            -111.60185019684515,
+            33.34376352403883
+          ],
+          [
+            -111.60185019684515,
+            33.343763564562686
+          ],
+          [
+            -111.60185000370737,
+            33.34377459605345
+          ],
+          [
+            -111.60198194376471,
+            33.34388366890512
+          ],
+          [
+            -111.60220917800574,
+            33.34388220404517
+          ],
+          [
+            -111.60220962536674,
+            33.34393105996412
+          ],
+          [
+            -111.60233417408593,
+            33.34393042809354
+          ],
+          [
+            -111.60233422528992,
+            33.343930427343096
+          ],
+          [
+            -111.60402679591397,
+            33.34391974707808
+          ],
+          [
+            -111.60618894288645,
+            33.34390606805215
+          ],
+          [
+            -111.6062191199918,
+            33.34646645114812
+          ],
+          [
+            -111.60729165813538,
+            33.34646079899726
+          ],
+          [
+            -111.60729976363419,
+            33.346460755473046
+          ],
+          [
+            -111.6073384370055,
+            33.349764670724
+          ],
+          [
+            -111.60732213797299,
+            33.34976459418422
+          ],
+          [
+            -111.60326645287431,
+            33.34974543973011
+          ],
+          [
+            -111.60314509766594,
+            33.349744864180984
+          ],
+          [
+            -111.60314509946258,
+            33.34974466757876
+          ],
+          [
+            -111.60314528002397,
+            33.34971737964039
+          ],
+          [
+            -111.60313041021107,
+            33.34971731060449
+          ],
+          [
+            -111.60132819840997,
+            33.34970882068843
+          ],
+          [
+            -111.60129264309101,
+            33.34967860471465
+          ]
+        ]
       ]
     ]
   },
   "parcels": [
     {
-      "id": "30433005S",
+      "id": "8d8a1d98-df74-4953-95f7-7a5b4385527a",
       "apn": "30433005S",
       "apn_formatted": "304-33-005S",
       "situs_address": "3740 S SIGNAL BUTTE RD",
-      "situs_city": "MESA",
+      "situs_city": "Mesa",
       "owner_name": "PLATYPUS DEVELOPMENT LLC",
       "owner_is_redacted": false,
       "land_use_description": "DATA CENTERS",
-      "lot_size_acres": 83.17,
+      "lot_size_acres": 83.1715,
       "last_deed_date": "2013-11-04",
       "last_deed_number": "20130962087",
       "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130962087&suffix=",
       "last_sale_price": 113576875.0,
       "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30433005S",
-      "link_reason": "assessor_use_code_1507",
-      "link_confidence": 0.98
-    },
-    {
-      "id": "14055293",
-      "apn": "14055293",
-      "apn_formatted": "140-55-293",
-      "situs_address": "4437 E HOLMES AVE",
-      "situs_city": "MESA",
-      "owner_name": "COX COMMUNICATIONS ARIZONA LLC",
-      "owner_is_redacted": false,
-      "land_use_description": "DATA CENTERS",
-      "lot_size_acres": 1.21,
-      "last_deed_date": "2013-02-27",
-      "last_deed_number": "20130183962",
-      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130183962&suffix=",
-      "last_sale_price": null,
-      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=14055293",
-      "link_reason": "assessor_use_code_1507",
+      "link_reason": "assessor_classification",
       "link_confidence": 0.95
     }
   ],
   "organizations": [
     {
-      "id": "org-platypus",
-      "canonical_name": "Platypus Development LLC",
+      "id": "4409dcdf-f822-4f85-9622-5693133ef548",
+      "canonical_name": "PLATYPUS DEVELOPMENT LLC",
       "role": "owner",
-      "organization_type": "holding_company",
+      "organization_type": "LLC",
       "is_suspected_shell": true,
       "shell_indicators": [
-        "Single-asset LLC structure"
+        "pass-through legal form (LLC)",
+        "minimal descriptive name"
       ],
-      "mailing_city": "Cupertino",
-      "mailing_state": "CA",
-      "attribution_note": "Record owner per Maricopa County Assessor"
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
     }
   ],
   "dependencies": [
     {
-      "id": "dep-sub-1",
+      "id": "d2c48a31-d652-4523-9cf9-a2685576beec",
+      "infrastructure_kind": "substation",
+      "label": "Luna Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 0.0,
+      "confidence": 0.95,
+      "assertion_class": "inferred",
+      "notes": "Luna Substation lies 0 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "49c6f962-3c9e-4e75-b3b9-b6eada9bedaa",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 0.0,
+      "confidence": 0.95,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 0 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "3f41781f-286a-46ab-bf43-10b4c6005f44",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 637.09,
+      "confidence": 0.3317,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "792057b0-c6ee-4864-bf78-1abc8b525894",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 656.43,
+      "confidence": 0.3273,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "058f5531-1c7a-4be5-9d53-f3f65dd55898",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 666.57,
+      "confidence": 0.325,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "a4f54b8f-72a1-4a41-a03f-165492e0fa84",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 684.59,
+      "confidence": 0.321,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "a2457aa5-efbd-4708-b202-362b014266e5",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 692.01,
+      "confidence": 0.3193,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "b1a5112e-25e8-411b-a871-165c28cd25f0",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 696.12,
+      "confidence": 0.3184,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "4aaed8f8-6015-44a0-b279-27f5840a7280",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 701.02,
+      "confidence": 0.3172,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "a214c391-ccb5-4f8c-b696-672c29cd00c3",
+      "infrastructure_kind": "transmission_line",
+      "label": "500.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 719.23,
+      "confidence": 0.3131,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 500.0,
+      "operator_name": null
+    },
+    {
+      "id": "ad7ba859-6960-4840-a056-3c9d04f050fc",
       "infrastructure_kind": "substation",
       "label": "Greenbone Substation",
-      "dependency_status": "matched",
+      "dependency_status": "existing",
       "is_blocking": true,
-      "match_method": "spatial_proximity",
-      "distance_meters": 450.0,
-      "confidence": 0.9,
+      "match_method": "substation_proximity",
+      "distance_meters": 731.32,
+      "confidence": 0.7306,
       "assertion_class": "inferred",
-      "notes": "500kV/230kV transmission substation adjacent to site",
+      "notes": "Greenbone Substation lies 731 m from the site boundary and is tagged 500 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
       "voltage_kv": 500.0,
       "operator_name": "Salt River Project"
+    },
+    {
+      "id": "75cb8193-c92b-4278-be3b-06f4afb0eab5",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 833.11,
+      "confidence": 0.7001,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 833 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "9026bd99-9b24-42d8-9592-7d9566401bb2",
+      "infrastructure_kind": "substation",
+      "label": "Howard Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1330.56,
+      "confidence": 0.5508,
+      "assertion_class": "inferred",
+      "notes": "Howard Substation lies 1331 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "2db190bb-ce47-4e82-8e51-c8ee386f09c9",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2291.89,
+      "confidence": 0.2624,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2292 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "4eb5cef9-007c-4f3d-8bfb-19bd0a48318a",
+      "infrastructure_kind": "substation",
+      "label": "Prickly Pear Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2468.11,
+      "confidence": 0.2096,
+      "assertion_class": "inferred",
+      "notes": "Prickly Pear Substation lies 2468 m from the site boundary and is tagged 230 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 230.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "5b5033c8-63f9-4e40-ab83-2708914c2270",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2707.75,
+      "confidence": 0.1377,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2708 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
     }
   ],
   "estimates": [
     {
-      "id": "est-power-1",
+      "id": "525f31ac-48a2-41df-bba7-def6620ba400",
       "estimate_type": "power_capacity",
       "unit": "MW",
-      "lower_value": 50.0,
-      "likely_value": 100.0,
-      "upper_value": 150.0,
-      "method": "heuristic_building_area",
+      "lower_value": null,
+      "likely_value": 199.6,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
       "assertion_class": "inferred",
-      "confidence": 0.85,
-      "assumptions": {
-        "watts_per_sqft": 150
-      },
-      "calculated_at": "2025-06-29T00:00:00Z",
-      "notes": "Based on 600,000 sq ft building footprint"
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.884956Z",
+      "notes": null
     },
     {
-      "id": "est-water-1",
+      "id": "de2f76ae-a161-4995-b499-b65eecdf0d39",
       "estimate_type": "water_usage",
-      "unit": "AF/yr",
-      "lower_value": 200.0,
-      "likely_value": 450.0,
-      "upper_value": 700.0,
-      "method": "cooling_type_benchmark",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 2395200.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
       "assertion_class": "inferred",
-      "confidence": 0.75,
-      "assumptions": {
-        "cooling_system": "evaporative"
-      },
-      "calculated_at": "2025-06-29T00:00:00Z",
-      "notes": "Standard cooling consumption estimate"
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.884971Z",
+      "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "pred-AZ-MESA-001",
-    "calculated_at": "2025-06-29T00:00:00Z",
-    "as_of_date": "2025-06-29",
+    "id": "0eb75711-1b5f-4940-a1d7-d39ac8eb3f50",
+    "calculated_at": "2026-07-27T05:27:28.883305Z",
+    "as_of_date": "2026-07-27",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
-    "raw_score": 92.0,
-    "confidence": 92.0,
+    "raw_score": 72.2978,
+    "confidence": 70.03,
     "confidence_band": "high",
-    "positive_contribution": 90.0,
-    "negative_contribution": 5.0,
-    "evidence_considered": 14,
-    "distinct_evidence_kinds": 4,
+    "positive_contribution": 72.2978,
+    "negative_contribution": 0.0,
+    "evidence_considered": 10,
+    "distinct_evidence_kinds": 6,
     "is_backtest": false,
-    "summary": "Stage classified as Operational based on record evidence.",
-    "model_name": "helios-stage-classifier",
-    "model_version": "1.0.0",
+    "summary": "70% confidence from 10 evidence records across 6 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
     "explanations": [
       {
-        "rule_id": "rule-assessor-datacenter",
-        "evidence_kind": "assessor_record",
-        "label": "Maricopa Assessor Classification",
-        "detail": "Property use code 1507 (DATA CENTERS)",
-        "base_weight": 50.0,
-        "applied_weight": 50.0,
-        "confidence_multiplier": 1.0,
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
-        "polarity": "positive",
-        "evidence_record_id": "ev-AZ-MESA-001-1"
+        "polarity": "supporting",
+        "evidence_record_id": "d653221a-bae9-47d1-a753-083a06989cd2"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-13495 at 3740 S SIGNAL BUTTE RD, opened 2026-07-23, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+        "base_weight": 20.0,
+        "applied_weight": 14.943,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9962,
+        "polarity": "supporting",
+        "evidence_record_id": "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d"
+      },
+      {
+        "rule_id": "backup-generator-air-permit",
+        "evidence_kind": "backup_generator_air_permit",
+        "label": "Backup-generator air permit",
+        "detail": "EPA ECHO lists PLATYPUS CAMPUS EMERGENCY GENERATORS as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Title V; NESHAP Reciprocating Internal Combustion Engines.",
+        "base_weight": 17.0,
+        "applied_weight": 13.5878,
+        "confidence_multiplier": 0.8,
+        "recency_multiplier": 0.9991,
+        "polarity": "supporting",
+        "evidence_record_id": "2924eab1-b2b7-4226-81a0-c5028bc2d242"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-12780 at 3740 S SIGNAL BUTTE RD, opened 2026-07-13, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 7.4647,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9953,
+        "polarity": "supporting",
+        "evidence_record_id": "8e687d18-595e-4854-8334-5dcf4642a5aa"
+      },
+      {
+        "rule_id": "transmission-or-substation-filing",
+        "evidence_kind": "substation_application",
+        "label": "Dedicated substation application",
+        "detail": "ACC docket E-01345A-22-0148: Amended single-line and site plan. Filed by Arizona Public Service Company on 2023-01-09. Helios ingested a recorded fixture, not a live scrape.",
+        "base_weight": 25.0,
+        "applied_weight": 6.2135,
+        "confidence_multiplier": 0.85,
+        "recency_multiplier": 0.2924,
+        "polarity": "supporting",
+        "evidence_record_id": "fc566d35-51b2-4ae5-8e02-3ece90961bae"
+      },
+      {
+        "rule_id": "large-industrial-parcel-acquisition",
+        "evidence_kind": "large_industrial_parcel_acquisition",
+        "label": "Large industrial parcel acquisition",
+        "detail": "Organization-held industrial parcel of 83.2 acres transferred for $113,576,875 on 2013-11-04, at or above the 20-acre campus-scale threshold.",
+        "base_weight": 18.0,
+        "applied_weight": 4.05,
+        "confidence_multiplier": 0.9,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "ff5ccea8-94ff-4db1-8548-f0f16d7112a2"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-07994 at 3740 S SIGNAL BUTTE RD, opened 2026-04-27, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 3, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 3.7076,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9887,
+        "polarity": "supporting",
+        "evidence_record_id": "2a893329-9929-4bd8-b63e-00dfb9f7de7a"
+      },
+      {
+        "rule_id": "transmission-or-substation-filing",
+        "evidence_kind": "substation_application",
+        "label": "Dedicated substation application",
+        "detail": "ACC docket E-01345A-22-0148: Initial CEC application \u2014 Signal Butte Substation. Filed by Arizona Public Service Company on 2022-06-14. Helios ingested a recorded fixture, not a live scrape. (occurrence 2, weight reduced)",
+        "base_weight": 25.0,
+        "applied_weight": 2.6562,
+        "confidence_multiplier": 0.85,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "66f270f1-c699-464b-aaba-c1b6c0715bf1"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by PLATYPUS DEVELOPMENT LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); minimal descriptive name). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 0.675,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "5a220dd1-1ce9-4704-a921-d6537799e771"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Luna Substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "42b6286f-86e6-44ae-959d-11a346baed89"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "st-AZ-MESA-001-1",
+      "id": "19352127-2d2a-4ab6-9187-b28f91eaa6b9",
       "from_stage": 0,
-      "from_stage_label": "No known development",
+      "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
-      "effective_date": "2021-08-03",
-      "detected_at": "2021-08-03T00:00:00Z",
+      "effective_date": "2013-11-04",
+      "detected_at": "2026-07-27T05:27:28.884553Z",
       "is_downgrade": false,
-      "confidence": 0.88,
-      "rationale": "Initial detection from public records",
+      "confidence": 70.03,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "triggering_evidence_ids": [
-        "ev-AZ-MESA-001-1"
+        "d653221a-bae9-47d1-a753-083a06989cd2",
+        "36d0e246-b9de-4fcb-a280-26e0c8ae8d9d",
+        "2924eab1-b2b7-4226-81a0-c5028bc2d242",
+        "8e687d18-595e-4854-8334-5dcf4642a5aa",
+        "fc566d35-51b2-4ae5-8e02-3ece90961bae",
+        "ff5ccea8-94ff-4db1-8548-f0f16d7112a2",
+        "2a893329-9929-4bd8-b63e-00dfb9f7de7a",
+        "66f270f1-c699-464b-aaba-c1b6c0715bf1",
+        "5a220dd1-1ce9-4704-a921-d6537799e771"
       ],
-      "detection_lag_days": 1
+      "detection_lag_days": 4648
     }
   ],
   "attributions": [
-    "Maricopa County Assessor",
-    "Helios Observatory"
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
   ]
 }

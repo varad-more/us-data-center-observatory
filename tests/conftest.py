@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pytest
 
-FIXTURES_ROOT = Path(__file__).parent / "fixtures"
+from helios_connectors.replay import FIXTURES_ROOT, load_fixture_bytes
 
 TEST_DATABASE_URL = os.environ.get(
     "HELIOS_TEST_DATABASE_URL",
@@ -32,6 +32,10 @@ def _isolated_settings(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Itera
 
     monkeypatch.setenv("HELIOS_ENVIRONMENT", "test")
     monkeypatch.setenv("HELIOS_ALLOW_LIVE_FETCH", "false")
+    # Code paths that build their own engine rather than taking the injected
+    # session - the readiness probe, most obviously - must not reach a
+    # developer's real database just because it is the ambient default.
+    monkeypatch.setenv("HELIOS_DATABASE_URL", TEST_DATABASE_URL)
     monkeypatch.setenv("HELIOS_EVIDENCE_BACKEND", "filesystem")
     monkeypatch.setenv("HELIOS_EVIDENCE_ROOT", str(tmp_path / "evidence-store"))
     monkeypatch.setenv("HELIOS_LOG_LEVEL", "WARNING")
@@ -65,19 +69,9 @@ def fixtures_root() -> Path:
     return FIXTURES_ROOT
 
 
-def load_fixture_bytes(*parts: str) -> bytes:
-    """Read a recorded fixture payload.
-
-    Args:
-        *parts: Path components below ``tests/fixtures``.
-
-    Returns:
-        The raw bytes exactly as captured from the source.
-    """
-    path = FIXTURES_ROOT.joinpath(*parts)
-    if not path.exists():
-        raise FileNotFoundError(f"Missing fixture: {path}")
-    return path.read_bytes()
+# ``load_fixture_bytes`` and ``FIXTURES_ROOT`` are re-exported from
+# helios_connectors.replay so tests and the CLI read fixtures through one path.
+__all__ = ["FIXTURES_ROOT", "load_fixture_bytes"]
 
 
 # ---------------------------------------------------------------- database --
@@ -90,9 +84,8 @@ def engine() -> Iterator[object]:
     """A session-scoped engine against the test database, with the schema created."""
     from sqlalchemy import create_engine, text
 
-    from helios_domain.base import Base
-
     import helios_domain.models  # noqa: F401
+    from helios_domain.base import Base
 
     db_engine = create_engine(TEST_DATABASE_URL, future=True, poolclass=None)
     try:
@@ -118,7 +111,11 @@ def db_session(engine: object) -> Iterator[object]:
 
     connection = engine.connect()  # type: ignore[attr-defined]
     transaction = connection.begin()
-    factory = sessionmaker(bind=connection, expire_on_commit=False, future=True)
+    # autoflush=False mirrors the production session factory
+    # (helios_domain.session). With autoflush left on, tests silently see
+    # pending writes that the real application would not, which hid a bug where
+    # every site reported zero evidence despite carrying a full evidence trail.
+    factory = sessionmaker(bind=connection, expire_on_commit=False, autoflush=False, future=True)
     session = factory()
     try:
         yield session

@@ -7,10 +7,6 @@ using document intelligence.
 
 from __future__ import annotations
 
-import json
-from typing import Any
-
-from helios_common.hashing import short_hash
 from helios_common.logging import get_logger
 from helios_common.vocabulary import (
     AccessMethod,
@@ -58,7 +54,7 @@ class MesaAgendasConnector(FixtureBackedConnector):
             agency="City of Mesa",
             jurisdiction="Mesa, Arizona",
             category=SourceCategory.MUNICIPAL_PLANNING,
-            access_method=AccessMethod.MANUAL_DOWNLOAD,
+            access_method=AccessMethod.MANUAL_UPLOAD,
             base_url="https://www.mesaaz.gov/government/advisory-boards-committees/planning-zoning-board",
             connector_version=CONNECTOR_VERSION,
             parser_version=PARSER_VERSION,
@@ -80,9 +76,9 @@ class MesaAgendasConnector(FixtureBackedConnector):
 
         # Assuming fixtures are under `fixtures/mesa_agendas/`
         # In a real environment, this might look up a known index or manifest.
-        # For this fixture-backed connector, we'll assume a specific manifest or 
-        # just yield a dummy item if we don't have a dynamic list, but since 
-        # discovery typically returns items from a known list, we'll construct 
+        # For this fixture-backed connector, we'll assume a specific manifest or
+        # just yield a dummy item if we don't have a dynamic list, but since
+        # discovery typically returns items from a known list, we'll construct
         # one based on expected fixtures or a metadata file.
         fixture_path = Path("fixtures") / self.fixture_dir
         items = []
@@ -129,9 +125,9 @@ class MesaAgendasConnector(FixtureBackedConnector):
         for index, row in enumerate(document.records):
             text = row.get("text", "")
             filename = row.get("filename", "unknown.pdf")
-            
+
             snippets = find_keywords_in_text(text, KEYWORDS)
-            
+
             if not snippets:
                 filtered += 1
                 continue
@@ -147,9 +143,9 @@ class MesaAgendasConnector(FixtureBackedConnector):
     def _normalize_row(self, filename: str, snippets: list[str], *, index: int) -> NormalizedRecord:
         """Create a NormalizedRecord from keyword snippets."""
         from helios_common.time import utcnow
-        
+
         source_native_id = f"agenda-{filename}"
-        
+
         evidence = []
         for i, snippet in enumerate(snippets):
             evidence.append(

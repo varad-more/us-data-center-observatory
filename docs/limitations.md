@@ -9,7 +9,7 @@ Helios is an early-warning **observatory**, not a complete map of AI infrastruct
 3. **OSM is incomplete.** Missing substations are not evidence that none exist. Transmission geometries from Overpass `out center` are centroids; distances are approximate.
 4. **EPA ECHO rate limits.** The public API throttles aggressive clients. Helios self-limits and uses fixtures in CI; a throttled live run is a temporary gap, not proof of no generators.
 5. **Mesa planning agendas and dust-control attributes** are not yet automated. Commercial building permits are ingested with address-only matching (no coordinates in source).
-6. **No satellite observations** in this sprint. Copernicus is registered as planned with credentials absent.
+6. **No satellite observations.** Copernicus Sentinel-2 is declared in the registry as `planned` with no connector at all. A fixture-backed satellite stub was deliberately removed rather than kept, because shipping one would have implied an imagery capability Helios does not have.
 7. **Study area is East Valley, Arizona.** National coverage is out of scope.
 
 ## Analytical
@@ -22,6 +22,6 @@ Helios is an early-warning **observatory**, not a complete map of AI infrastruct
 
 ## Product / ops
 
-1. Compose stack only — no Kafka/Kubernetes (ADR 0002).
+1. Single-container local stack — no Kafka/Kubernetes (ADR 0002).
 2. Admin API refuses all mutations when `HELIOS_ADMIN_API_TOKEN` is unset.
-3. Empty package stubs (`helios_observability`) are placeholders, not monitoring products.
+3. The published GitHub Pages site is a point-in-time snapshot exported from a fixture-seeded database, not a live view of public records. The date is stated on every page.

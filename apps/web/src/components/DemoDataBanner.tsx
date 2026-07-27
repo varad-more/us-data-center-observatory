@@ -1,0 +1,63 @@
+/**
+ * States what the published deployment actually is.
+ *
+ * Helios exists to keep reported facts distinguishable from derived ones, so a
+ * static snapshot that looked like a live feed would break the product's own
+ * rule at the outermost layer. The banner names the snapshot as a snapshot and
+ * dates it. It renders nothing when `meta.json` is absent, which is the case
+ * when the UI is pointed at a live API.
+ */
+import Link from "next/link";
+
+import fs from "fs/promises";
+import path from "path";
+
+import { API_BASE } from "@/lib/api";
+
+interface ExportMeta {
+  generated_at: string;
+  site_count: number;
+}
+
+async function readMeta(): Promise<ExportMeta | null> {
+  // Read from disk at build time; a static export has no server at runtime.
+  try {
+    const raw = await fs.readFile(
+      path.join(process.cwd(), "public", "api", "meta.json"),
+      "utf-8",
+    );
+    return JSON.parse(raw) as ExportMeta;
+  } catch {
+    return null;
+  }
+}
+
+function formatExportDate(iso: string): string | null {
+  const parsed = new Date(iso);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+export async function DemoDataBanner() {
+  const meta = await readMeta();
+  if (!meta) return null;
+
+  const exportedOn = formatExportDate(meta.generated_at);
+
+  return (
+    <div className="demo-banner" role="note">
+      <strong>Static snapshot.</strong>{" "}
+      This site serves {meta.site_count} sites exported from the Helios pipeline
+      {exportedOn ? ` on ${exportedOn}` : ""}. Every score and assertion class was
+      produced by the same code that runs against live public records — but this is a
+      point-in-time export, not a live view. See{" "}
+      <a href={`${API_BASE}/meta.json`}>meta.json</a> or the{" "}
+      <Link href="/methodology">methodology</Link>.
+    </div>
+  );
+}

@@ -12,7 +12,7 @@ Helios conclusions must be independently verifiable. If source bytes can be over
 
 1. Every fetched payload is stored under its **SHA-256** content hash.
 2. The store is **append-only** in application code. Overwriting an existing hash is forbidden; identical content is a no-op.
-3. Local development uses a filesystem backend (`HELIOS_EVIDENCE_ROOT`). Compose provides MinIO for an S3-compatible path.
+3. Local development uses a filesystem backend (`HELIOS_EVIDENCE_ROOT`); production selects S3 via `HELIOS_EVIDENCE_BACKEND`. No object store runs locally — an S3-compatible container was dropped as unnecessary weight for the filesystem path.
 4. Database rows (`document_versions`) reference the hash and metadata; they never embed mutable source bytes.
 5. Evidence records cite a specific `document_version_id` plus a locator (JSON path, URL, or span).
 

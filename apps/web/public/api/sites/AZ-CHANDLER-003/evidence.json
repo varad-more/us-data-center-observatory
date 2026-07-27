@@ -1,0 +1,872 @@
+{
+  "generated_at": "2026-07-27T05:28:20.687897+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-CHANDLER-003",
+    "jurisdiction": "Chandler",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 35.55,
+    "total_acres": 17.9617,
+    "first_signal_date": "2022-01-20",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 18.0 acres near 2900 W INNOVATION ST, Chandler. Title of record is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.88773732382724,
+              33.27113388619722
+            ],
+            [
+              -111.88771042916598,
+              33.27113201829379
+            ],
+            [
+              -111.88766427731993,
+              33.27112812926915
+            ],
+            [
+              -111.88762574678076,
+              33.2711242552657
+            ],
+            [
+              -111.88761636297932,
+              33.27112321278475
+            ],
+            [
+              -111.88760698456774,
+              33.27112213575462
+            ],
+            [
+              -111.88757887897745,
+              33.27111871764859
+            ],
+            [
+              -111.88756952482039,
+              33.271117504675324
+            ],
+            [
+              -111.88756315666333,
+              33.271116672493044
+            ],
+            [
+              -111.88756017605323,
+              33.27111626090832
+            ],
+            [
+              -111.88755083447258,
+              33.27111498033896
+            ],
+            [
+              -111.88750684756639,
+              33.27110847910216
+            ],
+            [
+              -111.88740453079681,
+              33.27109025318963
+            ],
+            [
+              -111.88730306204923,
+              33.27106778101827
+            ],
+            [
+              -111.88726549001248,
+              33.27105831531431
+            ],
+            [
+              -111.88725645565567,
+              33.27105594569615
+            ],
+            [
+              -111.88724838788612,
+              33.271053810411004
+            ],
+            [
+              -111.88724743297696,
+              33.271053542279866
+            ],
+            [
+              -111.88721146982286,
+              33.27104359363791
+            ],
+            [
+              -111.88718519410081,
+              33.271035957532426
+            ],
+            [
+              -111.88713157635644,
+              33.271019344663245
+            ],
+            [
+              -111.88709612614038,
+              33.27100762049266
+            ],
+            [
+              -111.8869974057453,
+              33.27097163203346
+            ],
+            [
+              -111.88690038234166,
+              33.270931291672206
+            ],
+            [
+              -111.88668121227695,
+              33.270834288097824
+            ],
+            [
+              -111.886680414573,
+              33.27083393434409
+            ],
+            [
+              -111.88663809044839,
+              33.27081520116692
+            ],
+            [
+              -111.88663693162165,
+              33.270814688937406
+            ],
+            [
+              -111.88663814883887,
+              33.270812749675564
+            ],
+            [
+              -111.88665028956993,
+              33.270793393105855
+            ],
+            [
+              -111.88665150588884,
+              33.270791454594566
+            ],
+            [
+              -111.88665274646225,
+              33.270789477778685
+            ],
+            [
+              -111.88666761178357,
+              33.270765775512494
+            ],
+            [
+              -111.88666876522038,
+              33.270763936141904
+            ],
+            [
+              -111.88695104283211,
+              33.27031388777549
+            ],
+            [
+              -111.88698719193746,
+              33.27025286825233
+            ],
+            [
+              -111.8870183846701,
+              33.27019119875941
+            ],
+            [
+              -111.88704499190443,
+              33.27012741656748
+            ],
+            [
+              -111.88706687163663,
+              33.27006186208446
+            ],
+            [
+              -111.8870839070938,
+              33.269994885177056
+            ],
+            [
+              -111.88709600735702,
+              33.26992684330351
+            ],
+            [
+              -111.88710310784677,
+              33.26985809960583
+            ],
+            [
+              -111.88710479308624,
+              33.269783759387636
+            ],
+            [
+              -111.88708709088526,
+              33.268760475002495
+            ],
+            [
+              -111.8870863937926,
+              33.2687200326963
+            ],
+            [
+              -111.88708284095564,
+              33.268514616736795
+            ],
+            [
+              -111.88707973907297,
+              33.26833490188024
+            ],
+            [
+              -111.88712882032515,
+              33.2683343791209
+            ],
+            [
+              -111.88716155223915,
+              33.26833402460594
+            ],
+            [
+              -111.88720389882165,
+              33.268333555174074
+            ],
+            [
+              -111.88720275167303,
+              33.268267562041125
+            ],
+            [
+              -111.88716040958211,
+              33.26826802020701
+            ],
+            [
+              -111.8871276776681,
+              33.26826837397113
+            ],
+            [
+              -111.88707857844962,
+              33.26826890499284
+            ],
+            [
+              -111.88706331786959,
+              33.26739718003398
+            ],
+            [
+              -111.8870633250561,
+              33.26739705910701
+            ],
+            [
+              -111.88706976956995,
+              33.26729871164446
+            ],
+            [
+              -111.88707123382386,
+              33.267276360410946
+            ],
+            [
+              -111.88707138833408,
+              33.267273998201176
+            ],
+            [
+              -111.88707336732266,
+              33.26724379270517
+            ],
+            [
+              -111.8870737167673,
+              33.267243809229385
+            ],
+            [
+              -111.88707422790871,
+              33.26724383326456
+            ],
+            [
+              -111.8870858997192,
+              33.26724434401283
+            ],
+            [
+              -111.88708695793461,
+              33.267244389078826
+            ],
+            [
+              -111.88709808536602,
+              33.26724483748578
+            ],
+            [
+              -111.88710020359346,
+              33.26724490658702
+            ],
+            [
+              -111.88711027460612,
+              33.26724525134209
+            ],
+            [
+              -111.8871126425652,
+              33.267245330207615
+            ],
+            [
+              -111.8871134528456,
+              33.267245358749406
+            ],
+            [
+              -111.88712246654114,
+              33.26724563515432
+            ],
+            [
+              -111.88720519059905,
+              33.26724680687088
+            ],
+            [
+              -111.88720619132225,
+              33.26724680536866
+            ],
+            [
+              -111.88723276977657,
+              33.26724666040629
+            ],
+            [
+              -111.88842982699495,
+              33.267234425731985
+            ],
+            [
+              -111.88865998704883,
+              33.26723207178315
+            ],
+            [
+              -111.88869271357295,
+              33.267231737543426
+            ],
+            [
+              -111.88869412482626,
+              33.26723281762594
+            ],
+            [
+              -111.88870336310065,
+              33.26723988698316
+            ],
+            [
+              -111.88876354124153,
+              33.26728593618546
+            ],
+            [
+              -111.88876619127161,
+              33.26731337161099
+            ],
+            [
+              -111.88879791976746,
+              33.26764190879141
+            ],
+            [
+              -111.88879792425904,
+              33.267641949350605
+            ],
+            [
+              -111.88882077508914,
+              33.26790682878773
+            ],
+            [
+              -111.88883817860203,
+              33.26817212182267
+            ],
+            [
+              -111.8888501274495,
+              33.268437716441774
+            ],
+            [
+              -111.88885661658642,
+              33.26870350050403
+            ],
+            [
+              -111.8888569435732,
+              33.26872827212761
+            ],
+            [
+              -111.88885696782772,
+              33.26873002366393
+            ],
+            [
+              -111.88888293542762,
+              33.27058286572358
+            ],
+            [
+              -111.88888434668092,
+              33.27068350025353
+            ],
+            [
+              -111.88888944012861,
+              33.27104686829293
+            ],
+            [
+              -111.88888982460753,
+              33.27107439191394
+            ],
+            [
+              -111.88885939058403,
+              33.27110056886283
+            ],
+            [
+              -111.88882993482586,
+              33.27112590385777
+            ],
+            [
+              -111.88882507943177,
+              33.2711300805411
+            ],
+            [
+              -111.88880512695097,
+              33.27113027807169
+            ],
+            [
+              -111.88879231517839,
+              33.271130405002026
+            ],
+            [
+              -111.88839914952798,
+              33.27113430604361
+            ],
+            [
+              -111.8879260742415,
+              33.27113899720739
+            ],
+            [
+              -111.88789908795204,
+              33.27113912188446
+            ],
+            [
+              -111.88781816438893,
+              33.27113778626494
+            ],
+            [
+              -111.88773732382724,
+              33.27113388619722
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "09eaa570-29d6-4983-9dba-ad7ba58c1f69",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); propco/opco naming convention). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = ALIGNED DATA CENTERS CONTINUUM PROPCO LLC",
+      "snippet_locator": "$.features[10].attributes.OwnerName",
+      "observed_at": "2022-01-20",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "ALIGNED DATA CENTERS CONTINUUM PROPCO LLC",
+            "locator": "$.features[10].attributes.OwnerName",
+            "raw_text": "ALIGNED DATA CENTERS CONTINUUM PROPCO LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "124da0ec-7d88-4d6a-b4b5-0d1cb5182081",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "RS-27 tagged 69 kV lies 383 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/318676175",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.835,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "distance_meters": 383.23,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "6e861be6-de4b-4abf-ad8c-433beacd2c28",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[10].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[10].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "97e8d011-ce43-431e-b93e-bca1e1deddc0",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2022-01-20",
+      "detected_at": "2026-07-27T05:27:28.919826Z",
+      "is_downgrade": false,
+      "confidence": 27.96,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "6e861be6-de4b-4abf-ad8c-433beacd2c28",
+        "09eaa570-29d6-4983-9dba-ad7ba58c1f69"
+      ],
+      "detection_lag_days": 1649
+    }
+  ],
+  "predictions": [
+    {
+      "id": "a0ff6f2e-8ccc-45f0-b00c-8fb756f827ed",
+      "calculated_at": "2026-07-27T05:27:28.918780Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 26.355,
+      "confidence": 35.55,
+      "confidence_band": "low",
+      "positive_contribution": 26.355,
+      "negative_contribution": 0.0,
+      "evidence_considered": 3,
+      "distinct_evidence_kinds": 3,
+      "is_backtest": false,
+      "summary": "36% confidence from 3 evidence records across 3 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "6e861be6-de4b-4abf-ad8c-433beacd2c28"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "RS-27 tagged 69 kV lies 383 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 6.68,
+          "confidence_multiplier": 0.835,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "124da0ec-7d88-4d6a-b4b5-0d1cb5182081"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); propco/opco naming convention). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "09eaa570-29d6-4983-9dba-ad7ba58c1f69"
+        }
+      ]
+    },
+    {
+      "id": "f19c39b9-e297-421e-9f81-927b306b204e",
+      "calculated_at": "2026-07-27T05:27:28.918795Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 19.675,
+      "confidence": 27.96,
+      "confidence_band": "low",
+      "positive_contribution": 19.675,
+      "negative_contribution": 0.0,
+      "evidence_considered": 3,
+      "distinct_evidence_kinds": 2,
+      "is_backtest": false,
+      "summary": "28% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "6e861be6-de4b-4abf-ad8c-433beacd2c28"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); propco/opco naming convention). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "09eaa570-29d6-4983-9dba-ad7ba58c1f69"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "RS-27 tagged 69 kV lies 383 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.835,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "124da0ec-7d88-4d6a-b4b5-0d1cb5182081"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

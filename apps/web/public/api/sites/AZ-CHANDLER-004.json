@@ -1,0 +1,378 @@
+{
+  "id": "b277f4c7-522d-4e73-997c-f4cf73d8453f",
+  "project_code": "AZ-CHANDLER-004",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 37.95,
+  "stage_confidence": 29.64,
+  "confidence_band": "low",
+  "first_signal_date": "2025-10-30",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 3,
+  "total_acres": 14.496,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.910322Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.909326Z",
+  "centroid": [
+    -111.886094,
+    33.300538
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 14.5 acres near 2500 W FRYE RD, Chandler. Title of record is held by 2500 WEST FRYE ROAD OWNER LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.88689137223936,
+            33.29877323194395
+          ],
+          [
+            -111.88689499334826,
+            33.29931603388439
+          ],
+          [
+            -111.8869148730655,
+            33.30229521148657
+          ],
+          [
+            -111.88663573326906,
+            33.30229646306815
+          ],
+          [
+            -111.88532997361311,
+            33.30230230803628
+          ],
+          [
+            -111.88529724439405,
+            33.30230245519281
+          ],
+          [
+            -111.88527411636875,
+            33.29880565348871
+          ],
+          [
+            -111.88530684648613,
+            33.29880555437931
+          ],
+          [
+            -111.88530666412812,
+            33.29877806953561
+          ],
+          [
+            -111.88689137223936,
+            33.29877323194395
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "6eac3c98-3fbd-4568-af55-dbdaaa3bfc34",
+      "apn": "30324019A",
+      "apn_formatted": "303-24-019A",
+      "situs_address": "2500 W FRYE RD",
+      "situs_city": "Chandler",
+      "owner_name": "2500 WEST FRYE ROAD OWNER LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 14.496,
+      "last_deed_date": "2025-10-30",
+      "last_deed_number": "20250629554",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20250629554&suffix=",
+      "last_sale_price": 13000000.0,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30324019A",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "bec7d707-d413-49e4-9b49-4430c37d6e35",
+      "canonical_name": "2500 WEST FRYE ROAD OWNER LLC",
+      "role": "owner",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "4a026b7c-46c2-46a0-9d30-3bfa475009c0",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 24.79,
+      "confidence": 0.9426,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 25 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "630f078e-ee08-4a98-81bb-481ecb81eed8",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 292.65,
+      "confidence": 0.8622,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 293 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "7411793b-4be8-402d-8f03-802742cd2db9",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 393.62,
+      "confidence": 0.8319,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 394 m from the site boundary. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": null,
+      "operator_name": null
+    },
+    {
+      "id": "8c387e57-d6bb-470c-8301-0dfa094fb850",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 511.04,
+      "confidence": 0.7967,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 511 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "95186a3b-f0a9-4aa9-bb80-cb28b2dd5277",
+      "infrastructure_kind": "substation",
+      "label": "Miller Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 908.23,
+      "confidence": 0.6775,
+      "assertion_class": "inferred",
+      "notes": "Miller Substation lies 908 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "2ba8dd2f-0a99-47a5-9cee-1edc931bd23b",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1017.5,
+      "confidence": 0.246,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "15dc00b4-02be-4b6e-bb83-9985c8634dad",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1022.97,
+      "confidence": 0.2449,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "3f4f8d33-0840-4a8b-afd5-8b97a9f477b7",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1642.19,
+      "confidence": 0.1055,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "d99d2ddd-5475-4813-b22a-7ee7e2d2133c",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2207.94,
+      "confidence": 0.2876,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2208 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "cd3f3695-6b17-49d7-be21-d33e97af428d",
+      "infrastructure_kind": "substation",
+      "label": "Jones Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2471.02,
+      "confidence": 0.2087,
+      "assertion_class": "inferred",
+      "notes": "Jones Substation lies 2471 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "dfec0ad0-40e2-4fe2-bc0e-3db9c36d1361",
+      "infrastructure_kind": "substation",
+      "label": "RS-27",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2732.04,
+      "confidence": 0.1304,
+      "assertion_class": "inferred",
+      "notes": "RS-27 lies 2732 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "e5470b1a-6768-4f75-b173-22c02353d0ac",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 34.8,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.910679Z",
+      "notes": null
+    },
+    {
+      "id": "6fe41528-862f-4d19-a76e-feb5f6135ce7",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 417600.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.910693Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "ec3f3e21-f3c2-4bee-9cd0-b36be6c967f2",
+    "calculated_at": "2026-07-27T05:27:28.909340Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 21.0895,
+    "confidence": 29.64,
+    "confidence_band": "low",
+    "positive_contribution": 21.0895,
+    "negative_contribution": 0.0,
+    "evidence_considered": 3,
+    "distinct_evidence_kinds": 2,
+    "is_backtest": false,
+    "summary": "30% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "8e9b7e89-22dc-43c8-84bd-1fa24c7f799f"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by 2500 WEST FRYE ROAD OWNER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 2.0895,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.7739,
+        "polarity": "supporting",
+        "evidence_record_id": "20815527-57e6-400d-b452-73a2b0d26269"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Unnamed substation tagged 69 kV lies 25 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.9426,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "0f794b8c-261c-4790-bf41-78aa52376c7c"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "ab5f51d6-3f95-494f-be4b-325524523d65",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2025-10-30",
+      "detected_at": "2026-07-27T05:27:28.910322Z",
+      "is_downgrade": false,
+      "confidence": 29.64,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 30% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "8e9b7e89-22dc-43c8-84bd-1fa24c7f799f",
+        "20815527-57e6-400d-b452-73a2b0d26269"
+      ],
+      "detection_lag_days": 270
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

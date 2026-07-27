@@ -1,9 +1,9 @@
 {
-  "total_evidence_records": 51,
-  "with_document_version": 51,
-  "with_snippet": 48,
-  "with_locator": 45,
-  "with_observation_date": 51,
-  "completeness_ratio": 0.94,
-  "note": "94.1% of evidence items carry full provenance links to source documents."
+  "total_evidence_records": 147,
+  "with_document_version": 147,
+  "with_snippet": 147,
+  "with_locator": 147,
+  "with_observation_date": 147,
+  "completeness_ratio": 1.0,
+  "note": "An evidence record counts as complete only when it cites an immutable document version, quotes a snippet, names a locator within that document, and carries an observation date."
 }

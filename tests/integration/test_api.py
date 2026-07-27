@@ -12,7 +12,6 @@ import io
 import json
 import zipfile
 from collections.abc import Iterator
-from datetime import UTC, datetime
 
 import pytest
 from fastapi.testclient import TestClient
@@ -23,54 +22,18 @@ from helios_common.evidence_store import FilesystemEvidenceStore
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
-from helios_connectors.types import (
-    DateRange,
-    DiscoveryResult,
-    FetchResult,
-    RawDocument,
-    SourceItem,
-)
+from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import Site
 from helios_geospatial.site_builder import build_sites
 from helios_scoring.service import recalculate_site
-from tests.conftest import load_fixture_bytes
 
 pytestmark = pytest.mark.integration
 
 EAST_VALLEY_CITIES = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
 
 
-def _replay(connector_cls, fixture_parts, native_id):  # noqa: ANN001, ANN202
-    content = load_fixture_bytes(*fixture_parts)
-
-    class _Replay(connector_cls):  # type: ignore[valid-type, misc]
-        def discover(self, date_range: DateRange) -> DiscoveryResult:
-            return DiscoveryResult(
-                items=[
-                    SourceItem(
-                        source_native_id=native_id,
-                        url="https://example.invalid/recorded",
-                        document_type="fixture",
-                    )
-                ]
-            )
-
-        def fetch(self, item: SourceItem) -> FetchResult:
-            return FetchResult(
-                document=RawDocument(
-                    item=item,
-                    payload=content,
-                    mime_type="application/json",
-                    retrieved_at=datetime(2026, 7, 25, tzinfo=UTC),
-                    http_status=200,
-                )
-            )
-
-    return _Replay()
-
-
 @pytest.fixture
-def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[TestClient]:  # noqa: ANN001
+def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[TestClient]:
     """A TestClient whose requests share the test's transactional session."""
     store = FilesystemEvidenceStore(settings.evidence_root)
     for connector in (
@@ -153,9 +116,7 @@ class TestSiteList:
         "bbox",
         ["1,2,3", "a,b,c,d", "10,10,5,5", "-999,0,0,10"],
     )
-    def test_rejects_malformed_bounding_boxes(
-        self, api_client: TestClient, bbox: str
-    ) -> None:
+    def test_rejects_malformed_bounding_boxes(self, api_client: TestClient, bbox: str) -> None:
         assert api_client.get("/sites", params={"bbox": bbox}).status_code == 422
 
     def test_sorting_is_validated(self, api_client: TestClient) -> None:
@@ -173,17 +134,13 @@ class TestSiteDetail:
         assert payload["parcels"]
         assert payload["boundary"]["type"] in {"Polygon", "MultiPolygon"}
 
-    def test_includes_licence_attributions(
-        self, api_client: TestClient, site_id: str
-    ) -> None:
+    def test_includes_licence_attributions(self, api_client: TestClient, site_id: str) -> None:
         """ODbL makes attribution a condition of use, so it travels with the data."""
         payload = api_client.get(f"/sites/{site_id}").json()
         assert payload["attributions"]
         assert any("Maricopa" in a for a in payload["attributions"])
 
-    def test_includes_an_explained_prediction(
-        self, api_client: TestClient, site_id: str
-    ) -> None:
+    def test_includes_an_explained_prediction(self, api_client: TestClient, site_id: str) -> None:
         prediction = api_client.get(f"/sites/{site_id}").json()["latest_prediction"]
         assert prediction is not None
         assert prediction["explanations"]
@@ -207,9 +164,7 @@ class TestSiteDetail:
 
 
 class TestTimeline:
-    def test_returns_chronological_entries(
-        self, api_client: TestClient, site_id: str
-    ) -> None:
+    def test_returns_chronological_entries(self, api_client: TestClient, site_id: str) -> None:
         entries = api_client.get(f"/sites/{site_id}/timeline").json()["entries"]
         assert len(entries) >= 5
         dates = [e["occurred_on"] for e in entries]
@@ -243,9 +198,7 @@ class TestTimeline:
 
 
 class TestEvidenceEndpoint:
-    def test_lists_evidence_with_paging(
-        self, api_client: TestClient, site_id: str
-    ) -> None:
+    def test_lists_evidence_with_paging(self, api_client: TestClient, site_id: str) -> None:
         payload = api_client.get(f"/sites/{site_id}/evidence", params={"limit": 2}).json()
         assert payload["meta"]["total"] >= 1
         assert len(payload["items"]) <= 2
@@ -257,8 +210,7 @@ class TestEvidenceEndpoint:
         ).json()
         assert payload["items"]
         assert all(
-            i["evidence_kind"] == "assessor_data_center_classification"
-            for i in payload["items"]
+            i["evidence_kind"] == "assessor_data_center_classification" for i in payload["items"]
         )
 
 
@@ -271,15 +223,11 @@ class TestMapLayers:
             assert feature["type"] == "Feature"
             assert feature["geometry"]["type"] in {"Polygon", "MultiPolygon"}
 
-    def test_infrastructure_layer_carries_odbl_attribution(
-        self, api_client: TestClient
-    ) -> None:
+    def test_infrastructure_layer_carries_odbl_attribution(self, api_client: TestClient) -> None:
         payload = api_client.get("/map/infrastructure").json()
         assert any("OpenStreetMap" in a for a in payload["attributions"])
 
-    def test_parcel_layer_never_exposes_redacted_owners(
-        self, api_client: TestClient
-    ) -> None:
+    def test_parcel_layer_never_exposes_redacted_owners(self, api_client: TestClient) -> None:
         payload = api_client.get("/map/parcels").json()
         for feature in payload["features"]:
             properties = feature["properties"]
@@ -288,9 +236,7 @@ class TestMapLayers:
 
 
 class TestSourceRegistry:
-    def test_publishes_inaccessible_sources_with_reasons(
-        self, api_client: TestClient
-    ) -> None:
+    def test_publishes_inaccessible_sources_with_reasons(self, api_client: TestClient) -> None:
         """Publishing the gaps is what distinguishes 'no activity' from 'no access'."""
         payload = api_client.get("/sources").json()
         blocked = [s for s in payload["items"] if s["connector_status"] == "fixture_only"]
@@ -332,9 +278,7 @@ class TestExports:
         assert payload["metadata"]["attributions"]
         assert "not fact" in payload["metadata"]["disclaimer"]
 
-    def test_evidence_bundle_is_verifiable(
-        self, api_client: TestClient, site_id: str
-    ) -> None:
+    def test_evidence_bundle_is_verifiable(self, api_client: TestClient, site_id: str) -> None:
         """The bundle must let a sceptic check Helios without trusting Helios."""
         response = api_client.get(f"/exports/site/{site_id}/bundle.zip")
         assert response.status_code == 200

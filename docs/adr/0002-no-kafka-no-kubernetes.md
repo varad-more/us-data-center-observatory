@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted (first sprint). Referenced by `docker-compose.yml`.
+Accepted.
 
 ## Context
 
@@ -16,7 +16,7 @@ Kafka and Kubernetes solve problems we have not measured yet (fan-out between ma
 
 ## Decision
 
-1. **Compose only** for local orchestration: Postgres/PostGIS, MinIO, API, web, optional worker CLI.
+1. **A single PostGIS container** for local orchestration (`make db-up`); the API, web app, and worker CLI run directly on the developer's machine. Evidence uses the filesystem backend locally, so no object store runs alongside it.
 2. **Synchronous ingestion** via the `helios` CLI and admin API. No message broker.
 3. **No Helm charts, operators, or cluster manifests** in this repository until a second region or continuous multi-source cadence forces the issue.
 4. Connector runs remain process-local and idempotent so a later scheduler (cron, Cloud Run Jobs, etc.) can wrap the same entry points without rewriting pipelines.

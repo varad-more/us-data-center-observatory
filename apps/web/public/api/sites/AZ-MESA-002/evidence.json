@@ -1,0 +1,891 @@
+{
+  "generated_at": "2026-07-27T05:28:20.492238+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-MESA-002",
+    "jurisdiction": "Mesa",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 40.23,
+    "total_acres": 3.6364,
+    "first_signal_date": "2025-07-24",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 3.6 acres near 3856 S EVERTON TER, Mesa. Title of record is held by MECP1 MESA 2 LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.6199590112642,
+              33.34451864436667
+            ],
+            [
+              -111.61907352392235,
+              33.344513437097454
+            ],
+            [
+              -111.6189578882874,
+              33.34451275570233
+            ],
+            [
+              -111.61895944416946,
+              33.34431672531356
+            ],
+            [
+              -111.61894388984032,
+              33.34431663150893
+            ],
+            [
+              -111.61895084819051,
+              33.34344021218633
+            ],
+            [
+              -111.61905562229538,
+              33.343440844810914
+            ],
+            [
+              -111.6190561235553,
+              33.3433776236014
+            ],
+            [
+              -111.61922147016143,
+              33.343378623944474
+            ],
+            [
+              -111.61922092039248,
+              33.343441844402854
+            ],
+            [
+              -111.62031742468953,
+              33.34344847082639
+            ],
+            [
+              -111.62031046903428,
+              33.34432642395857
+            ],
+            [
+              -111.62000474000375,
+              33.34432462891389
+            ],
+            [
+              -111.6200049897354,
+              33.344513783048036
+            ],
+            [
+              -111.61996053211199,
+              33.34451382507238
+            ],
+            [
+              -111.61996049528106,
+              33.344518653371935
+            ],
+            [
+              -111.6199590112642,
+              33.34451864436667
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by MECP1 MESA 2 LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); alphanumeric project-code naming pattern). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = MECP1 MESA 2 LLC",
+      "snippet_locator": "$.features[13].attributes.OwnerName",
+      "observed_at": "2025-07-24",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "MECP1 MESA 2 LLC",
+            "locator": "$.features[13].attributes.OwnerName",
+            "raw_text": "MECP1 MESA 2 LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "087a4667-16c1-46fe-8841-52882a1ec6c8",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-05458 at 3856 S EVERTON TERR, opened 2026-03-20, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-05458; COM; 3856 S EVERTON TERR; In Review - Plans are being reviewed or awaiting revisions",
+      "snippet_locator": "$[44]",
+      "observed_at": "2026-04-22",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-05458",
+            "locator": "$[44].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "3856 S EVERTON TERR",
+            "locator": "$[44].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[44].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "a0ef107f-541a-4ca7-ba8f-2c56c5b734e8",
+        "address_match": {
+          "apn": "30431955",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "3856 S EVERTON TER"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-00788 at 3856 S EVERTON TERR, opened 2026-01-12, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-00788; COM; 3856 S EVERTON TERR; Issued - Permit approved and issued and in inspection phase",
+      "snippet_locator": "$[74]",
+      "observed_at": "2026-05-12",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-00788",
+            "locator": "$[74].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "3856 S EVERTON TERR",
+            "locator": "$[74].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[74].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "8c986fea-f06c-4047-923b-15b74786ce33",
+        "address_match": {
+          "apn": "30431955",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "3856 S EVERTON TER"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "481d7137-fa87-450f-84df-677629c901ab",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-11828; COM; 3856 S EVERTON TERR; In Review - Plans are being reviewed or awaiting revisions",
+      "snippet_locator": "$[10]",
+      "observed_at": "2026-07-14",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-11828",
+            "locator": "$[10].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "3856 S EVERTON TERR",
+            "locator": "$[10].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[10].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "8af5272e-5dde-4579-933c-c899b119f0a6",
+        "address_match": {
+          "apn": "30431955",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "3856 S EVERTON TER"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-06976; COM; 3856 S EVERTON TERR; Issued - Permit approved and issued and in inspection phase",
+      "snippet_locator": "$[36]",
+      "observed_at": "2026-07-14",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-06976",
+            "locator": "$[36].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "3856 S EVERTON TERR",
+            "locator": "$[36].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[36].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "742b97df-c1b1-4b31-8f0a-b0012fa57a85",
+        "address_match": {
+          "apn": "30431955",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "3856 S EVERTON TER"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "09366c34-73d6-4fa0-a8d9-12a3d4a8c34f",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "Howard Substation tagged 69 kV lies 82 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = Howard Substation; operator = Salt River Project; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/1390793982",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.9253,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "distance_meters": 82.35,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[13].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[13].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "30fd5a48-d765-44ec-a61a-790568a7e410",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2025-07-24",
+      "detected_at": "2026-07-27T05:27:28.891021Z",
+      "is_downgrade": false,
+      "confidence": 54.02,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 54% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
+      "triggering_evidence_ids": [
+        "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4",
+        "481d7137-fa87-450f-84df-677629c901ab",
+        "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473",
+        "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6",
+        "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c"
+      ],
+      "detection_lag_days": 368
+    }
+  ],
+  "predictions": [
+    {
+      "id": "588ec9fc-9cd4-4839-9c33-f5c999cbc7c8",
+      "calculated_at": "2026-07-27T05:27:28.889618Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 30.8774,
+      "confidence": 40.23,
+      "confidence_band": "moderate",
+      "positive_contribution": 30.8774,
+      "negative_contribution": 0.0,
+      "evidence_considered": 7,
+      "distinct_evidence_kinds": 4,
+      "is_backtest": false,
+      "summary": "40% confidence from 7 evidence records across 4 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Howard Substation tagged 69 kV lies 82 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 7.4024,
+          "confidence_multiplier": 0.9253,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "09366c34-73d6-4fa0-a8d9-12a3d4a8c34f"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by MECP1 MESA 2 LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); alphanumeric project-code naming pattern). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 1.9038,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.7051,
+          "polarity": "supporting",
+          "evidence_record_id": "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+          "base_weight": 2.0,
+          "applied_weight": 1.4815,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9877,
+          "polarity": "supporting",
+          "evidence_record_id": "481d7137-fa87-450f-84df-677629c901ab"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+          "base_weight": 2.0,
+          "applied_weight": 0.7408,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9877,
+          "polarity": "supporting",
+          "evidence_record_id": "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-00788 at 3856 S EVERTON TERR, opened 2026-01-12, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 3, weight reduced)",
+          "base_weight": 2.0,
+          "applied_weight": 0.3489,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9304,
+          "polarity": "supporting",
+          "evidence_record_id": "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6"
+        }
+      ]
+    },
+    {
+      "id": "c1c96855-7c62-4e5a-9062-331f0758698b",
+      "calculated_at": "2026-07-27T05:27:28.889635Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 46.6161,
+      "confidence": 54.02,
+      "confidence_band": "moderate",
+      "positive_contribution": 46.6161,
+      "negative_contribution": 0.0,
+      "evidence_considered": 7,
+      "distinct_evidence_kinds": 3,
+      "is_backtest": false,
+      "summary": "54% confidence from 7 evidence records across 3 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+          "base_weight": 20.0,
+          "applied_weight": 14.8155,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9877,
+          "polarity": "supporting",
+          "evidence_record_id": "481d7137-fa87-450f-84df-677629c901ab"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+          "base_weight": 20.0,
+          "applied_weight": 7.4078,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9877,
+          "polarity": "supporting",
+          "evidence_record_id": "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-00788 at 3856 S EVERTON TERR, opened 2026-01-12, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 3, weight reduced)",
+          "base_weight": 20.0,
+          "applied_weight": 3.489,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9304,
+          "polarity": "supporting",
+          "evidence_record_id": "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by MECP1 MESA 2 LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); alphanumeric project-code naming pattern). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 1.9038,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.7051,
+          "polarity": "supporting",
+          "evidence_record_id": "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Howard Substation tagged 69 kV lies 82 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.9253,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "09366c34-73d6-4fa0-a8d9-12a3d4a8c34f"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

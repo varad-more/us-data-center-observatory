@@ -151,19 +151,18 @@ export function getProvenanceCompleteness() {
   return request("/analytics/provenance", provenanceSchema);
 }
 
-export function evidenceBundleUrl(siteId: string): string {
-  return `#`;
-}
-
+// Download targets. A static export cannot build a zip on demand, so the
+// evidence bundle is published as the same provenance payload the API would
+// have placed inside it. Keyed on project_code, matching the exported layout.
 export function evidenceJsonUrl(siteId: string): string {
-  return `${API_BASE}/sites/${siteId}.json`;
+  return `${API_BASE}/sites/${siteId}/evidence.json`;
 }
 
 export function sitesCsvUrl(): string {
-  return `#`;
+  return `${API_BASE}/sites.csv`;
 }
 
 export function sitesGeoJsonUrl(): string {
-  return `#`;
+  return `${API_BASE}/sites.geojson`;
 }
 

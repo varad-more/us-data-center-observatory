@@ -254,6 +254,7 @@ def build_sites(
         clusters=len(clusters),
     )
 
+    built: list[Site] = []
     for cluster in clusters:
         site, created = _upsert_site_for_cluster(session, cluster, region_slug)
         result.site_ids.append(site.id)
@@ -273,6 +274,15 @@ def build_sites(
         result.evidence_attached += _attach_parcel_evidence(session, site, cluster)
         result.evidence_attached += _attach_nearby_permit_evidence(session, site)
         result.dependencies_created += link_infrastructure(session, site)
+        built.append(site)
+
+    # Rollups run only once every site has claimed its evidence. Counting inside
+    # the loop would leave a stale total on any site whose evidence a later,
+    # nearer site went on to claim. The flush matters because the session does
+    # not autoflush: a query would otherwise not see the assignments above.
+    session.flush()
+    for site in built:
+        _refresh_evidence_rollups(session, site)
 
     session.flush()
     return result
@@ -393,10 +403,12 @@ def _refresh_site_geometry(session: Session, site: Site) -> None:
 
 
 def _attach_parcel_evidence(session: Session, site: Site, cluster: list[Parcel]) -> int:
-    """Attach parcel-derived evidence to the site and refresh its timeline bounds.
+    """Attach parcel-derived evidence to the site.
 
     Evidence is created by connectors against parcels; this step associates it
-    with the analytical site so the timeline and score can see it.
+    with the analytical site so the timeline and score can see it. Rollups are
+    refreshed once by :func:`_refresh_evidence_rollups` after every attachment
+    pass has run.
     """
     parcel_ids = [p.id for p in cluster]
     records = session.scalars(
@@ -409,16 +421,27 @@ def _attach_parcel_evidence(session: Session, site: Site, cluster: list[Parcel])
             record.site_id = site.id
             attached += 1
 
+    return attached
+
+
+def _refresh_evidence_rollups(session: Session, site: Site) -> None:
+    """Recompute a site's denormalised evidence counters from its evidence.
+
+    The session runs with ``autoflush=False``, so this must be called after an
+    explicit flush: a query issued while ``site_id`` assignments are still
+    pending returns nothing, which previously left every site advertising zero
+    evidence while carrying a full evidence trail.
+    """
     site_evidence = session.scalars(
         select(EvidenceRecord)
         .where(EvidenceRecord.site_id == site.id)
         .order_by(EvidenceRecord.observed_at)
     ).all()
-    if site_evidence:
-        site.first_signal_date = site_evidence[0].observed_at
-        site.latest_signal_date = site_evidence[-1].observed_at
-        site.evidence_count = len(site_evidence)
-    return attached
+    if not site_evidence:
+        return
+    site.first_signal_date = site_evidence[0].observed_at
+    site.latest_signal_date = site_evidence[-1].observed_at
+    site.evidence_count = len(site_evidence)
 
 
 MAX_DEPENDENCIES_PER_KIND = 8
@@ -468,15 +491,6 @@ def _attach_nearby_permit_evidence(
                 record.site_id = site.id
                 attached += 1
 
-    site_evidence = session.scalars(
-        select(EvidenceRecord)
-        .where(EvidenceRecord.site_id == site.id)
-        .order_by(EvidenceRecord.observed_at)
-    ).all()
-    if site_evidence:
-        site.first_signal_date = site_evidence[0].observed_at
-        site.latest_signal_date = site_evidence[-1].observed_at
-        site.evidence_count = len(site_evidence)
     return attached
 
 

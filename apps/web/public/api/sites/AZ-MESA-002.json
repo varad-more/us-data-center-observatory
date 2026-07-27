@@ -1,0 +1,516 @@
+{
+  "id": "2a597d28-e204-4bd3-bde2-1ac27bc616ab",
+  "project_code": "AZ-MESA-002",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Mesa",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 40.23,
+  "stage_confidence": 54.02,
+  "confidence_band": "moderate",
+  "first_signal_date": "2025-07-24",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 7,
+  "total_acres": 3.6364,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.891021Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.889618Z",
+  "centroid": [
+    -111.619606,
+    33.343957
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 3.6 acres near 3856 S EVERTON TER, Mesa. Title of record is held by MECP1 MESA 2 LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.6199590112642,
+            33.34451864436667
+          ],
+          [
+            -111.61907352392235,
+            33.344513437097454
+          ],
+          [
+            -111.6189578882874,
+            33.34451275570233
+          ],
+          [
+            -111.61895944416946,
+            33.34431672531356
+          ],
+          [
+            -111.61894388984032,
+            33.34431663150893
+          ],
+          [
+            -111.61895084819051,
+            33.34344021218633
+          ],
+          [
+            -111.61905562229538,
+            33.343440844810914
+          ],
+          [
+            -111.6190561235553,
+            33.3433776236014
+          ],
+          [
+            -111.61922147016143,
+            33.343378623944474
+          ],
+          [
+            -111.61922092039248,
+            33.343441844402854
+          ],
+          [
+            -111.62031742468953,
+            33.34344847082639
+          ],
+          [
+            -111.62031046903428,
+            33.34432642395857
+          ],
+          [
+            -111.62000474000375,
+            33.34432462891389
+          ],
+          [
+            -111.6200049897354,
+            33.344513783048036
+          ],
+          [
+            -111.61996053211199,
+            33.34451382507238
+          ],
+          [
+            -111.61996049528106,
+            33.344518653371935
+          ],
+          [
+            -111.6199590112642,
+            33.34451864436667
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "5e509802-dc37-40af-a8dc-c4c02b5ce683",
+      "apn": "30431955",
+      "apn_formatted": "304-31-955",
+      "situs_address": "3856 S EVERTON TER",
+      "situs_city": "Mesa",
+      "owner_name": "MECP1 MESA 2 LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 3.6364,
+      "last_deed_date": "2025-07-24",
+      "last_deed_number": "20250425798",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20250425798&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30431955",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "dd507bd2-4dad-4225-aa6c-77d9ccc3c70e",
+      "canonical_name": "MECP1 MESA 2 LLC",
+      "role": "owner",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)",
+        "alphanumeric project-code naming pattern"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "cb131ba6-a4df-4f7c-9067-b8224546599a",
+      "infrastructure_kind": "substation",
+      "label": "Howard Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 82.35,
+      "confidence": 0.9253,
+      "assertion_class": "inferred",
+      "notes": "Howard Substation lies 82 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "d875ea71-a02f-440b-a03a-b6ef17a8f9ee",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1067.81,
+      "confidence": 0.6297,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1068 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "8e299ad8-ad40-4bdd-bcb1-8dde4bfecba9",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1237.15,
+      "confidence": 0.5789,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1237 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "d250f59b-2cff-4cc5-814d-95e5f540e3f1",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1240.31,
+      "confidence": 0.196,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "306909f4-bff4-44ca-8e01-5953e9663a16",
+      "infrastructure_kind": "substation",
+      "label": "Prickly Pear Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1240.54,
+      "confidence": 0.5778,
+      "assertion_class": "inferred",
+      "notes": "Prickly Pear Substation lies 1241 m from the site boundary and is tagged 230 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 230.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "b284a061-88ba-4125-8bae-44ab7f79c45d",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1240.63,
+      "confidence": 0.1958,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "ccdaa73b-a270-4cb4-95cd-cc536a00a628",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1243.27,
+      "confidence": 0.1953,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "a47b679a-5770-44cf-9215-7991fd516901",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1290.14,
+      "confidence": 0.1847,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "afe0c38d-65c8-4c46-8fd3-7588367d8935",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1290.38,
+      "confidence": 0.1847,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "fc710920-2eb1-47bc-a796-d698d363c0ad",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1335.3,
+      "confidence": 0.1746,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "4c7eacec-2d4b-4379-b0c5-c6b77807e8b2",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1335.3,
+      "confidence": 0.1746,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "b2773106-1f12-415e-a269-ca5e8d7f786e",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1337.07,
+      "confidence": 0.1741,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "c7bc0ee5-7125-4d6b-82db-bb22adc96c01",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1552.23,
+      "confidence": 0.4843,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1552 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "1b7e4d99-d40f-45e0-a0ce-ab5c0c8d578a",
+      "infrastructure_kind": "substation",
+      "label": "Luna Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1596.84,
+      "confidence": 0.4709,
+      "assertion_class": "inferred",
+      "notes": "Luna Substation lies 1597 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "d6ce5704-e91e-4670-a39a-9aa10edc7bd4",
+      "infrastructure_kind": "substation",
+      "label": "Perales Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2012.52,
+      "confidence": 0.3462,
+      "assertion_class": "inferred",
+      "notes": "Perales Substation lies 2013 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "947fd6a7-09eb-4545-a245-40b49c11c8e1",
+      "infrastructure_kind": "substation",
+      "label": "Greenbone Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2328.05,
+      "confidence": 0.2516,
+      "assertion_class": "inferred",
+      "notes": "Greenbone Substation lies 2328 m from the site boundary and is tagged 500 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 500.0,
+      "operator_name": "Salt River Project"
+    }
+  ],
+  "estimates": [
+    {
+      "id": "fae7d0f2-a734-4a8d-a002-27881247e86c",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 8.7,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.891713Z",
+      "notes": null
+    },
+    {
+      "id": "6e4ac18d-e151-47f4-b703-1568d2777abf",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 104400.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.891731Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "c1c96855-7c62-4e5a-9062-331f0758698b",
+    "calculated_at": "2026-07-27T05:27:28.889635Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 46.6161,
+    "confidence": 54.02,
+    "confidence_band": "moderate",
+    "positive_contribution": 46.6161,
+    "negative_contribution": 0.0,
+    "evidence_considered": 7,
+    "distinct_evidence_kinds": 3,
+    "is_backtest": false,
+    "summary": "54% confidence from 7 evidence records across 3 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
+        "base_weight": 20.0,
+        "applied_weight": 14.8155,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9877,
+        "polarity": "supporting",
+        "evidence_record_id": "481d7137-fa87-450f-84df-677629c901ab"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 7.4078,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9877,
+        "polarity": "supporting",
+        "evidence_record_id": "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473"
+      },
+      {
+        "rule_id": "grading-or-construction-permit",
+        "evidence_kind": "grading_or_construction_permit",
+        "label": "Grading or construction permit",
+        "detail": "City of Mesa commercial building permit PMT26-00788 at 3856 S EVERTON TERR, opened 2026-01-12, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 3, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 3.489,
+        "confidence_multiplier": 0.75,
+        "recency_multiplier": 0.9304,
+        "polarity": "supporting",
+        "evidence_record_id": "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by MECP1 MESA 2 LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); alphanumeric project-code naming pattern). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 1.9038,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.7051,
+        "polarity": "supporting",
+        "evidence_record_id": "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Howard Substation tagged 69 kV lies 82 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.9253,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "09366c34-73d6-4fa0-a8d9-12a3d4a8c34f"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "30fd5a48-d765-44ec-a61a-790568a7e410",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2025-07-24",
+      "detected_at": "2026-07-27T05:27:28.891021Z",
+      "is_downgrade": false,
+      "confidence": 54.02,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 54% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
+      "triggering_evidence_ids": [
+        "c48ad2a6-9a4e-4e3f-ba38-6e400cfcc7c4",
+        "481d7137-fa87-450f-84df-677629c901ab",
+        "3ca62ba5-046b-4dfb-a6bc-a1b5d6c54473",
+        "d7804c26-6c63-4ecb-b381-c0a1e9bd6ca6",
+        "ab39a54c-50fc-43ab-b7ed-dd06f2a2120c"
+      ],
+      "detection_lag_days": 368
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

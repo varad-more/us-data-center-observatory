@@ -5,7 +5,7 @@ Automating it would require defeating session/viewstate controls, which Helios
 refuses to do. Instead this connector:
 
 * ships a parser/normalizer that understands a documented docket JSON schema;
-* discovers recorded fixtures under ``tests/fixtures/azcc_edocket``;
+* discovers recorded fixtures under ``fixtures/azcc_edocket``;
 * emits ``substation_application`` / ``transmission_filing`` evidence so the
   scoring model and UI can exercise the highest-weight early-warning path;
 * keeps registry status at ``fixture_only`` with an explicit access limitation.
@@ -63,7 +63,7 @@ _CATEGORY_TO_KIND: dict[str, StageEvidenceKind] = {
 
 def default_fixture_dir() -> Path:
     """Return the repository fixture directory for ACC eDocket payloads."""
-    return Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "azcc_edocket"
+    return Path(__file__).resolve().parents[2] / "fixtures" / "azcc_edocket"
 
 
 class AzccEdocketConnector(FixtureBackedConnector):
@@ -136,7 +136,7 @@ class AzccEdocketConnector(FixtureBackedConnector):
         items: list[SourceItem] = []
         if not self._fixture_root.exists():
             warning = f"Missing fixture root {self._fixture_root}"
-            return DiscoveryResult(items=[], warnings=[warning])
+            return DiscoveryResult(items=[], errors=[warning])
 
         for path in sorted(self._fixture_root.glob("*.json")):
             try:

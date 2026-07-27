@@ -1,0 +1,566 @@
+{
+  "id": "c2015b28-4430-4f62-9dea-35db35df91ef",
+  "project_code": "AZ-CHANDLER-006",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 61.29,
+  "stage_confidence": 56.48,
+  "confidence_band": "high",
+  "first_signal_date": "2021-03-22",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 7,
+  "total_acres": 4.9443,
+  "parcel_count": 2,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.914824Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.913725Z",
+  "centroid": [
+    -111.885715,
+    33.276908
+  ],
+  "is_synthetic": false,
+  "summary": "2 parcel(s) totalling 4.9 acres near 2600 W GERMANN RD, Chandler. Title of record is held by H5 DATA CENTERS CHANDLER LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.88498425787434,
+            33.27627384605597
+          ],
+          [
+            -111.88503230786056,
+            33.276232522524445
+          ],
+          [
+            -111.8851211072247,
+            33.276271496105934
+          ],
+          [
+            -111.88643869050645,
+            33.276248578644775
+          ],
+          [
+            -111.88643853419958,
+            33.27673552402059
+          ],
+          [
+            -111.88659098279489,
+            33.2767355593185
+          ],
+          [
+            -111.8865909738117,
+            33.27676343036987
+          ],
+          [
+            -111.88658705751031,
+            33.27683771183759
+          ],
+          [
+            -111.8865767684404,
+            33.27691138143039
+          ],
+          [
+            -111.88656018281887,
+            33.27698389343644
+          ],
+          [
+            -111.88653742350469,
+            33.277054710718794
+          ],
+          [
+            -111.88650865908879,
+            33.277123308694286
+          ],
+          [
+            -111.8864741026453,
+            33.27718917921938
+          ],
+          [
+            -111.88643401015308,
+            33.27725183435429
+          ],
+          [
+            -111.88638867859963,
+            33.27731080997743
+          ],
+          [
+            -111.8861723517028,
+            33.277575429279786
+          ],
+          [
+            -111.88549312832997,
+            33.27757409773639
+          ],
+          [
+            -111.88495607952049,
+            33.277573040312184
+          ],
+          [
+            -111.88495428019499,
+            33.27705743558659
+          ],
+          [
+            -111.88498699953259,
+            33.27705735522787
+          ],
+          [
+            -111.8849852379363,
+            33.27655369769222
+          ],
+          [
+            -111.88498425787434,
+            33.27627384605597
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "93de6650-c9bb-465b-870d-e848850be5cb",
+      "apn": "30325776B",
+      "apn_formatted": "303-25-776B",
+      "situs_address": "2600 W GERMANN RD",
+      "situs_city": "Chandler",
+      "owner_name": "H5 DATA CENTERS CHANDLER LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 3.5871,
+      "last_deed_date": "2025-03-10",
+      "last_deed_number": "20250127985",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20250127985&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30325776B",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    },
+    {
+      "id": "62dbd461-d098-4f3d-a947-0ef23ded458e",
+      "apn": "30325776C",
+      "apn_formatted": "303-25-776C",
+      "situs_address": "2600 W GERMANN RD",
+      "situs_city": "Chandler",
+      "owner_name": "H5 DATA CENTERS CHANDLER LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 1.3572,
+      "last_deed_date": "2025-03-10",
+      "last_deed_number": "20250127985",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20250127985&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30325776C",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "edbd8e8e-1244-4c7f-8c9b-c2c8f7d568ee",
+      "canonical_name": "H5 DATA CENTERS CHANDLER LLC",
+      "role": "owner",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "e41e0f44-2b46-4f3f-98b6-a2f0c8a26fed",
+      "infrastructure_kind": "substation",
+      "label": "RS-27",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 233.67,
+      "confidence": 0.8799,
+      "assertion_class": "inferred",
+      "notes": "RS-27 lies 234 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "53bba3be-accf-4a74-afcc-d9cded225594",
+      "infrastructure_kind": "substation",
+      "label": "Jones Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 361.71,
+      "confidence": 0.8415,
+      "assertion_class": "inferred",
+      "notes": "Jones Substation lies 362 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "3fdf1490-7f92-4f4a-90cf-1e6e595acb51",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 523.73,
+      "confidence": 0.3572,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "8cddc2f2-6e54-460a-b5f3-eb65140a6c83",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 529.42,
+      "confidence": 0.3559,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "74ac9b87-d825-4e2f-94b0-8f12e58c4a74",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 537.11,
+      "confidence": 0.3542,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "2e0a129e-7895-4a10-83c6-bbba486a5e1d",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 537.37,
+      "confidence": 0.3541,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "29d27d1a-fc97-48bc-85fa-a6f05dd665a7",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 539.35,
+      "confidence": 0.3537,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "848edf2e-473e-46b0-8f4d-fd97f8ab26c0",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 550.72,
+      "confidence": 0.3511,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "5d60292b-bf2f-400b-a4ed-69c1a239aacd",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 559.84,
+      "confidence": 0.3491,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "daef4594-4022-4e01-a13a-b769efd9b2ca",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 564.91,
+      "confidence": 0.3479,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "2dffe3ee-4232-47e7-aaad-fc79e029e11b",
+      "infrastructure_kind": "substation",
+      "label": "Henshaw Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 590.45,
+      "confidence": 0.7729,
+      "assertion_class": "inferred",
+      "notes": "Henshaw Substation lies 590 m from the site boundary and is tagged 230 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 230.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "b4afef93-59b3-462a-94f2-b09583b8b271",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 924.41,
+      "confidence": 0.6727,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 924 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "7667ce84-e60e-4b19-9564-b1ee7ee344d7",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2486.32,
+      "confidence": 0.2041,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2486 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "5192c181-3df2-4c11-abc0-a10ef26eb79d",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2534.76,
+      "confidence": 0.1896,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2535 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "b7b1754e-c38c-4f24-9e41-89300f9b1461",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2697.76,
+      "confidence": 0.1407,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2698 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "43ca024e-be37-437d-8380-c01ac28ec970",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2780.84,
+      "confidence": 0.1157,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2781 m from the site boundary. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": null,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "d301da40-45b8-4b96-9bbf-8612b6efe02e",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 11.9,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.915216Z",
+      "notes": null
+    },
+    {
+      "id": "77a34325-f132-4640-aa22-116c9e22bdda",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 142800.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.915233Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "f6617546-862d-4fe1-a3a1-6557d774316b",
+    "calculated_at": "2026-07-27T05:27:28.913738Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 49.9101,
+    "confidence": 56.48,
+    "confidence_band": "moderate",
+    "positive_contribution": 49.9101,
+    "negative_contribution": 0.0,
+    "evidence_considered": 7,
+    "distinct_evidence_kinds": 4,
+    "is_backtest": false,
+    "summary": "56% confidence from 7 evidence records across 4 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "b6cb43fb-bf6f-4e27-bc4e-3af344e51b73"
+      },
+      {
+        "rule_id": "backup-generator-air-permit",
+        "evidence_kind": "backup_generator_air_permit",
+        "label": "Backup-generator air permit",
+        "detail": "EPA ECHO lists EAST VALLEY COLO EMERGENCY POWER as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Minor NSR; Emergency Generator.",
+        "base_weight": 17.0,
+        "applied_weight": 13.5878,
+        "confidence_multiplier": 0.8,
+        "recency_multiplier": 0.9991,
+        "polarity": "supporting",
+        "evidence_record_id": "5236b7bc-c8b1-40a5-8ce1-3363e45d4cfb"
+      },
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507). (occurrence 2, weight reduced)",
+        "base_weight": 20.0,
+        "applied_weight": 9.5,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "d0c7f761-75f0-4ac1-8e98-b5abb6e8f6e6"
+      },
+      {
+        "rule_id": "transmission-filing",
+        "evidence_kind": "transmission_filing",
+        "label": "Transmission filing",
+        "detail": "ACC docket E-01933A-21-0099: 230 kV transmission line siting application. Filed by Salt River Project Agricultural Improvement and Power District on 2021-03-22. Helios ingested a recorded fixture, not a live scrape.",
+        "base_weight": 25.0,
+        "applied_weight": 5.3125,
+        "confidence_multiplier": 0.85,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "347b8356-dbd0-4b6d-b99b-a71103d02caf"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 1.6732,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.6197,
+        "polarity": "supporting",
+        "evidence_record_id": "56f6a392-36c6-4ee0-866e-f9be20305ba2"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent. (occurrence 2, weight reduced)",
+        "base_weight": 6.0,
+        "applied_weight": 0.8366,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.6197,
+        "polarity": "supporting",
+        "evidence_record_id": "46e0bfff-ef77-4ea7-b240-a67a0ede50b0"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "RS-27 tagged 69 kV lies 234 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.8799,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "f7e42001-75f9-495b-bd7c-c1148e6bc959"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "a5cdaed6-cbad-4af5-9d83-de162b3177f4",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2021-03-22",
+      "detected_at": "2026-07-27T05:27:28.914824Z",
+      "is_downgrade": false,
+      "confidence": 56.48,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 56% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Assessor classifies property use as data centre.",
+      "triggering_evidence_ids": [
+        "b6cb43fb-bf6f-4e27-bc4e-3af344e51b73",
+        "5236b7bc-c8b1-40a5-8ce1-3363e45d4cfb",
+        "d0c7f761-75f0-4ac1-8e98-b5abb6e8f6e6",
+        "347b8356-dbd0-4b6d-b99b-a71103d02caf",
+        "56f6a392-36c6-4ee0-866e-f9be20305ba2",
+        "46e0bfff-ef77-4ea7-b240-a67a0ede50b0"
+      ],
+      "detection_lag_days": 1953
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

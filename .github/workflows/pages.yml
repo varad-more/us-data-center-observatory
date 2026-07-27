@@ -1,4 +1,9 @@
-name: Deploy Next.js site to Pages
+name: Deploy to GitHub Pages
+
+# The site is built purely from the static snapshot committed under
+# apps/web/public/api, so this workflow needs no Python, no database, and no
+# network access to any public source. Regenerating that snapshot is a separate,
+# deliberate act (`make export-api`), verified by the CI workflow.
 
 on:
   push:
@@ -22,16 +27,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
@@ -42,26 +40,25 @@ jobs:
         with:
           enablement: true
 
-      - name: Export Mock JSON API
-        run: python scripts/export_mock_json.py
-
-      - name: Install web dependencies
+      - name: Install
         working-directory: apps/web
         run: npm ci
 
-      - name: Build Next.js site
+      - name: Build static site
         working-directory: apps/web
         run: npm run build
 
-      - name: Disable Jekyll
-        run: touch apps/web/out/.nojekyll
+      - name: Verify the build pre-rendered site routes
+        working-directory: apps/web
+        run: |
+          test -f out/index.html
+          test -f out/sites.html
+          test -f out/sites/AZ-MESA-001.html
+          test -f out/.nojekyll
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
-

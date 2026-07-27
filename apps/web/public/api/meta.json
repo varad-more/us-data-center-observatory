@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-07-27T05:28:20.846018+00:00",
+  "site_count": 13,
+  "project_codes": [
+    "AZ-CHANDLER-001",
+    "AZ-CHANDLER-002",
+    "AZ-CHANDLER-003",
+    "AZ-CHANDLER-004",
+    "AZ-CHANDLER-005",
+    "AZ-CHANDLER-006",
+    "AZ-CHANDLER-007",
+    "AZ-GILBERT-001",
+    "AZ-MESA-001",
+    "AZ-MESA-002",
+    "AZ-MESA-003",
+    "AZ-MESA-004",
+    "AZ-TEMPE-001"
+  ],
+  "note": "Static snapshot exported from the Helios API. Every value was produced by the same pipeline that serves a live deployment; it is a point-in-time export, not a live view of public records."
+}

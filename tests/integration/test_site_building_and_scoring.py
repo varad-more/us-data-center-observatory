@@ -17,13 +17,7 @@ from helios_common.vocabulary import AssertionClass
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
-from helios_connectors.types import (
-    DateRange,
-    DiscoveryResult,
-    FetchResult,
-    RawDocument,
-    SourceItem,
-)
+from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import (
     EvidenceRecord,
     InfrastructureDependency,
@@ -37,7 +31,6 @@ from helios_domain.ontology import DevelopmentStage, SiteKind
 from helios_geospatial.correlation import find_adjacent_parcels, parcels_in_bbox
 from helios_geospatial.site_builder import build_sites, generate_project_code
 from helios_scoring.service import recalculate_site, score_history
-from tests.conftest import load_fixture_bytes
 
 pytestmark = pytest.mark.integration
 
@@ -46,35 +39,6 @@ EAST_VALLEY_CITIES = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Ap
 TODAY = datetime.now(tz=UTC).date()
 """Standing-condition evidence is observed at ingestion time, so scoring cutoffs in
 these tests are anchored to the present rather than to a hard-coded date."""
-
-
-def _replay(connector_cls, fixture_parts, native_id, **kwargs):
-    content = load_fixture_bytes(*fixture_parts)
-
-    class _Replay(connector_cls):  # type: ignore[valid-type, misc]
-        def discover(self, date_range: DateRange) -> DiscoveryResult:
-            return DiscoveryResult(
-                items=[
-                    SourceItem(
-                        source_native_id=native_id,
-                        url="https://example.invalid/recorded",
-                        document_type="fixture",
-                    )
-                ]
-            )
-
-        def fetch(self, item: SourceItem) -> FetchResult:
-            return FetchResult(
-                document=RawDocument(
-                    item=item,
-                    payload=content,
-                    mime_type="application/json",
-                    retrieved_at=datetime(2026, 7, 25, tzinfo=UTC),
-                    http_status=200,
-                )
-            )
-
-    return _Replay(**kwargs)
 
 
 @pytest.fixture
@@ -179,6 +143,27 @@ class TestSiteBuilding:
         assert site.latest_signal_date is not None
         assert site.evidence_count >= 1
 
+    def test_evidence_count_matches_attached_evidence_for_every_site(
+        self, populated: Session
+    ) -> None:
+        """The denormalised counter is what the UI and CSV publish.
+
+        It is refreshed only after every site has claimed its evidence, because a
+        site's evidence can be reassigned to a nearer site later in the same
+        build. A stale counter would advertise a different amount of evidence
+        than the site can actually show.
+        """
+        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        populated.flush()
+
+        for site in populated.scalars(select(Site)).all():
+            actual = populated.scalar(
+                select(func.count())
+                .select_from(EvidenceRecord)
+                .where(EvidenceRecord.site_id == site.id)
+            )
+            assert site.evidence_count == actual, site.project_code
+
 
 class TestInfrastructureLinking:
     def test_links_nearby_substations_as_inferred_dependencies(self, populated: Session) -> None:
@@ -253,22 +238,36 @@ class TestScoringPersistence:
         recalculate_site(populated, site, as_of=TODAY)
         return site
 
-    def test_persists_a_prediction_with_a_model_version(
+    def test_persists_both_prediction_targets_with_a_model_version(
         self, scored_site: Site, populated: Session
     ) -> None:
-        prediction = populated.scalars(
-            select(Prediction).where(Prediction.site_id == scored_site.id)
-        ).one()
-        assert prediction.model_version_id is not None
-        assert prediction.confidence > 0
-        assert prediction.confidence_band
+        """Scoring answers two separate questions and stores them separately.
+
+        "Is this a data centre?" and "how far along is it?" are distinct claims,
+        so collapsing them into a single confidence number would hide which one
+        the evidence actually supports.
+        """
+        predictions = {
+            p.prediction_type: p
+            for p in populated.scalars(
+                select(Prediction).where(Prediction.site_id == scored_site.id)
+            ).all()
+        }
+        assert set(predictions) == {"identity_confidence", "stage_confidence"}
+        for prediction in predictions.values():
+            assert prediction.model_version_id is not None
+            assert prediction.confidence > 0
+            assert prediction.confidence_band
 
     def test_persists_one_explanation_per_contribution(
         self, scored_site: Site, populated: Session
     ) -> None:
         """Every point of every score must be attributable to a rule and a record."""
         prediction = populated.scalars(
-            select(Prediction).where(Prediction.site_id == scored_site.id)
+            select(Prediction).where(
+                Prediction.site_id == scored_site.id,
+                Prediction.prediction_type == "stage_confidence",
+            )
         ).one()
         explanations = populated.scalars(
             select(PredictionExplanation).where(
@@ -304,8 +303,12 @@ class TestScoringPersistence:
         recalculate_site(populated, scored_site, as_of=TODAY - timedelta(days=2), is_backtest=True)
         recalculate_site(populated, scored_site, as_of=TODAY - timedelta(days=1), is_backtest=True)
         history = score_history(populated, scored_site.id)
-        assert len(history) == 3
-        assert [p.as_of_date for p in history] == [
+
+        # Each recalculation appends one identity and one stage prediction, and
+        # never rewrites an earlier one.
+        assert len(history) == 6
+        stage_history = [p for p in history if p.prediction_type == "stage_confidence"]
+        assert [p.as_of_date for p in stage_history] == [
             TODAY,
             TODAY - timedelta(days=2),
             TODAY - timedelta(days=1),
@@ -336,14 +339,16 @@ class TestHistoricalCutoffEnforcement:
         build_sites(populated, region_cities=EAST_VALLEY_CITIES)
         site = _largest_site(populated)
         outcome = recalculate_site(populated, site, as_of=date(2010, 1, 1), is_backtest=True)
-        assert outcome.score.confidence == 0.0
-        assert outcome.score.evidence_considered == 0
+        assert outcome.stage_score.confidence == 0.0
+        assert outcome.stage_score.evidence_considered == 0
+        assert outcome.identity_score.confidence == 0.0
+        assert outcome.identity_score.evidence_considered == 0
 
     def test_scoring_after_evidence_uses_it(self, populated: Session) -> None:
         build_sites(populated, region_cities=EAST_VALLEY_CITIES)
         site = _largest_site(populated)
         outcome = recalculate_site(populated, site, as_of=date(2014, 1, 1), is_backtest=True)
-        assert outcome.score.evidence_considered >= 1
+        assert outcome.stage_score.evidence_considered >= 1
 
     def test_backtest_predictions_do_not_mutate_live_site_state(self, populated: Session) -> None:
         """A historical replay must not overwrite the site's current conclusion."""
@@ -361,10 +366,11 @@ class TestHistoricalCutoffEnforcement:
         build_sites(populated, region_cities=EAST_VALLEY_CITIES)
         site = _largest_site(populated)
         recalculate_site(populated, site, as_of=date(2014, 1, 1), is_backtest=True)
-        prediction = populated.scalars(
+        predictions = populated.scalars(
             select(Prediction).where(Prediction.site_id == site.id)
-        ).one()
-        assert prediction.is_backtest is True
+        ).all()
+        assert predictions
+        assert all(p.is_backtest is True for p in predictions)
 
 
 def _largest_site(session: Session) -> Site:
