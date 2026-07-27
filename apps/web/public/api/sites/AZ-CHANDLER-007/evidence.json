@@ -1,0 +1,560 @@
+{
+  "generated_at": "2026-07-27T05:28:20.662045+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-CHANDLER-007",
+    "jurisdiction": "Chandler",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 35.91,
+    "total_acres": 1.72,
+    "first_signal_date": "2013-02-27",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 1.7 acres near 100 N 79TH ST, Chandler. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.91311590290509,
+              33.303707348179245
+            ],
+            [
+              -111.91355598576615,
+              33.30371074849174
+            ],
+            [
+              -111.91356187300944,
+              33.30373735372534
+            ],
+            [
+              -111.9135720449953,
+              33.30376263274414
+            ],
+            [
+              -111.91358622611546,
+              33.30378590061726
+            ],
+            [
+              -111.91360403213476,
+              33.303806526905454
+            ],
+            [
+              -111.91362498060202,
+              33.303823952742825
+            ],
+            [
+              -111.91364850392192,
+              33.30383770597913
+            ],
+            [
+              -111.91367396473396,
+              33.30384741397268
+            ],
+            [
+              -111.91370067318157,
+              33.30385281368698
+            ],
+            [
+              -111.91372790560372,
+              33.303853758817645
+            ],
+            [
+              -111.91375492414237,
+              33.30385022375651
+            ],
+            [
+              -111.91378099673463,
+              33.30384230428549
+            ],
+            [
+              -111.91380541694785,
+              33.303830214981346
+            ],
+            [
+              -111.91382752312033,
+              33.30381428340182
+            ],
+            [
+              -111.91385201868792,
+              33.30379951607893
+            ],
+            [
+              -111.91387851839931,
+              33.30378875169543
+            ],
+            [
+              -111.91390637312487,
+              33.303782253932695
+            ],
+            [
+              -111.91393490054287,
+              33.30378018195815
+            ],
+            [
+              -111.91410105383615,
+              33.30377973148656
+            ],
+            [
+              -111.9140967374312,
+              33.30444413626694
+            ],
+            [
+              -111.91317844810673,
+              33.30444798026186
+            ],
+            [
+              -111.91311322682384,
+              33.30438689450798
+            ],
+            [
+              -111.91311590290509,
+              33.303707348179245
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "daf30d95-b9d5-4922-9ed4-e123c905b860",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
+      "snippet_locator": "$.features[7].attributes.OwnerName",
+      "observed_at": "2013-02-27",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "COX COMMUNICATIONS ARIZONA LLC",
+            "locator": "$.features[7].attributes.OwnerName",
+            "raw_text": "COX COMMUNICATIONS ARIZONA LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "3b612523-c15d-4fb9-bf5e-e0c0ad46076c",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/318513856",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.8776,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "distance_meters": 241.43,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "926019cb-fa2e-4363-90a6-4f72d01ba498",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[7].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[7].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "eebc6c4f-4a1d-4b22-b2f6-2fb95902835e",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-27T05:27:28.901769Z",
+      "is_downgrade": false,
+      "confidence": 27.96,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "926019cb-fa2e-4363-90a6-4f72d01ba498",
+        "daf30d95-b9d5-4922-9ed4-e123c905b860"
+      ],
+      "detection_lag_days": 4898
+    }
+  ],
+  "predictions": [
+    {
+      "id": "19be3219-e111-4afa-a939-4a2346c57aae",
+      "calculated_at": "2026-07-27T05:27:28.900784Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 26.6958,
+      "confidence": 35.91,
+      "confidence_band": "low",
+      "positive_contribution": 26.6958,
+      "negative_contribution": 0.0,
+      "evidence_considered": 3,
+      "distinct_evidence_kinds": 3,
+      "is_backtest": false,
+      "summary": "36% confidence from 3 evidence records across 3 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "926019cb-fa2e-4363-90a6-4f72d01ba498"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 7.0208,
+          "confidence_multiplier": 0.8776,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "3b612523-c15d-4fb9-bf5e-e0c0ad46076c"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "daf30d95-b9d5-4922-9ed4-e123c905b860"
+        }
+      ]
+    },
+    {
+      "id": "6453adc2-0d22-4b77-a2ba-d025c5d0b7be",
+      "calculated_at": "2026-07-27T05:27:28.900799Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 19.675,
+      "confidence": 27.96,
+      "confidence_band": "low",
+      "positive_contribution": 19.675,
+      "negative_contribution": 0.0,
+      "evidence_considered": 3,
+      "distinct_evidence_kinds": 2,
+      "is_backtest": false,
+      "summary": "28% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "926019cb-fa2e-4363-90a6-4f72d01ba498"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "daf30d95-b9d5-4922-9ed4-e123c905b860"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.8776,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "3b612523-c15d-4fb9-bf5e-e0c0ad46076c"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

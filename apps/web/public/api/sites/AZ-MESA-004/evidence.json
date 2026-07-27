@@ -1,0 +1,708 @@
+{
+  "generated_at": "2026-07-27T05:28:20.605761+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-MESA-004",
+    "jurisdiction": "Mesa",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 36.48,
+    "total_acres": 1.2114,
+    "first_signal_date": "2013-02-27",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 1.2 acres near 4437 E HOLMES AVE, Mesa. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.73487162098638,
+              33.38816859639002
+            ],
+            [
+              -111.73487581611877,
+              33.38803122228174
+            ],
+            [
+              -111.73496574915681,
+              33.387883619373035
+            ],
+            [
+              -111.7349647888578,
+              33.38773246016768
+            ],
+            [
+              -111.73496388335599,
+              33.38758984392534
+            ],
+            [
+              -111.73563965809645,
+              33.3875868586718
+            ],
+            [
+              -111.735629875443,
+              33.38808997820246
+            ],
+            [
+              -111.73552749355174,
+              33.388090574499635
+            ],
+            [
+              -111.73552712164923,
+              33.38826957748326
+            ],
+            [
+              -111.73550864869372,
+              33.388284628892286
+            ],
+            [
+              -111.73486810767533,
+              33.3882836928203
+            ],
+            [
+              -111.73486912366991,
+              33.3882504135038
+            ],
+            [
+              -111.73487162098638,
+              33.38816859639002
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "33fa3aa4-7a0a-4218-84ee-692e449b2435",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
+      "snippet_locator": "$.features[4].attributes.OwnerName",
+      "observed_at": "2013-02-27",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "COX COMMUNICATIONS ARIZONA LLC",
+            "locator": "$.features[4].attributes.OwnerName",
+            "raw_text": "COX COMMUNICATIONS ARIZONA LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-04526; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
+      "snippet_locator": "$[52]",
+      "observed_at": "2026-05-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-04526",
+            "locator": "$[52].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "4437 E HOLMES AVE",
+            "locator": "$[52].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[52].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "f3c65435-b0f9-4903-8831-6374b800dc9d",
+        "address_match": {
+          "apn": "14055293",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "4437 E HOLMES AVE"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "81474154-13b6-448b-a553-d8964b1a7264",
+      "evidence_kind": "grading_or_construction_permit",
+      "summary": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+      "snippet": "PMT26-05468; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
+      "snippet_locator": "$[43]",
+      "observed_at": "2026-07-23",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.75,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "permit_number",
+            "value": "PMT26-05468",
+            "locator": "$[43].permit_number",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "property_address",
+            "value": "4437 E HOLMES AVE",
+            "locator": "$[43].property_address",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "permit_type",
+            "value": "COM",
+            "locator": "$[43].permit_type",
+            "raw_text": null,
+            "raw_unit": null,
+            "confidence": 1.0,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "permit_id": "effde723-0044-40d0-b75d-16d2b013c73e",
+        "address_match": {
+          "apn": "14055293",
+          "method": "address_normalized_exact",
+          "confidence": 0.92,
+          "normalized": "4437 E HOLMES AVE"
+        },
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "6771a83d-30c0-4948-a4b3-bfbd3670b753",
+        "document_version_id": "6617f8d4-fcf3-4592-82a9-95bc13d2e523",
+        "source_slug": "mesa-building-permits",
+        "source_name": "City of Mesa Building Permits",
+        "agency": "City of Mesa",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "55cca827c96128ee340c6e8ac9570c08511f3a17edfa1c5f11187e55ee6c65f5",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    },
+    {
+      "id": "1ca14112-348e-43ed-a1b1-7cdbae5d141c",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = Southern Substation; operator = Salt River Project; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/991640108",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.6685,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "distance_meters": 938.31,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "5a5dce18-6070-4e6f-aae4-76c22c1b48f5",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[4].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[4].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "f5098149-562f-48c9-b5a3-3bc72798f109",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-27T05:27:28.897250Z",
+      "is_downgrade": false,
+      "confidence": 50.09,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
+      "triggering_evidence_ids": [
+        "5a5dce18-6070-4e6f-aae4-76c22c1b48f5",
+        "81474154-13b6-448b-a553-d8964b1a7264",
+        "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63",
+        "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+      ],
+      "detection_lag_days": 4898
+    }
+  ],
+  "predictions": [
+    {
+      "id": "f4928c8a-d194-4249-a4db-479e0512e130",
+      "calculated_at": "2026-07-27T05:27:28.896112Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 27.2251,
+      "confidence": 36.48,
+      "confidence_band": "low",
+      "positive_contribution": 27.2251,
+      "negative_contribution": 0.0,
+      "evidence_considered": 5,
+      "distinct_evidence_kinds": 4,
+      "is_backtest": false,
+      "summary": "36% confidence from 5 evidence records across 4 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "5a5dce18-6070-4e6f-aae4-76c22c1b48f5"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 5.348,
+          "confidence_multiplier": 0.6685,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "1ca14112-348e-43ed-a1b1-7cdbae5d141c"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+          "base_weight": 2.0,
+          "applied_weight": 1.4943,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9962,
+          "polarity": "supporting",
+          "evidence_record_id": "81474154-13b6-448b-a553-d8964b1a7264"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+          "base_weight": 2.0,
+          "applied_weight": 0.7078,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9437,
+          "polarity": "supporting",
+          "evidence_record_id": "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+        }
+      ]
+    },
+    {
+      "id": "accddf53-08b9-4bb8-946e-3b9e73a6f2e7",
+      "calculated_at": "2026-07-27T05:27:28.896128Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 41.6957,
+      "confidence": 50.09,
+      "confidence_band": "moderate",
+      "positive_contribution": 41.6957,
+      "negative_contribution": 0.0,
+      "evidence_considered": 5,
+      "distinct_evidence_kinds": 3,
+      "is_backtest": false,
+      "summary": "50% confidence from 5 evidence records across 3 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "5a5dce18-6070-4e6f-aae4-76c22c1b48f5"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+          "base_weight": 20.0,
+          "applied_weight": 14.943,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9962,
+          "polarity": "supporting",
+          "evidence_record_id": "81474154-13b6-448b-a553-d8964b1a7264"
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "label": "Grading or construction permit",
+          "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+          "base_weight": 20.0,
+          "applied_weight": 7.0777,
+          "confidence_multiplier": 0.75,
+          "recency_multiplier": 0.9437,
+          "polarity": "supporting",
+          "evidence_record_id": "3fb1bfe1-1fd8-47a5-b338-4f0e07f20f63"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "33fa3aa4-7a0a-4218-84ee-692e449b2435"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.6685,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "1ca14112-348e-43ed-a1b1-7cdbae5d141c"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

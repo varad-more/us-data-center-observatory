@@ -9,8 +9,6 @@ mostly do not change.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
-
 import pytest
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -20,13 +18,7 @@ from helios_connectors.base import BaseConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
-from helios_connectors.types import (
-    DateRange,
-    DiscoveryResult,
-    FetchResult,
-    RawDocument,
-    SourceItem,
-)
+from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import (
     ConnectorRun,
     DocumentVersion,
@@ -43,43 +35,6 @@ from helios_domain.models import (
 from tests.conftest import load_fixture_bytes
 
 pytestmark = [pytest.mark.integration]
-
-
-def _replay(connector_cls, fixture_parts, native_id, *, payload=None, **kwargs):
-    """Build a connector subclass that replays a recorded payload instead of fetching.
-
-    This keeps the pipeline under test end to end - discovery, hashing, storage,
-    versioning, loading - while removing the live source from the equation.
-    """
-    content = payload if payload is not None else load_fixture_bytes(*fixture_parts)
-
-    class _Replay(connector_cls):  # type: ignore[valid-type, misc]
-        def discover(self, date_range: DateRange) -> DiscoveryResult:
-            return DiscoveryResult(
-                items=[
-                    SourceItem(
-                        source_native_id=native_id,
-                        url="https://example.invalid/recorded",
-                        title="Recorded fixture",
-                        document_type="fixture",
-                    )
-                ]
-            )
-
-        def fetch(self, item: SourceItem) -> FetchResult:
-            return FetchResult(
-                document=RawDocument(
-                    item=item,
-                    payload=content,
-                    mime_type="application/json",
-                    retrieved_at=datetime(2026, 7, 25, 21, 30, tzinfo=UTC),
-                    http_status=200,
-                    headers={"content-type": "application/json", "etag": '"abc123"'},
-                    etag='"abc123"',
-                )
-            )
-
-    return _Replay(**kwargs)
 
 
 @pytest.fixture

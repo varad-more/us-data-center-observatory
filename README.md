@@ -1,85 +1,160 @@
-# Helios Open AI Infrastructure Observatory
+# Helios — Open AI Infrastructure Observatory
 
-Evidence-backed detection and tracking of hyperscale data-center development from public records (East Valley, Arizona study area for the first sprint).
+Evidence-backed detection and tracking of hyperscale data-centre development from
+public records. Study area: the East Valley, Arizona (Maricopa County).
 
-Every claim carries an **assertion class** (`reported` / `extracted` / `calculated` / `inferred` / `predicted` / `unknown`) and a path to an immutable, content-addressed evidence document.
+**[View the live observatory →](https://varad-more.github.io/project-helios/)**
 
-## Agent / contributor entry points
+Every claim Helios publishes carries an **assertion class** — `reported`,
+`extracted`, `calculated`, `inferred`, `predicted`, or `unknown` — and resolves to
+an immutable, content-addressed evidence document. The product rule that governs
+everything else: *an inferred value must never be rendered like a reported one.*
 
-| Document | Purpose |
+Helios names sites by anonymous project code (`AZ-MESA-001`), not by operator.
+Shell-company signals are review flags, never operator attributions.
+
+---
+
+## What it does
+
+```
+public records ──▶ connectors ──▶ evidence store ──▶ site clustering ──▶ scoring ──▶ API / UI
+                   (registry)     (content-addressed)  (parcel adjacency)  (explainable)
+```
+
+1. **Declare** every source in a registry — including the ones Helios *cannot*
+   reach, with the reason recorded, so coverage gaps stay visible instead of
+   silently absent.
+2. **Ingest** through a fixed connector contract: discover → fetch → parse →
+   normalize → validate → load. Payload bytes are hashed and stored immutably;
+   evidence is minted only when a genuinely new document version appears.
+3. **Build sites** by clustering parcels on adjacency *and* related ownership —
+   never ownership alone, which would fuse a company's county-wide holdings.
+4. **Score** with weighted rules where every contribution cites one evidence row.
+5. **Serve** profiles, timelines, GeoJSON, and downloadable evidence.
+
+| Connector | Status |
 |---|---|
-| [`docs/implementation.md`](docs/implementation.md) | Main prompt, Phase 0–6 roadmap, what shipped |
-| [`docs/HANDOFF.md`](docs/HANDOFF.md) | Current MVP state, invariants, known gaps, next priorities |
-| [`docs/MULTI_AGENT_SUPPORT.md`](docs/MULTI_AGENT_SUPPORT.md) | Parallel workstreams, branch protocol, conflict hotspots |
-| [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |
-| [`docs/source-inventory.md`](docs/source-inventory.md) | Sources and connector status |
-| [`docs/limitations.md`](docs/limitations.md) | Honest coverage gaps |
-| [`docs/adr/`](docs/adr/) | Architecture decisions (incl. no Kafka/K8s) |
+| Maricopa County Assessor | live |
+| OpenStreetMap power infrastructure (Overpass) | live |
+| EPA ECHO air facilities | live |
+| Mesa building permits | live (address → parcel matching) |
+| ACC eDocket | fixture-only — the live UI is session-driven and cannot be accessed responsibly |
+| Copernicus Sentinel-2 | **declared, not implemented** — no credentials, no imagery, no stub |
 
-**Scope lock for this sprint:** no ML, satellite, Kafka, Kubernetes, or national coverage.
-
-**Phase 5-6 status:** complete — Includes Impact Intelligence (power/water estimation), Regional Analytics, and AWS Terraform IaC.
-
-**Connectors:** Maricopa Assessor, OSM power, EPA ECHO air, Mesa building permits (live + fixtures); ACC eDocket (fixture-only).
+---
 
 ## Quick start
+
+### Frontend only — no database, no credentials
+
+The repository ships a static snapshot of the API, so the UI runs standalone:
+
+```bash
+cd apps/web && npm ci && npm run dev     # http://localhost:3000
+```
+
+### Full pipeline
+
+Requires Docker (for PostGIS) and Python 3.12+.
 
 ```bash
 make install
 cp .env.example .env
-make db-up
+make db-up            # one PostGIS container on :5432
 make migrate
-make bootstrap          # registry + live/fixture ingest + sites + scores
+make bootstrap        # replays recorded fixtures — offline and reproducible
 
-make api                # http://127.0.0.1:8000  (OpenAPI at /docs)
-make web                # http://localhost:3000
+make api              # http://127.0.0.1:8000  (OpenAPI at /docs)
+make web              # http://localhost:3000
 ```
 
-Or all-in-one via Compose (see `docker-compose.yml`):
+`make bootstrap` is **offline by default**. To fetch current records from live
+public sources instead:
 
 ```bash
-docker compose up --build
-docker compose run --rm worker helios bootstrap
+make bootstrap-live   # equivalently: helios bootstrap --live
 ```
 
-## Useful CLI
+> Live ingestion reaches real county and agency servers. It is opt-in so that a
+> fresh clone, a test run, and CI never put load on public infrastructure.
+
+### CLI
 
 ```bash
-helios status
-helios explain AZ-MESA-001
-helios backtest
-helios registry-show
-helios bootstrap
+helios status                    # what is currently in the database
+helios explain AZ-MESA-001       # why this site scores what it scores
+helios backtest                  # replay historical cutoffs against labelled cases
+helios registry-show             # every declared source, including unreachable ones
+helios ingest <slug> --fixture   # run one connector against recorded bytes
 ```
+
+---
+
+## The published site
+
+GitHub Pages cannot run FastAPI, so the deployed site reads flat JSON. That JSON
+is **generated by the real API against a fixture-seeded database** — not written
+by hand:
+
+```bash
+make export-api    # runs the exporter, then verifies the result
+```
+
+The output lands in `apps/web/public/api/` and is committed, which is what lets
+the frontend run with no backend. A banner on every page states that the
+deployment is a point-in-time snapshot and when it was taken. CI re-runs the
+whole bootstrap-and-export cycle to prove the committed snapshot is still
+something the pipeline actually produces.
+
+Site URLs are keyed on project code (`/sites/AZ-MESA-001`), so published links
+survive a rebuild of the underlying database.
+
+---
 
 ## Tests
 
 ```bash
-# Requires HELIOS_TEST_DATABASE_URL pointing at a *separate* DB (see .env.example)
-.venv/bin/pytest
-cd apps/web && npx tsc --noEmit
+pytest -m "unit or contract"   # no database required
+make test                      # full suite; needs PostGIS via `make db-up`
+cd apps/web && npm test && npm run typecheck
 ```
 
-## Production Deployment (Terraform)
-
-Phase 6 introduces declarative Infrastructure as Code (IaC) via Terraform, available in `infrastructure/terraform`. This configures the AWS production scaffolding (ECS, RDS PostGIS, and S3).
-
-```bash
-cd infrastructure/terraform
-terraform init
-terraform plan
-# terraform apply
-```
+---
 
 ## Layout
 
-- `apps/api` — FastAPI
-- `apps/web` — Next.js + MapLibre
-- `apps/worker` — `helios` CLI
-- `packages/*` — domain, connectors, geospatial, scoring, evidence store
-- `database/` — Alembic migrations + PostGIS init
-- `tests/` — unit, contract, integration, fixtures
+| Path | Contents |
+|---|---|
+| `apps/api` | FastAPI read APIs + token-gated admin routes |
+| `apps/web` | Next.js + MapLibre |
+| `apps/worker` | the `helios` CLI |
+| `packages/helios_connectors` | registry, connector SDK, fixture replay, pipeline |
+| `packages/helios_domain` | ORM models + ontology |
+| `packages/helios_scoring` | explainable rules, backtest, impact estimates |
+| `packages/helios_geospatial` | clustering, address matching, spatial joins |
+| `packages/helios_common` | config, hashing, evidence store, vocabularies |
+| `fixtures/` | recorded source payloads — product data, used by CLI and tests |
+| `database/` | Alembic migrations + PostGIS init |
+| `infrastructure/` | Dockerfiles + AWS Terraform scaffolding |
+
+---
+
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |
+| [`docs/methodology.md`](docs/methodology.md) | How assertion classes and scores are derived |
+| [`docs/source-inventory.md`](docs/source-inventory.md) | Every source and its connector status |
+| [`docs/limitations.md`](docs/limitations.md) | Honest coverage gaps |
+| [`docs/risk-register.md`](docs/risk-register.md) | Known risks |
+| [`docs/adr/`](docs/adr/) | Architecture decisions |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Setup, workflow, and invariants to preserve |
+
+**Deliberately absent:** Kafka, Kubernetes, trained ML models, and satellite
+pipelines. See [ADR 0002](docs/adr/0002-no-kafka-no-kubernetes.md).
 
 ## License
 
-Apache-2.0
+[Apache-2.0](LICENSE)

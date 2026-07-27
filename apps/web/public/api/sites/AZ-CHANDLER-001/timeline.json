@@ -1,58 +1,236 @@
 {
-  "site_id": "AZ-CHANDLER-001",
+  "site_id": "1c659fb3-0e68-422c-b694-9ad2a8f7a91f",
   "project_code": "AZ-CHANDLER-001",
-  "first_signal_date": "2012-04-04",
-  "latest_signal_date": "2025-01-27",
   "entries": [
     {
       "entry_type": "evidence",
-      "occurred_on": "2012-04-04",
-      "title": "Initial Record Detection",
-      "detail": "Deed or Assessor classification recorded.",
-      "confidence_delta": 30.0,
+      "occurred_on": "2022-04-04",
+      "title": "Shell entity ownership",
+      "detail": "Title is held by CI PHOENIX-CHANDLER I-VII LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "ev-AZ-CHANDLER-001-1",
-        "evidence_kind": "deed_record",
-        "summary": "Property document recorded",
-        "snippet": "Recorded in public registry",
-        "snippet_locator": "Page 1",
-        "observed_at": "2012-04-04T00:00:00Z",
-        "assertion_class": "extracted",
-        "extraction_method": "assessor_parser",
-        "polarity": "positive",
-        "confidence": 0.95,
-        "human_review_status": "verified",
+        "id": "bdebaff9-3b25-4e07-a3e5-258418a91af4",
+        "evidence_kind": "shell_entity_ownership",
+        "summary": "Title is held by CI PHOENIX-CHANDLER I-VII LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "snippet": "OwnerName = CI PHOENIX-CHANDLER I-VII LLC",
+        "snippet_locator": "$.features[5].attributes.OwnerName",
+        "observed_at": "2022-04-04",
+        "assertion_class": "inferred",
+        "extraction_method": "pattern_rule",
+        "polarity": "supporting",
+        "confidence": 0.45,
+        "human_review_status": "not_reviewed",
         "is_standing_condition": false,
-        "normalized_values": {},
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "owner_name",
+              "value": "CI PHOENIX-CHANDLER I-VII LLC",
+              "locator": "$.features[5].attributes.OwnerName",
+              "raw_text": "CI PHOENIX-CHANDLER I-VII LLC",
+              "raw_unit": null,
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "is_standing_condition": false
+        },
         "source": {
-          "document_id": "doc-AZ-CHANDLER-001-1",
-          "document_version_id": "docver-AZ-CHANDLER-001-1",
-          "source_slug": "maricopa_assessor",
-          "source_name": "Maricopa County Assessor",
-          "agency": "Maricopa County",
-          "source_url": "https://mcassessor.maricopa.gov",
-          "retrieved_at": "2012-04-04T00:00:00Z",
-          "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "parser_version": "1.0.0",
-          "attribution_text": "Data provided by Maricopa County Assessor"
+          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "source_slug": "maricopa-assessor-parcels",
+          "source_name": "Maricopa County Assessor Parcel Layer",
+          "agency": "Maricopa County Assessor / Maricopa County GIS",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+          "parser_version": "0.1.0",
+          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
         }
       },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2022-04-04",
+      "title": "Large industrial parcel acquisition",
+      "detail": "Organization-held industrial parcel of 66.1 acres transferred on 2022-04-04, at or above the 20-acre campus-scale threshold.",
+      "evidence": {
+        "id": "9d06911e-b74a-417c-b82e-43bdc0e6f759",
+        "evidence_kind": "large_industrial_parcel_acquisition",
+        "summary": "Organization-held industrial parcel of 66.1 acres transferred on 2022-04-04, at or above the 20-acre campus-scale threshold.",
+        "snippet": "DeedNumber = 20220297495; DeedDate = 2022-04-04; LotSize_Acre = 66.08299",
+        "snippet_locator": "$.features[5].attributes.DeedDate",
+        "observed_at": "2022-04-04",
+        "assertion_class": "reported",
+        "extraction_method": "structured_feed",
+        "polarity": "supporting",
+        "confidence": 0.9,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": false,
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "lot_size_acres",
+              "value": 66.083,
+              "locator": "$.features[5].attributes.LotSize_Acre",
+              "raw_text": "66.08299",
+              "raw_unit": "acres",
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": "acres",
+              "extraction_method": "structured_feed"
+            },
+            {
+              "name": "deed_number",
+              "value": "20220297495",
+              "locator": "$.features[5].attributes.DeedNumber",
+              "raw_text": "20220297495",
+              "raw_unit": null,
+              "confidence": 0.98,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "is_standing_condition": false
+        },
+        "source": {
+          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "source_slug": "maricopa-assessor-parcels",
+          "source_name": "Maricopa County Assessor Parcel Layer",
+          "agency": "Maricopa County Assessor / Maricopa County GIS",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+          "parser_version": "0.1.0",
+          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "stage_transition",
+      "occurred_on": "2022-04-04",
+      "title": "Stage advanced to Operational",
+      "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
+      "evidence": null,
       "stage_transition": {
-        "id": "st-AZ-CHANDLER-001-1",
+        "id": "f085157c-6780-410e-a851-6ae853011bec",
         "from_stage": 0,
-        "from_stage_label": "No known development",
+        "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
-        "effective_date": "2012-04-04",
-        "detected_at": "2012-04-04T00:00:00Z",
+        "effective_date": "2022-04-04",
+        "detected_at": "2026-07-27T05:27:28.879324Z",
         "is_downgrade": false,
-        "confidence": 0.92,
-        "rationale": "Detected from official filing",
+        "confidence": 32.66,
+        "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
         "triggering_evidence_ids": [
-          "ev-AZ-CHANDLER-001-1"
+          "b0671cae-d2ab-46c8-8d45-ddf42b3f433e",
+          "9d06911e-b74a-417c-b82e-43bdc0e6f759",
+          "bdebaff9-3b25-4e07-a3e5-258418a91af4"
         ],
-        "detection_lag_days": 1
-      }
+        "detection_lag_days": 1575
+      },
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2026-07-25",
+      "title": "Dedicated substation proximity",
+      "detail": "Unnamed substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "evidence": {
+        "id": "75446d92-0771-441a-9805-968373b375a3",
+        "evidence_kind": "dedicated_substation_proximity",
+        "summary": "Unnamed substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
+        "snippet_locator": "https://www.openstreetmap.org/way/318676416",
+        "observed_at": "2026-07-25",
+        "assertion_class": "calculated",
+        "extraction_method": "geometry_operation",
+        "polarity": "supporting",
+        "confidence": 0.95,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": true,
+        "normalized_values": {
+          "match_method": "substation_proximity",
+          "operator_name": null,
+          "max_voltage_kv": 69.0,
+          "distance_meters": 0.0,
+          "is_standing_condition": true
+        },
+        "source": {
+          "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+          "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+          "source_slug": "osm-power-infrastructure",
+          "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+          "agency": "OpenStreetMap contributors",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+          "parser_version": "0.1.0",
+          "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2026-07-27",
+      "title": "Assessor data center classification",
+      "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "evidence": {
+        "id": "b0671cae-d2ab-46c8-8d45-ddf42b3f433e",
+        "evidence_kind": "assessor_data_center_classification",
+        "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "snippet": "PropertyUseDescription = DATA CENTERS",
+        "snippet_locator": "$.features[5].attributes.PropertyUseDescription",
+        "observed_at": "2026-07-27",
+        "assertion_class": "reported",
+        "extraction_method": "structured_feed",
+        "polarity": "supporting",
+        "confidence": 0.95,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": true,
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "land_use_description",
+              "value": "DATA CENTERS",
+              "locator": "$.features[5].attributes.PropertyUseDescription",
+              "raw_text": "DATA CENTERS",
+              "raw_unit": null,
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "is_standing_condition": true
+        },
+        "source": {
+          "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+          "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+          "source_slug": "maricopa-assessor-parcels",
+          "source_name": "Maricopa County Assessor Parcel Layer",
+          "agency": "Maricopa County Assessor / Maricopa County GIS",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+          "parser_version": "0.1.0",
+          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
     }
-  ]
+  ],
+  "first_signal_date": "2022-04-04",
+  "latest_signal_date": "2026-07-27"
 }

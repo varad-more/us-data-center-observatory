@@ -97,7 +97,7 @@ export default async function ObservatoryHome() {
               {sites.items.map((site) => (
                 <tr key={site.id}>
                   <td>
-                    <Link href={`/sites/${site.id}`} className="mono">
+                    <Link href={`/sites/${site.project_code}`} className="mono">
                       {site.project_code}
                     </Link>
                   </td>

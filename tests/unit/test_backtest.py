@@ -1,11 +1,13 @@
 """Tests for backtest harness and evaluation metrics."""
 
-import pytest
 from datetime import date
 
-from helios_scoring.backtest import BacktestReport, BacktestCaseResult
+import pytest
+
+from helios_scoring.backtest import BacktestCaseResult, BacktestReport
 
 pytestmark = pytest.mark.unit
+
 
 def test_backtest_report_metrics():
     """Test calculation of precision, recall, lead time, and power estimation."""
@@ -75,20 +77,21 @@ def test_backtest_report_metrics():
             detail="",
         ),
     ]
-    
+
     report = BacktestReport(cases=cases)
-    
+
     # 1 TP, 1 FP -> Precision = 1 / 2 = 0.5
     assert report.precision == 0.5
-    
+
     # 1 TP, 1 FN -> Recall = 1 / 2 = 0.5
     assert report.recall == 0.5
-    
+
     # 2 passed, 4 total -> Accuracy = 0.5
     assert report.accuracy == 0.5
-    
+
     # Only SITE-1 has lead time of 100
     assert report.avg_lead_time_days == 100.0
+
 
 def test_generate_research_report():
     """Test generating the markdown research report."""
@@ -111,7 +114,7 @@ def test_generate_research_report():
     ]
     report = BacktestReport(cases=cases)
     markdown = report.generate_research_report()
-    
+
     assert "**Identity Precision**: 100.0%" in markdown
     assert "**Identity Recall**: 100.0%" in markdown
     assert "**Average Lead Time**: 100.0 days" in markdown

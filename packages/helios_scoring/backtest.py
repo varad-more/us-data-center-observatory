@@ -28,11 +28,7 @@ if TYPE_CHECKING:
 logger = get_logger(__name__)
 
 DEFAULT_CASES_PATH = (
-    Path(__file__).resolve().parents[2]
-    / "tests"
-    / "fixtures"
-    / "backtest"
-    / "east_valley_cases.json"
+    Path(__file__).resolve().parents[2] / "fixtures" / "backtest" / "east_valley_cases.json"
 )
 
 
@@ -118,23 +114,31 @@ class BacktestReport:
             f"- **Identity Precision**: {self.precision:.1%}",
             f"- **Identity Recall**: {self.recall:.1%}",
         ]
-        
+
         if self.avg_lead_time_days is not None:
             lines.append(f"- **Average Lead Time**: {self.avg_lead_time_days:.1f} days")
         else:
             lines.append("- **Average Lead Time**: N/A (no operational cases identified)")
-            
+
         lines.append("")
         lines.append("## Case Details")
-        lines.append("| Project | As Of | Expected | Predicted | Lead Time (days) | Est. Power (MW) | OK |")
+        lines.append(
+            "| Project | As Of | Expected | Predicted | Lead Time (days) | Est. Power (MW) | OK |"
+        )
         lines.append("|---|---|---|---|---|---|---|")
-        
+
         for case in self.cases:
             pred = str(case.predicted_stage) if case.predicted_stage is not None else "None"
             lt = str(case.lead_time_days) if case.lead_time_days is not None else "N/A"
-            power = f"{case.estimated_power_mw:.1f}" if case.estimated_power_mw is not None else "N/A"
+            power = (
+                f"{case.estimated_power_mw:.1f}" if case.estimated_power_mw is not None else "N/A"
+            )
             ok = "✅" if case.passed else "❌"
-            lines.append(f"| {case.project_code} | {case.as_of} | {case.expected_min_stage}-{case.expected_max_stage} | {pred} | {lt} | {power} | {ok} |")
+            expected = f"{case.expected_min_stage}-{case.expected_max_stage}"
+            lines.append(
+                f"| {case.project_code} | {case.as_of} | {expected} | "
+                f"{pred} | {lt} | {power} | {ok} |"
+            )
 
         return "\n".join(lines)
 
@@ -224,19 +228,19 @@ def run_backtest(
         outcome = recalculate_site(session, site, as_of=case.as_of, is_backtest=True)
         predicted = int(outcome.stage_score.implied_stage)
         passed = case.expected_min_stage <= predicted <= case.expected_max_stage
-        
+
         identity_confidence = outcome.identity_score.confidence
         identified_as_dc = identity_confidence >= 50.0
         expected_as_dc = case.expected_max_stage > 0
-        
+
         is_true_positive = identified_as_dc and expected_as_dc
         is_false_positive = identified_as_dc and not expected_as_dc
         is_false_negative = not identified_as_dc and expected_as_dc
-        
+
         lead_time_days = None
         if expected_as_dc and predicted >= 7 and site.first_signal_date:
             lead_time_days = (case.as_of - site.first_signal_date).days
-            
+
         estimated_power_mw = None
         if site.total_acres:
             estimated_power_mw = float(site.total_acres) * 2.0
@@ -281,16 +285,16 @@ def run_time_sliced_backtest(
 ) -> BacktestReport:
     """Evaluate historical stage expectations in quarterly time slices."""
     from dateutil.relativedelta import relativedelta
-    
+
     selected = cases if cases is not None else load_cases(cases_path)
     sliced_cases: list[BacktestCase] = []
-    
+
     for case in selected:
         current_date = date(2020, 1, 1)
         if current_date > case.as_of:
             sliced_cases.append(case)
             continue
-            
+
         while current_date < case.as_of:
             sliced_cases.append(
                 BacktestCase(
@@ -302,7 +306,7 @@ def run_time_sliced_backtest(
                 )
             )
             current_date += relativedelta(months=3)
-            
+
         sliced_cases.append(case)
 
     return run_backtest(session, sliced_cases)

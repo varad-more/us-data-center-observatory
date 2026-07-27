@@ -691,3 +691,31 @@ details summary {
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
 }
+
+/**
+ * Provenance banner.
+ *
+ * Uses the "inferred" hue rather than an alarm colour: the snapshot is not an
+ * error, it is a qualification the reader must carry while reading everything
+ * below it.
+ */
+.demo-banner {
+  max-width: 1280px;
+  margin: 1rem auto 0;
+  padding: 0.75rem 1rem;
+  background: color-mix(in srgb, var(--inferred) 12%, var(--bg-raised));
+  border: 1px solid color-mix(in srgb, var(--inferred) 40%, var(--border));
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.demo-banner strong {
+  color: var(--inferred);
+}
+
+.demo-banner a {
+  color: var(--text);
+  text-decoration: underline;
+}

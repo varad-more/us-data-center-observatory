@@ -11,15 +11,23 @@ from helios_connectors.base import BaseConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
 from helios_connectors.pipeline import IngestionPipeline
+from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import EvidenceRecord, Permit, Site
 from helios_domain.ontology import StageEvidenceKind
 from helios_geospatial.site_builder import build_sites
-from helios_scoring.backtest import run_backtest
-from tests.integration.test_ingestion_pipeline import _replay
+from helios_scoring.backtest import DEFAULT_CASES_PATH, run_backtest
 
 pytestmark = [pytest.mark.integration]
 
 EAST_VALLEY = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
+
+
+def _labelled_case_count() -> int:
+    """Number of labelled cases in the default backtest corpus."""
+    import json
+
+    payload = json.loads(DEFAULT_CASES_PATH.read_text(encoding="utf-8"))
+    return len(payload["cases"] if isinstance(payload, dict) else payload)
 
 
 @pytest.fixture
@@ -95,7 +103,9 @@ class TestBacktestHarness:
             recalculate_site(registered_sources, site)
 
         report = run_backtest(registered_sources)
-        assert report.total == 3
+        # Derived from the corpus rather than hard-coded, so growing the labelled
+        # case set does not silently leave this assertion behind.
+        assert report.total == _labelled_case_count()
         assert report.passed == report.total, report.as_dict()
         # Live stage must remain untouched by historical replay.
         mesa = registered_sources.scalar(select(Site).where(Site.project_code == "AZ-MESA-001"))

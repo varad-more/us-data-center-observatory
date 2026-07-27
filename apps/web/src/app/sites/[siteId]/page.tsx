@@ -10,11 +10,9 @@ import {
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { InfrastructureMap } from "@/components/InfrastructureMap";
 import { ScoreExplanation, Metric } from "@/components/ScoreExplanation";
-import { SatelliteComparison } from "@/components/SatelliteComparison";
 import { Timeline } from "@/components/Timeline";
 import {
   ApiError,
-  evidenceBundleUrl,
   evidenceJsonUrl,
   getMapInfrastructure,
   getMapSites,
@@ -24,18 +22,11 @@ import {
 } from "@/lib/api";
 import type { Dependency, Parcel, SiteDetail } from "@/lib/types";
 
+// Routes are keyed on project_code, not the database UUID, so a published URL
+// such as /sites/AZ-MESA-001 survives a rebuild of the underlying database.
 export async function generateStaticParams() {
-  try {
-    const sites = await listSites({ limit: 200 });
-    return sites.items.map((site) => ({ siteId: site.id }));
-  } catch {
-    return [
-      { siteId: "AZ-MESA-001" },
-      { siteId: "f272c49f-e2d2-4975-9aa8-0077384ede69" },
-      { siteId: "AZ-CHANDLER-001" },
-      { siteId: "3822e5b6-60f4-4e89-8da2-c33907a89140" },
-    ];
-  }
+  const sites = await listSites({ limit: 500 });
+  return sites.items.map((site) => ({ siteId: site.project_code }));
 }
 
 const STAGE_COUNT = 9;
@@ -82,11 +73,8 @@ export default async function SiteDetailPage({ params }: PageProps) {
             </p>
           </div>
           <div className="button-row">
-            <a className="button" href={evidenceBundleUrl(site.id)}>
-              Download evidence bundle
-            </a>
-            <a className="button" href={evidenceJsonUrl(site.id)}>
-              Evidence JSON
+            <a className="button" href={evidenceJsonUrl(site.project_code)}>
+              Download evidence &amp; provenance
             </a>
           </div>
         </div>
@@ -163,14 +151,6 @@ export default async function SiteDetailPage({ params }: PageProps) {
               <ScoreExplanation prediction={site.latest_prediction} />
             </section>
           )}
-
-          {/* SATELLITE COMPARISON */}
-          <section className="card">
-            <div className="card-header">
-              <h2 className="card-title">Remote Sensing (Copernicus)</h2>
-            </div>
-            <SatelliteComparison projectCode={site.project_code} />
-          </section>
         </div>
 
         <div className="stack">

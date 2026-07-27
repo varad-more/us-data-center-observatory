@@ -1,0 +1,448 @@
+{
+  "id": "f3d3dcf7-fbfa-42dc-b878-041d1245519d",
+  "project_code": "AZ-CHANDLER-005",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 36.11,
+  "stage_confidence": 27.96,
+  "confidence_band": "low",
+  "first_signal_date": "2007-09-20",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 3,
+  "total_acres": 5.72,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.924120Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.923057Z",
+  "centroid": [
+    -111.952306,
+    33.306135
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 5.7 acres near 240 N ROOSEVELT AVE, Chandler. Title of record is held by FIRST DATA REAL ESTATE HOLDINGS L L C. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.95118278292584,
+            33.305624032785495
+          ],
+          [
+            -111.95344384159765,
+            33.30560491667478
+          ],
+          [
+            -111.95344654373004,
+            33.305699868792345
+          ],
+          [
+            -111.95344515257557,
+            33.305761810484675
+          ],
+          [
+            -111.95343809039156,
+            33.305823363990804
+          ],
+          [
+            -111.95342541662198,
+            33.305884011201165
+          ],
+          [
+            -111.95340723794477,
+            33.30594324163469
+          ],
+          [
+            -111.95315498023321,
+            33.30670094580091
+          ],
+          [
+            -111.95228723012663,
+            33.3067089759385
+          ],
+          [
+            -111.95143625156642,
+            33.30671740472927
+          ],
+          [
+            -111.95132387861258,
+            33.306338702942654
+          ],
+          [
+            -111.95121157842227,
+            33.30596317300437
+          ],
+          [
+            -111.95119685141889,
+            33.305903497009574
+          ],
+          [
+            -111.95118667963796,
+            33.3058428781688
+          ],
+          [
+            -111.95118112133807,
+            33.30578166367471
+          ],
+          [
+            -111.95118020835423,
+            33.30572020413155
+          ],
+          [
+            -111.95118278292584,
+            33.305624032785495
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "1990e6be-0d4e-4168-a05d-9b1a285efa71",
+      "apn": "30168948",
+      "apn_formatted": "301-68-948",
+      "situs_address": "240 N ROOSEVELT AVE",
+      "situs_city": "Chandler",
+      "owner_name": "FIRST DATA REAL ESTATE HOLDINGS L L C",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 5.72,
+      "last_deed_date": "2007-09-20",
+      "last_deed_number": "20071041807",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20071041807&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30168948",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "26c3ab80-5aed-4e32-9320-ddfe03d80651",
+      "canonical_name": "FIRST DATA REAL ESTATE HOLDINGS L L C",
+      "role": "owner",
+      "organization_type": null,
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "holding-company naming"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "801b3845-343a-4df6-8e88-7252ce0fdd5c",
+      "infrastructure_kind": "substation",
+      "label": "Gila Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 162.81,
+      "confidence": 0.9012,
+      "assertion_class": "inferred",
+      "notes": "Gila Substation lies 163 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "3d65689e-d7ac-4d2b-a22b-1479da223f1e",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 305.18,
+      "confidence": 0.8584,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 305 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "4aa35a18-898c-4f93-9c8a-08768d6a9b59",
+      "infrastructure_kind": "transmission_line",
+      "label": "Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1320.46,
+      "confidence": 0.1779,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "18523177-cef8-4d6d-8775-be38e3b35e34",
+      "infrastructure_kind": "transmission_line",
+      "label": "Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1543.13,
+      "confidence": 0.1278,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "4153a272-cf76-4ef7-9501-5bced4688588",
+      "infrastructure_kind": "substation",
+      "label": "Intel Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1567.3,
+      "confidence": 0.4798,
+      "assertion_class": "inferred",
+      "notes": "Intel Substation lies 1567 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "5913d9f2-bb5b-4961-8c88-089e8f4cdb9b",
+      "infrastructure_kind": "transmission_line",
+      "label": "Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1678.12,
+      "confidence": 0.0974,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "f582c8d4-0299-4943-98fe-a6d971e63825",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1740.27,
+      "confidence": 0.0834,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "f0bfc9d4-eb27-4396-b02c-c32bf9f03b9a",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1789.18,
+      "confidence": 0.0725,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "a479cec1-96de-48ff-8762-53771edc7bd2",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1801.07,
+      "confidence": 0.0698,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "5f0900ad-3fde-4593-87b4-9cc79e5a70ea",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1808.63,
+      "confidence": 0.068,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "2b1041a3-89e8-4cf4-afd4-a2a9b645a9c3",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1837.81,
+      "confidence": 0.0615,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": null
+    },
+    {
+      "id": "c1d9db28-8d45-4664-ac77-7af457ca2f27",
+      "infrastructure_kind": "substation",
+      "label": "Knox Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1882.43,
+      "confidence": 0.3853,
+      "assertion_class": "inferred",
+      "notes": "Knox Substation lies 1882 m from the site boundary and is tagged 230 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "5cc414dc-dbd4-4e18-9dee-c52009d2b9b3",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2642.9,
+      "confidence": 0.1571,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2643 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "e8fa3bb9-815b-490c-9eff-60c7938504bc",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2805.5,
+      "confidence": 0.1084,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2806 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "28be0e34-bf59-48ec-a23f-9f8516816bd3",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 13.7,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.924492Z",
+      "notes": null
+    },
+    {
+      "id": "411b8112-3b6f-45db-a1c6-e86cb7bbcbb3",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 164400.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.924506Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "093fbc19-b6fc-446c-9b3a-be4ffb059bd9",
+    "calculated_at": "2026-07-27T05:27:28.923073Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 19.675,
+    "confidence": 27.96,
+    "confidence_band": "low",
+    "positive_contribution": 19.675,
+    "negative_contribution": 0.0,
+    "evidence_considered": 3,
+    "distinct_evidence_kinds": 2,
+    "is_backtest": false,
+    "summary": "28% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "9f49b055-f121-4b8e-a421-8210426d0464"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by FIRST DATA REAL ESTATE HOLDINGS L L C, whose name shows single-purpose-entity characteristics (holding-company naming). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 0.675,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "df8d3d94-2167-4ba2-898f-aadf5c388e34"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Gila Substation tagged 69 kV lies 163 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.9012,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "40fee33b-7719-47a9-a431-4d66241bc255"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "26827bf7-0374-4ab3-9356-ceeb16192d0e",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2007-09-20",
+      "detected_at": "2026-07-27T05:27:28.924120Z",
+      "is_downgrade": false,
+      "confidence": 27.96,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "9f49b055-f121-4b8e-a421-8210426d0464",
+        "df8d3d94-2167-4ba2-898f-aadf5c388e34"
+      ],
+      "detection_lag_days": 6885
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

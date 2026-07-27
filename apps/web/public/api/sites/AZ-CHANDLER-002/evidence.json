@@ -1,0 +1,598 @@
+{
+  "generated_at": "2026-07-27T05:28:20.554880+00:00",
+  "generator": "Project Helios",
+  "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
+  "site": {
+    "project_code": "AZ-CHANDLER-002",
+    "jurisdiction": "Chandler",
+    "county": "Maricopa",
+    "site_kind": "enterprise_data_center",
+    "site_kind_assertion": "reported",
+    "current_stage": 7,
+    "current_stage_label": "Operational",
+    "current_confidence": 38.86,
+    "total_acres": 20.9489,
+    "first_signal_date": "2010-07-15",
+    "latest_signal_date": "2026-07-27",
+    "operator_status": "not_established",
+    "summary": "1 parcel(s) totalling 20.9 acres near 2121 S PRICE RD, Chandler. Title of record is held by DIGITAL 2121 SOUTH PRICE LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+    "boundary": {
+      "type": "MultiPolygon",
+      "coordinates": [
+        [
+          [
+            [
+              -111.88893445919906,
+              33.273723006021065
+            ],
+            [
+              -111.88895066929837,
+              33.27484297988394
+            ],
+            [
+              -111.8889179571473,
+              33.27484356418916
+            ],
+            [
+              -111.88893048864551,
+              33.275709321499654
+            ],
+            [
+              -111.88886585036923,
+              33.27576543901126
+            ],
+            [
+              -111.88824429254943,
+              33.27577632664997
+            ],
+            [
+              -111.88824497437072,
+              33.27580380597163
+            ],
+            [
+              -111.88577329849404,
+              33.275847071860326
+            ],
+            [
+              -111.88577282238693,
+              33.27582783732189
+            ],
+            [
+              -111.8850290775188,
+              33.27584084735358
+            ],
+            [
+              -111.88496286808909,
+              33.275787020522415
+            ],
+            [
+              -111.88493471578641,
+              33.27379279155882
+            ],
+            [
+              -111.88646064712862,
+              33.27376618356659
+            ],
+            [
+              -111.88893445919906,
+              33.273723006021065
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by DIGITAL 2121 SOUTH PRICE LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = DIGITAL 2121 SOUTH PRICE LLC",
+      "snippet_locator": "$.features[3].attributes.OwnerName",
+      "observed_at": "2010-07-15",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "DIGITAL 2121 SOUTH PRICE LLC",
+            "locator": "$.features[3].attributes.OwnerName",
+            "raw_text": "DIGITAL 2121 SOUTH PRICE LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "53ca6256-06c0-47a6-a482-e362ca90286d",
+      "evidence_kind": "large_industrial_parcel_acquisition",
+      "summary": "Organization-held industrial parcel of 20.9 acres transferred for $289,275,000 on 2010-07-15, at or above the 20-acre campus-scale threshold.",
+      "snippet": "DeedNumber = 20100603763; DeedDate = 2010-07-15; LotSize_Acre = 20.94892",
+      "snippet_locator": "$.features[3].attributes.DeedDate",
+      "observed_at": "2010-07-15",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.9,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "lot_size_acres",
+            "value": 20.9489,
+            "locator": "$.features[3].attributes.LotSize_Acre",
+            "raw_text": "20.94892",
+            "raw_unit": "acres",
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": "acres",
+            "extraction_method": "structured_feed"
+          },
+          {
+            "name": "deed_number",
+            "value": "20100603763",
+            "locator": "$.features[3].attributes.DeedNumber",
+            "raw_text": "20100603763",
+            "raw_unit": null,
+            "confidence": 0.98,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "d5c3ab06-44b3-4268-9b70-67b9378cfb8a",
+      "evidence_kind": "dedicated_substation_proximity",
+      "summary": "RS-27 tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+      "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
+      "snippet_locator": "https://www.openstreetmap.org/way/318676175",
+      "observed_at": "2026-07-25",
+      "assertion_class": "calculated",
+      "extraction_method": "geometry_operation",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "match_method": "substation_proximity",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "distance_meters": 0.0,
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "444f9025-e22c-4b16-88d7-d91c720c929e",
+        "document_version_id": "337f8da3-e1ed-458d-ac60-261ad68b6542",
+        "source_slug": "osm-power-infrastructure",
+        "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
+        "agency": "OpenStreetMap contributors",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "b780b9bfc5c677683c8cde030c3a6581404f52cfeebcce02ca795d5d2d86e7b4",
+        "parser_version": "0.1.0",
+        "attribution_text": "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+      }
+    },
+    {
+      "id": "f6621ef2-948d-4ee4-a696-24e65960125b",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[3].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-27",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[3].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "85919330-784e-45c7-a52d-e3075050242d",
+        "document_version_id": "01e066c9-f620-4cd1-a672-bb1393b7b52c",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    }
+  ],
+  "stage_history": [
+    {
+      "id": "f90b5fca-11cd-4a72-b8ae-3a2220314cc1",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2010-07-15",
+      "detected_at": "2026-07-27T05:27:28.869679Z",
+      "is_downgrade": false,
+      "confidence": 32.66,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "f6621ef2-948d-4ee4-a696-24e65960125b",
+        "53ca6256-06c0-47a6-a482-e362ca90286d",
+        "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c"
+      ],
+      "detection_lag_days": 5856
+    }
+  ],
+  "predictions": [
+    {
+      "id": "e4eea9ac-17a0-4301-8514-9b6bc2a1f13c",
+      "calculated_at": "2026-07-27T05:27:28.868360Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 29.525,
+      "confidence": 38.86,
+      "confidence_band": "low",
+      "positive_contribution": 29.525,
+      "negative_contribution": 0.0,
+      "evidence_considered": 4,
+      "distinct_evidence_kinds": 4,
+      "is_backtest": false,
+      "summary": "39% confidence from 4 evidence records across 4 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "f6621ef2-948d-4ee4-a696-24e65960125b"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "RS-27 tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 8.0,
+          "applied_weight": 7.6,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "d5c3ab06-44b3-4268-9b70-67b9378cfb8a"
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "label": "Large industrial parcel acquisition",
+          "detail": "Organization-held industrial parcel of 20.9 acres transferred for $289,275,000 on 2010-07-15, at or above the 20-acre campus-scale threshold.",
+          "base_weight": 10.0,
+          "applied_weight": 2.25,
+          "confidence_multiplier": 0.9,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "53ca6256-06c0-47a6-a482-e362ca90286d"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by DIGITAL 2121 SOUTH PRICE LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c"
+        }
+      ]
+    },
+    {
+      "id": "78cb4b66-ded9-44db-8f87-b9975041bb68",
+      "calculated_at": "2026-07-27T05:27:28.868381Z",
+      "as_of_date": "2026-07-27",
+      "predicted_stage": 7,
+      "predicted_stage_label": "Operational",
+      "raw_score": 23.725,
+      "confidence": 32.66,
+      "confidence_band": "low",
+      "positive_contribution": 23.725,
+      "negative_contribution": 0.0,
+      "evidence_considered": 4,
+      "distinct_evidence_kinds": 3,
+      "is_backtest": false,
+      "summary": "33% confidence from 4 evidence records across 3 distinct kinds; stage 7 (Operational).",
+      "model_name": "helios-rule-based",
+      "model_version": "0.1.0",
+      "explanations": [
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "label": "Assessor classifies property use as data centre",
+          "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+          "base_weight": 20.0,
+          "applied_weight": 19.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "f6621ef2-948d-4ee4-a696-24e65960125b"
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "label": "Large industrial parcel acquisition",
+          "detail": "Organization-held industrial parcel of 20.9 acres transferred for $289,275,000 on 2010-07-15, at or above the 20-acre campus-scale threshold.",
+          "base_weight": 18.0,
+          "applied_weight": 4.05,
+          "confidence_multiplier": 0.9,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "53ca6256-06c0-47a6-a482-e362ca90286d"
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "label": "Single-purpose entity holds title",
+          "detail": "Title is held by DIGITAL 2121 SOUTH PRICE LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+          "base_weight": 6.0,
+          "applied_weight": 0.675,
+          "confidence_multiplier": 0.45,
+          "recency_multiplier": 0.25,
+          "polarity": "supporting",
+          "evidence_record_id": "0dba5fd0-7c99-4b9a-baf4-a2fc2e42c54c"
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "label": "High-voltage substation in close proximity",
+          "detail": "RS-27 tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+          "base_weight": 0.0,
+          "applied_weight": 0.0,
+          "confidence_multiplier": 0.95,
+          "recency_multiplier": 1.0,
+          "polarity": "supporting",
+          "evidence_record_id": "d5c3ab06-44b3-4268-9b70-67b9378cfb8a"
+        }
+      ]
+    }
+  ],
+  "scoring_model": {
+    "name": "helios-rule-based",
+    "version": "0.1.0",
+    "parameters_hash": "46888dc8be8c1d3ffb00092482a839e09fbddfae9688db732ffd6cf982064079",
+    "parameters": {
+      "rules": [
+        {
+          "rule_id": "transmission-or-substation-filing",
+          "evidence_kind": "substation_application",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "transmission-filing",
+          "evidence_kind": "transmission_filing",
+          "identity_weight": 25.0,
+          "stage_weight": 25.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "planning-application-data-center",
+          "evidence_kind": "planning_application_data_center",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "assessor-data-center-classification",
+          "evidence_kind": "assessor_data_center_classification",
+          "identity_weight": 20.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "large-industrial-parcel-acquisition",
+          "evidence_kind": "large_industrial_parcel_acquisition",
+          "identity_weight": 10.0,
+          "stage_weight": 18.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "backup-generator-air-permit",
+          "evidence_kind": "backup_generator_air_permit",
+          "identity_weight": 17.0,
+          "stage_weight": 17.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "water-or-cooling-permit",
+          "evidence_kind": "water_or_cooling_permit",
+          "identity_weight": 14.0,
+          "stage_weight": 14.0,
+          "implies_stage": 3,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "data-center-compatible-zoning",
+          "evidence_kind": "data_center_compatible_zoning",
+          "identity_weight": 8.0,
+          "stage_weight": 12.0,
+          "implies_stage": 2,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "grading-or-construction-permit",
+          "evidence_kind": "grading_or_construction_permit",
+          "identity_weight": 2.0,
+          "stage_weight": 20.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dust-control-registration",
+          "evidence_kind": "dust_control_registration",
+          "identity_weight": 2.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "satellite-construction-change",
+          "evidence_kind": "satellite_construction_change",
+          "identity_weight": 0.0,
+          "stage_weight": 15.0,
+          "implies_stage": 4,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "dedicated-substation-proximity",
+          "evidence_kind": "dedicated_substation_proximity",
+          "identity_weight": 8.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "known-developer-relationship",
+          "evidence_kind": "known_developer_relationship",
+          "identity_weight": 15.0,
+          "stage_weight": 5.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "shell-entity-ownership",
+          "evidence_kind": "shell_entity_ownership",
+          "identity_weight": 6.0,
+          "stage_weight": 6.0,
+          "implies_stage": 1,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "hiring-or-procurement-signal",
+          "evidence_kind": "hiring_or_procurement_signal",
+          "identity_weight": 15.0,
+          "stage_weight": 20.0,
+          "implies_stage": 7,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "conflicting-facility-classification",
+          "evidence_kind": "conflicting_facility_classification",
+          "identity_weight": -20.0,
+          "stage_weight": 0.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "project-cancellation",
+          "evidence_kind": "project_cancellation",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        },
+        {
+          "rule_id": "stale-evidence-no-progression",
+          "evidence_kind": "stale_evidence_no_progression",
+          "identity_weight": 0.0,
+          "stage_weight": -20.0,
+          "implies_stage": null,
+          "max_occurrences": 3,
+          "occurrence_decay": 0.5
+        }
+      ],
+      "staleness_threshold_days": 900,
+      "recency_half_life_days": 730,
+      "diversity_caps": {
+        "1": 45.0,
+        "2": 70.0,
+        "3": 88.0
+      },
+      "saturation_scale": 60.0
+    }
+  },
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

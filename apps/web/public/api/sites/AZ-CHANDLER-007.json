@@ -1,0 +1,462 @@
+{
+  "id": "490f444c-ebda-4218-86bd-35e3b2c40005",
+  "project_code": "AZ-CHANDLER-007",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Chandler",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 35.91,
+  "stage_confidence": 27.96,
+  "confidence_band": "low",
+  "first_signal_date": "2013-02-27",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 3,
+  "total_acres": 1.72,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.901769Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.900784Z",
+  "centroid": [
+    -111.913592,
+    33.304101
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 1.7 acres near 100 N 79TH ST, Chandler. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.91311590290509,
+            33.303707348179245
+          ],
+          [
+            -111.91355598576615,
+            33.30371074849174
+          ],
+          [
+            -111.91356187300944,
+            33.30373735372534
+          ],
+          [
+            -111.9135720449953,
+            33.30376263274414
+          ],
+          [
+            -111.91358622611546,
+            33.30378590061726
+          ],
+          [
+            -111.91360403213476,
+            33.303806526905454
+          ],
+          [
+            -111.91362498060202,
+            33.303823952742825
+          ],
+          [
+            -111.91364850392192,
+            33.30383770597913
+          ],
+          [
+            -111.91367396473396,
+            33.30384741397268
+          ],
+          [
+            -111.91370067318157,
+            33.30385281368698
+          ],
+          [
+            -111.91372790560372,
+            33.303853758817645
+          ],
+          [
+            -111.91375492414237,
+            33.30385022375651
+          ],
+          [
+            -111.91378099673463,
+            33.30384230428549
+          ],
+          [
+            -111.91380541694785,
+            33.303830214981346
+          ],
+          [
+            -111.91382752312033,
+            33.30381428340182
+          ],
+          [
+            -111.91385201868792,
+            33.30379951607893
+          ],
+          [
+            -111.91387851839931,
+            33.30378875169543
+          ],
+          [
+            -111.91390637312487,
+            33.303782253932695
+          ],
+          [
+            -111.91393490054287,
+            33.30378018195815
+          ],
+          [
+            -111.91410105383615,
+            33.30377973148656
+          ],
+          [
+            -111.9140967374312,
+            33.30444413626694
+          ],
+          [
+            -111.91317844810673,
+            33.30444798026186
+          ],
+          [
+            -111.91311322682384,
+            33.30438689450798
+          ],
+          [
+            -111.91311590290509,
+            33.303707348179245
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "a9b02b48-a3c6-4326-8522-7dbae15ea74a",
+      "apn": "30189944",
+      "apn_formatted": "301-89-944",
+      "situs_address": "100 N 79TH ST",
+      "situs_city": "Chandler",
+      "owner_name": "COX COMMUNICATIONS ARIZONA LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 1.72,
+      "last_deed_date": "2013-02-27",
+      "last_deed_number": "20130183968",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20130183968&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30189944",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "ada30edc-abb3-4018-b633-6628eeab1751",
+      "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
+      "role": "utility",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "4af0c683-89fc-464d-b0b5-089b6e42b0f4",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 241.43,
+      "confidence": 0.8776,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 241 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "53dcb932-58ce-45b7-bf3f-aad5ded37def",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1401.67,
+      "confidence": 0.1596,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "ba5e83cb-c109-46f9-889e-a48f054913fe",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1404.54,
+      "confidence": 0.159,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "336851dd-d7d7-4724-8c34-7573d9d46517",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1407.99,
+      "confidence": 0.1582,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "e299e1ad-1164-41e4-85c6-30a9119f3ef5",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1495.69,
+      "confidence": 0.1384,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "1ea175ef-e6d5-4b75-976e-22f0c289c6c0",
+      "infrastructure_kind": "transmission_line",
+      "label": "230.0 kV circuit",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1496.81,
+      "confidence": 0.1382,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "18b9e52a-32a9-42cc-b1f1-681018a748fb",
+      "infrastructure_kind": "transmission_line",
+      "label": "SRP Knox - Henshaw Powerlines",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "transmission_centroid_proximity",
+      "distance_meters": 1716.47,
+      "confidence": 0.0888,
+      "assertion_class": "inferred",
+      "notes": "Distance measured to the circuit centroid, not the nearest point on the line; treat as an upper bound.",
+      "voltage_kv": 230.0,
+      "operator_name": "SRP"
+    },
+    {
+      "id": "9a99fa0f-d675-448c-bad1-e9f9c1c108e7",
+      "infrastructure_kind": "substation",
+      "label": "Intel Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1933.5,
+      "confidence": 0.37,
+      "assertion_class": "inferred",
+      "notes": "Intel Substation lies 1934 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "37fc83f2-67a8-403b-823f-c8cacd659881",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1989.8,
+      "confidence": 0.3531,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1990 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "626b482a-657c-45bd-bc15-6e1bd2119a91",
+      "infrastructure_kind": "substation",
+      "label": "Houston Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2088.15,
+      "confidence": 0.3236,
+      "assertion_class": "inferred",
+      "notes": "Houston Substation lies 2088 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "2714b7e1-239d-4ff0-9b05-31548e3b5b93",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2183.83,
+      "confidence": 0.2949,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2184 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "2220b00c-038d-416f-8b11-327515cebda7",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2424.08,
+      "confidence": 0.2228,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2424 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "2906016b-0cc4-43d9-bc63-7c2f7aaa14fb",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2987.51,
+      "confidence": 0.0537,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2988 m from the site boundary. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": null,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "10e1200a-c561-446c-98bf-6c9c054ccc18",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 4.1,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.902132Z",
+      "notes": null
+    },
+    {
+      "id": "e08ba111-3441-4b79-9e7a-60d1ce913239",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 49200.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.902146Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "6453adc2-0d22-4b77-a2ba-d025c5d0b7be",
+    "calculated_at": "2026-07-27T05:27:28.900799Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 19.675,
+    "confidence": 27.96,
+    "confidence_band": "low",
+    "positive_contribution": 19.675,
+    "negative_contribution": 0.0,
+    "evidence_considered": 3,
+    "distinct_evidence_kinds": 2,
+    "is_backtest": false,
+    "summary": "28% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "926019cb-fa2e-4363-90a6-4f72d01ba498"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 0.675,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "daf30d95-b9d5-4922-9ed4-e123c905b860"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.8776,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "3b612523-c15d-4fb9-bf5e-e0c0ad46076c"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "eebc6c4f-4a1d-4b22-b2f6-2fb95902835e",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-27T05:27:28.901769Z",
+      "is_downgrade": false,
+      "confidence": 27.96,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "926019cb-fa2e-4363-90a6-4f72d01ba498",
+        "daf30d95-b9d5-4922-9ed4-e123c905b860"
+      ],
+      "detection_lag_days": 4898
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "id": "1bc5fd64-a059-4bda-8eb4-63f3e3960bac",
+  "project_code": "AZ-GILBERT-001",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Gilbert",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 35.32,
+  "stage_confidence": 27.14,
+  "confidence_band": "low",
+  "first_signal_date": "2026-07-25",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 2,
+  "total_acres": 2.8053,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.874578Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.873380Z",
+  "centroid": [
+    -111.812616,
+    33.374904
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 2.8 acres near 1040 W MERRILL AVE, Gilbert. Title of record is held by FOX CORPORATION. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.81202099203364,
+            33.374894026174566
+          ],
+          [
+            -111.8120309826111,
+            33.37487248287401
+          ],
+          [
+            -111.81203727619776,
+            33.37484958492204
+          ],
+          [
+            -111.81203969977716,
+            33.37482596180413
+          ],
+          [
+            -111.81203818672294,
+            33.3748022629412
+          ],
+          [
+            -111.81203277863032,
+            33.37477913983649
+          ],
+          [
+            -111.81202362417267,
+            33.374757228165116
+          ],
+          [
+            -111.81201097501435,
+            33.3747371302988
+          ],
+          [
+            -111.81199517889216,
+            33.3747193987461
+          ],
+          [
+            -111.81197667005584,
+            33.37470452096349
+          ],
+          [
+            -111.81196759165088,
+            33.37469696136786
+          ],
+          [
+            -111.81195976843387,
+            33.37468810912531
+          ],
+          [
+            -111.81195338238139,
+            33.374678170148684
+          ],
+          [
+            -111.81194858204003,
+            33.37466737562945
+          ],
+          [
+            -111.81194547907096,
+            33.37465597665995
+          ],
+          [
+            -111.81194414565266,
+            33.37464423839269
+          ],
+          [
+            -111.81194255293967,
+            33.37453446666319
+          ],
+          [
+            -111.81194386027246,
+            33.374526696636615
+          ],
+          [
+            -111.81194648933558,
+            33.37451926895466
+          ],
+          [
+            -111.81195036118521,
+            33.374512406650915
+          ],
+          [
+            -111.81195535955997,
+            33.3745063157822
+          ],
+          [
+            -111.81196133437193,
+            33.37450117924113
+          ],
+          [
+            -111.81196810621333,
+            33.37449715126443
+          ],
+          [
+            -111.8119754717437,
+            33.374494352801555
+          ],
+          [
+            -111.8119832097957,
+            33.37449286788294
+          ],
+          [
+            -111.81199108801614,
+            33.37449274109675
+          ],
+          [
+            -111.81261231525595,
+            33.374486396102284
+          ],
+          [
+            -111.81323126526647,
+            33.374480072862454
+          ],
+          [
+            -111.81323916509882,
+            33.37448005263734
+          ],
+          [
+            -111.8132469516001,
+            33.374481386113224
+          ],
+          [
+            -111.81325439452937,
+            33.37448403386024
+          ],
+          [
+            -111.81326127380481,
+            33.374487917586514
+          ],
+          [
+            -111.81326738601145,
+            33.37449292245318
+          ],
+          [
+            -111.81327255041593,
+            33.374498900470115
+          ],
+          [
+            -111.81327661431075,
+            33.37450567487188
+          ],
+          [
+            -111.81327945752959,
+            33.374513045344514
+          ],
+          [
+            -111.8132809960006,
+            33.374520793948726
+          ],
+          [
+            -111.81328258961192,
+            33.374630566445674
+          ],
+          [
+            -111.81328161061737,
+            33.37464230370277
+          ],
+          [
+            -111.81327884567445,
+            33.374653752577174
+          ],
+          [
+            -111.81327436001477,
+            33.37466464296247
+          ],
+          [
+            -111.81326825946584,
+            33.374674717928336
+          ],
+          [
+            -111.81326068795423,
+            33.37468373978216
+          ],
+          [
+            -111.81325182411005,
+            33.37469149567675
+          ],
+          [
+            -111.81323361611308,
+            33.37470675972216
+          ],
+          [
+            -111.81321821677366,
+            33.3747248534388
+          ],
+          [
+            -111.81320605970038,
+            33.37474526735085
+          ],
+          [
+            -111.81319748720736,
+            33.374767426651374
+          ],
+          [
+            -111.81319274067552,
+            33.37479070738744
+          ],
+          [
+            -111.81319195375582,
+            33.37481445402917
+          ],
+          [
+            -111.81319514860606,
+            33.37483799792792
+          ],
+          [
+            -111.81320223526687,
+            33.374860676143776
+          ],
+          [
+            -111.81321301419486,
+            33.37488185011241
+          ],
+          [
+            -111.81323395187343,
+            33.37490762074699
+          ],
+          [
+            -111.8132589173541,
+            33.37492951222398
+          ],
+          [
+            -111.81328720252952,
+            33.37494690362537
+          ],
+          [
+            -111.81331800513425,
+            33.37495930167086
+          ],
+          [
+            -111.8133504514999,
+            33.37496635470901
+          ],
+          [
+            -111.81338362133529,
+            33.37496786269124
+          ],
+          [
+            -111.81338605666802,
+            33.37528044253564
+          ],
+          [
+            -111.812909506698,
+            33.37528545592079
+          ],
+          [
+            -111.81185336640162,
+            33.37529657418709
+          ],
+          [
+            -111.81185013785648,
+            33.374984805337085
+          ],
+          [
+            -111.81188373466225,
+            33.37498274050718
+          ],
+          [
+            -111.81191649161013,
+            33.37497499510567
+          ],
+          [
+            -111.81194745536611,
+            33.37496179454901
+          ],
+          [
+            -111.81197572478384,
+            33.374943523016476
+          ],
+          [
+            -111.81200047713102,
+            33.37492071226927
+          ],
+          [
+            -111.81202099203364,
+            33.374894026174566
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "e623477a-39ec-4b3d-87ee-f85853117aef",
+      "apn": "30212690",
+      "apn_formatted": "302-12-690",
+      "situs_address": "1040 W MERRILL AVE",
+      "situs_city": "Gilbert",
+      "owner_name": "FOX CORPORATION",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 2.8053,
+      "last_deed_date": "2020-10-22",
+      "last_deed_number": "20201019171",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20201019171&suffix=",
+      "last_sale_price": null,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=30212690",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "93639729-4122-4127-b1a0-a969e3b0ff80",
+      "canonical_name": "FOX CORPORATION",
+      "role": "owner",
+      "organization_type": "CORP",
+      "is_suspected_shell": false,
+      "shell_indicators": [],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "16360784-4108-40e1-ac77-c9e30fe5e9c2",
+      "infrastructure_kind": "substation",
+      "label": "Finley Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 189.49,
+      "confidence": 0.8932,
+      "assertion_class": "inferred",
+      "notes": "Finley Substation lies 189 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "c14d8af2-6bb0-4f20-88c4-9dd5ae0c4bc6",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1916.69,
+      "confidence": 0.375,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1917 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "e8b023b5-337e-4006-b6d1-92b5b0bd6b10",
+      "infrastructure_kind": "substation",
+      "label": "Corbell Substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2394.19,
+      "confidence": 0.2317,
+      "assertion_class": "inferred",
+      "notes": "Corbell Substation lies 2394 m from the site boundary and is tagged 230 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 230.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "06e884c3-3604-4701-a078-b59ca52262c5",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2585.0,
+      "confidence": 0.1745,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2585 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "087c8a6e-7f0d-450d-bada-08bb25e38f1e",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 6.7,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.874996Z",
+      "notes": null
+    },
+    {
+      "id": "f6d8cf72-a249-4d7f-a458-0b6bd84352d2",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 80400.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.875017Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "372c5270-7f7d-4840-a1bf-8c5d5b0e6c60",
+    "calculated_at": "2026-07-27T05:27:28.873395Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 19.0,
+    "confidence": 27.14,
+    "confidence_band": "low",
+    "positive_contribution": 19.0,
+    "negative_contribution": 0.0,
+    "evidence_considered": 2,
+    "distinct_evidence_kinds": 1,
+    "is_backtest": false,
+    "summary": "27% confidence from 2 evidence records across 1 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "dbbf5789-8416-425f-b2c7-af6d7d5e32df"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.8932,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "251c91f9-b46a-444e-841c-5be0dcf21c76"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "1aeeb2a8-0e79-40b4-955f-fa45ffd0a5ba",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2026-07-27",
+      "detected_at": "2026-07-27T05:27:28.874578Z",
+      "is_downgrade": false,
+      "confidence": 27.14,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
+      "triggering_evidence_ids": [
+        "dbbf5789-8416-425f-b2c7-af6d7d5e32df"
+      ],
+      "detection_lag_days": 0
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

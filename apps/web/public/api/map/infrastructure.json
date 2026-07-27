@@ -3,83 +3,25 @@
   "features": [
     {
       "type": "Feature",
-      "id": "substation-28808694",
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -111.5976846,
-          33.3555507
+          -111.9690096,
+          33.4400406
         ]
       },
       "properties": {
-        "id": "28808694",
-        "name": "Greenbone Substation",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 500.0,
-        "voltage_kv": 500.0,
-        "osm_url": "https://www.openstreetmap.org/way/28808694"
+        "id": "0257f89c-441e-4f40-a888-25f7a6b9b936",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 750.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1354284638"
       }
     },
     {
       "type": "Feature",
-      "id": "substation-30140447",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.7748881,
-          33.3205873
-        ]
-      },
-      "properties": {
-        "id": "30140447",
-        "name": "Tenney Substation",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 69.0,
-        "voltage_kv": 69.0,
-        "osm_url": "https://www.openstreetmap.org/way/30140447"
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "substation-30140734",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.7049006,
-          33.3293805
-        ]
-      },
-      "properties": {
-        "id": "30140734",
-        "name": "Cooley Substation",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 69.0,
-        "voltage_kv": 69.0,
-        "osm_url": "https://www.openstreetmap.org/way/30140734"
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "substation-30568847",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -111.9123547,
-          33.4390662
-        ]
-      },
-      "properties": {
-        "id": "30568847",
-        "name": "Brandow Substation",
-        "operator_name": "Salt River Project",
-        "max_voltage_kv": 230.0,
-        "voltage_kv": 230.0,
-        "osm_url": "https://www.openstreetmap.org/way/30568847"
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "substation-106471938",
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -88,16 +30,3304 @@
         ]
       },
       "properties": {
-        "id": "106471938",
+        "id": "94f418a5-c996-4d4e-b2df-4b6c9ac74f8d",
+        "kind": "substation",
         "name": "Kyrene Substation",
         "operator_name": "Salt River Project",
         "max_voltage_kv": 500.0,
-        "voltage_kv": 500.0,
+        "status": "operational",
         "osm_url": "https://www.openstreetmap.org/way/106471938"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5976846,
+          33.3555507
+        ]
+      },
+      "properties": {
+        "id": "86773b1d-28c3-4fe3-b322-78a54ed10a1f",
+        "kind": "substation",
+        "name": "Greenbone Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 500.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/28808694"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8921907,
+          33.274013
+        ]
+      },
+      "properties": {
+        "id": "085e8dd9-ed53-4dcb-9c31-f0f4aa0fd830",
+        "kind": "substation",
+        "name": "Henshaw Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/775651859"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9110473,
+          33.4261938
+        ]
+      },
+      "properties": {
+        "id": "8e2e5b1e-5f70-416e-af68-2afd2f5ed3f7",
+        "kind": "substation",
+        "name": null,
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344754639"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9360625,
+          33.354016
+        ]
+      },
+      "properties": {
+        "id": "d2a9efb1-f944-4f6d-a2f7-14a613c65110",
+        "kind": "substation",
+        "name": "Kyrene Substation II",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/106471939"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9109091,
+          33.423391
+        ]
+      },
+      "properties": {
+        "id": "8e0023e6-8906-4bed-bd27-fc1fe694e6fb",
+        "kind": "substation",
+        "name": null,
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344754645"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9653602,
+          33.291896
+        ]
+      },
+      "properties": {
+        "id": "29663f4c-c38d-4d86-991d-054608281d76",
+        "kind": "substation",
+        "name": "Knox Substation",
+        "operator_name": "SRP",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/106479092"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8861505,
+          33.2359948
+        ]
+      },
+      "properties": {
+        "id": "a5952c0f-189b-426c-b18f-d9cfd9504c46",
+        "kind": "substation",
+        "name": "Intel Substation",
+        "operator_name": null,
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1319238610"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6783683,
+          33.3566333
+        ]
+      },
+      "properties": {
+        "id": "da19a7d0-e8c4-4177-a8c7-de112ff2fff7",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1292956193"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6455562,
+          33.3304317
+        ]
+      },
+      "properties": {
+        "id": "c19e3720-3b1b-4a08-8c00-53c1b5a70409",
+        "kind": "substation",
+        "name": "Scott Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200014621"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8297935,
+          33.3579487
+        ]
+      },
+      "properties": {
+        "id": "0fca4e37-c5bb-4b1d-a7d0-446732c534b5",
+        "kind": "substation",
+        "name": "Corbell Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30692633"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7998856,
+          33.4249216
+        ]
+      },
+      "properties": {
+        "id": "59ee677c-0688-4d4e-bbe6-0d69bd4fc40b",
+        "kind": "substation",
+        "name": "Rogers Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/45083494"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9123547,
+          33.4390662
+        ]
+      },
+      "properties": {
+        "id": "ce9499e8-5df7-4b58-8c70-f50aa39ec557",
+        "kind": "substation",
+        "name": "Brandow Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30568847"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6336404,
+          33.343921
+        ]
+      },
+      "properties": {
+        "id": "834f2fa0-19b6-4e35-afb8-380e1d34a05c",
+        "kind": "substation",
+        "name": "Prickly Pear Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200014620"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6748736,
+          33.4268197
+        ]
+      },
+      "properties": {
+        "id": "f1ff7fbf-9df7-4c66-b1b5-5b441118e982",
+        "kind": "substation",
+        "name": "Thunderstone Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/106086552"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5163112,
+          33.2768617
+        ]
+      },
+      "properties": {
+        "id": "e44fdc9c-92b2-4ad9-9028-44615d5ab3e3",
+        "kind": "substation",
+        "name": "Dinosaur Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/153678470"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9166358,
+          33.4258473
+        ]
+      },
+      "properties": {
+        "id": "836d0a60-0acc-46e8-a9fa-a2b0ac3ff094",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1194154943"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7483704,
+          33.3302844
+        ]
+      },
+      "properties": {
+        "id": "401c9586-c56f-40ab-a816-0b9dfa18ad80",
+        "kind": "substation",
+        "name": "Santan Substation",
+        "operator_name": null,
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/106086540"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6680784,
+          33.4254068
+        ]
+      },
+      "properties": {
+        "id": "ba93eb88-cc67-446a-8aa1-f55306c6ca71",
+        "kind": "substation",
+        "name": "Thunderstone Substation II",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/106086544"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5095512,
+          33.4526957
+        ]
+      },
+      "properties": {
+        "id": "4440dfd0-c2ae-4faa-a399-8c77fc5aa7c3",
+        "kind": "substation",
+        "name": "Goldfield Substation",
+        "operator_name": null,
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/105903716"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9411142,
+          33.4837421
+        ]
+      },
+      "properties": {
+        "id": "e606b4e4-72e4-49ec-8240-5c0d6b509d6f",
+        "kind": "substation",
+        "name": "Papago Buttes Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 230.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/137619994"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.4925029,
+          33.3866116
+        ]
+      },
+      "properties": {
+        "id": "6c531639-39c5-459f-a149-6459adfe2e99",
+        "kind": "substation",
+        "name": "Carrel Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 115.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/105903690"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.4530281,
+          33.3537038
+        ]
+      },
+      "properties": {
+        "id": "173fb9e3-3ac3-4b33-b270-a6b449fb0381",
+        "kind": "substation",
+        "name": "Spurlock Substation",
+        "operator_name": null,
+        "max_voltage_kv": 115.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/105903718"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5083237,
+          33.4527644
+        ]
+      },
+      "properties": {
+        "id": "5dd19622-300c-458b-9be2-fcfdf66db329",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 115.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/261345785"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6561018,
+          33.4229596
+        ]
+      },
+      "properties": {
+        "id": "bfc9b5b9-b0d9-419a-9c5a-705b300a4d5d",
+        "kind": "substation",
+        "name": "Noack Substation",
+        "operator_name": "SRP",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/176985789"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6666762,
+          33.446105
+        ]
+      },
+      "properties": {
+        "id": "df9dcec2-1649-4672-abde-cad47f3e3487",
+        "kind": "substation",
+        "name": "Spook Hill Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/176985793"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9396249,
+          33.4633526
+        ]
+      },
+      "properties": {
+        "id": "5c63c85e-a2c3-4eb9-8bf3-caefab245c56",
+        "kind": "substation",
+        "name": null,
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/187985263"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6384448,
+          33.2491853
+        ]
+      },
+      "properties": {
+        "id": "63ee3698-61c2-43bc-9f22-c4e29c9130b0",
+        "kind": "substation",
+        "name": "Rittenhouse Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/204795435"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6686632,
+          33.2710872
+        ]
+      },
+      "properties": {
+        "id": "a2fd8ce9-f615-4cc5-bda7-85fe488b8600",
+        "kind": "substation",
+        "name": "SRP Rohrig Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/204795440"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8851249,
+          33.2465624
+        ]
+      },
+      "properties": {
+        "id": "90e6cc76-e9dd-4e29-a5b5-c0eba047b92b",
+        "kind": "substation",
+        "name": "RS-28",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/204822665"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9690366,
+          33.4118547
+        ]
+      },
+      "properties": {
+        "id": "51345c05-45c6-4fde-b7ff-8b74c1e0c8eb",
+        "kind": "substation",
+        "name": "Binary Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/220124243"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9648853,
+          33.3559538
+        ]
+      },
+      "properties": {
+        "id": "f61921b0-bb84-4be8-bffa-5f595f6a41bf",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/221128651"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.945035,
+          33.3299327
+        ]
+      },
+      "properties": {
+        "id": "351225eb-1b95-4934-a07f-27dd94e23def",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/222004155"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9193942,
+          33.3495733
+        ]
+      },
+      "properties": {
+        "id": "bf823b57-eee4-48e9-a557-0a926bf6be5f",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/223784613"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9602466,
+          33.400541
+        ]
+      },
+      "properties": {
+        "id": "d2fe9372-23de-46a3-89cd-c0814b0635ee",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/224009482"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9617966,
+          33.3387149
+        ]
+      },
+      "properties": {
+        "id": "bc96b78b-3ff0-4738-af76-39a6a836dcce",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/224240600"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6677229,
+          33.4671329
+        ]
+      },
+      "properties": {
+        "id": "4bb1d43b-a940-4000-8601-b4a57ce87ea5",
+        "kind": "substation",
+        "name": "Kirk Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/224918775"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.691449,
+          33.3655058
+        ]
+      },
+      "properties": {
+        "id": "c598c4b7-b5f4-4778-b384-367c552108c1",
+        "kind": "substation",
+        "name": "Baseline Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/238211057"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6682051,
+          33.3946567
+        ]
+      },
+      "properties": {
+        "id": "f5f98e4b-4760-404f-b44e-2edc89f5f535",
+        "kind": "substation",
+        "name": "Sage Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/255992091"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5928423,
+          33.320268
+        ]
+      },
+      "properties": {
+        "id": "2d40424d-b432-4ae4-9abc-382f694e47e9",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/256263267"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9586971,
+          33.4906919
+        ]
+      },
+      "properties": {
+        "id": "6a2acfe3-a3a4-4ea2-a131-ca5e67ddd346",
+        "kind": "substation",
+        "name": "Arizona Falls",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/256552437"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9064819,
+          33.5162368
+        ]
+      },
+      "properties": {
+        "id": "969de17d-7fb3-4d7b-a64b-59907632f69d",
+        "kind": "substation",
+        "name": "Indian Bend Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/256552440"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9183833,
+          33.4506342
+        ]
+      },
+      "properties": {
+        "id": "825ed2c1-7ab1-4d18-a4a1-989ee92b31b4",
+        "kind": "substation",
+        "name": "Stadium Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/288007175"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9353574,
+          33.4463552
+        ]
+      },
+      "properties": {
+        "id": "4e0d8f57-a8c7-4d10-8ca9-d1f7748045f8",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/288007192"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9178671,
+          33.5118606
+        ]
+      },
+      "properties": {
+        "id": "015b3fa8-8243-4dce-8fe0-2e447cf42e68",
+        "kind": "substation",
+        "name": "Camelback Substation",
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/288249790"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9245303,
+          33.5029017
+        ]
+      },
+      "properties": {
+        "id": "a8ea2a63-73ac-40f0-9b0c-9b57ee8270f8",
+        "kind": "substation",
+        "name": "Scottsdale Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/288249791"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9724119,
+          33.4163266
+        ]
+      },
+      "properties": {
+        "id": "09dfaec5-5f35-4d06-b0a4-bb0991294028",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/291046892"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9706604,
+          33.4163313
+        ]
+      },
+      "properties": {
+        "id": "c6c04ea0-c9a6-4702-8191-6ffaf9064269",
+        "kind": "substation",
+        "name": "Weiler Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/291046898"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7124312,
+          33.218705
+        ]
+      },
+      "properties": {
+        "id": "22c4ee88-4fd8-4438-998a-07572c0086ca",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/292302626"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7664175,
+          33.3774973
+        ]
+      },
+      "properties": {
+        "id": "bc4ffbef-0e6c-4ff3-baa5-0b6e08df29ee",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/292653458"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8062152,
+          33.2594819
+        ]
+      },
+      "properties": {
+        "id": "6c4bf05c-3275-420d-ad71-583bc4030550",
+        "kind": "substation",
+        "name": "Cooper Electrical Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/296198962"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7776193,
+          33.2198773
+        ]
+      },
+      "properties": {
+        "id": "3156a21c-678d-4327-8497-133ea87decf3",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/297509890"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5816402,
+          33.2011706
+        ]
+      },
+      "properties": {
+        "id": "ff08a8ad-c62e-484c-9a8f-770c6298e1c2",
+        "kind": "substation",
+        "name": "Hunt Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/297509904"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8361224,
+          33.2181926
+        ]
+      },
+      "properties": {
+        "id": "6074ca13-d97c-446c-95c6-fe226aa4de1d",
+        "kind": "substation",
+        "name": "Willis Substation",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/297509912"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9778481,
+          33.4410326
+        ]
+      },
+      "properties": {
+        "id": "79d2e7c7-4299-4d13-be2b-67a578372eca",
+        "kind": "substation",
+        "name": "Hohokam Substation",
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/305074341"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8614228,
+          33.364798
+        ]
+      },
+      "properties": {
+        "id": "b15dc275-1725-4845-9f62-33442d187952",
+        "kind": "substation",
+        "name": "Griswold Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/306318026"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8948991,
+          33.3486755
+        ]
+      },
+      "properties": {
+        "id": "9ca09d14-85a1-4c0f-9ece-2598afe328cd",
+        "kind": "substation",
+        "name": "Clemans Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/306348816"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8477818,
+          33.3356645
+        ]
+      },
+      "properties": {
+        "id": "1dcf0e51-0b2a-45e7-9c3d-9ad9cfad1ae2",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/306453114"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8863931,
+          33.5173148
+        ]
+      },
+      "properties": {
+        "id": "1e893f71-a55a-4b8b-8c8d-24c8988b2ae3",
+        "kind": "substation",
+        "name": "Jackrabit Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/310865379"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7353063,
+          33.4674817
+        ]
+      },
+      "properties": {
+        "id": "574ce616-560f-4ff9-b851-c3cb5114e2fd",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/312877818"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7191005,
+          33.4734172
+        ]
+      },
+      "properties": {
+        "id": "7bac72dd-72e9-4323-a77f-b1382f04326b",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/312877821"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5595814,
+          33.3939029
+        ]
+      },
+      "properties": {
+        "id": "310c180b-ec53-4909-8d38-f941a79dac71",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/313196156"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7094576,
+          33.4814253
+        ]
+      },
+      "properties": {
+        "id": "2bdf774e-a2d6-4fb3-9466-1851f3962b26",
+        "kind": "substation",
+        "name": "Bassham Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/313541014"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8346097,
+          33.2762659
+        ]
+      },
+      "properties": {
+        "id": "3590bb55-5d1b-4824-b985-74832cb16a88",
+        "kind": "substation",
+        "name": "Tweedy Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/314684177"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8810854,
+          33.2767824
+        ]
+      },
+      "properties": {
+        "id": "b251160f-fade-4daa-85cd-30094366c11e",
+        "kind": "substation",
+        "name": "Jones Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/314803259"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7627256,
+          33.4377586
+        ]
+      },
+      "properties": {
+        "id": "2bd94b7e-0440-4e95-9b2b-a720a6f3e315",
+        "kind": "substation",
+        "name": "Lehi Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/315275918"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7406574,
+          33.2638762
+        ]
+      },
+      "properties": {
+        "id": "a7790cd7-2055-4260-9b6c-5e3a9f04cec6",
+        "kind": "substation",
+        "name": "Wortman Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/315379237"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8343713,
+          33.3029286
+        ]
+      },
+      "properties": {
+        "id": "98f85adc-de40-4cec-9789-502097c91361",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/318212434"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.875709,
+          33.3037969
+        ]
+      },
+      "properties": {
+        "id": "38098a32-468c-4261-a412-dcae7b282ce6",
+        "kind": "substation",
+        "name": "Miller Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/318512021"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9105985,
+          33.3031879
+        ]
+      },
+      "properties": {
+        "id": "ee0fbc84-1b09-4307-9114-f572fc1d8826",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/318513856"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.885369,
+          33.2741447
+        ]
+      },
+      "properties": {
+        "id": "b55e0aeb-aa87-433a-ac69-950de4026243",
+        "kind": "substation",
+        "name": "RS-27",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/318676175"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8809858,
+          33.2686223
+        ]
+      },
+      "properties": {
+        "id": "ae81a117-565a-44ca-856c-9802515ebe06",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/318676416"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8752042,
+          33.2212281
+        ]
+      },
+      "properties": {
+        "id": "9d44f063-5b74-4209-ba0a-ab7bec753aca",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/319265069"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8871783,
+          33.3018847
+        ]
+      },
+      "properties": {
+        "id": "f11c1b7f-84f3-457b-a036-96e3bdbd5be5",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/319267333"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9497222,
+          33.3048174
+        ]
+      },
+      "properties": {
+        "id": "f03ec200-ad10-4f6a-a411-1ff45bc51dd1",
+        "kind": "substation",
+        "name": "Gila Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/319388646"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8758395,
+          33.3314423
+        ]
+      },
+      "properties": {
+        "id": "94d1b2cf-04d3-4f4e-a3f3-10ce0d5abe74",
+        "kind": "substation",
+        "name": "Manor Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/320332175"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8058711,
+          33.2222385
+        ]
+      },
+      "properties": {
+        "id": "554512a9-9559-4423-a84e-378d65b3bd00",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/321840920"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9196652,
+          33.3933894
+        ]
+      },
+      "properties": {
+        "id": "89334684-aa6a-4ac9-a381-8b76258ac8ee",
+        "kind": "substation",
+        "name": "Alameda Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/327757074"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8114269,
+          33.4581682
+        ]
+      },
+      "properties": {
+        "id": "b82b553b-2dd7-4521-ac5a-6d88c9665102",
+        "kind": "substation",
+        "name": "Hughes Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/328097561"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8325902,
+          33.4947534
+        ]
+      },
+      "properties": {
+        "id": "59cb4a79-1973-4402-96dd-d2e9fbab9803",
+        "kind": "substation",
+        "name": "Evergreen Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/328097564"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7057585,
+          33.3923183
+        ]
+      },
+      "properties": {
+        "id": "b52cf43d-64dd-41fb-a094-fa0a7737fcc0",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/328269318"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7549639,
+          33.3471521
+        ]
+      },
+      "properties": {
+        "id": "915d2004-ddfb-4e12-acef-97025458bef3",
+        "kind": "substation",
+        "name": "Lacy Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/328304733"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.953418,
+          33.2803096
+        ]
+      },
+      "properties": {
+        "id": "6a1352c8-bfe6-4059-bb1e-0f52a5c0133b",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/334645876"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7043523,
+          33.4378671
+        ]
+      },
+      "properties": {
+        "id": "3fd2a9e2-1092-4e3c-a12c-41e605a5e1e9",
+        "kind": "substation",
+        "name": "Boone Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/343409575"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8923604,
+          33.4938467
+        ]
+      },
+      "properties": {
+        "id": "01340e3a-302a-407d-9d4b-6b19706a5c59",
+        "kind": "substation",
+        "name": "Pima Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/343409591"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9094064,
+          33.473494
+        ]
+      },
+      "properties": {
+        "id": "a6acad65-d9e4-4d42-9f82-8bec11043d4f",
+        "kind": "substation",
+        "name": "Beeline Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344436227"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9008717,
+          33.4635342
+        ]
+      },
+      "properties": {
+        "id": "76561712-4ce2-4cc6-b914-70704b180f28",
+        "kind": "substation",
+        "name": "Chambers Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344436228"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9010321,
+          33.461832
+        ]
+      },
+      "properties": {
+        "id": "6aceab67-8806-45c7-8495-0f64b3097614",
+        "kind": "substation",
+        "name": "Noble Substation",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344436229"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9167413,
+          33.4226684
+        ]
+      },
+      "properties": {
+        "id": "2cbe9d4a-99d7-4d4f-9d78-74567a846f02",
+        "kind": "substation",
+        "name": null,
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344754643"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8836463,
+          33.4155761
+        ]
+      },
+      "properties": {
+        "id": "50f39c71-6765-4fd3-9c82-4e23ae83b3ef",
+        "kind": "substation",
+        "name": "Tempe Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344960169"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8786411,
+          33.4108027
+        ]
+      },
+      "properties": {
+        "id": "ef360704-da56-491e-be63-2be642d9103e",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/344960172"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8927721,
+          33.3643901
+        ]
+      },
+      "properties": {
+        "id": "e297436e-58ff-47d0-8195-8a39397af2af",
+        "kind": "substation",
+        "name": "Hanger Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/345261475"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8063325,
+          33.3313245
+        ]
+      },
+      "properties": {
+        "id": "91b6e9e4-5f93-4f75-a8e2-86b3c9f9cd94",
+        "kind": "substation",
+        "name": "Neely Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/345471207"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9724688,
+          33.4611353
+        ]
+      },
+      "properties": {
+        "id": "49d3fe8f-1822-4922-aa97-87c5429b497a",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/351056180"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6017916,
+          33.3440535
+        ]
+      },
+      "properties": {
+        "id": "1884a331-fe61-4569-9175-84fa50db8fc0",
+        "kind": "substation",
+        "name": "Luna Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/376109324"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8963071,
+          33.3545323
+        ]
+      },
+      "properties": {
+        "id": "432c9a21-ab44-4ed2-b882-06e7dbdef752",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/377477643"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8062245,
+          33.3919202
+        ]
+      },
+      "properties": {
+        "id": "95f90ebf-26f8-450c-9137-b4c003d30a61",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/383831747"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7040384,
+          33.2590329
+        ]
+      },
+      "properties": {
+        "id": "978883f8-ef1b-4e2c-bd32-42d61de193ee",
+        "kind": "substation",
+        "name": "Bogle Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/383933966"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8807848,
+          33.3934969
+        ]
+      },
+      "properties": {
+        "id": "5c572c19-e82e-4b95-b4da-c91496a461dc",
+        "kind": "substation",
+        "name": "Dobson Water - Power Facility",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/386408283"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7265889,
+          33.3642551
+        ]
+      },
+      "properties": {
+        "id": "ae574be4-b90b-490d-96ae-60c9738a2163",
+        "kind": "substation",
+        "name": "Greer Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/400470846"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6066211,
+          33.3486617
+        ]
+      },
+      "properties": {
+        "id": "161808db-0752-48f0-ac10-f635bf5acb00",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/414047644"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8096166,
+          33.2996264
+        ]
+      },
+      "properties": {
+        "id": "a3f6e9f3-8e16-4df3-a6bc-0668f616efb6",
+        "kind": "substation",
+        "name": "Shultz Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/432753029"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7988329,
+          33.3539611
+        ]
+      },
+      "properties": {
+        "id": "3c1edb83-47b4-4150-80af-a50b5b8de53e",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/432753031"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.96019,
+          33.3858691
+        ]
+      },
+      "properties": {
+        "id": "ba1c23e9-4671-438b-bc28-2801ba21edd3",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/433285903"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7593358,
+          33.4721691
+        ]
+      },
+      "properties": {
+        "id": "32c7531b-32cb-4c28-825c-eec86cd4d081",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/434693815"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7636474,
+          33.2915373
+        ]
+      },
+      "properties": {
+        "id": "ff974bd3-2bab-44ee-807d-713819b24da0",
+        "kind": "substation",
+        "name": "Freestone Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/435750370"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7319701,
+          33.2916651
+        ]
+      },
+      "properties": {
+        "id": "f0bbd30c-9022-454a-9e3d-03579d697c9c",
+        "kind": "substation",
+        "name": "Clark Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/480300599"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8098139,
+          33.3749677
+        ]
+      },
+      "properties": {
+        "id": "380a9b73-2816-476f-a149-e1113b8355bb",
+        "kind": "substation",
+        "name": "Finley Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/515484742"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9011137,
+          33.3488007
+        ]
+      },
+      "properties": {
+        "id": "7f43e579-9172-4550-bc66-2c82b340b1ed",
+        "kind": "substation",
+        "name": "Display Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/516976205"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8900431,
+          33.3001973
+        ]
+      },
+      "properties": {
+        "id": "dff2d303-ff63-442d-a15a-71451b5248bd",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/518198118"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9117793,
+          33.3232387
+        ]
+      },
+      "properties": {
+        "id": "2315528b-23a2-40f4-a90e-57d049b3b0f6",
+        "kind": "substation",
+        "name": "Houston Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/528093660"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.4929054,
+          33.1624627
+        ]
+      },
+      "properties": {
+        "id": "309c627f-9aad-4dbe-9daa-d619e43d4d60",
+        "kind": "substation",
+        "name": "Quail Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/542833043"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5997723,
+          33.2782939
+        ]
+      },
+      "properties": {
+        "id": "e02045f7-4b53-4bf1-8c8a-8e9dc1a3bf99",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/565647198"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5841472,
+          33.2923343
+        ]
+      },
+      "properties": {
+        "id": "6413d8ee-7c7f-4234-997a-fcb67dab245b",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/565647200"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5843009,
+          33.2842429
+        ]
+      },
+      "properties": {
+        "id": "0255c311-6772-421c-b4f1-e23e58a36a1e",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/565647202"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.558668,
+          33.1611582
+        ]
+      },
+      "properties": {
+        "id": "fc38035a-6b03-4d14-87a2-230f80e9e083",
+        "kind": "substation",
+        "name": "Webber Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/565647206"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5492074,
+          33.2496366
+        ]
+      },
+      "properties": {
+        "id": "b72d32a8-24fa-45b1-972e-40ea79536645",
+        "kind": "substation",
+        "name": "Queen Creek Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/565647215"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8048203,
+          33.4335522
+        ]
+      },
+      "properties": {
+        "id": "659f54f8-7539-45ae-91e8-34aecc0369c9",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/627457429"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.3549597,
+          33.2637488
+        ]
+      },
+      "properties": {
+        "id": "6439c6a4-a173-4954-b5b0-4a629f79e998",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/749864741"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.771796,
+          33.2565948
+        ]
+      },
+      "properties": {
+        "id": "7bc4929d-8695-418d-88c3-eaab786a04dd",
+        "kind": "substation",
+        "name": "Turpen Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/764006306"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8499135,
+          33.4110083
+        ]
+      },
+      "properties": {
+        "id": "27287b33-e8f1-44a9-80a7-ec4ad96ffa7d",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/832351680"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8359657,
+          33.4093157
+        ]
+      },
+      "properties": {
+        "id": "fcde3ff4-14e8-4412-8f21-c2cf23cb57b3",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/859855151"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9110836,
+          33.428332
+        ]
+      },
+      "properties": {
+        "id": "7ad7ecda-5270-4be8-91df-1bcc73eaab1a",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/931739892"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7391937,
+          33.3961597
+        ]
+      },
+      "properties": {
+        "id": "3292c8b5-98cd-48e2-ba9f-6880008e9db5",
+        "kind": "substation",
+        "name": "Southern Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/991640108"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6352293,
+          33.2163506
+        ]
+      },
+      "properties": {
+        "id": "cc850318-0030-442c-9e51-9f917a9adb09",
+        "kind": "substation",
+        "name": "Morcom Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/991875435"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5278739,
+          33.2182106
+        ]
+      },
+      "properties": {
+        "id": "7fcfd51f-c832-45d4-92fc-f7d644bcf6fe",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/997328445"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9281211,
+          33.367767
+        ]
+      },
+      "properties": {
+        "id": "c42e3234-69cc-4d32-a752-a199c6e584a7",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1064496433"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7441154,
+          33.2186835
+        ]
+      },
+      "properties": {
+        "id": "995a312b-7c1f-4027-94dc-ea53a95aabac",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1083405337"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8612417,
+          33.4215744
+        ]
+      },
+      "properties": {
+        "id": "2d26fc59-809e-498f-8b3a-607c06ca72e3",
+        "kind": "substation",
+        "name": "University Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1097617072"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8493818,
+          33.3941906
+        ]
+      },
+      "properties": {
+        "id": "618efcf2-e6d5-48ac-92a9-ebbfc2a94351",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1120254887"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8616847,
+          33.3244602
+        ]
+      },
+      "properties": {
+        "id": "4da495fc-1274-4a44-8a82-e8a2cf84e795",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1124573498"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6808227,
+          33.5036102
+        ]
+      },
+      "properties": {
+        "id": "57134c92-52fd-4c84-9ce3-cd3396f6dd53",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1158567487"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9374127,
+          33.3559952
+        ]
+      },
+      "properties": {
+        "id": "62387a26-9166-409f-8da8-e3c060c20b6e",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1194154859"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6347648,
+          33.3299505
+        ]
+      },
+      "properties": {
+        "id": "ffb41b20-bb97-4a21-a016-f9c50555a949",
+        "kind": "substation",
+        "name": "Perales Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200014576"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6317821,
+          33.3442716
+        ]
+      },
+      "properties": {
+        "id": "83f7d558-7e64-479c-ab06-ec31b6f7113d",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200014619"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6168063,
+          33.2663881
+        ]
+      },
+      "properties": {
+        "id": "96a4e02b-0331-4d65-980f-f8c66b543a29",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/542866027"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7748881,
+          33.3205873
+        ]
+      },
+      "properties": {
+        "id": "13b05f46-3d6a-46f2-948d-41bb8333569a",
+        "kind": "substation",
+        "name": "Tenney Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30140447"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7049006,
+          33.3293805
+        ]
+      },
+      "properties": {
+        "id": "1c963090-8962-4fe0-bc8c-ee4e88448271",
+        "kind": "substation",
+        "name": "Cooley Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30140734"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7028346,
+          33.2907894
+        ]
+      },
+      "properties": {
+        "id": "6093e59d-a086-4709-b638-0debe458f455",
+        "kind": "substation",
+        "name": "Moody Substation",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30140875"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8333735,
+          33.2453025
+        ]
+      },
+      "properties": {
+        "id": "bb923029-3f11-4103-a945-495f7d9cad5b",
+        "kind": "substation",
+        "name": "Schrader Substation",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/30515650"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9790084,
+          33.3932965
+        ]
+      },
+      "properties": {
+        "id": "92d6c927-a526-4213-9f93-a254f7316df7",
+        "kind": "substation",
+        "name": "Wilkins Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/67356989"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.934499,
+          33.3076729
+        ]
+      },
+      "properties": {
+        "id": "a940e3ed-c992-4706-889f-a37a1e8e576c",
+        "kind": "substation",
+        "name": "Intel Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/125669141"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9596107,
+          33.4485186
+        ]
+      },
+      "properties": {
+        "id": "052a5022-8997-4062-9f4f-a6f1c63231ab",
+        "kind": "substation",
+        "name": "Tovrea Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/136636197"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.963071,
+          33.4403126
+        ]
+      },
+      "properties": {
+        "id": "78eeba54-d886-4625-aca0-5cb0d0e3690b",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/136636202"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9777605,
+          33.4533577
+        ]
+      },
+      "properties": {
+        "id": "a20e7379-3915-45b5-9836-040b390874ce",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/136759056"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9691305,
+          33.4786158
+        ]
+      },
+      "properties": {
+        "id": "6582e206-9b56-44cd-9834-ac7d2071647a",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/137555106"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.945042,
+          33.4287211
+        ]
+      },
+      "properties": {
+        "id": "c25d6d19-de88-406c-ad79-37e509b8f105",
+        "kind": "substation",
+        "name": "Tempe Substation",
+        "operator_name": "Arizona Public Service",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/148619039"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7324809,
+          33.4378419
+        ]
+      },
+      "properties": {
+        "id": "4d1c7ee3-048d-4017-8be4-d7245bfcd7b5",
+        "kind": "substation",
+        "name": "Buckhorn Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/151371122"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6751557,
+          33.3041032
+        ]
+      },
+      "properties": {
+        "id": "3b34060d-2507-4c51-979c-aa9a0bb8d009",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/152163874"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7787505,
+          33.4659222
+        ]
+      },
+      "properties": {
+        "id": "700a5996-2c39-4419-860d-75e01a326ddc",
+        "kind": "substation",
+        "name": "Culbertson Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/152420734"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6019472,
+          33.2493221
+        ]
+      },
+      "properties": {
+        "id": "63401498-e77a-446f-844a-023faa432590",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/157468283"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5704274,
+          33.4228897
+        ]
+      },
+      "properties": {
+        "id": "6fd16211-4429-4521-acd6-40dfd1b452f2",
+        "kind": "substation",
+        "name": "Shannon Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/158926721"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5335636,
+          33.4146294
+        ]
+      },
+      "properties": {
+        "id": "362b272d-0b3b-4795-8a9c-021550217e6c",
+        "kind": "substation",
+        "name": "Superstition Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/160226740"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8294822,
+          33.4226972
+        ]
+      },
+      "properties": {
+        "id": "c33b48f5-29a2-4abc-8714-1f3221fd8074",
+        "kind": "substation",
+        "name": "Lewis Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/168815987"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6060362,
+          33.39273
+        ]
+      },
+      "properties": {
+        "id": "e589aebc-5e1b-458b-b498-81aad101aa3f",
+        "kind": "substation",
+        "name": "Seaton Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/170998665"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.638523,
+          33.4446872
+        ]
+      },
+      "properties": {
+        "id": "d0d76824-c445-41d9-80bb-d07ad614ca94",
+        "kind": "substation",
+        "name": "Cameron Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/172747154"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6104713,
+          33.4227504
+        ]
+      },
+      "properties": {
+        "id": "b1095186-ae73-41b4-93d7-1599c6b08419",
+        "kind": "substation",
+        "name": "Signal Butte Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/172747168"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8465683,
+          33.4371066
+        ]
+      },
+      "properties": {
+        "id": "75863342-bbcd-482e-b89c-c9ce1db5b4cb",
+        "kind": "substation",
+        "name": "Mountain View Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/174029462"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6366054,
+          33.3939208
+        ]
+      },
+      "properties": {
+        "id": "945efce1-12fd-4fd4-b5e4-3a74780e73d0",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/175775908"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6850944,
+          33.4137644
+        ]
+      },
+      "properties": {
+        "id": "75463edf-e133-4e84-9e09-b5f08d5a43c2",
+        "kind": "substation",
+        "name": "Apache Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/176133355"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.97792,
+          33.4558508
+        ]
+      },
+      "properties": {
+        "id": "3b6e00d3-44b0-4957-83e5-6d4d96620573",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1226443524"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6107667,
+          33.3567034
+        ]
+      },
+      "properties": {
+        "id": "2b6b1d61-64c8-406a-b985-d6a88abc0bbc",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1263610594"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6212003,
+          33.3436665
+        ]
+      },
+      "properties": {
+        "id": "351bdd6e-7476-42c5-8f67-f5e2c2a8f4aa",
+        "kind": "substation",
+        "name": "Howard Substation",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1390793982"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.9559229,
+          33.3038055
+        ]
+      },
+      "properties": {
+        "id": "4ef2cb87-2371-4b30-a113-20041e604863",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1395084287"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7688444,
+          33.2028289
+        ]
+      },
+      "properties": {
+        "id": "2bf736d1-3753-49cc-b0ba-30ec80118da0",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1414178490"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6470539,
+          33.3586678
+        ]
+      },
+      "properties": {
+        "id": "969f13dd-73ee-4530-8b91-e3dab36a7c2b",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200014647"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8923825,
+          33.2993778
+        ]
+      },
+      "properties": {
+        "id": "47c8557e-7d4e-49fd-9d59-0f47b3e6ffaf",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200638783"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8862715,
+          33.2383434
+        ]
+      },
+      "properties": {
+        "id": "1283beee-01a6-4510-b328-e65324f773c1",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1200638790"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8137183,
+          33.4212891
+        ]
+      },
+      "properties": {
+        "id": "a5270942-4cc6-4b78-8060-dd2884146aa0",
+        "kind": "substation",
+        "name": "City of Mesa Fraser Substation",
+        "operator_name": null,
+        "max_voltage_kv": 69.0,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1210904654"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8450571,
+          33.167628
+        ]
+      },
+      "properties": {
+        "id": "c189674c-3910-420b-b7f0-bfa4f013e702",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": null,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1025079546"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7160113,
+          33.2801237
+        ]
+      },
+      "properties": {
+        "id": "7b84dfbd-892b-4c6c-96c5-6b9a57d35bd1",
+        "kind": "substation",
+        "name": "SRP",
+        "operator_name": "Salt River Project",
+        "max_voltage_kv": null,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/479972714"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.3654404,
+          33.1755191
+        ]
+      },
+      "properties": {
+        "id": "a56ed6b9-37e0-45fe-9a8b-5533c83a55ae",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": null,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1511789362"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.7298165,
+          33.2926055
+        ]
+      },
+      "properties": {
+        "id": "5fa363af-0c3a-4a3d-ad48-161c27da8c4e",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": null,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/1003794747"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.8810737,
+          33.3024332
+        ]
+      },
+      "properties": {
+        "id": "e97933bc-adc8-4e62-baac-f2e6a4195329",
+        "kind": "substation",
+        "name": null,
+        "operator_name": null,
+        "max_voltage_kv": null,
+        "status": "operational",
+        "osm_url": "https://www.openstreetmap.org/way/514376028"
       }
     }
   ],
   "attributions": [
-    "OpenStreetMap contributors"
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
   ]
 }

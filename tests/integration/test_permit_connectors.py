@@ -12,10 +12,10 @@ from helios_connectors.base import BaseConnector
 from helios_connectors.epa_echo import EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.pipeline import IngestionPipeline
+from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import EvidenceRecord, Permit
 from helios_domain.ontology import StageEvidenceKind
 from helios_geospatial.site_builder import build_sites
-from tests.integration.test_ingestion_pipeline import _replay
 
 pytestmark = [pytest.mark.integration]
 

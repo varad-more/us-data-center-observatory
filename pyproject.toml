@@ -97,7 +97,7 @@ convention = "google"
 known-first-party = [
   "helios_api", "helios_worker", "helios_common", "helios_domain",
   "helios_connectors", "helios_document_intelligence", "helios_entity_resolution",
-  "helios_geospatial", "helios_scoring", "helios_observability",
+  "helios_geospatial", "helios_scoring",
 ]
 
 [tool.mypy]

@@ -34,7 +34,10 @@ class TestRegistryHonesty:
         assert "osm-power-infrastructure" in slugs
         assert "epa-echo-air-facilities" in slugs
         assert "azcc-edocket" in slugs
-        assert "copernicus-sentinel2" in slugs
+        # Copernicus is declared but deliberately unimplemented: it is PLANNED, so
+        # it must not appear here. A fixture-backed satellite stub would have
+        # advertised a capability Helios does not have.
+        assert "copernicus-sentinel2" not in slugs
 
     def test_planned_entries_do_not_advertise_entry_points(self) -> None:
         for entry in SOURCE_REGISTRY:

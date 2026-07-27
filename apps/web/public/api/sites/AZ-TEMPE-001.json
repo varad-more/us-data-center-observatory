@@ -1,0 +1,304 @@
+{
+  "id": "02d5f9b8-e989-4540-bb00-2d537ae3b1e2",
+  "project_code": "AZ-TEMPE-001",
+  "display_name": null,
+  "site_kind": "enterprise_data_center",
+  "site_kind_assertion": "reported",
+  "jurisdiction": "Tempe",
+  "county": "Maricopa",
+  "region_slug": "east-valley-az",
+  "current_stage": 7,
+  "current_stage_label": "Operational",
+  "current_confidence": 34.39,
+  "stage_confidence": 27.96,
+  "confidence_band": "low",
+  "first_signal_date": "2021-08-02",
+  "latest_signal_date": "2026-07-27",
+  "evidence_count": 3,
+  "total_acres": 4.2,
+  "parcel_count": 1,
+  "operator_status": "not_established",
+  "stage_last_changed_at": "2026-07-27T05:27:28.861652Z",
+  "score_last_calculated_at": "2026-07-27T05:27:28.857895Z",
+  "centroid": [
+    -111.976583,
+    33.406444
+  ],
+  "is_synthetic": false,
+  "summary": "1 parcel(s) totalling 4.2 acres near 2601 W BROADWAY RD, Tempe. Title of record is held by TIERRA DC ASSETS LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
+  "boundary": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -111.97604759572974,
+            33.40569473253029
+          ],
+          [
+            -111.97714215786917,
+            33.405688844256865
+          ],
+          [
+            -111.97713308308813,
+            33.40717021538582
+          ],
+          [
+            -111.97637700255454,
+            33.40717428356448
+          ],
+          [
+            -111.97637756130665,
+            33.407247140300555
+          ],
+          [
+            -111.97603808885907,
+            33.40724611669518
+          ],
+          [
+            -111.97603434198604,
+            33.40724610469683
+          ],
+          [
+            -111.97604360361663,
+            33.40569475427759
+          ],
+          [
+            -111.97604759572974,
+            33.40569473253029
+          ]
+        ]
+      ]
+    ]
+  },
+  "parcels": [
+    {
+      "id": "fa3746a7-690d-478a-aefc-2f76ecec8461",
+      "apn": "12331001F",
+      "apn_formatted": "123-31-001F",
+      "situs_address": "2601 W BROADWAY RD",
+      "situs_city": "Tempe",
+      "owner_name": "TIERRA DC ASSETS LLC",
+      "owner_is_redacted": false,
+      "land_use_description": "DATA CENTERS",
+      "lot_size_acres": 4.2,
+      "last_deed_date": "2021-08-02",
+      "last_deed_number": "20210833178",
+      "last_deed_url": "https://recorder.maricopa.gov/recording/document-details.html?recordingNumber=20210833178&suffix=",
+      "last_sale_price": 22000000.0,
+      "assessor_url": "https://mcassessor.maricopa.gov/mcs/?q=12331001F",
+      "link_reason": "assessor_classification",
+      "link_confidence": 0.95
+    }
+  ],
+  "organizations": [
+    {
+      "id": "f05554bf-e6c1-47d8-a1d0-3a1cc98d39a7",
+      "canonical_name": "TIERRA DC ASSETS LLC",
+      "role": "owner",
+      "organization_type": "LLC",
+      "is_suspected_shell": true,
+      "shell_indicators": [
+        "pass-through legal form (LLC)"
+      ],
+      "mailing_city": null,
+      "mailing_state": null,
+      "attribution_note": "Helios records the entity of record only. Shell-company indicators are flags for human review and do not constitute an attribution to any parent."
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "812839d8-f191-47e9-bcd1-d4cb5dc7e6fc",
+      "infrastructure_kind": "substation",
+      "label": "Binary Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 827.63,
+      "confidence": 0.7017,
+      "assertion_class": "inferred",
+      "notes": "Binary Substation lies 828 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "54bd74df-e97c-4ca3-b0cf-c2ea7acb36f0",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1062.0,
+      "confidence": 0.6314,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1062 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "4dfd86d9-699f-4eff-85bb-896ee9b21cc0",
+      "infrastructure_kind": "substation",
+      "label": "Weiler Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1124.83,
+      "confidence": 0.6126,
+      "assertion_class": "inferred",
+      "notes": "Weiler Substation lies 1125 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "0f91b659-11db-48e1-87d1-d41e4a81934d",
+      "infrastructure_kind": "substation",
+      "label": "Wilkins Substation",
+      "dependency_status": "existing",
+      "is_blocking": true,
+      "match_method": "substation_proximity",
+      "distance_meters": 1385.38,
+      "confidence": 0.5344,
+      "assertion_class": "inferred",
+      "notes": "Wilkins Substation lies 1385 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": "Salt River Project"
+    },
+    {
+      "id": "46c3b657-1c42-402f-b7fe-e124a828d4a9",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 1576.79,
+      "confidence": 0.477,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 1577 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    },
+    {
+      "id": "d1860251-9d53-421d-bdf4-63e3c4ceb484",
+      "infrastructure_kind": "substation",
+      "label": "Unnamed substation",
+      "dependency_status": "existing",
+      "is_blocking": false,
+      "match_method": "substation_proximity",
+      "distance_meters": 2647.74,
+      "confidence": 0.1557,
+      "assertion_class": "inferred",
+      "notes": "Unnamed substation lies 2648 m from the site boundary and is tagged 69 kV. Proximity indicates the site could plausibly be served from here; it is not evidence that it is. No interconnection filing has been matched to this site.",
+      "voltage_kv": 69.0,
+      "operator_name": null
+    }
+  ],
+  "estimates": [
+    {
+      "id": "b3b9797d-dee4-4474-9f8f-e3c8a4be303e",
+      "estimate_type": "power_capacity",
+      "unit": "MW",
+      "lower_value": null,
+      "likely_value": 10.1,
+      "upper_value": null,
+      "method": "Heuristic based on acreage and stage",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.862594Z",
+      "notes": null
+    },
+    {
+      "id": "b93faf0e-07dd-474d-a20d-a1c5b3452e7c",
+      "estimate_type": "water_usage",
+      "unit": "GPD",
+      "lower_value": null,
+      "likely_value": 121200.0,
+      "upper_value": null,
+      "method": "Industry average 0.5 gal/kWh",
+      "assertion_class": "inferred",
+      "confidence": 0.3,
+      "assumptions": {},
+      "calculated_at": "2026-07-27T05:27:28.862620Z",
+      "notes": null
+    }
+  ],
+  "latest_prediction": {
+    "id": "cdb0d192-c6df-4cef-8728-9b482581571f",
+    "calculated_at": "2026-07-27T05:27:28.857934Z",
+    "as_of_date": "2026-07-27",
+    "predicted_stage": 7,
+    "predicted_stage_label": "Operational",
+    "raw_score": 19.675,
+    "confidence": 27.96,
+    "confidence_band": "low",
+    "positive_contribution": 19.675,
+    "negative_contribution": 0.0,
+    "evidence_considered": 3,
+    "distinct_evidence_kinds": 2,
+    "is_backtest": false,
+    "summary": "28% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+    "model_name": "helios-rule-based",
+    "model_version": "0.1.0",
+    "explanations": [
+      {
+        "rule_id": "assessor-data-center-classification",
+        "evidence_kind": "assessor_data_center_classification",
+        "label": "Assessor classifies property use as data centre",
+        "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "base_weight": 20.0,
+        "applied_weight": 19.0,
+        "confidence_multiplier": 0.95,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "e24b86b5-e205-4ff7-b4b3-8208beb72786"
+      },
+      {
+        "rule_id": "shell-entity-ownership",
+        "evidence_kind": "shell_entity_ownership",
+        "label": "Single-purpose entity holds title",
+        "detail": "Title is held by TIERRA DC ASSETS LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+        "base_weight": 6.0,
+        "applied_weight": 0.675,
+        "confidence_multiplier": 0.45,
+        "recency_multiplier": 0.25,
+        "polarity": "supporting",
+        "evidence_record_id": "b2f6e229-6ea9-4326-a287-a86fbad862f2"
+      },
+      {
+        "rule_id": "dedicated-substation-proximity",
+        "evidence_kind": "dedicated_substation_proximity",
+        "label": "High-voltage substation in close proximity",
+        "detail": "Binary Substation tagged 69 kV lies 828 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
+        "base_weight": 0.0,
+        "applied_weight": 0.0,
+        "confidence_multiplier": 0.7017,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "b83b02ba-2b04-42a0-bfdd-ca7fe9373f86"
+      }
+    ]
+  },
+  "stage_history": [
+    {
+      "id": "81501920-adc4-4a41-8763-152f4e4d18ff",
+      "from_stage": 0,
+      "from_stage_label": null,
+      "to_stage": 7,
+      "to_stage_label": "Operational",
+      "effective_date": "2021-08-02",
+      "detected_at": "2026-07-27T05:27:28.861652Z",
+      "is_downgrade": false,
+      "confidence": 27.96,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "triggering_evidence_ids": [
+        "e24b86b5-e205-4ff7-b4b3-8208beb72786",
+        "b2f6e229-6ea9-4326-a287-a86fbad862f2"
+      ],
+      "detection_lag_days": 1820
+    }
+  ],
+  "attributions": [
+    "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS.",
+    "Power infrastructure data (c) OpenStreetMap contributors, ODbL."
+  ]
+}

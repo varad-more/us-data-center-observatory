@@ -68,9 +68,26 @@ class ScoringRule:
     """Multiplier applied to each additional occurrence beyond the first."""
 
     def get_weight(self, target: str) -> float:
+        """Return this rule's weight for a scoring target.
+
+        Args:
+            target: ``"identity"`` for "is this a data centre?", anything else
+                for stage progression.
+
+        Returns:
+            The signed weight; negative values argue against the conclusion.
+        """
         return self.identity_weight if target == "identity" else self.stage_weight
 
     def get_polarity(self, target: str) -> EvidencePolarity:
+        """Return whether this rule supports or contradicts a target.
+
+        Args:
+            target: The scoring target, as for :meth:`get_weight`.
+
+        Returns:
+            The polarity implied by the sign of the weight.
+        """
         weight = self.get_weight(target)
         return EvidencePolarity.SUPPORTING if weight >= 0 else EvidencePolarity.CONTRADICTING
 
@@ -457,9 +474,7 @@ def score_site(
             1.0 if record.is_standing_condition else _recency_multiplier(record.observed_at, as_of)
         )
         base_weight = rule.get_weight(target)
-        applied = (
-            base_weight * confidence_multiplier * recency_multiplier * occurrence_multiplier
-        )
+        applied = base_weight * confidence_multiplier * recency_multiplier * occurrence_multiplier
 
         detail = record.summary or rule.rationale
         if seen:

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
+import { DemoDataBanner } from "@/components/DemoDataBanner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -43,6 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </nav>
             </div>
           </header>
+
+          <DemoDataBanner />
 
           <main id="main" className="container">
             {children}

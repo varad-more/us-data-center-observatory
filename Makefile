@@ -29,9 +29,27 @@ hooks: ## Install pre-commit hooks
 
 # ---------------------------------------------------------------- database --
 
+# One container, no Compose file. The evidence store uses the filesystem
+# backend locally, so there is no object store to run alongside it; S3 is a
+# production concern configured through HELIOS_EVIDENCE_BACKEND.
+PG_CONTAINER := helios-postgres
+PG_IMAGE := postgis/postgis:16-3.4
+
 .PHONY: db-up
-db-up: ## Start PostgreSQL and MinIO
-	docker compose up -d postgres minio minio-init
+db-up: ## Start PostgreSQL + PostGIS
+	@docker start $(PG_CONTAINER) 2>/dev/null || \
+	docker run -d --name $(PG_CONTAINER) \
+		-e POSTGRES_USER=helios -e POSTGRES_PASSWORD=helios -e POSTGRES_DB=helios \
+		-p 5432:5432 $(PG_IMAGE)
+	@echo "Waiting for PostgreSQL..."
+	@until docker exec $(PG_CONTAINER) pg_isready -U helios -q 2>/dev/null; do sleep 1; done
+	@docker exec $(PG_CONTAINER) psql -U helios -d helios -c \
+		"CREATE DATABASE helios_test;" 2>/dev/null || true
+	@echo "PostgreSQL ready on :5432 (databases: helios, helios_test)"
+
+.PHONY: db-down
+db-down: ## Stop and remove the PostgreSQL container and its data
+	-docker rm -f $(PG_CONTAINER)
 
 .PHONY: migrate
 migrate: ## Apply database migrations
@@ -52,8 +70,17 @@ db-check: ## Fail if the models have drifted from the migrations
 # --------------------------------------------------------------- ingestion --
 
 .PHONY: bootstrap
-bootstrap: ## Load real public records and build the observatory end to end
+bootstrap: ## Build the observatory from recorded fixtures (offline, reproducible)
 	$(VENV)/bin/helios bootstrap
+
+.PHONY: bootstrap-live
+bootstrap-live: ## Build the observatory from live public records (hits county servers)
+	$(VENV)/bin/helios bootstrap --live
+
+.PHONY: export-api
+export-api: ## Regenerate the static API snapshot the published site serves
+	$(PY) scripts/export_static_api.py
+	$(PY) scripts/verify_static_export.py
 
 .PHONY: registry
 registry: ## Print the source registry, including inaccessible sources
@@ -110,18 +137,12 @@ test-web: ## Run frontend tests
 .PHONY: check
 check: lint typecheck test test-web ## Run every check CI runs
 
-# ------------------------------------------------------------------ docker --
-
-.PHONY: up
-up: ## Start the whole stack
-	docker compose up --build
-
-.PHONY: down
-down: ## Stop the stack and remove volumes
-	docker compose down -v
+.PHONY: build-web
+build-web: ## Build the static site into apps/web/out
+	cd $(WEB) && npm run build
 
 .PHONY: clean
 clean: ## Remove caches and build artefacts
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +
 	rm -rf .pytest_cache .mypy_cache .ruff_cache htmlcov coverage.xml .coverage
-	rm -rf $(WEB)/.next
+	rm -rf $(WEB)/.next $(WEB)/out

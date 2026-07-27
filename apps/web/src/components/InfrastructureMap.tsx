@@ -215,7 +215,7 @@ function SitePopup({ properties }: { properties: Record<string, unknown> }) {
         {" · "}
         {String(properties.evidence_count ?? 0)} evidence records
       </div>
-      <Link href={`/sites/${String(properties.id)}`}>Open site profile</Link>
+      <Link href={`/sites/${String(properties.project_code)}`}>Open site profile</Link>
     </div>
   );
 }

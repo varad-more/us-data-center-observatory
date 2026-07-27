@@ -2,11 +2,9 @@
 
 Helios is a monorepo with a thin API/UI over domain packages that own provenance.
 
-**Requirements origin:** the main Project Helios product prompt (see
-[`implementation.md`](./implementation.md)). The referenced
-`Project_Helios_Architecture.pdf` was not in the workspace; the prompt is
-authoritative. This branch completed **Phase 0 + first-sprint / Phase 1 MVP**;
-later prompt phases (2–6) are roadmap only.
+Provenance is owned by the domain packages, not reconstructed at the edges: the
+API serialises stored assertion classes verbatim and the UI badges them without
+re-deriving anything.
 
 ```text
 ┌────────────┐   ┌────────────┐
@@ -37,6 +35,14 @@ later prompt phases (2–6) are roadmap only.
 | `packages/helios_scoring` | Explainable rules |
 | `packages/helios_geospatial` | Clustering + spatial joins |
 | `packages/helios_common` | Config, hashing, evidence store, vocabularies |
+
+## Publishing
+
+The GitHub Pages deployment serves a static snapshot exported from the real API
+(`scripts/export_static_api.py`) against a fixture-seeded database. The frontend
+reads flat JSON from `apps/web/public/api/`, keyed on project code so published
+URLs survive a database rebuild. Nothing about the epistemic model changes in the
+export: assertion classes are the ones the pipeline stored.
 
 ## Data flow
 
