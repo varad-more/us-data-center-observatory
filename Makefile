@@ -118,6 +118,10 @@ typecheck: ## Type-check Python and TypeScript
 	$(VENV)/bin/mypy packages apps/api apps/worker
 	cd $(WEB) && npm run typecheck
 
+.PHONY: audit-contrast
+audit-contrast: ## Check every interface colour pair against its WCAG floor
+	$(VENV)/bin/python scripts/audit_contrast.py
+
 .PHONY: test
 test: ## Run the full backend test suite
 	$(VENV)/bin/pytest

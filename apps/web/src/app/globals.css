@@ -63,8 +63,13 @@
   /* Helios is the sun; the amber is the project's identity. It is deliberately
      confined to the wordmark and the hero rule — decoration that encodes
      nothing. The moment it grades a value it becomes a second data hue, which
-     is the thing this palette exists to avoid. */
-  --brand: light-dark(#a8620a, #f0a63c);
+     is the thing this palette exists to avoid.
+
+     The light value is two steps darker than it looks like it wants to be: at
+     #a8620a the wordmark measured 4.48:1, which fails the text floor by a
+     hair. It is arguably large text and owed only 3:1, but a value that close to
+     the line is not worth the argument. */
+  --brand: light-dark(#a6610a, #f0a63c);
 
   /* Sequential ramp. Dark runs the same steps in reverse so that "more" always
      resolves to the higher-contrast end against whichever ground is behind it. */
@@ -80,7 +85,29 @@
      ramp. A weak value and an absent value are different claims, and Helios's
      `unknown` assertion class exists precisely to keep them apart. */
   --unmeasured: light-dark(#e8e3d7, #2b2823);
-  --unmeasured-edge: light-dark(#b6ad99, #4a453c);
+  /* The edge is a meaningful mark — it is the border of the `unknown` badge and
+     of the legend's no-data swatch — so it owes 3:1, not whatever looked
+     tasteful. The obvious warm greys measured 2.19 and 1.81. */
+  --unmeasured-edge: light-dark(#9e9277, #6d6659);
+
+  /* Assertion badge edges.
+   *
+   * These do not reuse --seq-* directly, and that is the point. The border is
+   * one of the three channels that keep an inferred value from looking reported,
+   * so every step of it owes the 3:1 mark floor — but the pale end of the
+   * sequential ramp measures 1.73 and 2.49 against a panel. Reusing the ramp
+   * would have made the two weakest badges' borders invisible and quietly
+   * collapsed the encoding back to fill colour alone.
+   *
+   * Solved instead across the legal band, 3.05:1 to 9.5:1, so the scale stays
+   * monotonic and every step stays visible. The fill below still carries the
+   * finer gradation, because a fill sits under a legible label and owes nothing.
+   */
+  --assert-edge-predicted: light-dark(#7c8fd7, #4460c5);
+  --assert-edge-inferred: light-dark(#5d76cd, #6179ce);
+  --assert-edge-calculated: light-dark(#3f5cc4, #8093d8);
+  --assert-edge-extracted: light-dark(#334da7, #9aa9e0);
+  --assert-edge-reported: light-dark(#2a3f89, #b4c0e8);
 
   /* Status pair. Decoration beside a word that already states the case — never
      the sole carrier of a fact, and never a series colour. */
@@ -426,6 +453,11 @@ code,
   font-size: 0.76rem;
 }
 
+.footer-gap {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+}
+
 .footer-bar {
   border-top: 1px solid var(--border);
   padding-top: 1rem;
@@ -547,36 +579,45 @@ code,
   border-style: solid;
 }
 
-.badge[data-evidence-basis="derived"],
-.badge[data-evidence-basis="unestablished"] {
+.badge[data-evidence-basis="derived"] {
   border-style: dashed;
+}
+
+/* Dotted rather than dashed, and this is not a flourish. Measured in greyscale,
+   the `unknown` edge lands at luminance 0.292 and `predicted` at 0.288 — the two
+   are indistinguishable once hue is gone, which would make "not established"
+   read as the weak end of the scale rather than as off it. Colour separates them
+   for a sighted reader; the stroke pattern is what separates them in print, in
+   greyscale, and for a reader who cannot see the hue difference at all. */
+.badge[data-evidence-basis="unestablished"] {
+  border-style: dotted;
 }
 
 /* Ramp position carries degree only. Strongest claim sits at the high-contrast
    end of the scale in both themes. */
 .badge-reported {
   background: color-mix(in srgb, var(--seq-6) 26%, var(--surface-1));
-  border-color: var(--seq-6);
+  border-color: var(--assert-edge-reported);
 }
 
 .badge-extracted {
   background: color-mix(in srgb, var(--seq-5) 20%, var(--surface-1));
-  border-color: var(--seq-5);
+  border-color: var(--assert-edge-extracted);
 }
 
 .badge-calculated {
   background: color-mix(in srgb, var(--seq-4) 16%, var(--surface-1));
-  border-color: var(--seq-4);
+  border-color: var(--assert-edge-calculated);
 }
 
 .badge-inferred {
   background: color-mix(in srgb, var(--seq-3) 14%, var(--surface-1));
-  border-color: var(--seq-3);
+  border-color: var(--assert-edge-inferred);
 }
 
 .badge-predicted {
   background: color-mix(in srgb, var(--seq-2) 12%, var(--surface-1));
-  border-color: var(--seq-2);
+  border-color: var(--assert-edge-predicted);
 }
 
 /* Outside the ramp entirely. Rendering "explicitly not established" as the
@@ -732,6 +773,19 @@ code,
   color: var(--ink-2);
   font-size: 1.02rem;
   max-width: 64ch;
+}
+
+/* The hero is the one place the page is allowed to breathe. Everything below it
+   is dense by intent — this is a records interface — so the contrast between the
+   two is what makes the density read as deliberate rather than as clutter. */
+.hero {
+  padding: 1.25rem 0 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 {
+  max-width: 18ch;
 }
 
 /* ---------------------------------------------------------------- timeline */

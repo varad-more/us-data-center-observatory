@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Link from "next/link";
 
 import { DemoDataBanner } from "@/components/DemoDataBanner";
+import { SiteFooter } from "@/components/SiteFooter";
 import { THEME_INIT_SCRIPT, ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
 
@@ -75,18 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
 
-          <footer className="site-footer">
-            <p>
-              Helios infers development activity from public records. Confidence scores are
-              model output, not fact. Helios does not assert the identity of any facility
-              operator unless a direct filing establishes it.
-            </p>
-            <p>
-              Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS. Power
-              infrastructure data &copy; OpenStreetMap contributors, ODbL. Owner names
-              classified as belonging to private individuals are redacted before storage.
-            </p>
-          </footer>
+          <SiteFooter />
         </div>
       </body>
     </html>

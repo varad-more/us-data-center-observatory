@@ -32,7 +32,8 @@ export default async function ObservatoryHome() {
 
   return (
     <div className="stack">
-      <section>
+      <section className="hero">
+        <p className="eyebrow">East Valley, Arizona · Maricopa County</p>
         <h1>From permit to power-on</h1>
         <p className="tagline">
           Helios assembles fragmented public records into an evidence-backed view of how

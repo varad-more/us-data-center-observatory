@@ -193,6 +193,15 @@ jobs:
       if: matrix.check == 'lint'
       run: npm run lint
 
+    # globals.css states a contrast obligation against nearly every token. This
+    # checks the values actually meet it, because the failure mode is invisible:
+    # a border that fails 3:1 still looks like a border to whoever chose it.
+    # Pure stdlib, so it needs no Python setup.
+    - name: Contrast audit (WCAG floors)
+      if: matrix.check == 'lint'
+      working-directory: .
+      run: python3 scripts/audit_contrast.py
+
     - name: Type check (tsc)
       if: matrix.check == 'typecheck'
       run: npm run typecheck

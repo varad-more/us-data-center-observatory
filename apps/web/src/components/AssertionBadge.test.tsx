@@ -81,6 +81,12 @@ describe("AssertionBadge", () => {
    * that was explicitly not established and a value that was weakly established
    * are different claims, and the vocabulary exists to keep them apart.
    */
+  /**
+   * `unknown` and `predicted` sit adjacent in luminance — measured, their badge
+   * edges differ by 0.003 — so once hue is removed they are the same mark. The
+   * basis attribute is what drives the different stroke pattern that keeps "not
+   * established" from reading as "weakly established" in greyscale and print.
+   */
   it("keeps 'unknown' off the strength scale rather than at its weak end", () => {
     const { rerender } = render(<AssertionBadge assertion="unknown" />);
     expect(screen.getByTestId("badge-unknown").dataset.evidenceBasis).toBe(
