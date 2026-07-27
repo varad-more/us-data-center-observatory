@@ -226,7 +226,7 @@ function StageTrack({ stage, label }: { stage: number; label: string }) {
       </div>
       <div className="stage-label-row">
         <span>0 No known development</span>
-        <span style={{ color: "var(--accent)", fontWeight: 600 }}>
+        <span style={{ color: "var(--ink-1)", fontWeight: 600 }}>
           Stage {stage}: {label}
         </span>
         <span>8 Expansion</span>

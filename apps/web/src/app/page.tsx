@@ -34,7 +34,7 @@ export default async function ObservatoryHome() {
     <div className="stack">
       <section>
         <h1>From permit to power-on</h1>
-        <p style={{ maxWidth: "62ch", color: "var(--text-muted)" }}>
+        <p className="tagline">
           Helios assembles fragmented public records into an evidence-backed view of how
           data-centre projects progress through land assembly, permitting, construction,
           grid connection, and operation. Every figure below traces back to a source

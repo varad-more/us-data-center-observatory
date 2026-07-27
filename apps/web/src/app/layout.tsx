@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Link from "next/link";
 
 import { DemoDataBanner } from "@/components/DemoDataBanner";
+import { THEME_INIT_SCRIPT, ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
+
+/**
+ * Fraunces carries the display voice; the interface stays on the system sans.
+ *
+ * Loaded through next/font/local rather than a hand-written @font-face because
+ * the site is served under the /project-helios base path — next/font rewrites
+ * the URL and fingerprints the file, where a raw url() in globals.css would have
+ * to hardcode the prefix and would break the moment the path changed.
+ */
+const fraunces = localFont({
+  src: "./fonts/fraunces-latin-var.woff2",
+  variable: "--font-fraunces",
+  display: "swap",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +41,12 @@ const NAV = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={fraunces.variable} suppressHydrationWarning>
+      <head>
+        {/* Runs before first paint so a dark-mode reader never sees the ivory
+            ground flash. Must be inline and blocking; see THEME_INIT_SCRIPT. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <div className="shell">
           <a href="#main" className="skip-link">
@@ -42,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {item.label}
                   </Link>
                 ))}
+                <ThemeToggle />
               </nav>
             </div>
           </header>
