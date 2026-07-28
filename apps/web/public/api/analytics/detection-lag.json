@@ -11,7 +11,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2007-09-20",
-      "detected_at": "2026-07-28T02:03:20.090790Z",
+      "detected_at": "2026-07-28T05:51:14.153762Z",
       "lag_days": 6886
     },
     {
@@ -19,23 +19,23 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2010-07-15",
-      "detected_at": "2026-07-28T02:03:20.078097Z",
+      "detected_at": "2026-07-28T05:51:14.201585Z",
       "lag_days": 5857
-    },
-    {
-      "project_code": "AZ-MESA-004",
-      "to_stage": 7,
-      "stage_label": "Operational",
-      "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T02:03:19.995177Z",
-      "lag_days": 4899
     },
     {
       "project_code": "AZ-CHANDLER-007",
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T02:03:20.068703Z",
+      "detected_at": "2026-07-28T05:51:14.189891Z",
+      "lag_days": 4899
+    },
+    {
+      "project_code": "AZ-MESA-004",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-28T05:51:14.249671Z",
       "lag_days": 4899
     },
     {
@@ -43,7 +43,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-28T02:03:20.047763Z",
+      "detected_at": "2026-07-28T05:51:14.139894Z",
       "lag_days": 4649
     },
     {
@@ -51,7 +51,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2021-03-22",
-      "detected_at": "2026-07-28T02:03:19.977235Z",
+      "detected_at": "2026-07-28T05:51:14.225814Z",
       "lag_days": 1954
     },
     {
@@ -59,7 +59,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-28T02:03:20.006786Z",
+      "detected_at": "2026-07-28T05:51:14.238287Z",
       "lag_days": 1821
     },
     {
@@ -67,7 +67,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2022-01-20",
-      "detected_at": "2026-07-28T02:03:20.119000Z",
+      "detected_at": "2026-07-28T05:51:14.213641Z",
       "lag_days": 1650
     },
     {
@@ -75,7 +75,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2022-04-04",
-      "detected_at": "2026-07-28T02:03:20.019848Z",
+      "detected_at": "2026-07-28T05:51:14.260924Z",
       "lag_days": 1576
     },
     {
@@ -83,7 +83,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2025-07-24",
-      "detected_at": "2026-07-28T02:03:20.109373Z",
+      "detected_at": "2026-07-28T05:51:14.106590Z",
       "lag_days": 369
     }
   ],

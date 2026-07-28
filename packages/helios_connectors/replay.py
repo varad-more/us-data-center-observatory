@@ -27,6 +27,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+from helios_connectors.area_totals import (
+    EiaStateElectricityConnector,
+    UsgsCountyWaterConnector,
+)
 from helios_connectors.azcc_edocket import AzccEdocketConnector, default_fixture_dir
 from helios_connectors.epa_echo import EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
@@ -73,6 +77,23 @@ def load_fixture_bytes(*parts: str) -> bytes:
     return path.read_bytes()
 
 
+_FIXTURE_MIME_TYPES: dict[str, str] = {
+    ".json": "application/json",
+    ".csv": "text/csv",
+    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+}
+
+
+def _mime_for(fixture_parts: tuple[str, ...]) -> str:
+    """Return the content type a live fetch of this fixture would have carried.
+
+    Replay is meant to be indistinguishable from a live run downstream of the
+    network, so a recorded spreadsheet must not arrive claiming to be JSON.
+    """
+    suffix = Path(fixture_parts[-1]).suffix.lower() if fixture_parts else ""
+    return _FIXTURE_MIME_TYPES.get(suffix, "application/octet-stream")
+
+
 def replay_connector(
     connector_cls: type[BaseConnector],
     fixture_parts: tuple[str, ...],
@@ -99,6 +120,7 @@ def replay_connector(
         An instance of an anonymous subclass of ``connector_cls``.
     """
     content = payload if payload is not None else load_fixture_bytes(*fixture_parts)
+    mime_type = _mime_for(fixture_parts)
 
     class _Replay(connector_cls):  # type: ignore[valid-type, misc]
         def discover(self, date_range: DateRange) -> DiscoveryResult:
@@ -118,10 +140,10 @@ def replay_connector(
                 document=RawDocument(
                     item=item,
                     payload=content,
-                    mime_type="application/json",
+                    mime_type=mime_type,
                     retrieved_at=REPLAY_RETRIEVED_AT,
                     http_status=200,
-                    headers={"content-type": "application/json", "etag": '"abc123"'},
+                    headers={"content-type": mime_type, "etag": '"abc123"'},
                     etag='"abc123"',
                 )
             )
@@ -153,6 +175,16 @@ FIXTURE_REPLAYS: dict[str, tuple[type[BaseConnector], tuple[str, ...], str]] = {
         ("mesa_permits", "east_valley_com.json"),
         "mesa:permits:east-valley",
     ),
+    "usgs-county-water-use": (
+        UsgsCountyWaterConnector,
+        ("usgs_water", "arizona_counties_2015.csv"),
+        "usgs:water:arizona-counties:2015",
+    ),
+    "eia-state-electricity-sales": (
+        EiaStateElectricityConnector,
+        ("eia_electricity", "sales_annual.xlsx"),
+        "eia:sales:states:latest",
+    ),
 }
 
 FIXTURE_INGEST_ORDER: tuple[str, ...] = (
@@ -161,6 +193,10 @@ FIXTURE_INGEST_ORDER: tuple[str, ...] = (
     "epa-echo-air-facilities",
     # Address matching needs assessor parcels already loaded.
     "mesa-building-permits",
+    # Area totals stand alone; they describe a county or state, not a site, so
+    # they neither depend on nor are depended on by anything above.
+    "usgs-county-water-use",
+    "eia-state-electricity-sales",
     # Fixture-only in production; no replay wrapper needed.
     "azcc-edocket",
 )

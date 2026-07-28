@@ -4,7 +4,11 @@ import pytest
 
 from helios_scoring.impact import (
     GAL_PER_KWH_LIKELY,
+    LOAD_FACTOR_HIGH,
+    LOAD_FACTOR_LIKELY,
+    LOAD_FACTOR_LOW,
     MW_PER_ACRE_LIKELY,
+    annualise_power_mwh,
     estimate_power_mw,
     estimate_water_gpd,
 )
@@ -84,3 +88,37 @@ def test_method_is_stated_and_units_are_explicit():
     water = estimate_water_gpd(power)
     assert water.unit == "GPD"
     assert water.method
+
+
+def test_annualising_capacity_uses_a_full_year_of_hours():
+    annual = annualise_power_mwh(100.0, 100.0, 100.0)
+    assert annual.likely == pytest.approx(100.0 * 8760 * LOAD_FACTOR_LIKELY)
+    assert annual.unit == "MWh/yr"
+
+
+def test_annualised_bounds_pair_each_capacity_with_its_own_load_factor():
+    """The low case is the low capacity running at the low load factor. Pairing
+    the low capacity with the high factor would narrow a band that the evidence
+    does not narrow."""
+    annual = annualise_power_mwh(50.0, 100.0, 200.0)
+
+    assert annual.lower == pytest.approx(50.0 * 8760 * LOAD_FACTOR_LOW)
+    assert annual.likely == pytest.approx(100.0 * 8760 * LOAD_FACTOR_LIKELY)
+    assert annual.upper == pytest.approx(200.0 * 8760 * LOAD_FACTOR_HIGH)
+    assert annual.lower < annual.likely < annual.upper
+
+
+def test_annualising_nothing_is_none_not_zero():
+    """Zero MWh/yr would read as a site that consumes nothing, which is a claim.
+    Absence of a capacity estimate is not a consumption of zero."""
+    assert annualise_power_mwh(0.0, 0.0, 0.0) is None
+
+
+def test_annualisation_publishes_the_load_factor_it_applied():
+    annual = annualise_power_mwh(10.0, 20.0, 40.0)
+
+    assert annual.assumptions["load_factor_likely"] == LOAD_FACTOR_LIKELY
+    assert annual.assumptions["hours_per_year"] == 8760
+    assert annual.assumptions["power_mw_likely"] == 20.0
+    assert "note" in annual.assumptions
+    assert annual.method

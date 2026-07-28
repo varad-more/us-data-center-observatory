@@ -1086,6 +1086,74 @@ class PredictionExplanation(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     prediction: Mapped[Prediction] = relationship(back_populates="explanations")
 
 
+class AreaTotal(UUIDPrimaryKeyMixin, TimestampMixin, Base):
+    """A measured total for a whole geography, as published by an agency.
+
+    The counterpart to :class:`SiteEstimate`, and deliberately a separate table
+    rather than a nullable ``site_id`` on that one. These two carry opposite
+    epistemic weight: a site estimate is Helios inferring from acreage, while
+    this is a figure an agency measured and published. Letting them share a
+    table would make it easy to sum across the boundary and report the result as
+    one number, which is exactly the error the vocabulary exists to prevent.
+
+    Every row cites the document version it came from, so a total shown next to
+    an inferred one can always be traced back to who measured it and when.
+    """
+
+    __tablename__ = "area_totals"
+
+    area_kind: Mapped[str] = mapped_column(String(20), nullable=False, index=True)
+    """``county`` or ``state``. Water is published per county and electricity per
+    state, and the difference is not a detail a reader can be left to infer."""
+
+    area_code: Mapped[str] = mapped_column(String(10), nullable=False, index=True)
+    """County FIPS (``04013``) or two-letter state code (``AZ``)."""
+
+    area_name: Mapped[str] = mapped_column(String(120), nullable=False)
+
+    metric: Mapped[str] = mapped_column(String(60), nullable=False, index=True)
+    """e.g. ``public_supply_water_withdrawal``, ``electricity_retail_sales``."""
+
+    sector: Mapped[str] = mapped_column(String(60), nullable=False, default="all")
+    """Reporting sector where the source breaks one out, e.g. ``commercial``.
+
+    Never NULL, and ``"all"`` when the source publishes no breakdown. Postgres
+    treats NULLs as distinct in a unique constraint, so a nullable sector would
+    have left the uniqueness below unenforced for exactly the rows that have
+    no sector -- which is most of them."""
+
+    value: Mapped[float] = mapped_column(Float, nullable=False)
+    unit: Mapped[str] = mapped_column(String(40), nullable=False)
+    reference_year: Mapped[int] = mapped_column(SmallInteger, nullable=False, index=True)
+    """The year the figure describes, which is routinely years behind today. The
+    UI must show it: a 2015 water total presented undated reads as current."""
+
+    assertion_class: Mapped[str] = mapped_column(
+        String(20), nullable=False, default=str(AssertionClass.REPORTED)
+    )
+    """``reported``. An agency published this; Helios did not derive it."""
+
+    source_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("sources.id", ondelete="RESTRICT"), nullable=False, index=True
+    )
+    document_version_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("document_versions.id", ondelete="SET NULL"), index=True
+    )
+    notes: Mapped[str | None] = mapped_column(Text)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "area_kind",
+            "area_code",
+            "metric",
+            "sector",
+            "reference_year",
+            name="uq_area_totals_measure",
+        ),
+        Index("ix_area_totals_lookup", "area_kind", "area_code", "metric"),
+    )
+
+
 class SiteEstimate(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     """A ranged, method-documented estimate such as power demand.
 
@@ -1150,6 +1218,7 @@ class HumanReview(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
 
 __all__ = [
+    "AreaTotal",
     "ConnectorRun",
     "DocumentVersion",
     "EvidenceRecord",

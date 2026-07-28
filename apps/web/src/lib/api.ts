@@ -6,6 +6,7 @@
  * missing provenance in the UI.
  */
 import {
+  areaConsumptionSchema,
   detectionLagSchema,
   featureCollectionSchema,
   provenanceSchema,
@@ -165,6 +166,10 @@ export function getStageGrowth() {
 export function getDetectionLag() {
   // Hyphenated on the wire; the static export writes the same filename.
   return request("/analytics/detection-lag", detectionLagSchema);
+}
+
+export function getAreaConsumption() {
+  return request("/analytics/area-consumption", areaConsumptionSchema);
 }
 
 // Download targets. A static export cannot build a zip on demand, so the

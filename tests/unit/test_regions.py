@@ -40,6 +40,28 @@ class TestRegistryShape:
             min_lon, min_lat, max_lon, max_lat = region.bbox
             assert min_lon < max_lon and min_lat < max_lat, region.slug
 
+    def test_county_fips_line_up_with_county_names(self) -> None:
+        """Federal datasets key on FIPS. A code in the wrong slot would attach a
+        real county's water figures to a different county, which reads as a
+        plausible number rather than as an error."""
+        for region in REGIONS:
+            assert len(region.county_fips) == len(region.counties), region.slug
+            for code in region.county_fips:
+                assert len(code) == 5 and code.isdigit(), f"{region.slug}: {code}"
+
+    def test_county_fips_agree_on_their_state(self) -> None:
+        """The first two digits of a county FIPS are the state FIPS. Every county
+        in a region must share one, and two regions in the same state must agree
+        on which one -- a stray prefix means a county from another state."""
+        by_state: dict[str, set[str]] = {}
+        for region in REGIONS:
+            prefixes = {code[:2] for code in region.county_fips}
+            assert len(prefixes) == 1, f"{region.slug}: mixed state prefixes {sorted(prefixes)}"
+            by_state.setdefault(region.state_code, set()).update(prefixes)
+
+        for state_code, prefixes in by_state.items():
+            assert len(prefixes) == 1, f"{state_code}: {sorted(prefixes)}"
+
     def test_default_region_is_registered_and_active(self) -> None:
         default = get_region(DEFAULT_REGION_SLUG)
         assert default is EAST_VALLEY_AZ

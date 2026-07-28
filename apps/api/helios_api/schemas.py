@@ -564,8 +564,89 @@ class RegionListResponse(HeliosModel):
     note: str
 
 
+class AreaTotalResponse(HeliosModel):
+    """One measured resource total for a whole county or state.
+
+    Every field here is ``reported``: an agency measured it and published it.
+    Nothing on this model is derived by Helios.
+    """
+
+    area_kind: str
+    """``county`` or ``state``. Not interchangeable -- see the response note."""
+
+    area_code: str
+    """County FIPS, or a two-letter state code."""
+
+    area_name: str
+    metric: str
+    sector: str
+    """``all`` where the publisher gives no sectoral breakdown."""
+
+    value: float
+    unit: str
+    reference_year: int
+    assertion_class: str
+    source_slug: str
+    source_name: str
+
+
+class HeliosShareResponse(HeliosModel):
+    """Helios's own sites expressed against a reported area total.
+
+    Both sides are stated separately and the ratio between them is a *ratio of
+    an inference to a measurement*, which is weaker than either. It carries the
+    inferred band, not just a midpoint, for that reason.
+    """
+
+    metric: str
+    unit: str
+    area_kind: str
+    area_name: str
+    area_value: float
+    """The reported total. Whole-area, covering every user in it."""
+
+    area_reference_year: int
+
+    sites_counted: int
+    inferred_lower: float
+    inferred_likely: float
+    inferred_upper: float
+
+    share_lower_pct: float | None
+    share_likely_pct: float | None
+    share_upper_pct: float | None
+
+    method: str
+    assumptions: dict[str, Any]
+    caveat: str
+
+
+class AreaConsumptionResponse(HeliosModel):
+    """What a region already consumes, and how Helios's sites compare to it.
+
+    The point of this endpoint is scale. An inferred 40 MW site means nothing
+    without knowing what the surrounding area already draws, and the surrounding
+    figure is one Helios did not produce.
+
+    The two halves are deliberately not merged. ``totals`` is reported and
+    ``comparisons`` is inferred, and a reader must be able to tell at a glance
+    which is which.
+    """
+
+    region_slug: str
+    region_name: str
+    totals: list[AreaTotalResponse]
+    comparisons: list[HeliosShareResponse]
+    granularity_note: str
+    """Why the water and electricity figures cover different geographies."""
+
+    note: str
+
+
 __all__ = [
     "AnalyticsStagesResponse",
+    "AreaConsumptionResponse",
+    "AreaTotalResponse",
     "AssertedValue",
     "ConnectorRunResponse",
     "DependencyResponse",
@@ -575,6 +656,7 @@ __all__ = [
     "EvidenceItemResponse",
     "EvidenceListResponse",
     "HealthResponse",
+    "HeliosShareResponse",
     "MapFeatureCollection",
     "OrganizationSummary",
     "PageMeta",

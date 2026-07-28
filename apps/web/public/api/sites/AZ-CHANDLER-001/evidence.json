@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T02:03:22.303412+00:00",
+  "generated_at": "2026-07-28T05:51:16.688871+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -460,7 +460,7 @@
   },
   "evidence": [
     {
-      "id": "a14a77dd-abba-47cc-a220-4da3be35139e",
+      "id": "0e2c729d-6850-4303-811e-5faec5991260",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by CI PHOENIX-CHANDLER I-VII LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = CI PHOENIX-CHANDLER I-VII LLC",
@@ -489,8 +489,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-        "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -502,7 +502,7 @@
       }
     },
     {
-      "id": "71293cb7-3fb2-42a1-b3f4-207b08fd6546",
+      "id": "af192644-d420-41b8-ac59-0e7c57bd537f",
       "evidence_kind": "large_industrial_parcel_acquisition",
       "summary": "Organization-held industrial parcel of 66.1 acres transferred on 2022-04-04, at or above the 20-acre campus-scale threshold.",
       "snippet": "DeedNumber = 20220297495; DeedDate = 2022-04-04; LotSize_Acre = 66.08299",
@@ -542,8 +542,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-        "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -555,7 +555,7 @@
       }
     },
     {
-      "id": "60273577-023d-4905-8dab-e5922562298b",
+      "id": "fac8b1e4-1c56-4cad-a0aa-49e026f13541",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Unnamed substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -575,8 +575,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "2810f737-c9c1-4e43-8d98-4d85bcd3ed27",
-        "document_version_id": "5cca6bf7-3ea5-4f09-9dea-daa9b2c78dca",
+        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
+        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -588,7 +588,7 @@
       }
     },
     {
-      "id": "0fa4edd6-41b1-4912-bf7b-40b6e365888a",
+      "id": "c536bbaf-fcbb-4918-b2c4-8936a792fc76",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -617,8 +617,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-        "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -632,28 +632,28 @@
   ],
   "stage_history": [
     {
-      "id": "8c05ebff-3a2f-497e-8332-79fcbc31884f",
+      "id": "d4e0b102-6716-4575-9b80-c7b45f1bcf0c",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2022-04-04",
-      "detected_at": "2026-07-28T02:03:20.019848Z",
+      "detected_at": "2026-07-28T05:51:14.260924Z",
       "is_downgrade": false,
       "confidence": 32.66,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "0fa4edd6-41b1-4912-bf7b-40b6e365888a",
-        "71293cb7-3fb2-42a1-b3f4-207b08fd6546",
-        "a14a77dd-abba-47cc-a220-4da3be35139e"
+        "c536bbaf-fcbb-4918-b2c4-8936a792fc76",
+        "af192644-d420-41b8-ac59-0e7c57bd537f",
+        "0e2c729d-6850-4303-811e-5faec5991260"
       ],
       "detection_lag_days": 1576
     }
   ],
   "predictions": [
     {
-      "id": "26710b20-e161-4631-a071-50b986e36697",
-      "calculated_at": "2026-07-28T02:03:20.016765Z",
+      "id": "f919f49f-3922-4bf4-8c43-7d5b788dfb83",
+      "calculated_at": "2026-07-28T05:51:14.258229Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -679,7 +679,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "0fa4edd6-41b1-4912-bf7b-40b6e365888a"
+          "evidence_record_id": "c536bbaf-fcbb-4918-b2c4-8936a792fc76"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -691,7 +691,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "60273577-023d-4905-8dab-e5922562298b"
+          "evidence_record_id": "fac8b1e4-1c56-4cad-a0aa-49e026f13541"
         },
         {
           "rule_id": "large-industrial-parcel-acquisition",
@@ -703,7 +703,7 @@
           "confidence_multiplier": 0.9,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "71293cb7-3fb2-42a1-b3f4-207b08fd6546"
+          "evidence_record_id": "af192644-d420-41b8-ac59-0e7c57bd537f"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -715,13 +715,13 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "a14a77dd-abba-47cc-a220-4da3be35139e"
+          "evidence_record_id": "0e2c729d-6850-4303-811e-5faec5991260"
         }
       ]
     },
     {
-      "id": "7648e6be-cf26-42ca-9d5e-0ae13b4b2aee",
-      "calculated_at": "2026-07-28T02:03:20.016830Z",
+      "id": "c6b227a9-48a9-40e9-b375-603ff8317e54",
+      "calculated_at": "2026-07-28T05:51:14.258291Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -747,7 +747,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "0fa4edd6-41b1-4912-bf7b-40b6e365888a"
+          "evidence_record_id": "c536bbaf-fcbb-4918-b2c4-8936a792fc76"
         },
         {
           "rule_id": "large-industrial-parcel-acquisition",
@@ -759,7 +759,7 @@
           "confidence_multiplier": 0.9,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "71293cb7-3fb2-42a1-b3f4-207b08fd6546"
+          "evidence_record_id": "af192644-d420-41b8-ac59-0e7c57bd537f"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -771,7 +771,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "a14a77dd-abba-47cc-a220-4da3be35139e"
+          "evidence_record_id": "0e2c729d-6850-4303-811e-5faec5991260"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -783,7 +783,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "60273577-023d-4905-8dab-e5922562298b"
+          "evidence_record_id": "fac8b1e4-1c56-4cad-a0aa-49e026f13541"
         }
       ]
     }

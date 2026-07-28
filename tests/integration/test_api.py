@@ -19,6 +19,10 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from helios_common.evidence_store import FilesystemEvidenceStore
+from helios_connectors.area_totals import (
+    EiaStateElectricityConnector,
+    UsgsCountyWaterConnector,
+)
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
@@ -41,6 +45,18 @@ def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[T
             "parcels",
         ),
         _replay(OsmPowerConnector, ("osm_power", "east_valley_power.json"), "power"),
+        _replay(
+            UsgsCountyWaterConnector,
+            ("usgs_water", "arizona_counties_2015.csv"),
+            "water",
+            counties=("04013", "04021"),
+        ),
+        _replay(
+            EiaStateElectricityConnector,
+            ("eia_electricity", "sales_annual.xlsx"),
+            "electricity",
+            states=("AZ",),
+        ),
     ):
         IngestionPipeline(registered_sources, connector, store, mode="fixture").run()
 
@@ -308,6 +324,147 @@ class TestAnalytics:
         payload = api_client.get("/analytics/detection-lag").json()
         lags = [e["lag_days"] for e in payload["slowest"]]
         assert lags == sorted(lags, reverse=True)
+
+
+class TestAreaConsumption:
+    def test_returns_the_regions_reported_totals(self, api_client: TestClient) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        assert payload["region_slug"] == "east-valley-az"
+
+        metrics = {t["metric"] for t in payload["totals"]}
+        assert "public_supply_water_withdrawal" in metrics
+        assert "electricity_retail_sales" in metrics
+
+    def test_every_area_total_is_reported(self, api_client: TestClient) -> None:
+        """These are the one set of figures on the site Helios did not derive.
+
+        If any of them ever came back as anything but reported, the whole point
+        of having a measured denominator would be gone.
+        """
+        payload = api_client.get("/analytics/area-consumption").json()
+        assert payload["totals"]
+        for total in payload["totals"]:
+            assert total["assertion_class"] == "reported", total["metric"]
+            assert total["source_slug"]
+            assert total["reference_year"] > 1990
+
+    def test_totals_are_scoped_to_the_regions_counties_and_state(
+        self, api_client: TestClient
+    ) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        for total in payload["totals"]:
+            if total["area_kind"] == "county":
+                assert total["area_code"] in {"04013", "04021"}
+            else:
+                assert total["area_kind"] == "state"
+                assert total["area_code"] == "AZ"
+
+    def test_water_and_electricity_do_not_pretend_to_share_a_geography(
+        self, api_client: TestClient
+    ) -> None:
+        """Water is county-level and electricity state-level. A reader must be
+        able to see that from the response rather than having to know it."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        by_metric = {t["metric"]: t["area_kind"] for t in payload["totals"]}
+        assert by_metric["public_supply_water_withdrawal"] == "county"
+        assert by_metric["electricity_retail_sales"] == "state"
+        assert payload["granularity_note"]
+
+    def test_maricopa_public_supply_matches_the_published_figure(
+        self, api_client: TestClient
+    ) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        maricopa = [
+            t
+            for t in payload["totals"]
+            if t["area_code"] == "04013" and t["metric"] == "public_supply_water_withdrawal"
+        ]
+        assert len(maricopa) == 1
+        assert maricopa[0]["value"] == pytest.approx(776.54)
+        assert maricopa[0]["unit"] == "Mgal/d"
+
+    def test_comparisons_state_their_bounds_and_their_caveat(self, api_client: TestClient) -> None:
+        """A ratio of an inference to a measurement must not render as a fact."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        assert payload["comparisons"], "sites with estimates should produce comparisons"
+
+        for comparison in payload["comparisons"]:
+            assert comparison["inferred_lower"] <= comparison["inferred_likely"]
+            assert comparison["inferred_likely"] <= comparison["inferred_upper"]
+            assert comparison["share_lower_pct"] <= comparison["share_likely_pct"]
+            assert comparison["share_likely_pct"] <= comparison["share_upper_pct"]
+            assert comparison["caveat"]
+            assert comparison["assumptions"]
+            assert comparison["method"]
+
+    def test_comparisons_are_never_labelled_reported(self, api_client: TestClient) -> None:
+        """The reported totals and the inferred comparisons stay in separate
+        lists precisely so nothing can read one as the other."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        for comparison in payload["comparisons"]:
+            assert "assertion_class" not in comparison
+
+    def test_water_comparison_converts_gallons_to_millions(self, api_client: TestClient) -> None:
+        """Site estimates are GPD and county totals Mgal/d. Comparing them
+        unconverted would be wrong by a factor of a million."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        water = [
+            c for c in payload["comparisons"] if c["metric"] == "public_supply_water_withdrawal"
+        ]
+        assert len(water) == 1
+        assert water[0]["unit"] == "Mgal/d"
+        # A handful of inferred sites cannot plausibly rival a metro's entire
+        # municipal supply; a unit error would put this in the thousands.
+        assert water[0]["share_likely_pct"] < 100
+
+    def test_electricity_comparison_is_annualised_energy_not_capacity(
+        self, api_client: TestClient
+    ) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        power = [c for c in payload["comparisons"] if c["metric"] == "electricity_retail_sales"]
+        assert len(power) == 1
+        assert power[0]["unit"] == "MWh/yr"
+        # The load factor must be published, not buried in the arithmetic.
+        assert "load_factor_likely" in power[0]["assumptions"]
+        assert power[0]["assumptions"]["hours_per_year"] == 8760
+
+    def test_the_same_request_twice_returns_identical_bytes(self, api_client: TestClient) -> None:
+        """Float addition is not associative and Postgres promises no row order,
+        so an unrounded sum over the same 13 sites can differ in its last bit
+        between two identical requests. That drift reached the published static
+        export once; a figure that changes when nothing changed is a defect in a
+        project whose claim is that its numbers can be re-derived."""
+        first = api_client.get("/analytics/area-consumption").text
+        second = api_client.get("/analytics/area-consumption").text
+        assert first == second
+
+    def test_summed_estimates_keep_the_precision_of_their_inputs(
+        self, api_client: TestClient
+    ) -> None:
+        """Inputs are produced rounded to one decimal, so a sum of them carries
+        no more precision than that and must not pretend to."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        power = next(c for c in payload["comparisons"] if c["metric"] == "electricity_retail_sales")
+        for key in ("power_mw_lower", "power_mw_likely", "power_mw_upper"):
+            value = power["assumptions"][key]
+            assert round(value, 1) == value, f"{key} carries false precision: {value!r}"
+
+    def test_unknown_region_is_a_404_not_an_empty_success(self, api_client: TestClient) -> None:
+        response = api_client.get("/analytics/area-consumption", params={"region": "atlantis"})
+        assert response.status_code == 404
+
+    def test_declared_region_returns_no_totals_rather_than_borrowed_ones(
+        self, api_client: TestClient
+    ) -> None:
+        """A declared region holds no data. It must come back empty, not with
+        another region's figures standing in."""
+        response = api_client.get(
+            "/analytics/area-consumption", params={"region": "northern-virginia"}
+        )
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["totals"] == []
+        assert payload["comparisons"] == []
 
 
 class TestExports:

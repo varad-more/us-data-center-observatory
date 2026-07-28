@@ -35,7 +35,20 @@ GAL_PER_KWH_LOW = 0.10
 GAL_PER_KWH_LIKELY = 0.50
 GAL_PER_KWH_HIGH = 1.00
 
+# Annual load factor: the fraction of nameplate capacity a campus actually draws
+# averaged over a year.
+#
+# Needed only to put an estimated *capacity* beside a reported *consumption*,
+# which are different quantities in different units. Data centres run steadier
+# than almost any other large load, so the band is narrower than the others here
+# -- but it is still an assumption, and it multiplies an already-inferred MW
+# figure rather than replacing it.
+LOAD_FACTOR_LOW = 0.60
+LOAD_FACTOR_LIKELY = 0.75
+LOAD_FACTOR_HIGH = 0.90
+
 _HOURS_PER_DAY = 24
+_HOURS_PER_YEAR = 8760
 _KW_PER_MW = 1000
 
 
@@ -148,14 +161,68 @@ def estimate_water_gpd(power: ImpactEstimate | None) -> ImpactEstimate | None:
     )
 
 
+def annualise_power_mwh(
+    lower_mw: float, likely_mw: float, upper_mw: float
+) -> ImpactEstimate | None:
+    """Convert a power capacity band in MW to annual energy in MWh.
+
+    Exists for one purpose: reported area electricity totals are published as
+    energy over a year, and Helios's site figures are capacity. Comparing them
+    without this conversion would be a unit error dressed up as a finding.
+
+    The conversion is not free. It layers an assumed load factor on top of an
+    already-inferred MW figure, so the result is weaker than its input and must
+    never be rendered as anything but ``inferred``.
+
+    Args:
+        lower_mw: Lower bound of the capacity band.
+        likely_mw: Central capacity figure.
+        upper_mw: Upper bound of the capacity band.
+
+    Returns:
+        A ranged annual-energy estimate, or None when there is no capacity.
+    """
+    if likely_mw <= 0:
+        return None
+
+    def mwh(mw: float, load_factor: float) -> float:
+        return round(mw * _HOURS_PER_YEAR * load_factor, 1)
+
+    return ImpactEstimate(
+        lower=mwh(lower_mw, LOAD_FACTOR_LOW),
+        likely=mwh(likely_mw, LOAD_FACTOR_LIKELY),
+        upper=mwh(upper_mw, LOAD_FACTOR_HIGH),
+        unit="MWh/yr",
+        method="Estimated capacity x hours per year x assumed load factor",
+        assumptions={
+            "power_mw_lower": lower_mw,
+            "power_mw_likely": likely_mw,
+            "power_mw_upper": upper_mw,
+            "hours_per_year": _HOURS_PER_YEAR,
+            "load_factor_low": LOAD_FACTOR_LOW,
+            "load_factor_likely": LOAD_FACTOR_LIKELY,
+            "load_factor_high": LOAD_FACTOR_HIGH,
+            "note": (
+                "Capacity is not consumption. This converts one to the other so "
+                "it can be set beside a reported energy total, and inherits every "
+                "assumption in the capacity estimate before adding its own."
+            ),
+        },
+    )
+
+
 __all__ = [
     "GAL_PER_KWH_HIGH",
     "GAL_PER_KWH_LIKELY",
     "GAL_PER_KWH_LOW",
+    "LOAD_FACTOR_HIGH",
+    "LOAD_FACTOR_LIKELY",
+    "LOAD_FACTOR_LOW",
     "MW_PER_ACRE_HIGH",
     "MW_PER_ACRE_LIKELY",
     "MW_PER_ACRE_LOW",
     "ImpactEstimate",
+    "annualise_power_mwh",
     "estimate_power_mw",
     "estimate_water_gpd",
 ]

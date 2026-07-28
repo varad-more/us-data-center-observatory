@@ -30,6 +30,7 @@ from helios_common.hashing import content_sha256
 from helios_common.logging import bind_run_context, clear_run_context, get_logger
 from helios_common.time import utcnow
 from helios_connectors.loaders import (
+    load_area_total,
     load_parcel,
     load_permit,
     load_substation,
@@ -384,6 +385,9 @@ class IngestionPipeline:
                 create_evidence=create_evidence,
             )
             return len(evidence)
+        if record.entity_type == "area_total":
+            load_area_total(self.session, record, source=source, version=version)
+            return 0
         if record.entity_type == "substation":
             load_substation(self.session, record, source=source, document=document)
             return 0

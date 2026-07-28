@@ -140,3 +140,46 @@ piece of work, and it is a connector per county, not a flag.
 - Nine regions registered, one `ACTIVE`. A `DECLARED` region is in scope and
   empty, `/regions` publishes its site count, and a unit test asserts only
   east-valley-az is active — so the list cannot quietly become a coverage claim.
+
+---
+
+## Area consumption — the measured denominator
+
+Goal: give Helios's inferred per-site figures something reported to sit against.
+
+- [x] `area_consumption` table, keyed on the measurement rather than a source id.
+- [x] `sector` non-null with an `"all"` sentinel — a nullable column inside a
+      unique constraint is not constrained in Postgres.
+- [x] USGS county water connector (2015, Mgal/d, per county FIPS).
+- [x] EIA state electricity connector (xlsx, MWh/yr, per state).
+- [x] County FIPS on every region, read out of the USGS file itself.
+- [x] Registry entries, replay fixtures, CLI wiring, bootstrap in live mode.
+- [x] `/analytics/area-consumption` — reported totals and inferred comparisons
+      as two separate lists.
+- [x] `annualise_power_mwh` with a published load factor.
+- [x] Frontend panel on `/analytics`, two cards with opposing badges.
+- [x] Rounded the summed estimates — an unrounded `func.sum()` was drifting in
+      its last bit between exports and reaching the published snapshot.
+
+### The granularity mismatch is real and is surfaced, not smoothed
+
+Water is published per county. Electricity is published per state, and no public
+source breaks retail sales to county nationally. Averaging or apportioning the
+state figure to a county would have produced a number that looked better and
+meant less. Every row carries its own `area_kind` and the API returns the
+mismatch as an explicit note.
+
+### What made the comparison hard to state honestly
+
+A site estimate is a *capacity* in MW. A retail sales total is *energy* in
+MWh/yr. Turning one into the other needs an assumed load factor, which sits on
+top of the assumed power density already inside the capacity figure. The result
+is weaker than its own input. It is published as a band with the load factor
+named, in a list the API keeps separate from the reported totals.
+
+### Verified against the real files
+
+Maricopa 2015 public supply 776.54 Mgal/d, total withdrawal 2,058.19, population
+4,167,947. Arizona 2020 retail sales 81,960,074 MWh/yr, and the four sectors sum
+to it — which is the check that catches reading EIA's overlapping provider
+categories and double counting.

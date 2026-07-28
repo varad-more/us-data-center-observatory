@@ -67,6 +67,10 @@ class Region:
         state_code: Two-letter USPS code; prefixes every project code minted here.
         coverage: Whether connectors actually read this region.
         counties: Counties whose assessor and permit records cover the region.
+        county_fips: Five-digit FIPS codes, positionally aligned with
+            ``counties``. County names collide across states and are spelled
+            inconsistently ("DeKalb", "De Kalb"); federal datasets key on FIPS,
+            so a region that cannot produce one cannot be joined to them.
         cities: Municipalities a parcel sweep is restricted to.
         bbox: ``(min_lon, min_lat, max_lon, max_lat)``, generous by design.
         note: Why this region is on the list.
@@ -77,6 +81,7 @@ class Region:
     state_code: str
     coverage: RegionCoverage
     counties: tuple[str, ...]
+    county_fips: tuple[str, ...]
     cities: tuple[str, ...]
     bbox: tuple[float, float, float, float]
     note: str
@@ -114,6 +119,7 @@ EAST_VALLEY_AZ = Region(
     state_code="AZ",
     coverage=RegionCoverage.ACTIVE,
     counties=("Maricopa", "Pinal"),
+    county_fips=("04013", "04021"),
     cities=("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction"),
     bbox=(-111.98, 33.16, -111.35, 33.52),
     note=(
@@ -133,6 +139,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="AZ",
         coverage=RegionCoverage.DECLARED,
         counties=("Maricopa",),
+        county_fips=("04013",),
         cities=("Goodyear", "Buckeye", "Avondale", "El Mirage", "Surprise", "Glendale"),
         bbox=(-112.75, 33.20, -112.05, 33.80),
         note=(
@@ -146,6 +153,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="VA",
         coverage=RegionCoverage.DECLARED,
         counties=("Loudoun", "Prince William", "Fairfax"),
+        county_fips=("51107", "51153", "51059"),
         cities=("Ashburn", "Sterling", "Leesburg", "Manassas", "Chantilly", "Herndon"),
         bbox=(-77.85, 38.55, -77.00, 39.35),
         note="The largest concentration of data-centre capacity in the world.",
@@ -156,6 +164,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="OH",
         coverage=RegionCoverage.DECLARED,
         counties=("Franklin", "Licking", "Delaware"),
+        county_fips=("39049", "39089", "39041"),
         cities=("Columbus", "New Albany", "Hilliard", "Dublin", "Johnstown"),
         bbox=(-83.30, 39.75, -82.30, 40.40),
         note="Fast-growing hyperscale cluster with active county GIS portals.",
@@ -166,6 +175,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="TX",
         coverage=RegionCoverage.DECLARED,
         counties=("Dallas", "Tarrant", "Denton", "Ellis"),
+        county_fips=("48113", "48439", "48121", "48139"),
         cities=("Dallas", "Fort Worth", "Plano", "Irving", "Garland", "Midlothian"),
         bbox=(-97.60, 32.35, -96.35, 33.30),
         note="Inside ERCOT, whose generation reporting is machine-readable.",
@@ -176,6 +186,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="GA",
         coverage=RegionCoverage.DECLARED,
         counties=("Fulton", "Douglas", "Coweta", "DeKalb"),
+        county_fips=("13121", "13097", "13077", "13089"),
         cities=("Atlanta", "Douglasville", "Lithia Springs", "Newnan", "Palmetto"),
         bbox=(-85.00, 33.20, -83.90, 34.15),
         note="Rapid buildout against a constrained transmission network.",
@@ -186,6 +197,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="UT",
         coverage=RegionCoverage.DECLARED,
         counties=("Salt Lake", "Utah", "Tooele"),
+        county_fips=("49035", "49049", "49045"),
         cities=("Salt Lake City", "West Jordan", "Bluffdale", "Eagle Mountain", "Lehi"),
         bbox=(-112.30, 40.30, -111.60, 41.00),
         note="Arid, like the pilot region, which makes water estimates comparable.",
@@ -196,6 +208,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="IL",
         coverage=RegionCoverage.DECLARED,
         counties=("Cook", "DuPage", "Kane", "Will"),
+        county_fips=("17031", "17043", "17089", "17197"),
         cities=("Chicago", "Elk Grove Village", "Aurora", "Northlake", "Franklin Park"),
         bbox=(-88.75, 41.35, -87.50, 42.20),
         note="Dense interconnection hub; strong county open-data publishing.",
@@ -206,6 +219,7 @@ REGIONS: tuple[Region, ...] = (
         state_code="CA",
         coverage=RegionCoverage.DECLARED,
         counties=("Santa Clara",),
+        county_fips=("06085",),
         cities=("Santa Clara", "San Jose", "Sunnyvale", "Milpitas"),
         bbox=(-122.20, 36.90, -121.20, 37.50),
         note="A municipal utility publishes load data no investor-owned utility does.",
@@ -284,6 +298,14 @@ def _validate_registry() -> None:
             raise ValueError(f"{region.slug}: state_code must be two upper-case letters")
         if not region.counties:
             raise ValueError(f"{region.slug}: at least one county is required")
+        if len(region.county_fips) != len(region.counties):
+            raise ValueError(
+                f"{region.slug}: county_fips must line up one-to-one with counties "
+                f"({len(region.county_fips)} codes for {len(region.counties)} counties)"
+            )
+        for code in region.county_fips:
+            if len(code) != 5 or not code.isdigit():
+                raise ValueError(f"{region.slug}: {code!r} is not a five-digit county FIPS code")
         if region.is_active and not region.cities:
             raise ValueError(f"{region.slug}: an active region must name its cities")
 

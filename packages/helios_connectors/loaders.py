@@ -22,6 +22,7 @@ from sqlalchemy import select
 from helios_common.logging import get_logger
 from helios_common.vocabulary import AssertionClass, EvidencePolarity
 from helios_domain.models import (
+    AreaTotal,
     DocumentVersion,
     EvidenceRecord,
     Organization,
@@ -304,6 +305,61 @@ def _load_ownership_event(
     )
     session.add(event)
     return event
+
+
+def load_area_total(
+    session: Session,
+    record: NormalizedRecord,
+    *,
+    source: Source,
+    version: DocumentVersion,
+) -> AreaTotal:
+    """Upsert a published resource total for a county or state.
+
+    Keyed on the measurement itself -- area, metric, sector and reference year --
+    rather than on a source-native id, because the same figure republished in a
+    later file is the same measurement and must overwrite rather than accumulate.
+
+    Args:
+        session: Open database session.
+        record: Normalized area-total record.
+        source: Owning source row.
+        version: The immutable document version this figure is cited from.
+
+    Returns:
+        The persisted row.
+    """
+    payload = record.payload
+
+    row = session.scalar(
+        select(AreaTotal).where(
+            AreaTotal.area_kind == payload["area_kind"],
+            AreaTotal.area_code == payload["area_code"],
+            AreaTotal.metric == payload["metric"],
+            AreaTotal.sector == payload["sector"],
+            AreaTotal.reference_year == payload["reference_year"],
+        )
+    )
+    if row is None:
+        row = AreaTotal(
+            area_kind=payload["area_kind"],
+            area_code=payload["area_code"],
+            metric=payload["metric"],
+            sector=payload["sector"],
+            reference_year=payload["reference_year"],
+            source_id=source.id,
+            value=payload["value"],
+            unit=payload["unit"],
+            area_name=payload["area_name"],
+        )
+        session.add(row)
+
+    row.area_name = payload["area_name"]
+    row.value = payload["value"]
+    row.unit = payload["unit"]
+    row.assertion_class = str(AssertionClass.REPORTED)
+    row.document_version_id = version.id
+    return row
 
 
 def load_substation(

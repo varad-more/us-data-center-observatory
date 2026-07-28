@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "a19a3e67-326a-44c6-9e33-315fd532aea8",
+      "id": "051ad15a-aaf1-43dc-9d3f-a7fa38b7cce4",
       "slug": "az-corporation-commission-entity-search",
       "name": "Arizona Corporation Commission Entity Search",
       "agency": "Arizona Corporation Commission",
@@ -28,7 +28,7 @@
       "document_count": 0
     },
     {
-      "id": "27c4b93a-1a69-42f6-a5c1-ae44f1158606",
+      "id": "7cad7e55-6b51-45cc-9b13-5f99f6c3f26d",
       "slug": "sec-edgar",
       "name": "SEC EDGAR Full-Text Search",
       "agency": "US Securities and Exchange Commission",
@@ -55,7 +55,7 @@
       "document_count": 0
     },
     {
-      "id": "273f58c2-32d1-4574-933a-ca0cb79cfae6",
+      "id": "6329b31c-6a4c-414f-a330-d29475feb613",
       "slug": "epa-echo-air-facilities",
       "name": "EPA ECHO Air Facility Records",
       "agency": "United States Environmental Protection Agency",
@@ -78,11 +78,11 @@
       "connector_status": "implemented",
       "connector_slug": "epa-echo-air-facilities",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T02:03:18.864741Z",
+      "last_success_at": "2026-07-28T05:51:12.451584Z",
       "document_count": 1
     },
     {
-      "id": "acd7e328-fa36-4a59-8537-db051ff4e0c3",
+      "id": "b0c4234c-8cb2-4be9-95d4-9c5eb2f625c9",
       "slug": "maricopa-aqd-dust-control",
       "name": "Maricopa County Air Quality Dust Control Sites",
       "agency": "Maricopa County Air Quality Department",
@@ -109,7 +109,34 @@
       "document_count": 0
     },
     {
-      "id": "58eed789-4f5a-45ef-8ff3-871268cc8dbf",
+      "id": "8672f4e3-7dd7-489d-88bd-7ddb4faca3d8",
+      "slug": "eia-state-electricity-sales",
+      "name": "EIA Retail Electricity Sales by State",
+      "agency": "United States Energy Information Administration",
+      "jurisdiction": "United States",
+      "category": "infrastructure_reference",
+      "base_url": "https://www.eia.gov/electricity/data/state/",
+      "access_method": "bulk_download",
+      "update_frequency": "annual",
+      "license_name": "US Government public domain",
+      "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
+      "attribution_required": false,
+      "attribution_text": null,
+      "robots_policy_status": "allowed",
+      "geographic_coverage": "All US states and DC. State resolution only.",
+      "historical_coverage": "1990 to the most recent published year.",
+      "contains_personal_data": false,
+      "reliability_score": 0.95,
+      "known_schema_issues": "Published only as xlsx; EIA offers no CSV equivalent. Provider categories overlap, so only the 'Total Electric Industry' roll-up is read. No public source breaks retail sales to county nationally, so unlike the water totals this cannot be narrowed to a metro area.",
+      "notes": "The electricity counterpart to the USGS water totals. Its state granularity is coarser than the county water figures, and every row records which it is so the two are never read as comparable.",
+      "connector_status": "implemented",
+      "connector_slug": "eia-state-electricity-sales",
+      "access_limitation": null,
+      "last_success_at": "2026-07-28T05:51:13.319598Z",
+      "document_count": 1
+    },
+    {
+      "id": "92444109-199c-4d89-abc8-9cbc71aeb528",
       "slug": "osm-power-infrastructure",
       "name": "OpenStreetMap Power Infrastructure (Overpass API)",
       "agency": "OpenStreetMap contributors",
@@ -132,11 +159,11 @@
       "connector_status": "implemented",
       "connector_slug": "osm-power-infrastructure",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T02:03:18.833514Z",
+      "last_success_at": "2026-07-28T05:51:12.415116Z",
       "document_count": 1
     },
     {
-      "id": "5f92f793-c053-40c4-b813-5ea71e064b57",
+      "id": "009736f4-215f-454e-b3bf-46841c2f2f5b",
       "slug": "maricopa-assessor-parcels",
       "name": "Maricopa County Assessor Parcel Layer",
       "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -159,11 +186,11 @@
       "connector_status": "implemented",
       "connector_slug": "maricopa-assessor-parcels",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T02:03:18.300405Z",
+      "last_success_at": "2026-07-28T05:51:11.847162Z",
       "document_count": 1
     },
     {
-      "id": "b6abd1d5-9a78-46a9-941b-b3c25ca62bc6",
+      "id": "54848686-ec28-4a63-8120-2d6565afcc1f",
       "slug": "maricopa-recorder-documents",
       "name": "Maricopa County Recorder Document Search",
       "agency": "Maricopa County Recorder",
@@ -190,7 +217,7 @@
       "document_count": 0
     },
     {
-      "id": "8dce2d23-2255-4cd7-b49f-1a2404122546",
+      "id": "961ae84e-acad-47ed-b7a9-ab8ff66ea13c",
       "slug": "mesa-building-permits",
       "name": "City of Mesa Building Permits",
       "agency": "City of Mesa",
@@ -213,11 +240,11 @@
       "connector_status": "implemented",
       "connector_slug": "mesa-building-permits",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T02:03:19.285151Z",
+      "last_success_at": "2026-07-28T05:51:12.925295Z",
       "document_count": 1
     },
     {
-      "id": "9c398896-12b0-4e31-a220-71ac57966bf2",
+      "id": "1e838f37-4c21-4e31-99af-83679c5b6918",
       "slug": "mesa-agendas",
       "name": "City of Mesa Planning and Zoning Agendas",
       "agency": "City of Mesa Development Services",
@@ -244,7 +271,7 @@
       "document_count": 0
     },
     {
-      "id": "dccfce40-1773-4817-93d9-71a45ebc0693",
+      "id": "6486908b-1ba9-4457-98c4-e90f896e60c7",
       "slug": "copernicus-sentinel2",
       "name": "Copernicus Sentinel-2 Surface Reflectance",
       "agency": "European Space Agency / Copernicus",
@@ -271,7 +298,7 @@
       "document_count": 0
     },
     {
-      "id": "e50bda53-9abc-4276-a550-b0f56d99e0f7",
+      "id": "98a4fc06-a4bf-43f0-930d-c30e87146081",
       "slug": "azcc-edocket",
       "name": "Arizona Corporation Commission eDocket",
       "agency": "Arizona Corporation Commission",
@@ -294,11 +321,11 @@
       "connector_status": "fixture_only",
       "connector_slug": "azcc-edocket",
       "access_limitation": "eDocket search is a stateful ASP.NET interface requiring viewstate round-trips and offering no documented API or bulk export. Helios implements and tests the parser against fixtures built from the documented docket schema, and does not automate the search interface. Live coverage requires either an agency-provided export or manual docket retrieval.",
-      "last_success_at": "2026-07-28T02:03:19.317578Z",
+      "last_success_at": "2026-07-28T05:51:13.355529Z",
       "document_count": 2
     },
     {
-      "id": "57cbcd8c-b9ec-4372-9587-8b6f22f89a53",
+      "id": "89c2272c-ce60-4f2c-9915-a5f5e1d36268",
       "slug": "srp-infrastructure-projects",
       "name": "Salt River Project Infrastructure Projects",
       "agency": "Salt River Project",
@@ -325,7 +352,7 @@
       "document_count": 0
     },
     {
-      "id": "47442a09-0bdc-406e-85ca-53b63fc86bdc",
+      "id": "1ff5bc89-01b9-4932-91df-1d8cd426522f",
       "slug": "adwr-water-records",
       "name": "Arizona Department of Water Resources Data",
       "agency": "Arizona Department of Water Resources",
@@ -350,11 +377,38 @@
       "access_limitation": null,
       "last_success_at": null,
       "document_count": 0
+    },
+    {
+      "id": "d0608817-d340-4bb0-94b6-ad0405968559",
+      "slug": "usgs-county-water-use",
+      "name": "USGS Estimated Use of Water, County-Level",
+      "agency": "United States Geological Survey",
+      "jurisdiction": "United States",
+      "category": "water",
+      "base_url": "https://www.sciencebase.gov/catalog/item/5af3311be4b0da30c1b245d8",
+      "access_method": "bulk_download",
+      "update_frequency": "every five years, historically",
+      "license_name": "US Government public domain",
+      "license_url": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+      "attribution_required": true,
+      "attribution_text": "Dieter, C.A., and others, 2018, Estimated use of water in the United States county-level data for 2015 (ver. 2.0): U.S. Geological Survey data release, https://doi.org/10.5066/F7TB15V5.",
+      "robots_policy_status": "allowed",
+      "geographic_coverage": "All 3,223 US counties and county equivalents.",
+      "historical_coverage": "Five-yearly compilations back to 1950. 2015 is the most recent release carrying a county breakdown.",
+      "contains_personal_data": false,
+      "reliability_score": 0.9,
+      "known_schema_issues": "A citation line sits above the real header row. Withdrawals are in million gallons per day; population is in thousands and is rescaled to people on ingest. The 2020 compilation dropped the county breakdown, so 2015 is the newest county figure that exists rather than the newest Helios fetched.",
+      "notes": "Supplies the reported denominator that Helios's inferred per-site water estimates are shown against. It is a whole-county withdrawal total covering every user, so it is context, never a baseline to subtract from.",
+      "connector_status": "implemented",
+      "connector_slug": "usgs-county-water-use",
+      "access_limitation": null,
+      "last_success_at": "2026-07-28T05:51:12.958219Z",
+      "document_count": 1
     }
   ],
   "coverage_summary": {
     "planned": 7,
-    "implemented": 4,
+    "implemented": 6,
     "fixture_only": 2
   }
 }

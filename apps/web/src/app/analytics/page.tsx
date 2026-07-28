@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { AreaConsumptionPanel } from "@/components/AreaConsumption";
 import { GrowthChart } from "@/components/GrowthChart";
 import {
+  getAreaConsumption,
   getDetectionLag,
   getStageDistribution,
   getStageGrowth,
@@ -14,11 +16,12 @@ function formatDays(days: number | null): string {
 }
 
 export default async function AnalyticsPage() {
-  const [stages, provenance, growth, lag] = await Promise.all([
+  const [stages, provenance, growth, lag, consumption] = await Promise.all([
     getStageDistribution(),
     getProvenanceCompleteness(),
     getStageGrowth(),
     getDetectionLag(),
+    getAreaConsumption(),
   ]);
 
   // Stage banding is only meaningful once sites accumulate more than one
@@ -57,6 +60,8 @@ export default async function AnalyticsPage() {
           </div>
         )}
       </section>
+
+      <AreaConsumptionPanel data={consumption} />
 
       <section className="card">
         <div className="card-header">

@@ -410,6 +410,83 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         notes="Needed before any water-use scenario is published. Deferred.",
         tags=("water", "future-phase"),
     ),
+    SourceRegistryEntry(
+        slug="usgs-county-water-use",
+        name="USGS Estimated Use of Water, County-Level",
+        agency="United States Geological Survey",
+        jurisdiction="United States",
+        category=SourceCategory.WATER,
+        base_url="https://www.sciencebase.gov/catalog/item/5af3311be4b0da30c1b245d8",
+        access_method=AccessMethod.BULK_DOWNLOAD,
+        connector_status=ConnectorStatus.IMPLEMENTED,
+        update_frequency="every five years, historically",
+        rate_limit_per_second=0.5,
+        rate_limit_notes="One file per run; Helios self-imposes 0.5 rps out of courtesy.",
+        license_name="US Government public domain",
+        license_url=(
+            "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+        ),
+        attribution_required=True,
+        attribution_text=(
+            "Dieter, C.A., and others, 2018, Estimated use of water in the United States "
+            "county-level data for 2015 (ver. 2.0): U.S. Geological Survey data release, "
+            "https://doi.org/10.5066/F7TB15V5."
+        ),
+        robots_policy_status="allowed",
+        geographic_coverage="All 3,223 US counties and county equivalents.",
+        historical_coverage=(
+            "Five-yearly compilations back to 1950. 2015 is the most recent release carrying "
+            "a county breakdown."
+        ),
+        reliability_score=0.9,
+        known_schema_issues=(
+            "A citation line sits above the real header row. Withdrawals are in million "
+            "gallons per day; population is in thousands and is rescaled to people on "
+            "ingest. The 2020 compilation dropped the county breakdown, so 2015 is the "
+            "newest county figure that exists rather than the newest Helios fetched."
+        ),
+        notes=(
+            "Supplies the reported denominator that Helios's inferred per-site water "
+            "estimates are shown against. It is a whole-county withdrawal total covering "
+            "every user, so it is context, never a baseline to subtract from."
+        ),
+        connector_slug="usgs-county-water-use",
+        connector_entry_point="helios_connectors.area_totals:UsgsCountyWaterConnector",
+        tags=("water", "area-totals", "federal"),
+    ),
+    # ---------------------------------------------- infrastructure reference --
+    SourceRegistryEntry(
+        slug="eia-state-electricity-sales",
+        name="EIA Retail Electricity Sales by State",
+        agency="United States Energy Information Administration",
+        jurisdiction="United States",
+        category=SourceCategory.INFRASTRUCTURE_REFERENCE,
+        base_url="https://www.eia.gov/electricity/data/state/",
+        access_method=AccessMethod.BULK_DOWNLOAD,
+        connector_status=ConnectorStatus.IMPLEMENTED,
+        update_frequency="annual",
+        rate_limit_per_second=0.5,
+        license_name="US Government public domain",
+        license_url="https://www.eia.gov/about/copyrights_reuse.php",
+        robots_policy_status="allowed",
+        geographic_coverage="All US states and DC. State resolution only.",
+        historical_coverage="1990 to the most recent published year.",
+        reliability_score=0.95,
+        known_schema_issues=(
+            "Published only as xlsx; EIA offers no CSV equivalent. Provider categories "
+            "overlap, so only the 'Total Electric Industry' roll-up is read. No public "
+            "source breaks retail sales to county nationally, so unlike the water totals "
+            "this cannot be narrowed to a metro area."
+        ),
+        notes=(
+            "The electricity counterpart to the USGS water totals. Its state granularity "
+            "is coarser than the county water figures, and every row records which it is "
+            "so the two are never read as comparable."
+        ),
+        connector_slug="eia-state-electricity-sales",
+        connector_entry_point="helios_connectors.area_totals:EiaStateElectricityConnector",
+        tags=("electricity", "area-totals", "federal"),
+    ),
 )
 
 

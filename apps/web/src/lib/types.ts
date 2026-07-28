@@ -382,3 +382,51 @@ export const provenanceSchema = z.object({
   completeness_ratio: z.number(),
   note: z.string(),
 });
+
+export const areaTotalSchema = z.object({
+  area_kind: z.enum(["county", "state"]),
+  area_code: z.string(),
+  area_name: z.string(),
+  metric: z.string(),
+  sector: z.string(),
+  value: z.number(),
+  unit: z.string(),
+  reference_year: z.number(),
+  assertion_class: assertionClassSchema,
+  source_slug: z.string(),
+  source_name: z.string(),
+});
+
+export type AreaTotal = z.infer<typeof areaTotalSchema>;
+
+export const heliosShareSchema = z.object({
+  metric: z.string(),
+  unit: z.string(),
+  area_kind: z.enum(["county", "state"]),
+  area_name: z.string(),
+  area_value: z.number(),
+  area_reference_year: z.number(),
+  sites_counted: z.number(),
+  inferred_lower: z.number(),
+  inferred_likely: z.number(),
+  inferred_upper: z.number(),
+  share_lower_pct: z.number().nullable(),
+  share_likely_pct: z.number().nullable(),
+  share_upper_pct: z.number().nullable(),
+  method: z.string(),
+  assumptions: z.record(z.unknown()),
+  caveat: z.string(),
+});
+
+export type HeliosShare = z.infer<typeof heliosShareSchema>;
+
+export const areaConsumptionSchema = z.object({
+  region_slug: z.string(),
+  region_name: z.string(),
+  totals: z.array(areaTotalSchema),
+  comparisons: z.array(heliosShareSchema),
+  granularity_note: z.string(),
+  note: z.string(),
+});
+
+export type AreaConsumption = z.infer<typeof areaConsumptionSchema>;

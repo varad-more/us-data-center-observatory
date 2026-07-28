@@ -19,6 +19,10 @@ from helios_common.config import get_settings
 from helios_common.evidence_store import build_evidence_store
 from helios_common.logging import configure_logging
 from helios_common.vocabulary import ConnectorStatus
+from helios_connectors.area_totals import (
+    EiaStateElectricityConnector,
+    UsgsCountyWaterConnector,
+)
 from helios_connectors.azcc_edocket import AzccEdocketConnector
 from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
@@ -68,6 +72,15 @@ CONNECTORS: dict[str, Any] = {
     "epa-echo-air-facilities": EpaEchoAirConnector,
     "mesa-building-permits": MesaBuildingPermitsConnector,
     "azcc-edocket": AzccEdocketConnector,
+    "usgs-county-water-use": UsgsCountyWaterConnector,
+    "eia-state-electricity-sales": EiaStateElectricityConnector,
+}
+
+AREA_TOTAL_SCOPES: dict[str, dict[str, Any]] = {
+    # Both files are national. Narrowing on ingest keeps the database to the
+    # areas Helios can actually put a site in; --nationwide lifts it.
+    "usgs-county-water-use": {"counties": STUDY_REGION.county_fips},
+    "eia-state-electricity-sales": {"states": (STUDY_REGION.state_code,)},
 }
 
 
@@ -142,8 +155,9 @@ def ingest(
         bool,
         typer.Option(
             help=(
-                "Shorthand for the EPA ECHO connector: query every state by hosting "
-                "NAICS code instead of enumerating the study region's cities."
+                "Drop the study-region narrowing. EPA ECHO queries every state by "
+                "hosting NAICS code instead of enumerating cities; the area-total "
+                "connectors keep every county or state in the published file."
             )
         ),
     ] = False,
@@ -163,9 +177,13 @@ def ingest(
 
     if fixture:
         # Replay ignores live query narrowing: the recorded bytes already are
-        # the response the query would have produced.
+        # the response the query would have produced. The area-total scopes are
+        # the exception -- they narrow during parsing, not during fetching, so
+        # they must still be applied or a replay would load more than a live run.
         try:
-            connector = build_fixture_connector(connector_slug, settings=settings)
+            connector = build_fixture_connector(
+                connector_slug, settings=settings, **AREA_TOTAL_SCOPES.get(connector_slug, {})
+            )
         except (KeyError, FixtureNotFoundError) as exc:
             console.print(f"[red]No fixture available[/red] {exc}")
             raise typer.Exit(code=1) from exc
@@ -176,12 +194,20 @@ def ingest(
         elif where:
             kwargs["where"] = where
 
+        if connector_slug in AREA_TOTAL_SCOPES:
+            kwargs = dict(AREA_TOTAL_SCOPES[connector_slug])
+
         if nationwide:
-            if connector_slug != "epa-echo-air-facilities":
+            if connector_slug == "epa-echo-air-facilities":
+                # state=None drops the p_st narrowing, leaving the NAICS filter alone.
+                kwargs = {"naics_codes": HOSTING_NAICS_QUERY, "state": None}
+            elif connector_slug in AREA_TOTAL_SCOPES:
+                # The file is downloaded whole either way; this only stops the
+                # parser discarding the areas outside the study region.
+                kwargs = {}
+            else:
                 console.print(f"[red]--nationwide does not apply to[/red] {connector_slug!r}")
                 raise typer.Exit(code=1)
-            # state=None drops the p_st narrowing, leaving the NAICS filter alone.
-            kwargs = {"naics_codes": HOSTING_NAICS_QUERY, "state": None}
 
         # Fixture-only connectors never take constructor kwargs meant for live queries.
         if connector_slug == "azcc-edocket":
@@ -519,6 +545,18 @@ def _ingest_live() -> None:
             "[yellow]Mesa permits ingest failed. Continuing; re-run "
             "`helios ingest mesa-building-permits` later.[/yellow]"
         )
+    # Area totals are large annual publications on stable federal hosts. They
+    # are independent of everything above, so a failure here costs the context
+    # figures and nothing else.
+    for slug in ("usgs-county-water-use", "eia-state-electricity-sales"):
+        try:
+            ingest(slug)
+        except typer.Exit:
+            console.print(
+                f"[yellow]{slug} ingest failed. The observatory stands without it, "
+                f"but per-site estimates will have no reported total to sit "
+                f"against. Re-run `helios ingest {slug}` later.[/yellow]"
+            )
     ingest("azcc-edocket")
 
 

@@ -1,5 +1,5 @@
 {
-  "site_id": "77635d62-a8e2-4cf7-8604-f8eda4248724",
+  "site_id": "bc2b87a3-8be0-4d5a-8aab-0edad112c968",
   "project_code": "AZ-CHANDLER-002",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by DIGITAL 2121 SOUTH PRICE LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "a34731a0-6139-4c5c-b055-a0323ce3921f",
+        "id": "7307dfc2-fa3f-432c-b44d-05ed1d3ea44b",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by DIGITAL 2121 SOUTH PRICE LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = DIGITAL 2121 SOUTH PRICE LLC",
@@ -37,8 +37,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-          "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+          "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+          "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -58,7 +58,7 @@
       "title": "Large industrial parcel acquisition",
       "detail": "Organization-held industrial parcel of 20.9 acres transferred for $289,275,000 on 2010-07-15, at or above the 20-acre campus-scale threshold.",
       "evidence": {
-        "id": "b884a320-f7b3-4130-bf67-abe66df37523",
+        "id": "e6f3aa2b-9442-4eea-a5ef-5e15fceb76ef",
         "evidence_kind": "large_industrial_parcel_acquisition",
         "summary": "Organization-held industrial parcel of 20.9 acres transferred for $289,275,000 on 2010-07-15, at or above the 20-acre campus-scale threshold.",
         "snippet": "DeedNumber = 20100603763; DeedDate = 2010-07-15; LotSize_Acre = 20.94892",
@@ -98,8 +98,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-          "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+          "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+          "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -120,20 +120,20 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
       "evidence": null,
       "stage_transition": {
-        "id": "0580a4f7-64c3-4484-85c1-dcbc06cb7d36",
+        "id": "0d959ce1-67d5-4fe8-bf09-34a0cda68c65",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2010-07-15",
-        "detected_at": "2026-07-28T02:03:20.078097Z",
+        "detected_at": "2026-07-28T05:51:14.201585Z",
         "is_downgrade": false,
         "confidence": 32.66,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 33% confidence. Principal evidence: Assessor classifies property use as data centre; Large industrial parcel acquisition; Single-purpose entity holds title.",
         "triggering_evidence_ids": [
-          "405f14a8-e78c-47c6-8a2e-ffc3cdfe0f8d",
-          "b884a320-f7b3-4130-bf67-abe66df37523",
-          "a34731a0-6139-4c5c-b055-a0323ce3921f"
+          "8e752450-dd1e-484e-8886-34c79242e9aa",
+          "e6f3aa2b-9442-4eea-a5ef-5e15fceb76ef",
+          "7307dfc2-fa3f-432c-b44d-05ed1d3ea44b"
         ],
         "detection_lag_days": 5857
       },
@@ -145,7 +145,7 @@
       "title": "Dedicated substation proximity",
       "detail": "RS-27 tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "f4202e65-7fb8-4f46-bfba-48ef5d5b7ab5",
+        "id": "d1526647-f2cb-4eaf-af75-f4577880d28e",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "RS-27 tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
@@ -165,8 +165,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "2810f737-c9c1-4e43-8d98-4d85bcd3ed27",
-          "document_version_id": "5cca6bf7-3ea5-4f09-9dea-daa9b2c78dca",
+          "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
+          "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -186,7 +186,7 @@
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "405f14a8-e78c-47c6-8a2e-ffc3cdfe0f8d",
+        "id": "8e752450-dd1e-484e-8886-34c79242e9aa",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -215,8 +215,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-          "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+          "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+          "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",

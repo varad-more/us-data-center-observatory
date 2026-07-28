@@ -1,5 +1,5 @@
 {
-  "id": "abb805f3-2843-400f-8249-56f0ae08fef8",
+  "id": "000c2341-4297-4a05-a67d-56d59a56ea77",
   "project_code": "AZ-MESA-002",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 3.6364,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T02:03:20.109373Z",
-  "score_last_calculated_at": "2026-07-28T02:03:20.107012Z",
+  "stage_last_changed_at": "2026-07-28T05:51:14.106590Z",
+  "score_last_calculated_at": "2026-07-28T05:51:14.099832Z",
   "centroid": [
     -111.619606,
     33.343957
@@ -105,7 +105,7 @@
   },
   "parcels": [
     {
-      "id": "defa773a-38c8-4fba-a1d0-5b8168313259",
+      "id": "465c3815-ebb0-44ed-8867-238067aefb0b",
       "apn": "30431955",
       "apn_formatted": "304-31-955",
       "situs_address": "3856 S EVERTON TER",
@@ -125,7 +125,7 @@
   ],
   "organizations": [
     {
-      "id": "286ad738-61e0-4be2-93e1-3c4edaa7490d",
+      "id": "16000a70-870b-475e-9ffd-58e727dcc79f",
       "canonical_name": "MECP1 MESA 2 LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -141,7 +141,7 @@
   ],
   "dependencies": [
     {
-      "id": "608b76f1-80bd-4016-90c2-263b2962b199",
+      "id": "29c00b0d-afe5-4783-b130-c06a058be0ab",
       "infrastructure_kind": "substation",
       "label": "Howard Substation",
       "dependency_status": "existing",
@@ -155,7 +155,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "4bdbf54f-cacd-4682-96f5-627855cae8c8",
+      "id": "73c4af5d-2683-4148-9929-9d07768c5303",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -169,7 +169,7 @@
       "operator_name": null
     },
     {
-      "id": "87464428-d0c1-43e6-bccf-92f82ccc6352",
+      "id": "83b6995d-5da1-46f9-a886-b8a7eda5d434",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -183,7 +183,7 @@
       "operator_name": null
     },
     {
-      "id": "9782e4e6-737e-4e8a-bb5d-f2932bcaf3ed",
+      "id": "9b3ce309-82ad-4d38-9f2f-8a4e298ad58c",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -197,7 +197,7 @@
       "operator_name": null
     },
     {
-      "id": "4bc9e3eb-7ccf-4a0d-a731-6d6fa4b2a27c",
+      "id": "f0383cdf-dc49-4ed8-b818-63df80e44055",
       "infrastructure_kind": "substation",
       "label": "Prickly Pear Substation",
       "dependency_status": "existing",
@@ -211,7 +211,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "2521a31a-465e-4d20-b979-4ccb72f2ea69",
+      "id": "44cbcb1d-64dd-40d1-83e1-cf29cbe04973",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -225,7 +225,7 @@
       "operator_name": null
     },
     {
-      "id": "46835203-70ae-4b6b-b90c-b2b173d169dd",
+      "id": "d123c7db-f78c-4290-aefa-6a11df650ab7",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -239,7 +239,7 @@
       "operator_name": null
     },
     {
-      "id": "fb3ac3d6-a8b7-4039-b230-368d5a6cb390",
+      "id": "32eeed03-bd01-4aba-9edd-31610adfbf91",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -253,7 +253,7 @@
       "operator_name": null
     },
     {
-      "id": "085a0ed6-ddc4-4a55-b478-e9ef8d611583",
+      "id": "13a9fee6-3db0-436a-98d6-d6e16573bcb3",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -267,7 +267,7 @@
       "operator_name": null
     },
     {
-      "id": "0f2c1c8c-612a-46f7-bf3a-c0f9644799a1",
+      "id": "01a1ea47-f7b5-4691-8e06-3658b47b72b4",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -281,7 +281,7 @@
       "operator_name": null
     },
     {
-      "id": "e5b2bb6d-55c9-466b-aea6-4e52415eece6",
+      "id": "e941e3dd-81e6-401e-b345-e79335779282",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -295,7 +295,7 @@
       "operator_name": null
     },
     {
-      "id": "2f1513de-d077-4563-a0d6-8d10194f7570",
+      "id": "4c520de5-ecc0-4408-bb65-7bb698e5d906",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -309,7 +309,7 @@
       "operator_name": null
     },
     {
-      "id": "68d38b85-d3d3-4adf-9b15-c3cdfdb59b7c",
+      "id": "f707ed40-c85c-4051-8dac-121e399bddc5",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -323,7 +323,7 @@
       "operator_name": null
     },
     {
-      "id": "f03a65a0-5086-4c23-9564-506c4d4c4041",
+      "id": "17d10295-69a3-48f6-9d90-328655397645",
       "infrastructure_kind": "substation",
       "label": "Luna Substation",
       "dependency_status": "existing",
@@ -337,7 +337,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "96e3510a-121e-4cb2-8d0d-4739664dbd46",
+      "id": "0fda3f5c-62f3-4e25-9120-341c73affb2b",
       "infrastructure_kind": "substation",
       "label": "Perales Substation",
       "dependency_status": "existing",
@@ -351,7 +351,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "43415db2-8e28-4147-94b3-1fdf4da38e97",
+      "id": "6a3a27bb-787c-497c-a9ca-d83939e8361a",
       "infrastructure_kind": "substation",
       "label": "Greenbone Substation",
       "dependency_status": "existing",
@@ -367,7 +367,7 @@
   ],
   "estimates": [
     {
-      "id": "6a7c3f96-4bc3-404a-a105-f6baa76494f8",
+      "id": "0d567175-0bfb-4e0a-bbb0-78d8d03d791c",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 4.4,
@@ -385,11 +385,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T02:03:20.110011Z",
+      "calculated_at": "2026-07-28T05:51:14.108722Z",
       "notes": null
     },
     {
-      "id": "e10497b4-862d-45d4-8514-80056dc81e98",
+      "id": "84aea039-9152-4d05-b6ff-9d93589720e8",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 10560.0,
@@ -407,13 +407,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T02:03:20.110072Z",
+      "calculated_at": "2026-07-28T05:51:14.108826Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "9e264cd6-794f-4aca-8f35-4ad47b8e9df2",
-    "calculated_at": "2026-07-28T02:03:20.107060Z",
+    "id": "001d625f-ecaf-4ded-bc88-9814427e1a67",
+    "calculated_at": "2026-07-28T05:51:14.099923Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -439,31 +439,31 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "13ae0ef2-7435-44cb-80bd-a96ce48daf26"
+        "evidence_record_id": "51c7a6d3-e46e-496c-a0ce-b1e1df371a35"
       },
       {
         "rule_id": "grading-or-construction-permit",
         "evidence_kind": "grading_or_construction_permit",
         "label": "Grading or construction permit",
-        "detail": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
+        "detail": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
         "base_weight": 20.0,
         "applied_weight": 14.802,
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9868,
         "polarity": "supporting",
-        "evidence_record_id": "67832263-67f7-43e4-9374-82cfa8c53df7"
+        "evidence_record_id": "e15169f3-d543-4a53-a803-f98fdb067adc"
       },
       {
         "rule_id": "grading-or-construction-permit",
         "evidence_kind": "grading_or_construction_permit",
         "label": "Grading or construction permit",
-        "detail": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
+        "detail": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
         "base_weight": 20.0,
         "applied_weight": 7.401,
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9868,
         "polarity": "supporting",
-        "evidence_record_id": "26ef6774-c230-46a0-b289-9bf4ccdf8e70"
+        "evidence_record_id": "a876e46d-1fee-46b0-8c25-d3fdd82fbb03"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -475,7 +475,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9295,
         "polarity": "supporting",
-        "evidence_record_id": "44dbd51b-8976-4ca0-9921-10944752a883"
+        "evidence_record_id": "f3b7549a-6080-45a1-9812-c1df32c43fa7"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -487,7 +487,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.7044,
         "polarity": "supporting",
-        "evidence_record_id": "432fb566-b2d3-448e-b277-5aca1677f4ee"
+        "evidence_record_id": "b7ef4beb-7687-4208-ad0e-8880086331df"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -499,28 +499,28 @@
         "confidence_multiplier": 0.9253,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "1b09b0de-4c98-45b2-9654-c8f811911fbd"
+        "evidence_record_id": "147229d5-28b9-4705-8378-cd3a1d0bf27f"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "08a58dc5-8f7a-4821-8c63-26ab76283bc9",
+      "id": "d383702a-386a-49b1-a521-dbfc5929bcba",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2025-07-24",
-      "detected_at": "2026-07-28T02:03:20.109373Z",
+      "detected_at": "2026-07-28T05:51:14.106590Z",
       "is_downgrade": false,
       "confidence": 54.0,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 54% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "13ae0ef2-7435-44cb-80bd-a96ce48daf26",
-        "67832263-67f7-43e4-9374-82cfa8c53df7",
-        "26ef6774-c230-46a0-b289-9bf4ccdf8e70",
-        "44dbd51b-8976-4ca0-9921-10944752a883",
-        "432fb566-b2d3-448e-b277-5aca1677f4ee"
+        "51c7a6d3-e46e-496c-a0ce-b1e1df371a35",
+        "e15169f3-d543-4a53-a803-f98fdb067adc",
+        "a876e46d-1fee-46b0-8c25-d3fdd82fbb03",
+        "f3b7549a-6080-45a1-9812-c1df32c43fa7",
+        "b7ef4beb-7687-4208-ad0e-8880086331df"
       ],
       "detection_lag_days": 369
     }

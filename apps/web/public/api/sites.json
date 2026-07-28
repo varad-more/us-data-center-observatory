@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "05862683-db7f-4a79-9de2-32b944432f90",
+      "id": "cb081524-1f6d-45d3-a7f5-797fc6b26b46",
       "project_code": "AZ-CHANDLER-006",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -20,8 +20,8 @@
       "total_acres": 4.9443,
       "parcel_count": 2,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:19.977235Z",
-      "score_last_calculated_at": "2026-07-28T02:03:19.972222Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.225814Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.222760Z",
       "centroid": [
         -111.885715,
         33.276908
@@ -29,7 +29,7 @@
       "is_synthetic": false
     },
     {
-      "id": "396a1631-0eb4-440e-9171-8820b4678d43",
+      "id": "3cda1da9-931b-4a64-a463-5a70b0bfcdca",
       "project_code": "AZ-MESA-001",
       "display_name": null,
       "site_kind": "hyperscale_campus",
@@ -48,8 +48,8 @@
       "total_acres": 83.1715,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.047763Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.044893Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.139894Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.136192Z",
       "centroid": [
         -111.604067,
         33.346951
@@ -57,7 +57,7 @@
       "is_synthetic": false
     },
     {
-      "id": "abb805f3-2843-400f-8249-56f0ae08fef8",
+      "id": "000c2341-4297-4a05-a67d-56d59a56ea77",
       "project_code": "AZ-MESA-002",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -76,8 +76,8 @@
       "total_acres": 3.6364,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.109373Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.107012Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.106590Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.099832Z",
       "centroid": [
         -111.619606,
         33.343957
@@ -85,7 +85,7 @@
       "is_synthetic": false
     },
     {
-      "id": "220f2109-4d8f-4737-a5a5-3cb8cf8763be",
+      "id": "e8308d06-6d5a-42da-8bc2-95bf5d5241c2",
       "project_code": "AZ-CHANDLER-001",
       "display_name": null,
       "site_kind": "hyperscale_campus",
@@ -104,8 +104,8 @@
       "total_acres": 66.083,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.019848Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.016765Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.260924Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.258229Z",
       "centroid": [
         -111.882299,
         33.26896
@@ -113,7 +113,7 @@
       "is_synthetic": false
     },
     {
-      "id": "77635d62-a8e2-4cf7-8604-f8eda4248724",
+      "id": "bc2b87a3-8be0-4d5a-8aab-0edad112c968",
       "project_code": "AZ-CHANDLER-002",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -132,8 +132,8 @@
       "total_acres": 20.9489,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.078097Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.075847Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.201585Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.198791Z",
       "centroid": [
         -111.886941,
         33.274785
@@ -141,7 +141,7 @@
       "is_synthetic": false
     },
     {
-      "id": "60176d96-7a68-4a7d-a28a-7e63bc61118f",
+      "id": "7c989359-6269-440d-8b62-647ed598c7de",
       "project_code": "AZ-CHANDLER-004",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -160,8 +160,8 @@
       "total_acres": 14.496,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.059439Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.057297Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.165569Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.162854Z",
       "centroid": [
         -111.886094,
         33.300538
@@ -169,7 +169,7 @@
       "is_synthetic": false
     },
     {
-      "id": "0779d5f0-6b09-4b80-8d55-da1bfefd8913",
+      "id": "d8be5b16-25cd-4198-9658-666bbb8e4a10",
       "project_code": "AZ-MESA-004",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -188,8 +188,8 @@
       "total_acres": 1.2114,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:19.995177Z",
-      "score_last_calculated_at": "2026-07-28T02:03:19.992534Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.249671Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.246921Z",
       "centroid": [
         -111.735264,
         33.387936
@@ -197,7 +197,7 @@
       "is_synthetic": false
     },
     {
-      "id": "7f72cc38-4a65-427a-9c3f-6746d41cdd26",
+      "id": "68b5e198-92ab-4a1c-b317-361c5207faca",
       "project_code": "AZ-CHANDLER-005",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -216,8 +216,8 @@
       "total_acres": 5.72,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.090790Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.085449Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.153762Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.151074Z",
       "centroid": [
         -111.952306,
         33.306135
@@ -225,7 +225,7 @@
       "is_synthetic": false
     },
     {
-      "id": "7548b10e-8c39-4a20-b301-a0640e992fa3",
+      "id": "b46a1eb6-1fa8-49f9-918b-68186ffd4229",
       "project_code": "AZ-CHANDLER-007",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -244,8 +244,8 @@
       "total_acres": 1.72,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.068703Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.066573Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.189891Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.187204Z",
       "centroid": [
         -111.913592,
         33.304101
@@ -253,7 +253,7 @@
       "is_synthetic": false
     },
     {
-      "id": "ebe85630-6b82-4cbb-8d92-471c4e231dc1",
+      "id": "c19ea29a-5d01-450a-8f36-a4ac8cbce265",
       "project_code": "AZ-CHANDLER-003",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -272,8 +272,8 @@
       "total_acres": 17.9617,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.119000Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.116865Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.213641Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.210861Z",
       "centroid": [
         -111.887943,
         33.269237
@@ -281,7 +281,7 @@
       "is_synthetic": false
     },
     {
-      "id": "83af667e-29f4-455e-b4fc-47869f1b5bcd",
+      "id": "adee8541-48ab-48df-a5aa-92fd3dc997d6",
       "project_code": "AZ-GILBERT-001",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -300,8 +300,8 @@
       "total_acres": 2.8053,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.100131Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.098004Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.177897Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.175085Z",
       "centroid": [
         -111.812616,
         33.374904
@@ -309,7 +309,7 @@
       "is_synthetic": false
     },
     {
-      "id": "1d8b2e61-3168-47dc-bd56-a36e95bdd932",
+      "id": "cc9a2319-0e0d-45e2-bb83-52e1fb0393d9",
       "project_code": "AZ-TEMPE-001",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -328,8 +328,8 @@
       "total_acres": 4.2,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.006786Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.003817Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.238287Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.235651Z",
       "centroid": [
         -111.976583,
         33.406444
@@ -337,7 +337,7 @@
       "is_synthetic": false
     },
     {
-      "id": "314d3f25-f2a2-441e-aa2b-feff0864eca8",
+      "id": "37761c01-21e9-4415-9f9a-656c15c8a9c5",
       "project_code": "AZ-MESA-003",
       "display_name": null,
       "site_kind": "enterprise_data_center",
@@ -356,8 +356,8 @@
       "total_acres": 3.0003,
       "parcel_count": 1,
       "operator_status": "not_established",
-      "stage_last_changed_at": "2026-07-28T02:03:20.035751Z",
-      "score_last_calculated_at": "2026-07-28T02:03:20.031782Z",
+      "stage_last_changed_at": "2026-07-28T05:51:14.126645Z",
+      "score_last_calculated_at": "2026-07-28T05:51:14.123818Z",
       "centroid": [
         -111.635169,
         33.356759

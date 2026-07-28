@@ -1,5 +1,5 @@
 {
-  "site_id": "83af667e-29f4-455e-b4fc-47869f1b5bcd",
+  "site_id": "adee8541-48ab-48df-a5aa-92fd3dc997d6",
   "project_code": "AZ-GILBERT-001",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "8103278d-3c7c-4a25-80e0-93495bc56a64",
+        "id": "ce758fbb-0d1b-462a-9b1c-6f2bc0bad03f",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = Finley Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -28,8 +28,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "2810f737-c9c1-4e43-8d98-4d85bcd3ed27",
-          "document_version_id": "5cca6bf7-3ea5-4f09-9dea-daa9b2c78dca",
+          "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
+          "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -49,7 +49,7 @@
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "6ad6aef8-564d-4920-bff4-b44059a554d6",
+        "id": "566b8844-b892-42f8-bdb2-5afb1ca63c7b",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -78,8 +78,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
-          "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
+          "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
+          "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -100,18 +100,18 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "evidence": null,
       "stage_transition": {
-        "id": "d7ba46f7-6fb9-4243-9ab1-fd6b5e2fc598",
+        "id": "3256758a-0f5b-468e-bc60-5fba84740c7f",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2026-07-28",
-        "detected_at": "2026-07-28T02:03:20.100131Z",
+        "detected_at": "2026-07-28T05:51:14.177897Z",
         "is_downgrade": false,
         "confidence": 27.14,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
         "triggering_evidence_ids": [
-          "6ad6aef8-564d-4920-bff4-b44059a554d6"
+          "566b8844-b892-42f8-bdb2-5afb1ca63c7b"
         ],
         "detection_lag_days": 0
       },
