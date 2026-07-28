@@ -33,7 +33,10 @@ export const metadata: Metadata = {
 
 const NAV = [
   { href: "/", label: "Observatory" },
-  { href: "/map", label: "Map" },
+  { href: "/growth", label: "Growth" },
+  { href: "/regions", label: "Regions" },
+  { href: "/observatory-map", label: "National map" },
+  { href: "/map", label: "Site map" },
   { href: "/sites", label: "Sites" },
   { href: "/sources", label: "Data sources" },
   { href: "/analytics", label: "Analytics" },

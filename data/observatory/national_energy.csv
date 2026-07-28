@@ -1,0 +1,11 @@
+year,electricity_twh,water_bgal,series_kind,scenario,assertion_class,source
+2014,58,,historical,,reported,LBNL 2024 Report
+2018,76,,historical,,reported,LBNL 2024 Report
+2023,176,17.4,historical,,reported,LBNL 2024 Report
+2024,192,,historical,,reported,LBNL 2025 Update
+2028,325,38,projection,low,predicted,LBNL 2024 Report
+2028,464,,projection,reference,predicted,LBNL 2025 Update
+2028,580,73,projection,high,predicted,LBNL 2024 Report
+2030,521,,projection,low,predicted,LBNL 2025 Update
+2030,649,,projection,reference,predicted,LBNL 2025 Update
+2030,843,,projection,high,predicted,LBNL 2025 Update

@@ -27,6 +27,11 @@ data/cache/
 *.sqlite3
 *.db
 
+# Raw per-tile API payloads. These exist so an interrupted fetch can resume
+# without re-querying volunteer-run servers; the CSVs derived from them are the
+# committed artefact, and they are what `git diff` is meant to speak about.
+data/observatory/.cache/
+
 # Node / Next.js
 node_modules/
 .next/

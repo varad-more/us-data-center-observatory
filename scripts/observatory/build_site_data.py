@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+"""Turn the observatory CSVs into the static JSON the published site reads.
+
+GitHub Pages serves files, not queries, so every view the site offers has to
+exist as a file before deployment. This script writes them. It needs no
+database, no API and no network - the CSVs in ``data/observatory`` are the whole
+input, which is what lets a contributor rebuild the site from a clean checkout.
+
+Series are written one file per region rather than as a single bundle. A visitor
+looking at Loudoun County should not download Alameda County's history to see
+it, and a per-region file is the simplest thing that has that property.
+
+Run::
+
+    python scripts/observatory/build_site_data.py
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from collections import defaultdict
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+from _common import DATA_DIR, REPO_ROOT, FetchError, read_csv
+
+OUT_DIR = REPO_ROOT / "apps" / "web" / "public" / "data"
+
+FACILITIES_PATH = DATA_DIR / "facilities.csv"
+REGIONS_PATH = DATA_DIR / "regions.csv"
+SERIES_PATH = DATA_DIR / "region_series.csv"
+EVENTS_PATH = DATA_DIR / "events.csv"
+NATIONAL_PATH = DATA_DIR / "national_energy.csv"
+
+# How many of the most recent months of change the front page summarises.
+RECENT_MONTHS = 24
+
+# Facilities are emitted as GeoJSON for the map. Tags a mapper did not fill in
+# are omitted rather than sent as empty strings, which keeps the file smaller and
+# stops the UI from rendering a blank where it should render nothing.
+FACILITY_KEYS = ("name", "operator", "ref", "county_fips", "state", "first_seen")
+
+
+def _write(path: Path, payload: Any) -> int:
+    """Write ``payload`` as compact JSON and return the byte count."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(payload, separators=(",", ":"), sort_keys=False) + "\n"
+    path.write_text(text, encoding="utf-8")
+    return len(text)
+
+
+def build_facilities(
+    facilities: list[dict[str, str]], national_mw: float, total_area: float
+) -> Any:
+    """Build the GeoJSON point layer for the map."""
+    features = []
+    for row in facilities:
+        try:
+            lon, lat = float(row["lon"]), float(row["lat"])
+        except (KeyError, ValueError):
+            continue
+        area = float(row.get("footprint_m2") or 0.0)
+        properties: dict[str, Any] = {
+            "id": f"{row['osm_type']}/{row['osm_id']}",
+            "footprint_m2": round(area),
+        }
+        for key in FACILITY_KEYS:
+            value = row.get(key)
+            if value:
+                properties[key] = value
+        if total_area > 0:
+            properties["est_mw"] = round(area / total_area * national_mw, 2)
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                "properties": properties,
+            }
+        )
+    return {"type": "FeatureCollection", "features": features}
+
+
+def build_series_files(series: list[dict[str, str]], out_dir: Path) -> int:
+    """Write one JSON file per region series. Returns the number written."""
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in series:
+        grouped[row["region_id"]].append(
+            {
+                "period": row["period"],
+                "count": int(row["cumulative_count"]),
+                "change": int(row["net_change"]),
+                "footprint_m2": round(float(row["cumulative_footprint_m2"])),
+            }
+        )
+    for region_id, points in grouped.items():
+        _write(
+            out_dir / f"{region_id.replace(':', '-')}.json",
+            {"region_id": region_id, "points": points},
+        )
+    return len(grouped)
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Build every static payload. Returns a process exit code."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", type=Path, default=OUT_DIR)
+    args = parser.parse_args(argv)
+
+    facilities = read_csv(FACILITIES_PATH)
+    regions = read_csv(REGIONS_PATH)
+    series = read_csv(SERIES_PATH)
+    events = read_csv(EVENTS_PATH)
+    national = read_csv(NATIONAL_PATH)
+
+    if not facilities or not regions:
+        raise FetchError(
+            "facilities.csv and regions.csv must exist. Run the fetch and assign "
+            "stages before building site data."
+        )
+
+    historical = [r for r in national if r.get("series_kind") == "historical"]
+    electricity = [r for r in historical if r.get("electricity_twh")]
+    if not electricity:
+        raise FetchError("national_energy.csv carries no historical electricity figure.")
+    latest = max(electricity, key=lambda r: int(r["year"]))
+    national_mw = float(latest["electricity_twh"]) * 1e12 / 8760 / 1e6
+    total_area = sum(float(f.get("footprint_m2") or 0.0) for f in facilities)
+
+    written: dict[str, int] = {}
+    written["facilities.geojson"] = _write(
+        args.out / "facilities.geojson",
+        build_facilities(facilities, national_mw, total_area),
+    )
+
+    written["regions.json"] = _write(
+        args.out / "regions.json",
+        {
+            "items": [
+                {
+                    "region_id": r["region_id"],
+                    "kind": r["region_kind"],
+                    "name": r["name"],
+                    "state": r["state"],
+                    "fips": r["fips"],
+                    "facility_count": int(r["facility_count"]),
+                    "footprint_m2": round(float(r["footprint_m2"])),
+                    "est_mw": float(r.get("est_mw") or 0.0),
+                    "est_gal_per_day": float(r.get("est_gal_per_day") or 0.0),
+                }
+                for r in regions
+            ]
+        },
+    )
+
+    written["national_energy.json"] = _write(
+        args.out / "national_energy.json",
+        {
+            "items": [
+                {
+                    "year": int(r["year"]),
+                    "electricity_twh": (
+                        float(r["electricity_twh"]) if r["electricity_twh"] else None
+                    ),
+                    "water_bgal": float(r["water_bgal"]) if r["water_bgal"] else None,
+                    "series_kind": r["series_kind"],
+                    "scenario": r["scenario"],
+                    "assertion_class": r["assertion_class"],
+                    "source": r["source"],
+                }
+                for r in national
+            ]
+        },
+    )
+
+    series_count = 0
+    if series:
+        series_count = build_series_files(series, args.out / "series")
+
+    recent = sorted(
+        (e for e in events if e.get("event_kind") in {"creation", "deletion"}),
+        key=lambda e: str(e["event_date"]),
+        reverse=True,
+    )[:500]
+    written["changes.json"] = _write(
+        args.out / "changes.json",
+        {
+            "items": [
+                {
+                    "id": f"{e['osm_type']}/{e['osm_id']}",
+                    "date": e["event_date"],
+                    "kind": e["event_kind"],
+                    "state": e.get("state", ""),
+                    "county_fips": e.get("county_fips", ""),
+                }
+                for e in recent
+            ]
+        },
+    )
+
+    written["meta.json"] = _write(
+        args.out / "meta.json",
+        {
+            "generated_at": datetime.now(tz=UTC).isoformat(),
+            "facility_count": len(facilities),
+            "region_count": len(regions),
+            "series_count": series_count,
+            "national_mw": round(national_mw),
+            "national_reference_year": int(latest["year"]),
+            "total_footprint_m2": round(total_area),
+            "note": (
+                "Facility locations and footprints are reported by OpenStreetMap "
+                "contributors. Dates are when OpenStreetMap first recorded a "
+                "facility, not when it was built - OpenStreetMap carries no build "
+                "dates. Power and water are a facility's share of a reported "
+                "national total, allocated by footprint, and are upper bounds."
+            ),
+        },
+    )
+
+    print(f"Wrote site data to {args.out}")
+    for name, size in written.items():
+        print(f"  {name:<24} {size / 1024:>8.1f} KB")
+    if series_count:
+        print(f"  series/{'':<17} {series_count} region files")
+    else:
+        print("  series/                  none - run fetch_osm_history.py and build_series.py")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except FetchError as exc:
+        print(f"\nBuild failed: {exc}", file=sys.stderr)
+        sys.exit(1)
