@@ -10,7 +10,8 @@ Helios is an early-warning **observatory**, not a complete map of AI infrastruct
 4. **EPA ECHO rate limits.** The public API throttles aggressive clients. Helios self-limits and uses fixtures in CI; a throttled live run is a temporary gap, not proof of no generators.
 5. **Mesa planning agendas and dust-control attributes** are not yet automated. Commercial building permits are ingested with address-only matching (no coordinates in source).
 6. **No satellite observations.** Copernicus Sentinel-2 is declared in the registry as `planned` with no connector at all. A fixture-backed satellite stub was deliberately removed rather than kept, because shipping one would have implied an imagery capability Helios does not have.
-7. **Study area is East Valley, Arizona.** National coverage is out of scope.
+7. **Only one region is actually read.** `helios_domain.regions` names nine US regions; exactly one — East Valley, Arizona — is `ACTIVE`. The rest are `DECLARED`: in scope, and empty. A region appearing in the registry is not a claim that Helios is watching it. The two hard blockers to minting a site elsewhere (an `AZ-` project-code prefix and a `Maricopa` county default) are removed, but no connector reads another region yet.
+8. **National EPA ECHO coverage is a query, not a pipeline.** The ECHO connector can sweep every state in one request via the `p_ncs` NAICS filter (`helios ingest epa-echo-air-facilities --nationwide`), which returns roughly 380 hosting-classified air facilities across the US. Those facilities are not sites. They land as permit rows with coordinates, and site building attaches permits to sites *by proximity* — so outside the pilot region, where no parcels have been ingested and therefore no sites exist, they stay unlinked. Parcel coverage is the blocker, and it is per-county: every county publishes its assessor data differently, or not at all.
 
 ## Analytical
 

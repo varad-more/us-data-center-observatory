@@ -568,7 +568,10 @@ class Parcel(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     """Assessor parcel number, normalised to digits only for joining."""
 
     apn_formatted: Mapped[str | None] = mapped_column(String(40))
-    county: Mapped[str] = mapped_column(String(80), nullable=False, default="Maricopa")
+    county: Mapped[str] = mapped_column(String(80), nullable=False)
+    """Required, and deliberately without a default: one used to fall back to
+    ``Maricopa``, which silently mislabelled any parcel loaded from elsewhere."""
+
     jurisdiction: Mapped[str | None] = mapped_column(String(120), index=True)
 
     situs_address: Mapped[str | None] = mapped_column(Text)
@@ -688,10 +691,12 @@ class Site(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     site_kind_assertion: Mapped[str] = mapped_column(String(20), nullable=False, default="inferred")
 
     jurisdiction: Mapped[str | None] = mapped_column(String(120), index=True)
-    county: Mapped[str] = mapped_column(String(80), nullable=False, default="Maricopa")
-    region_slug: Mapped[str] = mapped_column(
-        String(80), nullable=False, default="east-valley-az", index=True
-    )
+    county: Mapped[str] = mapped_column(String(80), nullable=False)
+    region_slug: Mapped[str] = mapped_column(String(80), nullable=False, index=True)
+    """Both required without a default. They previously defaulted to ``Maricopa``
+    and ``east-valley-az``, so a site built anywhere else would have claimed to
+    be in Arizona unless the caller remembered to say otherwise. The registered
+    regions live in :mod:`helios_domain.regions`."""
 
     current_stage: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=0, index=True)
     current_confidence: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)

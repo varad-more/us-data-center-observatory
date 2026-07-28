@@ -20,7 +20,7 @@ from helios_common.evidence_store import build_evidence_store
 from helios_common.logging import configure_logging
 from helios_common.vocabulary import ConnectorStatus
 from helios_connectors.azcc_edocket import AzccEdocketConnector
-from helios_connectors.epa_echo import EpaEchoAirConnector
+from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
 from helios_connectors.osm_power import OsmPowerConnector
@@ -41,6 +41,7 @@ from helios_domain.models import (
     Substation,
 )
 from helios_domain.ontology import DevelopmentStage
+from helios_domain.regions import DEFAULT_REGION_SLUG, get_region
 from helios_domain.session import session_scope
 from helios_geospatial.site_builder import build_sites
 from helios_scoring.backtest import run_backtest
@@ -54,11 +55,12 @@ app = typer.Typer(
 )
 console = Console()
 
-EAST_VALLEY_CITIES = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
+STUDY_REGION = get_region(DEFAULT_REGION_SLUG)
 
-EAST_VALLEY_CITY_SQL = (
-    "PropertyCity IN ('MESA','CHANDLER','TEMPE','GILBERT','QUEEN CREEK','APACHE JUNCTION')"
+EAST_VALLEY_CITY_SQL = "PropertyCity IN ({})".format(
+    ",".join(f"'{city}'" for city in STUDY_REGION.cities_upper)
 )
+"""Assessor query fragment, derived so it cannot drift from the region."""
 
 CONNECTORS: dict[str, Any] = {
     "maricopa-assessor-parcels": MaricopaAssessorConnector,
@@ -136,6 +138,15 @@ def ingest(
             )
         ),
     ] = False,
+    nationwide: Annotated[
+        bool,
+        typer.Option(
+            help=(
+                "Shorthand for the EPA ECHO connector: query every state by hosting "
+                "NAICS code instead of enumerating the study region's cities."
+            )
+        ),
+    ] = False,
     fixture: Annotated[
         bool,
         typer.Option(help="Replay recorded fixtures instead of reaching the live source"),
@@ -164,6 +175,13 @@ def ingest(
             kwargs["where"] = f"PropertyUseDescription='DATA CENTERS' AND {EAST_VALLEY_CITY_SQL}"
         elif where:
             kwargs["where"] = where
+
+        if nationwide:
+            if connector_slug != "epa-echo-air-facilities":
+                console.print(f"[red]--nationwide does not apply to[/red] {connector_slug!r}")
+                raise typer.Exit(code=1)
+            # state=None drops the p_st narrowing, leaving the NAICS filter alone.
+            kwargs = {"naics_codes": HOSTING_NAICS_QUERY, "state": None}
 
         # Fixture-only connectors never take constructor kwargs meant for live queries.
         if connector_slug == "azcc-edocket":
@@ -223,7 +241,7 @@ def health_check(
 def build_sites_command() -> None:
     """Cluster parcels into sites and link infrastructure dependencies."""
     with session_scope() as session:
-        result = build_sites(session, region_cities=EAST_VALLEY_CITIES)
+        result = build_sites(session, region=STUDY_REGION)
     console.print(
         f"[green]Sites[/green] created={result.sites_created} updated={result.sites_updated} "
         f"parcels_linked={result.parcels_linked} "

@@ -58,6 +58,7 @@ from helios_connectors.types import (
     SourceItem,
 )
 from helios_document_intelligence.units import parse_voltage_list
+from helios_domain.regions import get_region
 
 logger = get_logger(__name__)
 
@@ -100,10 +101,15 @@ class OsmPowerConnector(BaseConnector):
 
     @property
     def bbox(self) -> tuple[float, float, float, float]:
-        """The query bounding box, defaulting to the configured study region."""
+        """The query bounding box, defaulting to the configured study region.
+
+        Read from the region registry rather than from a second copy in
+        settings, so the box and the region it claims to cover cannot disagree.
+        """
         if self._bbox is not None:
             return self._bbox
-        return (self._settings or self.http.settings).study_region_bbox
+        settings = self._settings or self.http.settings
+        return get_region(settings.study_region_slug).bbox
 
     def get_metadata(self) -> ConnectorMetadata:
         """Return the connector description."""

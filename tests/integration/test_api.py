@@ -29,8 +29,6 @@ from helios_scoring.service import recalculate_site
 
 pytestmark = pytest.mark.integration
 
-EAST_VALLEY_CITIES = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
-
 
 @pytest.fixture
 def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[TestClient]:
@@ -46,7 +44,7 @@ def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[T
     ):
         IngestionPipeline(registered_sources, connector, store, mode="fixture").run()
 
-    build_sites(registered_sources, region_cities=EAST_VALLEY_CITIES)
+    build_sites(registered_sources)
     for site in registered_sources.scalars(select(Site)).all():
         recalculate_site(registered_sources, site)
     registered_sources.flush()

@@ -19,8 +19,6 @@ from helios_scoring.backtest import DEFAULT_CASES_PATH, run_backtest
 
 pytestmark = [pytest.mark.integration]
 
-EAST_VALLEY = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
-
 
 def _labelled_case_count() -> int:
     """Number of labelled cases in the default backtest corpus."""
@@ -76,7 +74,7 @@ class TestMesaAddressMatching:
             for p in matched
         )
 
-        build_sites(registered_sources, region_cities=EAST_VALLEY)
+        build_sites(registered_sources)
         construction = registered_sources.scalars(
             select(EvidenceRecord).where(
                 EvidenceRecord.evidence_kind
@@ -95,7 +93,7 @@ class TestBacktestHarness:
         store: FilesystemEvidenceStore,
     ) -> None:
         IngestionPipeline(registered_sources, assessor_connector, store, mode="fixture").run()
-        build_sites(registered_sources, region_cities=EAST_VALLEY)
+        build_sites(registered_sources)
         # Score live once so AZ-MESA-001 has a current stage, then backtest.
         from helios_scoring.service import recalculate_site
 

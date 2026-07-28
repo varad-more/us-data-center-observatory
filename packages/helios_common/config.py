@@ -66,8 +66,10 @@ class Settings(BaseSettings):
 
     # ----------------------------------------------------------------- study --
     study_region_slug: str = "east-valley-az"
-    study_region_bbox: tuple[float, float, float, float] = (-111.98, 33.16, -111.35, 33.52)
-    """(min_lon, min_lat, max_lon, max_lat) covering Mesa through Apache Junction."""
+    """Which registered region this deployment watches. The counties, cities and
+    bounding box that go with it live in ``helios_domain.regions``, which this
+    layer cannot import; a second copy of the bounding box used to live here and
+    was free to disagree with the region it named."""
 
     # ------------------------------------------------------------------- api --
     api_title: str = "Helios Open AI Infrastructure Observatory API"

@@ -109,6 +109,25 @@ class TestParcelIngestion:
         assert len(parcels) == 14
         assert all(p.geometry is not None for p in parcels)
 
+    def test_county_survives_the_flush_inside_owner_resolution(
+        self,
+        registered_sources: Session,
+        assessor_connector: BaseConnector,
+        store: FilesystemEvidenceStore,
+    ) -> None:
+        """Resolving a parcel's owner can create an organization, and that flushes.
+
+        The parcel is added to the session before that happens, so every
+        non-nullable column must already be set or the half-built row reaches the
+        database. This passed for a long time only because ``county`` carried a
+        ``"Maricopa"`` default that filled the hole -- a default that would have
+        mislabelled any parcel loaded from another county.
+        """
+        IngestionPipeline(registered_sources, assessor_connector, store, mode="fixture").run()
+
+        counties = {p.county for p in registered_sources.scalars(select(Parcel)).all()}
+        assert counties == {"Maricopa"}
+
     def test_stores_payload_immutably_and_verifiably(
         self,
         registered_sources: Session,

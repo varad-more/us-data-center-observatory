@@ -22,8 +22,6 @@ from helios_scoring.service import recalculate_site
 
 pytestmark = [pytest.mark.e2e, pytest.mark.integration]
 
-EAST_VALLEY = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
-
 
 def test_fixture_pipeline_produces_scored_sites(db_session, settings) -> None:
     sync_registry(db_session)
@@ -51,7 +49,7 @@ def test_fixture_pipeline_produces_scored_sites(db_session, settings) -> None:
         summary = IngestionPipeline(db_session, connector, store, mode="fixture").run()
         assert summary.status == "success", summary.errors
 
-    built = build_sites(db_session, region_cities=EAST_VALLEY)
+    built = build_sites(db_session)
     assert built.sites_created >= 1
 
     sites = list(db_session.scalars(select(Site)).all())

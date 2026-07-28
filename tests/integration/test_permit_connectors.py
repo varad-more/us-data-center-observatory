@@ -19,8 +19,6 @@ from helios_geospatial.site_builder import build_sites
 
 pytestmark = [pytest.mark.integration]
 
-EAST_VALLEY = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
-
 
 @pytest.fixture
 def store(settings) -> FilesystemEvidenceStore:
@@ -83,7 +81,7 @@ class TestPermitIngestion:
     ) -> None:
         IngestionPipeline(registered_sources, assessor_connector, store, mode="fixture").run()
         IngestionPipeline(registered_sources, echo_connector, store, mode="fixture").run()
-        result = build_sites(registered_sources, region_cities=EAST_VALLEY)
+        result = build_sites(registered_sources)
         assert result.sites_created >= 1
 
         attached = registered_sources.scalars(

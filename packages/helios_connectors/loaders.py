@@ -160,16 +160,27 @@ def load_parcel(
     payload = record.payload
     apn = payload["apn"]
 
+    # Validated before the row exists. A connector that does not say which county
+    # it read is a bug, and defaulting to Maricopa would file another county's
+    # parcel under ours.
+    county = payload.get("county")
+    if not county:
+        raise ValueError(f"Parcel {apn} from {source.slug} has no county in its payload")
+
     parcel = session.scalar(select(Parcel).where(Parcel.source_id == source.id, Parcel.apn == apn))
     if parcel is None:
-        parcel = Parcel(source_id=source.id, apn=apn)
+        # Every non-nullable column is set here rather than below, because
+        # resolving the owner can create an organization, and that flushes. A
+        # half-built parcel would reach the database mid-function; it only ever
+        # worked because county carried a default that filled the hole.
+        parcel = Parcel(source_id=source.id, apn=apn, county=county)
         session.add(parcel)
 
     owner_analysis = payload.get("owner_analysis") or {}
     organization = _resolve_parcel_owner(session, payload, owner_analysis)
 
     parcel.apn_formatted = payload.get("apn_formatted")
-    parcel.county = payload.get("county", "Maricopa")
+    parcel.county = county
     parcel.jurisdiction = payload.get("jurisdiction")
     parcel.situs_address = payload.get("situs_address")
     parcel.situs_city = payload.get("situs_city")

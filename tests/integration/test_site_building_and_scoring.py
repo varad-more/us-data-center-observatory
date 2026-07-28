@@ -28,13 +28,13 @@ from helios_domain.models import (
     SiteStageHistory,
 )
 from helios_domain.ontology import DevelopmentStage, SiteKind
+from helios_domain.regions import EAST_VALLEY_AZ, UnknownRegionError
 from helios_geospatial.correlation import find_adjacent_parcels, parcels_in_bbox
 from helios_geospatial.site_builder import build_sites, generate_project_code
 from helios_scoring.service import recalculate_site, score_history
 
 pytestmark = pytest.mark.integration
 
-EAST_VALLEY_CITIES = ("Mesa", "Chandler", "Tempe", "Gilbert", "Queen Creek", "Apache Junction")
 
 TODAY = datetime.now(tz=UTC).date()
 """Standing-condition evidence is observed at ingestion time, so scoring cutoffs in
@@ -61,25 +61,37 @@ def populated(registered_sources: Session, settings) -> Session:
 class TestProjectCodeGeneration:
     def test_generates_anonymous_sequential_codes(self, populated: Session) -> None:
         """Anonymous codes avoid implying an attribution the evidence cannot support."""
-        assert generate_project_code(populated, "Mesa") == "AZ-MESA-001"
+        assert generate_project_code(populated, "Mesa", EAST_VALLEY_AZ) == "AZ-MESA-001"
 
     def test_handles_missing_jurisdiction(self, populated: Session) -> None:
-        assert generate_project_code(populated, None).startswith("AZ-UNK-")
+        assert generate_project_code(populated, None, EAST_VALLEY_AZ).startswith("AZ-UNK-")
+
+    def test_takes_the_state_prefix_from_the_region(self, populated: Session) -> None:
+        """The prefix was hardcoded to AZ, which would have mislabelled every site
+        built anywhere else. It now comes from the region's state code."""
+        code = generate_project_code(populated, "Ashburn", "northern-virginia")
+        assert code == "VA-ASHBURN-001"
+
+    def test_rejects_an_unregistered_region(self, populated: Session) -> None:
+        """A typo in a slug must fail rather than mint a code under a region that
+        does not exist."""
+        with pytest.raises(UnknownRegionError):
+            generate_project_code(populated, "Mesa", "east-valley-arizona")
 
     def test_increments_within_a_jurisdiction(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         codes = populated.scalars(select(Site.project_code)).all()
         assert len(set(codes)) == len(codes)
 
 
 class TestSiteBuilding:
     def test_creates_sites_from_real_parcels(self, populated: Session) -> None:
-        result = build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        result = build_sites(populated)
         assert result.sites_created > 0
         assert result.parcels_linked == 14
 
     def test_computes_boundary_and_acreage_from_parcels(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         assert site.boundary is not None
         assert site.centroid is not None
@@ -89,20 +101,20 @@ class TestSiteBuilding:
     def test_classifies_large_classified_parcel_as_hyperscale_campus(
         self, populated: Session
     ) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         assert site.site_kind == str(SiteKind.HYPERSCALE_CAMPUS)
 
     def test_site_kind_from_assessor_classification_is_reported_not_inferred(
         self, populated: Session
     ) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         assert site.site_kind_assertion == str(AssertionClass.REPORTED)
 
     def test_summary_makes_no_operator_claim(self, populated: Session) -> None:
         """The single most damaging failure mode is naming an operator on weak evidence."""
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         assert site.summary is not None
         assert "has not established which organization" in site.summary
@@ -111,7 +123,7 @@ class TestSiteBuilding:
 
     def test_does_not_merge_distant_parcels_sharing_an_owner(self, populated: Session) -> None:
         """Shared ownership alone must not fuse a company's county-wide holdings."""
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         cox_links = populated.execute(
             select(func.count())
             .select_from(SiteParcelLink)
@@ -123,21 +135,21 @@ class TestSiteBuilding:
         assert cox_links == 14
 
     def test_is_idempotent(self, populated: Session) -> None:
-        first = build_sites(populated, region_cities=EAST_VALLEY_CITIES)
-        second = build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        first = build_sites(populated)
+        second = build_sites(populated)
         assert second.sites_created == 0
         assert second.parcels_linked == 0
         assert second.sites_updated == first.sites_created
 
     def test_attaches_parcel_evidence_to_sites(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         orphaned = populated.scalar(
             select(func.count()).select_from(EvidenceRecord).where(EvidenceRecord.site_id.is_(None))
         )
         assert orphaned == 0
 
     def test_sets_first_and_latest_signal_dates(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         assert site.first_signal_date is not None
         assert site.latest_signal_date is not None
@@ -153,7 +165,7 @@ class TestSiteBuilding:
         build. A stale counter would advertise a different amount of evidence
         than the site can actually show.
         """
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         populated.flush()
 
         for site in populated.scalars(select(Site)).all():
@@ -167,7 +179,7 @@ class TestSiteBuilding:
 
 class TestInfrastructureLinking:
     def test_links_nearby_substations_as_inferred_dependencies(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         dependencies = populated.scalars(
             select(InfrastructureDependency).where(
                 InfrastructureDependency.infrastructure_kind == "substation"
@@ -179,7 +191,7 @@ class TestInfrastructureLinking:
             assert dependency.distance_meters is not None
 
     def test_dependency_notes_disclaim_proof_of_service(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         dependency = populated.scalars(
             select(InfrastructureDependency).where(
                 InfrastructureDependency.infrastructure_kind == "substation"
@@ -189,7 +201,7 @@ class TestInfrastructureLinking:
         assert "not evidence that it is" in (dependency.notes or "")
 
     def test_confidence_decreases_with_distance(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         dependencies = populated.scalars(
             select(InfrastructureDependency)
             .where(InfrastructureDependency.infrastructure_kind == "substation")
@@ -233,7 +245,7 @@ class TestSpatialQueries:
 class TestScoringPersistence:
     @pytest.fixture
     def scored_site(self, populated: Session) -> Site:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         recalculate_site(populated, site, as_of=TODAY)
         return site
@@ -336,7 +348,7 @@ class TestHistoricalCutoffEnforcement:
     """Scores must be computable as of a past date using only evidence from then."""
 
     def test_scoring_before_first_evidence_yields_zero(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         outcome = recalculate_site(populated, site, as_of=date(2010, 1, 1), is_backtest=True)
         assert outcome.stage_score.confidence == 0.0
@@ -345,14 +357,14 @@ class TestHistoricalCutoffEnforcement:
         assert outcome.identity_score.evidence_considered == 0
 
     def test_scoring_after_evidence_uses_it(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         outcome = recalculate_site(populated, site, as_of=date(2014, 1, 1), is_backtest=True)
         assert outcome.stage_score.evidence_considered >= 1
 
     def test_backtest_predictions_do_not_mutate_live_site_state(self, populated: Session) -> None:
         """A historical replay must not overwrite the site's current conclusion."""
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         recalculate_site(populated, site, as_of=TODAY)
         live_confidence = site.current_confidence
@@ -363,7 +375,7 @@ class TestHistoricalCutoffEnforcement:
         assert site.current_stage == live_stage
 
     def test_backtest_predictions_are_flagged(self, populated: Session) -> None:
-        build_sites(populated, region_cities=EAST_VALLEY_CITIES)
+        build_sites(populated)
         site = _largest_site(populated)
         recalculate_site(populated, site, as_of=date(2014, 1, 1), is_backtest=True)
         predictions = populated.scalars(

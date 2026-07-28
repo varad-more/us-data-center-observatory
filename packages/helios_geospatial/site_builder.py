@@ -48,6 +48,7 @@ from helios_domain.ontology import (
     SiteKind,
     StageEvidenceKind,
 )
+from helios_domain.regions import DEFAULT_REGION_SLUG, Region, resolve_region
 from helios_geospatial.correlation import (
     ADJACENCY_TOLERANCE_METERS,
     PERMIT_PROXIMITY_METERS,
@@ -97,21 +98,29 @@ def _slugify_jurisdiction(name: str | None) -> str:
     return cleaned[:10] or "UNK"
 
 
-def generate_project_code(session: Session, jurisdiction: str | None) -> str:
+def generate_project_code(session: Session, jurisdiction: str | None, region: Region | str) -> str:
     """Mint the next anonymous project code for a jurisdiction.
 
     Codes look like ``AZ-MESA-001``. An anonymous identifier is used in
     preference to any name found in the records because naming a project after
     the LLC on the deed would imply an attribution Helios has not established.
 
+    The state prefix comes from the region rather than from a constant. It was
+    hardcoded to ``AZ``, which meant a site outside Arizona could be minted with
+    a code that misstated where it is.
+
     Args:
         session: Open database session.
         jurisdiction: City or town name.
+        region: Region the site belongs to, or its registered slug.
 
     Returns:
         A unique project code.
+
+    Raises:
+        UnknownRegionError: If a slug is given and is not registered.
     """
-    prefix = f"AZ-{_slugify_jurisdiction(jurisdiction)}"
+    prefix = resolve_region(region).project_code_prefix(_slugify_jurisdiction(jurisdiction))
     existing = session.scalars(
         select(Site.project_code).where(Site.project_code.like(f"{prefix}-%"))
     ).all()
@@ -229,23 +238,31 @@ def _owners_related(left: Parcel, right: Parcel) -> bool:
 def build_sites(
     session: Session,
     *,
-    region_cities: tuple[str, ...] | None = None,
-    region_slug: str = "east-valley-az",
+    region: Region | str = DEFAULT_REGION_SLUG,
     adjacency_tolerance_meters: float = ADJACENCY_TOLERANCE_METERS,
 ) -> SiteBuildResult:
     """Create or update sites from the current parcel population.
 
+    The region supplies both halves of what used to be two arguments: which
+    cities to sweep, and which tag to write. Passing them separately allowed a
+    caller to sweep one place and label it another, and the unrestricted default
+    swept every parcel in the database while still stamping them all
+    ``east-valley-az``.
+
     Args:
         session: Open database session.
-        region_cities: Restrict candidates to these cities.
-        region_slug: Region tag applied to created sites.
+        region: Region to build within, or its registered slug.
         adjacency_tolerance_meters: Clustering tolerance.
 
     Returns:
         Counts describing what changed.
+
+    Raises:
+        UnknownRegionError: If a slug is given and is not registered.
     """
+    resolved = resolve_region(region)
     result = SiteBuildResult()
-    candidates = find_candidate_parcels(session, region_cities=region_cities)
+    candidates = find_candidate_parcels(session, region_cities=resolved.cities or None)
     clusters = _cluster_candidates(session, candidates, adjacency_tolerance_meters)
 
     logger.info(
@@ -256,7 +273,7 @@ def build_sites(
 
     built: list[Site] = []
     for cluster in clusters:
-        site, created = _upsert_site_for_cluster(session, cluster, region_slug)
+        site, created = _upsert_site_for_cluster(session, cluster, resolved)
         result.site_ids.append(site.id)
         if created:
             result.sites_created += 1
@@ -289,7 +306,7 @@ def build_sites(
 
 
 def _upsert_site_for_cluster(
-    session: Session, cluster: list[Parcel], region_slug: str
+    session: Session, cluster: list[Parcel], region: Region
 ) -> tuple[Site, bool]:
     """Find the existing site for a cluster, or create one."""
     parcel_ids = [p.id for p in cluster]
@@ -304,12 +321,12 @@ def _upsert_site_for_cluster(
 
     anchor = max(cluster, key=lambda p: float(p.lot_size_acres or 0))
     site = Site(
-        project_code=generate_project_code(session, anchor.situs_city),
+        project_code=generate_project_code(session, anchor.situs_city, region),
         site_kind=str(_infer_site_kind(cluster)),
         site_kind_assertion=str(_site_kind_assertion(cluster)),
         jurisdiction=anchor.situs_city,
-        county=anchor.county,
-        region_slug=region_slug,
+        county=anchor.county or region.primary_county,
+        region_slug=region.slug,
         current_stage=int(DevelopmentStage.NO_KNOWN_DEVELOPMENT),
         current_confidence=0.0,
         summary=_build_site_summary(cluster, anchor),

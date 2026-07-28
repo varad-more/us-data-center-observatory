@@ -8,11 +8,22 @@ through a two-step REST API:
    short-lived ``QueryID``.
 2. ``air_rest_services.get_qid`` pages facility rows for that QueryID.
 
-Helios queries East Valley cities, keeps facilities that look like data-centre
-hosting and/or emergency generation, and emits
-``backup_generator_air_permit`` evidence when generator program text or hosting
-NAICS supports that reading. Ordinary industrial air permits are counted as
-``filtered``, not rejected.
+Helios keeps facilities that look like data-centre hosting and/or emergency
+generation, and emits ``backup_generator_air_permit`` evidence when generator
+program text or hosting NAICS supports that reading. Ordinary industrial air
+permits are counted as ``filtered``, not rejected.
+
+Two query modes
+---------------
+*City mode* enumerates municipalities, one round trip each. It was how the
+study area was read, and it is the reason the study area was six cities: a
+national sweep would need thousands of requests against an API that throttles
+at roughly 300 per hour.
+
+*Industry mode* uses ECHO's ``p_ncs`` NAICS filter instead, which returns every
+matching facility in the country in one request. Note that ``p_ncs`` is the
+parameter that works; ``p_naics`` is accepted and silently ignored, returning
+the unfiltered result set — a filter that appears to work and does not.
 """
 
 from __future__ import annotations
@@ -70,6 +81,17 @@ DEFAULT_CITIES: tuple[str, ...] = (
     "Apache Junction",
 )
 
+HOSTING_NAICS_QUERY: tuple[str, ...] = ("518210", "541513")
+"""NAICS codes ECHO is asked to filter on in industry mode.
+
+``518210`` is "Computing Infrastructure Providers, Data Processing, Web Hosting,
+and Related Services"; ``541513`` is the computer-facilities-management code
+that carried part of the same activity before the 2022 NAICS revision. Both are
+much broader than "data centre" - payroll processors and streaming services sit
+under 518210 too - so this narrows the *query*, not the *conclusion*. The
+classification that follows is unchanged.
+"""
+
 # ObjectName column IDs from ECHO Air metadata (echor / EPA docs).
 # Defaults always include RegistryID, FacName, FacLat, FacLong.
 QCOLUMNS = "1,2,3,4,5,7,8,14,15,16,17,18,19,23,24,25"
@@ -82,7 +104,7 @@ _HOSTING_NAME_PATTERN = re.compile(
 
 
 class EpaEchoAirConnector(BaseConnector):
-    """Reads CAA air facilities from EPA ECHO for the study cities."""
+    """Reads CAA air facilities from EPA ECHO, by city or by industry code."""
 
     def __init__(
         self,
@@ -90,19 +112,32 @@ class EpaEchoAirConnector(BaseConnector):
         http_client: PoliteHttpClient | None = None,
         settings: Settings | None = None,
         cities: tuple[str, ...] | None = None,
-        state: str = "AZ",
+        state: str | None = "AZ",
+        naics_codes: tuple[str, ...] | None = None,
     ) -> None:
-        """Initialise the connector.
+        """Initialise the connector in either city mode or industry mode.
+
+        City mode enumerates municipalities and costs one round trip each, which
+        is why the study area was six cities: it does not scale to a country.
+        Industry mode asks ECHO's ``p_ncs`` parameter for the hosting NAICS codes
+        directly and covers the whole United States in a single request.
 
         Args:
             http_client: Shared HTTP client.
             settings: Configuration override.
-            cities: City names to query within ``state``.
-            state: Two-letter state code.
+            cities: City names to query within ``state``. Ignored in industry mode.
+            state: Two-letter state code, or ``None`` in industry mode for nationwide.
+            naics_codes: Setting this selects industry mode.
         """
         super().__init__(http_client=http_client, settings=settings)
         self.cities = cities or DEFAULT_CITIES
         self.state = state
+        self.naics_codes = tuple(naics_codes) if naics_codes else ()
+
+    @property
+    def is_industry_mode(self) -> bool:
+        """Whether the connector queries by NAICS rather than by city."""
+        return bool(self.naics_codes)
 
     def get_metadata(self) -> ConnectorMetadata:
         """Return the connector description."""
@@ -123,7 +158,10 @@ class EpaEchoAirConnector(BaseConnector):
             license_name="US Government public domain",
             license_url="https://www.epa.gov/privacy/privacy-and-security-notice",
             robots_policy_status="allowed",
-            geographic_coverage="Nationwide; queried per city within the study area",
+            geographic_coverage=(
+                "Nationwide. Queried either per city within a study region, or "
+                "nationwide by hosting NAICS code."
+            ),
             historical_coverage="Active and historical Clean Air Act permitted facilities.",
             reliability_score=0.85,
             known_schema_issues=(
@@ -134,7 +172,7 @@ class EpaEchoAirConnector(BaseConnector):
         )
 
     def health_check(self) -> HealthCheckResult:
-        """Probe the metadata endpoint without running a city query."""
+        """Probe the metadata endpoint without running a facility query."""
         started = utcnow()
         try:
             response = self.http.get(METADATA_URL, params={"output": "JSON"})
@@ -159,15 +197,32 @@ class EpaEchoAirConnector(BaseConnector):
         )
 
     def discover(self, date_range: DateRange) -> DiscoveryResult:
-        """Discover one logical document covering the configured cities."""
+        """Discover the one logical document this connector's query produces."""
         del date_range
+        scope = self.state or "US"
+
+        if self.is_industry_mode:
+            naics_label = ",".join(self.naics_codes)
+            return DiscoveryResult(
+                items=[
+                    SourceItem(
+                        source_native_id=f"echo:air:naics:{scope.lower()}:"
+                        f"{short_hash(naics_label)}",
+                        url=GET_FACILITIES_URL,
+                        title=f"ECHO air facilities ({scope}: NAICS {naics_label})",
+                        document_type="echo_air_facilities_json",
+                        hints={"naics": list(self.naics_codes), "state": self.state},
+                    )
+                ]
+            )
+
         city_label = ",".join(self.cities)
         return DiscoveryResult(
             items=[
                 SourceItem(
-                    source_native_id=f"echo:air:{self.state.lower()}:{short_hash(city_label)}",
+                    source_native_id=f"echo:air:{scope.lower()}:{short_hash(city_label)}",
                     url=GET_FACILITIES_URL,
-                    title=f"ECHO air facilities ({self.state}: {city_label})",
+                    title=f"ECHO air facilities ({scope}: {city_label})",
                     document_type="echo_air_facilities_json",
                     hints={"cities": list(self.cities), "state": self.state},
                 )
@@ -175,26 +230,52 @@ class EpaEchoAirConnector(BaseConnector):
         )
 
     def fetch(self, item: SourceItem) -> FetchResult:
-        """Run get_facilities + get_qid for each city and merge facility rows."""
-        cities = item.hints.get("cities") or list(self.cities)
-        state = str(item.hints.get("state") or self.state)
+        """Fetch facility rows for the discovered query.
+
+        Industry mode is one request; city mode is one per city. Both funnel into
+        the same merged payload shape so the parser does not need to know which
+        query produced it.
+        """
+        naics = [str(code) for code in (item.hints.get("naics") or self.naics_codes)]
+        state_hint = item.hints.get("state", self.state)
+        state = str(state_hint) if state_hint else None
+
         facilities: list[dict[str, Any]] = []
         query_ids: list[str] = []
         warnings: list[str] = []
+        query_note: dict[str, Any]
 
-        for city in cities:
+        if naics:
             try:
-                city_rows, qid, warning = self._fetch_city(str(city), state)
+                facilities, qid, warning = self._fetch_query(
+                    {"p_ncs": ",".join(naics)}, state, label=f"NAICS {','.join(naics)}"
+                )
             except Exception as exc:
                 return FetchResult(
                     document=None,
-                    error=f"ECHO fetch failed for {city}: {type(exc).__name__}: {exc}",
+                    error=f"ECHO fetch failed for NAICS query: {type(exc).__name__}: {exc}",
                 )
             if warning:
                 warnings.append(warning)
             if qid:
                 query_ids.append(qid)
-            facilities.extend(city_rows)
+            query_note = {"state": state, "naics": naics, "warnings": warnings}
+        else:
+            cities = [str(city) for city in (item.hints.get("cities") or self.cities)]
+            for city in cities:
+                try:
+                    city_rows, qid, warning = self._fetch_query({"p_city": city}, state, label=city)
+                except Exception as exc:
+                    return FetchResult(
+                        document=None,
+                        error=f"ECHO fetch failed for {city}: {type(exc).__name__}: {exc}",
+                    )
+                if warning:
+                    warnings.append(warning)
+                if qid:
+                    query_ids.append(qid)
+                facilities.extend(city_rows)
+            query_note = {"state": state, "cities": cities, "warnings": warnings}
 
         if not facilities and warnings:
             return FetchResult(document=None, error="; ".join(warnings))
@@ -207,7 +288,7 @@ class EpaEchoAirConnector(BaseConnector):
                 "PageNo": "1",
                 "Facilities": facilities,
             },
-            "_helios_query": {"state": state, "cities": list(cities), "warnings": warnings},
+            "_helios_query": query_note,
         }
         body = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8")
         return FetchResult(
@@ -221,21 +302,36 @@ class EpaEchoAirConnector(BaseConnector):
             )
         )
 
-    def _fetch_city(
-        self, city: str, state: str
+    def _fetch_query(
+        self,
+        selector: dict[str, str],
+        state: str | None,
+        *,
+        label: str,
     ) -> tuple[list[dict[str, Any]], str | None, str | None]:
-        """Fetch one city through the two-step ECHO API."""
-        query_response = self.http.get(
-            GET_FACILITIES_URL,
-            params={
-                "output": "JSON",
-                "p_st": state,
-                "p_city": city,
-                "p_act": "Y",
-                "responseset": "1",
-                "qcolumns": QCOLUMNS,
-            },
-        )
+        """Run one narrowing through the two-step ECHO API.
+
+        Args:
+            selector: The narrowing parameter, e.g. ``{"p_city": "Mesa"}`` or
+                ``{"p_ncs": "518210,541513"}``. ``p_ncs`` is the documented NAICS
+                filter; ``p_naics`` is silently ignored by ECHO and returns every
+                row in scope, which is the worst kind of wrong answer.
+            state: Two-letter state code, or ``None`` for nationwide.
+            label: What to name this query in a warning.
+
+        Returns:
+            Facility rows, the QueryID if one was issued, and any warning.
+        """
+        params = {
+            "output": "JSON",
+            "p_act": "Y",
+            "responseset": "1",
+            "qcolumns": QCOLUMNS,
+            **selector,
+        }
+        if state:
+            params["p_st"] = state
+        query_response = self.http.get(GET_FACILITIES_URL, params=params)
         query_payload = json.loads(query_response.content)
         error = _echo_error_message(query_payload)
         results = query_payload.get("Results") or {}
@@ -243,7 +339,7 @@ class EpaEchoAirConnector(BaseConnector):
             error is not None and "throttle" in error.lower() and "QueryID" not in results
         )
         if throttled:
-            return [], None, f"{city}: throttled by ECHO ({error})"
+            return [], None, f"{label}: throttled by ECHO ({error})"
 
         query_id = results.get("QueryID")
         # Some responses embed the first page of facilities directly.
@@ -252,7 +348,7 @@ class EpaEchoAirConnector(BaseConnector):
             return embedded, str(query_id) if query_id else None, error
 
         if not query_id:
-            return [], None, f"{city}: no QueryID ({error or 'empty Results'})"
+            return [], None, f"{label}: no QueryID ({error or 'empty Results'})"
 
         page_response = self.http.get(
             GET_QID_URL,
