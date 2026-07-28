@@ -1,5 +1,5 @@
 {
-  "id": "3a8175eb-038c-448c-ac3c-d580e2617916",
+  "id": "0779d5f0-6b09-4b80-8d55-da1bfefd8913",
   "project_code": "AZ-MESA-004",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 1.2114,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T00:12:00.361053Z",
-  "score_last_calculated_at": "2026-07-28T00:12:00.358191Z",
+  "stage_last_changed_at": "2026-07-28T02:03:19.995177Z",
+  "score_last_calculated_at": "2026-07-28T02:03:19.992534Z",
   "centroid": [
     -111.735264,
     33.387936
@@ -89,7 +89,7 @@
   },
   "parcels": [
     {
-      "id": "53d430d9-410c-4990-aa2f-6b2e587206bc",
+      "id": "7d446fa1-893c-4313-a2ba-593a9f4c7b6d",
       "apn": "14055293",
       "apn_formatted": "140-55-293",
       "situs_address": "4437 E HOLMES AVE",
@@ -109,7 +109,7 @@
   ],
   "organizations": [
     {
-      "id": "915aa2c0-d5e4-43ff-9f27-89d4f65c7282",
+      "id": "f93b1de5-5e0b-4815-af1d-7da6bffa6ed6",
       "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
       "role": "utility",
       "organization_type": "LLC",
@@ -124,7 +124,7 @@
   ],
   "dependencies": [
     {
-      "id": "09393192-8642-40e1-877d-6e696b344d2b",
+      "id": "205918a0-2003-4d6d-8d60-2f4f8524a6ac",
       "infrastructure_kind": "substation",
       "label": "Southern Substation",
       "dependency_status": "existing",
@@ -138,7 +138,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "5925ab2d-49f2-4e7b-9409-71a4e2de3466",
+      "id": "a8bd54df-20ff-4150-b93d-d175441131b5",
       "infrastructure_kind": "substation",
       "label": "Greer Substation",
       "dependency_status": "existing",
@@ -152,7 +152,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "050ed460-4de2-43e9-92da-237f73d57462",
+      "id": "1ecefb7f-ccac-4b47-99f9-b0b526ec0d09",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -168,7 +168,7 @@
   ],
   "estimates": [
     {
-      "id": "72576de4-5438-423b-b4d3-3bee72e05000",
+      "id": "0f399ab9-81dd-4348-9076-f00e1eddca69",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 1.5,
@@ -186,11 +186,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T00:12:00.361889Z",
+      "calculated_at": "2026-07-28T02:03:19.996014Z",
       "notes": null
     },
     {
-      "id": "8d8964f5-dfa3-4b94-a9ab-ec4948f6f93b",
+      "id": "90bb81f1-2fdf-421e-9b1d-93fcec5dd1e4",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 3600.0,
@@ -208,13 +208,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T00:12:00.361975Z",
+      "calculated_at": "2026-07-28T02:03:19.996082Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "58b656a6-06dd-4126-a5c2-30ae4875d37b",
-    "calculated_at": "2026-07-28T00:12:00.358250Z",
+    "id": "ceb009d4-baea-4de2-be51-e4cc06983304",
+    "calculated_at": "2026-07-28T02:03:19.992590Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -240,7 +240,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7"
+        "evidence_record_id": "35cdaa81-9fab-4835-9449-7840a953c948"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -252,7 +252,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9953,
         "polarity": "supporting",
-        "evidence_record_id": "a090d72e-34cc-46ed-899d-02e9ed50cacd"
+        "evidence_record_id": "57813621-ed77-4e44-b277-30614ec2fa5c"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -264,7 +264,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9428,
         "polarity": "supporting",
-        "evidence_record_id": "2db685cb-7d0d-4eac-890a-a8f5282d4a0c"
+        "evidence_record_id": "5972525a-b569-4b8a-85a8-4f5458ad290a"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -276,7 +276,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "650030bd-8745-473d-81c8-15c516ec28ec"
+        "evidence_record_id": "9d41549e-8f2c-4e06-9a9a-35a871570b16"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -288,27 +288,27 @@
         "confidence_multiplier": 0.6685,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "c2e99184-9c0a-45da-b96e-f8bfbbe8ae6b"
+        "evidence_record_id": "4e1cee05-fff9-4b2e-b8d8-9e07e63b78b6"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "2ded2e6d-a88e-4038-a163-21414f2f0f2f",
+      "id": "4991d6db-e90f-4f62-86cf-6052b4ff95cd",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T00:12:00.361053Z",
+      "detected_at": "2026-07-28T02:03:19.995177Z",
       "is_downgrade": false,
       "confidence": 50.07,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7",
-        "a090d72e-34cc-46ed-899d-02e9ed50cacd",
-        "2db685cb-7d0d-4eac-890a-a8f5282d4a0c",
-        "650030bd-8745-473d-81c8-15c516ec28ec"
+        "35cdaa81-9fab-4835-9449-7840a953c948",
+        "57813621-ed77-4e44-b277-30614ec2fa5c",
+        "5972525a-b569-4b8a-85a8-4f5458ad290a",
+        "9d41549e-8f2c-4e06-9a9a-35a871570b16"
       ],
       "detection_lag_days": 4899
     }

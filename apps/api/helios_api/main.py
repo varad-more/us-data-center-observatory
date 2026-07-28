@@ -11,7 +11,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
-from helios_api.routers import admin, analytics, exports, map_layers, sites, sources
+from helios_api.routers import (
+    admin,
+    analytics,
+    exports,
+    map_layers,
+    regions,
+    sites,
+    sources,
+)
 from helios_api.schemas import HealthResponse, ReadinessResponse
 from helios_common.config import get_settings
 from helios_common.logging import configure_logging, get_logger
@@ -144,6 +152,7 @@ def create_app() -> FastAPI:
     app.include_router(sites.router)
     app.include_router(map_layers.router)
     app.include_router(sources.router)
+    app.include_router(regions.router)
     app.include_router(analytics.router)
     app.include_router(exports.router)
     app.include_router(admin.router)

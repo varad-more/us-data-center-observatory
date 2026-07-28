@@ -219,11 +219,19 @@ def recalculate(
 
 
 @router.post("/sites/rebuild", summary="Rebuild sites from the current parcel population")
-def rebuild_sites(session: DbSession, _principal: AdminPrincipal) -> dict[str, Any]:
-    """Re-run site clustering and infrastructure linking."""
+def rebuild_sites(
+    session: DbSession, settings: AppSettings, _principal: AdminPrincipal
+) -> dict[str, Any]:
+    """Re-run site clustering and infrastructure linking for the study region.
+
+    Scoped to the configured region rather than every parcel in the database.
+    Sweeping unrestricted while still stamping every result ``east-valley-az``
+    was how this previously behaved, and it was wrong in the direction that
+    mislabels data.
+    """
     from helios_geospatial.site_builder import build_sites
 
-    result = build_sites(session)
+    result = build_sites(session, region=settings.study_region_slug)
     session.commit()
     return {
         "sites_created": result.sites_created,

@@ -339,6 +339,27 @@ export const sourceListSchema = z.object({
   coverage_summary: z.record(z.number()),
 });
 
+export const regionSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  state_code: z.string(),
+  coverage: z.enum(["active", "declared"]),
+  counties: z.array(z.string()),
+  cities: z.array(z.string()),
+  bbox: z.array(z.number()),
+  note: z.string(),
+  site_count: z.number(),
+});
+
+export type Region = z.infer<typeof regionSchema>;
+
+export const regionListSchema = z.object({
+  items: z.array(regionSchema),
+  active_count: z.number(),
+  declared_count: z.number(),
+  note: z.string(),
+});
+
 export const stageDistributionSchema = z.object({
   region_slug: z.string().nullable(),
   total_sites: z.number(),

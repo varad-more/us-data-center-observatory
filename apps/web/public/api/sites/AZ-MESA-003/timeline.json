@@ -1,5 +1,5 @@
 {
-  "site_id": "77a2a22a-2d82-4170-ab0b-2f71ec35621d",
+  "site_id": "314d3f25-f2a2-441e-aa2b-feff0864eca8",
   "project_code": "AZ-MESA-003",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "9c82a2e7-9194-4fbd-bbd1-2ff709838f38",
+        "id": "572868b3-31cf-457e-b45d-b16687a4a595",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -28,8 +28,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
-          "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
+          "document_id": "2810f737-c9c1-4e43-8d98-4d85bcd3ed27",
+          "document_version_id": "5cca6bf7-3ea5-4f09-9dea-daa9b2c78dca",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -49,7 +49,7 @@
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "ded5ca94-ebc5-42c4-8545-8d3b75bda463",
+        "id": "a2f6b435-b4a3-4510-8cad-d61d6e59fc8a",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -78,8 +78,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
-          "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
+          "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
+          "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -100,18 +100,18 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "evidence": null,
       "stage_transition": {
-        "id": "d1969161-02fc-4fc7-8a13-7b04ef0acb8a",
+        "id": "4c30c342-78a2-4129-8954-4865baca5f18",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2026-07-28",
-        "detected_at": "2026-07-28T00:12:00.383542Z",
+        "detected_at": "2026-07-28T02:03:20.035751Z",
         "is_downgrade": false,
         "confidence": 27.14,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
         "triggering_evidence_ids": [
-          "ded5ca94-ebc5-42c4-8545-8d3b75bda463"
+          "a2f6b435-b4a3-4510-8cad-d61d6e59fc8a"
         ],
         "detection_lag_days": 0
       },

@@ -533,6 +533,37 @@ class ProvenanceCompletenessResponse(HeliosModel):
     note: str
 
 
+class RegionResponse(HeliosModel):
+    """One registered region and how much of it Helios actually reads."""
+
+    slug: str
+    name: str
+    state_code: str
+    coverage: str
+    """``active`` if a connector reads it, ``declared`` if it is only named."""
+
+    counties: list[str]
+    cities: list[str]
+    bbox: list[float]
+    note: str
+    site_count: int
+    """Sites Helios holds here. Always zero for a declared region."""
+
+
+class RegionListResponse(HeliosModel):
+    """The region registry, with the coverage gap stated rather than implied.
+
+    A region appearing here is not a claim that Helios is watching it. Naming
+    where the project intends to go is useful; letting that read as coverage
+    would not be.
+    """
+
+    items: list[RegionResponse]
+    active_count: int
+    declared_count: int
+    note: str
+
+
 __all__ = [
     "AnalyticsStagesResponse",
     "AssertedValue",
@@ -551,6 +582,8 @@ __all__ = [
     "PredictionResponse",
     "ProvenanceCompletenessResponse",
     "ReadinessResponse",
+    "RegionListResponse",
+    "RegionResponse",
     "ScoreExplanation",
     "ScoreHistoryResponse",
     "SiteDetail",

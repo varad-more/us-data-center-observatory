@@ -1,6 +1,6 @@
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { StatusPill } from "@/components/AssertionBadge";
-import { listSources } from "@/lib/api";
+import { listRegions, listSources } from "@/lib/api";
 import type { Source } from "@/lib/types";
 
 export const metadata = { title: "Data sources" };
@@ -13,8 +13,9 @@ const STATUS_TONE: Record<string, "positive" | "caution" | "neutral"> = {
 
 export default async function SourcesPage() {
   let sources;
+  let regions;
   try {
-    sources = await listSources();
+    [sources, regions] = await Promise.all([listSources(), listRegions()]);
   } catch (error) {
     return <ApiUnavailable error={error} />;
   }
@@ -42,6 +43,45 @@ export default async function SourcesPage() {
           </div>
         ))}
       </div>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">Geographic coverage</h2>
+          <span className="card-note">
+            {regions.active_count} of {regions.items.length} regions read
+          </span>
+        </div>
+        <p className="small muted" style={{ marginTop: 0 }}>
+          {regions.note}
+        </p>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Region</th>
+              <th>Counties</th>
+              <th>Coverage</th>
+              <th className="num">Sites</th>
+            </tr>
+          </thead>
+          <tbody>
+            {regions.items.map((region) => (
+              <tr key={region.slug}>
+                <td>
+                  <strong>{region.name}</strong>
+                  <div className="small muted">{region.note}</div>
+                </td>
+                <td className="small">{region.counties.join(", ")}</td>
+                <td>
+                  <StatusPill tone={region.coverage === "active" ? "positive" : "neutral"}>
+                    {region.coverage}
+                  </StatusPill>
+                </td>
+                <td className="num">{region.site_count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
 
       {Object.entries(grouped).map(([category, items]) => (
         <section key={category} className="card">

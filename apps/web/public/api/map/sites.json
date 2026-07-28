@@ -101,7 +101,7 @@
         ]
       },
       "properties": {
-        "id": "dc9a387f-990a-47df-8bbd-0c47ba6452e2",
+        "id": "05862683-db7f-4a79-9de2-32b944432f90",
         "project_code": "AZ-CHANDLER-006",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -239,7 +239,7 @@
         ]
       },
       "properties": {
-        "id": "1d8ff38c-2500-4ed0-b888-18db4a68f277",
+        "id": "396a1631-0eb4-440e-9171-8820b4678d43",
         "project_code": "AZ-MESA-001",
         "site_kind": "hyperscale_campus",
         "site_kind_assertion": "reported",
@@ -333,7 +333,7 @@
         ]
       },
       "properties": {
-        "id": "0a2cc420-ff49-472b-95ce-de9267418322",
+        "id": "abb805f3-2843-400f-8249-56f0ae08fef8",
         "project_code": "AZ-MESA-002",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -344,6 +344,88 @@
         "total_acres": 3.6364,
         "evidence_count": 7,
         "first_signal_date": "2025-07-24",
+        "latest_signal_date": "2026-07-28"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -111.888934459,
+                33.273723006
+              ],
+              [
+                -111.888950669,
+                33.27484298
+              ],
+              [
+                -111.888917957,
+                33.274843564
+              ],
+              [
+                -111.888930489,
+                33.275709321
+              ],
+              [
+                -111.88886585,
+                33.275765439
+              ],
+              [
+                -111.888244293,
+                33.275776327
+              ],
+              [
+                -111.888244974,
+                33.275803806
+              ],
+              [
+                -111.885773298,
+                33.275847072
+              ],
+              [
+                -111.885772822,
+                33.275827837
+              ],
+              [
+                -111.885029078,
+                33.275840847
+              ],
+              [
+                -111.884962868,
+                33.275787021
+              ],
+              [
+                -111.884934716,
+                33.273792792
+              ],
+              [
+                -111.886460647,
+                33.273766184
+              ],
+              [
+                -111.888934459,
+                33.273723006
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "77635d62-a8e2-4cf7-8604-f8eda4248724",
+        "project_code": "AZ-CHANDLER-002",
+        "site_kind": "enterprise_data_center",
+        "site_kind_assertion": "reported",
+        "stage": 7,
+        "stage_label": "Operational",
+        "confidence": 38.9,
+        "jurisdiction": "Chandler",
+        "total_acres": 20.9489,
+        "evidence_count": 4,
+        "first_signal_date": "2010-07-15",
         "latest_signal_date": "2026-07-28"
       }
     },
@@ -791,7 +873,7 @@
         ]
       },
       "properties": {
-        "id": "39031b36-218d-4f13-af1c-8f283d13a37f",
+        "id": "220f2109-4d8f-4737-a5a5-3cb8cf8763be",
         "project_code": "AZ-CHANDLER-001",
         "site_kind": "hyperscale_campus",
         "site_kind_assertion": "reported",
@@ -802,88 +884,6 @@
         "total_acres": 66.083,
         "evidence_count": 4,
         "first_signal_date": "2022-04-04",
-        "latest_signal_date": "2026-07-28"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "MultiPolygon",
-        "coordinates": [
-          [
-            [
-              [
-                -111.888934459,
-                33.273723006
-              ],
-              [
-                -111.888950669,
-                33.27484298
-              ],
-              [
-                -111.888917957,
-                33.274843564
-              ],
-              [
-                -111.888930489,
-                33.275709321
-              ],
-              [
-                -111.88886585,
-                33.275765439
-              ],
-              [
-                -111.888244293,
-                33.275776327
-              ],
-              [
-                -111.888244974,
-                33.275803806
-              ],
-              [
-                -111.885773298,
-                33.275847072
-              ],
-              [
-                -111.885772822,
-                33.275827837
-              ],
-              [
-                -111.885029078,
-                33.275840847
-              ],
-              [
-                -111.884962868,
-                33.275787021
-              ],
-              [
-                -111.884934716,
-                33.273792792
-              ],
-              [
-                -111.886460647,
-                33.273766184
-              ],
-              [
-                -111.888934459,
-                33.273723006
-              ]
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "id": "88ec83e7-6721-413f-8121-f05f089d18d1",
-        "project_code": "AZ-CHANDLER-002",
-        "site_kind": "enterprise_data_center",
-        "site_kind_assertion": "reported",
-        "stage": 7,
-        "stage_label": "Operational",
-        "confidence": 38.9,
-        "jurisdiction": "Chandler",
-        "total_acres": 20.9489,
-        "evidence_count": 4,
-        "first_signal_date": "2010-07-15",
         "latest_signal_date": "2026-07-28"
       }
     },
@@ -939,7 +939,7 @@
         ]
       },
       "properties": {
-        "id": "38ff1c30-adc2-4308-a9b4-da67d1314f64",
+        "id": "60176d96-7a68-4a7d-a28a-7e63bc61118f",
         "project_code": "AZ-CHANDLER-004",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1017,7 +1017,7 @@
         ]
       },
       "properties": {
-        "id": "3a8175eb-038c-448c-ac3c-d580e2617916",
+        "id": "0779d5f0-6b09-4b80-8d55-da1bfefd8913",
         "project_code": "AZ-MESA-004",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1111,7 +1111,7 @@
         ]
       },
       "properties": {
-        "id": "76a78cfe-c5e2-451e-bf80-fb06f7d9d4df",
+        "id": "7f72cc38-4a65-427a-9c3f-6746d41cdd26",
         "project_code": "AZ-CHANDLER-005",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1233,7 +1233,7 @@
         ]
       },
       "properties": {
-        "id": "19de8232-c976-4c73-a79c-7466b1c90a27",
+        "id": "7548b10e-8c39-4a20-b301-a0640e992fa3",
         "project_code": "AZ-CHANDLER-007",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1667,7 +1667,7 @@
         ]
       },
       "properties": {
-        "id": "1a37a1c8-db4e-472e-ae6e-171d8835ba1f",
+        "id": "ebe85630-6b82-4cbb-8d92-471c4e231dc1",
         "project_code": "AZ-CHANDLER-003",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1969,7 +1969,7 @@
         ]
       },
       "properties": {
-        "id": "c58c086d-6088-4461-8a87-e16c53c427e5",
+        "id": "83af667e-29f4-455e-b4fc-47869f1b5bcd",
         "project_code": "AZ-GILBERT-001",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -2031,7 +2031,7 @@
         ]
       },
       "properties": {
-        "id": "09c9bed7-829a-4a35-89a4-bb69326f41e0",
+        "id": "1d8b2e61-3168-47dc-bd56-a36e95bdd932",
         "project_code": "AZ-TEMPE-001",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -2081,7 +2081,7 @@
         ]
       },
       "properties": {
-        "id": "77a2a22a-2d82-4170-ab0b-2f71ec35621d",
+        "id": "314d3f25-f2a2-441e-aa2b-feff0864eca8",
         "project_code": "AZ-MESA-003",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",

@@ -9,6 +9,7 @@ import {
   detectionLagSchema,
   featureCollectionSchema,
   provenanceSchema,
+  regionListSchema,
   siteDetailSchema,
   siteListSchema,
   sourceListSchema,
@@ -139,6 +140,10 @@ export function getMapParcels(
     `/map/parcels${toQueryString({ bbox, land_use: landUse })}`,
     featureCollectionSchema,
   );
+}
+
+export function listRegions() {
+  return request("/regions", regionListSchema);
 }
 
 export function listSources() {

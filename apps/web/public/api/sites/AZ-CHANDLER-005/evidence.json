@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T00:12:02.776192+00:00",
+  "generated_at": "2026-07-28T02:03:22.558431+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -96,7 +96,7 @@
   },
   "evidence": [
     {
-      "id": "019cef31-650c-435b-b78f-891e113d124b",
+      "id": "6aa2a0c7-45ea-4cd2-9e67-54a83bc114f6",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by FIRST DATA REAL ESTATE HOLDINGS L L C, whose name shows single-purpose-entity characteristics (holding-company naming). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = FIRST DATA REAL ESTATE HOLDINGS L L C",
@@ -125,8 +125,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
-        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
+        "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
+        "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -138,7 +138,7 @@
       }
     },
     {
-      "id": "5b0e2edf-c4cb-479e-a17c-7a103a3c7fd5",
+      "id": "8cd7f5ab-7739-47f8-94d3-2964b673a91d",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Gila Substation tagged 69 kV lies 163 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Gila Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -158,8 +158,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
-        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
+        "document_id": "2810f737-c9c1-4e43-8d98-4d85bcd3ed27",
+        "document_version_id": "5cca6bf7-3ea5-4f09-9dea-daa9b2c78dca",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -171,7 +171,7 @@
       }
     },
     {
-      "id": "0a219ccf-e154-41f9-8405-f736d1e46094",
+      "id": "cff4928c-4b11-4366-8011-4700a9d0c10a",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -200,8 +200,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
-        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
+        "document_id": "4c1c8b2a-591a-4864-8350-eba92730592f",
+        "document_version_id": "11b9d9a7-329d-49c6-9d6d-f09591edca56",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -215,27 +215,27 @@
   ],
   "stage_history": [
     {
-      "id": "86d5ab5d-5793-4312-b5e9-59247f525408",
+      "id": "d1910aee-ed71-4ec5-a82a-3618267d179e",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2007-09-20",
-      "detected_at": "2026-07-28T00:12:00.372670Z",
+      "detected_at": "2026-07-28T02:03:20.090790Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "0a219ccf-e154-41f9-8405-f736d1e46094",
-        "019cef31-650c-435b-b78f-891e113d124b"
+        "cff4928c-4b11-4366-8011-4700a9d0c10a",
+        "6aa2a0c7-45ea-4cd2-9e67-54a83bc114f6"
       ],
       "detection_lag_days": 6886
     }
   ],
   "predictions": [
     {
-      "id": "83d50d10-48f6-41ff-a522-aee56b782cf5",
-      "calculated_at": "2026-07-28T00:12:00.370068Z",
+      "id": "e7289e44-c694-4bce-bcac-5af9c14c712c",
+      "calculated_at": "2026-07-28T02:03:20.085449Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -261,7 +261,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "0a219ccf-e154-41f9-8405-f736d1e46094"
+          "evidence_record_id": "cff4928c-4b11-4366-8011-4700a9d0c10a"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -273,7 +273,7 @@
           "confidence_multiplier": 0.9012,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "5b0e2edf-c4cb-479e-a17c-7a103a3c7fd5"
+          "evidence_record_id": "8cd7f5ab-7739-47f8-94d3-2964b673a91d"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -285,13 +285,13 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "019cef31-650c-435b-b78f-891e113d124b"
+          "evidence_record_id": "6aa2a0c7-45ea-4cd2-9e67-54a83bc114f6"
         }
       ]
     },
     {
-      "id": "ce4ca10f-e638-4a46-a46a-13b52774acbc",
-      "calculated_at": "2026-07-28T00:12:00.370125Z",
+      "id": "c45f4046-92a9-44b0-81ca-756658790033",
+      "calculated_at": "2026-07-28T02:03:20.085494Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -317,7 +317,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "0a219ccf-e154-41f9-8405-f736d1e46094"
+          "evidence_record_id": "cff4928c-4b11-4366-8011-4700a9d0c10a"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -329,7 +329,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "019cef31-650c-435b-b78f-891e113d124b"
+          "evidence_record_id": "6aa2a0c7-45ea-4cd2-9e67-54a83bc114f6"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -341,7 +341,7 @@
           "confidence_multiplier": 0.9012,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "5b0e2edf-c4cb-479e-a17c-7a103a3c7fd5"
+          "evidence_record_id": "8cd7f5ab-7739-47f8-94d3-2964b673a91d"
         }
       ]
     }

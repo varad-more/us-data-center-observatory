@@ -85,3 +85,32 @@ Register `afterEach(cleanup)` in the setup file, not per test.
 Recomputing a denormalised counter inside the loop that mutates its inputs makes
 the result order-dependent: a later iteration reassigned evidence and left an
 earlier site's count stale. Compute aggregates once, after the writes settle.
+
+### A column default can be load-bearing without anyone knowing
+`Parcel.county` defaulted to `"Maricopa"`. Removing it turned CI red — not
+because the default was needed, but because it had been silently filling a hole
+left by an ordering bug: the loader added the parcel to the session, then
+resolved its owner, and resolving an owner creates an organization, which
+flushes. Before removing a default, ask what would be written *without* it and
+at what moment. If the answer is "a half-built row, mid-function", the default
+is not a convenience — it is a bug being paid for.
+
+### Set every non-nullable column at construction
+Not "before commit". Any intervening call that queries or writes can flush, and
+a partially-populated object in the session is a row waiting to be written
+wrong. Pass required values to the constructor, not to the object afterwards.
+
+### An error recorder that shares the failing transaction destroys the evidence
+The real violation was a single not-null error. What reached the log was
+twenty-six foreign-key errors from the failure recorder trying to write
+`ingestion_failures` rows against a `connector_runs` row the rollback had
+already taken. The first exception never appeared anywhere. When diagnosing a
+cascade, find the first failure by its *stage*, not by reading the loudest
+error — and treat "the original exception is unreachable" as its own defect.
+
+### Verify a third-party query parameter empirically before building on it
+ECHO accepts `p_naics`, ignores it, and returns the unfiltered set. The
+documented parameter is `p_ncs`. Both return HTTP 200 and well-formed JSON; only
+the row count distinguishes them — 480 versus 15. A filter that appears to work
+and does not is worse than one that errors. Four curl calls settled it; guessing
+would have shipped a "national" query that filtered nothing.

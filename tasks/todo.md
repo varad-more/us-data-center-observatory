@@ -95,3 +95,48 @@ look observed.
 - Node-20-deprecated action versions in the workflows.
 - Four "phase" leftovers in the tree (migration filename, `models.py` docstring,
   `backtest.py` report title, ADR 0002).
+
+---
+
+## National base layer (track 6)
+
+Goal: make a site outside Arizona *possible*. Not to claim one exists.
+
+- [x] Region registry (`helios_domain/regions.py`) — slug, state code, counties,
+      cities and bbox in one place, validated at import.
+- [x] `generate_project_code` takes its state prefix from the region.
+- [x] Removed the `"Maricopa"` / `"east-valley-az"` column defaults.
+- [x] `build_sites` takes a region rather than a city tuple and a slug that were
+      free to disagree.
+- [x] EPA ECHO industry mode — `p_ncs` NAICS filter, one request nationwide.
+- [x] `/regions` endpoint + coverage table on `/sources`.
+- [x] Root-caused the CI failure the defaults had been hiding.
+
+### What the two hardcodes were actually costing
+
+`generate_project_code` prefixed every code with `AZ-`, and `Site.county`
+defaulted to `Maricopa`. Not "the national work hasn't started" — a site built
+in Loudoun County would have been minted claiming to be in Arizona, and nothing
+would have flagged it. Both are gone; a region must now be named.
+
+### Verified, not assumed
+
+ECHO's NAICS filter is `p_ncs`. `p_naics` is accepted, silently ignored, and
+returns the unfiltered set: 480 rows for Arizona against 15 for the real filter.
+Measured against the live API before any code was written. Nationwide by hosting
+NAICS returns 384 facilities in one request; Virginia alone returns 121.
+
+### The gap this exposes
+
+The ECHO connector can now read the whole country, and it does not help yet.
+Facilities land as permit rows and are attached to sites *by proximity*; outside
+the pilot region there are no parcels, so there are no sites, so they stay
+unlinked. **Parcel coverage is the blocker, and it is per-county** — every county
+publishes its assessor data differently, or not at all. That is the next real
+piece of work, and it is a connector per county, not a flag.
+
+### Deliberate
+
+- Nine regions registered, one `ACTIVE`. A `DECLARED` region is in scope and
+  empty, `/regions` publishes its site count, and a unit test asserts only
+  east-valley-az is active — so the list cannot quietly become a coverage claim.
