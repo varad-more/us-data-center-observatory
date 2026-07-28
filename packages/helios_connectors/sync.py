@@ -66,6 +66,11 @@ def sync_source(session: Session, entry: SourceRegistryEntry) -> Source:
     source.known_schema_issues = entry.known_schema_issues
     source.notes = entry.notes
 
+    # Set on every source, not only the ones with a connector: a source with no
+    # connector is precisely the case where the reader needs to be told why.
+    source.connector_status = str(entry.connector_status)
+    source.access_limitation = entry.access_limitation
+
     if entry.connector_slug and entry.connector_entry_point:
         _sync_connector(session, source, entry)
 

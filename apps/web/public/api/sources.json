@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "89ef23a3-974d-443b-ae96-c6e46a1ab0d0",
+      "id": "87ff2e7c-e4ff-40bb-bb79-bb06749f9b3d",
       "slug": "az-corporation-commission-entity-search",
       "name": "Arizona Corporation Commission Entity Search",
       "agency": "Arizona Corporation Commission",
@@ -23,12 +23,12 @@
       "notes": "Would substantially improve shell-company resolution. Held back deliberately pending a privacy review.",
       "connector_status": "planned",
       "connector_slug": null,
-      "access_limitation": null,
+      "access_limitation": "eCorp is an interactive search application. Registered-agent and officer records contain personal information, so Helios will only ingest entity-level fields (name, formation date, status) if a compliant access path is established.",
       "last_success_at": null,
       "document_count": 0
     },
     {
-      "id": "ee9de658-3268-4aae-94cd-9c0c660739ff",
+      "id": "15cfe972-f99c-4065-be0b-62f04e1fddac",
       "slug": "sec-edgar",
       "name": "SEC EDGAR Full-Text Search",
       "agency": "US Securities and Exchange Commission",
@@ -55,7 +55,7 @@
       "document_count": 0
     },
     {
-      "id": "55edaed4-46ec-444a-b546-a60a1dab1c28",
+      "id": "70170d32-1d71-45c8-ac18-fd2bbe168b68",
       "slug": "epa-echo-air-facilities",
       "name": "EPA ECHO Air Facility Records",
       "agency": "United States Environmental Protection Agency",
@@ -78,11 +78,11 @@
       "connector_status": "implemented",
       "connector_slug": "epa-echo-air-facilities",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:02.384788Z",
+      "last_success_at": "2026-07-28T10:57:01.498759Z",
       "document_count": 1
     },
     {
-      "id": "3988f738-fd3c-4041-adb1-d16b5f301e7c",
+      "id": "5efe4e73-f3d8-4612-a4b8-911ab25ace5e",
       "slug": "maricopa-aqd-dust-control",
       "name": "Maricopa County Air Quality Dust Control Sites",
       "agency": "Maricopa County Air Quality Department",
@@ -109,7 +109,7 @@
       "document_count": 0
     },
     {
-      "id": "0685fb06-2a43-4a43-b37d-20dd59f2a0b3",
+      "id": "ea6459a0-f84c-44cd-91d3-e4bb0565fdd3",
       "slug": "eia-state-generation-capacity",
       "name": "EIA Existing Electricity Generation Capacity by State",
       "agency": "United States Energy Information Administration",
@@ -132,11 +132,11 @@
       "connector_status": "implemented",
       "connector_slug": "eia-state-generation-capacity",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:03.701493Z",
+      "last_success_at": "2026-07-28T10:57:02.581018Z",
       "document_count": 1
     },
     {
-      "id": "e611c0c9-0309-46d2-b141-10301f94361e",
+      "id": "efa2a94d-80de-45ed-94be-f4e057341d42",
       "slug": "eia-state-electricity-sales",
       "name": "EIA Retail Electricity Sales by State",
       "agency": "United States Energy Information Administration",
@@ -159,11 +159,38 @@
       "connector_status": "implemented",
       "connector_slug": "eia-state-electricity-sales",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:03.430499Z",
+      "last_success_at": "2026-07-28T10:57:02.293034Z",
       "document_count": 1
     },
     {
-      "id": "8fbf134c-f85f-4eab-8388-6dc4c9643dfe",
+      "id": "4b5e53fa-e7c8-4d82-85ed-d490b79dce9c",
+      "slug": "hifld-electric-substations",
+      "name": "HIFLD Electric Substations",
+      "agency": "US Department of Homeland Security / Geospatial Management Office",
+      "jurisdiction": "United States",
+      "category": "infrastructure_reference",
+      "base_url": "https://hifld-geoplatform.opendata.arcgis.com/datasets/electric-substations",
+      "access_method": "arcgis_rest",
+      "update_frequency": null,
+      "license_name": null,
+      "license_url": null,
+      "attribution_required": false,
+      "attribution_text": null,
+      "robots_policy_status": null,
+      "geographic_coverage": "United States, substations at 69 kV and above.",
+      "historical_coverage": null,
+      "contains_personal_data": false,
+      "reliability_score": null,
+      "known_schema_issues": null,
+      "notes": "This was the intended national upgrade over contributor-dependent OSM coverage. It is declared as withdrawn rather than dropped so the gap stays legible: US substation coverage in Helios is OSM's, with OSM's limits.",
+      "connector_status": "withdrawn",
+      "connector_slug": null,
+      "access_limitation": "DHS withdrew public access. The HIFLD Open portal's own catalogue API answers 401 'private org id ... is not accessible', and no federal republication has taken its place: the EIA Energy Atlas catalogue carries no substation, transmission or power-plant layer at all. Copies survive on university and state-agency ArcGIS servers, but they are undated snapshots of a withdrawn dataset with empty copyright fields and no maintained licence. Helios will not ingest one. Substation geometry sourced that way would enter the graph as reported fact whose provenance is an unattributed mirror, which is a worse position than the honest under-coverage of OSM.",
+      "last_success_at": null,
+      "document_count": 0
+    },
+    {
+      "id": "d99e7ee9-44be-4fe8-8aa5-701a30af26b7",
       "slug": "osm-power-infrastructure",
       "name": "OpenStreetMap Power Infrastructure (Overpass API)",
       "agency": "OpenStreetMap contributors",
@@ -186,11 +213,11 @@
       "connector_status": "implemented",
       "connector_slug": "osm-power-infrastructure",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:02.353987Z",
+      "last_success_at": "2026-07-28T10:57:01.465332Z",
       "document_count": 1
     },
     {
-      "id": "5e6425ab-c684-4f90-984f-f78a5612944b",
+      "id": "24692f9d-1246-4272-a763-2f2f498872af",
       "slug": "maricopa-assessor-parcels",
       "name": "Maricopa County Assessor Parcel Layer",
       "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -213,11 +240,11 @@
       "connector_status": "implemented",
       "connector_slug": "maricopa-assessor-parcels",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:01.764849Z",
+      "last_success_at": "2026-07-28T10:57:00.931735Z",
       "document_count": 1
     },
     {
-      "id": "f5a45883-0972-4de5-a1dd-897ef4baf30c",
+      "id": "dc13e835-2aad-4824-862d-d351b679bd79",
       "slug": "maricopa-recorder-documents",
       "name": "Maricopa County Recorder Document Search",
       "agency": "Maricopa County Recorder",
@@ -239,12 +266,12 @@
       "notes": "Helios links out to recorder documents for human verification rather than ingesting them.",
       "connector_status": "planned",
       "connector_slug": null,
-      "access_limitation": null,
+      "access_limitation": "Individual recorded documents are reachable by recording number, and the assessor layer already supplies those numbers and deep links. Systematic enumeration is not attempted: it would constitute bulk retrieval of records containing personal information without a demonstrated need.",
       "last_success_at": null,
       "document_count": 0
     },
     {
-      "id": "7677a138-039f-42de-bc25-b4d986a055b2",
+      "id": "910992ab-41f5-41cb-abbd-3a12adcbefab",
       "slug": "mesa-building-permits",
       "name": "City of Mesa Building Permits",
       "agency": "City of Mesa",
@@ -267,11 +294,11 @@
       "connector_status": "implemented",
       "connector_slug": "mesa-building-permits",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:02.812901Z",
+      "last_success_at": "2026-07-28T10:57:01.926314Z",
       "document_count": 1
     },
     {
-      "id": "83f8fbb8-6cfd-4138-ba75-8d282d839f3f",
+      "id": "9960fe36-2e48-4d60-9f7f-4f978f9f1543",
       "slug": "mesa-agendas",
       "name": "City of Mesa Planning and Zoning Agendas",
       "agency": "City of Mesa Development Services",
@@ -298,7 +325,7 @@
       "document_count": 0
     },
     {
-      "id": "75870595-9d67-4fc4-8ea1-a1f7b518f936",
+      "id": "d7d0111c-3f6b-4a57-9502-48f85f698536",
       "slug": "copernicus-sentinel2",
       "name": "Copernicus Sentinel-2 Surface Reflectance",
       "agency": "European Space Agency / Copernicus",
@@ -320,12 +347,12 @@
       "notes": null,
       "connector_status": "planned",
       "connector_slug": null,
-      "access_limitation": null,
+      "access_limitation": "No Copernicus credentials are configured and no satellite imagery has been acquired or analysed. Declared here so the gap stays visible; deliberately has no connector, because a fixture-backed stub would have implied a capability Helios does not have.",
       "last_success_at": null,
       "document_count": 0
     },
     {
-      "id": "0bc6de4c-d6ed-4d65-a3c5-aa0ce50c1121",
+      "id": "b4498fa0-b117-4830-be6b-fec5ba102c41",
       "slug": "azcc-edocket",
       "name": "Arizona Corporation Commission eDocket",
       "agency": "Arizona Corporation Commission",
@@ -348,11 +375,11 @@
       "connector_status": "fixture_only",
       "connector_slug": "azcc-edocket",
       "access_limitation": "eDocket search is a stateful ASP.NET interface requiring viewstate round-trips and offering no documented API or bulk export. Helios implements and tests the parser against fixtures built from the documented docket schema, and does not automate the search interface. Live coverage requires either an agency-provided export or manual docket retrieval.",
-      "last_success_at": "2026-07-28T07:44:03.728134Z",
+      "last_success_at": "2026-07-28T10:57:02.611788Z",
       "document_count": 2
     },
     {
-      "id": "b201d624-e46c-4357-8e5b-1eeaa06a0a68",
+      "id": "6c7e7018-ee2d-4b2e-a02b-90e060510086",
       "slug": "srp-infrastructure-projects",
       "name": "Salt River Project Infrastructure Projects",
       "agency": "Salt River Project",
@@ -374,12 +401,12 @@
       "notes": null,
       "connector_status": "planned",
       "connector_slug": null,
-      "access_limitation": null,
+      "access_limitation": "Project pages are marketing content without a stable structure or machine-readable index. Parsing is feasible but brittle and deferred.",
       "last_success_at": null,
       "document_count": 0
     },
     {
-      "id": "ec2d2ef2-52e5-4e92-a49f-7c055051c0d7",
+      "id": "ccca22dd-5f13-4f1f-932e-c1a292416b8e",
       "slug": "adwr-water-records",
       "name": "Arizona Department of Water Resources Data",
       "agency": "Arizona Department of Water Resources",
@@ -406,7 +433,7 @@
       "document_count": 0
     },
     {
-      "id": "ff0aa52d-354d-4049-ba13-726e875f805e",
+      "id": "23900b1a-5ad1-4f4f-a71e-3d2f487d657d",
       "slug": "usgs-county-water-use",
       "name": "USGS Estimated Use of Water, County-Level",
       "agency": "United States Geological Survey",
@@ -429,13 +456,14 @@
       "connector_status": "implemented",
       "connector_slug": "usgs-county-water-use",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T07:44:02.842726Z",
+      "last_success_at": "2026-07-28T10:57:01.956255Z",
       "document_count": 1
     }
   ],
   "coverage_summary": {
     "planned": 7,
     "implemented": 7,
+    "withdrawn": 1,
     "fixture_only": 2
   }
 }

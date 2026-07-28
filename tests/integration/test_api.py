@@ -27,6 +27,7 @@ from helios_connectors.area_totals import (
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
+from helios_connectors.registry import SOURCE_REGISTRY
 from helios_connectors.replay import replay_connector as _replay
 from helios_domain.models import Site
 from helios_geospatial.site_builder import build_sites
@@ -263,6 +264,33 @@ class TestSourceRegistry:
         blocked = [s for s in payload["items"] if s["connector_status"] == "fixture_only"]
         assert blocked
         assert all(s["access_limitation"] for s in blocked)
+
+    def test_every_declared_limitation_reaches_the_api(self, api_client: TestClient) -> None:
+        """A reason recorded in the registry is worthless if the API drops it.
+
+        This once only held for sources that had a connector, which excluded
+        every source with no access at all -- the ones the reason exists for.
+        """
+        items = {s["slug"]: s for s in api_client.get("/sources").json()["items"]}
+        for entry in SOURCE_REGISTRY:
+            if not entry.access_limitation:
+                continue
+            assert entry.slug in items, entry.slug
+            assert items[entry.slug]["access_limitation"] == entry.access_limitation, entry.slug
+
+    def test_status_is_the_registry_status(self, api_client: TestClient) -> None:
+        """No source may report "planned" merely because it has no connector row."""
+        items = {s["slug"]: s for s in api_client.get("/sources").json()["items"]}
+        for entry in SOURCE_REGISTRY:
+            assert items[entry.slug]["connector_status"] == str(entry.connector_status), entry.slug
+
+    def test_withdrawn_source_is_not_mistaken_for_planned(self, api_client: TestClient) -> None:
+        """HIFLD substations were taken away; nothing should imply they are coming."""
+        items = {s["slug"]: s for s in api_client.get("/sources").json()["items"]}
+        hifld = items["hifld-electric-substations"]
+        assert hifld["connector_status"] == "withdrawn"
+        assert "withdrew public access" in hifld["access_limitation"]
+        assert hifld["connector_slug"] is None
 
     def test_reports_coverage_summary(self, api_client: TestClient) -> None:
         payload = api_client.get("/sources").json()

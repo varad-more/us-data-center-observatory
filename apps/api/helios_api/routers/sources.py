@@ -53,7 +53,10 @@ def list_sources(session: DbSession) -> SourceListResponse:
             )
             or 0
         )
-        connector_status = connector.status if connector else "planned"
+        # The source carries its own status and limitation. Falling back to the
+        # connector row would report every unreadable source as "planned" and
+        # drop the explanation of what actually blocks it.
+        connector_status = source.connector_status
         coverage[connector_status] = coverage.get(connector_status, 0) + 1
 
         items.append(
@@ -80,7 +83,7 @@ def list_sources(session: DbSession) -> SourceListResponse:
                 notes=source.notes,
                 connector_status=connector_status,
                 connector_slug=connector.slug if connector else None,
-                access_limitation=connector.access_limitation if connector else None,
+                access_limitation=source.access_limitation,
                 last_success_at=connector.last_success_at if connector else None,
                 document_count=document_count,
             )

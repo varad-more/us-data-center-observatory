@@ -41,7 +41,9 @@ The third comparison — summed site capacity against reported net summer genera
 
 The two EIA files do not share a reference year: sales currently stops at 2020 while capacity runs to 2024. Each is published with the year it describes rather than aligned to the other.
 
-Helios does not know substation capacity and does not estimate it. Neither HIFLD nor OSM publishes transformer capacity in MW, and FERC Form 715 is restricted as CEII. No substation carries a capacity or utilisation figure anywhere in the API or the UI.
+Helios does not know substation capacity and does not estimate it. OSM publishes substation voltage but not transformer capacity in MW, HIFLD published the same voltage attribute and no capacity either, and FERC Form 715 is restricted as CEII. No substation carries a capacity or utilisation figure anywhere in the API or the UI.
+
+Substation *coverage* is OpenStreetMap's alone. HIFLD's national layer was the intended upgrade over OSM's contributor-dependent completeness; DHS has since withdrawn public access to it, and no federal republication exists. Helios declines the surviving third-party mirrors, so the absence of a substation from Helios remains what it always was — a coverage gap, never evidence that none exists.
 
 ## Site identity
 

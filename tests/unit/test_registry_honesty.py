@@ -43,3 +43,25 @@ class TestRegistryHonesty:
         for entry in SOURCE_REGISTRY:
             if entry.connector_status == ConnectorStatus.PLANNED:
                 assert entry.connector_entry_point is None, entry.slug
+
+    def test_withdrawn_entries_have_no_connector_and_say_why(self) -> None:
+        """WITHDRAWN means the publisher took the data away, not that we were lazy.
+
+        The status only earns its place in the vocabulary if it carries the
+        reason with it; a bare "withdrawn" pill would tell a reader less than
+        the PLANNED it replaced.
+        """
+        withdrawn = [
+            entry
+            for entry in SOURCE_REGISTRY
+            if entry.connector_status == ConnectorStatus.WITHDRAWN
+        ]
+        assert withdrawn, "the status exists because HIFLD substations went away"
+        for entry in withdrawn:
+            assert entry.connector_entry_point is None, entry.slug
+            assert entry.connector_slug is None, entry.slug
+            assert entry.access_limitation, entry.slug
+
+    def test_withdrawn_entries_are_not_runnable(self) -> None:
+        slugs = {entry.slug for entry in implemented_entries()}
+        assert "hifld-electric-substations" not in slugs

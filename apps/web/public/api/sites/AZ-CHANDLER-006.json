@@ -1,5 +1,5 @@
 {
-  "id": "8669bc1e-ce4f-48b8-86aa-7512753376d7",
+  "id": "90579da7-b414-4a01-8831-a1ccc2dfea4f",
   "project_code": "AZ-CHANDLER-006",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 4.9443,
   "parcel_count": 2,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T07:44:04.441710Z",
-  "score_last_calculated_at": "2026-07-28T07:44:04.439433Z",
+  "stage_last_changed_at": "2026-07-28T10:57:03.347772Z",
+  "score_last_calculated_at": "2026-07-28T10:57:03.345288Z",
   "centroid": [
     -111.885715,
     33.276908
@@ -125,7 +125,7 @@
   },
   "parcels": [
     {
-      "id": "df7ab574-ff84-4642-aa98-ee6525c8d7be",
+      "id": "80f46162-1069-474e-849a-aaae65ddc482",
       "apn": "30325776B",
       "apn_formatted": "303-25-776B",
       "situs_address": "2600 W GERMANN RD",
@@ -143,7 +143,7 @@
       "link_confidence": 0.95
     },
     {
-      "id": "14897b20-1d8e-4ed4-bead-27a4bee724d6",
+      "id": "afc132af-ae15-44f4-a1e1-cc43e6b970de",
       "apn": "30325776C",
       "apn_formatted": "303-25-776C",
       "situs_address": "2600 W GERMANN RD",
@@ -163,7 +163,7 @@
   ],
   "organizations": [
     {
-      "id": "fd1e4cf2-1f3f-430d-8727-967c8abcac8b",
+      "id": "e26a54ae-aefc-4b85-9cae-2da409446b5d",
       "canonical_name": "H5 DATA CENTERS CHANDLER LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -178,7 +178,7 @@
   ],
   "dependencies": [
     {
-      "id": "ea0cced1-e73e-4b61-a5ee-783f4bdea146",
+      "id": "7dc091c8-efed-4071-a13a-6f54893849df",
       "infrastructure_kind": "substation",
       "label": "RS-27",
       "dependency_status": "existing",
@@ -192,7 +192,7 @@
       "operator_name": null
     },
     {
-      "id": "a29cc799-df83-444b-a185-079b9d5bda59",
+      "id": "3decb0d1-4c5a-47bb-939f-fd02db11e0ed",
       "infrastructure_kind": "substation",
       "label": "Jones Substation",
       "dependency_status": "existing",
@@ -206,7 +206,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "33d714a4-dfdc-4118-9c5e-d4209076aa32",
+      "id": "4323a9aa-b681-4db4-92f1-5f6b2982a9cf",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -220,7 +220,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "ce00c9bf-53ea-4d0f-a96f-7eee4e11a605",
+      "id": "5fcc02dd-e0bd-418b-9d17-78f37816e595",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -234,7 +234,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "3e41dada-b75d-4140-873b-d195e31446b0",
+      "id": "b16b99b4-8978-4b13-a4ee-87ae5f97bc0c",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -248,7 +248,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "7ecf4715-04c7-44b6-875c-d2b20a62db7a",
+      "id": "d25f5906-7e29-4ebb-83ba-aeb39cfecd90",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -262,7 +262,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "70200c36-7710-4b89-a652-488882ee8716",
+      "id": "8cf25cbd-58de-4194-a11b-4ede85930108",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -276,7 +276,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "23d6d132-35a9-4394-9a7f-f8918c6a90b2",
+      "id": "81065a1b-e219-413b-9f0f-211c3961e9d3",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -290,7 +290,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "ef646ba8-9960-46aa-bb6a-5b2ebb9a05fa",
+      "id": "4f72d786-5ab2-4a74-a0cf-2401975cda31",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -304,7 +304,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "73416bf9-b7c3-495f-a38c-696738d524a9",
+      "id": "04fe8e4b-6d95-4a1b-b2f5-cf89c59c2d10",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -318,7 +318,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "d505c9b5-159a-4990-934d-9736e25c943d",
+      "id": "f47d86fb-0d24-401f-8754-04f84908da41",
       "infrastructure_kind": "substation",
       "label": "Henshaw Substation",
       "dependency_status": "existing",
@@ -332,7 +332,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "6e2ae0c3-e364-435a-9c0c-bae1117568f0",
+      "id": "cd10ef33-55c0-4cbf-a465-1749fd78adb2",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -346,7 +346,7 @@
       "operator_name": null
     },
     {
-      "id": "3b90b7ec-ed6c-4d30-b8d5-f0fcae288488",
+      "id": "8b17f405-4b5c-4053-a6cd-750d09a345f4",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -360,7 +360,7 @@
       "operator_name": null
     },
     {
-      "id": "c273e089-62d8-4ffe-b1c3-c592cbefc476",
+      "id": "b2c2007f-7bd5-4d60-9a83-da4d92d2a064",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -374,7 +374,7 @@
       "operator_name": null
     },
     {
-      "id": "62f6d574-21ce-4b6b-9239-bdd39a643a76",
+      "id": "7a0253f1-1adb-485a-9bd1-036bb69e0da5",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -388,7 +388,7 @@
       "operator_name": null
     },
     {
-      "id": "87a094df-83d6-44e2-bf98-1ef4401fab12",
+      "id": "e88600c3-3d64-4d98-ae46-41e3a2b93784",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -404,7 +404,7 @@
   ],
   "estimates": [
     {
-      "id": "725241b5-4ec0-4c50-bbed-659647f044c4",
+      "id": "4f80d468-e4b2-48f1-9231-aa92e3806884",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 5.9,
@@ -422,11 +422,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T07:44:04.442440Z",
+      "calculated_at": "2026-07-28T10:57:03.348503Z",
       "notes": null
     },
     {
-      "id": "5f1691f3-f243-4020-bfd1-81879d6b4b7d",
+      "id": "b7e5620a-f3d7-49d1-8fe1-6010078a296a",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 14160.0,
@@ -444,13 +444,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T07:44:04.442502Z",
+      "calculated_at": "2026-07-28T10:57:03.348567Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "583b2282-3b5c-471b-9d25-65dee7591c83",
-    "calculated_at": "2026-07-28T07:44:04.439475Z",
+    "id": "ea1c186f-78ab-483c-b307-7f7762f5a9f5",
+    "calculated_at": "2026-07-28T10:57:03.345333Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -476,7 +476,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13"
+        "evidence_record_id": "5a9d785a-e7c6-4567-a714-6eaeb1a16d4d"
       },
       {
         "rule_id": "backup-generator-air-permit",
@@ -488,7 +488,7 @@
         "confidence_multiplier": 0.8,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "912e1809-e0bd-41b4-bd82-ffe30f52bffb"
+        "evidence_record_id": "48ac55ad-5096-4ea7-96b2-61bcfc4643c6"
       },
       {
         "rule_id": "assessor-data-center-classification",
@@ -500,7 +500,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "eac9d88c-6b80-406a-bcca-604fa2f0747c"
+        "evidence_record_id": "9b0e6f3a-c769-47b8-8300-5680d73c4354"
       },
       {
         "rule_id": "transmission-filing",
@@ -512,7 +512,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "9b515fc1-4364-4b9e-8305-38fe0ab456b3"
+        "evidence_record_id": "ed45fdc4-0b95-41bd-ae7d-58b2b7471aae"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -524,7 +524,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.6191,
         "polarity": "supporting",
-        "evidence_record_id": "23131e1e-74ed-4283-977c-277abc5c05ba"
+        "evidence_record_id": "1f13b48d-6eaa-4ead-9070-5546441ec633"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -536,7 +536,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.6191,
         "polarity": "supporting",
-        "evidence_record_id": "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
+        "evidence_record_id": "57ad42b8-30cc-4417-81a3-157077a6835e"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -548,29 +548,29 @@
         "confidence_multiplier": 0.8799,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "0e3ba4a4-643a-4c80-9c46-eae387cf9fa5"
+        "evidence_record_id": "4a1070dc-b65e-4707-9018-c3f59e39663b"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "b6aee08f-6b2e-4ab7-81bf-1a10e877f926",
+      "id": "4182b24a-9a29-4522-a420-2beab63b3cae",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-03-22",
-      "detected_at": "2026-07-28T07:44:04.441710Z",
+      "detected_at": "2026-07-28T10:57:03.347772Z",
       "is_downgrade": false,
       "confidence": 56.48,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 56% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13",
-        "912e1809-e0bd-41b4-bd82-ffe30f52bffb",
-        "eac9d88c-6b80-406a-bcca-604fa2f0747c",
-        "9b515fc1-4364-4b9e-8305-38fe0ab456b3",
-        "23131e1e-74ed-4283-977c-277abc5c05ba",
-        "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
+        "5a9d785a-e7c6-4567-a714-6eaeb1a16d4d",
+        "48ac55ad-5096-4ea7-96b2-61bcfc4643c6",
+        "9b0e6f3a-c769-47b8-8300-5680d73c4354",
+        "ed45fdc4-0b95-41bd-ae7d-58b2b7471aae",
+        "1f13b48d-6eaa-4ead-9070-5546441ec633",
+        "57ad42b8-30cc-4417-81a3-157077a6835e"
       ],
       "detection_lag_days": 1954
     }

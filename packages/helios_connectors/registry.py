@@ -170,6 +170,34 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         connector_entry_point="helios_connectors.osm_power:OsmPowerConnector",
         tags=("substations", "transmission", "odbl"),
     ),
+    SourceRegistryEntry(
+        slug="hifld-electric-substations",
+        name="HIFLD Electric Substations",
+        agency="US Department of Homeland Security / Geospatial Management Office",
+        jurisdiction="United States",
+        category=SourceCategory.INFRASTRUCTURE_REFERENCE,
+        base_url="https://hifld-geoplatform.opendata.arcgis.com/datasets/electric-substations",
+        access_method=AccessMethod.ARCGIS_REST,
+        connector_status=ConnectorStatus.WITHDRAWN,
+        geographic_coverage="United States, substations at 69 kV and above.",
+        access_limitation=(
+            "DHS withdrew public access. The HIFLD Open portal's own catalogue API answers "
+            "401 'private org id ... is not accessible', and no federal republication has "
+            "taken its place: the EIA Energy Atlas catalogue carries no substation, "
+            "transmission or power-plant layer at all. Copies survive on university and "
+            "state-agency ArcGIS servers, but they are undated snapshots of a withdrawn "
+            "dataset with empty copyright fields and no maintained licence. Helios will not "
+            "ingest one. Substation geometry sourced that way would enter the graph as "
+            "reported fact whose provenance is an unattributed mirror, which is a worse "
+            "position than the honest under-coverage of OSM."
+        ),
+        notes=(
+            "This was the intended national upgrade over contributor-dependent OSM coverage. "
+            "It is declared as withdrawn rather than dropped so the gap stays legible: US "
+            "substation coverage in Helios is OSM's, with OSM's limits."
+        ),
+        tags=("substations", "national", "withdrawn"),
+    ),
     # ---------------------------------------------------------- environmental --
     SourceRegistryEntry(
         slug="epa-echo-air-facilities",

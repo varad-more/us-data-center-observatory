@@ -9,6 +9,9 @@ const STATUS_TONE: Record<string, "positive" | "caution" | "neutral"> = {
   implemented: "positive",
   fixture_only: "caution",
   planned: "neutral",
+  // Withdrawn reads as caution, not neutral: a source the publisher took away
+  // is a live gap in coverage, whereas "planned" is merely work not yet done.
+  withdrawn: "caution",
 };
 
 export default async function SourcesPage() {

@@ -1,5 +1,5 @@
 {
-  "id": "d57fed5f-31e4-43b8-b79a-1cd75e61cf9d",
+  "id": "55cb5a63-a874-49d8-bf1d-53cd11cfb218",
   "project_code": "AZ-MESA-003",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 3.0003,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T07:44:04.413946Z",
-  "score_last_calculated_at": "2026-07-28T07:44:04.411570Z",
+  "stage_last_changed_at": "2026-07-28T10:57:03.286596Z",
+  "score_last_calculated_at": "2026-07-28T10:57:03.284240Z",
   "centroid": [
     -111.635169,
     33.356759
@@ -61,7 +61,7 @@
   },
   "parcels": [
     {
-      "id": "58c6b07d-7548-4eb7-ad12-692c17c325ea",
+      "id": "812c1676-8720-4154-a7a6-6db6be19d2e5",
       "apn": "30404918A",
       "apn_formatted": "304-04-918A",
       "situs_address": "3223 S ELLSWORTH RD",
@@ -81,7 +81,7 @@
   ],
   "organizations": [
     {
-      "id": "6d1c10ff-bd63-45a8-89da-16cb9894cee7",
+      "id": "c0b8c03d-8eb7-4f8d-88b0-99659702ea9b",
       "canonical_name": "COMARCH INC",
       "role": "owner",
       "organization_type": "INC",
@@ -94,7 +94,7 @@
   ],
   "dependencies": [
     {
-      "id": "aaf44451-36c6-4890-bfc6-549a29402f3c",
+      "id": "bedc80a1-55a0-49bd-97ea-592610e3e2f2",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -108,7 +108,7 @@
       "operator_name": null
     },
     {
-      "id": "cc26322c-c743-4eb1-b2ca-6218b43fd2f4",
+      "id": "83a3ac72-0eff-48c6-92c8-ff4645f3fd17",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -122,7 +122,7 @@
       "operator_name": null
     },
     {
-      "id": "99bed16e-83c2-4102-8a18-aa71949f8ff9",
+      "id": "13f6e1a2-212a-4e5b-a981-5a03cfa8baf1",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -136,7 +136,7 @@
       "operator_name": null
     },
     {
-      "id": "0ab19806-8a86-4340-aef3-d44e6e4b032d",
+      "id": "afd976a0-1fa8-4b28-b6a1-62509b5daaf7",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -150,7 +150,7 @@
       "operator_name": null
     },
     {
-      "id": "78766aec-504f-470e-b348-0dc146cf7a85",
+      "id": "70ecf0be-bff0-42c5-b6f3-b2b6dea24cc4",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -164,7 +164,7 @@
       "operator_name": null
     },
     {
-      "id": "a83eadf9-2a67-4b0f-bc65-d7bdceefaebd",
+      "id": "01c218d9-f841-4517-9153-09533aeea89d",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -178,7 +178,7 @@
       "operator_name": null
     },
     {
-      "id": "88c89758-2398-4c5c-bb26-5df2042e6138",
+      "id": "38070ee7-675a-4050-a3fd-1916e4e1b7d6",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -192,7 +192,7 @@
       "operator_name": null
     },
     {
-      "id": "42fa423f-e8d8-49c3-af30-428ff7285a8a",
+      "id": "29bba67e-7df5-45e6-a221-b9f5ab4ae5df",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -206,7 +206,7 @@
       "operator_name": null
     },
     {
-      "id": "6e0cc6b9-8266-40d3-80b4-c194b4fc86cc",
+      "id": "34d18b80-4e3e-4210-b2d3-00a09678a606",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -220,7 +220,7 @@
       "operator_name": null
     },
     {
-      "id": "8cf6a0c8-9eb8-477b-bca1-aa248ef79210",
+      "id": "12f13b1c-b726-4786-bf85-0fd37b4abeba",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -234,7 +234,7 @@
       "operator_name": null
     },
     {
-      "id": "99a79c8e-7f75-4db3-aa8c-5961efc1cf14",
+      "id": "ec57a45a-2f7b-4472-be16-b3d211d73b4e",
       "infrastructure_kind": "substation",
       "label": "Prickly Pear Substation",
       "dependency_status": "existing",
@@ -248,7 +248,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "918da435-613a-494c-b9e3-76b58165643c",
+      "id": "16e1c49b-1897-4945-a662-0fe55b5ed914",
       "infrastructure_kind": "substation",
       "label": "Howard Substation",
       "dependency_status": "existing",
@@ -262,7 +262,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "9c75d23d-0bd0-4f78-b1c6-60a7c305092c",
+      "id": "92b2c7cc-4ed3-487e-a97e-4149c24090df",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -276,7 +276,7 @@
       "operator_name": null
     },
     {
-      "id": "b3f1c6e0-f07d-441c-ab1a-dc88c48c0298",
+      "id": "265a52cc-1772-4711-a747-513da55a5193",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -290,7 +290,7 @@
       "operator_name": null
     },
     {
-      "id": "9f1dcdba-689d-4807-b3fd-f3e4b3a1fa38",
+      "id": "ac81ed88-6350-442c-9dae-e06cf70b9f9d",
       "infrastructure_kind": "substation",
       "label": "Perales Substation",
       "dependency_status": "existing",
@@ -304,7 +304,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "3d346c95-6622-43d0-94e8-af2f641fe8fd",
+      "id": "9d54e581-8cd9-4f8a-a0d2-39dd2f4be51c",
       "infrastructure_kind": "substation",
       "label": "Scott Substation",
       "dependency_status": "existing",
@@ -320,7 +320,7 @@
   ],
   "estimates": [
     {
-      "id": "d565795b-7cec-4c5e-9cc3-e7e85204b5b3",
+      "id": "ec29bff8-0200-4811-a57a-46a10dc0d846",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 3.6,
@@ -338,11 +338,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T07:44:04.414898Z",
+      "calculated_at": "2026-07-28T10:57:03.287383Z",
       "notes": null
     },
     {
-      "id": "e7573910-f627-4212-8100-a16aed217199",
+      "id": "0cf4e7b6-595a-4e5a-8490-79c10a63f71e",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 8640.0,
@@ -360,13 +360,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T07:44:04.415005Z",
+      "calculated_at": "2026-07-28T10:57:03.287475Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "8a29e817-13ec-414d-95ae-351ca2f3cb4b",
-    "calculated_at": "2026-07-28T07:44:04.411617Z",
+    "id": "07cde2c7-4cfd-42c9-b260-06dd28d39c53",
+    "calculated_at": "2026-07-28T10:57:03.284294Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -392,7 +392,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "c2167047-40e9-4d80-a7e1-00955eb526fd"
+        "evidence_record_id": "1dbf75c5-e3cd-4772-b4cf-915b353fed38"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -404,24 +404,24 @@
         "confidence_multiplier": 0.6284,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "198469a4-b2f4-40ba-b887-f117e862fa73"
+        "evidence_record_id": "fe5ab2f2-cd9c-46ab-8be3-d651618bf428"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "9aa29104-2a88-42d7-b69a-b3f31b2ecac3",
+      "id": "efa799cf-0e71-475c-826b-e900041132ee",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2026-07-28",
-      "detected_at": "2026-07-28T07:44:04.413946Z",
+      "detected_at": "2026-07-28T10:57:03.286596Z",
       "is_downgrade": false,
       "confidence": 27.14,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "c2167047-40e9-4d80-a7e1-00955eb526fd"
+        "1dbf75c5-e3cd-4772-b4cf-915b353fed38"
       ],
       "detection_lag_days": 0
     }

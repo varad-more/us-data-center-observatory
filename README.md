@@ -144,6 +144,7 @@ cd apps/web && npm test && npm run typecheck
 
 | Document | Purpose |
 |---|---|
+| [`docs/goals.md`](docs/goals.md) | What Helios is for, what it produces, and what it will not do |
 | [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |
 | [`docs/methodology.md`](docs/methodology.md) | How assertion classes and scores are derived |
 | [`docs/source-inventory.md`](docs/source-inventory.md) | Every source and its connector status |

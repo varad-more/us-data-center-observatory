@@ -169,3 +169,31 @@ of what is unused. Where a correct figure has an obvious wrong reading, put the
 correction in the payload beside the number rather than in the docs, and assert
 it in a test — a caveat that lives only in prose gets separated from the figure
 the first time anyone quotes it.
+
+### "Planned" and "withdrawn" are different promises
+A registry entry marked `planned` tells a reader the connector is coming. HIFLD
+substations are not coming — DHS withdrew public access. Reusing `planned`
+because the enum happened to have no better member would have made the registry
+state something false in the one place the project exists to be careful about.
+The vocabulary is small and owned here; adding a member cost an enum entry, a
+tone map and two tests, and no migration, because the value was already a plain
+string end to end. Check what a status actually costs before bending an existing
+one to fit.
+
+### A mirror is not a source
+Copies of the withdrawn HIFLD layer are still downloadable from university and
+state ArcGIS servers, and ingesting one would have produced a national
+substation table that looked exactly like the real thing. Its provenance would
+have been "someone's undated copy of a dataset the publisher took down", with an
+empty copyright field. Ingesting it degrades the graph precisely because the
+output is indistinguishable from a good source. When the publisher has withdrawn
+a dataset, the honest position is the gap, not the mirror.
+
+### Check that a declared reason actually reaches the reader
+The registry recorded why each blocked source was blocked, the sources page had
+a component to render it, and five of six never appeared, because the API read
+the field off the connector row and blocked sources have no connector. The test
+that should have caught it asserted the invariant only for `fixture_only` — the
+two entries that happen to have connectors — so it passed for a year while
+saying almost nothing. When a test filters to a subset before asserting, check
+whether the subset excludes exactly the cases the assertion is for.

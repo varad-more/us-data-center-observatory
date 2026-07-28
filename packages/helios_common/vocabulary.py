@@ -149,6 +149,11 @@ class ConnectorStatus(StrEnum):
     IMPLEMENTED = "implemented"
     """Runs against the live source."""
 
+    WITHDRAWN = "withdrawn"
+    """The publisher removed public access. Distinct from PLANNED, which promises
+    a connector that has not been written yet; this one is never coming, and a
+    reader of the registry must not be left expecting it."""
+
     DEGRADED = "degraded"
     DISABLED = "disabled"
 

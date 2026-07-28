@@ -111,6 +111,21 @@ class Source(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     known_schema_issues: Mapped[str | None] = mapped_column(Text)
     notes: Mapped[str | None] = mapped_column(Text)
 
+    connector_status: Mapped[str] = mapped_column(
+        String(30), nullable=False, server_default="planned"
+    )
+    """Whether Helios reads this source, and if not, why not.
+
+    This lives on the source rather than only on the connector because the
+    sources Helios *cannot* read have no connector row to hang it from — and
+    those are exactly the ones a reader most needs the answer for. Keeping it
+    here means a withdrawn or blocked source states its own posture instead of
+    defaulting to the same "planned" as work merely not started yet.
+    """
+
+    access_limitation: Mapped[str | None] = mapped_column(Text)
+    """What blocks access, in plain language. Set for every non-runnable source."""
+
     connectors: Mapped[list[SourceConnector]] = relationship(
         back_populates="source", cascade="all, delete-orphan"
     )

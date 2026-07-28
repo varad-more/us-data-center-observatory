@@ -202,3 +202,38 @@ Helios does not know how much. The caveat says so and two tests assert it.
 Arizona, as published: 32,876.5 MW net summer capacity (2024) against
 81,960,074 MWh of retail sales (2020). Those years do not match because EIA's
 own files do not, and each is shown with the year it describes.
+
+### Grid coverage: HIFLD substations
+
+- [x] Established that the source no longer exists publicly, and recorded it.
+- [x] `ConnectorStatus.WITHDRAWN` added, so the registry can say "taken away"
+      rather than "not built yet".
+- [x] Root-cause fix: status and access limitation moved onto `sources`
+      (migration 0006).
+
+The plan called for HIFLD's national substation layer as the upgrade over
+contributor-dependent OSM coverage. It is gone. The HIFLD Open catalogue API
+answers `401 — private org id ... is not accessible`, and nothing federal
+replaced it: the EIA Energy Atlas catalogue (89 datasets) carries no substation,
+transmission or power-plant layer at all. What survives are copies on university
+and state-agency ArcGIS servers — undated snapshots with empty copyright fields
+and no maintained licence.
+
+Not ingested, deliberately. Substation geometry entering the graph as reported
+fact by way of an unattributed mirror is a worse position than OSM's honest
+under-coverage, which at least has a live licence and a contributor history.
+
+Recording it surfaced a real bug. The API read `connector_status` and
+`access_limitation` off `source_connectors`, and a connector row exists only
+when a registry entry names importable code — so the sources with no access at
+all had nowhere to carry their reason, and reported themselves as `planned`.
+Five of six declared limitations never reached a reader: Copernicus, SRP, the
+ACC entity search, the county recorder and HIFLD. The registry had been keeping
+its most important field to itself. Both fields now live on the source.
+
+Live coverage summary: 7 implemented, 7 planned, 2 fixture-only, 1 withdrawn.
+
+Follow-up not taken: three planned sources (`sec-edgar`,
+`maricopa-aqd-dust-control`, `adwr-water-records`) still declare no limitation.
+They are unbuilt rather than blocked, so that is arguably correct, but ADWR's
+`notes` field explains the deferral and the sources page renders `notes` nowhere.

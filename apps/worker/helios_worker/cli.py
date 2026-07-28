@@ -125,6 +125,7 @@ def registry_show() -> None:
             "implemented": "green",
             "fixture_only": "yellow",
             "planned": "dim",
+            "withdrawn": "red",
         }.get(str(entry.connector_status), "white")
         table.add_row(
             entry.slug,

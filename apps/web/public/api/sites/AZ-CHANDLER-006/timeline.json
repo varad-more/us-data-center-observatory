@@ -1,5 +1,5 @@
 {
-  "site_id": "8669bc1e-ce4f-48b8-86aa-7512753376d7",
+  "site_id": "90579da7-b414-4a01-8831-a1ccc2dfea4f",
   "project_code": "AZ-CHANDLER-006",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Transmission filing",
       "detail": "ACC docket E-01933A-21-0099: 230 kV transmission line siting application. Filed by Salt River Project Agricultural Improvement and Power District on 2021-03-22. Helios ingested a recorded fixture, not a live scrape.",
       "evidence": {
-        "id": "9b515fc1-4364-4b9e-8305-38fe0ab456b3",
+        "id": "ed45fdc4-0b95-41bd-ae7d-58b2b7471aae",
         "evidence_kind": "transmission_filing",
         "summary": "ACC docket E-01933A-21-0099: 230 kV transmission line siting application. Filed by Salt River Project Agricultural Improvement and Power District on 2021-03-22. Helios ingested a recorded fixture, not a live scrape.",
         "snippet": "Proposes rebuild and tap of a 230 kV circuit to serve projected large industrial load south of the Loop 202.",
@@ -56,17 +56,17 @@
               "extraction_method": "pattern_rule"
             }
           ],
-          "permit_id": "86df9bbd-d7b0-4b83-be57-1b44ce653046",
+          "permit_id": "4772ef04-ae04-4a37-a96f-588d685fe743",
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "b51e0535-b22d-4418-b215-ee481dd65518",
-          "document_version_id": "633375a6-6b35-424a-ad89-730e2e60d502",
+          "document_id": "cbe3ac1e-d47d-45c0-959a-6f978f675699",
+          "document_version_id": "faef03b2-ab74-4c30-8454-0160500109e2",
           "source_slug": "azcc-edocket",
           "source_name": "Arizona Corporation Commission eDocket",
           "agency": "Arizona Corporation Commission",
           "source_url": "https://edocket.azcc.gov/search/docket-search",
-          "retrieved_at": "2026-07-28T07:44:03.719063Z",
+          "retrieved_at": "2026-07-28T10:57:02.601685Z",
           "content_sha256": "0d9fd1cefbd138ea0bd15962089a5067d90f0d0f6b2b44ade8841fcf200d3c4a",
           "parser_version": "0.1.0",
           "attribution_text": null
@@ -82,23 +82,23 @@
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 56% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Assessor classifies property use as data centre.",
       "evidence": null,
       "stage_transition": {
-        "id": "b6aee08f-6b2e-4ab7-81bf-1a10e877f926",
+        "id": "4182b24a-9a29-4522-a420-2beab63b3cae",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2021-03-22",
-        "detected_at": "2026-07-28T07:44:04.441710Z",
+        "detected_at": "2026-07-28T10:57:03.347772Z",
         "is_downgrade": false,
         "confidence": 56.48,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 56% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Assessor classifies property use as data centre.",
         "triggering_evidence_ids": [
-          "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13",
-          "912e1809-e0bd-41b4-bd82-ffe30f52bffb",
-          "eac9d88c-6b80-406a-bcca-604fa2f0747c",
-          "9b515fc1-4364-4b9e-8305-38fe0ab456b3",
-          "23131e1e-74ed-4283-977c-277abc5c05ba",
-          "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
+          "5a9d785a-e7c6-4567-a714-6eaeb1a16d4d",
+          "48ac55ad-5096-4ea7-96b2-61bcfc4643c6",
+          "9b0e6f3a-c769-47b8-8300-5680d73c4354",
+          "ed45fdc4-0b95-41bd-ae7d-58b2b7471aae",
+          "1f13b48d-6eaa-4ead-9070-5546441ec633",
+          "57ad42b8-30cc-4417-81a3-157077a6835e"
         ],
         "detection_lag_days": 1954
       },
@@ -110,7 +110,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "23131e1e-74ed-4283-977c-277abc5c05ba",
+        "id": "1f13b48d-6eaa-4ead-9070-5546441ec633",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = H5 DATA CENTERS CHANDLER LLC",
@@ -139,8 +139,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
-          "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
+          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -160,7 +160,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "83f7a697-e5e3-4f9f-a5ca-0894f85c7351",
+        "id": "57ad42b8-30cc-4417-81a3-157077a6835e",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = H5 DATA CENTERS CHANDLER LLC",
@@ -189,8 +189,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
-          "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
+          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -210,7 +210,7 @@
       "title": "Dedicated substation proximity",
       "detail": "RS-27 tagged 69 kV lies 234 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "0e3ba4a4-643a-4c80-9c46-eae387cf9fa5",
+        "id": "4a1070dc-b65e-4707-9018-c3f59e39663b",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "RS-27 tagged 69 kV lies 234 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
@@ -230,8 +230,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
-          "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
+          "document_id": "88cd945b-79ce-4674-8193-1ede12b94390",
+          "document_version_id": "4f0ededc-cef6-4655-8876-9cb991f6b552",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -248,60 +248,10 @@
     {
       "entry_type": "evidence",
       "occurred_on": "2026-07-28",
-      "title": "Assessor data center classification",
-      "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-      "evidence": {
-        "id": "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13",
-        "evidence_kind": "assessor_data_center_classification",
-        "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-        "snippet": "PropertyUseDescription = DATA CENTERS",
-        "snippet_locator": "$.features[11].attributes.PropertyUseDescription",
-        "observed_at": "2026-07-28",
-        "assertion_class": "reported",
-        "extraction_method": "structured_feed",
-        "polarity": "supporting",
-        "confidence": 0.95,
-        "human_review_status": "not_reviewed",
-        "is_standing_condition": true,
-        "normalized_values": {
-          "fields": [
-            {
-              "name": "land_use_description",
-              "value": "DATA CENTERS",
-              "locator": "$.features[11].attributes.PropertyUseDescription",
-              "raw_text": "DATA CENTERS",
-              "raw_unit": null,
-              "confidence": 0.95,
-              "assertion_class": "reported",
-              "normalized_unit": null,
-              "extraction_method": "structured_feed"
-            }
-          ],
-          "is_standing_condition": true
-        },
-        "source": {
-          "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
-          "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
-          "source_slug": "maricopa-assessor-parcels",
-          "source_name": "Maricopa County Assessor Parcel Layer",
-          "agency": "Maricopa County Assessor / Maricopa County GIS",
-          "source_url": "https://example.invalid/recorded",
-          "retrieved_at": "2026-07-25T21:30:00Z",
-          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
-          "parser_version": "0.1.0",
-          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
-        }
-      },
-      "stage_transition": null,
-      "confidence_delta": null
-    },
-    {
-      "entry_type": "evidence",
-      "occurred_on": "2026-07-28",
       "title": "Backup generator air permit",
       "detail": "EPA ECHO lists EAST VALLEY COLO EMERGENCY POWER as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Minor NSR; Emergency Generator.",
       "evidence": {
-        "id": "912e1809-e0bd-41b4-bd82-ffe30f52bffb",
+        "id": "48ac55ad-5096-4ea7-96b2-61bcfc4643c6",
         "evidence_kind": "backup_generator_air_permit",
         "summary": "EPA ECHO lists EAST VALLEY COLO EMERGENCY POWER as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Minor NSR; Emergency Generator.",
         "snippet": "EAST VALLEY COLO EMERGENCY POWER; Minor NSR; Emergency Generator",
@@ -349,12 +299,12 @@
               "extraction_method": "structured_feed"
             }
           ],
-          "permit_id": "80e250b3-13f5-4156-905b-d434343cf5dc",
+          "permit_id": "daa4ac51-721d-4479-8d7d-48c849cac5dc",
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "17a59c32-d9fd-4fe7-821f-fb010fcccbee",
-          "document_version_id": "5f484896-9842-41ad-8857-1887bf50d061",
+          "document_id": "b97c24a1-2d4f-444c-877e-621e6a9aaa63",
+          "document_version_id": "990d6f14-3a73-4e8b-97fd-2b8ac13926e2",
           "source_slug": "epa-echo-air-facilities",
           "source_name": "EPA ECHO Air Facility Records",
           "agency": "United States Environmental Protection Agency",
@@ -374,7 +324,57 @@
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "eac9d88c-6b80-406a-bcca-604fa2f0747c",
+        "id": "5a9d785a-e7c6-4567-a714-6eaeb1a16d4d",
+        "evidence_kind": "assessor_data_center_classification",
+        "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+        "snippet": "PropertyUseDescription = DATA CENTERS",
+        "snippet_locator": "$.features[11].attributes.PropertyUseDescription",
+        "observed_at": "2026-07-28",
+        "assertion_class": "reported",
+        "extraction_method": "structured_feed",
+        "polarity": "supporting",
+        "confidence": 0.95,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": true,
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "land_use_description",
+              "value": "DATA CENTERS",
+              "locator": "$.features[11].attributes.PropertyUseDescription",
+              "raw_text": "DATA CENTERS",
+              "raw_unit": null,
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "is_standing_condition": true
+        },
+        "source": {
+          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
+          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
+          "source_slug": "maricopa-assessor-parcels",
+          "source_name": "Maricopa County Assessor Parcel Layer",
+          "agency": "Maricopa County Assessor / Maricopa County GIS",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+          "parser_version": "0.1.0",
+          "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2026-07-28",
+      "title": "Assessor data center classification",
+      "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "evidence": {
+        "id": "9b0e6f3a-c769-47b8-8300-5680d73c4354",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -403,8 +403,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
-          "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
+          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",

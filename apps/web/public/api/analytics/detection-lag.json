@@ -11,7 +11,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2007-09-20",
-      "detected_at": "2026-07-28T07:44:04.469333Z",
+      "detected_at": "2026-07-28T10:57:03.270798Z",
       "lag_days": 6886
     },
     {
@@ -19,7 +19,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2010-07-15",
-      "detected_at": "2026-07-28T07:44:04.461116Z",
+      "detected_at": "2026-07-28T10:57:03.367909Z",
       "lag_days": 5857
     },
     {
@@ -27,7 +27,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T07:44:04.394116Z",
+      "detected_at": "2026-07-28T10:57:03.306126Z",
       "lag_days": 4899
     },
     {
@@ -35,7 +35,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T07:44:04.403960Z",
+      "detected_at": "2026-07-28T10:57:03.327005Z",
       "lag_days": 4899
     },
     {
@@ -43,7 +43,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-28T07:44:04.477970Z",
+      "detected_at": "2026-07-28T10:57:03.397621Z",
       "lag_days": 4649
     },
     {
@@ -51,7 +51,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2021-03-22",
-      "detected_at": "2026-07-28T07:44:04.441710Z",
+      "detected_at": "2026-07-28T10:57:03.347772Z",
       "lag_days": 1954
     },
     {
@@ -59,7 +59,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-28T07:44:04.359005Z",
+      "detected_at": "2026-07-28T10:57:03.377416Z",
       "lag_days": 1821
     },
     {
@@ -67,7 +67,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2022-01-20",
-      "detected_at": "2026-07-28T07:44:04.432822Z",
+      "detected_at": "2026-07-28T10:57:03.337853Z",
       "lag_days": 1650
     },
     {
@@ -75,7 +75,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2022-04-04",
-      "detected_at": "2026-07-28T07:44:04.423980Z",
+      "detected_at": "2026-07-28T10:57:03.358224Z",
       "lag_days": 1576
     },
     {
@@ -83,7 +83,7 @@
       "to_stage": 7,
       "stage_label": "Operational",
       "effective_date": "2025-07-24",
-      "detected_at": "2026-07-28T07:44:04.451614Z",
+      "detected_at": "2026-07-28T10:57:03.387034Z",
       "lag_days": 369
     }
   ],

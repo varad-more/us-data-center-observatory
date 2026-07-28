@@ -1,5 +1,5 @@
 {
-  "id": "3e60d63e-1e02-4bba-b963-6343db356eb8",
+  "id": "b5393ae1-4aec-4eea-a18a-0110c51ffbb2",
   "project_code": "AZ-TEMPE-001",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 4.2,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T07:44:04.359005Z",
-  "score_last_calculated_at": "2026-07-28T07:44:04.354251Z",
+  "stage_last_changed_at": "2026-07-28T10:57:03.377416Z",
+  "score_last_calculated_at": "2026-07-28T10:57:03.375230Z",
   "centroid": [
     -111.976583,
     33.406444
@@ -73,7 +73,7 @@
   },
   "parcels": [
     {
-      "id": "7592aa8e-fef8-40e3-b222-a28272c2663c",
+      "id": "9ee73b0d-633f-4133-89f4-533f72ce8452",
       "apn": "12331001F",
       "apn_formatted": "123-31-001F",
       "situs_address": "2601 W BROADWAY RD",
@@ -93,7 +93,7 @@
   ],
   "organizations": [
     {
-      "id": "76ae1000-1046-45d4-b6e4-882e10705576",
+      "id": "684442f1-1992-4880-b58d-c728c96065e7",
       "canonical_name": "TIERRA DC ASSETS LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -108,7 +108,7 @@
   ],
   "dependencies": [
     {
-      "id": "52940fa8-2f58-4aec-b641-da512cea37e0",
+      "id": "c4e574a4-e532-44e4-b064-7cbc578385a5",
       "infrastructure_kind": "substation",
       "label": "Binary Substation",
       "dependency_status": "existing",
@@ -122,7 +122,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "22007a0d-96be-4a7f-99d2-48ca2d46b534",
+      "id": "b7b39751-a28e-45fb-9f02-a38de3f576a8",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -136,7 +136,7 @@
       "operator_name": null
     },
     {
-      "id": "46cb70ba-e889-49f2-bfa2-9d5508e1671c",
+      "id": "76f87db4-79e0-4338-92e3-1f8235cdc4ab",
       "infrastructure_kind": "substation",
       "label": "Weiler Substation",
       "dependency_status": "existing",
@@ -150,7 +150,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "8d22eb46-6437-4949-8e26-019896e8ec31",
+      "id": "d574ae45-6608-4d65-9707-696d6fa48908",
       "infrastructure_kind": "substation",
       "label": "Wilkins Substation",
       "dependency_status": "existing",
@@ -164,7 +164,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "b4eaf3d5-0cfd-4bf9-9f28-5f168d6c18d5",
+      "id": "941e19b0-4bf3-4102-9ecc-bd01a687cfbc",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -178,7 +178,7 @@
       "operator_name": null
     },
     {
-      "id": "4e57d990-4c94-46ae-9e56-93cc5dcc41aa",
+      "id": "48f75332-91d0-4b63-afc8-ad4881ea97ac",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -194,7 +194,7 @@
   ],
   "estimates": [
     {
-      "id": "b8a2ee0b-676b-472a-ba53-7aeaa0d8d7f6",
+      "id": "5009c48a-b495-45e6-9b73-bd27f2c1a010",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 5.0,
@@ -212,11 +212,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T07:44:04.360810Z",
+      "calculated_at": "2026-07-28T10:57:03.378149Z",
       "notes": null
     },
     {
-      "id": "e452cdcb-7d8a-4fe6-aaf1-80f442c9e9c8",
+      "id": "c65db985-21b9-453a-9c80-d871393f8031",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 12000.0,
@@ -234,13 +234,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T07:44:04.360929Z",
+      "calculated_at": "2026-07-28T10:57:03.378224Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "5cd9ec5a-13f6-4e22-8e3c-5702d4c24acc",
-    "calculated_at": "2026-07-28T07:44:04.354328Z",
+    "id": "9a83ec48-fe99-4789-8549-4a258700c753",
+    "calculated_at": "2026-07-28T10:57:03.375276Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -266,7 +266,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "a7f5d821-3f8d-44aa-979d-6a94e1671f60"
+        "evidence_record_id": "f152560b-3792-4547-bde7-2f44e3c34b59"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -278,7 +278,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "4e40feac-091b-4605-9ae0-adeb64d1a97a"
+        "evidence_record_id": "6987c267-ebdc-4ac6-9576-2227c1017427"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -290,25 +290,25 @@
         "confidence_multiplier": 0.7017,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "d5299633-4fac-4f8a-aa12-3b57b07ae6f4"
+        "evidence_record_id": "593a7d0a-e51d-4450-b849-8278de7c14e9"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "84a10bbb-5518-4991-9094-5aee7f3523a2",
+      "id": "1197e9bf-cd0c-4641-aca0-75dfcb62ae48",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-28T07:44:04.359005Z",
+      "detected_at": "2026-07-28T10:57:03.377416Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "a7f5d821-3f8d-44aa-979d-6a94e1671f60",
-        "4e40feac-091b-4605-9ae0-adeb64d1a97a"
+        "f152560b-3792-4547-bde7-2f44e3c34b59",
+        "6987c267-ebdc-4ac6-9576-2227c1017427"
       ],
       "detection_lag_days": 1821
     }

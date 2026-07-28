@@ -2,6 +2,7 @@
 
 | Doc | Audience |
 |---|---|
+| [goals.md](./goals.md) | Goals, outcomes, success criteria, non-goals |
 | [architecture.md](./architecture.md) | System layers and data flow |
 | [methodology.md](./methodology.md) | Assertion classes, stages, scoring |
 | [source-inventory.md](./source-inventory.md) | Human-readable source registry |
