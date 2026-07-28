@@ -1,0 +1,282 @@
+{
+  "items": [
+    {
+      "state_code": "AL",
+      "facility_count": 3,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "AR",
+      "facility_count": 2,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "AZ",
+      "facility_count": 17,
+      "site_count": 13,
+      "region_slug": "east-valley-az",
+      "region_coverage": "active"
+    },
+    {
+      "state_code": "CA",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": "santa-clara-california",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "CO",
+      "facility_count": 17,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "CT",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "DE",
+      "facility_count": 5,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "FL",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "GA",
+      "facility_count": 15,
+      "site_count": 0,
+      "region_slug": "atlanta-georgia",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "IA",
+      "facility_count": 16,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "ID",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "IL",
+      "facility_count": 33,
+      "site_count": 0,
+      "region_slug": "chicago-illinois",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "IN",
+      "facility_count": 9,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "KS",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "KY",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MA",
+      "facility_count": 6,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MD",
+      "facility_count": 10,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "ME",
+      "facility_count": 2,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MI",
+      "facility_count": 3,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MN",
+      "facility_count": 9,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MO",
+      "facility_count": 7,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "MS",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NC",
+      "facility_count": 7,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NE",
+      "facility_count": 16,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NH",
+      "facility_count": 4,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NJ",
+      "facility_count": 15,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NM",
+      "facility_count": 3,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NV",
+      "facility_count": 4,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "NY",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "OH",
+      "facility_count": 20,
+      "site_count": 0,
+      "region_slug": "central-ohio",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "OK",
+      "facility_count": 7,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "PA",
+      "facility_count": 16,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "SC",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "TN",
+      "facility_count": 9,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "TX",
+      "facility_count": 12,
+      "site_count": 0,
+      "region_slug": "dfw-texas",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "UT",
+      "facility_count": 0,
+      "site_count": 0,
+      "region_slug": "salt-lake-utah",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "VA",
+      "facility_count": 132,
+      "site_count": 0,
+      "region_slug": "northern-virginia",
+      "region_coverage": "declared"
+    },
+    {
+      "state_code": "WI",
+      "facility_count": 1,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    },
+    {
+      "state_code": "WY",
+      "facility_count": 3,
+      "site_count": 0,
+      "region_slug": null,
+      "region_coverage": null
+    }
+  ],
+  "states_with_facilities": 38,
+  "states_with_sites": 1,
+  "facility_total": 412,
+  "site_total": 13,
+  "note": "Two different counts, deliberately not added together. A facility is an EPA ECHO record: a federal agency reports that a Clean Air Act permitted facility carries a hosting NAICS code, and Helios repeats that. A site is Helios's own hypothesis that a set of parcels forms one development, built from county parcel geometry and ownership and defensible line by line. Building sites needs parcel and ownership records, which are published county by county or not at all, so sites exist only where Helios reads a county. A state with facilities and no sites is unread, not empty, and no count here should be taken as the number of data centres in a state."
+}

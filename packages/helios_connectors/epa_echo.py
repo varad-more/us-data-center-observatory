@@ -96,6 +96,21 @@ classification that follows is unchanged.
 # Defaults always include RegistryID, FacName, FacLat, FacLong.
 QCOLUMNS = "1,2,3,4,5,7,8,14,15,16,17,18,19,23,24,25"
 
+PAGE_SIZE = 500
+"""Rows per ``get_qid`` page.
+
+``responseset`` is the page size, not a result-set selector. It was ``1``, which
+is why a query reporting 447 matching facilities yielded a single row: the
+connector asked for one row per page and then read only page one. Six cities in
+one state never exposed that, because those result sets fit in the page ECHO
+sometimes embeds in the ``get_facilities`` response. A national query does not.
+"""
+
+MAX_PAGES = 40
+"""Stop after this many pages. At :data:`PAGE_SIZE` that is 20,000 facilities,
+far above any hosting-NAICS result set, and it bounds a paging bug against an
+API that throttles at roughly 300 requests per hour."""
+
 _HOSTING_NAICS = {"518210", "541513", "5182"}
 _HOSTING_NAME_PATTERN = re.compile(
     r"data\s*cent|colocation|co-location|colo\b|hosting|server farm",
@@ -140,11 +155,25 @@ class EpaEchoAirConnector(BaseConnector):
         return bool(self.naics_codes)
 
     def get_metadata(self) -> ConnectorMetadata:
-        """Return the connector description."""
+        """Return the connector description.
+
+        The two query modes report as two connectors against one source. ECHO
+        answers a city query with ``Fac*`` columns and a NAICS query with
+        ``AIR*`` columns, so a single field-signature baseline would flip on
+        every alternating run and report schema drift that had not happened -
+        which is worse than no drift detection, because it trains a reader to
+        ignore the warning. ``source_slug`` is unchanged, so both still hang off
+        the one registered source and its one licence and access statement.
+        """
+        national = self.is_industry_mode
         return ConnectorMetadata(
-            slug="epa-echo-air-facilities",
+            slug=("epa-echo-air-facilities-national" if national else "epa-echo-air-facilities"),
             source_slug="epa-echo-air-facilities",
-            name="EPA ECHO Air Facility Records",
+            name=(
+                "EPA ECHO Air Facility Records (nationwide hosting NAICS)"
+                if national
+                else "EPA ECHO Air Facility Records"
+            ),
             agency="United States Environmental Protection Agency",
             jurisdiction="United States",
             category=SourceCategory.ENVIRONMENTAL,
@@ -325,7 +354,7 @@ class EpaEchoAirConnector(BaseConnector):
         params = {
             "output": "JSON",
             "p_act": "Y",
-            "responseset": "1",
+            "responseset": str(PAGE_SIZE),
             "qcolumns": QCOLUMNS,
             **selector,
         }
@@ -342,27 +371,59 @@ class EpaEchoAirConnector(BaseConnector):
             return [], None, f"{label}: throttled by ECHO ({error})"
 
         query_id = results.get("QueryID")
-        # Some responses embed the first page of facilities directly.
-        embedded = list(results.get("Facilities") or [])
-        if embedded:
-            return embedded, str(query_id) if query_id else None, error
+        expected = _int_or_none(results.get("QueryRows"))
+
+        # Some responses embed the first page of facilities directly; others
+        # return only a QueryID and expect get_qid to be paged. Which one you
+        # get varies between identical requests, so handle both.
+        facilities = list(results.get("Facilities") or [])
+        if facilities and (expected is None or len(facilities) >= expected):
+            return facilities, str(query_id) if query_id else None, error
 
         if not query_id:
+            if facilities:
+                return facilities, None, error
             return [], None, f"{label}: no QueryID ({error or 'empty Results'})"
 
-        page_response = self.http.get(
-            GET_QID_URL,
-            params={
-                "output": "JSON",
-                "qid": query_id,
-                "pageno": "1",
-                "qcolumns": QCOLUMNS,
-            },
-        )
-        page_payload = json.loads(page_response.content)
-        page_error = _echo_error_message(page_payload)
-        page_results = page_payload.get("Results") or {}
-        facilities = list(page_results.get("Facilities") or [])
+        page_error: str | None = None
+        for page in range(1, MAX_PAGES + 1):
+            page_response = self.http.get(
+                GET_QID_URL,
+                params={
+                    "output": "JSON",
+                    "qid": query_id,
+                    "pageno": str(page),
+                    "qcolumns": QCOLUMNS,
+                },
+            )
+            page_payload = json.loads(page_response.content)
+            page_error = _echo_error_message(page_payload) or page_error
+            page_rows = list((page_payload.get("Results") or {}).get("Facilities") or [])
+            if not page_rows:
+                break
+            facilities.extend(page_rows)
+            if expected is not None and len(facilities) >= expected:
+                break
+        else:
+            page_error = (
+                f"{label}: stopped at the {MAX_PAGES}-page ceiling with " f"{len(facilities)} rows"
+            )
+
+        # Delivery and uniqueness are different facts and must not be reported
+        # as one. ECHO's headline count includes rows repeating a RegistryID -
+        # 447 reported, 447 delivered, 440 distinct on the national query - so
+        # comparing the de-duplicated total against the headline would announce
+        # a coverage gap that does not exist.
+        delivered = len(facilities)
+        facilities = _deduplicate(facilities)
+        notes: list[str] = []
+        if expected is not None and delivered < expected:
+            notes.append(f"{label}: ECHO reported {expected} rows and delivered {delivered}")
+        if duplicates := delivered - len(facilities):
+            notes.append(f"{label}: {duplicates} row(s) repeated a RegistryID and were merged")
+        if notes:
+            page_error = "; ".join([page_error, *notes]) if page_error else "; ".join(notes)
+
         return facilities, str(query_id), page_error or error
 
     def parse(self, document: RawDocument) -> ParseResult:
@@ -418,8 +479,14 @@ class EpaEchoAirConnector(BaseConnector):
         facilities that look like data-processing / hosting sites (NAICS or name).
         Generator program text strengthens the evidence summary but is not enough
         alone - a municipal well backup engine is not a campus signal.
+
+        NAICS arrives under different keys depending on the query. City queries
+        returned ``FacNAICSCodes``; the national NAICS query returns ``AIRNAICS``
+        and no ``Fac*`` columns at all. Reading only the first meant a national
+        run fell back to the name pattern and discarded most of what it asked
+        for - measured at 7 kept of 59 before this, 54 of 59 after.
         """
-        naics = _codes(row.get("FacNAICSCodes") or row.get("NAICSCodes"))
+        naics = _naics_codes(row)
         name = str(row.get("FacName") or row.get("AIRName") or "")
         hosting = bool(naics & _HOSTING_NAICS) or bool(_HOSTING_NAME_PATTERN.search(name))
         return "keep" if hosting else "filter"
@@ -436,10 +503,15 @@ class EpaEchoAirConnector(BaseConnector):
         city = str(row.get("FacCity") or row.get("AIRCity") or "")
         street = str(row.get("FacStreet") or row.get("AIRStreet") or "")
         programs = str(row.get("AIRPrograms") or "")
-        naics = sorted(_codes(row.get("FacNAICSCodes")))
+        naics = sorted(_naics_codes(row))
+        # The state the record states. This was the literal "AZ", which was
+        # invisible while the connector only ever ran against six Arizona
+        # cities and became a fabricated address the moment it ran nationally.
+        state = str(row.get("FacState") or row.get("AIRState") or "").strip().upper() or None
+        county_fips = str(row.get("FacFIPSCode") or "").strip() or None
 
         geometry = f"POINT({lon} {lat})" if lat is not None and lon is not None else None
-        address = ", ".join(part for part in (street, city, "AZ") if part)
+        address = ", ".join(part for part in (street, city, state) if part)
 
         fields = [
             ExtractedField(
@@ -503,7 +575,7 @@ class EpaEchoAirConnector(BaseConnector):
                 "description": name,
                 "status": row.get("AIRStatus") or row.get("FacStatus"),
                 "issuing_authority": "US EPA / ICIS-Air (via ECHO)",
-                "jurisdiction": city or "Arizona",
+                "jurisdiction": _jurisdiction(city, state),
                 "applied_date": None,
                 "issued_date": None,
                 "address_raw": address or None,
@@ -514,6 +586,12 @@ class EpaEchoAirConnector(BaseConnector):
                     "naics": naics,
                     "programs": programs,
                     "facility_name": name,
+                    # Carried so a national sweep can be grouped by the place it
+                    # actually describes. FIPS rather than a county name because
+                    # names collide across states and are spelled inconsistently,
+                    # which is the same reason Region records county_fips.
+                    "state": state,
+                    "county_fips": county_fips,
                 },
             },
             fields=fields,
@@ -540,6 +618,50 @@ def _codes(value: object) -> set[str]:
         return set()
     parts = re.split(r"[;,]\s*", str(value).strip())
     return {part.strip() for part in parts if part.strip()}
+
+
+def _naics_codes(row: dict[str, Any]) -> set[str]:
+    """Collect NAICS codes from whichever column this query populated.
+
+    ECHO answers a city query with ``FacNAICSCodes`` and a NAICS query with
+    ``AIRNAICS``. Both are read because either can be the only one present.
+    """
+    codes: set[str] = set()
+    for key in ("FacNAICSCodes", "NAICSCodes", "AIRNAICS"):
+        codes |= _codes(row.get(key))
+    return codes
+
+
+def _jurisdiction(city: str, state: str | None) -> str | None:
+    """Name the place a facility sits in, without inventing one."""
+    if city and state:
+        return f"{city}, {state}"
+    return city or state or None
+
+
+def _int_or_none(value: object) -> int | None:
+    """Parse ECHO's stringly-typed row counts."""
+    try:
+        return int(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def _deduplicate(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Drop rows repeating a RegistryID, preserving order.
+
+    An embedded first page overlapping page one of ``get_qid`` would otherwise
+    count the same facility twice.
+    """
+    seen: set[str] = set()
+    unique: list[dict[str, Any]] = []
+    for row in rows:
+        key = str(row.get("RegistryID") or row.get("SourceID") or id(row))
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(row)
+    return unique
 
 
 def _float_or_none(value: object) -> float | None:

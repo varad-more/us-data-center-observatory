@@ -430,3 +430,24 @@ export const areaConsumptionSchema = z.object({
 });
 
 export type AreaConsumption = z.infer<typeof areaConsumptionSchema>;
+
+export const stateCoverageSchema = z.object({
+  state_code: z.string(),
+  facility_count: z.number(),
+  site_count: z.number(),
+  region_slug: z.string().nullable(),
+  region_coverage: z.enum(["active", "declared"]).nullable(),
+});
+
+export type StateCoverage = z.infer<typeof stateCoverageSchema>;
+
+export const nationalCoverageSchema = z.object({
+  items: z.array(stateCoverageSchema),
+  states_with_facilities: z.number(),
+  states_with_sites: z.number(),
+  facility_total: z.number(),
+  site_total: z.number(),
+  note: z.string(),
+});
+
+export type NationalCoverage = z.infer<typeof nationalCoverageSchema>;

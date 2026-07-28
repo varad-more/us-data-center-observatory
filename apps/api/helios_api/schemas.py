@@ -564,6 +564,42 @@ class RegionListResponse(HeliosModel):
     note: str
 
 
+class StateCoverageResponse(HeliosModel):
+    """What Helios holds for one state, separated by what kind of thing it is."""
+
+    state_code: str
+    facility_count: int
+    """Facilities reported by EPA ECHO under a hosting NAICS code. Reported
+    federal records, not Helios's own conclusion that a data centre exists."""
+
+    site_count: int
+    """Sites Helios has built here. Requires parcel and ownership records, which
+    are published county by county, so this is zero nearly everywhere."""
+
+    region_slug: str | None
+    """The registered region covering this state, if one is declared."""
+
+    region_coverage: str | None
+    """``active``, ``declared``, or null where no region names this state."""
+
+
+class NationalCoverageResponse(HeliosModel):
+    """Per-state coverage, with the difference between the two counts stated.
+
+    A facility count and a site count answer different questions. The first is
+    how many facilities a federal source reports; the second is how many
+    developments Helios has assembled from primary records and can explain. A
+    state with facilities and no sites is not empty - it is unread.
+    """
+
+    items: list[StateCoverageResponse]
+    states_with_facilities: int
+    states_with_sites: int
+    facility_total: int
+    site_total: int
+    note: str
+
+
 class AreaTotalResponse(HeliosModel):
     """One measured resource total for a whole county or state.
 

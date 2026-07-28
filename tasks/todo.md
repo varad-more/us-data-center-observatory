@@ -237,3 +237,184 @@ Follow-up not taken: three planned sources (`sec-edgar`,
 `maricopa-aqd-dust-control`, `adwr-water-records`) still declare no limitation.
 They are unbuilt rather than blocked, so that is arguably correct, but ADWR's
 `notes` field explains the deferral and the sources page renders `notes` nowhere.
+
+---
+
+## What to do next — a survey of the field, and what it changes
+
+Goal: decide where Helios goes now that comparable public trackers exist, and
+stop guessing at what is already solved elsewhere.
+
+### The landscape
+
+Six comparable efforts, none of which existed in this form when Helios started:
+DataCentersExposed (6,098 sites, 45 countries), dcmap.us (4,800 US facilities),
+the Data Center Atlas (2,353, each tied to a permit or filing), FracTracker
+(media monitoring plus FOIA), Compute Atlas (725 facilities, open source with a
+public API, citing permits, tax abatements, water filings and queues), and
+PNNL's IM3 atlas (existing *and projected*, with fiber, water and transmission
+layers).
+
+Helios has 13 sites in one Arizona valley. **On coverage this is not a contest
+and should not become one** — which is what `docs/goals.md` already says by
+listing completeness as a non-goal. What none of the six do is carry a per-claim
+assertion class resolving to an immutable evidence document. Two of them cite
+sources per *facility*; none distinguishes "a party filed this" from "we derived
+this" at the level of the individual number. That is the differentiator, and it
+survived contact with the field.
+
+### Candidate work, ranked
+
+- [ ] **State PUC large-load dockets.** The live replacement for the dead ERCOT
+      track. Michigan's MPSC approved a 1.4 GW special contract for a hyperscale
+      site in Saline Township; DTE then filed a Large Load Provision for loads
+      over 100 MW; Pennsylvania created a dedicated large-load tariff. These are
+      primary filings carrying a **reported** MW figure attached to a named
+      site — the exact epistemic object track 1 wanted, reachable today.
+- [ ] **Register FERC RM26-4 as a planned source.** On 18 June 2026 FERC issued
+      show cause orders to all six RTOs/ISOs and directed them to publish
+      large-load network upgrade projects and costs on a *searchable platform*,
+      plus aggregated large-load requests per transmission zone. Nothing to
+      build yet; a registry entry citing the docket makes the gap visible and
+      dated, which is what the registry is for.
+- [ ] **GASB 77 tax abatement disclosures.** Every state and local government
+      must disclose taxes abated in its annual financial statements. No tracker
+      ties public cost to a specific site, and 14 states do not disclose
+      data-centre incentive costs at all — a nameable gap of exactly this
+      project's genre.
+- [ ] **LBNL "Queued Up".** Project-level queue data from 50+ operators covering
+      ~98% of US capacity, as Excel with a codebook. It is *generation*, not
+      load: it strengthens the supply half of the grid-balance comparison and
+      does not answer demand. Do not let the name suggest otherwise.
+- [ ] **Locational uncertainty in the geometry.** The Data Center Atlas draws an
+      exact point for a confirmed address, a soft halo for city-or-county-level
+      placement, and nothing at all for unconfirmed sites. Helios badges values
+      but draws geometry as if always exact. This is the map-level form of the
+      rule the whole project runs on.
+- [ ] **Treat the other trackers as claims to check, not as truth.** Ingest them
+      as third-party assertions and publish the disagreement — "three trackers
+      assert a facility here, Helios finds no permit". Measuring inter-source
+      disagreement is a product none of them can offer, because none model claim
+      provenance. Compute Atlas is the licence-viable one.
+
+### Cleaning, sorted by whether a reader is misled
+
+- [ ] `source.notes` renders nowhere, so ADWR's stated deferral reason is held
+      and invisible — the same defect just fixed one field over.
+- [ ] The interconnection gap is asserted in `limitations.md` twice,
+      `methodology.md`, the analytics caveat and two source comments, and the
+      registry says nothing. The page built to show gaps omits the biggest one.
+- [ ] Two `future-phase` tag values in `registry.py` — last of the phase naming.
+- [ ] `ConnectorStatus.DEGRADED` and `DISABLED` are statuses no code can
+      produce. Either derive them from `last_success_at` or drop them.
+- [ ] Three stale claims in "Known, not addressed" above: the Node-20 actions
+      are already on v5–v7, and three of the four "phase leftovers" are clean.
+
+### The parcel hypothesis, tested and rejected
+
+Worth recording because it was wrong twice before it was right.
+
+The recorded blocker is "a connector per county, not a flag". The hypothesis was
+that this overstates the cost, because counties largely publish through two
+platforms with uniform APIs, so the shape should be one connector per *platform*
+plus a per-county config row. Measured, in order:
+
+1. ArcGIS Hub's dataset API returns 245,034 datasets matching "parcels", and
+   Loudoun County's parcel layer answers a plain ArcGIS REST query with acreage,
+   parcel id, update date and geometry — no bespoke code. Encouraging.
+2. That service publishes **no ownership table** (layers: parcel boundaries,
+   address points, subdivisions). Helios clusters on adjacency *and* related
+   ownership, never adjacency alone, so the layer Helios can reach is the one it
+   cannot cluster from.
+3. A probe of eight counties for "parcels" found ownership in none — but
+   Maricopa was among them, and Helios demonstrably reads `OwnerName` from
+   `gis.maricopa.gov/.../RED/Assessor/MapServer`. The probe was searching the
+   wrong word: ownership rides on layers named *Assessor* or *Tax Parcel*.
+4. Re-probed for those terms, six of eight counties appeared to expose
+   ownership — and the result is noise. "Loudoun" and "Fairfax" both matched a
+   **Charlottesville** layer, "Santa Clara" matched a *streets* layer with an
+   `owner` field, "Dallas" matched a third-party republication by a private
+   firm, and Maricopa — the one county known to work — returned nothing.
+
+So the conclusion already in `docs/limitations.md` stands, and the hypothesis
+does not. The refinement worth keeping is narrow: the *transport* is frequently
+the same ArcGIS REST API Helios already speaks, so the per-county cost is
+discovery, layer identification and field mapping rather than a new HTTP client.
+That is a real saving and it is not a flag.
+
+The sharper finding is a hazard. Automated discovery by keyword returns
+wrong-jurisdiction layers and third-party republications that are
+indistinguishable from authoritative ones at the API surface. A discovery-driven
+connector would have ingested a private firm's copy of Dallas County parcels as
+county-authoritative — the same failure as the HIFLD mirrors, arrived at by a
+different road. Per-county identification has to stay a human decision that
+names the authoritative endpoint.
+
+## National coverage — what shipped, and what it cost to find
+
+Helios now reads one source nationally and still builds sites in one region. That
+asymmetry is the product, not a shortfall, and both halves are published side by
+side so neither can be read as the other.
+
+**Shipped**
+- [x] Nationwide ECHO sweep recorded as a fixture (440 distinct facilities, 39
+      states) and replayed in `bootstrap`, so the published snapshot rebuilds offline.
+- [x] `/analytics/national-coverage` and `/map/facilities`, plus the coverage panel
+      and the continental map that render them.
+- [x] `docs/limitations.md` items 7 and 8 rewritten: national is now a pipeline,
+      not a query, and "read" is defined as *sites*, not *records*.
+
+**Three defects the national query exposed, all invisible in one state**
+1. `responseset` is ECHO's page size and was set to `1`, with only page one ever
+   fetched. A query matching 447 facilities returned one row. City result sets hid
+   it because ECHO sometimes embeds a first page — and whether it does varies
+   between identical requests.
+2. Classification read `FacNAICSCodes`; the national payload carries `AIRNAICS`
+   and no `Fac*` columns whatsoever. Measured: 7 rows kept of 59 before, 54 after.
+3. Address and jurisdiction were built from a literal `"AZ"` and a default of
+   `"Arizona"`. Nationally that writes a fabricated location onto a *reported*
+   field, which is the specific failure this project exists to prevent.
+
+Each now has a test that fails without its fix.
+
+**A distinction worth keeping.** ECHO reports 447 rows, delivers 447, and 440 are
+distinct: its headline count includes repeated RegistryIDs. The first version of
+the fix compared the de-duplicated total against the headline and announced a
+coverage gap that did not exist. Delivery and uniqueness are different facts and
+are now reported as different facts.
+
+### Open: is the pilot ECHO fixture a recording or a construction?
+
+`fixtures/epa_echo/mesa_air_facilities.json` has four rows whose RegistryIDs are
+`110070123456`, `110070654321`, `110011112223`, `110044455566` — sequential digit
+runs, unlike every real ECHO identifier — and whose names read like deliberate
+keep/filter cases (`PLATYPUS CAMPUS EMERGENCY GENERATORS` against `DESERT READY
+MIX PLANT 7` and `CITY WELL SITE 12 BACKUP ENGINE`). The national recording does
+*not* contain them; at that same address it carries `PLATYPUS DEVELOPMENT`,
+RegistryID `110062853416`, which is a real record.
+
+This matters because both sets now publish under one source with nothing to tell
+them apart, and two of the four hand-shaped rows attach to East Valley sites as
+`reported` federal facts.
+
+It is **not** resolved, and was deliberately not acted on. A live check against
+`p_city` returned zero rows under HTTP 429, and zero-rows-because-throttled is
+not evidence of absence — the same trap as the county-parcel probe above. Deleting
+published evidence on an unconfirmed inference is worse than leaving it one more
+release.
+
+- [ ] Re-run the Mesa/Chandler city query against ECHO when not rate-limited and
+      confirm whether those four RegistryIDs exist.
+- [ ] If they do not: stop ingesting the fixture in `FIXTURE_INGEST_ORDER` (keep it
+      for contract tests, which is what it is good for) and re-export. The real
+      Arizona records already cover both affected sites, so nothing real is lost.
+- [ ] Either way, set `is_synthetic` where it belongs. The column exists on
+      `Permit` and every ECHO row currently reads `False`.
+
+**Not a finding, and worth writing down as a corrected assumption.** `PLATYPUS
+DEVELOPMENT LLC` looked like anonymisation and is not: it is the real assessor
+owner of APN 30433005S, and EPA lists `PLATYPUS DEVELOPMENT` at the same address.
+It is a genuine shell company of exactly the kind the scoring rules exist to
+notice. The assessor fixture is real throughout — `DIGITAL 2121 SOUTH PRICE LLC`
+sits at 2121 S Price Rd, where ECHO independently reports `DIGITAL REALTY TRUST
+CHANDLER`.

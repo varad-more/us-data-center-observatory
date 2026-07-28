@@ -1,5 +1,5 @@
 {
-  "id": "52eb3855-f7f8-4c7c-a448-5f0721bcedde",
+  "id": "3de55d7d-dcb7-4bf8-818c-4f11778dabf6",
   "project_code": "AZ-CHANDLER-004",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -9,17 +9,17 @@
   "region_slug": "east-valley-az",
   "current_stage": 7,
   "current_stage_label": "Operational",
-  "current_confidence": 37.94,
-  "stage_confidence": 29.63,
-  "confidence_band": "low",
+  "current_confidence": 50.53,
+  "stage_confidence": 43.9,
+  "confidence_band": "moderate",
   "first_signal_date": "2025-10-30",
   "latest_signal_date": "2026-07-28",
-  "evidence_count": 3,
+  "evidence_count": 4,
   "total_acres": 14.496,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T10:57:03.316524Z",
-  "score_last_calculated_at": "2026-07-28T10:57:03.314013Z",
+  "stage_last_changed_at": "2026-07-28T17:30:32.118730Z",
+  "score_last_calculated_at": "2026-07-28T17:30:32.115038Z",
   "centroid": [
     -111.886094,
     33.300538
@@ -77,7 +77,7 @@
   },
   "parcels": [
     {
-      "id": "072e4bba-0bcb-4921-abc8-f09bd21998c3",
+      "id": "712aa486-bc18-4bc9-8625-c5e69179ef6a",
       "apn": "30324019A",
       "apn_formatted": "303-24-019A",
       "situs_address": "2500 W FRYE RD",
@@ -97,7 +97,7 @@
   ],
   "organizations": [
     {
-      "id": "8d7309bc-465c-461a-8c98-47fc558ee3ff",
+      "id": "dd4c2b60-73b3-48fa-8991-fba4316c9915",
       "canonical_name": "2500 WEST FRYE ROAD OWNER LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -112,7 +112,7 @@
   ],
   "dependencies": [
     {
-      "id": "736e165e-ef28-4611-89fa-f2c476d5868a",
+      "id": "c47d7944-8f44-4ed3-ba13-4a40f212835a",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -126,7 +126,7 @@
       "operator_name": null
     },
     {
-      "id": "5a8d93fb-e7be-4548-9203-45aa9a33a2c6",
+      "id": "cca94beb-56f7-4e41-88f9-5a4eaedacce2",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -140,7 +140,7 @@
       "operator_name": null
     },
     {
-      "id": "0df6f699-9aa4-4fbd-a184-8d8a619224c5",
+      "id": "8ad6a21d-a81d-498b-897a-c86980e85350",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -154,7 +154,7 @@
       "operator_name": null
     },
     {
-      "id": "cf873136-5deb-444d-9beb-427409d5acd1",
+      "id": "84c0e1b6-f05a-4100-b354-f146aae157cd",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -168,7 +168,7 @@
       "operator_name": null
     },
     {
-      "id": "4d607d48-52c6-4643-b5b1-0b1320047d6c",
+      "id": "840aa1a7-ca50-4576-8523-2dabbc148b09",
       "infrastructure_kind": "substation",
       "label": "Miller Substation",
       "dependency_status": "existing",
@@ -182,7 +182,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "84218b8c-d046-4616-baf0-473df5a8a1ef",
+      "id": "a2f33bec-52e5-4f50-9b70-6aad97195c6c",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -196,7 +196,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "c0e1fe99-f602-4117-99d8-9b3697cb562b",
+      "id": "4550f2af-2483-483b-bbc9-a44478c080a9",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -210,7 +210,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "da374361-05e8-4284-849b-e4eceb4d8e33",
+      "id": "689ae7a5-df73-4095-95f9-9b8226890d75",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -224,7 +224,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "662f9c60-5a19-4567-b9cd-eda7b8db88c9",
+      "id": "afae8019-80e2-4bdd-852b-e48988a17298",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -238,7 +238,7 @@
       "operator_name": null
     },
     {
-      "id": "c02c2c06-6a89-403a-bfda-6727d0b89d56",
+      "id": "b1c504bb-7ffe-46ae-9088-c5e61c51f99a",
       "infrastructure_kind": "substation",
       "label": "Jones Substation",
       "dependency_status": "existing",
@@ -252,7 +252,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "e7d2e2e8-376a-4084-b73e-9c9d0a298eb2",
+      "id": "703edcca-be23-45e5-8e17-7aecfe86ce69",
       "infrastructure_kind": "substation",
       "label": "RS-27",
       "dependency_status": "existing",
@@ -268,7 +268,7 @@
   ],
   "estimates": [
     {
-      "id": "9a7c2d85-5620-426d-b89e-e6614c1a0df2",
+      "id": "b6d66dc6-07ac-443b-ad19-cee37eceebc2",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 17.4,
@@ -286,11 +286,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T10:57:03.317282Z",
+      "calculated_at": "2026-07-28T17:30:32.119885Z",
       "notes": null
     },
     {
-      "id": "7f2d0941-5cfe-4f8c-87f7-5e227008b578",
+      "id": "7ab749f4-0685-4111-9ec7-d3ce63a0b024",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 41760.0,
@@ -308,25 +308,25 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T10:57:03.317348Z",
+      "calculated_at": "2026-07-28T17:30:32.119993Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "bd9df2bb-6721-474b-a6cf-cb08f6b44ee2",
-    "calculated_at": "2026-07-28T10:57:03.314061Z",
+    "id": "58703918-6371-41f4-bd38-3762799e1f56",
+    "calculated_at": "2026-07-28T17:30:32.115140Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
-    "raw_score": 21.0874,
-    "confidence": 29.63,
-    "confidence_band": "low",
-    "positive_contribution": 21.0874,
+    "raw_score": 34.6874,
+    "confidence": 43.9,
+    "confidence_band": "moderate",
+    "positive_contribution": 34.6874,
     "negative_contribution": 0.0,
-    "evidence_considered": 3,
-    "distinct_evidence_kinds": 2,
+    "evidence_considered": 4,
+    "distinct_evidence_kinds": 3,
     "is_backtest": false,
-    "summary": "30% confidence from 3 evidence records across 2 distinct kinds; stage 7 (Operational).",
+    "summary": "44% confidence from 4 evidence records across 3 distinct kinds; stage 7 (Operational).",
     "model_name": "helios-rule-based",
     "model_version": "0.1.0",
     "explanations": [
@@ -340,7 +340,19 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "510892e7-d625-43c5-9561-c73a0d6bc135"
+        "evidence_record_id": "cdbfaa4a-7d85-4093-a878-3e366b2610f9"
+      },
+      {
+        "rule_id": "backup-generator-air-permit",
+        "evidence_kind": "backup_generator_air_permit",
+        "label": "Backup-generator air permit",
+        "detail": "EPA ECHO lists CPUS WEST FRYE ROAD, LP as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: SIP.",
+        "base_weight": 17.0,
+        "applied_weight": 13.6,
+        "confidence_multiplier": 0.8,
+        "recency_multiplier": 1.0,
+        "polarity": "supporting",
+        "evidence_record_id": "e25d4a6d-d414-4d56-8a03-f4a605e9c978"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -352,7 +364,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.7731,
         "polarity": "supporting",
-        "evidence_record_id": "4157fe3c-d760-44c0-ad48-d7162d336710"
+        "evidence_record_id": "d46bd708-653c-453b-9e35-743b95be141e"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -364,25 +376,26 @@
         "confidence_multiplier": 0.9426,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "8cb92d4d-66d5-4c42-817d-b95a6cc5c71a"
+        "evidence_record_id": "74da2d4e-c104-498a-a5de-2e0b8bd19427"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "bd4afd97-e5b2-4120-9d1c-fc7f6e17e4e5",
+      "id": "7220fa2c-c59b-4bfd-9cbd-2ee1db667c56",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2025-10-30",
-      "detected_at": "2026-07-28T10:57:03.316524Z",
+      "detected_at": "2026-07-28T17:30:32.118730Z",
       "is_downgrade": false,
-      "confidence": 29.63,
-      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 30% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "confidence": 43.9,
+      "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 44% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "510892e7-d625-43c5-9561-c73a0d6bc135",
-        "4157fe3c-d760-44c0-ad48-d7162d336710"
+        "cdbfaa4a-7d85-4093-a878-3e366b2610f9",
+        "e25d4a6d-d414-4d56-8a03-f4a605e9c978",
+        "d46bd708-653c-453b-9e35-743b95be141e"
       ],
       "detection_lag_days": 271
     }

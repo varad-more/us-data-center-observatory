@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T10:57:05.697313+00:00",
+  "generated_at": "2026-07-28T17:40:37.540418+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -124,7 +124,7 @@
   },
   "evidence": [
     {
-      "id": "fc41cf86-56ba-4ec9-983e-3400e9dfd0bc",
+      "id": "b48fdaa4-3ae0-4dbd-b1d1-1aedc7018850",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
@@ -153,8 +153,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
-        "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
+        "document_id": "2f6efd07-7c10-4f43-94f2-5b714de87e97",
+        "document_version_id": "4f91c5f4-4b77-4df5-b8c8-7edca03375aa",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -166,7 +166,7 @@
       }
     },
     {
-      "id": "cad83168-b1a5-4c8c-a036-afc2042a2524",
+      "id": "33f1d41b-49f0-4677-bfbe-9d1573648696",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -186,8 +186,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "88cd945b-79ce-4674-8193-1ede12b94390",
-        "document_version_id": "4f0ededc-cef6-4655-8876-9cb991f6b552",
+        "document_id": "b8abfb58-b6bf-43d9-a88d-3b29d8a9db78",
+        "document_version_id": "ad75ee7e-5363-44ab-a65c-26f4f7b68b2f",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -199,7 +199,7 @@
       }
     },
     {
-      "id": "c6fdbdf2-584a-4340-8432-619bb68211c0",
+      "id": "6c1e1752-81bb-4dda-84e5-82794972541e",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -228,8 +228,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
-        "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
+        "document_id": "2f6efd07-7c10-4f43-94f2-5b714de87e97",
+        "document_version_id": "4f91c5f4-4b77-4df5-b8c8-7edca03375aa",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -243,27 +243,27 @@
   ],
   "stage_history": [
     {
-      "id": "f67c840e-0f41-4ead-943e-4fb64201756b",
+      "id": "3f09307d-7877-4295-b201-325d57b20c90",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T10:57:03.306126Z",
+      "detected_at": "2026-07-28T17:30:32.169939Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "c6fdbdf2-584a-4340-8432-619bb68211c0",
-        "fc41cf86-56ba-4ec9-983e-3400e9dfd0bc"
+        "6c1e1752-81bb-4dda-84e5-82794972541e",
+        "b48fdaa4-3ae0-4dbd-b1d1-1aedc7018850"
       ],
       "detection_lag_days": 4899
     }
   ],
   "predictions": [
     {
-      "id": "5eee6f11-578a-4004-87c8-a5bd41329ab7",
-      "calculated_at": "2026-07-28T10:57:03.303759Z",
+      "id": "cfb6c6ce-7551-4775-b5ad-6f7e3d315c78",
+      "calculated_at": "2026-07-28T17:30:32.166678Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -289,7 +289,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "c6fdbdf2-584a-4340-8432-619bb68211c0"
+          "evidence_record_id": "6c1e1752-81bb-4dda-84e5-82794972541e"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -301,7 +301,7 @@
           "confidence_multiplier": 0.8776,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "cad83168-b1a5-4c8c-a036-afc2042a2524"
+          "evidence_record_id": "33f1d41b-49f0-4677-bfbe-9d1573648696"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -313,13 +313,13 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "fc41cf86-56ba-4ec9-983e-3400e9dfd0bc"
+          "evidence_record_id": "b48fdaa4-3ae0-4dbd-b1d1-1aedc7018850"
         }
       ]
     },
     {
-      "id": "1d64f078-54df-44e7-ba09-773c6e17e76c",
-      "calculated_at": "2026-07-28T10:57:03.303824Z",
+      "id": "3d354dc5-ccfc-4037-9b3d-91e0669b7c0d",
+      "calculated_at": "2026-07-28T17:30:32.166747Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -345,7 +345,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "c6fdbdf2-584a-4340-8432-619bb68211c0"
+          "evidence_record_id": "6c1e1752-81bb-4dda-84e5-82794972541e"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -357,7 +357,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "fc41cf86-56ba-4ec9-983e-3400e9dfd0bc"
+          "evidence_record_id": "b48fdaa4-3ae0-4dbd-b1d1-1aedc7018850"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -369,7 +369,7 @@
           "confidence_multiplier": 0.8776,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "cad83168-b1a5-4c8c-a036-afc2042a2524"
+          "evidence_record_id": "33f1d41b-49f0-4677-bfbe-9d1573648696"
         }
       ]
     }

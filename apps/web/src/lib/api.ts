@@ -9,6 +9,7 @@ import {
   areaConsumptionSchema,
   detectionLagSchema,
   featureCollectionSchema,
+  nationalCoverageSchema,
   provenanceSchema,
   regionListSchema,
   siteDetailSchema,
@@ -170,6 +171,17 @@ export function getDetectionLag() {
 
 export function getAreaConsumption() {
   return request("/analytics/area-consumption", areaConsumptionSchema);
+}
+
+export function getNationalCoverage() {
+  return request("/analytics/national-coverage", nationalCoverageSchema);
+}
+
+export function getMapFacilities(bbox?: string, state?: string): Promise<FeatureCollection> {
+  return request(
+    `/map/facilities${toQueryString({ bbox, state })}`,
+    featureCollectionSchema,
+  );
 }
 
 // Download targets. A static export cannot build a zip on demand, so the

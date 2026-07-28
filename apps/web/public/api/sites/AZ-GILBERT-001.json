@@ -1,5 +1,5 @@
 {
-  "id": "1dfd55d2-6e22-4b03-9e19-8705499f8c90",
+  "id": "cb706132-e8ba-4530-9a88-4a3ccba963be",
   "project_code": "AZ-GILBERT-001",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -18,8 +18,8 @@
   "total_acres": 2.8053,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T10:57:03.296269Z",
-  "score_last_calculated_at": "2026-07-28T10:57:03.294007Z",
+  "stage_last_changed_at": "2026-07-28T17:30:32.236965Z",
+  "score_last_calculated_at": "2026-07-28T17:30:32.234259Z",
   "centroid": [
     -111.812616,
     33.374904
@@ -313,7 +313,7 @@
   },
   "parcels": [
     {
-      "id": "57453e2a-1a1c-4ab8-b31f-fb919a6c84db",
+      "id": "a1e51a03-8620-4688-8983-e51afec221e8",
       "apn": "30212690",
       "apn_formatted": "302-12-690",
       "situs_address": "1040 W MERRILL AVE",
@@ -333,7 +333,7 @@
   ],
   "organizations": [
     {
-      "id": "24075a01-37d3-4ba8-baec-4753f95bc069",
+      "id": "dc955746-0720-43b8-9d87-280ac9854c33",
       "canonical_name": "FOX CORPORATION",
       "role": "owner",
       "organization_type": "CORP",
@@ -346,7 +346,7 @@
   ],
   "dependencies": [
     {
-      "id": "6697f8ba-cdef-4b48-87cb-23e192dfee06",
+      "id": "320513b1-6a9f-4aa0-9b0b-e60e829de93a",
       "infrastructure_kind": "substation",
       "label": "Finley Substation",
       "dependency_status": "existing",
@@ -360,7 +360,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "a58d4351-c2f0-4b7b-be5c-658d1fb2c6c6",
+      "id": "7f35f3cb-84f2-40dd-b42d-4f98a3fea803",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -374,7 +374,7 @@
       "operator_name": null
     },
     {
-      "id": "e39628fe-2ad1-421a-9cfb-95f771d367ba",
+      "id": "5291025c-70ed-46aa-9845-6be194b6fee6",
       "infrastructure_kind": "substation",
       "label": "Corbell Substation",
       "dependency_status": "existing",
@@ -388,7 +388,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "143dd420-6c26-4fdd-ae59-58d6611626cb",
+      "id": "7bc77c6a-79ad-4abd-b7ed-2942b49d6e2b",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -404,7 +404,7 @@
   ],
   "estimates": [
     {
-      "id": "c1ef27a2-ddc5-4164-aea4-2e3fdde5174e",
+      "id": "6ce1387c-138f-45c8-8b06-578b5fc7806e",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 3.4,
@@ -422,11 +422,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T10:57:03.297033Z",
+      "calculated_at": "2026-07-28T17:30:32.237993Z",
       "notes": null
     },
     {
-      "id": "99857bf9-cc9c-47d1-84a2-1bdd82b345e3",
+      "id": "66c7b2a4-ec37-48a6-8024-ed87669da892",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 8160.0,
@@ -444,13 +444,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T10:57:03.297101Z",
+      "calculated_at": "2026-07-28T17:30:32.238079Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "938c2fc2-d1d8-4bd8-8736-604b8cb5cf92",
-    "calculated_at": "2026-07-28T10:57:03.294056Z",
+    "id": "b46d7023-b16f-4401-8274-26e1c8bf8d67",
+    "calculated_at": "2026-07-28T17:30:32.234325Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -476,7 +476,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "b3563fad-d99b-417c-acb4-2ddb3c1668c7"
+        "evidence_record_id": "752ebb88-2a77-4f92-8611-3076948b2f3a"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -488,24 +488,24 @@
         "confidence_multiplier": 0.8932,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "2e3c9683-6e54-4b40-a1e1-995e06a0864d"
+        "evidence_record_id": "df79f87c-a884-4b99-a3f2-3c91b781dede"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "4f129d9e-895e-4ea4-bb1d-429d9fb580c5",
+      "id": "01f22832-49c2-47af-8284-d0ae85c50e3e",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2026-07-28",
-      "detected_at": "2026-07-28T10:57:03.296269Z",
+      "detected_at": "2026-07-28T17:30:32.236965Z",
       "is_downgrade": false,
       "confidence": 27.14,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "b3563fad-d99b-417c-acb4-2ddb3c1668c7"
+        "752ebb88-2a77-4f92-8611-3076948b2f3a"
       ],
       "detection_lag_days": 0
     }

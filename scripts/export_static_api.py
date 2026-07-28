@@ -119,11 +119,13 @@ def main() -> int:
     _export_endpoint(client, "/analytics/growth", "analytics/growth.json")
     _export_endpoint(client, "/analytics/detection-lag", "analytics/detection-lag.json")
     _export_endpoint(client, "/analytics/area-consumption", "analytics/area-consumption.json")
+    _export_endpoint(client, "/analytics/national-coverage", "analytics/national-coverage.json")
 
     print("Exporting map layers...")
     _export_endpoint(client, "/map/sites", "map/sites.json")
     _export_endpoint(client, "/map/infrastructure", "map/infrastructure.json")
     _export_endpoint(client, "/map/parcels", "map/parcels.json")
+    _export_endpoint(client, "/map/facilities", "map/facilities.json")
 
     print("Exporting bulk downloads...")
     _export_text(client, "/exports/sites.csv", "sites.csv")

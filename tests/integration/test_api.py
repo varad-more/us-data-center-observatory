@@ -24,6 +24,7 @@ from helios_connectors.area_totals import (
     EiaStateGenerationCapacityConnector,
     UsgsCountyWaterConnector,
 )
+from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
@@ -89,6 +90,34 @@ def site_id(api_client: TestClient) -> str:
     items = response.json()["items"]
     mesa = next(i for i in items if i["project_code"] == "AZ-MESA-001")
     return str(mesa["id"])
+
+
+@pytest.fixture
+def national_client(
+    api_client: TestClient, registered_sources: Session, settings
+) -> Iterator[TestClient]:
+    """``api_client`` plus the nationwide ECHO sweep.
+
+    Kept separate rather than folded into ``api_client`` because 410 facilities
+    across 38 states would attach to East Valley sites by proximity and shift
+    the evidence counts and confidences the other tests assert on. The national
+    layer is a different question and gets a different fixture.
+    """
+    store = FilesystemEvidenceStore(settings.evidence_root)
+    IngestionPipeline(
+        registered_sources,
+        _replay(
+            EpaEchoAirConnector,
+            ("epa_echo", "national_air_facilities.json"),
+            "echo:air:naics:us",
+            naics_codes=HOSTING_NAICS_QUERY,
+            state=None,
+        ),
+        store,
+        mode="fixture",
+    ).run()
+    registered_sources.flush()
+    yield api_client
 
 
 class TestHealth:
@@ -642,3 +671,59 @@ class TestGenerationCapacity:
         assert 0 < headroom["share_likely_pct"] < 100
         assert headroom["share_lower_pct"] <= headroom["share_likely_pct"]
         assert headroom["share_likely_pct"] <= headroom["share_upper_pct"]
+
+
+class TestNationalCoverage:
+    """The national layer must never read as national site coverage."""
+
+    def test_reports_facilities_across_many_states(self, national_client: TestClient) -> None:
+        payload = national_client.get("/analytics/national-coverage").json()
+        assert payload["states_with_facilities"] > 30
+        assert payload["facility_total"] > 300
+
+    def test_sites_stay_in_the_one_region_helios_reads(self, national_client: TestClient) -> None:
+        """Facilities are national; sites are not, and the gap between the two
+        counts is the honest content of this endpoint."""
+        payload = national_client.get("/analytics/national-coverage").json()
+        assert payload["states_with_sites"] == 1
+        with_sites = [i for i in payload["items"] if i["site_count"]]
+        assert [i["state_code"] for i in with_sites] == ["AZ"]
+
+    def test_a_state_with_facilities_and_no_sites_is_visible(
+        self, national_client: TestClient
+    ) -> None:
+        """Virginia holds the largest concentration of data centres in the world
+        and Helios has built no sites there. That has to be legible, not absent."""
+        payload = national_client.get("/analytics/national-coverage").json()
+        virginia = next(i for i in payload["items"] if i["state_code"] == "VA")
+        assert virginia["facility_count"] > 100
+        assert virginia["site_count"] == 0
+        assert virginia["region_coverage"] == "declared"
+
+    def test_note_separates_a_reported_facility_from_a_helios_site(
+        self, national_client: TestClient
+    ) -> None:
+        payload = national_client.get("/analytics/national-coverage").json()
+        assert "unread, not empty" in payload["note"]
+
+    def test_facility_layer_spans_the_country(self, national_client: TestClient) -> None:
+        features = national_client.get("/map/facilities").json()["features"]
+        longitudes = [f["geometry"]["coordinates"][0] for f in features]
+        assert len(features) > 300
+        assert max(longitudes) - min(longitudes) > 40
+
+    def test_facility_features_are_not_labelled_as_sites(self, national_client: TestClient) -> None:
+        features = national_client.get("/map/facilities").json()["features"]
+        assert {f["properties"]["kind"] for f in features} == {"reported_facility"}
+        assert all("project_code" not in f["properties"] for f in features)
+
+    def test_facility_layer_states_its_coordinates_may_be_geocoded(
+        self, national_client: TestClient
+    ) -> None:
+        payload = national_client.get("/map/facilities").json()
+        assert any("geocoded" in a for a in payload["attributions"])
+
+    def test_facility_layer_filters_by_state(self, national_client: TestClient) -> None:
+        features = national_client.get("/map/facilities", params={"state": "va"}).json()["features"]
+        assert features
+        assert {f["properties"]["state"] for f in features} == {"VA"}

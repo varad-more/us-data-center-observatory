@@ -17,6 +17,12 @@ router = APIRouter(prefix="/map", tags=["map"])
 DEFAULT_BBOX = (-111.98, 33.16, -111.35, 33.52)
 """East Valley study area, used when the client does not supply a viewport."""
 
+CONTINENTAL_US_BBOX = (-125.0, 24.0, -66.5, 49.5)
+"""Default viewport for the one layer that is national rather than regional.
+
+Deliberately excludes Alaska and Hawaii: neither appears in the hosting-NAICS
+sweep, and stretching the box to hold them would shrink everything else."""
+
 
 def _feature(geometry_json: str | None, properties: dict[str, Any]) -> dict[str, Any] | None:
     """Build a GeoJSON feature, skipping rows without geometry."""
@@ -201,6 +207,83 @@ def map_infrastructure(
     return MapFeatureCollection(
         features=features,
         attributions=["Power infrastructure data (c) OpenStreetMap contributors, ODbL."],
+    )
+
+
+@router.get(
+    "/facilities",
+    response_model=MapFeatureCollection,
+    summary="Reported hosting facilities as GeoJSON",
+)
+def map_facilities(
+    session: DbSession,
+    bbox: BoundingBox = None,
+    state: Annotated[str | None, Query(min_length=2, max_length=2)] = None,
+) -> MapFeatureCollection:
+    """Return EPA-reported hosting facilities, nationwide by default.
+
+    These are not sites. A facility here is one federal record saying a permitted
+    Clean Air Act facility carries a hosting NAICS code; a Helios site is a
+    hypothesis assembled from county parcels and defensible line by line. The
+    viewport defaults to the continental United States rather than the study
+    area, because unlike every other layer this one is not regional.
+    """
+    min_lon, min_lat, max_lon, max_lat = bbox or CONTINENTAL_US_BBOX
+    rows = session.execute(
+        text("""
+            SELECT
+                p.id, p.description, p.jurisdiction, p.status, p.attributes,
+                p.site_id,
+                ST_AsGeoJSON(p.location) AS geometry_json
+            FROM permits AS p
+            JOIN sources AS src ON src.id = p.source_id
+            WHERE p.location IS NOT NULL
+              AND src.slug = 'epa-echo-air-facilities'
+              AND (CAST(:state AS text) IS NULL OR p.attributes->>'state' = CAST(:state AS text))
+              AND ST_Intersects(
+                    p.location,
+                    ST_MakeEnvelope(:min_lon, :min_lat, :max_lon, :max_lat, 4326)
+                  )
+            ORDER BY p.description
+            LIMIT 2000
+            """),
+        {
+            "min_lon": min_lon,
+            "min_lat": min_lat,
+            "max_lon": max_lon,
+            "max_lat": max_lat,
+            "state": state.upper() if state else None,
+        },
+    ).mappings()
+
+    features = []
+    for row in rows:
+        attributes = row["attributes"] or {}
+        feature = _feature(
+            row["geometry_json"],
+            {
+                "id": str(row["id"]),
+                "kind": "reported_facility",
+                "name": row["description"],
+                "jurisdiction": row["jurisdiction"],
+                "state": attributes.get("state"),
+                "county_fips": attributes.get("county_fips"),
+                "naics": attributes.get("naics"),
+                "status": row["status"],
+                # Whether this record was matched to a Helios site. Nearly always
+                # false, and visibly so: matching needs parcels.
+                "linked_to_site": row["site_id"] is not None,
+            },
+        )
+        if feature:
+            features.append(feature)
+
+    return MapFeatureCollection(
+        features=features,
+        attributions=[
+            "Facility records from US EPA ECHO (ICIS-Air), public domain. "
+            "Coordinates are sometimes geocoded rather than surveyed."
+        ],
     )
 
 

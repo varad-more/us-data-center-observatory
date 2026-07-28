@@ -94,7 +94,7 @@ function stageColourExpression(theme: "light" | "dark"): unknown[] {
  * A dark basemap under an ivory page reads as a hole punched in the paper, so
  * the tiles follow the theme.
  */
-function basemapStyle(theme: "light" | "dark") {
+export function basemapStyle(theme: "light" | "dark") {
   const variant = theme === "dark" ? "dark_all" : "light_all";
   return {
     version: 8 as const,

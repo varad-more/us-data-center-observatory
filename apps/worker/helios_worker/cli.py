@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 from datetime import date
+from functools import partial
 from typing import Annotated, Any
 
 import typer
@@ -71,6 +72,12 @@ CONNECTORS: dict[str, Any] = {
     "maricopa-assessor-parcels": MaricopaAssessorConnector,
     "osm-power-infrastructure": OsmPowerConnector,
     "epa-echo-air-facilities": EpaEchoAirConnector,
+    # The same connector asking the other question it can ask. City mode reads
+    # the six pilot cities; this reads every state at once by hosting NAICS, and
+    # is a separate recorded document rather than a wider version of the first.
+    "epa-echo-air-facilities-national": partial(
+        EpaEchoAirConnector, naics_codes=HOSTING_NAICS_QUERY, state=None
+    ),
     "mesa-building-permits": MesaBuildingPermitsConnector,
     "azcc-edocket": AzccEdocketConnector,
     "usgs-county-water-use": UsgsCountyWaterConnector,
@@ -202,7 +209,7 @@ def ingest(
             kwargs = dict(AREA_TOTAL_SCOPES[connector_slug])
 
         if nationwide:
-            if connector_slug == "epa-echo-air-facilities":
+            if connector_slug.startswith("epa-echo-air-facilities"):
                 # state=None drops the p_st narrowing, leaving the NAICS filter alone.
                 kwargs = {"naics_codes": HOSTING_NAICS_QUERY, "state": None}
             elif connector_slug in AREA_TOTAL_SCOPES:
@@ -533,14 +540,15 @@ def _ingest_live() -> None:
     ingest("osm-power-infrastructure")
     # EPA may 429 under load; failures are non-fatal for bootstrap so the
     # observatory still stands on assessor + OSM (+ ACC fixtures).
-    try:
-        ingest("epa-echo-air-facilities")
-    except typer.Exit:
-        console.print(
-            "[yellow]EPA ECHO ingest failed (often rate-limit). "
-            "Continuing with remaining sources; re-run "
-            "`helios ingest epa-echo-air-facilities` later.[/yellow]"
-        )
+    for echo_slug in ("epa-echo-air-facilities", "epa-echo-air-facilities-national"):
+        try:
+            ingest(echo_slug)
+        except typer.Exit:
+            console.print(
+                f"[yellow]{echo_slug} ingest failed (often rate-limit). "
+                f"Continuing with remaining sources; re-run "
+                f"`helios ingest {echo_slug}` later.[/yellow]"
+            )
     # Mesa permits need assessor parcels already loaded for address matching.
     try:
         ingest("mesa-building-permits")

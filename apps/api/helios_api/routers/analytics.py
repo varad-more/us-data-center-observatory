@@ -17,21 +17,30 @@ from helios_api.schemas import (
     DetectionLagEntry,
     DetectionLagResponse,
     HeliosShareResponse,
+    NationalCoverageResponse,
     ProvenanceCompletenessResponse,
     StageDistributionEntry,
     StageGrowthPoint,
     StageGrowthResponse,
+    StateCoverageResponse,
 )
 from helios_domain.models import (
     AreaTotal,
     EvidenceRecord,
+    Permit,
     Site,
     SiteEstimate,
     SiteStageHistory,
     Source,
 )
 from helios_domain.ontology import DevelopmentStage
-from helios_domain.regions import DEFAULT_REGION_SLUG, Region, UnknownRegionError, get_region
+from helios_domain.regions import (
+    DEFAULT_REGION_SLUG,
+    REGIONS,
+    Region,
+    UnknownRegionError,
+    get_region,
+)
 from helios_scoring.impact import annualise_power_mwh
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
@@ -282,6 +291,93 @@ def provenance_completeness(session: DbSession) -> ProvenanceCompletenessRespons
             "document version, quotes a snippet, names a locator within that document, "
             "and carries an observation date."
         ),
+    )
+
+
+ECHO_SOURCE_SLUG = "epa-echo-air-facilities"
+"""The one source behind the facility count.
+
+Named explicitly rather than inferred from which rows happen to carry a state,
+so that adding a second national source is a visible change here instead of a
+silent one."""
+
+_COVERAGE_NOTE = (
+    "Two different counts, deliberately not added together. A facility is an "
+    "EPA ECHO record: a federal agency reports that a Clean Air Act permitted "
+    "facility carries a hosting NAICS code, and Helios repeats that. A site is "
+    "Helios's own hypothesis that a set of parcels forms one development, built "
+    "from county parcel geometry and ownership and defensible line by line. "
+    "Building sites needs parcel and ownership records, which are published "
+    "county by county or not at all, so sites exist only where Helios reads a "
+    "county. A state with facilities and no sites is unread, not empty, and no "
+    "count here should be taken as the number of data centres in a state."
+)
+
+
+@router.get(
+    "/national-coverage",
+    response_model=NationalCoverageResponse,
+    summary="What Helios holds in each state, and what it does not",
+)
+def national_coverage(session: DbSession) -> NationalCoverageResponse:
+    """Report per-state facility and site counts side by side.
+
+    The point of publishing both is the gap between them. Helios reads one
+    national source of reported facilities and one county's parcel records, and
+    a reader is entitled to see which of those produced any given number.
+    """
+    facility_rows = session.execute(
+        select(
+            Permit.attributes["state"].astext.label("state_code"),
+            func.count().label("facility_count"),
+        )
+        .join(Source, Source.id == Permit.source_id)
+        .where(Source.slug == ECHO_SOURCE_SLUG)
+        .where(Permit.attributes["state"].astext.isnot(None))
+        .group_by("state_code")
+    ).all()
+    facilities = {row.state_code: row.facility_count for row in facility_rows if row.state_code}
+
+    site_rows = session.execute(
+        select(Site.region_slug, func.count().label("site_count")).group_by(Site.region_slug)
+    ).all()
+    sites: dict[str, int] = defaultdict(int)
+    for row in site_rows:
+        if not row.region_slug:
+            continue
+        try:
+            sites[get_region(row.region_slug).state_code] += row.site_count
+        except UnknownRegionError:
+            continue
+
+    # A state can be named by more than one region; the more complete claim wins,
+    # because "active" here means at least one connector reads part of the state.
+    region_by_state: dict[str, Region] = {}
+    for region in REGIONS:
+        current = region_by_state.get(region.state_code)
+        if current is None or (region.is_active and not current.is_active):
+            region_by_state[region.state_code] = region
+
+    items = [
+        StateCoverageResponse(
+            state_code=state_code,
+            facility_count=facilities.get(state_code, 0),
+            site_count=sites.get(state_code, 0),
+            region_slug=region_by_state[state_code].slug if state_code in region_by_state else None,
+            region_coverage=(
+                str(region_by_state[state_code].coverage) if state_code in region_by_state else None
+            ),
+        )
+        for state_code in sorted(set(facilities) | set(sites) | set(region_by_state))
+    ]
+
+    return NationalCoverageResponse(
+        items=items,
+        states_with_facilities=sum(1 for item in items if item.facility_count),
+        states_with_sites=sum(1 for item in items if item.site_count),
+        facility_total=sum(item.facility_count for item in items),
+        site_total=sum(item.site_count for item in items),
+        note=_COVERAGE_NOTE,
     )
 
 

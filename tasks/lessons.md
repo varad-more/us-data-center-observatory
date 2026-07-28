@@ -197,3 +197,66 @@ that should have caught it asserted the invariant only for `fixture_only` — th
 two entries that happen to have connectors — so it passed for a year while
 saying almost nothing. When a test filters to a subset before asserting, check
 whether the subset excludes exactly the cases the assertion is for.
+
+### One encouraging probe is not a measurement
+The hypothesis that county parcel data could be read by one connector per
+*platform* rather than one per county survived exactly one test — Loudoun
+County answering a standard ArcGIS REST query — and was reported as a finding
+before the second test ran. It failed the second test, and the third, for a
+different reason each time: the layer carried no ownership; the follow-up probe
+searched for "parcels" when ownership rides on layers named "Assessor"; and the
+corrected probe returned Charlottesville for Loudoun, a streets layer for Santa
+Clara, and nothing for the one county already known to work. A claim built from
+a single successful probe is a hypothesis wearing a result's clothing. Run the
+negative cases, and include a case whose answer is already known — Maricopa
+returning nothing is what exposed the third probe as noise.
+
+### Automated discovery re-opens the mirror problem
+Searching open-data portals by keyword to find a county's parcel layer returns
+wrong-jurisdiction layers and private republications alongside authoritative
+ones, and at the API surface they are indistinguishable: same protocol, same
+field shapes, plausible names. A discovery-driven connector would have ingested
+a private firm's copy of Dallas County parcels as county-authoritative. This is
+[the HIFLD mirror problem](#a-mirror-is-not-a-source) reached from the opposite
+direction — there by looking for a withdrawn source, here by automating the
+search for a live one. Naming the authoritative endpoint stays a human decision.
+
+## A parameter that looks like a selector may be a page size
+
+ECHO's `responseset` was set to `1` and read as "which result set". It is the
+number of rows per page. The connector then fetched only page one, so a national
+query matching 447 facilities ingested a single row and reported success.
+
+Nothing caught it for the same reason nothing caught the hardcoded `"AZ"`: six
+cities in one state is a scale at which a paging bug and a fabricated state
+constant both look like working code.
+
+**How to apply:** when a query is widened by an order of magnitude, re-derive
+what every request parameter means rather than assuming the old value still fits.
+Check the row count the source reports against the row count actually loaded, and
+surface the difference — a connector that silently returns 1 of 447 is worse than
+one that fails.
+
+## Reported and delivered and distinct are three numbers
+
+The first fix compared de-duplicated rows against the source's headline count and
+raised "ECHO reported 447 and returned 440" — a coverage gap that did not exist.
+ECHO delivered all 447; seven repeated a RegistryID.
+
+**How to apply:** before reporting a shortfall, separate *what arrived* from *what
+survived processing*. A warning that misdescribes its own cause is worse than
+silence, because it spends the reader's trust on a non-event. This is the same
+principle as [[a-declared-reason-that-never-reaches-a-reader]]: the wording of a
+gap is part of the gap.
+
+## Zero rows under 429 is not zero rows
+
+Checking whether four suspicious fixture records exist in live ECHO returned
+nothing — because the API was throttling after a recording session. That is
+absence of data, not data showing absence, and treating it as the latter would
+have justified deleting published evidence.
+
+**How to apply:** an empty result is only evidence when the request succeeded.
+Check the status code before drawing a conclusion from a count, and when the
+check is inconclusive, record the open question instead of resolving it in
+whichever direction is convenient. Same failure mode as the county-parcel probe.

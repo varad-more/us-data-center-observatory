@@ -1,5 +1,5 @@
 {
-  "site_id": "52eb3855-f7f8-4c7c-a448-5f0721bcedde",
+  "site_id": "3de55d7d-dcb7-4bf8-818c-4f11778dabf6",
   "project_code": "AZ-CHANDLER-004",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Shell entity ownership",
       "detail": "Title is held by 2500 WEST FRYE ROAD OWNER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "evidence": {
-        "id": "4157fe3c-d760-44c0-ad48-d7162d336710",
+        "id": "d46bd708-653c-453b-9e35-743b95be141e",
         "evidence_kind": "shell_entity_ownership",
         "summary": "Title is held by 2500 WEST FRYE ROAD OWNER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
         "snippet": "OwnerName = 2500 WEST FRYE ROAD OWNER LLC",
@@ -37,8 +37,8 @@
           "is_standing_condition": false
         },
         "source": {
-          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
-          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
+          "document_id": "2f6efd07-7c10-4f43-94f2-5b714de87e97",
+          "document_version_id": "4f91c5f4-4b77-4df5-b8c8-7edca03375aa",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -56,22 +56,23 @@
       "entry_type": "stage_transition",
       "occurred_on": "2025-10-30",
       "title": "Stage advanced to Operational",
-      "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 30% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+      "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 44% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Single-purpose entity holds title.",
       "evidence": null,
       "stage_transition": {
-        "id": "bd4afd97-e5b2-4120-9d1c-fc7f6e17e4e5",
+        "id": "7220fa2c-c59b-4bfd-9cbd-2ee1db667c56",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
         "effective_date": "2025-10-30",
-        "detected_at": "2026-07-28T10:57:03.316524Z",
+        "detected_at": "2026-07-28T17:30:32.118730Z",
         "is_downgrade": false,
-        "confidence": 29.63,
-        "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 30% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
+        "confidence": 43.9,
+        "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 44% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Single-purpose entity holds title.",
         "triggering_evidence_ids": [
-          "510892e7-d625-43c5-9561-c73a0d6bc135",
-          "4157fe3c-d760-44c0-ad48-d7162d336710"
+          "cdbfaa4a-7d85-4093-a878-3e366b2610f9",
+          "e25d4a6d-d414-4d56-8a03-f4a605e9c978",
+          "d46bd708-653c-453b-9e35-743b95be141e"
         ],
         "detection_lag_days": 271
       },
@@ -83,7 +84,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Unnamed substation tagged 69 kV lies 25 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "8cb92d4d-66d5-4c42-817d-b95a6cc5c71a",
+        "id": "74da2d4e-c104-498a-a5de-2e0b8bd19427",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Unnamed substation tagged 69 kV lies 25 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -103,8 +104,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "88cd945b-79ce-4674-8193-1ede12b94390",
-          "document_version_id": "4f0ededc-cef6-4655-8876-9cb991f6b552",
+          "document_id": "b8abfb58-b6bf-43d9-a88d-3b29d8a9db78",
+          "document_version_id": "ad75ee7e-5363-44ab-a65c-26f4f7b68b2f",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -121,10 +122,83 @@
     {
       "entry_type": "evidence",
       "occurred_on": "2026-07-28",
+      "title": "Backup generator air permit",
+      "detail": "EPA ECHO lists CPUS WEST FRYE ROAD, LP as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: SIP.",
+      "evidence": {
+        "id": "e25d4a6d-d414-4d56-8a03-f4a605e9c978",
+        "evidence_kind": "backup_generator_air_permit",
+        "summary": "EPA ECHO lists CPUS WEST FRYE ROAD, LP as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: SIP.",
+        "snippet": "CPUS WEST FRYE ROAD, LP; SIP",
+        "snippet_locator": "$.Results.Facilities[126]",
+        "observed_at": "2026-07-28",
+        "assertion_class": "extracted",
+        "extraction_method": "structured_feed",
+        "polarity": "supporting",
+        "confidence": 0.8,
+        "human_review_status": "not_reviewed",
+        "is_standing_condition": true,
+        "normalized_values": {
+          "fields": [
+            {
+              "name": "registry_id",
+              "value": "110000471089",
+              "locator": "$.Results.Facilities[126].RegistryID",
+              "raw_text": null,
+              "raw_unit": null,
+              "confidence": 1.0,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            },
+            {
+              "name": "facility_name",
+              "value": "CPUS WEST FRYE ROAD, LP",
+              "locator": "$.Results.Facilities[126].FacName",
+              "raw_text": null,
+              "raw_unit": null,
+              "confidence": 0.95,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            },
+            {
+              "name": "naics",
+              "value": "518210",
+              "locator": "$.Results.Facilities[126].FacNAICSCodes",
+              "raw_text": null,
+              "raw_unit": null,
+              "confidence": 0.9,
+              "assertion_class": "reported",
+              "normalized_unit": null,
+              "extraction_method": "structured_feed"
+            }
+          ],
+          "permit_id": "800c751c-f52e-408e-a074-1070f653e40c",
+          "is_standing_condition": true
+        },
+        "source": {
+          "document_id": "5ea0498b-45e6-444b-9ce6-0152b1d46ce2",
+          "document_version_id": "2fd898a1-cdcc-4d1a-8794-bafb16b643f0",
+          "source_slug": "epa-echo-air-facilities",
+          "source_name": "EPA ECHO Air Facility Records",
+          "agency": "United States Environmental Protection Agency",
+          "source_url": "https://example.invalid/recorded",
+          "retrieved_at": "2026-07-25T21:30:00Z",
+          "content_sha256": "71c269ae37b235a090ccad898ff3eb8edbe09b6354bda668713ff99269f166d3",
+          "parser_version": "0.1.0",
+          "attribution_text": null
+        }
+      },
+      "stage_transition": null,
+      "confidence_delta": null
+    },
+    {
+      "entry_type": "evidence",
+      "occurred_on": "2026-07-28",
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "510892e7-d625-43c5-9561-c73a0d6bc135",
+        "id": "cdbfaa4a-7d85-4093-a878-3e366b2610f9",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -153,8 +227,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "c9c17130-d4ca-4c09-a552-d47961ab6cc2",
-          "document_version_id": "e9b4214c-0f06-4468-8dc3-c66d162231b9",
+          "document_id": "2f6efd07-7c10-4f43-94f2-5b714de87e97",
+          "document_version_id": "4f91c5f4-4b77-4df5-b8c8-7edca03375aa",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",

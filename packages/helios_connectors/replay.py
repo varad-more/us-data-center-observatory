@@ -33,7 +33,7 @@ from helios_connectors.area_totals import (
     UsgsCountyWaterConnector,
 )
 from helios_connectors.azcc_edocket import AzccEdocketConnector, default_fixture_dir
-from helios_connectors.epa_echo import EpaEchoAirConnector
+from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
 from helios_connectors.osm_power import OsmPowerConnector
@@ -171,6 +171,11 @@ FIXTURE_REPLAYS: dict[str, tuple[type[BaseConnector], tuple[str, ...], str]] = {
         ("epa_echo", "mesa_air_facilities.json"),
         "echo:air:east-valley",
     ),
+    "epa-echo-air-facilities-national": (
+        EpaEchoAirConnector,
+        ("epa_echo", "national_air_facilities.json"),
+        "echo:air:naics:us",
+    ),
     "mesa-building-permits": (
         MesaBuildingPermitsConnector,
         ("mesa_permits", "east_valley_com.json"),
@@ -193,10 +198,33 @@ FIXTURE_REPLAYS: dict[str, tuple[type[BaseConnector], tuple[str, ...], str]] = {
     ),
 }
 
+FIXTURE_REPLAY_KWARGS: dict[str, dict[str, Any]] = {
+    # A replay overrides fetching, not identity. Without these the national
+    # recording would be read back by a connector that believes it is in city
+    # mode, and would report itself under the pilot connector's slug - which is
+    # exactly the confusion the two slugs exist to prevent.
+    "epa-echo-air-facilities-national": {
+        "naics_codes": HOSTING_NAICS_QUERY,
+        "state": None,
+    },
+}
+
+NATIONAL_FIXTURES: dict[str, str] = {
+    "epa-echo-air-facilities": "epa-echo-air-facilities-national",
+}
+"""Connector slug -> the replay key holding its nationwide recording.
+
+The same source answers two different questions depending on how it is queried,
+and both recordings are kept. The pilot fixture is six Arizona cities and is
+what the East Valley sites rest on; the national fixture is the hosting-NAICS
+sweep, 440 facilities across 39 states. Neither supersedes the other.
+"""
+
 FIXTURE_INGEST_ORDER: tuple[str, ...] = (
     "maricopa-assessor-parcels",
     "osm-power-infrastructure",
     "epa-echo-air-facilities",
+    "epa-echo-air-facilities-national",
     # Address matching needs assessor parcels already loaded.
     "mesa-building-permits",
     # Area totals stand alone; they describe a county or state, not a site, so
@@ -235,13 +263,17 @@ def build_fixture_connector(slug: str, **kwargs: Any) -> BaseConnector:
         )
 
     connector_cls, fixture_parts, native_id = FIXTURE_REPLAYS[slug]
-    return replay_connector(connector_cls, fixture_parts, native_id, **kwargs)
+    return replay_connector(
+        connector_cls, fixture_parts, native_id, **{**FIXTURE_REPLAY_KWARGS.get(slug, {}), **kwargs}
+    )
 
 
 __all__ = [
     "FIXTURES_ROOT",
     "FIXTURE_INGEST_ORDER",
     "FIXTURE_REPLAYS",
+    "FIXTURE_REPLAY_KWARGS",
+    "NATIONAL_FIXTURES",
     "FixtureNotFoundError",
     "build_fixture_connector",
     "load_fixture_bytes",
