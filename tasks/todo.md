@@ -183,3 +183,22 @@ Maricopa 2015 public supply 776.54 Mgal/d, total withdrawal 2,058.19, population
 4,167,947. Arizona 2020 retail sales 81,960,074 MWh/yr, and the four sectors sum
 to it — which is the check that catches reading EIA's overlapping provider
 categories and double counting.
+
+### Supply side: generation capacity
+
+- [x] `area_consumption` renamed to `area_totals` (migration 0005). It already
+      held county population, which is not a consumption; the name was for the
+      first thing that went in, not for what the table means.
+- [x] EIA existing-capacity connector — nameplate and net summer, per state.
+- [x] Third comparison: summed site MW against reported summer capacity.
+
+That third comparison is the strongest of the three and the easiest to misread.
+Strongest because both sides are a peak figure in MW, so it needs no conversion
+at all — one assumption fewer than the annual-energy one. Easiest to misread
+because 1.68% of state capacity invites "there is plenty of room", and it is
+nothing of the sort: existing demand already consumes most of that figure and
+Helios does not know how much. The caveat says so and two tests assert it.
+
+Arizona, as published: 32,876.5 MW net summer capacity (2024) against
+81,960,074 MWh of retail sales (2020). Those years do not match because EIA's
+own files do not, and each is shown with the year it describes.

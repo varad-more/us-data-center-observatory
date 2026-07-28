@@ -289,6 +289,7 @@ GALLONS_PER_MILLION = 1_000_000
 
 PUBLIC_SUPPLY = "public_supply_water_withdrawal"
 ELECTRICITY_SALES = "electricity_retail_sales"
+SUMMER_CAPACITY = "generation_summer_capacity"
 
 _GRANULARITY_NOTE = (
     "Water is published per county and electricity per state, because no public "
@@ -500,8 +501,50 @@ def _build_comparisons(
             )
         )
 
-    sales, power_year = _latest_sum(rows, ELECTRICITY_SALES, sector="total")
+    capacity, capacity_year = _latest_sum(rows, SUMMER_CAPACITY)
     power = estimates.get("power_capacity")
+    if capacity > 0 and power is not None:
+        lower, likely, upper, sites = power
+        comparisons.append(
+            HeliosShareResponse(
+                metric=SUMMER_CAPACITY,
+                unit="MW",
+                area_kind="state",
+                area_name=region.state_code,
+                area_value=round(capacity, 1),
+                area_reference_year=capacity_year,
+                sites_counted=sites,
+                inferred_lower=lower,
+                inferred_likely=likely,
+                inferred_upper=upper,
+                share_lower_pct=_share(lower, capacity),
+                share_likely_pct=_share(likely, capacity),
+                share_upper_pct=_share(upper, capacity),
+                method=(
+                    "Summed site power estimates against reported net summer " "generating capacity"
+                ),
+                assumptions={
+                    "note": (
+                        "The only comparison here that needs no unit conversion: "
+                        "both sides are a peak figure in MW, so it carries one "
+                        "assumption fewer than the annual-energy one. Net summer "
+                        "capacity is used rather than the more-quoted nameplate "
+                        "figure because it is what the grid can deliver on the "
+                        "afternoon that decides whether there is room."
+                    ),
+                },
+                caveat=(
+                    "This is not spare capacity. Existing demand already consumes "
+                    "most of that figure, and Helios does not know how much, so a "
+                    "share of total capacity is not a share of what is unused. "
+                    "Whether any individual site can be served is an "
+                    "interconnection question, answered by filings Helios cannot "
+                    "read."
+                ),
+            )
+        )
+
+    sales, power_year = _latest_sum(rows, ELECTRICITY_SALES, sector="total")
     if sales > 0 and power is not None:
         lower, likely, upper, sites = power
         annual = annualise_power_mwh(lower, likely, upper)

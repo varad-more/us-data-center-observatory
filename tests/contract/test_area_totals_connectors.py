@@ -15,9 +15,13 @@ import pytest
 
 from helios_common.vocabulary import AssertionClass, ConnectorStatus, ExtractionMethod
 from helios_connectors.area_totals import (
+    CAPACITY_ROLLUP_FUEL,
+    CAPACITY_ROLLUP_PRODUCER,
     EiaStateElectricityConnector,
+    EiaStateGenerationCapacityConnector,
     UsgsCountyWaterConnector,
     _clean_number,
+    _read_eia_workbook,
 )
 from helios_connectors.types import DateRange, RawDocument, SourceItem
 from tests.conftest import load_fixture_bytes
@@ -26,6 +30,8 @@ pytestmark = pytest.mark.contract
 
 WATER_FIXTURE = ("usgs_water", "arizona_counties_2015.csv")
 ELECTRICITY_FIXTURE = ("eia_electricity", "sales_annual.xlsx")
+CAPACITY_FIXTURE = ("eia_generation", "existcapacity_annual.xlsx")
+XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 MARICOPA = "04013"
 PINAL = "04021"
@@ -257,3 +263,123 @@ class TestNormalization:
         assert parsed.document is not None
         result = water.normalize(parsed.document)
         assert all(not record.evidence for record in result.records)
+
+
+@pytest.fixture
+def capacity() -> EiaStateGenerationCapacityConnector:
+    return EiaStateGenerationCapacityConnector(states=("AZ",))
+
+
+class TestEiaStateGenerationCapacity:
+    def test_is_implemented(self, capacity: EiaStateGenerationCapacityConnector) -> None:
+        assert capacity.get_metadata().status == ConnectorStatus.IMPLEMENTED
+
+    def test_parses_the_published_arizona_capacity(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.ok and parsed.document is not None
+        metrics = {r["metric"]: r for r in parsed.document.records}
+
+        assert metrics["generation_nameplate_capacity"]["value"] == pytest.approx(36_344.9)
+        assert metrics["generation_summer_capacity"]["value"] == pytest.approx(32_876.5)
+        assert metrics["generation_nameplate_capacity"]["unit"] == "MW"
+
+    def test_summer_capacity_is_below_nameplate(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        """Not a formality. Nameplate overstates what an Arizona grid can deliver
+        on the afternoon that decides whether there is room, which is why the
+        comparison uses summer capacity rather than the more-quoted figure."""
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        metrics = {r["metric"]: r["value"] for r in parsed.document.records}
+        assert metrics["generation_summer_capacity"] < metrics["generation_nameplate_capacity"]
+
+    def test_keeps_only_the_rollup_row(self, capacity: EiaStateGenerationCapacityConnector) -> None:
+        """Producer type and fuel source each carry a roll-up beside their parts.
+
+        Reading the sheet naively sums a state several times over and the result
+        still looks like a capacity figure, just a wrong one.
+        """
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        assert len(parsed.document.records) == 2  # two metrics, one area, one year
+
+    def test_the_kept_row_equals_the_sum_of_the_parts_it_rolls_up(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        """Proves the roll-up was picked rather than one fuel that happened to
+        parse. Read straight from the fixture, independently of the connector."""
+        records = _read_eia_workbook(
+            load_fixture_bytes(*CAPACITY_FIXTURE), ("Year", "State Code"), label="capacity"
+        )
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        year = parsed.document.records[0]["reference_year"]
+
+        arizona = [
+            r
+            for r in records
+            if str(r["State Code"]).strip() == "AZ"
+            and int(r["Year"]) == year
+            and str(r["Producer Type"]).strip() == CAPACITY_ROLLUP_PRODUCER
+        ]
+        parts = sum(
+            r["Nameplate Capacity (Megawatts)"]
+            for r in arizona
+            if str(r["Fuel Source"]).strip() != CAPACITY_ROLLUP_FUEL
+        )
+        emitted = next(
+            r["value"]
+            for r in parsed.document.records
+            if r["metric"] == "generation_nameplate_capacity"
+        )
+        assert emitted == pytest.approx(parts)
+
+    def test_state_filter_excludes_the_rest_of_the_country(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        assert {r["area_code"] for r in parsed.document.records} == {"AZ"}
+
+    def test_unfiltered_reads_every_state_in_the_file(self) -> None:
+        connector = EiaStateGenerationCapacityConnector()
+        parsed = connector.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        assert len({r["area_code"] for r in parsed.document.records}) == 51
+
+    def test_honours_an_explicit_year(self) -> None:
+        connector = EiaStateGenerationCapacityConnector(states=("AZ",), year=2023)
+        parsed = connector.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        assert connector.reference_year == 2023
+        assert {r["reference_year"] for r in parsed.document.records} == {2023}
+
+    def test_rejects_a_payload_that_is_not_a_workbook(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        document = _raw(CAPACITY_FIXTURE, XLSX_MIME)
+        document = RawDocument(
+            item=document.item,
+            payload=b"<!DOCTYPE html><html><body>Page not found</body></html>",
+            mime_type="text/html",
+            retrieved_at=document.retrieved_at,
+            http_status=200,
+        )
+        parsed = capacity.parse(document)
+        assert not parsed.ok
+        assert parsed.error is not None and "xlsx" in parsed.error
+
+    def test_capacity_is_reported_like_every_other_area_total(
+        self, capacity: EiaStateGenerationCapacityConnector
+    ) -> None:
+        parsed = capacity.parse(_raw(CAPACITY_FIXTURE, XLSX_MIME))
+        assert parsed.document is not None
+        result = capacity.normalize(parsed.document)
+
+        assert result.records
+        for record in result.records:
+            assert record.entity_type == "area_total"
+            assert record.fields[0].assertion_class == AssertionClass.REPORTED

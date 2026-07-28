@@ -21,6 +21,7 @@ from sqlalchemy.orm import Session
 from helios_common.evidence_store import FilesystemEvidenceStore
 from helios_connectors.area_totals import (
     EiaStateElectricityConnector,
+    EiaStateGenerationCapacityConnector,
     UsgsCountyWaterConnector,
 )
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
@@ -55,6 +56,12 @@ def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[T
             EiaStateElectricityConnector,
             ("eia_electricity", "sales_annual.xlsx"),
             "electricity",
+            states=("AZ",),
+        ),
+        _replay(
+            EiaStateGenerationCapacityConnector,
+            ("eia_generation", "existcapacity_annual.xlsx"),
+            "capacity",
             states=("AZ",),
         ),
     ):
@@ -554,3 +561,56 @@ class TestOpenApi:
         description = spec["info"]["description"]
         for term in ("reported", "extracted", "inferred", "predicted", "unknown"):
             assert term in description
+
+
+class TestGenerationCapacity:
+    def test_capacity_totals_are_published_with_their_own_year(
+        self, api_client: TestClient
+    ) -> None:
+        """EIA's sales file stops at 2020 and its capacity file runs to 2024.
+        Each figure carries the year it describes rather than being aligned to
+        the other, because matching another dataset's staleness is worse."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        by_metric = {t["metric"]: t for t in payload["totals"]}
+
+        capacity = by_metric["generation_summer_capacity"]
+        sales = by_metric["electricity_retail_sales"]
+        assert capacity["reference_year"] > sales["reference_year"]
+        assert capacity["unit"] == "MW"
+
+    def test_summer_capacity_is_below_nameplate(self, api_client: TestClient) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        by_metric = {t["metric"]: t["value"] for t in payload["totals"]}
+        assert by_metric["generation_summer_capacity"] < by_metric["generation_nameplate_capacity"]
+
+    def test_capacity_comparison_needs_no_unit_conversion(self, api_client: TestClient) -> None:
+        """Both sides are a peak figure in MW, so unlike the water and annual
+        energy comparisons this one carries no conversion assumption at all."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        headroom = next(
+            c for c in payload["comparisons"] if c["metric"] == "generation_summer_capacity"
+        )
+        assert headroom["unit"] == "MW"
+        assert "load_factor_likely" not in headroom["assumptions"]
+        assert "gallons_per_million" not in headroom["assumptions"]
+
+    def test_capacity_comparison_refuses_to_imply_spare_room(self, api_client: TestClient) -> None:
+        """A share of total capacity is not a share of unused capacity. Existing
+        demand already consumes most of that figure and Helios does not know how
+        much, so the response must say so rather than let the percentage imply
+        headroom it has not measured."""
+        payload = api_client.get("/analytics/area-consumption").json()
+        headroom = next(
+            c for c in payload["comparisons"] if c["metric"] == "generation_summer_capacity"
+        )
+        assert "not spare capacity" in headroom["caveat"]
+        assert "interconnection" in headroom["caveat"]
+
+    def test_capacity_share_is_bounded_and_ordered(self, api_client: TestClient) -> None:
+        payload = api_client.get("/analytics/area-consumption").json()
+        headroom = next(
+            c for c in payload["comparisons"] if c["metric"] == "generation_summer_capacity"
+        )
+        assert 0 < headroom["share_likely_pct"] < 100
+        assert headroom["share_lower_pct"] <= headroom["share_likely_pct"]
+        assert headroom["share_likely_pct"] <= headroom["share_upper_pct"]

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:51:17.204188+00:00",
+  "generated_at": "2026-07-28T07:44:06.447466+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -304,7 +304,7 @@
   },
   "evidence": [
     {
-      "id": "ce758fbb-0d1b-462a-9b1c-6f2bc0bad03f",
+      "id": "48a19490-ce3b-474b-9eaf-d1fb02eb64d9",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Finley Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -324,8 +324,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
-        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
+        "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
+        "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -337,7 +337,7 @@
       }
     },
     {
-      "id": "566b8844-b892-42f8-bdb2-5afb1ca63c7b",
+      "id": "4a781dbf-950c-4188-849c-413f1ef9f35b",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -366,8 +366,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -381,26 +381,26 @@
   ],
   "stage_history": [
     {
-      "id": "3256758a-0f5b-468e-bc60-5fba84740c7f",
+      "id": "334e460c-f26e-47cb-808c-19395d60fc90",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2026-07-28",
-      "detected_at": "2026-07-28T05:51:14.177897Z",
+      "detected_at": "2026-07-28T07:44:04.385108Z",
       "is_downgrade": false,
       "confidence": 27.14,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "566b8844-b892-42f8-bdb2-5afb1ca63c7b"
+        "4a781dbf-950c-4188-849c-413f1ef9f35b"
       ],
       "detection_lag_days": 0
     }
   ],
   "predictions": [
     {
-      "id": "093fe281-d8b3-43a4-9afa-eb02c0926820",
-      "calculated_at": "2026-07-28T05:51:14.175085Z",
+      "id": "ed9df38d-1300-4c73-8734-e006a579991d",
+      "calculated_at": "2026-07-28T07:44:04.382745Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -426,7 +426,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "566b8844-b892-42f8-bdb2-5afb1ca63c7b"
+          "evidence_record_id": "4a781dbf-950c-4188-849c-413f1ef9f35b"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -438,13 +438,13 @@
           "confidence_multiplier": 0.8932,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "ce758fbb-0d1b-462a-9b1c-6f2bc0bad03f"
+          "evidence_record_id": "48a19490-ce3b-474b-9eaf-d1fb02eb64d9"
         }
       ]
     },
     {
-      "id": "0d32db89-556b-4295-87b3-e59e791a482f",
-      "calculated_at": "2026-07-28T05:51:14.175147Z",
+      "id": "df6f998c-ad55-4719-afb0-0e6f50952abb",
+      "calculated_at": "2026-07-28T07:44:04.382793Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -470,7 +470,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "566b8844-b892-42f8-bdb2-5afb1ca63c7b"
+          "evidence_record_id": "4a781dbf-950c-4188-849c-413f1ef9f35b"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -482,7 +482,7 @@
           "confidence_multiplier": 0.8932,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "ce758fbb-0d1b-462a-9b1c-6f2bc0bad03f"
+          "evidence_record_id": "48a19490-ce3b-474b-9eaf-d1fb02eb64d9"
         }
       ]
     }

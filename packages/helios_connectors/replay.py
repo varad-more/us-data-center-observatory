@@ -29,6 +29,7 @@ from typing import TYPE_CHECKING, Any
 
 from helios_connectors.area_totals import (
     EiaStateElectricityConnector,
+    EiaStateGenerationCapacityConnector,
     UsgsCountyWaterConnector,
 )
 from helios_connectors.azcc_edocket import AzccEdocketConnector, default_fixture_dir
@@ -185,6 +186,11 @@ FIXTURE_REPLAYS: dict[str, tuple[type[BaseConnector], tuple[str, ...], str]] = {
         ("eia_electricity", "sales_annual.xlsx"),
         "eia:sales:states:latest",
     ),
+    "eia-state-generation-capacity": (
+        EiaStateGenerationCapacityConnector,
+        ("eia_generation", "existcapacity_annual.xlsx"),
+        "eia:capacity:states:latest",
+    ),
 }
 
 FIXTURE_INGEST_ORDER: tuple[str, ...] = (
@@ -197,6 +203,7 @@ FIXTURE_INGEST_ORDER: tuple[str, ...] = (
     # they neither depend on nor are depended on by anything above.
     "usgs-county-water-use",
     "eia-state-electricity-sales",
+    "eia-state-generation-capacity",
     # Fixture-only in production; no replay wrapper needed.
     "azcc-edocket",
 )

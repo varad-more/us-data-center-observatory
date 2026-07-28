@@ -5,23 +5,30 @@ are inferences from acreage, and on their own they have no scale: 40 MW is
 either negligible or alarming depending on what the surrounding area already
 uses. These connectors supply the denominator, and it is a measured one.
 
-Two sources, one shape
-----------------------
-Both publish a single bulk table rather than a queryable API, so the shared
+Three sources, one shape
+------------------------
+Each publishes a single bulk table rather than a queryable API, so the shared
 :class:`BulkAreaTotalsConnector` does the work and each subclass only has to say
 where the file is and how to read a row out of it.
 
 * **USGS** county-level water use, per county, in million gallons per day.
 * **EIA** retail electricity sales, per state, in megawatt-hours per year.
+* **EIA** existing generation capacity, per state, in megawatts.
 
-The granularity differs and that difference is not cosmetic. Water is published
-per county; electricity is published per state and no public source breaks it to
-county nationally. A state figure is a much weaker denominator for a metro-scale
-region, and every row records its ``area_kind`` so the UI can say which it is
-rather than leaving a reader to assume they match.
+The last two are the demand and supply sides of the same question, and they do
+not share a reference year: EIA's sales file currently stops at 2020 while the
+capacity file runs to 2024. Both are published with the year they describe
+rather than silently aligned, because using stale data to match another
+dataset's staleness is worse than showing the gap.
 
-Both totals are ``reported``. Helios did not derive them, and it must not
-present them with the same weight as its own estimates, nor sum the two.
+The granularity differs too, and that difference is not cosmetic. Water is
+published per county; electricity is published per state and no public source
+breaks it to county nationally. A state figure is a much weaker denominator for
+a metro-scale region, and every row records its ``area_kind`` so the UI can say
+which it is rather than leaving a reader to assume they match.
+
+Every total here is ``reported``. Helios did not derive them, and it must not
+present them with the same weight as its own estimates, nor sum across the line.
 """
 
 from __future__ import annotations
@@ -56,6 +63,7 @@ logger = get_logger(__name__)
 __all__ = [
     "BulkAreaTotalsConnector",
     "EiaStateElectricityConnector",
+    "EiaStateGenerationCapacityConnector",
     "UsgsCountyWaterConnector",
 ]
 
@@ -364,6 +372,78 @@ class UsgsCountyWaterConnector(BulkAreaTotalsConnector):
 
 # ------------------------------------------------------------- electricity --
 
+
+def _read_eia_workbook(
+    payload: bytes, header_names: tuple[str, ...], *, label: str
+) -> list[dict[str, Any]]:
+    """Read an EIA state workbook into dicts keyed by its own header row.
+
+    EIA puts a title in row one and the real header in row two, and the exact
+    row varies between their files, so the header is located by the columns it
+    must contain rather than by index.
+
+    The zipfile check is not defensive padding: EIA soft-404s serve an HTML page
+    with HTTP 200, and two different dead URLs both returned exactly 67,080
+    bytes. A parser that trusted the status code would report success on a
+    "page not found".
+
+    Args:
+        payload: Raw downloaded bytes.
+        header_names: Column names that identify the header row.
+        label: Which workbook this is, for error messages.
+
+    Returns:
+        One dict per data row.
+
+    Raises:
+        ValueError: If the payload is not a workbook, or the header is absent.
+    """
+    import openpyxl
+
+    if not zipfile.is_zipfile(io.BytesIO(payload)):
+        raise ValueError(f"EIA {label} payload is not an xlsx workbook")
+
+    workbook = openpyxl.load_workbook(io.BytesIO(payload), read_only=True, data_only=True)
+    sheet = workbook[workbook.sheetnames[0]]
+
+    header: list[str] | None = None
+    records: list[dict[str, Any]] = []
+    for raw in sheet.iter_rows(values_only=True):
+        cells = ["" if c is None else str(c).strip() for c in raw]
+        if header is None:
+            if all(name in cells for name in header_names):
+                header = cells
+            continue
+        if not any(cells):
+            continue
+        records.append(dict(zip(header, raw, strict=False)))
+    workbook.close()
+
+    if header is None:
+        wanted = "/".join(header_names)
+        raise ValueError(f"Could not locate the {wanted} header row in the EIA {label} workbook")
+    return records
+
+
+def _resolve_year(records: list[dict[str, Any]], requested: int | None) -> int:
+    """Pick the year to keep: the requested one if present, else the newest.
+
+    Args:
+        records: Rows carrying a ``Year`` column.
+        requested: Year the caller asked for, or None for the newest.
+
+    Returns:
+        The reference year.
+
+    Raises:
+        ValueError: If no row carries a usable year.
+    """
+    years = {int(y) for r in records if (y := _clean_number(r.get("Year"))) is not None}
+    if not years:
+        raise ValueError("No usable years in the EIA workbook")
+    return requested if requested in years else max(years)
+
+
 EIA_SALES_URL = "https://www.eia.gov/electricity/data/state/sales_annual.xlsx"
 """Retail sales to ultimate customers, by state, sector and provider."""
 
@@ -440,31 +520,7 @@ class EiaStateElectricityConnector(BulkAreaTotalsConnector):
 
     def rows_from(self, payload: bytes) -> list[dict[str, Any]]:
         """Read the EIA sales workbook into measurement rows."""
-        import openpyxl
-
-        if not zipfile.is_zipfile(io.BytesIO(payload)):
-            raise ValueError("EIA sales payload is not an xlsx workbook")
-
-        workbook = openpyxl.load_workbook(io.BytesIO(payload), read_only=True, data_only=True)
-        sheet = workbook[workbook.sheetnames[0]]
-
-        header: list[str] | None = None
-        records: list[dict[str, Any]] = []
-        for raw in sheet.iter_rows(values_only=True):
-            cells = ["" if c is None else str(c).strip() for c in raw]
-            if header is None:
-                # The title occupies the first row; the header is the row that
-                # actually names Year and State.
-                if "Year" in cells and "State" in cells:
-                    header = cells
-                continue
-            if not any(cells):
-                continue
-            records.append(dict(zip(header, raw, strict=False)))
-        workbook.close()
-
-        if header is None:
-            raise ValueError("Could not locate the Year/State header row in the EIA workbook")
+        records = _read_eia_workbook(payload, ("Year", "State"), label="sales")
 
         # "Total Electric Industry" is the all-providers roll-up; the other
         # provider categories are subsets of it and would double count.
@@ -473,10 +529,7 @@ class EiaStateElectricityConnector(BulkAreaTotalsConnector):
             for r in records
             if str(r.get("Industry Sector Category") or "").strip() == "Total Electric Industry"
         ]
-        years = {int(y) for r in totals if (y := _clean_number(r.get("Year"))) is not None}
-        if not years:
-            raise ValueError("No usable years in the EIA workbook")
-        target = self._year if self._year in years else max(years)
+        target = _resolve_year(totals, self._year)
         self._resolved_year = target
 
         rows: list[dict[str, Any]] = []
@@ -503,6 +556,141 @@ class EiaStateElectricityConnector(BulkAreaTotalsConnector):
                         "sector": sector,
                         "value": value,
                         "unit": "MWh/yr",
+                        "reference_year": target,
+                    }
+                )
+        return rows
+
+
+# ------------------------------------------------------ generation capacity --
+
+EIA_CAPACITY_URL = "https://www.eia.gov/electricity/data/state/existcapacity_annual.xlsx"
+"""Existing nameplate and net summer capacity, by state, producer type and fuel."""
+
+CAPACITY_ROLLUP_PRODUCER = "Total Electric Power Industry"
+"""The all-producers roll-up. The seven other producer types are subsets of it."""
+
+CAPACITY_ROLLUP_FUEL = "All Sources"
+"""The all-fuels roll-up. The twelve fuel rows sum to it exactly."""
+
+CAPACITY_METRICS: dict[str, str] = {
+    "Nameplate Capacity (Megawatts)": "generation_nameplate_capacity",
+    "Summer Capacity (Megawatts)": "generation_summer_capacity",
+}
+"""Both are published and they differ by around 10% in Arizona. Nameplate is the
+figure usually quoted; summer capacity is what the grid can actually deliver on
+the afternoon it matters most, so both are stored and the comparison uses
+summer."""
+
+
+class EiaStateGenerationCapacityConnector(BulkAreaTotalsConnector):
+    """Reads state-level existing generation capacity from EIA."""
+
+    def __init__(
+        self,
+        *,
+        states: tuple[str, ...] | None = None,
+        year: int | None = None,
+        **kwargs: Any,
+    ) -> None:
+        """Initialise the connector.
+
+        Args:
+            states: Two-letter state codes to keep. ``None`` keeps every state.
+            year: Reference year to keep. ``None`` keeps the latest in the file.
+            **kwargs: Passed to :class:`BaseConnector`.
+        """
+        super().__init__(**kwargs)
+        self.states = states
+        self._year = year
+        self._resolved_year: int | None = None
+
+    @property
+    def download_url(self) -> str:
+        """The EIA existing-capacity workbook."""
+        return EIA_CAPACITY_URL
+
+    @property
+    def reference_year(self) -> int:
+        """The year kept from the workbook."""
+        return self._resolved_year or self._year or 0
+
+    def get_metadata(self) -> Any:
+        """Return the connector description."""
+        from helios_common.vocabulary import AccessMethod, ConnectorStatus, SourceCategory
+        from helios_connectors.types import ConnectorMetadata
+
+        return ConnectorMetadata(
+            slug="eia-state-generation-capacity",
+            source_slug="eia-state-generation-capacity",
+            name="EIA Existing Electricity Generation Capacity by State",
+            agency="United States Energy Information Administration",
+            jurisdiction="United States",
+            category=SourceCategory.INFRASTRUCTURE_REFERENCE,
+            access_method=AccessMethod.BULK_DOWNLOAD,
+            base_url=EIA_CAPACITY_URL,
+            connector_version="0.1.0",
+            parser_version="0.1.0",
+            status=ConnectorStatus.IMPLEMENTED,
+            update_frequency="annual",
+            rate_limit_per_second=0.5,
+            license_name="US Government public domain",
+            license_url="https://www.eia.gov/about/copyrights_reuse.php",
+            robots_policy_status="allowed",
+            geographic_coverage="All US states and DC. State resolution only.",
+            historical_coverage="1990 to the most recent published year.",
+            reliability_score=0.95,
+            known_schema_issues=(
+                "Published only as xlsx. Producer types and fuel sources both "
+                "carry roll-up rows alongside their parts, so reading the sheet "
+                "naively double counts. This is installed capacity, not "
+                "generation, and it says nothing about whether a particular site "
+                "could be served."
+            ),
+        )
+
+    def rows_from(self, payload: bytes) -> list[dict[str, Any]]:
+        """Read the EIA capacity workbook into measurement rows.
+
+        Only the all-producers, all-fuels roll-up is kept. The fuel breakdown is
+        genuinely interesting and is deliberately not ingested: it would add
+        twenty-four rows per state to a table whose job here is to give one
+        honest denominator, and a fuel mix is a different question from whether
+        the grid has room.
+        """
+        records = _read_eia_workbook(payload, ("Year", "State Code"), label="capacity")
+        target = _resolve_year(records, self._year)
+        self._resolved_year = target
+
+        rows: list[dict[str, Any]] = []
+        for record in records:
+            year = _clean_number(record.get("Year"))
+            if year is None or int(year) != target:
+                continue
+            if str(record.get("Producer Type") or "").strip() != CAPACITY_ROLLUP_PRODUCER:
+                continue
+            if str(record.get("Fuel Source") or "").strip() != CAPACITY_ROLLUP_FUEL:
+                continue
+
+            state = str(record.get("State Code") or "").strip().upper()
+            if not state or state == "US":
+                continue
+            if self.states is not None and state not in self.states:
+                continue
+
+            for column, metric in CAPACITY_METRICS.items():
+                value = _clean_number(record.get(column))
+                if value is None:
+                    continue
+                rows.append(
+                    {
+                        "area_kind": "state",
+                        "area_code": state,
+                        "area_name": state,
+                        "metric": metric,
+                        "sector": "all",
+                        "value": value,
+                        "unit": "MW",
                         "reference_year": target,
                     }
                 )

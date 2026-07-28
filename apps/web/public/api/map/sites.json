@@ -101,7 +101,7 @@
         ]
       },
       "properties": {
-        "id": "cb081524-1f6d-45d3-a7f5-797fc6b26b46",
+        "id": "8669bc1e-ce4f-48b8-86aa-7512753376d7",
         "project_code": "AZ-CHANDLER-006",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -239,7 +239,7 @@
         ]
       },
       "properties": {
-        "id": "3cda1da9-931b-4a64-a463-5a70b0bfcdca",
+        "id": "cf73662a-86bb-4a1d-89c3-302723627abe",
         "project_code": "AZ-MESA-001",
         "site_kind": "hyperscale_campus",
         "site_kind_assertion": "reported",
@@ -333,7 +333,7 @@
         ]
       },
       "properties": {
-        "id": "000c2341-4297-4a05-a67d-56d59a56ea77",
+        "id": "9049373a-c16b-49e1-b75d-d0a96ced35d6",
         "project_code": "AZ-MESA-002",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -791,7 +791,7 @@
         ]
       },
       "properties": {
-        "id": "e8308d06-6d5a-42da-8bc2-95bf5d5241c2",
+        "id": "1d34fcd3-d4d9-45bc-bd3f-ade48bfe2da3",
         "project_code": "AZ-CHANDLER-001",
         "site_kind": "hyperscale_campus",
         "site_kind_assertion": "reported",
@@ -873,7 +873,7 @@
         ]
       },
       "properties": {
-        "id": "bc2b87a3-8be0-4d5a-8aab-0edad112c968",
+        "id": "aed84c6c-f7a2-4583-a9ac-5a8affa58d4c",
         "project_code": "AZ-CHANDLER-002",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -939,7 +939,7 @@
         ]
       },
       "properties": {
-        "id": "7c989359-6269-440d-8b62-647ed598c7de",
+        "id": "57dfd082-6178-492c-8ee3-493c0e29a924",
         "project_code": "AZ-CHANDLER-004",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1017,7 +1017,7 @@
         ]
       },
       "properties": {
-        "id": "d8be5b16-25cd-4198-9658-666bbb8e4a10",
+        "id": "7242d18c-8d4f-4ab6-aa23-5dfce8c9f44c",
         "project_code": "AZ-MESA-004",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1111,7 +1111,7 @@
         ]
       },
       "properties": {
-        "id": "68b5e198-92ab-4a1c-b317-361c5207faca",
+        "id": "cc1d757a-3d99-4f19-914c-92a2416628bc",
         "project_code": "AZ-CHANDLER-005",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1233,7 +1233,7 @@
         ]
       },
       "properties": {
-        "id": "b46a1eb6-1fa8-49f9-918b-68186ffd4229",
+        "id": "0383aa13-4e4b-4a31-9484-d99012ced900",
         "project_code": "AZ-CHANDLER-007",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1667,7 +1667,7 @@
         ]
       },
       "properties": {
-        "id": "c19ea29a-5d01-450a-8f36-a4ac8cbce265",
+        "id": "51fea70d-73e8-43a4-aa06-8d6b1136bae5",
         "project_code": "AZ-CHANDLER-003",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -1969,7 +1969,7 @@
         ]
       },
       "properties": {
-        "id": "adee8541-48ab-48df-a5aa-92fd3dc997d6",
+        "id": "031d6fdf-3008-4ea4-93de-761be6541082",
         "project_code": "AZ-GILBERT-001",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -2031,7 +2031,7 @@
         ]
       },
       "properties": {
-        "id": "cc9a2319-0e0d-45e2-bb83-52e1fb0393d9",
+        "id": "3e60d63e-1e02-4bba-b963-6343db356eb8",
         "project_code": "AZ-TEMPE-001",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",
@@ -2081,7 +2081,7 @@
         ]
       },
       "properties": {
-        "id": "37761c01-21e9-4415-9f9a-656c15c8a9c5",
+        "id": "d57fed5f-31e4-43b8-b79a-1cd75e61cf9d",
         "project_code": "AZ-MESA-003",
         "site_kind": "enterprise_data_center",
         "site_kind_assertion": "reported",

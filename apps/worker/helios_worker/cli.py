@@ -21,6 +21,7 @@ from helios_common.logging import configure_logging
 from helios_common.vocabulary import ConnectorStatus
 from helios_connectors.area_totals import (
     EiaStateElectricityConnector,
+    EiaStateGenerationCapacityConnector,
     UsgsCountyWaterConnector,
 )
 from helios_connectors.azcc_edocket import AzccEdocketConnector
@@ -74,6 +75,7 @@ CONNECTORS: dict[str, Any] = {
     "azcc-edocket": AzccEdocketConnector,
     "usgs-county-water-use": UsgsCountyWaterConnector,
     "eia-state-electricity-sales": EiaStateElectricityConnector,
+    "eia-state-generation-capacity": EiaStateGenerationCapacityConnector,
 }
 
 AREA_TOTAL_SCOPES: dict[str, dict[str, Any]] = {
@@ -81,6 +83,7 @@ AREA_TOTAL_SCOPES: dict[str, dict[str, Any]] = {
     # areas Helios can actually put a site in; --nationwide lifts it.
     "usgs-county-water-use": {"counties": STUDY_REGION.county_fips},
     "eia-state-electricity-sales": {"states": (STUDY_REGION.state_code,)},
+    "eia-state-generation-capacity": {"states": (STUDY_REGION.state_code,)},
 }
 
 
@@ -548,7 +551,11 @@ def _ingest_live() -> None:
     # Area totals are large annual publications on stable federal hosts. They
     # are independent of everything above, so a failure here costs the context
     # figures and nothing else.
-    for slug in ("usgs-county-water-use", "eia-state-electricity-sales"):
+    for slug in (
+        "usgs-county-water-use",
+        "eia-state-electricity-sales",
+        "eia-state-generation-capacity",
+    ):
         try:
             ingest(slug)
         except typer.Exit:

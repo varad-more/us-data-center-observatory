@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:51:16.599612+00:00",
+  "generated_at": "2026-07-28T07:44:05.995741+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -96,7 +96,7 @@
   },
   "evidence": [
     {
-      "id": "b7ef4beb-7687-4208-ad0e-8880086331df",
+      "id": "9eee4f2d-8c66-489f-b4ce-9638a150a192",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by MECP1 MESA 2 LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); alphanumeric project-code naming pattern). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = MECP1 MESA 2 LLC",
@@ -125,8 +125,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -138,7 +138,7 @@
       }
     },
     {
-      "id": "02eada7a-06e3-4c8f-b722-9d0eac33e3cd",
+      "id": "fa85b997-77e2-410a-8387-20ad613c93fd",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-05458 at 3856 S EVERTON TERR, opened 2026-03-20, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-05458; COM; 3856 S EVERTON TERR; In Review - Plans are being reviewed or awaiting revisions",
@@ -186,7 +186,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "4d762728-ca84-4bad-b04c-34b5325e0eeb",
+        "permit_id": "2c480818-2c33-4cc5-8e21-cdec0f217125",
         "address_match": {
           "apn": "30431955",
           "method": "address_normalized_exact",
@@ -196,8 +196,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -209,7 +209,7 @@
       }
     },
     {
-      "id": "f3b7549a-6080-45a1-9812-c1df32c43fa7",
+      "id": "8695b930-9e53-41d0-92db-011ac26cde79",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-00788 at 3856 S EVERTON TERR, opened 2026-01-12, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-00788; COM; 3856 S EVERTON TERR; Issued - Permit approved and issued and in inspection phase",
@@ -257,7 +257,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "cea33aec-2e6b-4503-9c12-c3ed216963ac",
+        "permit_id": "5fc9f946-1079-4913-90ed-3f11a87dcaea",
         "address_match": {
           "apn": "30431955",
           "method": "address_normalized_exact",
@@ -267,8 +267,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -280,7 +280,7 @@
       }
     },
     {
-      "id": "e15169f3-d543-4a53-a803-f98fdb067adc",
+      "id": "612519b2-be6f-4d6d-ad6e-86db4051b87a",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-11828 at 3856 S EVERTON TERR, opened 2026-06-29, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-11828; COM; 3856 S EVERTON TERR; In Review - Plans are being reviewed or awaiting revisions",
@@ -328,7 +328,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "7c6807f7-217e-4c06-aacb-a330abf23d08",
+        "permit_id": "a06b3dda-91d8-4d30-b248-69a741f14768",
         "address_match": {
           "apn": "30431955",
           "method": "address_normalized_exact",
@@ -338,8 +338,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -351,7 +351,7 @@
       }
     },
     {
-      "id": "a876e46d-1fee-46b0-8c25-d3fdd82fbb03",
+      "id": "a2e85f0e-5ff1-491a-a346-1b0ce74fff14",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-06976 at 3856 S EVERTON TERR, opened 2026-04-13, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-06976; COM; 3856 S EVERTON TERR; Issued - Permit approved and issued and in inspection phase",
@@ -399,7 +399,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "61ee167c-6b80-426d-9437-6cb21fba6d62",
+        "permit_id": "ac82efee-cd18-4841-af3d-d347f123544e",
         "address_match": {
           "apn": "30431955",
           "method": "address_normalized_exact",
@@ -409,8 +409,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -422,7 +422,7 @@
       }
     },
     {
-      "id": "147229d5-28b9-4705-8378-cd3a1d0bf27f",
+      "id": "3000a444-b6e3-4c27-a6ab-ac751b98ca02",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Howard Substation tagged 69 kV lies 82 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Howard Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -442,8 +442,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
-        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
+        "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
+        "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -455,7 +455,7 @@
       }
     },
     {
-      "id": "51c7a6d3-e46e-496c-a0ce-b1e1df371a35",
+      "id": "56cada74-679f-4b46-ae64-3c2e5572401e",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -484,8 +484,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -499,30 +499,30 @@
   ],
   "stage_history": [
     {
-      "id": "d383702a-386a-49b1-a521-dbfc5929bcba",
+      "id": "4d90d048-4549-49cf-8a0b-2a371f0e43cb",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2025-07-24",
-      "detected_at": "2026-07-28T05:51:14.106590Z",
+      "detected_at": "2026-07-28T07:44:04.451614Z",
       "is_downgrade": false,
       "confidence": 54.0,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 54% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "51c7a6d3-e46e-496c-a0ce-b1e1df371a35",
-        "e15169f3-d543-4a53-a803-f98fdb067adc",
-        "a876e46d-1fee-46b0-8c25-d3fdd82fbb03",
-        "f3b7549a-6080-45a1-9812-c1df32c43fa7",
-        "b7ef4beb-7687-4208-ad0e-8880086331df"
+        "56cada74-679f-4b46-ae64-3c2e5572401e",
+        "612519b2-be6f-4d6d-ad6e-86db4051b87a",
+        "a2e85f0e-5ff1-491a-a346-1b0ce74fff14",
+        "8695b930-9e53-41d0-92db-011ac26cde79",
+        "9eee4f2d-8c66-489f-b4ce-9638a150a192"
       ],
       "detection_lag_days": 369
     }
   ],
   "predictions": [
     {
-      "id": "d9374253-8f9f-4363-8d0f-a20004e11ea6",
-      "calculated_at": "2026-07-28T05:51:14.099832Z",
+      "id": "a9fb8c50-998d-485a-8bf6-d2464d8e37a2",
+      "calculated_at": "2026-07-28T07:44:04.449372Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -548,7 +548,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "51c7a6d3-e46e-496c-a0ce-b1e1df371a35"
+          "evidence_record_id": "56cada74-679f-4b46-ae64-3c2e5572401e"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -560,7 +560,7 @@
           "confidence_multiplier": 0.9253,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "147229d5-28b9-4705-8378-cd3a1d0bf27f"
+          "evidence_record_id": "3000a444-b6e3-4c27-a6ab-ac751b98ca02"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -572,7 +572,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.7044,
           "polarity": "supporting",
-          "evidence_record_id": "b7ef4beb-7687-4208-ad0e-8880086331df"
+          "evidence_record_id": "9eee4f2d-8c66-489f-b4ce-9638a150a192"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -584,7 +584,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9868,
           "polarity": "supporting",
-          "evidence_record_id": "e15169f3-d543-4a53-a803-f98fdb067adc"
+          "evidence_record_id": "612519b2-be6f-4d6d-ad6e-86db4051b87a"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -596,7 +596,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9868,
           "polarity": "supporting",
-          "evidence_record_id": "a876e46d-1fee-46b0-8c25-d3fdd82fbb03"
+          "evidence_record_id": "a2e85f0e-5ff1-491a-a346-1b0ce74fff14"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -608,13 +608,13 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9295,
           "polarity": "supporting",
-          "evidence_record_id": "f3b7549a-6080-45a1-9812-c1df32c43fa7"
+          "evidence_record_id": "8695b930-9e53-41d0-92db-011ac26cde79"
         }
       ]
     },
     {
-      "id": "001d625f-ecaf-4ded-bc88-9814427e1a67",
-      "calculated_at": "2026-07-28T05:51:14.099923Z",
+      "id": "e1bccf1f-e860-434c-9c70-80138d916e79",
+      "calculated_at": "2026-07-28T07:44:04.449416Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -640,7 +640,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "51c7a6d3-e46e-496c-a0ce-b1e1df371a35"
+          "evidence_record_id": "56cada74-679f-4b46-ae64-3c2e5572401e"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -652,7 +652,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9868,
           "polarity": "supporting",
-          "evidence_record_id": "e15169f3-d543-4a53-a803-f98fdb067adc"
+          "evidence_record_id": "612519b2-be6f-4d6d-ad6e-86db4051b87a"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -664,7 +664,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9868,
           "polarity": "supporting",
-          "evidence_record_id": "a876e46d-1fee-46b0-8c25-d3fdd82fbb03"
+          "evidence_record_id": "a2e85f0e-5ff1-491a-a346-1b0ce74fff14"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -676,7 +676,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9295,
           "polarity": "supporting",
-          "evidence_record_id": "f3b7549a-6080-45a1-9812-c1df32c43fa7"
+          "evidence_record_id": "8695b930-9e53-41d0-92db-011ac26cde79"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -688,7 +688,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.7044,
           "polarity": "supporting",
-          "evidence_record_id": "b7ef4beb-7687-4208-ad0e-8880086331df"
+          "evidence_record_id": "9eee4f2d-8c66-489f-b4ce-9638a150a192"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -700,7 +700,7 @@
           "confidence_multiplier": 0.9253,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "147229d5-28b9-4705-8378-cd3a1d0bf27f"
+          "evidence_record_id": "3000a444-b6e3-4c27-a6ab-ac751b98ca02"
         }
       ]
     }

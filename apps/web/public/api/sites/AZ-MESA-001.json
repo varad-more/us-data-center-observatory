@@ -1,5 +1,5 @@
 {
-  "id": "3cda1da9-931b-4a64-a463-5a70b0bfcdca",
+  "id": "cf73662a-86bb-4a1d-89c3-302723627abe",
   "project_code": "AZ-MESA-001",
   "display_name": null,
   "site_kind": "hyperscale_campus",
@@ -18,8 +18,8 @@
   "total_acres": 83.1715,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-28T05:51:14.139894Z",
-  "score_last_calculated_at": "2026-07-28T05:51:14.136192Z",
+  "stage_last_changed_at": "2026-07-28T07:44:04.477970Z",
+  "score_last_calculated_at": "2026-07-28T07:44:04.475621Z",
   "centroid": [
     -111.604067,
     33.346951
@@ -149,7 +149,7 @@
   },
   "parcels": [
     {
-      "id": "ed19a71d-a396-4670-b584-3d62327f0ae6",
+      "id": "37c06fd4-b37a-4d82-bdc9-22eb8cd9960a",
       "apn": "30433005S",
       "apn_formatted": "304-33-005S",
       "situs_address": "3740 S SIGNAL BUTTE RD",
@@ -169,7 +169,7 @@
   ],
   "organizations": [
     {
-      "id": "edaa2520-3a1e-40a3-9e5b-b67eb085e6d0",
+      "id": "fe64dc2b-f99a-4687-a817-e3e8644be08f",
       "canonical_name": "PLATYPUS DEVELOPMENT LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -185,7 +185,7 @@
   ],
   "dependencies": [
     {
-      "id": "6a9ca8a9-f041-4f24-9dd2-6407e8c016ae",
+      "id": "6da8de00-0056-4ab8-89b4-55299ba891ca",
       "infrastructure_kind": "substation",
       "label": "Luna Substation",
       "dependency_status": "existing",
@@ -199,7 +199,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "c8654d71-d64d-4308-8d91-bafc12204e93",
+      "id": "d56f2f9e-c978-448d-8290-c47db46f35d3",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -213,7 +213,7 @@
       "operator_name": null
     },
     {
-      "id": "f50c5744-b765-4452-82dc-255684585a85",
+      "id": "4ba26e7e-7a98-4397-a6fa-f3d24b0ce3b8",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -227,7 +227,7 @@
       "operator_name": null
     },
     {
-      "id": "4b08c7af-c3ca-4bb1-8384-8e0fa6a2201c",
+      "id": "bae7dea3-251b-41dc-a746-4286e3724d3f",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -241,7 +241,7 @@
       "operator_name": null
     },
     {
-      "id": "d2c76acf-7f97-49d4-bd6d-3d32857e35f3",
+      "id": "e0ae6f90-41c1-4425-93b3-5e57eea0a0d5",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -255,7 +255,7 @@
       "operator_name": null
     },
     {
-      "id": "6a30f88b-bb31-485f-a0e6-f6742da7b988",
+      "id": "f2c62dc2-3bdb-4c12-a648-de805279a82b",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -269,7 +269,7 @@
       "operator_name": null
     },
     {
-      "id": "01324a0e-ddb7-4a53-89db-35ebb0708b19",
+      "id": "861c55d4-0bda-4c78-b9c0-9fa5a0d63568",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -283,7 +283,7 @@
       "operator_name": null
     },
     {
-      "id": "f4992054-4c1d-4838-9281-04a2b195a11a",
+      "id": "21405572-b4af-475d-a44d-05403b6c4131",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -297,7 +297,7 @@
       "operator_name": null
     },
     {
-      "id": "40896b6d-5741-45b5-9d7a-d3fea2c55b38",
+      "id": "b61b1638-98cf-4fe3-a8de-7d0c989857de",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -311,7 +311,7 @@
       "operator_name": null
     },
     {
-      "id": "e123d7ce-f25f-43f4-b1c5-e585d64efeb8",
+      "id": "5509e074-0a7b-481a-85d4-d648157086c3",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -325,7 +325,7 @@
       "operator_name": null
     },
     {
-      "id": "24be7d19-9c1a-4bc0-a732-4ddbd677b076",
+      "id": "6dd9a7f3-99f5-4435-909d-e327d15940dd",
       "infrastructure_kind": "substation",
       "label": "Greenbone Substation",
       "dependency_status": "existing",
@@ -339,7 +339,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "c40bba61-4c4c-46c8-b02d-0d2af276d190",
+      "id": "4b3fb0c9-f580-49cb-a419-71352236aa21",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -353,7 +353,7 @@
       "operator_name": null
     },
     {
-      "id": "79ff701f-3e17-4635-b40b-a53909df5a96",
+      "id": "b3a5a97b-ec4d-4a67-ad46-38ee9844c8df",
       "infrastructure_kind": "substation",
       "label": "Howard Substation",
       "dependency_status": "existing",
@@ -367,7 +367,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "5bbc6f86-b1b6-4d3b-b137-272cf560aec5",
+      "id": "8ef368f6-a832-4a66-97ed-cf22a62e5342",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -381,7 +381,7 @@
       "operator_name": null
     },
     {
-      "id": "aae82df5-637a-4113-8e61-a9a777c02462",
+      "id": "04dfdcf0-a9b7-4c78-99ef-1d0923599979",
       "infrastructure_kind": "substation",
       "label": "Prickly Pear Substation",
       "dependency_status": "existing",
@@ -395,7 +395,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "985a7996-e858-446c-bd81-02def22fb07f",
+      "id": "7b48ba8c-402e-4fdc-bd99-5dae6317617e",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -411,7 +411,7 @@
   ],
   "estimates": [
     {
-      "id": "7b2111c1-5e13-4244-8adb-d5c68c41a3ce",
+      "id": "edfba00a-fd54-4caa-90d0-3279936c21a8",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 99.8,
@@ -429,11 +429,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-28T05:51:14.140833Z",
+      "calculated_at": "2026-07-28T07:44:04.478563Z",
       "notes": null
     },
     {
-      "id": "910b0e0d-3ba3-4f12-9c5b-36bc3d81d5d2",
+      "id": "0b689efd-5db8-4b51-ac86-612e6102f510",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 239520.0,
@@ -451,13 +451,13 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-28T05:51:14.140908Z",
+      "calculated_at": "2026-07-28T07:44:04.478633Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "4ed474b8-9755-4b27-b2e4-1f5a3ecab4f2",
-    "calculated_at": "2026-07-28T05:51:14.136254Z",
+    "id": "f0c5faa1-f5e2-4438-b26b-45c4f666bb1a",
+    "calculated_at": "2026-07-28T07:44:04.475663Z",
     "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
@@ -483,7 +483,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "89a96c2e-f73d-4e91-97a3-ced3f3643dec"
+        "evidence_record_id": "f0da49cc-37ac-4223-bc3b-25d7b401db63"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -495,7 +495,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9953,
         "polarity": "supporting",
-        "evidence_record_id": "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408"
+        "evidence_record_id": "c140827f-a620-47c6-8acf-6b89f9b9c4cd"
       },
       {
         "rule_id": "backup-generator-air-permit",
@@ -507,7 +507,7 @@
         "confidence_multiplier": 0.8,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "41dde2a6-6da3-4904-8c92-cb30a9217704"
+        "evidence_record_id": "65f9238f-797a-457b-9556-5e8f9c377db6"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -519,7 +519,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9943,
         "polarity": "supporting",
-        "evidence_record_id": "178520f5-85e1-4c8d-b589-46d172703c16"
+        "evidence_record_id": "f4f59e05-8863-437a-8d73-eb2a28beddc9"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -531,7 +531,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.2921,
         "polarity": "supporting",
-        "evidence_record_id": "bd528ec4-1034-43a5-bbac-a5030ffe8752"
+        "evidence_record_id": "e53542af-98f9-4745-8fdb-7c20ef8b2420"
       },
       {
         "rule_id": "large-industrial-parcel-acquisition",
@@ -543,7 +543,7 @@
         "confidence_multiplier": 0.9,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "3927325b-ace9-402b-8ead-82f19effbb6c"
+        "evidence_record_id": "3e5f3f44-7913-439d-96a8-5d153caa2b7d"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -555,7 +555,7 @@
         "confidence_multiplier": 0.75,
         "recency_multiplier": 0.9877,
         "polarity": "supporting",
-        "evidence_record_id": "d2662bbd-f06a-4a76-8e9b-5793eede095b"
+        "evidence_record_id": "e53a3c16-18ea-433f-acd7-95ff7adee77b"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -567,7 +567,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee"
+        "evidence_record_id": "4f75e49d-1434-416e-897a-de1b2ae2bb9b"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -579,7 +579,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "0af8d4c0-e60b-4100-a74e-58078a8e2831"
+        "evidence_record_id": "8363a7f6-6682-4c26-b860-87b2fcb1cd58"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -591,32 +591,32 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "66082726-6f96-4318-8836-dcbf172fea29"
+        "evidence_record_id": "f7c5c6e1-7486-4d68-b129-98beba65db20"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "bfbc501b-a0eb-4d54-8bdf-6a20cb866b1e",
+      "id": "38e1b50c-f015-4d08-b113-33ad5f84d1a7",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-28T05:51:14.139894Z",
+      "detected_at": "2026-07-28T07:44:04.477970Z",
       "is_downgrade": false,
       "confidence": 70.02,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "triggering_evidence_ids": [
-        "89a96c2e-f73d-4e91-97a3-ced3f3643dec",
-        "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408",
-        "41dde2a6-6da3-4904-8c92-cb30a9217704",
-        "178520f5-85e1-4c8d-b589-46d172703c16",
-        "bd528ec4-1034-43a5-bbac-a5030ffe8752",
-        "3927325b-ace9-402b-8ead-82f19effbb6c",
-        "d2662bbd-f06a-4a76-8e9b-5793eede095b",
-        "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee",
-        "0af8d4c0-e60b-4100-a74e-58078a8e2831"
+        "f0da49cc-37ac-4223-bc3b-25d7b401db63",
+        "c140827f-a620-47c6-8acf-6b89f9b9c4cd",
+        "65f9238f-797a-457b-9556-5e8f9c377db6",
+        "f4f59e05-8863-437a-8d73-eb2a28beddc9",
+        "e53542af-98f9-4745-8fdb-7c20ef8b2420",
+        "3e5f3f44-7913-439d-96a8-5d153caa2b7d",
+        "e53a3c16-18ea-433f-acd7-95ff7adee77b",
+        "4f75e49d-1434-416e-897a-de1b2ae2bb9b",
+        "8363a7f6-6682-4c26-b860-87b2fcb1cd58"
       ],
       "detection_lag_days": 4649
     }

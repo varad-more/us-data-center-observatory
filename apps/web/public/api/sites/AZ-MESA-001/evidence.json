@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:51:16.492146+00:00",
+  "generated_at": "2026-07-28T07:44:05.907468+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -140,49 +140,7 @@
   },
   "evidence": [
     {
-      "id": "0af8d4c0-e60b-4100-a74e-58078a8e2831",
-      "evidence_kind": "shell_entity_ownership",
-      "summary": "Title is held by PLATYPUS DEVELOPMENT LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); minimal descriptive name). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
-      "snippet": "OwnerName = PLATYPUS DEVELOPMENT LLC",
-      "snippet_locator": "$.features[6].attributes.OwnerName",
-      "observed_at": "2013-11-04",
-      "assertion_class": "inferred",
-      "extraction_method": "pattern_rule",
-      "polarity": "supporting",
-      "confidence": 0.45,
-      "human_review_status": "not_reviewed",
-      "is_standing_condition": false,
-      "normalized_values": {
-        "fields": [
-          {
-            "name": "owner_name",
-            "value": "PLATYPUS DEVELOPMENT LLC",
-            "locator": "$.features[6].attributes.OwnerName",
-            "raw_text": "PLATYPUS DEVELOPMENT LLC",
-            "raw_unit": null,
-            "confidence": 0.95,
-            "assertion_class": "reported",
-            "normalized_unit": null,
-            "extraction_method": "structured_feed"
-          }
-        ],
-        "is_standing_condition": false
-      },
-      "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
-        "source_slug": "maricopa-assessor-parcels",
-        "source_name": "Maricopa County Assessor Parcel Layer",
-        "agency": "Maricopa County Assessor / Maricopa County GIS",
-        "source_url": "https://example.invalid/recorded",
-        "retrieved_at": "2026-07-25T21:30:00Z",
-        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
-        "parser_version": "0.1.0",
-        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
-      }
-    },
-    {
-      "id": "3927325b-ace9-402b-8ead-82f19effbb6c",
+      "id": "3e5f3f44-7913-439d-96a8-5d153caa2b7d",
       "evidence_kind": "large_industrial_parcel_acquisition",
       "summary": "Organization-held industrial parcel of 83.2 acres transferred for $113,576,875 on 2013-11-04, at or above the 20-acre campus-scale threshold.",
       "snippet": "DeedNumber = 20130962087; DeedDate = 2013-11-04; LotSize_Acre = 83.17146",
@@ -222,8 +180,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -235,7 +193,49 @@
       }
     },
     {
-      "id": "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee",
+      "id": "8363a7f6-6682-4c26-b860-87b2fcb1cd58",
+      "evidence_kind": "shell_entity_ownership",
+      "summary": "Title is held by PLATYPUS DEVELOPMENT LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); minimal descriptive name). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
+      "snippet": "OwnerName = PLATYPUS DEVELOPMENT LLC",
+      "snippet_locator": "$.features[6].attributes.OwnerName",
+      "observed_at": "2013-11-04",
+      "assertion_class": "inferred",
+      "extraction_method": "pattern_rule",
+      "polarity": "supporting",
+      "confidence": 0.45,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": false,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "owner_name",
+            "value": "PLATYPUS DEVELOPMENT LLC",
+            "locator": "$.features[6].attributes.OwnerName",
+            "raw_text": "PLATYPUS DEVELOPMENT LLC",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": false
+      },
+      "source": {
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
+    },
+    {
+      "id": "4f75e49d-1434-416e-897a-de1b2ae2bb9b",
       "evidence_kind": "substation_application",
       "summary": "ACC docket E-01345A-22-0148: Initial CEC application \u2014 Signal Butte Substation. Filed by Arizona Public Service Company on 2022-06-14. Helios ingested a recorded fixture, not a live scrape.",
       "snippet": "Requests approval to construct a 230/69 kV substation and short loop-in of an existing 230 kV circuit near S Signal Butte Road, Mesa.",
@@ -283,24 +283,24 @@
             "extraction_method": "pattern_rule"
           }
         ],
-        "permit_id": "939d69bb-fc0a-4d46-a1ff-3191f97dbd37",
+        "permit_id": "ecdd3fe5-6165-434c-92c4-0ea7f8d01070",
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "b76cf740-6ded-4be5-b388-ac5078e64bcf",
-        "document_version_id": "ab019037-df29-492e-913c-6a353c9f5bd2",
+        "document_id": "234b55f7-fb29-4e81-885c-3c39b280bf1a",
+        "document_version_id": "31545f57-735c-4b25-8155-99c41b674be1",
         "source_slug": "azcc-edocket",
         "source_name": "Arizona Corporation Commission eDocket",
         "agency": "Arizona Corporation Commission",
         "source_url": "https://edocket.azcc.gov/search/docket-search",
-        "retrieved_at": "2026-07-28T05:51:13.328943Z",
+        "retrieved_at": "2026-07-28T07:44:03.707687Z",
         "content_sha256": "c3c1150bf8f6907a483612a4f43d19afe9814f38215a0a65ce0d5b6f78128055",
         "parser_version": "0.1.0",
         "attribution_text": null
       }
     },
     {
-      "id": "bd528ec4-1034-43a5-bbac-a5030ffe8752",
+      "id": "e53542af-98f9-4745-8fdb-7c20ef8b2420",
       "evidence_kind": "substation_application",
       "summary": "ACC docket E-01345A-22-0148: Amended single-line and site plan. Filed by Arizona Public Service Company on 2023-01-09. Helios ingested a recorded fixture, not a live scrape.",
       "snippet": "Updates the proposed substation footprint and confirms 230 kV loop-in alignment.",
@@ -348,24 +348,24 @@
             "extraction_method": "pattern_rule"
           }
         ],
-        "permit_id": "996743f4-edbc-4bdc-bba4-897eaf6abcdd",
+        "permit_id": "0d2619ef-a098-442e-a9e4-8b657ad666d5",
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "b76cf740-6ded-4be5-b388-ac5078e64bcf",
-        "document_version_id": "ab019037-df29-492e-913c-6a353c9f5bd2",
+        "document_id": "234b55f7-fb29-4e81-885c-3c39b280bf1a",
+        "document_version_id": "31545f57-735c-4b25-8155-99c41b674be1",
         "source_slug": "azcc-edocket",
         "source_name": "Arizona Corporation Commission eDocket",
         "agency": "Arizona Corporation Commission",
         "source_url": "https://edocket.azcc.gov/search/docket-search",
-        "retrieved_at": "2026-07-28T05:51:13.328943Z",
+        "retrieved_at": "2026-07-28T07:44:03.707687Z",
         "content_sha256": "c3c1150bf8f6907a483612a4f43d19afe9814f38215a0a65ce0d5b6f78128055",
         "parser_version": "0.1.0",
         "attribution_text": null
       }
     },
     {
-      "id": "d2662bbd-f06a-4a76-8e9b-5793eede095b",
+      "id": "e53a3c16-18ea-433f-acd7-95ff7adee77b",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-07994 at 3740 S SIGNAL BUTTE RD, opened 2026-04-27, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-07994; COM; 3740 S SIGNAL BUTTE RD; Issued - Permit approved and issued and in inspection phase",
@@ -413,7 +413,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "2b472d10-a03f-4169-9054-6aa5de933ff8",
+        "permit_id": "5991027c-7b16-4539-a6cf-4e3dc0803717",
         "address_match": {
           "apn": "30433005S",
           "method": "address_normalized_exact",
@@ -423,8 +423,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -436,7 +436,7 @@
       }
     },
     {
-      "id": "178520f5-85e1-4c8d-b589-46d172703c16",
+      "id": "f4f59e05-8863-437a-8d73-eb2a28beddc9",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-12780 at 3740 S SIGNAL BUTTE RD, opened 2026-07-13, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-12780; COM; 3740 S SIGNAL BUTTE RD; In Review - Plans are being reviewed or awaiting revisions",
@@ -484,7 +484,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "357a3aab-fa10-4e8f-91b9-b8fc149ae02a",
+        "permit_id": "564bfca0-25c0-4a3f-a04e-40f88518cafe",
         "address_match": {
           "apn": "30433005S",
           "method": "address_normalized_exact",
@@ -494,8 +494,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -507,7 +507,7 @@
       }
     },
     {
-      "id": "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408",
+      "id": "c140827f-a620-47c6-8acf-6b89f9b9c4cd",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-13495 at 3740 S SIGNAL BUTTE RD, opened 2026-07-23, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-13495; COM; 3740 S SIGNAL BUTTE RD; In Review - Plans are being reviewed or awaiting revisions",
@@ -555,7 +555,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "bf87e50f-ff72-4207-8fc0-22b0d9ee0a0f",
+        "permit_id": "bd40d0e8-e2ae-432c-a41a-1addef39c9be",
         "address_match": {
           "apn": "30433005S",
           "method": "address_normalized_exact",
@@ -565,8 +565,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -578,7 +578,7 @@
       }
     },
     {
-      "id": "66082726-6f96-4318-8836-dcbf172fea29",
+      "id": "f7c5c6e1-7486-4d68-b129-98beba65db20",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Luna Substation tagged 69 kV lies 0 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Luna Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -598,8 +598,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
-        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
+        "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
+        "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -611,49 +611,7 @@
       }
     },
     {
-      "id": "89a96c2e-f73d-4e91-97a3-ced3f3643dec",
-      "evidence_kind": "assessor_data_center_classification",
-      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-      "snippet": "PropertyUseDescription = DATA CENTERS",
-      "snippet_locator": "$.features[6].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-28",
-      "assertion_class": "reported",
-      "extraction_method": "structured_feed",
-      "polarity": "supporting",
-      "confidence": 0.95,
-      "human_review_status": "not_reviewed",
-      "is_standing_condition": true,
-      "normalized_values": {
-        "fields": [
-          {
-            "name": "land_use_description",
-            "value": "DATA CENTERS",
-            "locator": "$.features[6].attributes.PropertyUseDescription",
-            "raw_text": "DATA CENTERS",
-            "raw_unit": null,
-            "confidence": 0.95,
-            "assertion_class": "reported",
-            "normalized_unit": null,
-            "extraction_method": "structured_feed"
-          }
-        ],
-        "is_standing_condition": true
-      },
-      "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
-        "source_slug": "maricopa-assessor-parcels",
-        "source_name": "Maricopa County Assessor Parcel Layer",
-        "agency": "Maricopa County Assessor / Maricopa County GIS",
-        "source_url": "https://example.invalid/recorded",
-        "retrieved_at": "2026-07-25T21:30:00Z",
-        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
-        "parser_version": "0.1.0",
-        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
-      }
-    },
-    {
-      "id": "41dde2a6-6da3-4904-8c92-cb30a9217704",
+      "id": "65f9238f-797a-457b-9556-5e8f9c377db6",
       "evidence_kind": "backup_generator_air_permit",
       "summary": "EPA ECHO lists PLATYPUS CAMPUS EMERGENCY GENERATORS as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Title V; NESHAP Reciprocating Internal Combustion Engines.",
       "snippet": "PLATYPUS CAMPUS EMERGENCY GENERATORS; Title V; NESHAP Reciprocating Internal Combustion Engines",
@@ -701,12 +659,12 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "6df07829-1a01-4438-8489-25e48e41dc3f",
+        "permit_id": "3b16d893-7e40-4ebc-bab7-e104325c9eed",
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "a25361ae-53a4-48b8-a936-847e3bcfcde9",
-        "document_version_id": "e38aed94-5a28-4895-a964-8e979944a354",
+        "document_id": "17a59c32-d9fd-4fe7-821f-fb010fcccbee",
+        "document_version_id": "5f484896-9842-41ad-8857-1887bf50d061",
         "source_slug": "epa-echo-air-facilities",
         "source_name": "EPA ECHO Air Facility Records",
         "agency": "United States Environmental Protection Agency",
@@ -716,38 +674,80 @@
         "parser_version": "0.1.0",
         "attribution_text": null
       }
+    },
+    {
+      "id": "f0da49cc-37ac-4223-bc3b-25d7b401db63",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[6].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-28",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[6].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
     }
   ],
   "stage_history": [
     {
-      "id": "bfbc501b-a0eb-4d54-8bdf-6a20cb866b1e",
+      "id": "38e1b50c-f015-4d08-b113-33ad5f84d1a7",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-28T05:51:14.139894Z",
+      "detected_at": "2026-07-28T07:44:04.477970Z",
       "is_downgrade": false,
       "confidence": 70.02,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "triggering_evidence_ids": [
-        "89a96c2e-f73d-4e91-97a3-ced3f3643dec",
-        "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408",
-        "41dde2a6-6da3-4904-8c92-cb30a9217704",
-        "178520f5-85e1-4c8d-b589-46d172703c16",
-        "bd528ec4-1034-43a5-bbac-a5030ffe8752",
-        "3927325b-ace9-402b-8ead-82f19effbb6c",
-        "d2662bbd-f06a-4a76-8e9b-5793eede095b",
-        "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee",
-        "0af8d4c0-e60b-4100-a74e-58078a8e2831"
+        "f0da49cc-37ac-4223-bc3b-25d7b401db63",
+        "c140827f-a620-47c6-8acf-6b89f9b9c4cd",
+        "65f9238f-797a-457b-9556-5e8f9c377db6",
+        "f4f59e05-8863-437a-8d73-eb2a28beddc9",
+        "e53542af-98f9-4745-8fdb-7c20ef8b2420",
+        "3e5f3f44-7913-439d-96a8-5d153caa2b7d",
+        "e53a3c16-18ea-433f-acd7-95ff7adee77b",
+        "4f75e49d-1434-416e-897a-de1b2ae2bb9b",
+        "8363a7f6-6682-4c26-b860-87b2fcb1cd58"
       ],
       "detection_lag_days": 4649
     }
   ],
   "predictions": [
     {
-      "id": "efc614a5-8bd4-4674-a72f-b069937858f8",
-      "calculated_at": "2026-07-28T05:51:14.136192Z",
+      "id": "495cf473-795b-46e6-b741-51919a8402fb",
+      "calculated_at": "2026-07-28T07:44:04.475621Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -773,7 +773,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "89a96c2e-f73d-4e91-97a3-ced3f3643dec"
+          "evidence_record_id": "f0da49cc-37ac-4223-bc3b-25d7b401db63"
         },
         {
           "rule_id": "backup-generator-air-permit",
@@ -785,7 +785,7 @@
           "confidence_multiplier": 0.8,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "41dde2a6-6da3-4904-8c92-cb30a9217704"
+          "evidence_record_id": "65f9238f-797a-457b-9556-5e8f9c377db6"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -797,7 +797,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "66082726-6f96-4318-8836-dcbf172fea29"
+          "evidence_record_id": "f7c5c6e1-7486-4d68-b129-98beba65db20"
         },
         {
           "rule_id": "transmission-or-substation-filing",
@@ -809,7 +809,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.2921,
           "polarity": "supporting",
-          "evidence_record_id": "bd528ec4-1034-43a5-bbac-a5030ffe8752"
+          "evidence_record_id": "e53542af-98f9-4745-8fdb-7c20ef8b2420"
         },
         {
           "rule_id": "transmission-or-substation-filing",
@@ -821,7 +821,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee"
+          "evidence_record_id": "4f75e49d-1434-416e-897a-de1b2ae2bb9b"
         },
         {
           "rule_id": "large-industrial-parcel-acquisition",
@@ -833,7 +833,7 @@
           "confidence_multiplier": 0.9,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "3927325b-ace9-402b-8ead-82f19effbb6c"
+          "evidence_record_id": "3e5f3f44-7913-439d-96a8-5d153caa2b7d"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -845,7 +845,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408"
+          "evidence_record_id": "c140827f-a620-47c6-8acf-6b89f9b9c4cd"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -857,7 +857,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9943,
           "polarity": "supporting",
-          "evidence_record_id": "178520f5-85e1-4c8d-b589-46d172703c16"
+          "evidence_record_id": "f4f59e05-8863-437a-8d73-eb2a28beddc9"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -869,7 +869,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "0af8d4c0-e60b-4100-a74e-58078a8e2831"
+          "evidence_record_id": "8363a7f6-6682-4c26-b860-87b2fcb1cd58"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -881,13 +881,13 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9877,
           "polarity": "supporting",
-          "evidence_record_id": "d2662bbd-f06a-4a76-8e9b-5793eede095b"
+          "evidence_record_id": "e53a3c16-18ea-433f-acd7-95ff7adee77b"
         }
       ]
     },
     {
-      "id": "4ed474b8-9755-4b27-b2e4-1f5a3ecab4f2",
-      "calculated_at": "2026-07-28T05:51:14.136254Z",
+      "id": "f0c5faa1-f5e2-4438-b26b-45c4f666bb1a",
+      "calculated_at": "2026-07-28T07:44:04.475663Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -913,7 +913,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "89a96c2e-f73d-4e91-97a3-ced3f3643dec"
+          "evidence_record_id": "f0da49cc-37ac-4223-bc3b-25d7b401db63"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -925,7 +925,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "8bc5bd30-b1ff-4f9e-bdf2-f042034a7408"
+          "evidence_record_id": "c140827f-a620-47c6-8acf-6b89f9b9c4cd"
         },
         {
           "rule_id": "backup-generator-air-permit",
@@ -937,7 +937,7 @@
           "confidence_multiplier": 0.8,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "41dde2a6-6da3-4904-8c92-cb30a9217704"
+          "evidence_record_id": "65f9238f-797a-457b-9556-5e8f9c377db6"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -949,7 +949,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9943,
           "polarity": "supporting",
-          "evidence_record_id": "178520f5-85e1-4c8d-b589-46d172703c16"
+          "evidence_record_id": "f4f59e05-8863-437a-8d73-eb2a28beddc9"
         },
         {
           "rule_id": "transmission-or-substation-filing",
@@ -961,7 +961,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.2921,
           "polarity": "supporting",
-          "evidence_record_id": "bd528ec4-1034-43a5-bbac-a5030ffe8752"
+          "evidence_record_id": "e53542af-98f9-4745-8fdb-7c20ef8b2420"
         },
         {
           "rule_id": "large-industrial-parcel-acquisition",
@@ -973,7 +973,7 @@
           "confidence_multiplier": 0.9,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "3927325b-ace9-402b-8ead-82f19effbb6c"
+          "evidence_record_id": "3e5f3f44-7913-439d-96a8-5d153caa2b7d"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -985,7 +985,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9877,
           "polarity": "supporting",
-          "evidence_record_id": "d2662bbd-f06a-4a76-8e9b-5793eede095b"
+          "evidence_record_id": "e53a3c16-18ea-433f-acd7-95ff7adee77b"
         },
         {
           "rule_id": "transmission-or-substation-filing",
@@ -997,7 +997,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "8e6ac4ca-ef64-4fc7-b98c-56dafd5d83ee"
+          "evidence_record_id": "4f75e49d-1434-416e-897a-de1b2ae2bb9b"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -1009,7 +1009,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "0af8d4c0-e60b-4100-a74e-58078a8e2831"
+          "evidence_record_id": "8363a7f6-6682-4c26-b860-87b2fcb1cd58"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -1021,7 +1021,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "66082726-6f96-4318-8836-dcbf172fea29"
+          "evidence_record_id": "f7c5c6e1-7486-4d68-b129-98beba65db20"
         }
       ]
     }

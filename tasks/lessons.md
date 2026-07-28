@@ -152,3 +152,20 @@ plan. It reached the published snapshot as phantom drift. Round an aggregate to
 the precision its inputs actually carry, at the point it leaves the query — and
 assert that two identical requests return identical bytes, because this class of
 bug is invisible in any test that compares numbers with a tolerance.
+
+### Name a table for what it holds, not for the first thing put in it
+`area_consumption` held county population within a day of being created, and
+generation capacity within two. The name was already wrong before the second
+source arrived. Renaming while the table is one migration old costs an
+ALTER TABLE; renaming it after it has consumers costs an argument. When the
+second row type does not fit the name, that is the signal, and it is cheapest
+the moment it appears.
+
+### The number most likely to be quoted needs the loudest caveat
+"These sites are 1.68% of Arizona's generating capacity" reads as "there is
+plenty of room". It is not that: existing demand already consumes most of that
+capacity and Helios does not measure how much. A share of a total is not a share
+of what is unused. Where a correct figure has an obvious wrong reading, put the
+correction in the payload beside the number rather than in the docs, and assert
+it in a test — a caveat that lives only in prose gets separated from the figure
+the first time anyone quotes it.

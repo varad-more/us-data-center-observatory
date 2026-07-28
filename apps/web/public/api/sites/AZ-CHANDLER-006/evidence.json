@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:51:16.384119+00:00",
+  "generated_at": "2026-07-28T07:44:05.818815+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -116,7 +116,7 @@
   },
   "evidence": [
     {
-      "id": "75b9bb87-2d9d-4154-a367-9e439ae2255c",
+      "id": "9b515fc1-4364-4b9e-8305-38fe0ab456b3",
       "evidence_kind": "transmission_filing",
       "summary": "ACC docket E-01933A-21-0099: 230 kV transmission line siting application. Filed by Salt River Project Agricultural Improvement and Power District on 2021-03-22. Helios ingested a recorded fixture, not a live scrape.",
       "snippet": "Proposes rebuild and tap of a 230 kV circuit to serve projected large industrial load south of the Loop 202.",
@@ -164,24 +164,24 @@
             "extraction_method": "pattern_rule"
           }
         ],
-        "permit_id": "4e44b38c-3a60-417d-95d8-65716a7e724f",
+        "permit_id": "86df9bbd-d7b0-4b83-be57-1b44ce653046",
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "494bd01a-1c73-4111-83ac-a838f5ebe620",
-        "document_version_id": "7af6d82f-87a3-4440-a388-7c874b9788fb",
+        "document_id": "b51e0535-b22d-4418-b215-ee481dd65518",
+        "document_version_id": "633375a6-6b35-424a-ad89-730e2e60d502",
         "source_slug": "azcc-edocket",
         "source_name": "Arizona Corporation Commission eDocket",
         "agency": "Arizona Corporation Commission",
         "source_url": "https://edocket.azcc.gov/search/docket-search",
-        "retrieved_at": "2026-07-28T05:51:13.343936Z",
+        "retrieved_at": "2026-07-28T07:44:03.719063Z",
         "content_sha256": "0d9fd1cefbd138ea0bd15962089a5067d90f0d0f6b2b44ade8841fcf200d3c4a",
         "parser_version": "0.1.0",
         "attribution_text": null
       }
     },
     {
-      "id": "c6c57ce4-5106-4cc4-ba02-2681b1995501",
+      "id": "23131e1e-74ed-4283-977c-277abc5c05ba",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = H5 DATA CENTERS CHANDLER LLC",
@@ -210,8 +210,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -223,7 +223,7 @@
       }
     },
     {
-      "id": "1c4ad5dc-9a02-4adb-92da-454dc32a3564",
+      "id": "83f7a697-e5e3-4f9f-a5ca-0894f85c7351",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by H5 DATA CENTERS CHANDLER LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = H5 DATA CENTERS CHANDLER LLC",
@@ -252,8 +252,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -265,7 +265,7 @@
       }
     },
     {
-      "id": "34dda956-edd3-4956-8f5c-ce7b36d0cf61",
+      "id": "0e3ba4a4-643a-4c80-9c46-eae387cf9fa5",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "RS-27 tagged 69 kV lies 234 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
@@ -285,8 +285,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
-        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
+        "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
+        "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -298,49 +298,7 @@
       }
     },
     {
-      "id": "77fcf5cf-1358-43eb-aff9-4fc4bf46bf6b",
-      "evidence_kind": "assessor_data_center_classification",
-      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
-      "snippet": "PropertyUseDescription = DATA CENTERS",
-      "snippet_locator": "$.features[12].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-28",
-      "assertion_class": "reported",
-      "extraction_method": "structured_feed",
-      "polarity": "supporting",
-      "confidence": 0.95,
-      "human_review_status": "not_reviewed",
-      "is_standing_condition": true,
-      "normalized_values": {
-        "fields": [
-          {
-            "name": "land_use_description",
-            "value": "DATA CENTERS",
-            "locator": "$.features[12].attributes.PropertyUseDescription",
-            "raw_text": "DATA CENTERS",
-            "raw_unit": null,
-            "confidence": 0.95,
-            "assertion_class": "reported",
-            "normalized_unit": null,
-            "extraction_method": "structured_feed"
-          }
-        ],
-        "is_standing_condition": true
-      },
-      "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
-        "source_slug": "maricopa-assessor-parcels",
-        "source_name": "Maricopa County Assessor Parcel Layer",
-        "agency": "Maricopa County Assessor / Maricopa County GIS",
-        "source_url": "https://example.invalid/recorded",
-        "retrieved_at": "2026-07-25T21:30:00Z",
-        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
-        "parser_version": "0.1.0",
-        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
-      }
-    },
-    {
-      "id": "63d02615-1be2-48e0-b125-fe50eddb239e",
+      "id": "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -369,8 +327,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -382,7 +340,7 @@
       }
     },
     {
-      "id": "665b0ee3-cd4e-429d-8908-bd898f3b89d7",
+      "id": "912e1809-e0bd-41b4-bd82-ffe30f52bffb",
       "evidence_kind": "backup_generator_air_permit",
       "summary": "EPA ECHO lists EAST VALLEY COLO EMERGENCY POWER as a Clean Air Act facility (NAICS 518210). Program text and/or hosting NAICS are consistent with backup generation at a data-processing site. Coordinates may be geocoded. Programs: Minor NSR; Emergency Generator.",
       "snippet": "EAST VALLEY COLO EMERGENCY POWER; Minor NSR; Emergency Generator",
@@ -430,12 +388,12 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "ac527a80-e384-493c-846f-d0c50e0128f8",
+        "permit_id": "80e250b3-13f5-4156-905b-d434343cf5dc",
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "a25361ae-53a4-48b8-a936-847e3bcfcde9",
-        "document_version_id": "e38aed94-5a28-4895-a964-8e979944a354",
+        "document_id": "17a59c32-d9fd-4fe7-821f-fb010fcccbee",
+        "document_version_id": "5f484896-9842-41ad-8857-1887bf50d061",
         "source_slug": "epa-echo-air-facilities",
         "source_name": "EPA ECHO Air Facility Records",
         "agency": "United States Environmental Protection Agency",
@@ -445,35 +403,77 @@
         "parser_version": "0.1.0",
         "attribution_text": null
       }
+    },
+    {
+      "id": "eac9d88c-6b80-406a-bcca-604fa2f0747c",
+      "evidence_kind": "assessor_data_center_classification",
+      "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
+      "snippet": "PropertyUseDescription = DATA CENTERS",
+      "snippet_locator": "$.features[12].attributes.PropertyUseDescription",
+      "observed_at": "2026-07-28",
+      "assertion_class": "reported",
+      "extraction_method": "structured_feed",
+      "polarity": "supporting",
+      "confidence": 0.95,
+      "human_review_status": "not_reviewed",
+      "is_standing_condition": true,
+      "normalized_values": {
+        "fields": [
+          {
+            "name": "land_use_description",
+            "value": "DATA CENTERS",
+            "locator": "$.features[12].attributes.PropertyUseDescription",
+            "raw_text": "DATA CENTERS",
+            "raw_unit": null,
+            "confidence": 0.95,
+            "assertion_class": "reported",
+            "normalized_unit": null,
+            "extraction_method": "structured_feed"
+          }
+        ],
+        "is_standing_condition": true
+      },
+      "source": {
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
+        "source_slug": "maricopa-assessor-parcels",
+        "source_name": "Maricopa County Assessor Parcel Layer",
+        "agency": "Maricopa County Assessor / Maricopa County GIS",
+        "source_url": "https://example.invalid/recorded",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "77af6d6d43febde9b56073b5a2200e2713b9331b31345f146047d2723a8a5008",
+        "parser_version": "0.1.0",
+        "attribution_text": "Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS."
+      }
     }
   ],
   "stage_history": [
     {
-      "id": "72b545be-96d6-4ed0-aa8f-64be4ebb9da6",
+      "id": "b6aee08f-6b2e-4ab7-81bf-1a10e877f926",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-03-22",
-      "detected_at": "2026-07-28T05:51:14.225814Z",
+      "detected_at": "2026-07-28T07:44:04.441710Z",
       "is_downgrade": false,
       "confidence": 56.48,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 56% confidence. Principal evidence: Assessor classifies property use as data centre; Backup-generator air permit; Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "77fcf5cf-1358-43eb-aff9-4fc4bf46bf6b",
-        "665b0ee3-cd4e-429d-8908-bd898f3b89d7",
-        "63d02615-1be2-48e0-b125-fe50eddb239e",
-        "75b9bb87-2d9d-4154-a367-9e439ae2255c",
-        "c6c57ce4-5106-4cc4-ba02-2681b1995501",
-        "1c4ad5dc-9a02-4adb-92da-454dc32a3564"
+        "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13",
+        "912e1809-e0bd-41b4-bd82-ffe30f52bffb",
+        "eac9d88c-6b80-406a-bcca-604fa2f0747c",
+        "9b515fc1-4364-4b9e-8305-38fe0ab456b3",
+        "23131e1e-74ed-4283-977c-277abc5c05ba",
+        "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
       ],
       "detection_lag_days": 1954
     }
   ],
   "predictions": [
     {
-      "id": "ee9081b8-2063-4439-bec9-0f52af38b3b6",
-      "calculated_at": "2026-07-28T05:51:14.222760Z",
+      "id": "1011b2a9-2534-44eb-a66f-990f0a834fac",
+      "calculated_at": "2026-07-28T07:44:04.439433Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -499,7 +499,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "77fcf5cf-1358-43eb-aff9-4fc4bf46bf6b"
+          "evidence_record_id": "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13"
         },
         {
           "rule_id": "backup-generator-air-permit",
@@ -511,7 +511,7 @@
           "confidence_multiplier": 0.8,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "665b0ee3-cd4e-429d-8908-bd898f3b89d7"
+          "evidence_record_id": "912e1809-e0bd-41b4-bd82-ffe30f52bffb"
         },
         {
           "rule_id": "assessor-data-center-classification",
@@ -523,7 +523,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "63d02615-1be2-48e0-b125-fe50eddb239e"
+          "evidence_record_id": "eac9d88c-6b80-406a-bcca-604fa2f0747c"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -535,7 +535,7 @@
           "confidence_multiplier": 0.8799,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "34dda956-edd3-4956-8f5c-ce7b36d0cf61"
+          "evidence_record_id": "0e3ba4a4-643a-4c80-9c46-eae387cf9fa5"
         },
         {
           "rule_id": "transmission-filing",
@@ -547,7 +547,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "75b9bb87-2d9d-4154-a367-9e439ae2255c"
+          "evidence_record_id": "9b515fc1-4364-4b9e-8305-38fe0ab456b3"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -559,7 +559,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.6191,
           "polarity": "supporting",
-          "evidence_record_id": "c6c57ce4-5106-4cc4-ba02-2681b1995501"
+          "evidence_record_id": "23131e1e-74ed-4283-977c-277abc5c05ba"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -571,13 +571,13 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.6191,
           "polarity": "supporting",
-          "evidence_record_id": "1c4ad5dc-9a02-4adb-92da-454dc32a3564"
+          "evidence_record_id": "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
         }
       ]
     },
     {
-      "id": "0a6fc32c-55cb-46de-b1cd-4748b0c0e45a",
-      "calculated_at": "2026-07-28T05:51:14.222821Z",
+      "id": "583b2282-3b5c-471b-9d25-65dee7591c83",
+      "calculated_at": "2026-07-28T07:44:04.439475Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -603,7 +603,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "77fcf5cf-1358-43eb-aff9-4fc4bf46bf6b"
+          "evidence_record_id": "0d87afd8-b0b9-44cb-9ffb-d79a80d7db13"
         },
         {
           "rule_id": "backup-generator-air-permit",
@@ -615,7 +615,7 @@
           "confidence_multiplier": 0.8,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "665b0ee3-cd4e-429d-8908-bd898f3b89d7"
+          "evidence_record_id": "912e1809-e0bd-41b4-bd82-ffe30f52bffb"
         },
         {
           "rule_id": "assessor-data-center-classification",
@@ -627,7 +627,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "63d02615-1be2-48e0-b125-fe50eddb239e"
+          "evidence_record_id": "eac9d88c-6b80-406a-bcca-604fa2f0747c"
         },
         {
           "rule_id": "transmission-filing",
@@ -639,7 +639,7 @@
           "confidence_multiplier": 0.85,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "75b9bb87-2d9d-4154-a367-9e439ae2255c"
+          "evidence_record_id": "9b515fc1-4364-4b9e-8305-38fe0ab456b3"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -651,7 +651,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.6191,
           "polarity": "supporting",
-          "evidence_record_id": "c6c57ce4-5106-4cc4-ba02-2681b1995501"
+          "evidence_record_id": "23131e1e-74ed-4283-977c-277abc5c05ba"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -663,7 +663,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.6191,
           "polarity": "supporting",
-          "evidence_record_id": "1c4ad5dc-9a02-4adb-92da-454dc32a3564"
+          "evidence_record_id": "83f7a697-e5e3-4f9f-a5ca-0894f85c7351"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -675,7 +675,7 @@
           "confidence_multiplier": 0.8799,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "34dda956-edd3-4956-8f5c-ce7b36d0cf61"
+          "evidence_record_id": "0e3ba4a4-643a-4c80-9c46-eae387cf9fa5"
         }
       ]
     }

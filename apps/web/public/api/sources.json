@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "051ad15a-aaf1-43dc-9d3f-a7fa38b7cce4",
+      "id": "89ef23a3-974d-443b-ae96-c6e46a1ab0d0",
       "slug": "az-corporation-commission-entity-search",
       "name": "Arizona Corporation Commission Entity Search",
       "agency": "Arizona Corporation Commission",
@@ -28,7 +28,7 @@
       "document_count": 0
     },
     {
-      "id": "7cad7e55-6b51-45cc-9b13-5f99f6c3f26d",
+      "id": "ee9de658-3268-4aae-94cd-9c0c660739ff",
       "slug": "sec-edgar",
       "name": "SEC EDGAR Full-Text Search",
       "agency": "US Securities and Exchange Commission",
@@ -55,7 +55,7 @@
       "document_count": 0
     },
     {
-      "id": "6329b31c-6a4c-414f-a330-d29475feb613",
+      "id": "55edaed4-46ec-444a-b546-a60a1dab1c28",
       "slug": "epa-echo-air-facilities",
       "name": "EPA ECHO Air Facility Records",
       "agency": "United States Environmental Protection Agency",
@@ -78,11 +78,11 @@
       "connector_status": "implemented",
       "connector_slug": "epa-echo-air-facilities",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:12.451584Z",
+      "last_success_at": "2026-07-28T07:44:02.384788Z",
       "document_count": 1
     },
     {
-      "id": "b0c4234c-8cb2-4be9-95d4-9c5eb2f625c9",
+      "id": "3988f738-fd3c-4041-adb1-d16b5f301e7c",
       "slug": "maricopa-aqd-dust-control",
       "name": "Maricopa County Air Quality Dust Control Sites",
       "agency": "Maricopa County Air Quality Department",
@@ -109,7 +109,34 @@
       "document_count": 0
     },
     {
-      "id": "8672f4e3-7dd7-489d-88bd-7ddb4faca3d8",
+      "id": "0685fb06-2a43-4a43-b37d-20dd59f2a0b3",
+      "slug": "eia-state-generation-capacity",
+      "name": "EIA Existing Electricity Generation Capacity by State",
+      "agency": "United States Energy Information Administration",
+      "jurisdiction": "United States",
+      "category": "infrastructure_reference",
+      "base_url": "https://www.eia.gov/electricity/data/state/",
+      "access_method": "bulk_download",
+      "update_frequency": "annual",
+      "license_name": "US Government public domain",
+      "license_url": "https://www.eia.gov/about/copyrights_reuse.php",
+      "attribution_required": false,
+      "attribution_text": null,
+      "robots_policy_status": "allowed",
+      "geographic_coverage": "All US states and DC. State resolution only.",
+      "historical_coverage": "1990 to the most recent published year.",
+      "contains_personal_data": false,
+      "reliability_score": 0.95,
+      "known_schema_issues": "Published only as xlsx. Producer type and fuel source each carry a roll-up row alongside their parts, so reading the sheet naively double counts. Helios keeps only the all-producers, all-fuels row.",
+      "notes": "The supply side of the same question the sales figures answer from the demand side. This is installed capacity, not generation, and it says nothing about whether any particular site could be served -- that would need interconnection data Helios does not have.",
+      "connector_status": "implemented",
+      "connector_slug": "eia-state-generation-capacity",
+      "access_limitation": null,
+      "last_success_at": "2026-07-28T07:44:03.701493Z",
+      "document_count": 1
+    },
+    {
+      "id": "e611c0c9-0309-46d2-b141-10301f94361e",
       "slug": "eia-state-electricity-sales",
       "name": "EIA Retail Electricity Sales by State",
       "agency": "United States Energy Information Administration",
@@ -132,11 +159,11 @@
       "connector_status": "implemented",
       "connector_slug": "eia-state-electricity-sales",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:13.319598Z",
+      "last_success_at": "2026-07-28T07:44:03.430499Z",
       "document_count": 1
     },
     {
-      "id": "92444109-199c-4d89-abc8-9cbc71aeb528",
+      "id": "8fbf134c-f85f-4eab-8388-6dc4c9643dfe",
       "slug": "osm-power-infrastructure",
       "name": "OpenStreetMap Power Infrastructure (Overpass API)",
       "agency": "OpenStreetMap contributors",
@@ -159,11 +186,11 @@
       "connector_status": "implemented",
       "connector_slug": "osm-power-infrastructure",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:12.415116Z",
+      "last_success_at": "2026-07-28T07:44:02.353987Z",
       "document_count": 1
     },
     {
-      "id": "009736f4-215f-454e-b3bf-46841c2f2f5b",
+      "id": "5e6425ab-c684-4f90-984f-f78a5612944b",
       "slug": "maricopa-assessor-parcels",
       "name": "Maricopa County Assessor Parcel Layer",
       "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -186,11 +213,11 @@
       "connector_status": "implemented",
       "connector_slug": "maricopa-assessor-parcels",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:11.847162Z",
+      "last_success_at": "2026-07-28T07:44:01.764849Z",
       "document_count": 1
     },
     {
-      "id": "54848686-ec28-4a63-8120-2d6565afcc1f",
+      "id": "f5a45883-0972-4de5-a1dd-897ef4baf30c",
       "slug": "maricopa-recorder-documents",
       "name": "Maricopa County Recorder Document Search",
       "agency": "Maricopa County Recorder",
@@ -217,7 +244,7 @@
       "document_count": 0
     },
     {
-      "id": "961ae84e-acad-47ed-b7a9-ab8ff66ea13c",
+      "id": "7677a138-039f-42de-bc25-b4d986a055b2",
       "slug": "mesa-building-permits",
       "name": "City of Mesa Building Permits",
       "agency": "City of Mesa",
@@ -240,11 +267,11 @@
       "connector_status": "implemented",
       "connector_slug": "mesa-building-permits",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:12.925295Z",
+      "last_success_at": "2026-07-28T07:44:02.812901Z",
       "document_count": 1
     },
     {
-      "id": "1e838f37-4c21-4e31-99af-83679c5b6918",
+      "id": "83f8fbb8-6cfd-4138-ba75-8d282d839f3f",
       "slug": "mesa-agendas",
       "name": "City of Mesa Planning and Zoning Agendas",
       "agency": "City of Mesa Development Services",
@@ -271,7 +298,7 @@
       "document_count": 0
     },
     {
-      "id": "6486908b-1ba9-4457-98c4-e90f896e60c7",
+      "id": "75870595-9d67-4fc4-8ea1-a1f7b518f936",
       "slug": "copernicus-sentinel2",
       "name": "Copernicus Sentinel-2 Surface Reflectance",
       "agency": "European Space Agency / Copernicus",
@@ -298,7 +325,7 @@
       "document_count": 0
     },
     {
-      "id": "98a4fc06-a4bf-43f0-930d-c30e87146081",
+      "id": "0bc6de4c-d6ed-4d65-a3c5-aa0ce50c1121",
       "slug": "azcc-edocket",
       "name": "Arizona Corporation Commission eDocket",
       "agency": "Arizona Corporation Commission",
@@ -321,11 +348,11 @@
       "connector_status": "fixture_only",
       "connector_slug": "azcc-edocket",
       "access_limitation": "eDocket search is a stateful ASP.NET interface requiring viewstate round-trips and offering no documented API or bulk export. Helios implements and tests the parser against fixtures built from the documented docket schema, and does not automate the search interface. Live coverage requires either an agency-provided export or manual docket retrieval.",
-      "last_success_at": "2026-07-28T05:51:13.355529Z",
+      "last_success_at": "2026-07-28T07:44:03.728134Z",
       "document_count": 2
     },
     {
-      "id": "89c2272c-ce60-4f2c-9915-a5f5e1d36268",
+      "id": "b201d624-e46c-4357-8e5b-1eeaa06a0a68",
       "slug": "srp-infrastructure-projects",
       "name": "Salt River Project Infrastructure Projects",
       "agency": "Salt River Project",
@@ -352,7 +379,7 @@
       "document_count": 0
     },
     {
-      "id": "1ff5bc89-01b9-4932-91df-1d8cd426522f",
+      "id": "ec2d2ef2-52e5-4e92-a49f-7c055051c0d7",
       "slug": "adwr-water-records",
       "name": "Arizona Department of Water Resources Data",
       "agency": "Arizona Department of Water Resources",
@@ -379,7 +406,7 @@
       "document_count": 0
     },
     {
-      "id": "d0608817-d340-4bb0-94b6-ad0405968559",
+      "id": "ff0aa52d-354d-4049-ba13-726e875f805e",
       "slug": "usgs-county-water-use",
       "name": "USGS Estimated Use of Water, County-Level",
       "agency": "United States Geological Survey",
@@ -402,13 +429,13 @@
       "connector_status": "implemented",
       "connector_slug": "usgs-county-water-use",
       "access_limitation": null,
-      "last_success_at": "2026-07-28T05:51:12.958219Z",
+      "last_success_at": "2026-07-28T07:44:02.842726Z",
       "document_count": 1
     }
   ],
   "coverage_summary": {
     "planned": 7,
-    "implemented": 6,
+    "implemented": 7,
     "fixture_only": 2
   }
 }

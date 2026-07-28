@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T05:51:16.915709+00:00",
+  "generated_at": "2026-07-28T07:44:06.231586+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -80,7 +80,7 @@
   },
   "evidence": [
     {
-      "id": "51b55416-cb56-49a9-bf78-3406b9e2b437",
+      "id": "b8e86770-d3c3-41ba-902e-5c8ad0b7b361",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
@@ -109,8 +109,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -122,7 +122,7 @@
       }
     },
     {
-      "id": "2776544b-49c0-406a-8391-e0930f09e4ac",
+      "id": "8dec8799-500a-43ae-a319-406d70dcd806",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-04526; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
@@ -170,7 +170,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "c4d02e0f-74da-4b2f-9f25-749f6bfc63e3",
+        "permit_id": "7acb393c-d6b7-45bb-b3af-a4cb3aae6a72",
         "address_match": {
           "apn": "14055293",
           "method": "address_normalized_exact",
@@ -180,8 +180,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -193,7 +193,7 @@
       }
     },
     {
-      "id": "6fac99b7-f1bc-4997-aaa7-32d2a805488d",
+      "id": "cd901200-0e6a-42a0-88a8-13c69703a9d1",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-05468; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
@@ -241,7 +241,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "5a732c04-21f1-4ca6-9ac0-6d5912e697d8",
+        "permit_id": "7f035a28-7a41-443a-9bd0-0ee593650cd9",
         "address_match": {
           "apn": "14055293",
           "method": "address_normalized_exact",
@@ -251,8 +251,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "4391e7dd-0300-42d7-b496-968c04ada11b",
-        "document_version_id": "9aeaa83b-f257-4fc7-8e91-5afa52b25d63",
+        "document_id": "747607fb-af22-4634-b6b5-fc45a2a66e2f",
+        "document_version_id": "3a335591-777c-4f76-a114-da04261dc4ff",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -264,7 +264,7 @@
       }
     },
     {
-      "id": "35380521-3dc4-4eff-b73b-2bf6d1dc0f8f",
+      "id": "5907e82c-6a3a-42c3-9519-1ec6ac9ab490",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Southern Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -284,8 +284,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "bbd68dda-f2fe-4811-be2c-3db5725932de",
-        "document_version_id": "8cfdf36a-7616-45ec-8ff5-da7d5e48e35b",
+        "document_id": "d05c5c88-8101-41e5-8138-0408d4b2d73c",
+        "document_version_id": "c7da2e29-778e-49c9-986d-e98e7f469f1e",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -297,7 +297,7 @@
       }
     },
     {
-      "id": "e72dc0a7-7bae-4405-b60e-9f4b55b7b94d",
+      "id": "1aacbad4-9d26-4ec7-aabd-2e285bed2159",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
@@ -326,8 +326,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "e8b87a9c-55e3-4e0e-af8a-20c4a5be3903",
-        "document_version_id": "a35272bf-f509-4079-a59c-702ac005d682",
+        "document_id": "dfa54a3c-66ee-4b78-b22f-4760a0fa518d",
+        "document_version_id": "205c1e7a-8d6d-4898-9639-ebd422dc3981",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -341,29 +341,29 @@
   ],
   "stage_history": [
     {
-      "id": "312697e9-3de3-4c5d-8796-d499bd58e9c4",
+      "id": "361c6663-4334-4f69-90e4-a2627a71ab70",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-28T05:51:14.249671Z",
+      "detected_at": "2026-07-28T07:44:04.403960Z",
       "is_downgrade": false,
       "confidence": 50.07,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "e72dc0a7-7bae-4405-b60e-9f4b55b7b94d",
-        "6fac99b7-f1bc-4997-aaa7-32d2a805488d",
-        "2776544b-49c0-406a-8391-e0930f09e4ac",
-        "51b55416-cb56-49a9-bf78-3406b9e2b437"
+        "1aacbad4-9d26-4ec7-aabd-2e285bed2159",
+        "cd901200-0e6a-42a0-88a8-13c69703a9d1",
+        "8dec8799-500a-43ae-a319-406d70dcd806",
+        "b8e86770-d3c3-41ba-902e-5c8ad0b7b361"
       ],
       "detection_lag_days": 4899
     }
   ],
   "predictions": [
     {
-      "id": "3d84aa94-4a3c-42b4-8fe4-0daa162d2126",
-      "calculated_at": "2026-07-28T05:51:14.246921Z",
+      "id": "dd8f36c9-3e5c-4b27-b854-f8c2d5dc30fc",
+      "calculated_at": "2026-07-28T07:44:04.401697Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -389,7 +389,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e72dc0a7-7bae-4405-b60e-9f4b55b7b94d"
+          "evidence_record_id": "1aacbad4-9d26-4ec7-aabd-2e285bed2159"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -401,7 +401,7 @@
           "confidence_multiplier": 0.6685,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "35380521-3dc4-4eff-b73b-2bf6d1dc0f8f"
+          "evidence_record_id": "5907e82c-6a3a-42c3-9519-1ec6ac9ab490"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -413,7 +413,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "6fac99b7-f1bc-4997-aaa7-32d2a805488d"
+          "evidence_record_id": "cd901200-0e6a-42a0-88a8-13c69703a9d1"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -425,7 +425,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9428,
           "polarity": "supporting",
-          "evidence_record_id": "2776544b-49c0-406a-8391-e0930f09e4ac"
+          "evidence_record_id": "8dec8799-500a-43ae-a319-406d70dcd806"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -437,13 +437,13 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "51b55416-cb56-49a9-bf78-3406b9e2b437"
+          "evidence_record_id": "b8e86770-d3c3-41ba-902e-5c8ad0b7b361"
         }
       ]
     },
     {
-      "id": "ef0fc2a1-86a5-4475-8c17-58a60fedc0da",
-      "calculated_at": "2026-07-28T05:51:14.246976Z",
+      "id": "cf3e5cff-34b5-49c2-8258-8b2a32d07f04",
+      "calculated_at": "2026-07-28T07:44:04.401745Z",
       "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
@@ -469,7 +469,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e72dc0a7-7bae-4405-b60e-9f4b55b7b94d"
+          "evidence_record_id": "1aacbad4-9d26-4ec7-aabd-2e285bed2159"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -481,7 +481,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "6fac99b7-f1bc-4997-aaa7-32d2a805488d"
+          "evidence_record_id": "cd901200-0e6a-42a0-88a8-13c69703a9d1"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -493,7 +493,7 @@
           "confidence_multiplier": 0.75,
           "recency_multiplier": 0.9428,
           "polarity": "supporting",
-          "evidence_record_id": "2776544b-49c0-406a-8391-e0930f09e4ac"
+          "evidence_record_id": "8dec8799-500a-43ae-a319-406d70dcd806"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -505,7 +505,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "51b55416-cb56-49a9-bf78-3406b9e2b437"
+          "evidence_record_id": "b8e86770-d3c3-41ba-902e-5c8ad0b7b361"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -517,7 +517,7 @@
           "confidence_multiplier": 0.6685,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "35380521-3dc4-4eff-b73b-2bf6d1dc0f8f"
+          "evidence_record_id": "5907e82c-6a3a-42c3-9519-1ec6ac9ab490"
         }
       ]
     }

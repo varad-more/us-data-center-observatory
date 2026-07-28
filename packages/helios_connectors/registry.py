@@ -487,6 +487,38 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         connector_entry_point="helios_connectors.area_totals:EiaStateElectricityConnector",
         tags=("electricity", "area-totals", "federal"),
     ),
+    SourceRegistryEntry(
+        slug="eia-state-generation-capacity",
+        name="EIA Existing Electricity Generation Capacity by State",
+        agency="United States Energy Information Administration",
+        jurisdiction="United States",
+        category=SourceCategory.INFRASTRUCTURE_REFERENCE,
+        base_url="https://www.eia.gov/electricity/data/state/",
+        access_method=AccessMethod.BULK_DOWNLOAD,
+        connector_status=ConnectorStatus.IMPLEMENTED,
+        update_frequency="annual",
+        rate_limit_per_second=0.5,
+        license_name="US Government public domain",
+        license_url="https://www.eia.gov/about/copyrights_reuse.php",
+        robots_policy_status="allowed",
+        geographic_coverage="All US states and DC. State resolution only.",
+        historical_coverage="1990 to the most recent published year.",
+        reliability_score=0.95,
+        known_schema_issues=(
+            "Published only as xlsx. Producer type and fuel source each carry a "
+            "roll-up row alongside their parts, so reading the sheet naively "
+            "double counts. Helios keeps only the all-producers, all-fuels row."
+        ),
+        notes=(
+            "The supply side of the same question the sales figures answer from "
+            "the demand side. This is installed capacity, not generation, and it "
+            "says nothing about whether any particular site could be served -- "
+            "that would need interconnection data Helios does not have."
+        ),
+        connector_slug="eia-state-generation-capacity",
+        connector_entry_point=("helios_connectors.area_totals:EiaStateGenerationCapacityConnector"),
+        tags=("electricity", "generation", "area-totals", "federal"),
+    ),
 )
 
 

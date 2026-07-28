@@ -19,6 +19,8 @@ const METRIC_LABELS: Record<string, string> = {
   thermoelectric_water_withdrawal: "Thermoelectric water",
   total_water_withdrawal: "Total water withdrawal",
   electricity_retail_sales: "Retail electricity sales",
+  generation_nameplate_capacity: "Generation capacity (nameplate)",
+  generation_summer_capacity: "Generation capacity (summer)",
   population: "Population",
 };
 
@@ -46,20 +48,34 @@ function sectorSuffix(sector: string): string {
   return sector === "all" ? "" : ` (${sector})`;
 }
 
+const ROLLUP_SECTORS = new Set(["all", "total"]);
+
 /**
- * Sorts a sector roll-up below the sectors it rolls up.
+ * Whether a row is a roll-up of other rows actually present beside it.
  *
- * EIA publishes "total" as one sector among five, so alphabetically it lands
- * between residential and transportation — in the middle of a column a reader
- * could plausibly add up, which would count the whole state twice.
+ * A roll-up sector is only a double-count risk when its parts are on screen
+ * too. Water carries sector "all" with no siblings and is just a figure; EIA
+ * publishes "total" as one sector among five, where a reader adding the column
+ * would count the whole state twice.
  */
-function sectorRollupLast(a: AreaTotal, b: AreaTotal): number {
-  if (a.metric !== b.metric || a.area_code !== b.area_code) return 0;
-  return Number(a.sector === "total") - Number(b.sector === "total");
+function isRollup(row: AreaTotal, all: AreaTotal[]): boolean {
+  if (!ROLLUP_SECTORS.has(row.sector)) return false;
+  return all.some(
+    (other) =>
+      other.metric === row.metric &&
+      other.area_code === row.area_code &&
+      !ROLLUP_SECTORS.has(other.sector),
+  );
 }
 
 function TotalsTable({ totals }: { totals: AreaTotal[] }) {
-  const ordered = [...totals].sort(sectorRollupLast);
+  // A roll-up sorts below the parts it rolls up: EIA publishes "total" as one
+  // sector among five, so alphabetically it lands mid-column where a reader
+  // could plausibly add it in.
+  const ordered = [...totals].sort((a, b) => {
+    if (a.metric !== b.metric || a.area_code !== b.area_code) return 0;
+    return Number(isRollup(a, totals)) - Number(isRollup(b, totals));
+  });
   return (
     <table className="table">
       <thead>
@@ -77,7 +93,7 @@ function TotalsTable({ totals }: { totals: AreaTotal[] }) {
             <td>
               {metricLabel(total.metric)}
               {sectorSuffix(total.sector)}
-              {total.sector === "total" && (
+              {isRollup(total, totals) && (
                 <span className="muted small"> — sum of the sectors above</span>
               )}
             </td>
@@ -147,7 +163,7 @@ function Comparison({ share }: { share: HeliosShare }) {
       </p>
 
       <details className="estimate-assumptions">
-        <summary>Why this is weaker than either number in it</summary>
+        <summary>What this comparison does and does not show</summary>
         <p className="estimate-note">{share.caveat}</p>
         {note && <p className="estimate-note">{note}</p>}
       </details>
@@ -175,7 +191,7 @@ export function AreaConsumptionPanel({ data }: { data: AreaConsumption }) {
     <>
       <section className="card">
         <div className="card-header">
-          <h2 className="card-title">What {data.region_name} already uses</h2>
+          <h2 className="card-title">What {data.region_name} already uses and can generate</h2>
           <span className="card-note">
             <AssertionBadge assertion="reported" /> measured and published
           </span>
