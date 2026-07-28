@@ -1,0 +1,91 @@
+{
+  "region_slug": null,
+  "transitions": 13,
+  "median_lag_days": 1821.0,
+  "p90_lag_days": 5665.4,
+  "min_lag_days": 0,
+  "max_lag_days": 6886,
+  "slowest": [
+    {
+      "project_code": "AZ-CHANDLER-005",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2007-09-20",
+      "detected_at": "2026-07-28T00:12:00.372670Z",
+      "lag_days": 6886
+    },
+    {
+      "project_code": "AZ-CHANDLER-002",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2010-07-15",
+      "detected_at": "2026-07-28T00:12:00.394394Z",
+      "lag_days": 5857
+    },
+    {
+      "project_code": "AZ-CHANDLER-007",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-28T00:12:00.297887Z",
+      "lag_days": 4899
+    },
+    {
+      "project_code": "AZ-MESA-004",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2013-02-27",
+      "detected_at": "2026-07-28T00:12:00.361053Z",
+      "lag_days": 4899
+    },
+    {
+      "project_code": "AZ-MESA-001",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2013-11-04",
+      "detected_at": "2026-07-28T00:12:00.322076Z",
+      "lag_days": 4649
+    },
+    {
+      "project_code": "AZ-CHANDLER-006",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2021-03-22",
+      "detected_at": "2026-07-28T00:12:00.415769Z",
+      "lag_days": 1954
+    },
+    {
+      "project_code": "AZ-TEMPE-001",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2021-08-02",
+      "detected_at": "2026-07-28T00:12:00.264652Z",
+      "lag_days": 1821
+    },
+    {
+      "project_code": "AZ-CHANDLER-003",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2022-01-20",
+      "detected_at": "2026-07-28T00:12:00.309598Z",
+      "lag_days": 1650
+    },
+    {
+      "project_code": "AZ-CHANDLER-001",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2022-04-04",
+      "detected_at": "2026-07-28T00:12:00.348992Z",
+      "lag_days": 1576
+    },
+    {
+      "project_code": "AZ-MESA-002",
+      "to_stage": 7,
+      "stage_label": "Operational",
+      "effective_date": "2025-07-24",
+      "detected_at": "2026-07-28T00:12:00.284867Z",
+      "lag_days": 369
+    }
+  ],
+  "note": "Lag is detection date minus the evidence date the transition rests on. On a fixture-seeded deployment every record was ingested at once, so these figures describe the recorded corpus, not live operation."
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:21:22.358397+00:00",
+  "generated_at": "2026-07-28T00:12:02.700613+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -10,10 +10,10 @@
     "site_kind_assertion": "reported",
     "current_stage": 7,
     "current_stage_label": "Operational",
-    "current_confidence": 36.48,
+    "current_confidence": 36.47,
     "total_acres": 1.2114,
     "first_signal_date": "2013-02-27",
-    "latest_signal_date": "2026-07-27",
+    "latest_signal_date": "2026-07-28",
     "operator_status": "not_established",
     "summary": "1 parcel(s) totalling 1.2 acres near 4437 E HOLMES AVE, Mesa. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
     "boundary": {
@@ -80,7 +80,7 @@
   },
   "evidence": [
     {
-      "id": "d73ced7d-4222-470e-99bf-ac179c63ea6c",
+      "id": "650030bd-8745-473d-81c8-15c516ec28ec",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
@@ -109,8 +109,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -122,7 +122,7 @@
       }
     },
     {
-      "id": "28f77d8d-3c83-4a09-a01f-236c3d815902",
+      "id": "2db685cb-7d0d-4eac-890a-a8f5282d4a0c",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-04526; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
@@ -170,7 +170,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "97450237-a4ff-4e8f-a922-ce278de4128a",
+        "permit_id": "7e0c53d3-d8a7-41ed-9bcb-6f15338ee9d3",
         "address_match": {
           "apn": "14055293",
           "method": "address_normalized_exact",
@@ -180,8 +180,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "256017be-bbdb-4fdc-b408-456a54553987",
-        "document_version_id": "8c4025c5-3778-48d1-8450-44019d9419dd",
+        "document_id": "c8125adb-8324-41bd-ad76-706def5191cc",
+        "document_version_id": "b3d14e37-f40e-4bd7-ad19-5fc63b96f9fd",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -193,7 +193,7 @@
       }
     },
     {
-      "id": "cf255201-2df9-4215-893c-7ec48c865c8c",
+      "id": "a090d72e-34cc-46ed-899d-02e9ed50cacd",
       "evidence_kind": "grading_or_construction_permit",
       "summary": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
       "snippet": "PMT26-05468; COM; 4437 E HOLMES AVE; Issued - Permit approved and issued and in inspection phase",
@@ -241,7 +241,7 @@
             "extraction_method": "structured_feed"
           }
         ],
-        "permit_id": "b7555340-a06a-4299-97cc-98829eb4bb67",
+        "permit_id": "e1969dd9-889c-4157-bd5b-c5d4d750a398",
         "address_match": {
           "apn": "14055293",
           "method": "address_normalized_exact",
@@ -251,8 +251,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "256017be-bbdb-4fdc-b408-456a54553987",
-        "document_version_id": "8c4025c5-3778-48d1-8450-44019d9419dd",
+        "document_id": "c8125adb-8324-41bd-ad76-706def5191cc",
+        "document_version_id": "b3d14e37-f40e-4bd7-ad19-5fc63b96f9fd",
         "source_slug": "mesa-building-permits",
         "source_name": "City of Mesa Building Permits",
         "agency": "City of Mesa",
@@ -264,7 +264,7 @@
       }
     },
     {
-      "id": "e8684b6c-40aa-4b19-bf35-fa5846b72506",
+      "id": "c2e99184-9c0a-45da-b96e-f8bfbbe8ae6b",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Southern Substation tagged 69 kV lies 938 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Southern Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -284,8 +284,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-        "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -297,12 +297,12 @@
       }
     },
     {
-      "id": "c3abf6c8-44f8-4993-a97f-0dc481ca5242",
+      "id": "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
       "snippet_locator": "$.features[4].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-27",
+      "observed_at": "2026-07-28",
       "assertion_class": "reported",
       "extraction_method": "structured_feed",
       "polarity": "supporting",
@@ -326,8 +326,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -341,36 +341,36 @@
   ],
   "stage_history": [
     {
-      "id": "7bbd6634-50bb-4731-a509-540583483a8a",
+      "id": "2ded2e6d-a88e-4038-a163-21414f2f0f2f",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-27T23:21:20.135302Z",
+      "detected_at": "2026-07-28T00:12:00.361053Z",
       "is_downgrade": false,
-      "confidence": 50.09,
+      "confidence": 50.07,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "c3abf6c8-44f8-4993-a97f-0dc481ca5242",
-        "cf255201-2df9-4215-893c-7ec48c865c8c",
-        "28f77d8d-3c83-4a09-a01f-236c3d815902",
-        "d73ced7d-4222-470e-99bf-ac179c63ea6c"
+        "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7",
+        "a090d72e-34cc-46ed-899d-02e9ed50cacd",
+        "2db685cb-7d0d-4eac-890a-a8f5282d4a0c",
+        "650030bd-8745-473d-81c8-15c516ec28ec"
       ],
-      "detection_lag_days": 4898
+      "detection_lag_days": 4899
     }
   ],
   "predictions": [
     {
-      "id": "632c0d84-4c1c-4d8e-b2e7-5f01409bcf7d",
-      "calculated_at": "2026-07-27T23:21:20.132945Z",
-      "as_of_date": "2026-07-27",
+      "id": "48c7285b-439c-4295-8856-4e585ab85734",
+      "calculated_at": "2026-07-28T00:12:00.358191Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
-      "raw_score": 27.2251,
-      "confidence": 36.48,
+      "raw_score": 27.223,
+      "confidence": 36.47,
       "confidence_band": "low",
-      "positive_contribution": 27.2251,
+      "positive_contribution": 27.223,
       "negative_contribution": 0.0,
       "evidence_considered": 5,
       "distinct_evidence_kinds": 4,
@@ -389,7 +389,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "c3abf6c8-44f8-4993-a97f-0dc481ca5242"
+          "evidence_record_id": "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -401,7 +401,7 @@
           "confidence_multiplier": 0.6685,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e8684b6c-40aa-4b19-bf35-fa5846b72506"
+          "evidence_record_id": "c2e99184-9c0a-45da-b96e-f8bfbbe8ae6b"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -409,11 +409,11 @@
           "label": "Grading or construction permit",
           "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
           "base_weight": 2.0,
-          "applied_weight": 1.4943,
+          "applied_weight": 1.4929,
           "confidence_multiplier": 0.75,
-          "recency_multiplier": 0.9962,
+          "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "cf255201-2df9-4215-893c-7ec48c865c8c"
+          "evidence_record_id": "a090d72e-34cc-46ed-899d-02e9ed50cacd"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -421,11 +421,11 @@
           "label": "Grading or construction permit",
           "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
           "base_weight": 2.0,
-          "applied_weight": 0.7078,
+          "applied_weight": 0.7071,
           "confidence_multiplier": 0.75,
-          "recency_multiplier": 0.9437,
+          "recency_multiplier": 0.9428,
           "polarity": "supporting",
-          "evidence_record_id": "28f77d8d-3c83-4a09-a01f-236c3d815902"
+          "evidence_record_id": "2db685cb-7d0d-4eac-890a-a8f5282d4a0c"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -437,20 +437,20 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "d73ced7d-4222-470e-99bf-ac179c63ea6c"
+          "evidence_record_id": "650030bd-8745-473d-81c8-15c516ec28ec"
         }
       ]
     },
     {
-      "id": "781f7fdc-c906-4fcb-8d7e-2e8810c853a2",
-      "calculated_at": "2026-07-27T23:21:20.132990Z",
-      "as_of_date": "2026-07-27",
+      "id": "58b656a6-06dd-4126-a5c2-30ae4875d37b",
+      "calculated_at": "2026-07-28T00:12:00.358250Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
-      "raw_score": 41.6957,
-      "confidence": 50.09,
+      "raw_score": 41.6755,
+      "confidence": 50.07,
       "confidence_band": "moderate",
-      "positive_contribution": 41.6957,
+      "positive_contribution": 41.6755,
       "negative_contribution": 0.0,
       "evidence_considered": 5,
       "distinct_evidence_kinds": 3,
@@ -469,7 +469,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "c3abf6c8-44f8-4993-a97f-0dc481ca5242"
+          "evidence_record_id": "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -477,11 +477,11 @@
           "label": "Grading or construction permit",
           "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
           "base_weight": 20.0,
-          "applied_weight": 14.943,
+          "applied_weight": 14.9295,
           "confidence_multiplier": 0.75,
-          "recency_multiplier": 0.9962,
+          "recency_multiplier": 0.9953,
           "polarity": "supporting",
-          "evidence_record_id": "cf255201-2df9-4215-893c-7ec48c865c8c"
+          "evidence_record_id": "a090d72e-34cc-46ed-899d-02e9ed50cacd"
         },
         {
           "rule_id": "grading-or-construction-permit",
@@ -489,11 +489,11 @@
           "label": "Grading or construction permit",
           "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
           "base_weight": 20.0,
-          "applied_weight": 7.0777,
+          "applied_weight": 7.071,
           "confidence_multiplier": 0.75,
-          "recency_multiplier": 0.9437,
+          "recency_multiplier": 0.9428,
           "polarity": "supporting",
-          "evidence_record_id": "28f77d8d-3c83-4a09-a01f-236c3d815902"
+          "evidence_record_id": "2db685cb-7d0d-4eac-890a-a8f5282d4a0c"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -505,7 +505,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "d73ced7d-4222-470e-99bf-ac179c63ea6c"
+          "evidence_record_id": "650030bd-8745-473d-81c8-15c516ec28ec"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -517,7 +517,7 @@
           "confidence_multiplier": 0.6685,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e8684b6c-40aa-4b19-bf35-fa5846b72506"
+          "evidence_record_id": "c2e99184-9c0a-45da-b96e-f8bfbbe8ae6b"
         }
       ]
     }

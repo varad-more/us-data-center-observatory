@@ -1,5 +1,5 @@
 {
-  "site_id": "81c368d2-da48-4684-b43a-895a7c05e07a",
+  "site_id": "c58c086d-6088-4461-8a87-e16c53c427e5",
   "project_code": "AZ-GILBERT-001",
   "entries": [
     {
@@ -8,7 +8,7 @@
       "title": "Dedicated substation proximity",
       "detail": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "evidence": {
-        "id": "b737c2a9-af56-4b7c-a5a7-a5cc601f666b",
+        "id": "9a7a18ab-ad56-4c52-9c81-268fecf37f30",
         "evidence_kind": "dedicated_substation_proximity",
         "summary": "Finley Substation tagged 69 kV lies 189 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
         "snippet": "name = Finley Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -28,8 +28,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-          "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+          "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+          "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
           "source_slug": "osm-power-infrastructure",
           "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
           "agency": "OpenStreetMap contributors",
@@ -45,16 +45,16 @@
     },
     {
       "entry_type": "evidence",
-      "occurred_on": "2026-07-27",
+      "occurred_on": "2026-07-28",
       "title": "Assessor data center classification",
       "detail": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "evidence": {
-        "id": "c049aa91-9d56-4fd4-8d61-5c9c844f9804",
+        "id": "448ba2d9-acd5-45de-9414-3aa0fbf000b9",
         "evidence_kind": "assessor_data_center_classification",
         "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
         "snippet": "PropertyUseDescription = DATA CENTERS",
         "snippet_locator": "$.features[9].attributes.PropertyUseDescription",
-        "observed_at": "2026-07-27",
+        "observed_at": "2026-07-28",
         "assertion_class": "reported",
         "extraction_method": "structured_feed",
         "polarity": "supporting",
@@ -78,8 +78,8 @@
           "is_standing_condition": true
         },
         "source": {
-          "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-          "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+          "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+          "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
           "source_slug": "maricopa-assessor-parcels",
           "source_name": "Maricopa County Assessor Parcel Layer",
           "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -95,23 +95,23 @@
     },
     {
       "entry_type": "stage_transition",
-      "occurred_on": "2026-07-27",
+      "occurred_on": "2026-07-28",
       "title": "Stage advanced to Operational",
       "detail": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "evidence": null,
       "stage_transition": {
-        "id": "3db36e9c-7629-45e2-afef-4fe05db44b4e",
+        "id": "84ab4fbc-1606-4c84-8bfa-703ffd82efc0",
         "from_stage": 0,
         "from_stage_label": null,
         "to_stage": 7,
         "to_stage_label": "Operational",
-        "effective_date": "2026-07-27",
-        "detected_at": "2026-07-27T23:21:20.055198Z",
+        "effective_date": "2026-07-28",
+        "detected_at": "2026-07-28T00:12:00.405300Z",
         "is_downgrade": false,
         "confidence": 27.14,
         "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
         "triggering_evidence_ids": [
-          "c049aa91-9d56-4fd4-8d61-5c9c844f9804"
+          "448ba2d9-acd5-45de-9414-3aa0fbf000b9"
         ],
         "detection_lag_days": 0
       },
@@ -119,5 +119,5 @@
     }
   ],
   "first_signal_date": "2026-07-25",
-  "latest_signal_date": "2026-07-27"
+  "latest_signal_date": "2026-07-28"
 }

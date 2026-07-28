@@ -243,6 +243,45 @@ export const estimateSchema = z.object({
 
 export type Estimate = z.infer<typeof estimateSchema>;
 
+export const stageGrowthPointSchema = z.object({
+  month: z.string(),
+  // JSON object keys are always strings, so the stage index arrives as one.
+  cumulative_by_stage: z.record(z.number()),
+  sites_tracked: z.number(),
+});
+
+export type StageGrowthPoint = z.infer<typeof stageGrowthPointSchema>;
+
+export const stageGrowthSchema = z.object({
+  region_slug: z.string().nullable(),
+  points: z.array(stageGrowthPointSchema),
+  note: z.string(),
+});
+
+export type StageGrowth = z.infer<typeof stageGrowthSchema>;
+
+export const detectionLagEntrySchema = z.object({
+  project_code: z.string(),
+  to_stage: z.number(),
+  stage_label: z.string(),
+  effective_date: z.string(),
+  detected_at: z.string(),
+  lag_days: z.number(),
+});
+
+export const detectionLagSchema = z.object({
+  region_slug: z.string().nullable(),
+  transitions: z.number(),
+  median_lag_days: z.number().nullable(),
+  p90_lag_days: z.number().nullable(),
+  min_lag_days: z.number().nullable(),
+  max_lag_days: z.number().nullable(),
+  slowest: z.array(detectionLagEntrySchema),
+  note: z.string(),
+});
+
+export type DetectionLag = z.infer<typeof detectionLagSchema>;
+
 export const siteDetailSchema = siteSummarySchema.extend({
   summary: z.string().nullable(),
   boundary: z.record(z.unknown()).nullable(),

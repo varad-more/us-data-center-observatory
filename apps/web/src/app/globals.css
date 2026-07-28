@@ -869,6 +869,48 @@ code,
   align-items: center;
 }
 
+/* ------------------------------------------------------------------ charts */
+
+.chart {
+  margin: 0;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.chart-grid {
+  stroke: var(--grid, var(--border));
+  stroke-width: 1;
+}
+
+.chart-tick {
+  fill: var(--ink-muted);
+  font-size: 10px;
+  font-family: var(--font-sans);
+}
+
+.chart-area {
+  fill: color-mix(in srgb, var(--seq-4) 22%, transparent);
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--seq-6);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.chart-caption {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  max-width: 68ch;
+}
+
 /* --------------------------------------------------------------- estimates */
 
 /**

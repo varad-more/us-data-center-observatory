@@ -1,5 +1,5 @@
 {
-  "id": "e9a89997-1bfc-4daf-9ca2-69ff9fb70488",
+  "id": "3a8175eb-038c-448c-ac3c-d580e2617916",
   "project_code": "AZ-MESA-004",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -9,17 +9,17 @@
   "region_slug": "east-valley-az",
   "current_stage": 7,
   "current_stage_label": "Operational",
-  "current_confidence": 36.48,
-  "stage_confidence": 50.09,
+  "current_confidence": 36.47,
+  "stage_confidence": 50.07,
   "confidence_band": "low",
   "first_signal_date": "2013-02-27",
-  "latest_signal_date": "2026-07-27",
+  "latest_signal_date": "2026-07-28",
   "evidence_count": 5,
   "total_acres": 1.2114,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T23:21:20.135302Z",
-  "score_last_calculated_at": "2026-07-27T23:21:20.132945Z",
+  "stage_last_changed_at": "2026-07-28T00:12:00.361053Z",
+  "score_last_calculated_at": "2026-07-28T00:12:00.358191Z",
   "centroid": [
     -111.735264,
     33.387936
@@ -89,7 +89,7 @@
   },
   "parcels": [
     {
-      "id": "1340e674-9fe7-490a-8561-3aa26b86fd5a",
+      "id": "53d430d9-410c-4990-aa2f-6b2e587206bc",
       "apn": "14055293",
       "apn_formatted": "140-55-293",
       "situs_address": "4437 E HOLMES AVE",
@@ -109,7 +109,7 @@
   ],
   "organizations": [
     {
-      "id": "7e40b1af-2ef0-4b44-b81a-9384f812861c",
+      "id": "915aa2c0-d5e4-43ff-9f27-89d4f65c7282",
       "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
       "role": "utility",
       "organization_type": "LLC",
@@ -124,7 +124,7 @@
   ],
   "dependencies": [
     {
-      "id": "0e767783-8f50-4b9f-98a9-53e6ed75db37",
+      "id": "09393192-8642-40e1-877d-6e696b344d2b",
       "infrastructure_kind": "substation",
       "label": "Southern Substation",
       "dependency_status": "existing",
@@ -138,7 +138,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "cdc9b34b-bb8e-4de4-833f-83a602298b2e",
+      "id": "5925ab2d-49f2-4e7b-9409-71a4e2de3466",
       "infrastructure_kind": "substation",
       "label": "Greer Substation",
       "dependency_status": "existing",
@@ -152,7 +152,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "645dac41-9c20-4c66-ba6a-41f5ec429599",
+      "id": "050ed460-4de2-43e9-92da-237f73d57462",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -168,7 +168,7 @@
   ],
   "estimates": [
     {
-      "id": "13ee960b-784d-4882-941f-b1f927cf6f72",
+      "id": "72576de4-5438-423b-b4d3-3bee72e05000",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 1.5,
@@ -186,11 +186,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-27T23:21:20.135980Z",
+      "calculated_at": "2026-07-28T00:12:00.361889Z",
       "notes": null
     },
     {
-      "id": "7e9fc26f-0ce9-4168-9113-33f6fd950e0b",
+      "id": "8d8964f5-dfa3-4b94-a9ab-ec4948f6f93b",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 3600.0,
@@ -208,20 +208,20 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-27T23:21:20.136039Z",
+      "calculated_at": "2026-07-28T00:12:00.361975Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "781f7fdc-c906-4fcb-8d7e-2e8810c853a2",
-    "calculated_at": "2026-07-27T23:21:20.132990Z",
-    "as_of_date": "2026-07-27",
+    "id": "58b656a6-06dd-4126-a5c2-30ae4875d37b",
+    "calculated_at": "2026-07-28T00:12:00.358250Z",
+    "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
-    "raw_score": 41.6957,
-    "confidence": 50.09,
+    "raw_score": 41.6755,
+    "confidence": 50.07,
     "confidence_band": "moderate",
-    "positive_contribution": 41.6957,
+    "positive_contribution": 41.6755,
     "negative_contribution": 0.0,
     "evidence_considered": 5,
     "distinct_evidence_kinds": 3,
@@ -240,7 +240,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "c3abf6c8-44f8-4993-a97f-0dc481ca5242"
+        "evidence_record_id": "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -248,11 +248,11 @@
         "label": "Grading or construction permit",
         "detail": "City of Mesa commercial building permit PMT26-05468 at 4437 E HOLMES AVE, opened 2026-03-23, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source.",
         "base_weight": 20.0,
-        "applied_weight": 14.943,
+        "applied_weight": 14.9295,
         "confidence_multiplier": 0.75,
-        "recency_multiplier": 0.9962,
+        "recency_multiplier": 0.9953,
         "polarity": "supporting",
-        "evidence_record_id": "cf255201-2df9-4215-893c-7ec48c865c8c"
+        "evidence_record_id": "a090d72e-34cc-46ed-899d-02e9ed50cacd"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -260,11 +260,11 @@
         "label": "Grading or construction permit",
         "detail": "City of Mesa commercial building permit PMT26-04526 at 4437 E HOLMES AVE, opened 2026-03-06, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
         "base_weight": 20.0,
-        "applied_weight": 7.0777,
+        "applied_weight": 7.071,
         "confidence_multiplier": 0.75,
-        "recency_multiplier": 0.9437,
+        "recency_multiplier": 0.9428,
         "polarity": "supporting",
-        "evidence_record_id": "28f77d8d-3c83-4a09-a01f-236c3d815902"
+        "evidence_record_id": "2db685cb-7d0d-4eac-890a-a8f5282d4a0c"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -276,7 +276,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "d73ced7d-4222-470e-99bf-ac179c63ea6c"
+        "evidence_record_id": "650030bd-8745-473d-81c8-15c516ec28ec"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -288,29 +288,29 @@
         "confidence_multiplier": 0.6685,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "e8684b6c-40aa-4b19-bf35-fa5846b72506"
+        "evidence_record_id": "c2e99184-9c0a-45da-b96e-f8bfbbe8ae6b"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "7bbd6634-50bb-4731-a509-540583483a8a",
+      "id": "2ded2e6d-a88e-4038-a163-21414f2f0f2f",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-27T23:21:20.135302Z",
+      "detected_at": "2026-07-28T00:12:00.361053Z",
       "is_downgrade": false,
-      "confidence": 50.09,
+      "confidence": 50.07,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 50% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Grading or construction permit.",
       "triggering_evidence_ids": [
-        "c3abf6c8-44f8-4993-a97f-0dc481ca5242",
-        "cf255201-2df9-4215-893c-7ec48c865c8c",
-        "28f77d8d-3c83-4a09-a01f-236c3d815902",
-        "d73ced7d-4222-470e-99bf-ac179c63ea6c"
+        "b86a1d81-1ee0-4bf5-b255-6e2378fec0f7",
+        "a090d72e-34cc-46ed-899d-02e9ed50cacd",
+        "2db685cb-7d0d-4eac-890a-a8f5282d4a0c",
+        "650030bd-8745-473d-81c8-15c516ec28ec"
       ],
-      "detection_lag_days": 4898
+      "detection_lag_days": 4899
     }
   ],
   "attributions": [

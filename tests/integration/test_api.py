@@ -260,6 +260,57 @@ class TestAnalytics:
         assert payload["total_evidence_records"] > 0
         assert payload["completeness_ratio"] == 1.0
 
+    def test_growth_series_is_cumulative_and_monotonic(self, api_client: TestClient) -> None:
+        """A site that reached stage 6 has passed stage 4 and counts at both.
+
+        Counting only a site's current stage would make earlier stages appear to
+        drain as projects advanced, which reads as decline rather than movement.
+        """
+        payload = api_client.get("/analytics/growth").json()
+        points = payload["points"]
+        assert points, "fixture corpus should produce at least one month"
+
+        for point in points:
+            counts = point["cumulative_by_stage"]
+            ordered = [counts[str(stage)] for stage in sorted(int(k) for k in counts)]
+            # Non-increasing as the stage threshold rises.
+            assert ordered == sorted(ordered, reverse=True), point["month"]
+
+        tracked = [p["sites_tracked"] for p in points]
+        assert tracked == sorted(tracked), "cumulative site count must never fall"
+
+    def test_growth_months_are_ordered_and_well_formed(self, api_client: TestClient) -> None:
+        payload = api_client.get("/analytics/growth").json()
+        months = [p["month"] for p in payload["points"]]
+        assert months == sorted(months)
+        for month in months:
+            year, sep, mon = month.partition("-")
+            assert sep == "-" and len(year) == 4 and len(mon) == 2
+
+    def test_detection_lag_is_reported_not_clamped(self, api_client: TestClient) -> None:
+        """Negative lag is a real outcome and must survive to the response.
+
+        Clamping at zero would quietly flatter an early-warning claim that this
+        endpoint exists to test rather than assert.
+        """
+        payload = api_client.get("/analytics/detection-lag").json()
+        assert payload["transitions"] > 0
+
+        assert payload["min_lag_days"] <= payload["max_lag_days"]
+        assert payload["median_lag_days"] is not None
+        assert payload["p90_lag_days"] >= payload["median_lag_days"]
+
+        for entry in payload["slowest"]:
+            assert entry["project_code"]
+            assert entry["stage_label"]
+            # The arithmetic must be reproducible from the fields shown.
+            assert isinstance(entry["lag_days"], int)
+
+    def test_detection_lag_slowest_is_ordered_worst_first(self, api_client: TestClient) -> None:
+        payload = api_client.get("/analytics/detection-lag").json()
+        lags = [e["lag_days"] for e in payload["slowest"]]
+        assert lags == sorted(lags, reverse=True)
+
 
 class TestExports:
     def test_csv_export_has_a_header_and_rows(self, api_client: TestClient) -> None:

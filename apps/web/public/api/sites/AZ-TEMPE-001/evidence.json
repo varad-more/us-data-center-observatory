@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:21:22.660213+00:00",
+  "generated_at": "2026-07-28T00:12:03.033203+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -13,7 +13,7 @@
     "current_confidence": 34.39,
     "total_acres": 4.2,
     "first_signal_date": "2021-08-02",
-    "latest_signal_date": "2026-07-27",
+    "latest_signal_date": "2026-07-28",
     "operator_status": "not_established",
     "summary": "1 parcel(s) totalling 4.2 acres near 2601 W BROADWAY RD, Tempe. Title of record is held by TIERRA DC ASSETS LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
     "boundary": {
@@ -64,7 +64,7 @@
   },
   "evidence": [
     {
-      "id": "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90",
+      "id": "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by TIERRA DC ASSETS LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = TIERRA DC ASSETS LLC",
@@ -93,8 +93,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -106,7 +106,7 @@
       }
     },
     {
-      "id": "668a07cf-3f41-4a42-8ae8-6034033aa251",
+      "id": "981da3ea-042b-4c1c-8fce-614e7bfb90b1",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Binary Substation tagged 69 kV lies 828 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = Binary Substation; operator = Salt River Project; max_voltage_kv = 69.0",
@@ -126,8 +126,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-        "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -139,12 +139,12 @@
       }
     },
     {
-      "id": "23cbce2d-ced7-401c-a1c0-297fe317a6b6",
+      "id": "c4ee9349-806e-4bae-8341-fb33a11b108b",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
       "snippet_locator": "$.features[0].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-27",
+      "observed_at": "2026-07-28",
       "assertion_class": "reported",
       "extraction_method": "structured_feed",
       "polarity": "supporting",
@@ -168,8 +168,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -183,28 +183,28 @@
   ],
   "stage_history": [
     {
-      "id": "e7ce1c04-20bb-40b5-b7d8-4efca9e29757",
+      "id": "665668b1-c929-4191-a643-4ddafefe3e57",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-27T23:21:20.095230Z",
+      "detected_at": "2026-07-28T00:12:00.264652Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "23cbce2d-ced7-401c-a1c0-297fe317a6b6",
-        "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
+        "c4ee9349-806e-4bae-8341-fb33a11b108b",
+        "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e"
       ],
-      "detection_lag_days": 1820
+      "detection_lag_days": 1821
     }
   ],
   "predictions": [
     {
-      "id": "fd3718ee-3b37-4b66-8b4f-77a2119a91ad",
-      "calculated_at": "2026-07-27T23:21:20.092972Z",
-      "as_of_date": "2026-07-27",
+      "id": "e343655f-b446-48b7-91eb-973cb1ed0cd2",
+      "calculated_at": "2026-07-28T00:12:00.258991Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 25.2886,
@@ -229,7 +229,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "23cbce2d-ced7-401c-a1c0-297fe317a6b6"
+          "evidence_record_id": "c4ee9349-806e-4bae-8341-fb33a11b108b"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -241,7 +241,7 @@
           "confidence_multiplier": 0.7017,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "668a07cf-3f41-4a42-8ae8-6034033aa251"
+          "evidence_record_id": "981da3ea-042b-4c1c-8fce-614e7bfb90b1"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -253,14 +253,14 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
+          "evidence_record_id": "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e"
         }
       ]
     },
     {
-      "id": "23e8afe1-0d2c-4c55-a468-6d96826080d7",
-      "calculated_at": "2026-07-27T23:21:20.093018Z",
-      "as_of_date": "2026-07-27",
+      "id": "4356d302-a3a3-4f1f-8a44-ae594ec9cc84",
+      "calculated_at": "2026-07-28T00:12:00.259082Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 19.675,
@@ -285,7 +285,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "23cbce2d-ced7-401c-a1c0-297fe317a6b6"
+          "evidence_record_id": "c4ee9349-806e-4bae-8341-fb33a11b108b"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -297,7 +297,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
+          "evidence_record_id": "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -309,7 +309,7 @@
           "confidence_multiplier": 0.7017,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "668a07cf-3f41-4a42-8ae8-6034033aa251"
+          "evidence_record_id": "981da3ea-042b-4c1c-8fce-614e7bfb90b1"
         }
       ]
     }

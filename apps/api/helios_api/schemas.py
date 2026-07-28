@@ -470,6 +470,57 @@ class AnalyticsStagesResponse(HeliosModel):
     stages: list[StageDistributionEntry]
 
 
+class StageGrowthPoint(HeliosModel):
+    """How many sites had reached each stage as of one month."""
+
+    month: str
+    """Month bucket as ``YYYY-MM``."""
+
+    cumulative_by_stage: dict[int, int]
+    """Stage -> count of sites that had reached *at least* that stage."""
+
+    sites_tracked: int
+    """Distinct sites with any recorded transition by this month."""
+
+
+class StageGrowthResponse(HeliosModel):
+    """Development activity over time, derived from recorded stage transitions."""
+
+    region_slug: str | None
+    points: list[StageGrowthPoint]
+    note: str
+
+
+class DetectionLagEntry(HeliosModel):
+    """One stage transition and how long Helios took to notice it."""
+
+    project_code: str
+    to_stage: int
+    stage_label: str
+    effective_date: date
+    detected_at: datetime
+    lag_days: int
+    """``detected_at`` minus ``effective_date``. Negative means Helios recorded
+    the transition before the effective date it later attributed to it."""
+
+
+class DetectionLagResponse(HeliosModel):
+    """Measured detection lag across all recorded transitions.
+
+    Helios claims to be an early-warning system. This is that claim rendered as a
+    measurement rather than an assertion.
+    """
+
+    region_slug: str | None
+    transitions: int
+    median_lag_days: float | None
+    p90_lag_days: float | None
+    min_lag_days: int | None
+    max_lag_days: int | None
+    slowest: list[DetectionLagEntry]
+    note: str
+
+
 class ProvenanceCompletenessResponse(HeliosModel):
     """Measured provenance completeness across all evidence."""
 

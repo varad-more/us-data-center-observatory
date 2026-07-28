@@ -6,12 +6,14 @@
  * missing provenance in the UI.
  */
 import {
+  detectionLagSchema,
   featureCollectionSchema,
   provenanceSchema,
   siteDetailSchema,
   siteListSchema,
   sourceListSchema,
   stageDistributionSchema,
+  stageGrowthSchema,
   timelineSchema,
   type FeatureCollection,
   type SiteDetail,
@@ -149,6 +151,15 @@ export function getStageDistribution() {
 
 export function getProvenanceCompleteness() {
   return request("/analytics/provenance", provenanceSchema);
+}
+
+export function getStageGrowth() {
+  return request("/analytics/growth", stageGrowthSchema);
+}
+
+export function getDetectionLag() {
+  // Hyphenated on the wire; the static export writes the same filename.
+  return request("/analytics/detection-lag", detectionLagSchema);
 }
 
 // Download targets. A static export cannot build a zip on demand, so the

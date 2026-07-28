@@ -115,6 +115,8 @@ def main() -> int:
     _export_endpoint(client, "/sources", "sources.json")
     _export_endpoint(client, "/analytics/stages", "analytics/stages.json")
     _export_endpoint(client, "/analytics/provenance", "analytics/provenance.json")
+    _export_endpoint(client, "/analytics/growth", "analytics/growth.json")
+    _export_endpoint(client, "/analytics/detection-lag", "analytics/detection-lag.json")
 
     print("Exporting map layers...")
     _export_endpoint(client, "/map/sites", "map/sites.json")

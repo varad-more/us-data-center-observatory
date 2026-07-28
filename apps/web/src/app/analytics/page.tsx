@@ -1,24 +1,98 @@
 import Link from "next/link";
-import { getStageDistribution, getProvenanceCompleteness } from "@/lib/api";
+import { GrowthChart } from "@/components/GrowthChart";
+import {
+  getDetectionLag,
+  getStageDistribution,
+  getStageGrowth,
+  getProvenanceCompleteness,
+} from "@/lib/api";
+
+function formatDays(days: number | null): string {
+  if (days === null) return "—";
+  const years = days / 365.25;
+  return years >= 2 ? `${days.toLocaleString()} (~${years.toFixed(1)} yr)` : days.toLocaleString();
+}
 
 export default async function AnalyticsPage() {
-  const [stages, provenance] = await Promise.all([
+  const [stages, provenance, growth, lag] = await Promise.all([
     getStageDistribution(),
-    getProvenanceCompleteness()
+    getProvenanceCompleteness(),
+    getStageGrowth(),
+    getDetectionLag(),
   ]);
+
+  // Stage banding is only meaningful once sites accumulate more than one
+  // transition each. Until then a per-stage chart is eight identical curves.
+  const transitionsPerSite =
+    growth.points.length > 0
+      ? lag.transitions / growth.points[growth.points.length - 1].sites_tracked
+      : 0;
+  const progressionObservable = transitionsPerSite > 1.05;
 
   return (
     <div className="stack">
-      <header>
-        <div className="card-header" style={{ marginBottom: "0.25rem" }}>
-          <div>
-            <h1 style={{ marginBottom: "0.25rem" }}>Regional Analytics</h1>
-            <p className="muted" style={{ margin: 0 }}>
-              Pipeline overview and data quality metrics for {stages.region_slug ?? "all regions"}
-            </p>
+      <header className="hero">
+        <p className="eyebrow">Measured, not asserted</p>
+        <h1>Regional analytics</h1>
+        <p className="tagline">
+          Pipeline coverage and data-quality metrics for{" "}
+          {stages.region_slug ?? "all regions"}, including the two numbers Helios owes
+          about itself: how complete its provenance is, and how long it takes to notice.
+        </p>
+      </header>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">Sites tracked over time</h2>
+          <span className="card-note">{growth.points.length} months with activity</span>
+        </div>
+        <GrowthChart points={growth.points} />
+        {!progressionObservable && (
+          <div className="notice" style={{ marginTop: "1rem", marginBottom: 0 }}>
+            <strong>Stage progression is not yet observable.</strong> Every site in this
+            corpus carries exactly one recorded stage transition, straight to its current
+            stage, so a per-stage breakdown would draw one curve per stage and they would
+            all be identical. This chart therefore counts sites, not progressions. It
+            gains a stage dimension when the pipeline has watched projects actually move.
+          </div>
+        )}
+      </section>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">Detection lag</h2>
+          <span className="card-note">{lag.transitions} transitions measured</span>
+        </div>
+        <div className="grid grid-4">
+          <div className="metric">
+            <div className="metric-label">Median lag</div>
+            <div className="metric-value num">{formatDays(lag.median_lag_days)}</div>
+            <div className="metric-sub">days between evidence and detection</div>
+          </div>
+          <div className="metric">
+            <div className="metric-label">90th percentile</div>
+            <div className="metric-value num">{formatDays(lag.p90_lag_days)}</div>
+            <div className="metric-sub">the slow tail</div>
+          </div>
+          <div className="metric">
+            <div className="metric-label">Fastest</div>
+            <div className="metric-value num">{formatDays(lag.min_lag_days)}</div>
+            <div className="metric-sub">same-day at best</div>
+          </div>
+          <div className="metric">
+            <div className="metric-label">Slowest</div>
+            <div className="metric-value num">{formatDays(lag.max_lag_days)}</div>
+            <div className="metric-sub">oldest record reached back to</div>
           </div>
         </div>
-      </header>
+        <div className="notice" style={{ marginTop: "1rem", marginBottom: 0 }}>
+          <strong>These are not operating characteristics.</strong> {lag.note} A median
+          measured in years reflects Helios reaching back over historical records in a
+          single pass, not the delay a live deployment would show. The figure becomes
+          meaningful only once the pipeline has been running against changing records
+          over time.
+        </div>
+      </section>
 
       <div className="split">
         <section className="card">

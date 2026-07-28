@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:21:22.554108+00:00",
+  "generated_at": "2026-07-28T00:12:02.913149+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -13,7 +13,7 @@
     "current_confidence": 35.55,
     "total_acres": 17.9617,
     "first_signal_date": "2022-01-20",
-    "latest_signal_date": "2026-07-27",
+    "latest_signal_date": "2026-07-28",
     "operator_status": "not_established",
     "summary": "1 parcel(s) totalling 18.0 acres near 2900 W INNOVATION ST, Chandler. Title of record is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
     "boundary": {
@@ -436,7 +436,7 @@
   },
   "evidence": [
     {
-      "id": "d180cbfb-064a-4124-930e-8a5849b74d99",
+      "id": "48e3de99-94e6-47df-a9ff-eb48d0a02eb9",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by ALIGNED DATA CENTERS CONTINUUM PROPCO LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC); propco/opco naming convention). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = ALIGNED DATA CENTERS CONTINUUM PROPCO LLC",
@@ -465,8 +465,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -478,7 +478,7 @@
       }
     },
     {
-      "id": "e4127ae6-9afc-4fcf-a130-4e8ab05936b7",
+      "id": "7b0a6b96-8a37-4792-9c12-4dd72d99876e",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "RS-27 tagged 69 kV lies 383 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = RS-27; operator = unknown; max_voltage_kv = 69.0",
@@ -498,8 +498,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-        "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -511,12 +511,12 @@
       }
     },
     {
-      "id": "73b721cb-ab7d-47ac-912c-6459553e0549",
+      "id": "ab9f9b17-46b3-41c2-9592-4dbd5e777caa",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
       "snippet_locator": "$.features[10].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-27",
+      "observed_at": "2026-07-28",
       "assertion_class": "reported",
       "extraction_method": "structured_feed",
       "polarity": "supporting",
@@ -540,8 +540,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -555,28 +555,28 @@
   ],
   "stage_history": [
     {
-      "id": "162086f6-4343-448f-be2a-679eef77b803",
+      "id": "966a80bc-6278-4dae-8679-b9f817e3b4a3",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2022-01-20",
-      "detected_at": "2026-07-27T23:21:20.075920Z",
+      "detected_at": "2026-07-28T00:12:00.309598Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "73b721cb-ab7d-47ac-912c-6459553e0549",
-        "d180cbfb-064a-4124-930e-8a5849b74d99"
+        "ab9f9b17-46b3-41c2-9592-4dbd5e777caa",
+        "48e3de99-94e6-47df-a9ff-eb48d0a02eb9"
       ],
-      "detection_lag_days": 1649
+      "detection_lag_days": 1650
     }
   ],
   "predictions": [
     {
-      "id": "c219a14c-1440-43d4-b5d1-e47e785607ec",
-      "calculated_at": "2026-07-27T23:21:20.073694Z",
-      "as_of_date": "2026-07-27",
+      "id": "d266bb67-f119-49e1-ada7-10bfecbf292b",
+      "calculated_at": "2026-07-28T00:12:00.306917Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 26.355,
@@ -601,7 +601,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "73b721cb-ab7d-47ac-912c-6459553e0549"
+          "evidence_record_id": "ab9f9b17-46b3-41c2-9592-4dbd5e777caa"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -613,7 +613,7 @@
           "confidence_multiplier": 0.835,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e4127ae6-9afc-4fcf-a130-4e8ab05936b7"
+          "evidence_record_id": "7b0a6b96-8a37-4792-9c12-4dd72d99876e"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -625,14 +625,14 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "d180cbfb-064a-4124-930e-8a5849b74d99"
+          "evidence_record_id": "48e3de99-94e6-47df-a9ff-eb48d0a02eb9"
         }
       ]
     },
     {
-      "id": "4ae47719-f950-4cdb-8286-7fdfb418566b",
-      "calculated_at": "2026-07-27T23:21:20.073740Z",
-      "as_of_date": "2026-07-27",
+      "id": "0b2c35ff-0683-43aa-868b-a3b43b1c7fd5",
+      "calculated_at": "2026-07-28T00:12:00.306984Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 19.675,
@@ -657,7 +657,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "73b721cb-ab7d-47ac-912c-6459553e0549"
+          "evidence_record_id": "ab9f9b17-46b3-41c2-9592-4dbd5e777caa"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -669,7 +669,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "d180cbfb-064a-4124-930e-8a5849b74d99"
+          "evidence_record_id": "48e3de99-94e6-47df-a9ff-eb48d0a02eb9"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -681,7 +681,7 @@
           "confidence_multiplier": 0.835,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "e4127ae6-9afc-4fcf-a130-4e8ab05936b7"
+          "evidence_record_id": "7b0a6b96-8a37-4792-9c12-4dd72d99876e"
         }
       ]
     }

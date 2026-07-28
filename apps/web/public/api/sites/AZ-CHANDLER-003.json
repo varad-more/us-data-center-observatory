@@ -1,5 +1,5 @@
 {
-  "id": "9f086a50-021e-4d48-9662-27ebec3ad400",
+  "id": "1a37a1c8-db4e-472e-ae6e-171d8835ba1f",
   "project_code": "AZ-CHANDLER-003",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -13,13 +13,13 @@
   "stage_confidence": 27.96,
   "confidence_band": "low",
   "first_signal_date": "2022-01-20",
-  "latest_signal_date": "2026-07-27",
+  "latest_signal_date": "2026-07-28",
   "evidence_count": 3,
   "total_acres": 17.9617,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T23:21:20.075920Z",
-  "score_last_calculated_at": "2026-07-27T23:21:20.073694Z",
+  "stage_last_changed_at": "2026-07-28T00:12:00.309598Z",
+  "score_last_calculated_at": "2026-07-28T00:12:00.306917Z",
   "centroid": [
     -111.887943,
     33.269237
@@ -445,7 +445,7 @@
   },
   "parcels": [
     {
-      "id": "c6d5486b-9207-4d9c-ae80-8fc1b7f39118",
+      "id": "4229c9c0-9d75-4fc8-8b17-58b758490224",
       "apn": "30336988",
       "apn_formatted": "303-36-988",
       "situs_address": "2900 W INNOVATION ST",
@@ -465,7 +465,7 @@
   ],
   "organizations": [
     {
-      "id": "529527a4-a841-4f46-982c-8753565fabf6",
+      "id": "89a3ae90-744f-41ef-b383-719a845ec93b",
       "canonical_name": "ALIGNED DATA CENTERS CONTINUUM PROPCO LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -481,7 +481,7 @@
   ],
   "dependencies": [
     {
-      "id": "3b80d3f3-99af-47fe-93d5-1e030efe191f",
+      "id": "02889054-10de-4184-96ba-bb20dedfc192",
       "infrastructure_kind": "substation",
       "label": "RS-27",
       "dependency_status": "existing",
@@ -495,7 +495,7 @@
       "operator_name": null
     },
     {
-      "id": "3509dd84-07fd-4b54-b77a-765f88f87edd",
+      "id": "6c5f693e-cb9f-4546-9652-f9869aa0a1a0",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -509,7 +509,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "3a39b1e2-ea64-4294-bb09-d74aceab7c2a",
+      "id": "f30527a9-d3f5-4180-acef-4cf076f681c8",
       "infrastructure_kind": "substation",
       "label": "Henshaw Substation",
       "dependency_status": "existing",
@@ -523,7 +523,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "ad2ca4c8-879e-43f1-b9be-548ce91628e2",
+      "id": "2dff9d7d-f933-4096-aba9-dca2a5fbb694",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -537,7 +537,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "b81b0c18-d96e-4647-aed4-fa436ac85c0d",
+      "id": "744b5218-c5f8-4b17-b024-594fca457c89",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -551,7 +551,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "982fde69-0443-4355-8ba5-16bd0e7f475d",
+      "id": "9ba50a43-40cd-4306-a246-1cbf5e4f9383",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -565,7 +565,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "2865e9c9-bb04-4b56-8e4b-3e5418c14793",
+      "id": "a75fd2c1-86a1-4ba0-a36f-2c6b07539dd3",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -579,7 +579,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "8d1ff06b-d538-4b78-904d-f91f37e702d3",
+      "id": "0ef807bc-a520-40eb-a216-4825897941c3",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -593,7 +593,7 @@
       "operator_name": null
     },
     {
-      "id": "77d89d10-3b5f-4efd-a757-fa46f81d2ed7",
+      "id": "7e4e7a29-a044-4166-9ed7-efdb2636b6d6",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -607,7 +607,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "3dada380-c426-466a-9b19-61599cf27453",
+      "id": "3f99ace1-949a-4de2-9c8f-e110d58669d0",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -621,7 +621,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "58709add-c028-4ae3-87ea-247e2ac40609",
+      "id": "927362e0-4b8a-4055-99f7-270400a0955a",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -635,7 +635,7 @@
       "operator_name": null
     },
     {
-      "id": "b82b01d3-18bf-4500-8e01-f1b3f612210a",
+      "id": "7d1dc95c-014e-40b2-9de4-7193856a2934",
       "infrastructure_kind": "substation",
       "label": "Jones Substation",
       "dependency_status": "existing",
@@ -649,7 +649,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "99e8ea14-fe69-4a6a-8bb2-cfa0f36f9478",
+      "id": "3b5a1b91-f6c7-476d-b258-db9882f2be9a",
       "infrastructure_kind": "substation",
       "label": "RS-28",
       "dependency_status": "existing",
@@ -665,7 +665,7 @@
   ],
   "estimates": [
     {
-      "id": "ac865ae5-892e-4163-aad9-64b5863cc98c",
+      "id": "950cdb5e-3aa7-477c-86d6-7ed8ef63469c",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 21.6,
@@ -683,11 +683,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-27T23:21:20.076592Z",
+      "calculated_at": "2026-07-28T00:12:00.310592Z",
       "notes": null
     },
     {
-      "id": "da3ba15a-8280-4290-b4e3-fab8faddd63d",
+      "id": "d8ecf945-fcf5-4879-8295-d8589a2c5de2",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 51840.0,
@@ -705,14 +705,14 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-27T23:21:20.076693Z",
+      "calculated_at": "2026-07-28T00:12:00.310703Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "4ae47719-f950-4cdb-8286-7fdfb418566b",
-    "calculated_at": "2026-07-27T23:21:20.073740Z",
-    "as_of_date": "2026-07-27",
+    "id": "0b2c35ff-0683-43aa-868b-a3b43b1c7fd5",
+    "calculated_at": "2026-07-28T00:12:00.306984Z",
+    "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
     "raw_score": 19.675,
@@ -737,7 +737,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "73b721cb-ab7d-47ac-912c-6459553e0549"
+        "evidence_record_id": "ab9f9b17-46b3-41c2-9592-4dbd5e777caa"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -749,7 +749,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "d180cbfb-064a-4124-930e-8a5849b74d99"
+        "evidence_record_id": "48e3de99-94e6-47df-a9ff-eb48d0a02eb9"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -761,27 +761,27 @@
         "confidence_multiplier": 0.835,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "e4127ae6-9afc-4fcf-a130-4e8ab05936b7"
+        "evidence_record_id": "7b0a6b96-8a37-4792-9c12-4dd72d99876e"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "162086f6-4343-448f-be2a-679eef77b803",
+      "id": "966a80bc-6278-4dae-8679-b9f817e3b4a3",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2022-01-20",
-      "detected_at": "2026-07-27T23:21:20.075920Z",
+      "detected_at": "2026-07-28T00:12:00.309598Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "73b721cb-ab7d-47ac-912c-6459553e0549",
-        "d180cbfb-064a-4124-930e-8a5849b74d99"
+        "ab9f9b17-46b3-41c2-9592-4dbd5e777caa",
+        "48e3de99-94e6-47df-a9ff-eb48d0a02eb9"
       ],
-      "detection_lag_days": 1649
+      "detection_lag_days": 1650
     }
   ],
   "attributions": [

@@ -1,5 +1,5 @@
 {
-  "id": "c78ddddb-592f-4e75-a23c-b65e230772c6",
+  "id": "09c9bed7-829a-4a35-89a4-bb69326f41e0",
   "project_code": "AZ-TEMPE-001",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -13,13 +13,13 @@
   "stage_confidence": 27.96,
   "confidence_band": "low",
   "first_signal_date": "2021-08-02",
-  "latest_signal_date": "2026-07-27",
+  "latest_signal_date": "2026-07-28",
   "evidence_count": 3,
   "total_acres": 4.2,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T23:21:20.095230Z",
-  "score_last_calculated_at": "2026-07-27T23:21:20.092972Z",
+  "stage_last_changed_at": "2026-07-28T00:12:00.264652Z",
+  "score_last_calculated_at": "2026-07-28T00:12:00.258991Z",
   "centroid": [
     -111.976583,
     33.406444
@@ -73,7 +73,7 @@
   },
   "parcels": [
     {
-      "id": "671e108f-1aad-4cee-b6c2-20d861224788",
+      "id": "ffed7755-965f-4d1c-b804-8d79fcbe3678",
       "apn": "12331001F",
       "apn_formatted": "123-31-001F",
       "situs_address": "2601 W BROADWAY RD",
@@ -93,7 +93,7 @@
   ],
   "organizations": [
     {
-      "id": "c6f056d2-97da-46a1-a6da-0639fcee099b",
+      "id": "9956e327-592e-4cca-b4d0-dd71986e2bf4",
       "canonical_name": "TIERRA DC ASSETS LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -108,7 +108,7 @@
   ],
   "dependencies": [
     {
-      "id": "1e40d5e7-e341-4c93-8129-8a8928ede43d",
+      "id": "1199d73c-677c-44fd-892d-0b56d0d516f1",
       "infrastructure_kind": "substation",
       "label": "Binary Substation",
       "dependency_status": "existing",
@@ -122,7 +122,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "a861ed29-c73f-483f-a254-e5da332ca026",
+      "id": "b8b706f0-b9e2-4675-af16-ff1f6993a15e",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -136,7 +136,7 @@
       "operator_name": null
     },
     {
-      "id": "ccfb58e2-aca8-43ce-914a-ee0789fba168",
+      "id": "df7b1ed2-67f0-4997-9eb1-ae18654158ba",
       "infrastructure_kind": "substation",
       "label": "Weiler Substation",
       "dependency_status": "existing",
@@ -150,7 +150,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "825d054e-6490-4a52-a572-fa2004e53d32",
+      "id": "8e6c6090-921a-4868-9f41-d4f94327c9fe",
       "infrastructure_kind": "substation",
       "label": "Wilkins Substation",
       "dependency_status": "existing",
@@ -164,7 +164,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "0bebda57-f33a-4f12-b5ce-e9f10e921f96",
+      "id": "d34886e2-e4df-4bf0-a588-4d2b2dc1439d",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -178,7 +178,7 @@
       "operator_name": null
     },
     {
-      "id": "0a53ee63-a3c5-4ab3-914c-f691cf345bf4",
+      "id": "36f262fc-5cb5-44e9-b395-a07742c6557e",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -194,7 +194,7 @@
   ],
   "estimates": [
     {
-      "id": "f31a2ba4-b54e-4dea-b8a1-ae8de41b597e",
+      "id": "e695ca3c-2946-44ef-89c8-5ac2fab7dfc0",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 5.0,
@@ -212,11 +212,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-27T23:21:20.095932Z",
+      "calculated_at": "2026-07-28T00:12:00.266757Z",
       "notes": null
     },
     {
-      "id": "3572af3a-f557-4d2d-a54e-37b55622857b",
+      "id": "88360f0c-33b4-42d1-b092-5ef319f4d512",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 12000.0,
@@ -234,14 +234,14 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-27T23:21:20.096005Z",
+      "calculated_at": "2026-07-28T00:12:00.266896Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "23e8afe1-0d2c-4c55-a468-6d96826080d7",
-    "calculated_at": "2026-07-27T23:21:20.093018Z",
-    "as_of_date": "2026-07-27",
+    "id": "4356d302-a3a3-4f1f-8a44-ae594ec9cc84",
+    "calculated_at": "2026-07-28T00:12:00.259082Z",
+    "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
     "raw_score": 19.675,
@@ -266,7 +266,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "23cbce2d-ced7-401c-a1c0-297fe317a6b6"
+        "evidence_record_id": "c4ee9349-806e-4bae-8341-fb33a11b108b"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -278,7 +278,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
+        "evidence_record_id": "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -290,27 +290,27 @@
         "confidence_multiplier": 0.7017,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "668a07cf-3f41-4a42-8ae8-6034033aa251"
+        "evidence_record_id": "981da3ea-042b-4c1c-8fce-614e7bfb90b1"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "e7ce1c04-20bb-40b5-b7d8-4efca9e29757",
+      "id": "665668b1-c929-4191-a643-4ddafefe3e57",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2021-08-02",
-      "detected_at": "2026-07-27T23:21:20.095230Z",
+      "detected_at": "2026-07-28T00:12:00.264652Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "23cbce2d-ced7-401c-a1c0-297fe317a6b6",
-        "2b907b53-8bb6-42a9-bd34-a9e0bc60ae90"
+        "c4ee9349-806e-4bae-8341-fb33a11b108b",
+        "c8ffd0a0-c3df-442d-a2e8-f3615ba9ae5e"
       ],
-      "detection_lag_days": 1820
+      "detection_lag_days": 1821
     }
   ],
   "attributions": [

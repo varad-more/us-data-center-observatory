@@ -1,5 +1,5 @@
 {
-  "id": "8b77d9b0-699d-413a-b889-c0a1ecf6b1e6",
+  "id": "19de8232-c976-4c73-a79c-7466b1c90a27",
   "project_code": "AZ-CHANDLER-007",
   "display_name": null,
   "site_kind": "enterprise_data_center",
@@ -13,13 +13,13 @@
   "stage_confidence": 27.96,
   "confidence_band": "low",
   "first_signal_date": "2013-02-27",
-  "latest_signal_date": "2026-07-27",
+  "latest_signal_date": "2026-07-28",
   "evidence_count": 3,
   "total_acres": 1.72,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T23:21:20.065416Z",
-  "score_last_calculated_at": "2026-07-27T23:21:20.062941Z",
+  "stage_last_changed_at": "2026-07-28T00:12:00.297887Z",
+  "score_last_calculated_at": "2026-07-28T00:12:00.295026Z",
   "centroid": [
     -111.913592,
     33.304101
@@ -133,7 +133,7 @@
   },
   "parcels": [
     {
-      "id": "b94850d0-a5b8-4a1b-895d-f420ac9a2aa9",
+      "id": "38b6d3a2-e9ce-40f1-8049-3f28dabe48c1",
       "apn": "30189944",
       "apn_formatted": "301-89-944",
       "situs_address": "100 N 79TH ST",
@@ -153,7 +153,7 @@
   ],
   "organizations": [
     {
-      "id": "7e40b1af-2ef0-4b44-b81a-9384f812861c",
+      "id": "915aa2c0-d5e4-43ff-9f27-89d4f65c7282",
       "canonical_name": "COX COMMUNICATIONS ARIZONA LLC",
       "role": "utility",
       "organization_type": "LLC",
@@ -168,7 +168,7 @@
   ],
   "dependencies": [
     {
-      "id": "22f0b250-e1dd-40a0-815d-d6eacbd37ad0",
+      "id": "bb153995-0287-4d25-90f2-84c1232ad79e",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -182,7 +182,7 @@
       "operator_name": null
     },
     {
-      "id": "304ec459-2fb0-41d9-ba14-bff2aea025d4",
+      "id": "c4556520-cec5-41f2-b38d-0af30da5ce0b",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -196,7 +196,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "49833c2c-5271-49fc-823b-7900a59066fa",
+      "id": "5c312aef-efef-4783-9f3f-2a0214137bc2",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -210,7 +210,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "6a4babb7-48a3-499f-952f-98b580e564fa",
+      "id": "660b62f8-0425-4fbb-9c9f-af9c184740e4",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -224,7 +224,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "61c295a7-6808-4c7f-9185-6caa4415c85a",
+      "id": "7f16d80b-c97a-4dda-a6cf-d5ffa3c71cb6",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -238,7 +238,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "0c3da57f-e1fd-49c2-86fd-2d3d73467370",
+      "id": "606440cb-5c01-469e-a54f-e64309fa66b1",
       "infrastructure_kind": "transmission_line",
       "label": "230.0 kV circuit",
       "dependency_status": "existing",
@@ -252,7 +252,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "e552feea-8f9c-4c47-8723-7c65011e95da",
+      "id": "bd0a855f-c2cf-4c05-aabe-c464c2e0f395",
       "infrastructure_kind": "transmission_line",
       "label": "SRP Knox - Henshaw Powerlines",
       "dependency_status": "existing",
@@ -266,7 +266,7 @@
       "operator_name": "SRP"
     },
     {
-      "id": "b5011d3c-0e28-48b8-a8b4-2e34bacb5b33",
+      "id": "94f9d31f-f79f-4f6f-88af-012cd2616591",
       "infrastructure_kind": "substation",
       "label": "Intel Substation",
       "dependency_status": "existing",
@@ -280,7 +280,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "165a46d1-be0a-4a52-a432-3faf4c8fd5ea",
+      "id": "2cc8efb7-ab40-4568-82be-e59fd717318d",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -294,7 +294,7 @@
       "operator_name": null
     },
     {
-      "id": "f444a9b5-7b21-4788-869f-876d3d956013",
+      "id": "9b70fe2f-4303-4c19-bbad-aebd65404561",
       "infrastructure_kind": "substation",
       "label": "Houston Substation",
       "dependency_status": "existing",
@@ -308,7 +308,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "936a7653-6048-447d-a875-daf5a8663ea8",
+      "id": "577c8118-545d-49b2-8e1e-3f9f9d5e10a9",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -322,7 +322,7 @@
       "operator_name": null
     },
     {
-      "id": "5ec0b9c7-4a04-4dc2-aa6c-0143ac2f811c",
+      "id": "4126a8fb-b7c2-4bec-bbce-73146df06716",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -336,7 +336,7 @@
       "operator_name": null
     },
     {
-      "id": "7244d05a-82f6-45c0-8fcf-4d065b9e9dc2",
+      "id": "f9aa80f0-a7ee-4c21-a6ee-930c9bc21787",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -352,7 +352,7 @@
   ],
   "estimates": [
     {
-      "id": "69aef9a9-7493-4189-8357-fb512ca4c055",
+      "id": "807ea284-cfed-4816-a1fa-24535b965e3a",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 2.1,
@@ -370,11 +370,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-27T23:21:20.066330Z",
+      "calculated_at": "2026-07-28T00:12:00.298786Z",
       "notes": null
     },
     {
-      "id": "7b174b2b-c634-4ff3-9735-4e2848e07c49",
+      "id": "67463104-6428-45a3-a4fc-b9e57dca14a0",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 5040.0,
@@ -392,14 +392,14 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-27T23:21:20.066413Z",
+      "calculated_at": "2026-07-28T00:12:00.298866Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "275ae324-dca1-48ea-be41-e4239b91cfee",
-    "calculated_at": "2026-07-27T23:21:20.062985Z",
-    "as_of_date": "2026-07-27",
+    "id": "ebb82e0f-88a2-4812-9d38-e16b25f48a89",
+    "calculated_at": "2026-07-28T00:12:00.295088Z",
+    "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
     "raw_score": 19.675,
@@ -424,7 +424,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "54f7ab87-fd7b-4006-bd01-72accfb22584"
+        "evidence_record_id": "dfc6e48a-a6b3-4a8a-ab91-58b831511c92"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -436,7 +436,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "97b7cea7-1e01-457c-b48b-3d2fb600777d"
+        "evidence_record_id": "55fbc3e1-cfa8-4170-8984-1a84cbc66498"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -448,27 +448,27 @@
         "confidence_multiplier": 0.8776,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "d87f3081-04be-4fac-b190-47f20810ce3b"
+        "evidence_record_id": "5ead1cd0-6377-4b21-b6a0-1511758d5ab2"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "9ba08b63-e9bb-4a71-9823-924c090c8d45",
+      "id": "9693fc94-f0a1-450f-8aff-b6723731537e",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-27T23:21:20.065416Z",
+      "detected_at": "2026-07-28T00:12:00.297887Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "54f7ab87-fd7b-4006-bd01-72accfb22584",
-        "97b7cea7-1e01-457c-b48b-3d2fb600777d"
+        "dfc6e48a-a6b3-4a8a-ab91-58b831511c92",
+        "55fbc3e1-cfa8-4170-8984-1a84cbc66498"
       ],
-      "detection_lag_days": 4898
+      "detection_lag_days": 4899
     }
   ],
   "attributions": [

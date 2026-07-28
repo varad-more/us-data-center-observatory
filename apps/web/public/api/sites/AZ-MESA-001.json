@@ -1,5 +1,5 @@
 {
-  "id": "cc182767-f805-4665-9596-119fb963d4c6",
+  "id": "1d8ff38c-2500-4ed0-b888-18db4a68f277",
   "project_code": "AZ-MESA-001",
   "display_name": null,
   "site_kind": "hyperscale_campus",
@@ -10,16 +10,16 @@
   "current_stage": 7,
   "current_stage_label": "Operational",
   "current_confidence": 59.75,
-  "stage_confidence": 70.04,
+  "stage_confidence": 70.02,
   "confidence_band": "moderate",
   "first_signal_date": "2013-11-04",
-  "latest_signal_date": "2026-07-27",
+  "latest_signal_date": "2026-07-28",
   "evidence_count": 10,
   "total_acres": 83.1715,
   "parcel_count": 1,
   "operator_status": "not_established",
-  "stage_last_changed_at": "2026-07-27T23:21:20.105640Z",
-  "score_last_calculated_at": "2026-07-27T23:21:20.102890Z",
+  "stage_last_changed_at": "2026-07-28T00:12:00.322076Z",
+  "score_last_calculated_at": "2026-07-28T00:12:00.318883Z",
   "centroid": [
     -111.604067,
     33.346951
@@ -149,7 +149,7 @@
   },
   "parcels": [
     {
-      "id": "7874e269-4a22-4f2c-b37a-8b8f49b0de08",
+      "id": "f819b7ee-a181-4d03-9957-d73cae03cdb9",
       "apn": "30433005S",
       "apn_formatted": "304-33-005S",
       "situs_address": "3740 S SIGNAL BUTTE RD",
@@ -169,7 +169,7 @@
   ],
   "organizations": [
     {
-      "id": "4f07953d-4ce2-4ccf-975b-34d21bc28ad9",
+      "id": "396def93-2bfa-411a-bdf8-3d459c8000eb",
       "canonical_name": "PLATYPUS DEVELOPMENT LLC",
       "role": "owner",
       "organization_type": "LLC",
@@ -185,7 +185,7 @@
   ],
   "dependencies": [
     {
-      "id": "528f15e1-ba15-4785-88ec-6298ca52565c",
+      "id": "c440a1e7-a1df-43f8-9a8a-4809609a4cb4",
       "infrastructure_kind": "substation",
       "label": "Luna Substation",
       "dependency_status": "existing",
@@ -199,7 +199,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "2c018868-aa50-4d3e-a4cb-570621c30714",
+      "id": "93557b6a-0ef6-4e19-9bdf-193b144185b6",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -213,7 +213,7 @@
       "operator_name": null
     },
     {
-      "id": "99be4764-a6b0-4a39-a102-1422b735b270",
+      "id": "601d9ade-9b60-4226-94d8-2710351d824e",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -227,7 +227,7 @@
       "operator_name": null
     },
     {
-      "id": "9ca9b720-ec13-4e61-bab3-b265617b6e5c",
+      "id": "b552b4f7-865b-44a9-babb-4120f07f6714",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -241,7 +241,7 @@
       "operator_name": null
     },
     {
-      "id": "3bb92471-7403-42a6-a09b-14e0be6b825c",
+      "id": "c086de02-0044-430b-abd1-7969cdaaf058",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -255,7 +255,7 @@
       "operator_name": null
     },
     {
-      "id": "dc5466c3-7175-44e6-bbf2-e9f76e7d652c",
+      "id": "efc838c0-4692-41d4-8708-ef6081953f58",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -269,7 +269,7 @@
       "operator_name": null
     },
     {
-      "id": "3fa3c0d6-efb9-4942-8b0f-8db2a012c346",
+      "id": "b0eddad4-b408-4693-b8bd-f3c2cff5f5d6",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -283,7 +283,7 @@
       "operator_name": null
     },
     {
-      "id": "b69aa402-d050-4a91-9b41-b3cca5603552",
+      "id": "f108fc8d-b057-4a25-9735-7ad73f77af0c",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -297,7 +297,7 @@
       "operator_name": null
     },
     {
-      "id": "a95e66f6-8460-4f42-af29-bf964a497096",
+      "id": "dc6e17b0-21e5-4033-9c35-3ad3e1a5d708",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -311,7 +311,7 @@
       "operator_name": null
     },
     {
-      "id": "e22c0e1f-9307-4f1b-bcdd-0b081369e7e1",
+      "id": "4015920e-f15e-4432-9609-d00181cc93d5",
       "infrastructure_kind": "transmission_line",
       "label": "500.0 kV circuit",
       "dependency_status": "existing",
@@ -325,7 +325,7 @@
       "operator_name": null
     },
     {
-      "id": "410a0bb6-eeda-4a61-94fa-56752635a6af",
+      "id": "31645a92-5d4b-41ed-8031-45e4aead3687",
       "infrastructure_kind": "substation",
       "label": "Greenbone Substation",
       "dependency_status": "existing",
@@ -339,7 +339,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "be34d002-bb02-40ed-aa42-17870132ff6c",
+      "id": "97540abb-30e8-46d8-aaeb-41db5e488154",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -353,7 +353,7 @@
       "operator_name": null
     },
     {
-      "id": "0d210dc6-1be8-4d79-afa5-7d1b64c88953",
+      "id": "13c7322b-a0cc-42e9-a03b-f4a9d8b5bfa1",
       "infrastructure_kind": "substation",
       "label": "Howard Substation",
       "dependency_status": "existing",
@@ -367,7 +367,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "699a4e93-99ca-40d8-92b0-d8c194c31fbb",
+      "id": "d7f5b023-6733-48ff-b3ca-a060b5373f85",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -381,7 +381,7 @@
       "operator_name": null
     },
     {
-      "id": "e9baf70e-06f1-4bc5-8c1f-e5083344add4",
+      "id": "6bff28e9-3866-4c24-89e4-d2776b86434f",
       "infrastructure_kind": "substation",
       "label": "Prickly Pear Substation",
       "dependency_status": "existing",
@@ -395,7 +395,7 @@
       "operator_name": "Salt River Project"
     },
     {
-      "id": "cb658649-b07f-4741-b6cc-a065f3d851d7",
+      "id": "89931794-7c6c-4f61-833a-60845fa0b367",
       "infrastructure_kind": "substation",
       "label": "Unnamed substation",
       "dependency_status": "existing",
@@ -411,7 +411,7 @@
   ],
   "estimates": [
     {
-      "id": "4e902490-f5d9-46a2-9d8b-3191e9dcc684",
+      "id": "cd526700-ff36-4dde-9355-91e322c98c1b",
       "estimate_type": "power_capacity",
       "unit": "MW",
       "lower_value": 99.8,
@@ -429,11 +429,11 @@
         "mw_per_acre_likely": 2.0,
         "stage_density_multiplier": 1.2
       },
-      "calculated_at": "2026-07-27T23:21:20.106316Z",
+      "calculated_at": "2026-07-28T00:12:00.322961Z",
       "notes": null
     },
     {
-      "id": "ac7739bd-f760-4136-969e-fcb05a5d82ae",
+      "id": "ab02b58b-04c7-4d50-bc9e-339421c620b1",
       "estimate_type": "water_usage",
       "unit": "GPD",
       "lower_value": 239520.0,
@@ -451,20 +451,20 @@
         "gal_per_kwh_high": 1.0,
         "gal_per_kwh_likely": 0.5
       },
-      "calculated_at": "2026-07-27T23:21:20.106386Z",
+      "calculated_at": "2026-07-28T00:12:00.323043Z",
       "notes": null
     }
   ],
   "latest_prediction": {
-    "id": "df7143f9-76c4-4445-bc31-fb86b7ba4489",
-    "calculated_at": "2026-07-27T23:21:20.102936Z",
-    "as_of_date": "2026-07-27",
+    "id": "00fc506b-b4f9-4e01-b6f2-48d7d6cebb1c",
+    "calculated_at": "2026-07-28T00:12:00.318941Z",
+    "as_of_date": "2026-07-28",
     "predicted_stage": 7,
     "predicted_stage_label": "Operational",
-    "raw_score": 72.31,
-    "confidence": 70.04,
+    "raw_score": 72.279,
+    "confidence": 70.02,
     "confidence_band": "high",
-    "positive_contribution": 72.31,
+    "positive_contribution": 72.279,
     "negative_contribution": 0.0,
     "evidence_considered": 10,
     "distinct_evidence_kinds": 6,
@@ -483,7 +483,7 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "f333faab-9981-48a1-99f0-ea71580b54ac"
+        "evidence_record_id": "76cea888-e95c-4a47-b232-acc1dcd7f4ba"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -491,11 +491,11 @@
         "label": "Grading or construction permit",
         "detail": "City of Mesa commercial building permit PMT26-13495 at 3740 S SIGNAL BUTTE RD, opened 2026-07-23, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source.",
         "base_weight": 20.0,
-        "applied_weight": 14.943,
+        "applied_weight": 14.9295,
         "confidence_multiplier": 0.75,
-        "recency_multiplier": 0.9962,
+        "recency_multiplier": 0.9953,
         "polarity": "supporting",
-        "evidence_record_id": "5d029e37-1b20-42c2-a045-d21a6d423cbf"
+        "evidence_record_id": "ca72411d-96dd-4ab7-acae-66d9c06c3892"
       },
       {
         "rule_id": "backup-generator-air-permit",
@@ -507,7 +507,7 @@
         "confidence_multiplier": 0.8,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "86022632-93b6-4e3a-b234-aaae27a1355f"
+        "evidence_record_id": "3f34d3e1-3f3f-4dae-94f0-bf97b25d2710"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -515,11 +515,11 @@
         "label": "Grading or construction permit",
         "detail": "City of Mesa commercial building permit PMT26-12780 at 3740 S SIGNAL BUTTE RD, opened 2026-07-13, status: In Review - Plans are being reviewed or awaiting revisions. Matched to parcels by normalized address; no coordinates in source. (occurrence 2, weight reduced)",
         "base_weight": 20.0,
-        "applied_weight": 7.4647,
+        "applied_weight": 7.4573,
         "confidence_multiplier": 0.75,
-        "recency_multiplier": 0.9953,
+        "recency_multiplier": 0.9943,
         "polarity": "supporting",
-        "evidence_record_id": "9ff74f24-a830-4b77-a230-27fbb5999288"
+        "evidence_record_id": "1c03d2fd-bdaa-4033-95b1-1a54a1ff5cca"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -527,11 +527,11 @@
         "label": "Dedicated substation application",
         "detail": "ACC docket E-01345A-22-0148: Amended single-line and site plan. Filed by Arizona Public Service Company on 2023-01-09. Helios ingested a recorded fixture, not a live scrape.",
         "base_weight": 25.0,
-        "applied_weight": 6.2135,
+        "applied_weight": 6.2071,
         "confidence_multiplier": 0.85,
-        "recency_multiplier": 0.2924,
+        "recency_multiplier": 0.2921,
         "polarity": "supporting",
-        "evidence_record_id": "77d7ee04-b57a-4f59-be22-febd119ad0fb"
+        "evidence_record_id": "632f5eb5-fca4-4a4b-811a-0b74e40edcf0"
       },
       {
         "rule_id": "large-industrial-parcel-acquisition",
@@ -543,7 +543,7 @@
         "confidence_multiplier": 0.9,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "f5cbee6f-65f1-4241-a10d-6b5c66182a2c"
+        "evidence_record_id": "ae543a4e-70e9-484d-ab2c-e7bd0ef71b81"
       },
       {
         "rule_id": "grading-or-construction-permit",
@@ -551,11 +551,11 @@
         "label": "Grading or construction permit",
         "detail": "City of Mesa commercial building permit PMT26-07994 at 3740 S SIGNAL BUTTE RD, opened 2026-04-27, status: Issued - Permit approved and issued and in inspection phase. Matched to parcels by normalized address; no coordinates in source. (occurrence 3, weight reduced)",
         "base_weight": 20.0,
-        "applied_weight": 3.7076,
+        "applied_weight": 3.7039,
         "confidence_multiplier": 0.75,
-        "recency_multiplier": 0.9887,
+        "recency_multiplier": 0.9877,
         "polarity": "supporting",
-        "evidence_record_id": "0550d3cc-09c7-4262-97a9-95794fce612a"
+        "evidence_record_id": "c8cce95f-5b0d-47b2-ae33-505ed83ea202"
       },
       {
         "rule_id": "transmission-or-substation-filing",
@@ -567,7 +567,7 @@
         "confidence_multiplier": 0.85,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "37806db2-2998-423a-8b0a-30039b8a790f"
+        "evidence_record_id": "25e61d24-6782-4c8d-ad1e-91ea4b289175"
       },
       {
         "rule_id": "shell-entity-ownership",
@@ -579,7 +579,7 @@
         "confidence_multiplier": 0.45,
         "recency_multiplier": 0.25,
         "polarity": "supporting",
-        "evidence_record_id": "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2"
+        "evidence_record_id": "d4be27e8-7a38-442d-8674-3a1f035fa824"
       },
       {
         "rule_id": "dedicated-substation-proximity",
@@ -591,34 +591,34 @@
         "confidence_multiplier": 0.95,
         "recency_multiplier": 1.0,
         "polarity": "supporting",
-        "evidence_record_id": "44452fa6-e1e3-4c72-8260-875ef88edcbd"
+        "evidence_record_id": "9604e8a1-5b26-4119-a260-a96a98ccf82f"
       }
     ]
   },
   "stage_history": [
     {
-      "id": "6e1bc377-6627-4b35-84cf-08ea8a7265f3",
+      "id": "a5b2e2f8-fad6-44d2-ae9e-2e5200615caf",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-11-04",
-      "detected_at": "2026-07-27T23:21:20.105640Z",
+      "detected_at": "2026-07-28T00:12:00.322076Z",
       "is_downgrade": false,
-      "confidence": 70.04,
+      "confidence": 70.02,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 70% confidence. Principal evidence: Assessor classifies property use as data centre; Grading or construction permit; Backup-generator air permit.",
       "triggering_evidence_ids": [
-        "f333faab-9981-48a1-99f0-ea71580b54ac",
-        "5d029e37-1b20-42c2-a045-d21a6d423cbf",
-        "86022632-93b6-4e3a-b234-aaae27a1355f",
-        "9ff74f24-a830-4b77-a230-27fbb5999288",
-        "77d7ee04-b57a-4f59-be22-febd119ad0fb",
-        "f5cbee6f-65f1-4241-a10d-6b5c66182a2c",
-        "0550d3cc-09c7-4262-97a9-95794fce612a",
-        "37806db2-2998-423a-8b0a-30039b8a790f",
-        "56a2917e-6a92-490a-b6e2-cd3f2fc2d7d2"
+        "76cea888-e95c-4a47-b232-acc1dcd7f4ba",
+        "ca72411d-96dd-4ab7-acae-66d9c06c3892",
+        "3f34d3e1-3f3f-4dae-94f0-bf97b25d2710",
+        "1c03d2fd-bdaa-4033-95b1-1a54a1ff5cca",
+        "632f5eb5-fca4-4a4b-811a-0b74e40edcf0",
+        "ae543a4e-70e9-484d-ab2c-e7bd0ef71b81",
+        "c8cce95f-5b0d-47b2-ae33-505ed83ea202",
+        "25e61d24-6782-4c8d-ad1e-91ea4b289175",
+        "d4be27e8-7a38-442d-8674-3a1f035fa824"
       ],
-      "detection_lag_days": 4648
+      "detection_lag_days": 4649
     }
   ],
   "attributions": [

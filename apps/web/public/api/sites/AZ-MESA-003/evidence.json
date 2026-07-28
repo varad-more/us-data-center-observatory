@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:21:22.721478+00:00",
+  "generated_at": "2026-07-28T00:12:03.100813+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -13,7 +13,7 @@
     "current_confidence": 33.0,
     "total_acres": 3.0003,
     "first_signal_date": "2026-07-25",
-    "latest_signal_date": "2026-07-27",
+    "latest_signal_date": "2026-07-28",
     "operator_status": "not_established",
     "summary": "1 parcel(s) totalling 3.0 acres near 3223 S ELLSWORTH RD, Mesa. Title of record is held by COMARCH INC. Helios has not established which organization, if any, operates or will operate a facility here.",
     "boundary": {
@@ -52,7 +52,7 @@
   },
   "evidence": [
     {
-      "id": "66e563e3-cd2d-473e-8e53-91deb611c8f5",
+      "id": "9c82a2e7-9194-4fbd-bbd1-2ff709838f38",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Unnamed substation tagged 69 kV lies 1072 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -72,8 +72,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-        "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -85,12 +85,12 @@
       }
     },
     {
-      "id": "b0f452b8-28f2-4036-9a95-311a937b6ee0",
+      "id": "ded5ca94-ebc5-42c4-8545-8d3b75bda463",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
       "snippet_locator": "$.features[8].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-27",
+      "observed_at": "2026-07-28",
       "assertion_class": "reported",
       "extraction_method": "structured_feed",
       "polarity": "supporting",
@@ -114,8 +114,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -129,27 +129,27 @@
   ],
   "stage_history": [
     {
-      "id": "c0f180f3-5cd8-47d9-a623-c97463530e3f",
+      "id": "d1969161-02fc-4fc7-8a13-7b04ef0acb8a",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
-      "effective_date": "2026-07-27",
-      "detected_at": "2026-07-27T23:21:20.116679Z",
+      "effective_date": "2026-07-28",
+      "detected_at": "2026-07-28T00:12:00.383542Z",
       "is_downgrade": false,
       "confidence": 27.14,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 27% confidence. Principal evidence: Assessor classifies property use as data centre.",
       "triggering_evidence_ids": [
-        "b0f452b8-28f2-4036-9a95-311a937b6ee0"
+        "ded5ca94-ebc5-42c4-8545-8d3b75bda463"
       ],
       "detection_lag_days": 0
     }
   ],
   "predictions": [
     {
-      "id": "90dee8b9-8816-491b-a79d-461ced523f2d",
-      "calculated_at": "2026-07-27T23:21:20.114591Z",
-      "as_of_date": "2026-07-27",
+      "id": "6404140d-4e86-4ed5-ba38-5f8afb27ea34",
+      "calculated_at": "2026-07-28T00:12:00.381030Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 24.0272,
@@ -174,7 +174,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "b0f452b8-28f2-4036-9a95-311a937b6ee0"
+          "evidence_record_id": "ded5ca94-ebc5-42c4-8545-8d3b75bda463"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -186,14 +186,14 @@
           "confidence_multiplier": 0.6284,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "66e563e3-cd2d-473e-8e53-91deb611c8f5"
+          "evidence_record_id": "9c82a2e7-9194-4fbd-bbd1-2ff709838f38"
         }
       ]
     },
     {
-      "id": "d2ff3101-24fb-4908-8230-e0674c1e4876",
-      "calculated_at": "2026-07-27T23:21:20.114636Z",
-      "as_of_date": "2026-07-27",
+      "id": "d261c043-343f-49c6-8f1b-8ed82ffe6512",
+      "calculated_at": "2026-07-28T00:12:00.381089Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 19.0,
@@ -218,7 +218,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "b0f452b8-28f2-4036-9a95-311a937b6ee0"
+          "evidence_record_id": "ded5ca94-ebc5-42c4-8545-8d3b75bda463"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -230,7 +230,7 @@
           "confidence_multiplier": 0.6284,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "66e563e3-cd2d-473e-8e53-91deb611c8f5"
+          "evidence_record_id": "9c82a2e7-9194-4fbd-bbd1-2ff709838f38"
         }
       ]
     }

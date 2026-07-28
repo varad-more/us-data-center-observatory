@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T23:21:22.490593+00:00",
+  "generated_at": "2026-07-28T00:12:02.844817+00:00",
   "generator": "Project Helios",
   "disclaimer": "Helios infers development activity from public records. Confidence scores are model output, not fact. Helios does not assert the identity of any facility operator unless a direct filing establishes it. Estimates are labelled as such and must not be cited as measurements.",
   "site": {
@@ -13,7 +13,7 @@
     "current_confidence": 35.91,
     "total_acres": 1.72,
     "first_signal_date": "2013-02-27",
-    "latest_signal_date": "2026-07-27",
+    "latest_signal_date": "2026-07-28",
     "operator_status": "not_established",
     "summary": "1 parcel(s) totalling 1.7 acres near 100 N 79TH ST, Chandler. Title of record is held by COX COMMUNICATIONS ARIZONA LLC. Helios has not established which organization, if any, operates or will operate a facility here.",
     "boundary": {
@@ -124,7 +124,7 @@
   },
   "evidence": [
     {
-      "id": "97b7cea7-1e01-457c-b48b-3d2fb600777d",
+      "id": "55fbc3e1-cfa8-4170-8984-1a84cbc66498",
       "evidence_kind": "shell_entity_ownership",
       "summary": "Title is held by COX COMMUNICATIONS ARIZONA LLC, whose name shows single-purpose-entity characteristics (pass-through legal form (LLC)). This is a weak signal only: project-specific entities are routine in ordinary commercial real estate and imply no particular parent.",
       "snippet": "OwnerName = COX COMMUNICATIONS ARIZONA LLC",
@@ -153,8 +153,8 @@
         "is_standing_condition": false
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -166,7 +166,7 @@
       }
     },
     {
-      "id": "d87f3081-04be-4fac-b190-47f20810ce3b",
+      "id": "5ead1cd0-6377-4b21-b6a0-1511758d5ab2",
       "evidence_kind": "dedicated_substation_proximity",
       "summary": "Unnamed substation tagged 69 kV lies 241 m from the site boundary, close enough for a dedicated connection to be practical. Proximity is a locational precondition, not evidence that this substation serves the site.",
       "snippet": "name = None; operator = unknown; max_voltage_kv = 69.0",
@@ -186,8 +186,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "3500fdf3-5c1f-4fa1-8dbf-3ea0d0854cfb",
-        "document_version_id": "baaed429-0df3-4180-ab9b-684fe053f427",
+        "document_id": "3165d6b9-9557-4b88-b938-4873d59d8169",
+        "document_version_id": "19340b85-4d0c-44df-a447-cfee28fa5137",
         "source_slug": "osm-power-infrastructure",
         "source_name": "OpenStreetMap Power Infrastructure (Overpass API)",
         "agency": "OpenStreetMap contributors",
@@ -199,12 +199,12 @@
       }
     },
     {
-      "id": "54f7ab87-fd7b-4006-bd01-72accfb22584",
+      "id": "dfc6e48a-a6b3-4a8a-ab91-58b831511c92",
       "evidence_kind": "assessor_data_center_classification",
       "summary": "Maricopa County Assessor currently classifies this parcel's property use as DATA CENTERS (use code 1507).",
       "snippet": "PropertyUseDescription = DATA CENTERS",
       "snippet_locator": "$.features[7].attributes.PropertyUseDescription",
-      "observed_at": "2026-07-27",
+      "observed_at": "2026-07-28",
       "assertion_class": "reported",
       "extraction_method": "structured_feed",
       "polarity": "supporting",
@@ -228,8 +228,8 @@
         "is_standing_condition": true
       },
       "source": {
-        "document_id": "223a7728-9b7a-4c8d-ac8d-f87d492ba6e2",
-        "document_version_id": "5d8e41b0-07f6-4d47-8f64-c6a66528605c",
+        "document_id": "c9d02372-ff5f-4c7f-9314-304f70ddd988",
+        "document_version_id": "6217c5ee-ad83-40a3-9648-4b39a05a50c4",
         "source_slug": "maricopa-assessor-parcels",
         "source_name": "Maricopa County Assessor Parcel Layer",
         "agency": "Maricopa County Assessor / Maricopa County GIS",
@@ -243,28 +243,28 @@
   ],
   "stage_history": [
     {
-      "id": "9ba08b63-e9bb-4a71-9823-924c090c8d45",
+      "id": "9693fc94-f0a1-450f-8aff-b6723731537e",
       "from_stage": 0,
       "from_stage_label": null,
       "to_stage": 7,
       "to_stage_label": "Operational",
       "effective_date": "2013-02-27",
-      "detected_at": "2026-07-27T23:21:20.065416Z",
+      "detected_at": "2026-07-28T00:12:00.297887Z",
       "is_downgrade": false,
       "confidence": 27.96,
       "rationale": "Stage advanced from 0 (No known development) to 7 (Operational) at 28% confidence. Principal evidence: Assessor classifies property use as data centre; Single-purpose entity holds title.",
       "triggering_evidence_ids": [
-        "54f7ab87-fd7b-4006-bd01-72accfb22584",
-        "97b7cea7-1e01-457c-b48b-3d2fb600777d"
+        "dfc6e48a-a6b3-4a8a-ab91-58b831511c92",
+        "55fbc3e1-cfa8-4170-8984-1a84cbc66498"
       ],
-      "detection_lag_days": 4898
+      "detection_lag_days": 4899
     }
   ],
   "predictions": [
     {
-      "id": "9e3d92c8-5e32-4276-a53c-962605ea196d",
-      "calculated_at": "2026-07-27T23:21:20.062941Z",
-      "as_of_date": "2026-07-27",
+      "id": "bdd10445-1ea4-4b99-a077-86aabbdb49b1",
+      "calculated_at": "2026-07-28T00:12:00.295026Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 26.6958,
@@ -289,7 +289,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "54f7ab87-fd7b-4006-bd01-72accfb22584"
+          "evidence_record_id": "dfc6e48a-a6b3-4a8a-ab91-58b831511c92"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -301,7 +301,7 @@
           "confidence_multiplier": 0.8776,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "d87f3081-04be-4fac-b190-47f20810ce3b"
+          "evidence_record_id": "5ead1cd0-6377-4b21-b6a0-1511758d5ab2"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -313,14 +313,14 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "97b7cea7-1e01-457c-b48b-3d2fb600777d"
+          "evidence_record_id": "55fbc3e1-cfa8-4170-8984-1a84cbc66498"
         }
       ]
     },
     {
-      "id": "275ae324-dca1-48ea-be41-e4239b91cfee",
-      "calculated_at": "2026-07-27T23:21:20.062985Z",
-      "as_of_date": "2026-07-27",
+      "id": "ebb82e0f-88a2-4812-9d38-e16b25f48a89",
+      "calculated_at": "2026-07-28T00:12:00.295088Z",
+      "as_of_date": "2026-07-28",
       "predicted_stage": 7,
       "predicted_stage_label": "Operational",
       "raw_score": 19.675,
@@ -345,7 +345,7 @@
           "confidence_multiplier": 0.95,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "54f7ab87-fd7b-4006-bd01-72accfb22584"
+          "evidence_record_id": "dfc6e48a-a6b3-4a8a-ab91-58b831511c92"
         },
         {
           "rule_id": "shell-entity-ownership",
@@ -357,7 +357,7 @@
           "confidence_multiplier": 0.45,
           "recency_multiplier": 0.25,
           "polarity": "supporting",
-          "evidence_record_id": "97b7cea7-1e01-457c-b48b-3d2fb600777d"
+          "evidence_record_id": "55fbc3e1-cfa8-4170-8984-1a84cbc66498"
         },
         {
           "rule_id": "dedicated-substation-proximity",
@@ -369,7 +369,7 @@
           "confidence_multiplier": 0.8776,
           "recency_multiplier": 1.0,
           "polarity": "supporting",
-          "evidence_record_id": "d87f3081-04be-4fac-b190-47f20810ce3b"
+          "evidence_record_id": "5ead1cd0-6377-4b21-b6a0-1511758d5ab2"
         }
       ]
     }
