@@ -10,9 +10,11 @@
  * non-zero.
  */
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MappingGrowthChart } from "@/components/MappingGrowthChart";
+import { RegionPicker } from "@/components/RegionPicker";
 import {
   getRegionFacilities,
   getRegionSeries,
@@ -78,6 +80,34 @@ export default async function RegionPage({
     .sort((a, b) => b.properties.footprint_m2 - a.properties.footprint_m2)
     .slice(0, 40);
 
+  // The picker reaches everywhere; these reach the handful of places a reader
+  // on this page is most likely to want next. Server-rendered, so they work
+  // before hydration and without JavaScript at all.
+  const peers = (
+    region?.kind === "county"
+      ? regions.filter(
+          (r) => r.kind === "county" && r.state === region.state && r.region_id !== id,
+        )
+      : region?.kind === "state"
+        ? regions.filter((r) => r.kind === "county" && r.state === region.state)
+        : regions.filter((r) => r.kind === "county")
+  )
+    .sort((a, b) => b.facility_count - a.facility_count)
+    .slice(0, 12);
+
+  const peerLabel =
+    region?.kind === "county"
+      ? `Other counties in ${region.state}`
+      : region?.kind === "state"
+        ? `Counties in ${region.name}`
+        : "Densest counties";
+
+  const currentLabel = region
+    ? region.kind === "county"
+      ? `${region.name}, ${region.state}`
+      : region.name
+    : "United States — national";
+
   return (
     <div className="stack">
       <div className="card-header">
@@ -88,7 +118,37 @@ export default async function RegionPage({
             OpenStreetMap
           </p>
         </div>
+        <RegionPicker currentId={id} currentLabel={currentLabel} />
       </div>
+
+      {peers.length > 0 ? (
+        <nav className="peer-nav" aria-label={peerLabel}>
+          <span className="peer-nav-label">{peerLabel}</span>
+          {peers.map((peer) => (
+            <Link
+              key={peer.region_id}
+              href={`/regions/${regionSlug(peer.region_id)}`}
+              className="chip"
+            >
+              {peer.name}
+              <span className="muted"> {peer.facility_count.toLocaleString()}</span>
+            </Link>
+          ))}
+          {region?.kind === "county" ? (
+            <Link href={`/regions/state-${region.state}`} className="chip">
+              All of {region.state}
+            </Link>
+          ) : null}
+          {!isNational ? (
+            <Link href="/regions/national-US" className="chip">
+              United States
+            </Link>
+          ) : null}
+          <Link href="/regions" className="chip">
+            All regions →
+          </Link>
+        </nav>
+      ) : null}
 
       <div className="grid grid-4">
         <div className="metric">

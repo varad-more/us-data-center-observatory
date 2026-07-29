@@ -418,3 +418,94 @@ It is a genuine shell company of exactly the kind the scoring rules exist to
 notice. The assessor fixture is real throughout — `DIGITAL 2121 SOUTH PRICE LLC`
 sits at 2121 S Price Rd, where ECHO independently reports `DIGITAL REALTY TRUST
 CHANDLER`.
+
+## The pivot: a data-centre growth observatory
+
+The project's centre of gravity moved from deep inference in one Arizona valley
+to broad measurement across the country over time. The existing site model is
+kept as a sub-part, not retired.
+
+### What shipped
+
+- [x] 1,853 US data centres from OpenStreetMap, pinpoint coordinates, 92% with
+      building footprints, 62% with a named operator
+- [x] 4,464 mapping events, 2012 to June 2026 — 1,967 appearances, 232 removals
+- [x] National curve: 135 mapped data centres at end-2016 to 1,736 in June 2026
+- [x] 276 counties and 47 states, each with its own monthly series and page
+- [x] LBNL's reported 192 TWh and 17.4 bn gallons allocated by footprint; state
+      shares re-sum to 21,918 MW exactly
+- [x] `make poll` — one resumable command, byte-stable, reports what changed
+- [x] Changes feed, national map, growth chart with the pre-2017 band hatched
+
+Validated against a direct ohsome query made before any of the code existed:
+2016 135 v 136, 2023 917 v 916, 2025 1,520 v 1,518.
+
+### Known gaps, deliberately left visible
+
+- [ ] 2 tiles with no current facility were never checked. Only a data centre
+      mapped there and since removed could hide in them.
+- [ ] 203 of 1,853 facilities have no `first_seen`: mapped before the retained
+      history, so they are on the map but not in any curve. Each region page
+      states its own gap rather than hiding it.
+- [ ] Virginia is allocated 2,255 MW where JLARC puts Northern Virginia alone
+      near 4,100 MW. Footprint under-weights dense multi-storey halls. This is
+      the weakest link in the power model and is documented as such.
+- [ ] Facility coverage is unmeasurable. No authoritative count of US data
+      centres exists to compare 1,853 against.
+
+### Worth doing next
+
+- [ ] Cross-check the allocation against a second independent regional figure
+      (Dominion's metered Northern Virginia load) and publish the error, the way
+      the backtest harness does for the scoring model.
+- [ ] Per-facility footprint history, so the footprint curve stops attributing
+      today's enlarged buildings to the month they were first drawn.
+- [ ] A `--since` incremental poll is written but has never run against a real
+      upstream change; exercise it once ohsome is healthy.
+
+## Making the site readable by someone who did not build it
+
+The landing page was still the pre-pivot page: it opened on "East Valley,
+Arizona · Maricopa County" and never mentioned the national observatory at all.
+A visitor arrived at the sub-part and had no way to discover the main work —
+no link to /growth, /regions, /changes or the national map existed above the
+fold or anywhere else on it. The nav was a flat strip of ten items mixing two
+different datasets, with "National map" and "Site map" sitting beside each
+other meaning entirely different things.
+
+The second gap: the site published numbers but never explained the subject.
+Nothing said what a data centre is, why electricity is the binding constraint,
+why water is spent at all, or what a megawatt means next to a county.
+
+- [x] Rewrite `/` to lead with the observatory: headline figures, the national
+      curve, where they concentrate, what changed, and a guide into each
+      section. Arizona becomes a clearly-labelled second dataset.
+- [x] Group the nav into observatory / Arizona study / reference, and rename
+      the two "map" entries so they cannot be confused.
+- [x] Add `/understand`: the theory — anatomy of a data centre, why power and
+      water, why they cluster, how to read every number here, glossary.
+- [x] Extend `/methodology` to cover the observatory pipeline, which was
+      documented in the repo but nowhere on the site.
+- [x] Rebuild the footer around the same three groups.
+- [x] Tests for the claims that must not regress, then lint, typecheck, build.
+
+### What the rework delivered
+
+The entry point now leads with the observatory, and the path from the front
+page to any of the nine pivot pages exists. Verified live: 10,135 internal
+links across 349 built pages, none broken; 351 pages export; 11 web tests,
+five of them new and covering the one property that must never regress — the
+pre-2017 stretch of the growth curve stays hatched and labelled.
+
+Two figures were wrong in draft and are worth remembering as a pattern. A
+hardcoded "4.4%" sat beside a dynamically resolved year, which is the 2023
+share next to the 2024 total. And a 30:1 footprint spread was carried over
+from one county's numbers; measured nationally it is 263:1. Both are now
+derived from the committed CSVs at build time. The worked example that
+converts 192 TWh into a continuous 21,918 MW reaches the same figure the
+allocation uses by a different route, which makes the explanatory text
+checkable against the data rather than merely consistent with it.
+
+Not verified: nothing was ever looked at. The Chrome extension is not
+connected, so the check was structural — rendered HTML, heading outlines,
+the link graph, the contrast audit — and never visual.

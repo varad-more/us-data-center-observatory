@@ -260,3 +260,82 @@ have justified deleting published evidence.
 Check the status code before drawing a conclusion from a count, and when the
 check is inconclusive, record the open question instead of resolving it in
 whichever direction is convenient. Same failure mode as the county-parcel probe.
+
+## A response can carry every record and still be useless
+
+Asking ohsome for `properties=tags` returned every contribution with an id, a
+timestamp and no flag saying whether it was a creation, a deletion or an edit.
+Nothing errored. The rows were real and complete; they simply could not be
+classified, so the parser skipped all of them and the history came out empty.
+Only a proportional guard caught it — 3,377 of 4,629 unusable is a malformed
+request, not sparse data.
+
+**How to apply:** when a parser skips a record, count the skips and compare them
+against the total. A handful is sparse data; a majority is a bug in the request.
+Assert on the ratio, not on the presence of output, because output that parses
+cleanly and means nothing looks exactly like success.
+
+## The record of a deleted thing has no geometry
+
+Every one of 232 removals arrived from ohsome with `geometry: null` — by the time
+an element is deleted there is nothing left to take a centroid of. The parser
+required a coordinate pair, so it dropped all of them, and the resulting counts
+could only ever rise. A monotonically increasing "net" count is the tell.
+
+**How to apply:** an event about a thing's disappearance cannot be assumed to
+carry the thing's attributes. Resolve them from earlier events, and if a series
+that is defined as net movement never moves downward, treat that as a bug to
+disprove rather than a finding.
+
+## A partial output file can poison every later run
+
+A 46-row `events.csv`, written when a backfill was nowhere near complete, was
+enough to flip every subsequent run into incremental mode: each asked for the
+last five weeks and treated the preceding fourteen years as already covered. The
+backfill could never finish, and nothing reported an error.
+
+**How to apply:** never infer "the expensive work is done" from an artefact
+merely existing. Gate the cheap path on a marker written only when the expensive
+path actually completed, and make absence of the marker mean "do the full work" —
+the safe direction is redoing effort, never silently skipping it.
+
+## A window boundary can make a count go negative
+
+Elements created before the history window and deleted inside it subtracted
+facilities the series had never added, and the national count read minus one data
+centre through 2012–2014. The arithmetic was right; the population was not.
+
+**How to apply:** when a series is built from paired events, check that both
+halves of the pair fall inside the window. Sanity-check derived series against
+their own domain — a count of physical objects below zero is a bug that no
+amount of correct summation will surface on its own.
+
+## A pivot has to reach the front door
+
+Nine new pages shipped for the pivot — growth, regions, 324 region details, the
+national map, changes — and the page that introduces the project was never
+touched. It still opened on "East Valley, Arizona · Maricopa County" and linked
+to none of them. Every new page was correct and the site as a whole still
+described the wrong project, because the entry point was the one page the new
+work gave no reason to open.
+
+**How to apply:** when the scope of a project changes, the pages that frame it
+are part of the change, not documentation of it. After building a feature, open
+the site at its root the way a stranger would and check that the path to the new
+work exists. Navigation labels count: "National map" and "Site map" sat side by
+side meaning entirely different datasets.
+
+## Publishing a figure is not the same as making it legible
+
+The site published megawatts, gallons and footprints for months without ever
+saying what a data centre contains, why capacity is quoted in power rather than
+floor area, or why cooling spends water. Every number was sourced, labelled by
+assertion class and traceable — and unreadable to anyone not already in the
+field, who could not tell whether 1,020 MW in one county was a lot.
+
+**How to apply:** rigour about *where* a number came from does not substitute for
+explaining *what it means*. When a project publishes a domain's quantities, it
+owes that domain's concepts too. Derive the explanatory figures from the
+committed data at build time so the teaching text cannot drift from the tables
+beside it — the footprint spread quoted as the reason for weighting by area was
+263:1, not the 30:1 carried over from a single county's numbers.

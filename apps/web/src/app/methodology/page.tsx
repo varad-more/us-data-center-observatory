@@ -1,12 +1,128 @@
-export const metadata = { title: "Methodology and limitations" };
+import Link from "next/link";
 
-export default function MethodologyPage() {
+import { getObservatoryMeta } from "@/lib/observatory";
+
+export const metadata = {
+  title: "Methodology and limitations",
+  description:
+    "How the national observatory and the Arizona site model each produce their figures, and what neither can see.",
+};
+
+export default async function MethodologyPage() {
+  const meta = await getObservatoryMeta();
+
   return (
     <div className="stack container-narrow">
       <h1>Methodology and limitations</h1>
+      <p className="tagline">
+        Helios publishes two datasets built by entirely different methods. The national
+        observatory counts what has been mapped and divides up a reported national total.
+        The Arizona study argues, from primary records, where a facility is probably being
+        built. Neither method is used to support the other&apos;s claims. If you have not
+        read <Link href="/understand">the basics</Link>, start there.
+      </p>
+
+      <h2>The national observatory</h2>
 
       <section className="card">
-        <h2 className="card-title">How Helios reaches a conclusion</h2>
+        <h3 className="card-title">Four stages, no database</h3>
+        <p className="small">
+          The whole pipeline runs from committed CSVs with no server and no database, so a
+          contributor can rebuild every figure on the site from a clean checkout. One
+          command, <code>make poll</code>, runs it end to end and prints what changed.
+        </p>
+        <ol className="small" style={{ paddingLeft: "1.2rem" }}>
+          <li>
+            <strong>Snapshot.</strong> A tiled Overpass query pulls every US element
+            tagged <code>telecom=data_center</code>, <code>building=data_center</code> or{" "}
+            <code>industrial=data_centre</code>, with its geometry. Building outlines are
+            converted to area on the WGS-84 ellipsoid, not by treating degrees as metres,
+            and each element is reduced to a centroid, a footprint and its tags.
+          </li>
+          <li>
+            <strong>History.</strong> The ohsome API replays OpenStreetMap&apos;s full
+            edit history and reports the moment each element began — or stopped — matching
+            that filter. This is the only defensible source for the time axis: an
+            element&apos;s original creation date is when it was first drawn as{" "}
+            <em>anything</em>, which is often years before it became a data centre.
+          </li>
+          <li>
+            <strong>Placement.</strong> Each facility is matched to a US county by
+            point-in-polygon against Census TIGER boundaries, indexed with an R-tree. The
+            boundary vintage is recorded, because county codes do change.
+          </li>
+          <li>
+            <strong>Allocation.</strong> LBNL&apos;s reported national electricity and
+            water totals are divided across facilities in proportion to mapped building
+            footprint, then summed into counties and states.
+          </li>
+        </ol>
+        <p className="small" style={{ marginBottom: 0 }}>
+          Re-running the pipeline with no upstream change produces no diff at all. The
+          CSVs are written deterministically — stable sort, fixed precision — so that{" "}
+          <code>git diff</code> between two polls is itself an honest change log.
+        </p>
+      </section>
+
+      <section className="card">
+        <h3 className="card-title">The power and water model, and its weakest link</h3>
+        <p className="small">
+          The allocation is conservative by construction: every facility receives its
+          footprint&apos;s share of the national figure, so the state shares re-sum to the
+          published total exactly. A test asserts this, because the property is the entire
+          justification for the method.
+        </p>
+        <p className="small">
+          What the model assumes is that power density per square metre is uniform across
+          facilities. It is not. A dense multi-storey hall draws far more per square metre
+          of ground than a single-storey shed, so tall sites are under-weighted and flat
+          ones over-weighted.
+        </p>
+        <p className="small" style={{ marginBottom: 0 }}>
+          The measured consequence is stated rather than buried: this model allocates
+          Virginia about 2,255 MW, where Virginia&apos;s own legislative commission has
+          put Northern Virginia alone near 4,100 MW. The method under-reads the densest
+          region in the country by roughly half. It is the weakest part of the observatory
+          and the next thing worth fixing.
+        </p>
+      </section>
+
+      <section className="card">
+        <h3 className="card-title">What the observatory cannot see</h3>
+        <ul className="small" style={{ paddingLeft: "1.2rem" }}>
+          <li>
+            <strong>Construction dates.</strong> Not one facility in the dataset carries
+            one, because OpenStreetMap does not record them. Every date here describes an
+            edit to the map.
+          </li>
+          <li>
+            <strong>Coverage.</strong> No authoritative public count of US data centres
+            exists, so how much of reality these{" "}
+            {meta.facility_count.toLocaleString()} represent is unknown, not merely
+            unstated.
+          </li>
+          <li>
+            <strong>Pre-2017 history.</strong> The tagging convention was barely used
+            before then. That stretch of the curve is drawn hatched because it describes
+            the tag, not the country.
+          </li>
+          <li>
+            <strong>Whether a removal was a demolition.</strong> An element leaves the
+            dataset when it stops matching the filter, which a retag does as readily as a
+            teardown.
+          </li>
+          <li>
+            <strong>203 facilities&apos; arrival.</strong> They were mapped before the
+            retained history begins, so they appear in the counts but in no curve. Each
+            region page states its own gap rather than hiding it.
+          </li>
+        </ul>
+      </section>
+
+      <h2>The Arizona site model</h2>
+
+      <section className="card">
+        <h3 className="card-title">How Helios reaches a conclusion</h3>
         <p className="small">
           Data flows in one direction, and every step is reversible for audit:
         </p>
@@ -36,7 +152,7 @@ export default function MethodologyPage() {
       </section>
 
       <section className="card">
-        <h2 className="card-title">The confidence model</h2>
+        <h3 className="card-title">The confidence model</h3>
         <p className="small muted">
           Each evidence record maps to at most one rule and contributes{" "}
           <code>base weight &times; extraction confidence &times; recency</code>. The sum
@@ -70,7 +186,7 @@ export default function MethodologyPage() {
       </section>
 
       <section className="card">
-        <h2 className="card-title">Privacy</h2>
+        <h3 className="card-title">Privacy</h3>
         <p className="small muted">
           County assessor records name private homeowners. Helios classifies every owner
           name during ingestion and suppresses those identified as natural persons or as
@@ -88,7 +204,7 @@ export default function MethodologyPage() {
       </section>
 
       <section className="card">
-        <h2 className="card-title">Known limitations</h2>
+        <h3 className="card-title">Known limitations of the site model</h3>
         <ul className="small muted" style={{ paddingLeft: "1.2rem" }}>
           <li>
             <strong>Early-stage coverage is still uneven.</strong> ACC eDocket
@@ -135,7 +251,7 @@ export default function MethodologyPage() {
       </section>
 
       <section className="card">
-        <h2 className="card-title">What Helios will not do</h2>
+        <h3 className="card-title">What Helios will not do</h3>
         <ul className="small muted" style={{ paddingLeft: "1.2rem" }}>
           <li>
             Name an operator without a direct filing. Circumstantial strength &mdash; a

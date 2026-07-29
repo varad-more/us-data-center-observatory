@@ -1,168 +1,429 @@
+/**
+ * The front door.
+ *
+ * This page has one job: tell a reader who has never seen Helios what is here,
+ * what kind of claim each number is, and where to go next. It leads with the
+ * national observatory because that is the larger and more general dataset —
+ * 1,853 facilities across the country — and treats the Arizona site model as
+ * what it is, a second and much deeper study of one valley.
+ *
+ * The two halves are kept visually and verbally separate. They answer different
+ * questions from different evidence: the observatory reports where data centres
+ * have been *mapped*, while the Arizona model argues, from parcel and permit
+ * records, where one is probably *being built*. Merging them into a single
+ * headline figure would blur a reported count into an inferred one, which is
+ * the failure this project exists to avoid.
+ *
+ * The Arizona half is loaded defensively. It comes from the exported API
+ * payloads, and when those are absent — a fresh checkout, a partial export —
+ * the observatory must still render. Before, a missing API replaced the entire
+ * page with an error, including all the content that never needed it.
+ */
 import Link from "next/link";
 
-import { Metric } from "@/components/ScoreExplanation";
-import { AssertionBadge, ConfidenceBadge } from "@/components/AssertionBadge";
+import { AssertionBadge } from "@/components/AssertionBadge";
+import { MappingGrowthChart } from "@/components/MappingGrowthChart";
+import { getStageDistribution, listSites } from "@/lib/api";
 import {
-  getProvenanceCompleteness,
-  getStageDistribution,
-  listSites,
-  listSources,
-} from "@/lib/api";
-import { ApiUnavailable } from "@/components/ApiUnavailable";
+  getChanges,
+  getNationalEnergy,
+  getNationalSeries,
+  getObservatoryMeta,
+  getRegions,
+  regionSlug,
+} from "@/lib/observatory";
 
-export default async function ObservatoryHome() {
-  let data;
+/** How many of the densest counties the front page names before deferring. */
+const TOP_COUNTIES = 8;
+
+/** How many recent map edits the front page shows before deferring. */
+const RECENT_CHANGES = 6;
+
+interface ArizonaSummary {
+  siteCount: number;
+  topCode: string | null;
+  topStage: string | null;
+}
+
+/**
+ * The Arizona study, or null when its payloads are not present.
+ *
+ * Returning null rather than throwing is deliberate: this dataset is a section
+ * of the page, not the page, and its absence should cost the reader that
+ * section and nothing else.
+ */
+async function loadArizona(): Promise<ArizonaSummary | null> {
   try {
-    const [sites, stages, provenance, sources] = await Promise.all([
-      listSites({ limit: 8, sort: "-confidence" }),
+    const [sites, stages] = await Promise.all([
+      listSites({ limit: 1, sort: "-confidence" }),
       getStageDistribution(),
-      getProvenanceCompleteness(),
-      listSources(),
     ]);
-    data = { sites, stages, provenance, sources };
-  } catch (error) {
-    return <ApiUnavailable error={error} />;
+    const top = sites.items[0];
+    return {
+      siteCount: stages.total_sites,
+      topCode: top?.project_code ?? null,
+      topStage: top?.current_stage_label ?? null,
+    };
+  } catch {
+    return null;
   }
+}
 
-  const { sites, stages, provenance, sources } = data;
-  const activeStages = stages.stages.filter((s) => s.site_count > 0);
-  const blockedSources = sources.items.filter(
-    (s) => s.connector_status !== "implemented",
+export default async function Home() {
+  const [meta, regions, series, energy, changes, arizona] = await Promise.all([
+    getObservatoryMeta(),
+    getRegions(),
+    getNationalSeries(),
+    getNationalEnergy(),
+    getChanges(),
+    loadArizona(),
+  ]);
+
+  const counties = regions.filter((r) => r.kind === "county");
+  const states = regions.filter((r) => r.kind === "state");
+  const topCounties = [...counties]
+    .sort((a, b) => b.facility_count - a.facility_count)
+    .slice(0, TOP_COUNTIES);
+
+  // Net movement over the last twelve months of the series. Net rather than
+  // gross: removals are real edits and hiding them would overstate arrivals.
+  const recentPoints = series?.points.slice(-12) ?? [];
+  const netYear = recentPoints.reduce((sum, point) => sum + point.change, 0);
+
+  const historical = energy.filter((p) => p.series_kind === "historical");
+  const latestPower = [...historical]
+    .filter((p) => p.electricity_twh !== null)
+    .sort((a, b) => b.year - a.year)[0];
+  const latestWater = [...historical]
+    .filter((p) => p.water_bgal !== null)
+    .sort((a, b) => b.year - a.year)[0];
+  const earliestPower = [...historical]
+    .filter((p) => p.electricity_twh !== null)
+    .sort((a, b) => a.year - b.year)[0];
+  const outlook = energy.find(
+    (p) => p.series_kind === "projection" && p.year === 2030 && p.scenario === "reference",
   );
+
+  // Derived rather than typed, so it cannot drift from the figures beside it
+  // when a new LBNL year is added to the CSV.
+  const growthMultiple =
+    latestPower?.electricity_twh && earliestPower?.electricity_twh
+      ? latestPower.electricity_twh / earliestPower.electricity_twh
+      : null;
 
   return (
     <div className="stack">
       <section className="hero">
-        <p className="eyebrow">East Valley, Arizona · Maricopa County</p>
-        <h1>From permit to power-on</h1>
+        <p className="eyebrow">United States · OpenStreetMap · Lawrence Berkeley Lab</p>
+        <h1>Where data centres are, and how fast they are arriving</h1>
         <p className="tagline">
-          Helios assembles fragmented public records into an evidence-backed view of how
-          data-centre projects progress through land assembly, permitting, construction,
-          grid connection, and operation. Every figure below traces back to a source
-          document you can open and verify.
+          Helios tracks {meta.facility_count.toLocaleString()} data centres across the
+          United States — each at a real coordinate, each traceable to the public record
+          it came from — and plots how that number has grown, county by county, against
+          the electricity and water the country is reported to spend on them.
         </p>
+        <div className="button-row" style={{ marginTop: "1rem" }}>
+          <Link className="button button-primary" href="/growth">
+            See the growth curve
+          </Link>
+          <Link className="button" href="/regions">
+            Find a county
+          </Link>
+          <Link className="button" href="/understand">
+            New here? Start with the basics
+          </Link>
+        </div>
       </section>
 
       <div className="grid grid-4">
-        <Metric
-          label="Sites tracked"
-          value={String(stages.total_sites)}
-          sub="East Valley, Arizona"
-        />
-        <Metric
-          label="Evidence records"
-          value={String(provenance.total_evidence_records)}
-          sub={`${(provenance.completeness_ratio * 100).toFixed(0)}% with complete provenance`}
-        />
-        <Metric
-          label="Sources declared"
-          value={String(sources.items.length)}
-          sub={`${sources.coverage_summary.implemented ?? 0} with working connectors`}
-        />
-        <Metric
-          label="Coverage gaps"
-          value={String(blockedSources.length)}
-          sub="declared but not yet ingesting"
-        />
+        <div className="metric">
+          <div className="metric-label">Data centres mapped</div>
+          <div className="metric-value num">{meta.facility_count.toLocaleString()}</div>
+          <div className="metric-sub">reported by OSM contributors</div>
+        </div>
+        <div className="metric">
+          <div className="metric-label">Counties holding one</div>
+          <div className="metric-value num">{counties.length}</div>
+          <div className="metric-sub">across {states.length} states</div>
+        </div>
+        <div className="metric">
+          <div className="metric-label">Net change, 12 months</div>
+          <div className="metric-value num">
+            {netYear >= 0 ? "+" : ""}
+            {netYear.toLocaleString()}
+          </div>
+          <div className="metric-sub">appeared minus removed</div>
+        </div>
+        <div className="metric">
+          <div className="metric-label">US data-centre power</div>
+          <div className="metric-value num">
+            {latestPower ? latestPower.electricity_twh?.toLocaleString() : "—"}
+          </div>
+          <div className="metric-sub">
+            TWh in {latestPower?.year ?? "—"}, reported by LBNL
+          </div>
+        </div>
       </div>
 
       <div className="notice">
-        <strong>How to read this observatory.</strong> A confidence score is model output,
-        not a probability that a facility exists. Helios never names an operator without a
-        direct filing, so most sites show <em>Operator not established</em> even when the
-        land is plainly in use. Absence of evidence is not evidence of absence: the{" "}
-        <Link href="/sources">data-source registry</Link> lists which records Helios cannot
-        currently read and why.
+        <strong>Three kinds of number appear on this site, and they are not
+        interchangeable.</strong>{" "}
+        A location is <AssertionBadge assertion="reported" /> — a contributor mapped it. A
+        date is <em>observed</em>: it is when OpenStreetMap first recorded the facility,
+        never when it was built, because OpenStreetMap carries no construction dates. A
+        megawatt figure is <AssertionBadge assertion="inferred" /> — a share of a national
+        total published by Lawrence Berkeley National Laboratory, divided up by building
+        footprint. <Link href="/understand">What each of these means</Link>.
       </div>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">Data centres on the map, 2012 to today</h2>
+          <Link href="/growth" className="small">
+            Full series and national energy &rarr;
+          </Link>
+        </div>
+        {series ? (
+          <MappingGrowthChart points={series.points} />
+        ) : (
+          <p className="muted small">
+            The growth series has not been built yet. Run{" "}
+            <code>make poll</code> to produce it.
+          </p>
+        )}
+      </section>
 
       <div className="split">
         <section className="card">
           <div className="card-header">
-            <h2 className="card-title">Highest-confidence sites</h2>
-            <Link href="/sites" className="small">
-              View all sites &rarr;
+            <h2 className="card-title">Where they concentrate</h2>
+            <Link href="/regions" className="small">
+              All {regions.length} regions &rarr;
             </Link>
           </div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Project</th>
-                <th>City</th>
-                <th>Stage</th>
-                <th className="num">Acres</th>
-                <th className="num">Evidence</th>
-                <th>Confidence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sites.items.map((site) => (
-                <tr key={site.id}>
-                  <td>
-                    <Link href={`/sites/${site.project_code}`} className="mono">
-                      {site.project_code}
-                    </Link>
-                  </td>
-                  <td>{site.jurisdiction ?? "—"}</td>
-                  <td>
-                    {site.current_stage_label}{" "}
-                    <AssertionBadge assertion={site.site_kind_assertion} />
-                  </td>
-                  <td className="num">
-                    {site.total_acres ? site.total_acres.toFixed(1) : "—"}
-                  </td>
-                  <td className="num">{site.evidence_count}</td>
-                  <td>
-                    <ConfidenceBadge
-                      confidence={site.current_confidence}
-                      band={site.confidence_band}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-
-        <section className="card">
-          <div className="card-header">
-            <h2 className="card-title">Development stage distribution</h2>
-          </div>
-          {activeStages.length === 0 ? (
-            <p className="muted">No sites have been classified yet.</p>
-          ) : (
+          <div className="table-scroll">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Stage</th>
-                  <th className="num">Sites</th>
-                  <th className="num">Mean confidence</th>
+                  <th>County</th>
+                  <th className="num">Mapped</th>
+                  <th className="num">Footprint km²</th>
+                  <th className="num">Share MW</th>
                 </tr>
               </thead>
               <tbody>
-                {activeStages.map((stage) => (
-                  <tr key={stage.stage}>
+                {topCounties.map((county) => (
+                  <tr key={county.region_id}>
                     <td>
-                      <span className="mono muted">{stage.stage}</span> {stage.stage_label}
+                      <Link href={`/regions/${regionSlug(county.region_id)}`}>
+                        {county.name}
+                      </Link>
+                      <span className="muted small">, {county.state}</span>
                     </td>
-                    <td className="num">{stage.site_count}</td>
-                    <td className="num">
-                      {stage.mean_confidence !== null
-                        ? `${stage.mean_confidence.toFixed(0)}%`
-                        : "—"}
-                    </td>
+                    <td className="num">{county.facility_count.toLocaleString()}</td>
+                    <td className="num">{(county.footprint_m2 / 1e6).toFixed(2)}</td>
+                    <td className="num">{Math.round(county.est_mw).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+          <p className="card-note">
+            Concentration is the whole story of this industry: the densest county holds
+            more mapped data centres than most states. Megawatt figures are inferred
+            shares of a reported national total, not meter readings.
+          </p>
+        </section>
+
+        <section className="card">
+          <div className="card-header">
+            <h2 className="card-title">What changed lately</h2>
+            <Link href="/changes" className="small">
+              Full feed &rarr;
+            </Link>
+          </div>
+          {changes.length === 0 ? (
+            <p className="muted small">No change history has been built yet.</p>
+          ) : (
+            <ul className="feed">
+              {changes.slice(0, RECENT_CHANGES).map((change) => (
+                <li key={`${change.id}-${change.date}-${change.kind}`}>
+                  <span className="mono small muted">{change.date}</span>{" "}
+                  <span
+                    className={
+                      change.kind === "creation" ? "pill pill-positive" : "pill pill-caution"
+                    }
+                  >
+                    {change.kind === "creation" ? "appeared" : "removed from OSM"}
+                  </span>
+                  <div className="small">
+                    {change.name || <span className="muted">unnamed</span>}
+                    {change.county_name ? (
+                      <span className="muted"> · {change.county_name}</span>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
           <p className="card-note">
-            Current coverage is concentrated at Stage 7 because the assessor&rsquo;s
-            data-centre classification is applied to facilities that already exist. Earlier
-            stages depend on planning and utility filings, which are the sources Helios
-            cannot yet read automatically.
+            A removal means the element stopped matching the data-centre filter in
+            OpenStreetMap. That is not the same as a demolition, and this site never
+            claims it is.
           </p>
         </section>
       </div>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">The national picture these counts sit inside</h2>
+          <Link href="/growth" className="small">
+            Every published figure &rarr;
+          </Link>
+        </div>
+        <div className="grid grid-3">
+          <div>
+            <div className="metric-label">Electricity</div>
+            <p className="small" style={{ marginBottom: 0 }}>
+              US data centres consumed{" "}
+              <strong>{latestPower?.electricity_twh?.toLocaleString()} TWh</strong> in{" "}
+              {latestPower?.year}
+              {growthMultiple && earliestPower
+                ? ` — ${growthMultiple.toFixed(1)}× the ${earliestPower.electricity_twh} TWh they used in ${earliestPower.year}`
+                : ""}
+              . For scale, that is a few per cent of all the electricity consumed in the
+              country.
+            </p>
+          </div>
+          <div>
+            <div className="metric-label">Water</div>
+            <p className="small" style={{ marginBottom: 0 }}>
+              Cooling them consumed{" "}
+              <strong>{latestWater?.water_bgal} billion gallons</strong> directly in{" "}
+              {latestWater?.year}, before counting the water spent generating the
+              electricity itself.
+            </p>
+          </div>
+          <div>
+            <div className="metric-label">Outlook</div>
+            <p className="small" style={{ marginBottom: 0 }}>
+              LBNL&apos;s reference case puts {outlook?.year} at{" "}
+              <strong>{outlook?.electricity_twh?.toLocaleString()} TWh</strong>. That is a{" "}
+              <AssertionBadge assertion="predicted" /> figure — a scenario, not a
+              measurement, and it is published as a range for good reason.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">Start here</h2>
+          <span className="card-note">what each part of the site answers</span>
+        </div>
+        <div className="guide-grid">
+          <Link href="/understand" className="guide-card">
+            <h3>The basics</h3>
+            <p>
+              What a data centre actually contains, why electricity is the constraint that
+              decides where one gets built, why cooling spends water, and what every unit
+              on this site means.
+            </p>
+          </Link>
+          <Link href="/growth" className="guide-card">
+            <h3>Growth over time</h3>
+            <p>
+              How many data centres the map has recorded each month since 2012, beside the
+              national electricity and water totals — and why the two series must never be
+              divided into each other.
+            </p>
+          </Link>
+          <Link href="/regions" className="guide-card">
+            <h3>Regions</h3>
+            <p>
+              Every county and state holding at least one mapped facility, sortable by
+              count, footprint or allocated load. Each has its own page and its own curve.
+            </p>
+          </Link>
+          <Link href="/observatory-map" className="guide-card">
+            <h3>The national map</h3>
+            <p>
+              All {meta.facility_count.toLocaleString()} facilities at their mapped
+              coordinates, each circle sized so its drawn area tracks the real building
+              footprint.
+            </p>
+          </Link>
+          <Link href="/changes" className="guide-card">
+            <h3>Changes</h3>
+            <p>
+              What appeared on the map and what came off it, newest first, every row
+              linking to the OpenStreetMap element so you can check the edit yourself.
+            </p>
+          </Link>
+          <Link href="/methodology" className="guide-card">
+            <h3>How it was built</h3>
+            <p>
+              The pipeline end to end — where each figure comes from, how the power
+              allocation works, and the list of things this dataset cannot see.
+            </p>
+          </Link>
+        </div>
+      </section>
+
+      <section className="card">
+        <div className="card-header">
+          <h2 className="card-title">A second, deeper dataset: the Arizona study</h2>
+          {arizona ? (
+            <Link href="/sites" className="small">
+              Browse the site register &rarr;
+            </Link>
+          ) : null}
+        </div>
+        <p className="small">
+          Everything above is a map of what has already been <em>recorded</em>. It cannot
+          see a project before someone maps it — which, in practice, is usually after the
+          building exists. The Arizona study is the opposite experiment: in one valley in
+          Maricopa County, Helios reads parcel transfers, permits, assessor
+          classifications and utility filings, clusters them into candidate sites, and
+          argues a confidence score for each with the evidence chain attached.
+        </p>
+        {arizona ? (
+          <>
+            <p className="small">
+              It currently tracks <strong>{arizona.siteCount}</strong> candidate sites.
+              Every point of every score links back to the document that produced it, and
+              an operator is never named without a direct filing.
+              {arizona.topCode ? (
+                <>
+                  {" "}
+                  The highest-confidence site is{" "}
+                  <Link href={`/sites/${arizona.topCode}`} className="mono">
+                    {arizona.topCode}
+                  </Link>
+                  {arizona.topStage ? `, at ${arizona.topStage.toLowerCase()}` : ""}.
+                </>
+              ) : null}
+            </p>
+            <div className="button-row">
+              <Link className="button" href="/sites">
+                Site register
+              </Link>
+              <Link className="button" href="/map">
+                Arizona parcel map
+              </Link>
+              <Link className="button" href="/analytics">
+                Model analytics
+              </Link>
+            </div>
+          </>
+        ) : (
+          <p className="small muted" style={{ marginBottom: 0 }}>
+            The Arizona payloads are not present in this build, so its figures are omitted
+            rather than estimated. Run <code>make export-static-api</code> to generate
+            them.
+          </p>
+        )}
+      </section>
     </div>
   );
 }

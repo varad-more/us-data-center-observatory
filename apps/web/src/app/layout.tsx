@@ -31,17 +31,44 @@ export const metadata: Metadata = {
     "From permit to power-on: transparent early-warning intelligence for AI infrastructure.",
 };
 
-const NAV = [
-  { href: "/", label: "Observatory" },
-  { href: "/growth", label: "Growth" },
-  { href: "/regions", label: "Regions" },
-  { href: "/changes", label: "Changes" },
-  { href: "/observatory-map", label: "National map" },
-  { href: "/map", label: "Site map" },
-  { href: "/sites", label: "Sites" },
-  { href: "/sources", label: "Data sources" },
-  { href: "/analytics", label: "Analytics" },
-  { href: "/methodology", label: "Methodology" },
+/**
+ * Grouped rather than flat, because the site serves two different datasets and
+ * a single ten-item strip gave a reader no way to tell which was which. The
+ * groups are the actual division in the data: what OpenStreetMap reports
+ * nationally, what Helios infers about one Arizona valley, and the reference
+ * material explaining both.
+ *
+ * The two map entries used to read "National map" and "Site map" side by side.
+ * "Site map" meant the Arizona parcel view, but it reads as a sitemap; both are
+ * now named after the thing they actually draw.
+ */
+const NAV_GROUPS = [
+  {
+    label: "Observatory",
+    items: [
+      { href: "/", label: "Overview" },
+      { href: "/growth", label: "Growth" },
+      { href: "/regions", label: "Regions" },
+      { href: "/observatory-map", label: "US map" },
+      { href: "/changes", label: "Changes" },
+    ],
+  },
+  {
+    label: "Arizona study",
+    items: [
+      { href: "/sites", label: "Sites" },
+      { href: "/map", label: "Parcel map" },
+      { href: "/analytics", label: "Analytics" },
+    ],
+  },
+  {
+    label: "Reference",
+    items: [
+      { href: "/understand", label: "Basics" },
+      { href: "/methodology", label: "Methods" },
+      { href: "/sources", label: "Sources" },
+    ],
+  },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -64,10 +91,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="brand-tag">Open AI Infrastructure Observatory</span>
               </Link>
               <nav className="nav" aria-label="Primary">
-                {NAV.map((item) => (
-                  <Link key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
+                {NAV_GROUPS.map((group) => (
+                  <ul key={group.label} className="nav-group" aria-label={group.label}>
+                    {group.items.map((item) => (
+                      <li key={item.href}>
+                        <Link href={item.href}>{item.label}</Link>
+                      </li>
+                    ))}
+                  </ul>
                 ))}
                 <ThemeToggle />
               </nav>

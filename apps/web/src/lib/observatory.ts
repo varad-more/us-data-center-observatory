@@ -19,8 +19,11 @@ import { z } from "zod";
 import fs from "fs/promises";
 import path from "path";
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "/project-helios";
-export const DATA_BASE = process.env.NEXT_PUBLIC_DATA_BASE || `${BASE_PATH}/data`;
+import { DATA_BASE } from "./regionPath";
+
+// Re-exported so server code keeps importing from this module, while the client
+// picker can reach the same helpers without dragging `fs` into the bundle.
+export { DATA_BASE, regionIdFromSlug, regionSlug } from "./regionPath";
 
 export const observatoryMetaSchema = z.object({
   generated_at: z.string(),
@@ -203,16 +206,6 @@ export function getRegionSeries(regionId: string): Promise<RegionSeries | null> 
 /** Convenience wrapper for the national series, which the growth page leads on. */
 export function getNationalSeries(): Promise<RegionSeries | null> {
   return getRegionSeries("national:US");
-}
-
-/** Turn `county:51107` into the `county-51107` used in URLs and file names. */
-export function regionSlug(regionId: string): string {
-  return regionId.replace(":", "-");
-}
-
-/** Reverse of {@link regionSlug}. */
-export function regionIdFromSlug(slug: string): string {
-  return slug.replace("-", ":");
 }
 
 /**

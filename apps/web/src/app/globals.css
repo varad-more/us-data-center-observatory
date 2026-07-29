@@ -344,6 +344,35 @@ code,
   align-items: center;
 }
 
+/* The nav is three labelled groups, not one strip. The rule between them is the
+   only thing telling a reader that "Regions" and "Sites" index different
+   datasets, so it is a real separator rather than extra gap: at these type sizes
+   whitespace alone did not read as a boundary. */
+.nav-group {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-group + .nav-group {
+  margin-left: 0.5rem;
+  padding-left: 0.65rem;
+  border-left: 1px solid var(--rule);
+}
+
+/* Wrapped onto its own line, a left edge points at nothing. */
+@media (max-width: 900px) {
+  .nav-group + .nav-group {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
 .nav a {
   color: var(--ink-2);
   font-size: 0.86rem;
@@ -1402,6 +1431,70 @@ details summary {
   min-width: 14rem;
 }
 
+/* Native select rather than a custom combobox. 323 options is exactly the case
+   where the platform control wins: type-ahead, keyboard, and the OS picker on a
+   phone all come free, and none of them would survive a hand-rolled listbox. */
+.control-select {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  color: var(--ink-1);
+  max-width: 16rem;
+  cursor: pointer;
+}
+
+.control-select:disabled {
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+.region-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.region-switch-label {
+  font-size: 0.71rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--ink-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* The peer row. Chips here are links, not toggles, so they take the chip's
+   shape without its pressed state. */
+.peer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  padding-bottom: 0.25rem;
+}
+
+.peer-nav-label {
+  font-size: 0.71rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--ink-muted);
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.peer-nav .chip {
+  text-decoration: none;
+  color: var(--ink-2);
+}
+
+.peer-nav .chip:hover {
+  color: var(--ink-1);
+  text-decoration: none;
+}
+
 .th-sort {
   font: inherit;
   font-weight: inherit;
@@ -1421,6 +1514,70 @@ details summary {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------------ wayfinding on home */
+
+/**
+ * The "start here" cards.
+ *
+ * Whole-card links rather than a heading link with prose beside it: the target
+ * is a section of the site, so the description is part of what the reader is
+ * choosing between, not decoration around a link.
+ */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.guide-card {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.guide-card:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.guide-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+  color: var(--ink-1);
+}
+
+/* The arrow is decoration; the heading text already names the destination. */
+.guide-card h3::after {
+  content: " →";
+  color: var(--accent);
+}
+
+.guide-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* A short list of dated events. Rules between rows rather than bullets, to match
+   the tables it sits beside. */
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.feed li:last-child {
+  border-bottom: none;
 }
 
 /* ------------------------------------------------------------------- print */

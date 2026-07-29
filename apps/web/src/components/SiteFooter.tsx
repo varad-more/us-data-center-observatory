@@ -77,9 +77,10 @@ export async function SiteFooter() {
           <div className="footer-brand">
             <p className="footer-mark">Helios</p>
             <p className="footer-blurb">
-              An evidence-first view of how data-centre projects move from land assembly
-              through permitting, construction, and grid connection — assembled from
-              public records, with every figure traceable to the document it came from.
+              Where data centres are, how fast they are arriving, and what they cost in
+              electricity and water — counted nationally from OpenStreetMap and, in one
+              Arizona valley, inferred in depth from parcel and permit records. Every
+              figure traces to the document it came from.
             </p>
             {exportedOn && (
               <p className="freshness">
@@ -89,23 +90,44 @@ export async function SiteFooter() {
             )}
           </div>
 
-          <nav className="footer-col" aria-label="Site">
-            <h2>The site</h2>
+          <nav className="footer-col" aria-label="Observatory">
+            <h2>Observatory</h2>
             <ul>
               <li>
-                <Link href="/">Observatory</Link>
+                <Link href="/">Overview</Link>
               </li>
               <li>
-                <Link href="/map">Map</Link>
+                <Link href="/growth">Growth over time</Link>
               </li>
               <li>
-                <Link href="/sites">Sites</Link>
+                <Link href="/regions">Regions</Link>
               </li>
               <li>
-                <Link href="/sources">Data sources</Link>
+                <Link href="/observatory-map">US map</Link>
+              </li>
+              <li>
+                <Link href="/changes">Changes</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <nav className="footer-col" aria-label="Arizona study and reference">
+            <h2>Study &amp; reference</h2>
+            <ul>
+              <li>
+                <Link href="/sites">Arizona sites</Link>
+              </li>
+              <li>
+                <Link href="/map">Arizona parcel map</Link>
+              </li>
+              <li>
+                <Link href="/understand">Understanding data centres</Link>
               </li>
               <li>
                 <Link href="/methodology">Methodology &amp; limitations</Link>
+              </li>
+              <li>
+                <Link href="/sources">Data sources</Link>
               </li>
               <li>
                 <a href="https://github.com/varad-more/project-helios">Source on GitHub</a>
@@ -144,8 +166,11 @@ export async function SiteFooter() {
             operator unless a direct filing establishes it.
           </p>
           <p>
-            Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS. Power
-            infrastructure data &copy; OpenStreetMap contributors, ODbL. Owner names
+            Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS. Data
+            centre locations, footprints and edit history &copy; OpenStreetMap
+            contributors, ODbL. National electricity and water totals from Lawrence
+            Berkeley National Laboratory. County boundaries from the US Census
+            Bureau. Owner names
             classified as belonging to private individuals are redacted before storage.{" "}
             <a href="https://github.com/varad-more/project-helios/blob/main/LICENSE">
               Apache-2.0
