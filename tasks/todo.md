@@ -575,3 +575,69 @@ Unknowns are carried, not folded in: a plant with no capacity tag is counted
 separately rather than summed as zero, and the 2,898 assets falling in no US
 county are dropped rather than attached to the nearest one, which would invent
 grid capacity in a real place.
+
+## The footprint that was not a footprint
+
+Every megawatt on the site was allocated by "footprint", and `footprint_m2`
+turned out to be three different physical quantities added together: a building
+floor plate, a campus land parcel, and a construction site. Pooling them and
+dividing LBNL's national total across the result is what produced the ranking.
+
+Measured against the cached snapshot, before any change:
+
+| class | elements | area | share of national MW |
+|---|---|---|---|
+| building | 1,525 | 20.3 km² | **17.6%** |
+| site parcel, no building tag | 174 | 72.3 km² | 62.7% |
+| under construction | 29 | 22.7 km² | 19.7% |
+| node, no area | 125 | 0 | 0% |
+
+So 82% of a *measured 2024 consumption* figure was allocated to polygons that
+are not buildings, and a fifth of it to sites that are not built. A single
+3.1 km² parcel in Racine County drew 598 MW — more than half a gigawatt to one
+land boundary — while all 239 mapped buildings in Loudoun together drew 1,020.
+
+- [x] Retain the class in `facilities.csv` as `site_class`; it was being
+      discarded at fetch time, which is why nothing downstream could tell a
+      floor plate from a land parcel.
+- [x] Allocate only across operating buildings. A parcel and a construction site
+      keep their measured area and get no megawatt figure at all — unknown, not
+      zero, the same treatment plants without a capacity tag already get.
+- [x] Carry the distinction onto the region pages, methodology and limitations.
+
+`building=no` is an explicit "this is not a building" and must not be read as
+one — the 2 km² Meta Los Lunas parcel carries it, and treating it as a building
+put Valencia County, New Mexico second in the nation on six elements.
+
+### What changed, measured
+
+| region | before | after | independent figure |
+|---|---|---|---|
+| Loudoun County, VA | 1,020 MW | **3,034 MW** | — |
+| Virginia | 2,255 MW | **4,972 MW** | ~4,100 MW for N. Virginia alone (JLARC) |
+| Racine County, WI | 1,028 MW from 5 elements | **30 MW from 2 buildings** | — |
+| Maricopa County, AZ | 1,635 MW | 1,050 MW | — |
+
+The old model ranked Maricopa County above Loudoun, which no industry source
+agrees with. The corrected Virginia figure is consistent with a measurement the
+model never saw; the old one was off by about half, which the methodology page
+had already flagged as the weakest link without knowing the cause.
+
+Allocation still sums to 21,918 MW exactly — conservation is unaffected, because
+the denominator changed but the total did not. Re-running the pipeline still
+produces no CSV diff.
+
+The correction is not a claim of accuracy. Discarded parcels are real facilities
+whose load is now carried by buildings elsewhere, so regions mapped campus-first
+are understated, and each of them says so on its own page. This trades a large
+invisible error for a smaller stated one.
+
+### Still open after this
+
+- [ ] A campus mapped only as a land parcel contributes nothing to its county.
+      Estimating it would need a floor-area-to-parcel ratio, which is a
+      coefficient this project has no measured basis for and will not invent.
+- [ ] 45 sites are mapped as under construction. That is a genuine forward
+      signal — where capacity is being built — and nothing yet reads it.
+- [ ] Still nobody has *looked* at any of these pages. The browser extension was
+      not connected in this session either.

@@ -56,13 +56,28 @@ export default async function UnderstandPage() {
   // Measured from the committed dataset rather than asserted, because the
   // spread is the argument for footprint-weighting and a stale number would
   // quietly undermine it.
+  //
+  // Buildings only. Including the campus land parcels compared a median floor
+  // plate against a 3.2 km2 property boundary and reported the ratio as a spread
+  // between buildings, which is the very conflation this page warns about.
   const areas = facilities.features
+    .filter((f) => f.properties.site_class === "building")
     .map((f) => f.properties.footprint_m2)
     .filter((a) => a > 0)
     .sort((a, b) => a - b);
   const medianArea = areas[Math.floor(areas.length / 2)] ?? 0;
   const largestArea = areas[areas.length - 1] ?? 0;
   const spread = medianArea > 0 ? Math.round(largestArea / medianArea) : 0;
+
+  // The largest land parcel, for contrast with the largest building. Derived
+  // for the same reason as the rest: a typed figure here drifted once already.
+  const largestParcel = Math.max(
+    0,
+    ...facilities.features
+      .filter((f) => f.properties.site_class === "site")
+      .map((f) => f.properties.footprint_m2),
+  );
+  const parcelRatio = medianArea > 0 ? Math.round(largestParcel / medianArea) : 0;
 
   // A household's *average* draw: annual energy spread over the year. This is
   // the only honest way to compare a continuous megawatt to a home, and it is
@@ -118,9 +133,18 @@ export default async function UnderstandPage() {
           {medianArea.toLocaleString()} m² while the largest covers{" "}
           {largestArea.toLocaleString()} m² — a spread of roughly{" "}
           <strong>{spread.toLocaleString()} to one</strong>. That gap is the reason Helios
-          weights its power allocation by building footprint instead of dividing the
+          weights its power allocation by building floor area instead of dividing the
           national total evenly across facilities; a flat per-facility figure would be
-          wrong by orders of magnitude at both ends of that range.
+          wrong by about an order of magnitude at both ends of that range.
+        </p>
+        <p className="small" style={{ marginBottom: 0 }}>
+          Those are <em>buildings</em>. The same OpenStreetMap tags are also used for the
+          land a campus sits on, and the largest such parcel covers{" "}
+          {(largestParcel / 1e6).toFixed(1)} km² — {parcelRatio.toLocaleString()} times the
+          median building. Counting that area as though it were floor space is what
+          the allocation used to do, and it sent 82% of the national total to geometry
+          that is not a building. Helios now weights buildings only, and says so wherever
+          a region has parcels it therefore cannot estimate.
         </p>
       </section>
 

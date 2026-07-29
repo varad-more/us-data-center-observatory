@@ -11,8 +11,12 @@
  * The vocabulary distinction this module exists to protect: a facility's
  * location is *reported* by OpenStreetMap contributors, the date it appears is
  * *observed* (when the map recorded it, never when it was built), and its power
- * and water are *inferred* - a share of a national total, allocated by
- * footprint.
+ * and water are *inferred* - a share of a national total, allocated by building
+ * floor area.
+ *
+ * That last word carries weight. The same tags are used for machine halls and
+ * for the land parcels campuses sit on, and only the first is a floor plate, so
+ * `site_class` says which a row is and only buildings are given a power figure.
  */
 import { z } from "zod";
 
@@ -28,6 +32,10 @@ export { DATA_BASE, regionIdFromSlug, regionSlug } from "./regionPath";
 export const observatoryMetaSchema = z.object({
   generated_at: z.string(),
   facility_count: z.number(),
+  // Optional for the same reason as the grid fields: a dataset built before
+  // buildings and land parcels were told apart carries neither.
+  building_count: z.number().optional(),
+  construction_count: z.number().optional(),
   region_count: z.number(),
   series_count: z.number(),
   // Optional so a dataset built before the grid layer existed still validates
@@ -49,7 +57,15 @@ export const regionSchema = z.object({
   state: z.string(),
   fips: z.string(),
   facility_count: z.number(),
+  // `footprint_m2` is building floor area alone. Land parcels and construction
+  // sites are measured too, but kept in their own fields: adding them together
+  // produces a number in square metres that describes no physical thing.
+  building_count: z.number().optional(),
+  site_count: z.number().optional(),
+  construction_count: z.number().optional(),
   footprint_m2: z.number(),
+  site_area_m2: z.number().optional(),
+  construction_area_m2: z.number().optional(),
   est_mw: z.number(),
   est_gal_per_day: z.number(),
   // Grid context, present only for regions the grid stage has placed assets in.
@@ -102,6 +118,9 @@ export const nationalEnergySchema = z.object({
 export const facilityPropertiesSchema = z.object({
   id: z.string(),
   footprint_m2: z.number(),
+  // What that area measures: a building's floor plate, the boundary of a campus
+  // ("site"), a site under construction, or a node with no area at all.
+  site_class: z.enum(["building", "site", "construction", "point"]).optional(),
   name: z.string().optional(),
   operator: z.string().optional(),
   ref: z.string().optional(),

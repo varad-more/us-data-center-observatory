@@ -54,7 +54,9 @@ export default async function MethodologyPage() {
           <li>
             <strong>Allocation.</strong> LBNL&apos;s reported national electricity and
             water totals are divided across facilities in proportion to mapped building
-            footprint, then summed into counties and states.
+            floor area, then summed into counties and states. Only facilities mapped as
+            buildings take part: a campus mapped as a land parcel and a site mapped as
+            under construction are counted and measured, but receive no share.
           </li>
         </ol>
         <p className="small" style={{ marginBottom: 0 }}>
@@ -78,12 +80,25 @@ export default async function MethodologyPage() {
           of ground than a single-storey shed, so tall sites are under-weighted and flat
           ones over-weighted.
         </p>
+        <p className="small">
+          <strong>What that weakest link turned out to be.</strong> This model used to
+          allocate Virginia about 2,255 MW, against roughly 4,100 MW that Virginia&apos;s
+          own legislative commission attributes to Northern Virginia alone — an under-read
+          of about half in the densest region in the country. The cause was not the
+          density assumption above. It was that &ldquo;footprint&rdquo; pooled three
+          different things: a building&apos;s floor plate, the boundary of the land a
+          campus sits on, and a site still under construction. Weighting by the pooled
+          figure sent 82% of a measured national total to geometry that is not a building,
+          and a single 3.1 km² parcel in Racine County, Wisconsin drew 598 MW while every
+          mapped building in Loudoun County together drew 1,020 MW.
+        </p>
         <p className="small" style={{ marginBottom: 0 }}>
-          The measured consequence is stated rather than buried: this model allocates
-          Virginia about 2,255 MW, where Virginia&apos;s own legislative commission has
-          put Northern Virginia alone near 4,100 MW. The method under-reads the densest
-          region in the country by roughly half. It is the weakest part of the observatory
-          and the next thing worth fixing.
+          Weighting building floor area alone moves Loudoun County to 3,034 MW and Virginia
+          to 4,972 MW, which is consistent with that independent figure where the old
+          result was not. The correction cuts both ways and is not a claim of accuracy: the
+          discarded parcels are real facilities whose load is now attributed to buildings
+          elsewhere, so regions mapped campus-first are understated, and each such region
+          says so on its own page. The density assumption above is unaffected and remains.
         </p>
       </section>
 

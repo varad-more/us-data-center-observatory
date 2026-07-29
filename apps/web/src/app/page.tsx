@@ -173,7 +173,9 @@ export default async function Home() {
         never when it was built, because OpenStreetMap carries no construction dates. A
         megawatt figure is <AssertionBadge assertion="inferred" /> — a share of a national
         total published by Lawrence Berkeley National Laboratory, divided up by building
-        footprint. <Link href="/understand">What each of these means</Link>.
+        floor area — and given only to facilities mapped as buildings, never to a campus
+        land parcel or a site still under construction.{" "}
+        <Link href="/understand">What each of these means</Link>.
       </div>
 
       <section className="card">
@@ -207,7 +209,7 @@ export default async function Home() {
                 <tr>
                   <th>County</th>
                   <th className="num">Mapped</th>
-                  <th className="num">Footprint km²</th>
+                  <th className="num">Floor area km²</th>
                   <th className="num">Share MW</th>
                 </tr>
               </thead>
@@ -342,7 +344,7 @@ export default async function Home() {
             <h3>Regions</h3>
             <p>
               Every county and state holding at least one mapped facility, sortable by
-              count, footprint or allocated load. Each has its own page and its own curve.
+              count, floor area or allocated load. Each has its own page and its own curve.
             </p>
           </Link>
           <Link href="/observatory-map" className="guide-card">

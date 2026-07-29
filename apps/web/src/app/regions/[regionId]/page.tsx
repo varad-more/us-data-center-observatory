@@ -75,6 +75,14 @@ export default async function RegionPage({
   const observed = series?.points.at(-1)?.count ?? 0;
   const undated = mapped - observed;
 
+  // Facilities carrying no power estimate, because what was mapped is a land
+  // parcel or a site under construction rather than a building. Reported rather
+  // than absorbed: without this the megawatt figure looks like a full account of
+  // the region, and in a county mapped campus-first it is nowhere near one.
+  const siteCount = region?.site_count ?? 0;
+  const constructionCount = region?.construction_count ?? 0;
+  const unmeasured = siteCount + constructionCount;
+
   const named = [...facilities]
     .filter((f) => f.properties.name)
     .sort((a, b) => b.properties.footprint_m2 - a.properties.footprint_m2)
@@ -157,11 +165,13 @@ export default async function RegionPage({
           <div className="metric-sub">on the map today</div>
         </div>
         <div className="metric">
-          <div className="metric-label">Footprint</div>
+          <div className="metric-label">Floor area</div>
           <div className="metric-value num">
             {region ? (region.footprint_m2 / 1e6).toFixed(2) : "—"}
           </div>
-          <div className="metric-sub">km² of building</div>
+          <div className="metric-sub">
+            km² across {(region?.building_count ?? 0).toLocaleString()} buildings
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">Share of US load</div>
@@ -178,6 +188,36 @@ export default async function RegionPage({
           <div className="metric-sub">million gal/day, inferred</div>
         </div>
       </div>
+
+      {unmeasured > 0 ? (
+        <div className="notice">
+          <strong>
+            {unmeasured.toLocaleString()} of these {mapped.toLocaleString()} are not
+            mapped as buildings, so no power figure is estimated for them.
+          </strong>{" "}
+          {siteCount > 0 ? (
+            <>
+              {siteCount.toLocaleString()}{" "}
+              {siteCount === 1 ? "is a campus boundary" : "are campus boundaries"} covering{" "}
+              {(region!.site_area_m2! / 1e6).toFixed(2)} km² of land
+              {constructionCount > 0 ? ", and " : ". "}
+            </>
+          ) : null}
+          {constructionCount > 0 ? (
+            <>
+              {constructionCount.toLocaleString()}{" "}
+              {constructionCount === 1 ? "is a site" : "are sites"} mapped as under
+              construction.{" "}
+            </>
+          ) : null}
+          The megawatt figure above divides a national total by{" "}
+          <em>building floor area</em>, and the area of a land parcel is not floor area.
+          A site still being built consumed none of the electricity that total measures.
+          Both are counted here and left out of the estimate rather than folded into it,
+          so this region&apos;s load is understated by however much those{" "}
+          {unmeasured === 1 ? "represents" : "represent"}.
+        </div>
+      ) : null}
 
       <section className="card">
         <div className="card-header">

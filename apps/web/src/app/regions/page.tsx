@@ -50,11 +50,13 @@ export default async function RegionsPage() {
           <div className="metric-sub">holding at least one</div>
         </div>
         <div className="metric">
-          <div className="metric-label">Total footprint</div>
+          <div className="metric-label">Total floor area</div>
           <div className="metric-value num">
             {(meta.total_footprint_m2 / 1e6).toFixed(0)}
           </div>
-          <div className="metric-sub">km² of building</div>
+          <div className="metric-sub">
+            km² across {(meta.building_count ?? 0).toLocaleString()} buildings
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">Densest county</div>

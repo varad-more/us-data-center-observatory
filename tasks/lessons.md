@@ -359,3 +359,46 @@ the comparison. More generally, when a feature cannot be verified by looking at
 it, write the test that exercises the interaction rather than trusting that
 every static check passing means it works — those checks all pass on a feature
 that does nothing at all.
+
+## A shared unit is not a shared quantity
+
+Three kinds of polygon carried a data-centre tag: a building's floor plate, the
+land boundary of a campus, and a site under construction. All three came back
+from Overpass as an area in square metres, so the pipeline added them up and
+called the result "footprint". Weighting a national electricity total by that
+sum sent 82% of it to geometry that is not a building, and 19.7% to sites that
+do not exist yet.
+
+Nothing looked wrong. The allocation summed to the published total exactly, the
+conservation check passed, every figure was derived from committed data, and the
+ranking it produced was plausible enough to publish and leave up. It was visible
+only in a consequence: Racine County drew 1,028 MW from five elements while
+Loudoun County, the densest in the world, drew 1,020 from two hundred and
+thirty-nine.
+
+The same conflation had also written the *justification*. The footprint spread
+quoted as the reason for weighting by area — 263-fold nationally, 34-fold in
+Loudoun — was a land parcel divided by a building. Between buildings it is
+12-fold and 4-fold.
+
+**How to apply:** before aggregating a quantity, ask what physical thing each
+value measures, not what unit it is in. Matching units are not evidence of a
+matching quantity, and a sum of unlike things fails silently — it produces a
+number, it balances, and it is wrong. When a source is a folksonomy like
+OpenStreetMap, one tag routinely spans several physical kinds; check the
+distribution of the *other* tags on the rows before trusting the column. And
+treat an implausible ranking as a defect report about the model rather than a
+finding about the world.
+
+## Check the sentinel values a vocabulary reserves
+
+Classifying those polygons, `'building' in tags` counted `building=no` as a
+building. It is an explicit statement that the area is *not* one, and it carried
+a 2 km² land parcel that put Valencia County, New Mexico second in the nation on
+six elements. Caught only by re-reading the outlier instead of accepting a
+result that had just moved in the direction I expected.
+
+**How to apply:** a key's presence is not its truth value. Enumerate what a
+field actually contains before branching on it — `Counter(tags.get(k))` over the
+real data takes seconds and would have shown `no` sitting there among the 21
+values. And be most suspicious of a new result exactly when it confirms the fix.

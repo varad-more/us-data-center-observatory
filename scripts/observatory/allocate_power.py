@@ -9,10 +9,37 @@ script distributes the former across the latter, weighted by floor area.
 
 Why weight by footprint
 -----------------------
-Because size varies enormously and a flat per-facility figure would be wrong by
-more than an order of magnitude. Measured in Loudoun County, footprints run from
-a 12,515 m2 median to a 426,398 m2 campus - a 34-fold spread. Area is a crude
-proxy for capacity, but it is a vastly better one than facility count.
+Because size varies and a flat per-facility figure would be wrong by roughly an
+order of magnitude. Measured across the mapped buildings, floor plates run from a
+10,537 m2 median to 124,329 m2 - a 12-fold spread; within Loudoun County alone it
+is 4-fold. Area is a crude proxy for capacity, but it is a better one than
+facility count.
+
+That spread used to be quoted as 263-fold nationally and 34-fold in Loudoun. Both
+figures were a *land parcel* divided by a *building*, which is the same
+conflation described below, and they overstated the case for this method. The
+method still holds on the corrected numbers; the old justification did not.
+
+What is weighted, and what is not
+---------------------------------
+**Only buildings.** The tags this project selects on are also carried by campus
+land parcels and by sites mapped as under construction, and once every polygon is
+reduced to square metres the three are indistinguishable. Weighting the pooled
+figure sent 82% of a *measured* national total to geometry that is not a
+building: 62.7% to 174 land parcels covering 72 km2, and a further 19.7% to 29
+sites that are not built yet. One 3.1 km2 parcel in Racine County drew 598 MW
+while every mapped building in Loudoun County together drew 1,020 MW.
+
+Allocating measured 2024 consumption to a construction site asserts that an
+unbuilt facility drew power, which is the same class of error as reading a
+mapping date as a build date. Parcels and construction sites therefore keep
+their measured area, are counted, and receive no megawatt figure at all -
+unknown, not zero, the treatment plants without a capacity tag already get.
+
+Correcting this moved Loudoun County from 1,020 MW to 3,034 MW and Virginia from
+2,255 MW to 4,972 MW, against an independently reported Virginia load in the
+4-6 GW range. The old model put Maricopa County above Loudoun, which no industry
+source agrees with.
 
 What this figure is, and is not
 -------------------------------
@@ -57,7 +84,12 @@ REGION_FIELDNAMES = (
     "state",
     "fips",
     "facility_count",
+    "building_count",
+    "site_count",
+    "construction_count",
     "footprint_m2",
+    "site_area_m2",
+    "construction_area_m2",
     "share_of_footprint",
     "est_mw",
     "est_gal_per_day",
@@ -111,14 +143,16 @@ def main(argv: list[str] | None = None) -> int:
     national_mw = twh * 1e12 / HOURS_PER_YEAR / 1e6
     national_gal_per_day = bgal * 1e9 / DAYS_PER_YEAR
 
-    total_footprint = sum(float(f.get("footprint_m2") or 0.0) for f in facilities)
+    buildings = [f for f in facilities if f.get("site_class") == "building"]
+    total_footprint = sum(float(f.get("footprint_m2") or 0.0) for f in buildings)
     if total_footprint <= 0:
         raise FetchError(
-            "Total mapped footprint is zero, so there is no weight to allocate by. "
-            "Check that fetch_osm_snapshot.py recorded building geometry."
+            "Total mapped building footprint is zero, so there is no weight to allocate "
+            "by. Check that fetch_osm_snapshot.py recorded geometry and site_class."
         )
 
-    with_footprint = sum(1 for f in facilities if float(f.get("footprint_m2") or 0.0) > 0)
+    with_footprint = sum(1 for f in buildings if float(f.get("footprint_m2") or 0.0) > 0)
+    excluded = len(facilities) - len(buildings)
 
     allocated_mw = 0.0
     allocated_gal = 0.0
@@ -137,13 +171,14 @@ def main(argv: list[str] | None = None) -> int:
 
     written = write_csv(args.out, REGION_FIELDNAMES, regions)
 
-    print(f"Allocated national totals across {len(facilities)} facilities")
+    print(f"Allocated national totals across {len(buildings)} mapped buildings")
     print(f"  electricity   {twh:.0f} TWh ({electricity_year}) = {national_mw:,.0f} MW average")
     print(
         f"  water         {bgal:.1f} bn gal ({water_year}) "
         f"= {national_gal_per_day:,.0f} gal/day"
     )
-    print(f"  footprint     {total_footprint / 1e6:.2f} km2 across {with_footprint} facilities")
+    print(f"  floor area    {total_footprint / 1e6:.2f} km2 across {with_footprint} buildings")
+    print(f"  excluded      {excluded} land parcels and construction sites")
     print(f"  wrote         {written} regions to {args.out}")
 
     # Conservation check. States partition the mapped stock, so their allocations
@@ -156,9 +191,10 @@ def main(argv: list[str] | None = None) -> int:
             "whose coordinates fell outside every county boundary."
         )
     print(
-        "\n  Every per-facility figure is an upper bound: the whole national total is\n"
-        "  spread across mapped facilities only, so unmapped ones have their share\n"
-        "  attributed to those that are visible."
+        "\n  Every per-facility figure is an upper bound. The whole national total is\n"
+        "  spread across mapped buildings only, so both the facilities OpenStreetMap\n"
+        "  has never recorded and the campuses mapped as a land parcel rather than as\n"
+        "  buildings have their share attributed to the buildings that are visible."
     )
     return 0
 

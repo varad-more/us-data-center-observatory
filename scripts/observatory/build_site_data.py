@@ -66,15 +66,22 @@ def build_facilities(
         except (KeyError, ValueError):
             continue
         area = float(row.get("footprint_m2") or 0.0)
+        kind = row.get("site_class") or ""
         properties: dict[str, Any] = {
             "id": f"{row['osm_type']}/{row['osm_id']}",
             "footprint_m2": round(area),
         }
+        if kind:
+            properties["site_class"] = kind
         for key in FACILITY_KEYS:
             value = row.get(key)
             if value:
                 properties[key] = value
-        if total_area > 0:
+        # Only a building carries a power figure. A land parcel's area is not a
+        # floor plate and a construction site is not consuming anything yet, so
+        # both are left without the key entirely - absent reads as unknown,
+        # where a zero would read as a measured nothing.
+        if kind == "building" and total_area > 0:
             properties["est_mw"] = round(area / total_area * national_mw, 2)
         features.append(
             {
@@ -180,7 +187,12 @@ def main(argv: list[str] | None = None) -> int:
         raise FetchError("national_energy.csv carries no historical electricity figure.")
     latest = max(electricity, key=lambda r: int(r["year"]))
     national_mw = float(latest["electricity_twh"]) * 1e12 / 8760 / 1e6
-    total_area = sum(float(f.get("footprint_m2") or 0.0) for f in facilities)
+    # Building floor area only, matching allocate_power.py's denominator. Pooling
+    # in land parcels here would put a different national total behind the map
+    # than the one behind the region pages.
+    total_area = sum(
+        float(f.get("footprint_m2") or 0.0) for f in facilities if f.get("site_class") == "building"
+    )
 
     written: dict[str, int] = {}
     written["facilities.geojson"] = _write(
@@ -210,7 +222,12 @@ def main(argv: list[str] | None = None) -> int:
                     "state": r["state"],
                     "fips": r["fips"],
                     "facility_count": int(r["facility_count"]),
+                    "building_count": int(r.get("building_count") or 0),
+                    "site_count": int(r.get("site_count") or 0),
+                    "construction_count": int(r.get("construction_count") or 0),
                     "footprint_m2": round(float(r["footprint_m2"])),
+                    "site_area_m2": round(float(r.get("site_area_m2") or 0.0)),
+                    "construction_area_m2": round(float(r.get("construction_area_m2") or 0.0)),
                     "est_mw": float(r.get("est_mw") or 0.0),
                     "est_gal_per_day": float(r.get("est_gal_per_day") or 0.0),
                 }
@@ -281,6 +298,10 @@ def main(argv: list[str] | None = None) -> int:
         {
             "generated_at": datetime.now(tz=UTC).isoformat(),
             "facility_count": len(facilities),
+            "building_count": sum(1 for f in facilities if f.get("site_class") == "building"),
+            "construction_count": sum(
+                1 for f in facilities if f.get("site_class") == "construction"
+            ),
             "region_count": len(regions),
             "series_count": series_count,
             "substation_count": sum(1 for r in grid if r.get("kind") == "substation"),
@@ -293,7 +314,10 @@ def main(argv: list[str] | None = None) -> int:
                 "contributors. Dates are when OpenStreetMap first recorded a "
                 "facility, not when it was built - OpenStreetMap carries no build "
                 "dates. Power and water are a facility's share of a reported "
-                "national total, allocated by footprint, and are upper bounds."
+                "national total, allocated by building floor area, and are upper "
+                "bounds. Only buildings carry that share: a campus mapped as a land "
+                "parcel and a site mapped as under construction are counted and "
+                "measured, but are given no power or water figure at all."
             ),
         },
     )

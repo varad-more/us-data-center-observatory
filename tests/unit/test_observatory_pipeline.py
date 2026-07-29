@@ -17,16 +17,18 @@ SCRIPTS = Path(__file__).resolve().parents[2] / "scripts" / "observatory"
 sys.path.insert(0, str(SCRIPTS))
 
 from _common import BoundingBox, tile, us_tiles, write_csv  # noqa: E402
+from allocate_power import main as allocate_main  # noqa: E402
 from assign_grid_regions import _accumulate, _blank_totals  # noqa: E402
 from assign_grid_regions import build as grid_build  # noqa: E402
+from assign_regions import _blank_region, _fold, _region_totals  # noqa: E402
 from build_series import _month_range, build  # noqa: E402
-from build_site_data import build_grid  # noqa: E402
+from build_site_data import build_facilities, build_grid  # noqa: E402
 from fetch_grid import VOLTAGE_PATTERN  # noqa: E402
 from fetch_grid import capacity_mw as grid_capacity  # noqa: E402
 from fetch_grid import max_voltage_v as grid_max_voltage  # noqa: E402
 from fetch_grid import normalise as grid_normalise  # noqa: E402
 from fetch_osm_history import _kind_of, _split_osm_id  # noqa: E402
-from fetch_osm_snapshot import _ring_area_m2, normalise  # noqa: E402
+from fetch_osm_snapshot import _ring_area_m2, normalise, site_class  # noqa: E402
 
 
 class TestGeodesicArea:
@@ -559,3 +561,281 @@ class TestGridRegionTotals:
         state = next(r for r in rows if r["region_kind"] == "state")
         assert state["substation_count"] == 2
         assert state["bulk_substation_count"] == 2
+
+
+class TestSiteClass:
+    """What an element's area measures decides whether it may carry a megawatt.
+
+    The three data-centre tags are satisfied both by machine halls and by the
+    land parcels campuses sit on. Pooling the two sent 82% of a measured national
+    total to geometry that is not a building, and put a 3.1 km2 parcel in Racine
+    County above every mapped building in Loudoun.
+    """
+
+    def test_building_tag_makes_it_a_building(self) -> None:
+        assert site_class({"building": "yes"}, "way") == "building"
+        assert site_class({"building": "data_center"}, "way") == "building"
+
+    def test_building_no_is_not_a_building(self) -> None:
+        """`building=no` states the area is *not* a building.
+
+        Reading it as one put the 2 km2 Meta Los Lunas land parcel into the floor
+        area pool and sent Valencia County, New Mexico to second in the nation on
+        six elements.
+        """
+        assert site_class({"building": "no", "landuse": "industrial"}, "way") == "site"
+
+    def test_landuse_without_building_is_a_site(self) -> None:
+        """A campus boundary is land, not floor space."""
+        assert site_class({"landuse": "industrial"}, "way") == "site"
+        assert site_class({"telecom": "data_center"}, "way") == "site"
+
+    def test_construction_is_not_operating(self) -> None:
+        """Both spellings mappers use, because either one means "not yet built"."""
+        assert site_class({"landuse": "construction"}, "way") == "construction"
+        assert site_class({"building": "construction"}, "way") == "construction"
+
+    def test_construction_wins_over_a_building_tag(self) -> None:
+        """A shell under construction consumed none of a measured 2024 total."""
+        assert site_class({"building": "yes", "landuse": "construction"}, "way") == "construction"
+
+    def test_a_node_carries_no_area(self) -> None:
+        assert site_class({"telecom": "data_center"}, "node") == "point"
+
+    def test_normalise_records_the_class(self) -> None:
+        """The column has to survive the fetch or nothing downstream can use it."""
+        element = {
+            "type": "way",
+            "id": 7,
+            "tags": {"landuse": "construction", "name": "Half-built"},
+            "geometry": [
+                {"lon": 0.0, "lat": 0.0},
+                {"lon": 0.001, "lat": 0.0},
+                {"lon": 0.001, "lat": 0.001},
+                {"lon": 0.0, "lat": 0.001},
+            ],
+        }
+        row = normalise(element)
+        assert row is not None
+        assert row["site_class"] == "construction"
+
+
+class TestRegionClassTotals:
+    """A region's areas are kept apart because they measure different things."""
+
+    def _fold_all(self, *facilities: dict[str, str]) -> dict[str, object]:
+        totals = _blank_region()
+        for facility in facilities:
+            _fold(totals, facility)
+        return _region_totals(totals)
+
+    def test_floor_area_excludes_land_and_construction(self) -> None:
+        row = self._fold_all(
+            {"footprint_m2": "10000", "site_class": "building"},
+            {"footprint_m2": "3000000", "site_class": "site"},
+            {"footprint_m2": "500000", "site_class": "construction"},
+        )
+        # The parcel is 300x the building; pooling would make the building
+        # invisible and hand the region's whole allocation to a property line.
+        assert row["footprint_m2"] == "10000.0"
+        assert row["site_area_m2"] == "3000000.0"
+        assert row["construction_area_m2"] == "500000.0"
+
+    def test_every_facility_is_counted_exactly_once(self) -> None:
+        """Excluded from the estimate is not excluded from the count."""
+        row = self._fold_all(
+            {"footprint_m2": "10000", "site_class": "building"},
+            {"footprint_m2": "3000000", "site_class": "site"},
+            {"footprint_m2": "500000", "site_class": "construction"},
+            {"footprint_m2": "0", "site_class": "point"},
+        )
+        assert row["facility_count"] == 4
+        assert row["building_count"] == 1
+        assert row["site_count"] == 1
+        assert row["construction_count"] == 1
+
+    def test_a_node_is_not_counted_as_a_site(self) -> None:
+        """Nodes have no area at all, so calling them parcels would misreport
+        the reason a region carries no estimate for them."""
+        row = self._fold_all({"footprint_m2": "0", "site_class": "point"})
+        assert row["site_count"] == 0
+        assert row["site_area_m2"] == "0.0"
+
+    def test_an_unlabelled_area_is_not_assumed_to_be_a_building(self) -> None:
+        """Rows predating `site_class` must not silently rejoin the floor pool."""
+        row = self._fold_all({"footprint_m2": "40000"})
+        assert row["footprint_m2"] == "0.0"
+        assert row["site_area_m2"] == "40000.0"
+
+
+class TestPowerAllocation:
+    """The allocation is the site's central inferred number.
+
+    LBNL's 192 TWh is measured consumption from data centres that ran in 2024.
+    Handing a share of it to a construction site asserts that an unbuilt facility
+    drew power - the same class of error as reading a mapping date as a build
+    date, and the one this project exists to avoid.
+    """
+
+    def _run(self, tmp_path: Path, facilities: list[dict[str, str]]) -> list[dict[str, str]]:
+        import csv
+
+        facilities_path = tmp_path / "facilities.csv"
+        regions_path = tmp_path / "regions.csv"
+        national_path = tmp_path / "national.csv"
+        out_path = tmp_path / "out.csv"
+
+        write_csv(
+            facilities_path,
+            ("osm_type", "osm_id", "footprint_m2", "site_class", "state"),
+            facilities,
+        )
+        # One state region holding the whole mapped stock, so its allocation must
+        # come back as the entire national total.
+        floor = sum(float(f["footprint_m2"]) for f in facilities if f["site_class"] == "building")
+        write_csv(
+            regions_path,
+            ("region_id", "region_kind", "name", "state", "fips", "footprint_m2"),
+            [
+                {
+                    "region_id": "state:VA",
+                    "region_kind": "state",
+                    "name": "VA",
+                    "state": "VA",
+                    "fips": "",
+                    "footprint_m2": f"{floor:.1f}",
+                }
+            ],
+        )
+        write_csv(
+            national_path,
+            ("year", "electricity_twh", "water_bgal", "series_kind"),
+            [
+                {
+                    "year": "2024",
+                    "electricity_twh": "192",
+                    "water_bgal": "17.4",
+                    "series_kind": "historical",
+                }
+            ],
+        )
+        allocate_main(
+            [
+                "--facilities",
+                str(facilities_path),
+                "--regions",
+                str(regions_path),
+                "--national",
+                str(national_path),
+                "--out",
+                str(out_path),
+            ]
+        )
+        with out_path.open(encoding="utf-8") as handle:
+            return list(csv.DictReader(handle))
+
+    def test_shares_sum_to_the_national_total(self, tmp_path: Path) -> None:
+        """Conservation is the whole point of a calibrated allocation."""
+        rows = self._run(
+            tmp_path,
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "footprint_m2": "10000",
+                    "site_class": "building",
+                    "state": "VA",
+                },
+                {
+                    "osm_type": "way",
+                    "osm_id": "2",
+                    "footprint_m2": "30000",
+                    "site_class": "building",
+                    "state": "VA",
+                },
+            ],
+        )
+        # 192 TWh over 8760 h = 21,918 MW.
+        assert float(rows[0]["est_mw"]) == pytest.approx(21918.0, abs=1.0)
+
+    def test_a_land_parcel_does_not_dilute_the_buildings(self, tmp_path: Path) -> None:
+        """A parcel 100x the building must not take 99% of the region's load.
+
+        This is the defect exactly: one 3.1 km2 Racine County parcel drew 598 MW
+        while every mapped building in Loudoun County together drew 1,020 MW.
+        """
+        rows = self._run(
+            tmp_path,
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "footprint_m2": "10000",
+                    "site_class": "building",
+                    "state": "VA",
+                },
+                {
+                    "osm_type": "way",
+                    "osm_id": "2",
+                    "footprint_m2": "1000000",
+                    "site_class": "site",
+                    "state": "VA",
+                },
+            ],
+        )
+        assert float(rows[0]["est_mw"]) == pytest.approx(21918.0, abs=1.0)
+
+    def test_a_construction_site_gets_nothing(self, tmp_path: Path) -> None:
+        rows = self._run(
+            tmp_path,
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "footprint_m2": "10000",
+                    "site_class": "building",
+                    "state": "VA",
+                },
+                {
+                    "osm_type": "way",
+                    "osm_id": "2",
+                    "footprint_m2": "900000",
+                    "site_class": "construction",
+                    "state": "VA",
+                },
+            ],
+        )
+        assert float(rows[0]["est_mw"]) == pytest.approx(21918.0, abs=1.0)
+
+
+class TestFacilityPowerKeys:
+    """The map layer and the region pages must agree on who has a figure."""
+
+    def _properties(self, site_class: str) -> dict[str, object]:
+        collection = build_facilities(
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "lon": "-77.5",
+                    "lat": "39.0",
+                    "footprint_m2": "10000",
+                    "site_class": site_class,
+                }
+            ],
+            national_mw=21918.0,
+            total_area=10000.0,
+        )
+        return collection["features"][0]["properties"]
+
+    def test_a_building_carries_a_power_figure(self) -> None:
+        assert self._properties("building")["est_mw"] == pytest.approx(21918.0, abs=1.0)
+
+    def test_a_parcel_carries_no_power_key_at_all(self) -> None:
+        """Absent reads as unknown; a zero would read as a measured nothing."""
+        properties = self._properties("site")
+        assert "est_mw" not in properties
+        assert properties["site_class"] == "site"
+
+    def test_a_construction_site_carries_no_power_key(self) -> None:
+        assert "est_mw" not in self._properties("construction")

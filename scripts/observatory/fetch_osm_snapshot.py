@@ -3,11 +3,17 @@
 
 What this produces is a *snapshot*: every element carrying a data-centre tag at
 the moment of the query, with its coordinates, its operator where a mapper
-recorded one, and its building footprint. It does not say when anything was
-built - OpenStreetMap does not carry that, and this script never invents it.
-Dates come from :mod:`fetch_osm_history`, and they are mapping dates.
+recorded one, and the area of whatever polygon was drawn. It does not say when
+anything was built - OpenStreetMap does not carry that, and this script never
+invents it. Dates come from :mod:`fetch_osm_history`, and they are mapping dates.
 
-Two mechanical points decide whether this is correct:
+Three mechanical points decide whether this is correct:
+
+**What the area measures.** The tags this project selects on are satisfied both
+by machine halls and by the land parcels campuses sit on, and the two arrive
+indistinguishable once reduced to square metres. Every row therefore carries a
+``site_class`` saying which it is, so that a consumer weighting by floor area
+cannot silently pick up 72 km2 of land boundary. See :func:`site_class`.
 
 **Tiling.** A whole-country extract returns HTTP 504. Requests are therefore
 tiled, and because tiles share edges, a facility can be returned by more than one
@@ -70,6 +76,7 @@ FIELDNAMES = (
     "lat",
     "lon",
     "footprint_m2",
+    "site_class",
     "county_fips",
     "state",
     "first_seen",
@@ -149,6 +156,38 @@ def _centroid(rings: list[list[tuple[float, float]]]) -> tuple[float, float] | N
     return (float(point.x), float(point.y))
 
 
+def site_class(tags: dict[str, Any], osm_type: str) -> str:
+    """Classify what an element's area actually measures.
+
+    The three tag filters this project selects on are satisfied by two entirely
+    different kinds of geometry: the outline of a machine hall, and the boundary
+    of the land a campus sits on. Both arrive with an area in square metres, and
+    adding them together produces a number that measures nothing.
+
+    Measured across the national snapshot, the parcels are the larger share by
+    far - 174 of them cover 72 km2 against 20 km2 for 1,525 buildings - so
+    treating the pooled figure as floor area does not introduce a small error,
+    it inverts the result.
+
+    Returns one of:
+        ``building``      an actual structure; its area is a floor plate
+        ``construction``  mapped as being built, so not yet consuming anything
+        ``site``          a parcel or campus boundary; its area is land
+        ``point``         a node, which carries no area at all
+    """
+    if tags.get("landuse") == "construction" or tags.get("building") == "construction":
+        return "construction"
+    if osm_type == "node":
+        return "point"
+    building = str(tags.get("building") or "").strip()
+    # `building=no` is an explicit statement that the area is *not* a building.
+    # Reading it as one put a 2 km2 land parcel into the floor-area pool and
+    # sent Valencia County, New Mexico to second in the nation on six elements.
+    if building and building != "no":
+        return "building"
+    return "site"
+
+
 def normalise(element: dict[str, Any]) -> dict[str, Any] | None:
     """Convert one Overpass element into a facility row, or ``None`` to skip."""
     tags = element.get("tags") or {}
@@ -180,6 +219,7 @@ def normalise(element: dict[str, Any]) -> dict[str, Any] | None:
         "lat": fmt_coord(position[1]),
         "lon": fmt_coord(position[0]),
         "footprint_m2": fmt_area(footprint),
+        "site_class": site_class(tags, str(element.get("type") or "")),
         # Filled in by assign_regions.py; kept in the header so the schema of the
         # file never depends on which stages have run.
         "county_fips": "",

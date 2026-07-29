@@ -60,12 +60,14 @@ being demolished.
 
 **A megawatt figure is a share, not a meter reading.** Nobody meters these
 buildings. LBNL's reported national totals are allocated across mapped
-facilities by footprint, so the shares re-sum to the published total by
+*buildings* by floor area, so the shares re-sum to the published total by
 construction — but the whole national total is spread over only the facilities
-that have been mapped, so every per-facility figure is an upper bound. Footprint
-is a proxy for capacity and an imperfect one: this method gives Virginia
-2,255 MW where Virginia's JLARC study puts Northern Virginia alone near
-4,100 MW.
+that have been mapped, so every per-facility figure is an upper bound. A campus
+mapped as a land parcel and a site mapped as under construction keep their
+measured area and receive no megawatt figure at all, which means their load is
+carried by buildings elsewhere. Floor area is a proxy for capacity and an
+imperfect one: it gives Virginia 4,972 MW where Virginia's JLARC study puts
+Northern Virginia alone near 4,100 MW.
 
 ## Sources
 

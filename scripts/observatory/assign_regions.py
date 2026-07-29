@@ -61,7 +61,12 @@ REGION_FIELDNAMES = (
     "state",
     "fips",
     "facility_count",
+    "building_count",
+    "site_count",
+    "construction_count",
     "footprint_m2",
+    "site_area_m2",
+    "construction_area_m2",
 )
 
 
@@ -172,28 +177,72 @@ def _first_seen(events: list[dict[str, str]]) -> dict[tuple[str, str], str]:
     return earliest
 
 
+def _blank_region() -> dict[str, float]:
+    """Return a zeroed accumulator for one region."""
+    return {
+        "facility_count": 0.0,
+        "building_count": 0.0,
+        "site_count": 0.0,
+        "construction_count": 0.0,
+        "footprint_m2": 0.0,
+        "site_area_m2": 0.0,
+        "construction_area_m2": 0.0,
+    }
+
+
+def _fold(totals: dict[str, float], facility: dict[str, str]) -> None:
+    """Fold one facility into a region's totals, keeping the classes apart."""
+    area = float(facility.get("footprint_m2") or 0.0)
+    # Rows written before `site_class` existed carry none. Treating those as
+    # buildings would reinstate the pooling this function exists to prevent, so
+    # an unlabelled area is treated as a site, which is the conservative side.
+    kind = facility.get("site_class") or ("point" if area <= 0 else "site")
+    totals["facility_count"] += 1
+    if kind == "building":
+        totals["building_count"] += 1
+        totals["footprint_m2"] += area
+    elif kind == "construction":
+        totals["construction_count"] += 1
+        totals["construction_area_m2"] += area
+    elif kind != "point":
+        totals["site_count"] += 1
+        totals["site_area_m2"] += area
+
+
+def _region_totals(totals: dict[str, float]) -> dict[str, Any]:
+    """Render one region's accumulator into its output columns."""
+    return {
+        "facility_count": int(totals["facility_count"]),
+        "building_count": int(totals["building_count"]),
+        "site_count": int(totals["site_count"]),
+        "construction_count": int(totals["construction_count"]),
+        "footprint_m2": fmt_area(totals["footprint_m2"]),
+        "site_area_m2": fmt_area(totals["site_area_m2"]),
+        "construction_area_m2": fmt_area(totals["construction_area_m2"]),
+    }
+
+
 def _build_regions(facilities: list[dict[str, str]], index: CountyIndex) -> list[dict[str, Any]]:
     """Roll facilities up into county and state region rows."""
     names = {p["fips"]: (p["name"], p["state"]) for p in index.properties}
 
-    county_count: dict[str, int] = defaultdict(int)
-    county_area: dict[str, float] = defaultdict(float)
-    state_count: dict[str, int] = defaultdict(int)
-    state_area: dict[str, float] = defaultdict(float)
+    # Accumulated per class rather than pooled. A machine hall's floor plate and
+    # the boundary of the land a campus sits on are both areas in square metres
+    # and are not the same measurement; summing them yields a figure that
+    # describes nothing, and weighting a national total by it is how a single
+    # 3.1 km2 parcel came to outweigh every mapped building in Loudoun County.
+    counties: dict[str, dict[str, float]] = defaultdict(_blank_region)
+    states: dict[str, dict[str, float]] = defaultdict(_blank_region)
 
     for facility in facilities:
         fips = facility.get("county_fips") or ""
         state = facility.get("state") or ""
-        area = float(facility.get("footprint_m2") or 0.0)
-        if fips:
-            county_count[fips] += 1
-            county_area[fips] += area
-        if state:
-            state_count[state] += 1
-            state_area[state] += area
+        for target, key in ((counties, fips), (states, state)):
+            if key:
+                _fold(target[key], facility)
 
     rows: list[dict[str, Any]] = []
-    for fips, count in county_count.items():
+    for fips, totals in counties.items():
         name, state = names.get(fips, (fips, ""))
         rows.append(
             {
@@ -202,11 +251,10 @@ def _build_regions(facilities: list[dict[str, str]], index: CountyIndex) -> list
                 "name": name,
                 "state": state,
                 "fips": fips,
-                "facility_count": count,
-                "footprint_m2": fmt_area(county_area[fips]),
+                **_region_totals(totals),
             }
         )
-    for state, count in state_count.items():
+    for state, totals in states.items():
         rows.append(
             {
                 "region_id": f"state:{state}",
@@ -214,8 +262,7 @@ def _build_regions(facilities: list[dict[str, str]], index: CountyIndex) -> list
                 "name": state,
                 "state": state,
                 "fips": "",
-                "facility_count": count,
-                "footprint_m2": fmt_area(state_area[state]),
+                **_region_totals(totals),
             }
         )
 
