@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { InfrastructureMap, MapLegend } from "@/components/InfrastructureMap";
 import { NationalFacilityMap } from "@/components/NationalFacilityMap";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
@@ -46,6 +48,13 @@ export default async function MapPage() {
             because it is not showing sites. Each point is a single federal record: EPA
             lists a permitted air facility under a hosting NAICS code. Nothing here has
             been clustered into a project, staged, or scored.
+          </p>
+          <p className="muted" style={{ maxWidth: "62ch" }}>
+            For national coverage of data centres and the transmission grid that supplies
+            them, see the{" "}
+            <Link href="/observatory-map">national infrastructure map</Link>, which draws
+            every mapped US facility over the substations and generating plants around
+            it.
           </p>
         </div>
         <NationalFacilityMap facilities={facilities} />

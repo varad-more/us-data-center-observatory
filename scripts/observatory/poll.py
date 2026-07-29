@@ -12,6 +12,8 @@ never a re-serialisation artefact.
 Stages::
 
     fetch_osm_snapshot   what exists now        (Overpass, ~2 min)
+    fetch_grid           substations & plants   (Overpass, ~30 min)
+    assign_grid_regions  grid totals per county (offline)
     fetch_osm_history    when it was mapped     (ohsome, slow, resumable)
     assign_regions       place it in a county   (offline)
     build_series         growth per region      (offline)
@@ -90,6 +92,11 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Do not touch the network at all; rebuild derived files from the CSVs",
     )
+    parser.add_argument(
+        "--skip-grid",
+        action="store_true",
+        help="Leave the substation and power-plant layer as it is",
+    )
     args = parser.parse_args(argv)
 
     before = _snapshot_ids()
@@ -98,10 +105,13 @@ def main(argv: list[str] | None = None) -> int:
     stages: list[tuple[str, list[str]]] = []
     if not args.skip_fetch:
         stages.append(("fetch_osm_snapshot.py", []))
+        if not args.skip_grid:
+            stages.append(("fetch_grid.py", []))
         if not args.skip_history:
             budget = ["--time-budget", str(args.history_budget)] if args.history_budget else []
             stages.append(("fetch_osm_history.py", budget))
     stages.append(("assign_regions.py", []))
+    stages.append(("assign_grid_regions.py", []))
     stages.append(("build_series.py", []))
     stages.append(("allocate_power.py", []))
     stages.append(("build_site_data.py", []))
@@ -112,7 +122,12 @@ def main(argv: list[str] | None = None) -> int:
             failed.append(script)
             # build_series is expected to fail until the history backfill has
             # completed at least once. That is not a reason to abandon the rest.
-            if script not in {"build_series.py", "fetch_osm_history.py"}:
+            if script not in {
+                "build_series.py",
+                "fetch_osm_history.py",
+                "fetch_grid.py",
+                "assign_grid_regions.py",
+            }:
                 break
 
     after = _snapshot_ids()

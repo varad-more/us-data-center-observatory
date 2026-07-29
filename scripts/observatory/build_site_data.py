@@ -18,6 +18,7 @@ Run::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import sys
 from collections import defaultdict
@@ -30,6 +31,8 @@ from _common import DATA_DIR, REPO_ROOT, FetchError, read_csv
 OUT_DIR = REPO_ROOT / "apps" / "web" / "public" / "data"
 
 FACILITIES_PATH = DATA_DIR / "facilities.csv"
+GRID_PATH = DATA_DIR / "grid.csv"
+GRID_REGIONS_PATH = DATA_DIR / "grid_regions.csv"
 REGIONS_PATH = DATA_DIR / "regions.csv"
 SERIES_PATH = DATA_DIR / "region_series.csv"
 EVENTS_PATH = DATA_DIR / "events.csv"
@@ -83,6 +86,54 @@ def build_facilities(
     return {"type": "FeatureCollection", "features": features}
 
 
+def build_grid(rows: list[dict[str, str]]) -> Any:
+    """Build the GeoJSON point layer for substations and generating plants.
+
+    Coordinates are cut to five decimals - about a metre - because this layer is
+    read at national zoom and the sixth decimal would add roughly 40 KB across
+    42,000 points to place a substation no more accurately than its own fence.
+
+    Empty tags are omitted rather than sent as blanks. At this row count that is
+    the difference between a file the map can fetch on demand and one it cannot.
+    """
+    features = []
+    for row in rows:
+        try:
+            lon, lat = round(float(row["lon"]), 5), round(float(row["lat"]), 5)
+        except (KeyError, ValueError):
+            continue
+        properties: dict[str, Any] = {"kind": row["kind"]}
+        for key in ("name", "operator", "source"):
+            if row.get(key):
+                properties[key] = row[key]
+        for key in ("voltage_kv", "capacity_mw"):
+            if row.get(key):
+                with contextlib.suppress(ValueError):
+                    properties[key] = float(row[key])
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                "properties": properties,
+            }
+        )
+    return {"type": "FeatureCollection", "features": features}
+
+
+def _grid_fields(row: dict[str, str] | None) -> dict[str, Any]:
+    """Return a region's grid summary, or nothing at all when it has none."""
+    if not row:
+        return {}
+    return {
+        "substation_count": int(row["substation_count"]),
+        "bulk_substation_count": int(row["bulk_substation_count"]),
+        "max_voltage_kv": float(row["max_voltage_kv"]),
+        "plant_count": int(row["plant_count"]),
+        "plant_capacity_mw": float(row["plant_capacity_mw"]),
+        "plants_without_capacity": int(row["plants_without_capacity"]),
+    }
+
+
 def build_series_files(series: list[dict[str, str]], out_dir: Path) -> int:
     """Write one JSON file per region series. Returns the number written."""
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -110,6 +161,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     facilities = read_csv(FACILITIES_PATH)
+    grid = read_csv(GRID_PATH)
+    grid_regions = read_csv(GRID_REGIONS_PATH)
     regions = read_csv(REGIONS_PATH)
     series = read_csv(SERIES_PATH)
     events = read_csv(EVENTS_PATH)
@@ -135,11 +188,22 @@ def main(argv: list[str] | None = None) -> int:
         build_facilities(facilities, national_mw, total_area),
     )
 
+    # Written even when empty so the map's fetch gets a valid, obviously empty
+    # layer rather than a 404 it would have to interpret.
+    written["grid.geojson"] = _write(args.out / "grid.geojson", build_grid(grid))
+
+    # Grid totals are merged in by region_id rather than joined in the browser.
+    # They are optional: a region with no grid row carries no grid keys at all,
+    # so the UI can distinguish "no substations mapped here" from "this dataset
+    # has not been built yet" instead of rendering both as zero.
+    grid_by_region = {r["region_id"]: r for r in grid_regions}
+
     written["regions.json"] = _write(
         args.out / "regions.json",
         {
             "items": [
                 {
+                    **_grid_fields(grid_by_region.get(r["region_id"])),
                     "region_id": r["region_id"],
                     "kind": r["region_kind"],
                     "name": r["name"],
@@ -219,6 +283,8 @@ def main(argv: list[str] | None = None) -> int:
             "facility_count": len(facilities),
             "region_count": len(regions),
             "series_count": series_count,
+            "substation_count": sum(1 for r in grid if r.get("kind") == "substation"),
+            "plant_count": sum(1 for r in grid if r.get("kind") == "plant"),
             "national_mw": round(national_mw),
             "national_reference_year": int(latest["year"]),
             "total_footprint_m2": round(total_area),

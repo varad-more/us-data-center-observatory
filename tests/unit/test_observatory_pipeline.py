@@ -17,7 +17,14 @@ SCRIPTS = Path(__file__).resolve().parents[2] / "scripts" / "observatory"
 sys.path.insert(0, str(SCRIPTS))
 
 from _common import BoundingBox, tile, us_tiles, write_csv  # noqa: E402
+from assign_grid_regions import _accumulate, _blank_totals  # noqa: E402
+from assign_grid_regions import build as grid_build  # noqa: E402
 from build_series import _month_range, build  # noqa: E402
+from build_site_data import build_grid  # noqa: E402
+from fetch_grid import VOLTAGE_PATTERN  # noqa: E402
+from fetch_grid import capacity_mw as grid_capacity  # noqa: E402
+from fetch_grid import max_voltage_v as grid_max_voltage  # noqa: E402
+from fetch_grid import normalise as grid_normalise  # noqa: E402
 from fetch_osm_history import _kind_of, _split_osm_id  # noqa: E402
 from fetch_osm_snapshot import _ring_area_m2, normalise  # noqa: E402
 
@@ -307,3 +314,248 @@ class TestDeterministicWrites:
         path = tmp_path / "out.csv"
         write_csv(path, ("a",), [{"a": "1"}])
         assert b"\r\n" not in path.read_bytes()
+
+
+class TestGridVoltage:
+    """The voltage filter decides which substations exist as far as the map is
+    concerned, and every way it can be wrong hides the largest ones."""
+
+    def test_reads_the_highest_level_of_a_multi_voltage_substation(self) -> None:
+        """OSM records a transforming substation as a list.
+
+        A filter anchored to the whole tag matches none of these, and the ones
+        it drops are the big multi-level yards the layer exists to show.
+        """
+        assert grid_max_voltage("115000;230000") == 230000
+        assert grid_max_voltage("69000;138000;345000") == 345000
+
+    def test_handles_a_single_value_and_stray_whitespace(self) -> None:
+        assert grid_max_voltage("500000") == 500000
+        assert grid_max_voltage(" 230000 ; 115000 ") == 230000
+
+    def test_refuses_to_invent_a_number_from_free_text(self) -> None:
+        """An unparseable tag is unknown, not zero, and not the threshold."""
+        assert grid_max_voltage("high") is None
+        assert grid_max_voltage("") is None
+        assert grid_max_voltage(None) is None
+
+    def test_keeps_the_numbers_out_of_a_mixed_tag(self) -> None:
+        assert grid_max_voltage("115000;unknown") == 115000
+
+    def test_server_regex_agrees_with_the_parser_on_lists(self) -> None:
+        """The Overpass filter is an optimisation; if it excluded rows the
+        parser would keep, the layer would be missing them before the parser
+        ever ran."""
+        import re
+
+        pattern = re.compile(VOLTAGE_PATTERN)
+        for value in ("115000;230000", "69000;138000;345000", "500000", "69000"):
+            assert pattern.search(value), value
+        for value in ("12000", "34500", "4160"):
+            assert not pattern.search(value), value
+
+
+class TestGridNormalise:
+    """Rows that reach the map."""
+
+    def test_drops_a_distribution_substation(self) -> None:
+        row = grid_normalise(
+            {
+                "type": "way",
+                "id": 1,
+                "center": {"lat": 39.0, "lon": -77.0},
+                "tags": {"power": "substation", "voltage": "12000"},
+            }
+        )
+        assert row is None
+
+    def test_keeps_a_transmission_substation_at_its_highest_voltage(self) -> None:
+        row = grid_normalise(
+            {
+                "type": "way",
+                "id": 2,
+                "center": {"lat": 39.0, "lon": -77.0},
+                "tags": {"power": "substation", "voltage": "115000;230000", "name": "Yard"},
+            }
+        )
+        assert row is not None
+        assert row["voltage_kv"] == 230.0
+        assert row["kind"] == "substation"
+
+    def test_drops_an_element_with_no_position(self) -> None:
+        """A relation with no centre cannot be drawn; writing it at 0,0 would
+        put a substation in the Atlantic."""
+        row = grid_normalise(
+            {"type": "relation", "id": 3, "tags": {"power": "substation", "voltage": "230000"}}
+        )
+        assert row is None
+
+    def test_keeps_a_plant_regardless_of_voltage(self) -> None:
+        """Generation is collected on being a plant, not on carrying a voltage
+        tag - most plants do not."""
+        row = grid_normalise(
+            {
+                "type": "relation",
+                "id": 4,
+                "center": {"lat": 36.0, "lon": -78.0},
+                "tags": {
+                    "power": "plant",
+                    "plant:source": "nuclear",
+                    "plant:output:electricity": "1900 MW",
+                },
+            }
+        )
+        assert row is not None
+        assert row["kind"] == "plant"
+        assert row["source"] == "nuclear"
+        assert row["capacity_mw"] == 1900.0
+
+    def test_ignores_a_generator(self) -> None:
+        """power=generator is one turbine. Virginia alone has 22,854."""
+        row = grid_normalise(
+            {
+                "type": "node",
+                "id": 5,
+                "lat": 36.0,
+                "lon": -78.0,
+                "tags": {"power": "generator", "generator:source": "solar"},
+            }
+        )
+        assert row is None
+
+
+class TestGridCapacity:
+    """A capacity figure invented from free text would look reported."""
+
+    def test_converts_the_units_that_actually_appear(self) -> None:
+        assert grid_capacity("1900 MW") == 1900.0
+        assert grid_capacity("1.2 GW") == 1200.0
+        assert grid_capacity("500 kW") == 0.5
+
+    def test_leaves_unparseable_output_blank(self) -> None:
+        assert grid_capacity("about 2 reactors") is None
+        assert grid_capacity("") is None
+
+    def test_refuses_a_bare_number_too_large_to_be_megawatts(self) -> None:
+        """`1200000000` is watts written without a unit. Read as MW it would
+        publish a 1.2-billion-megawatt power station."""
+        assert grid_capacity("1200000000") is None
+        assert grid_capacity("250") == 250.0
+
+
+class TestGridGeoJson:
+    """The grid layer is ~42,000 points fetched over the network on demand, so
+    what is left out of each feature decides whether it is fetchable at all."""
+
+    def _row(self, **over: str) -> dict[str, str]:
+        row = {
+            "osm_type": "way",
+            "osm_id": "1",
+            "kind": "substation",
+            "name": "",
+            "operator": "",
+            "voltage_kv": "230.0",
+            "source": "",
+            "capacity_mw": "",
+            "lat": "38.123456789",
+            "lon": "-77.987654321",
+        }
+        row.update(over)
+        return row
+
+    def test_omits_tags_a_mapper_did_not_fill_in(self) -> None:
+        """Blank strings for every absent tag would roughly double the file."""
+        feature = build_grid([self._row()])["features"][0]
+        assert set(feature["properties"]) == {"kind", "voltage_kv"}
+        assert "name" not in feature["properties"]
+
+    def test_rounds_coordinates_to_about_a_metre(self) -> None:
+        """The sixth decimal places a substation no better than its own fence."""
+        lon, lat = build_grid([self._row()])["features"][0]["geometry"]["coordinates"]
+        assert lat == 38.12346
+        assert lon == -77.98765
+
+    def test_carries_numbers_as_numbers(self) -> None:
+        """The map sizes circles from these; a string would break the paint
+        expression silently and draw every asset at the floor radius."""
+        props = build_grid(
+            [self._row(kind="plant", voltage_kv="", capacity_mw="1900.0", source="nuclear")]
+        )["features"][0]["properties"]
+        assert props["capacity_mw"] == 1900.0
+        assert isinstance(props["capacity_mw"], float)
+        assert props["source"] == "nuclear"
+
+    def test_skips_a_row_with_an_unusable_position(self) -> None:
+        assert build_grid([self._row(lat="")])["features"] == []
+
+    def test_no_grid_data_is_a_valid_empty_layer(self) -> None:
+        """The grid stage takes far longer than the rest of the pipeline, so the
+        site has to build before it has ever run - and the map's fetch needs a
+        valid empty collection rather than a 404 to interpret."""
+        assert build_grid([]) == {"type": "FeatureCollection", "features": []}
+
+
+class TestGridRegionTotals:
+    """County grid summaries. Every field here can mislead a siting question if
+    it folds an unknown into a number."""
+
+    def _sub(self, kv: str, fips: str = "51107") -> dict[str, str]:
+        return {"kind": "substation", "voltage_kv": kv, "county_fips": fips, "state": "VA"}
+
+    def _plant(self, mw: str, fips: str = "51107") -> dict[str, str]:
+        return {"kind": "plant", "capacity_mw": mw, "county_fips": fips, "state": "VA"}
+
+    def test_separates_bulk_transmission_from_the_rest(self) -> None:
+        """Forty 69 kV yards are not a substitute for one 500 kV substation, so
+        a single count would rank counties backwards for a large load."""
+        totals = _blank_totals()
+        for row in (self._sub("69"), self._sub("115"), self._sub("230"), self._sub("500")):
+            _accumulate(totals, row)
+        assert totals["substation_count"] == 4
+        assert totals["bulk_substation_count"] == 2
+        assert totals["max_voltage_kv"] == 500.0
+
+    def test_counts_a_plant_with_no_capacity_instead_of_summing_it_as_zero(self) -> None:
+        """A county whose generation is simply untagged must not read as a
+        county with none, so the unknowns are carried beside the total."""
+        totals = _blank_totals()
+        _accumulate(totals, self._plant("100"))
+        _accumulate(totals, self._plant(""))
+        _accumulate(totals, self._plant("not recorded"))
+        assert totals["plant_count"] == 3
+        assert totals["plant_capacity_mw"] == 100.0
+        assert totals["plants_without_capacity"] == 2
+
+    def test_a_substation_with_an_unparseable_voltage_is_not_bulk(self) -> None:
+        totals = _blank_totals()
+        _accumulate(totals, self._sub("high"))
+        assert totals["substation_count"] == 1
+        assert totals["bulk_substation_count"] == 0
+
+    def test_an_asset_in_no_county_is_left_out_rather_than_guessed(self) -> None:
+        """2,898 of 65,325 assets fall outside every US county - offshore, or
+        across a border inside the query envelope. Attaching them to whichever
+        county is nearest would invent grid capacity in a real place."""
+
+        class _Index:
+            properties = [{"fips": "51107", "name": "Loudoun County", "state": "VA"}]
+
+        rows = grid_build(
+            [self._sub("500"), self._sub("500", fips="")], _Index()  # type: ignore[arg-type]
+        )
+        county = next(r for r in rows if r["region_kind"] == "county")
+        assert county["substation_count"] == 1
+
+    def test_state_totals_include_every_county_in_them(self) -> None:
+        class _Index:
+            properties = [
+                {"fips": "51107", "name": "Loudoun County", "state": "VA"},
+                {"fips": "51153", "name": "Prince William County", "state": "VA"},
+            ]
+
+        rows = grid_build(
+            [self._sub("500"), self._sub("230", fips="51153")], _Index()  # type: ignore[arg-type]
+        )
+        state = next(r for r in rows if r["region_kind"] == "state")
+        assert state["substation_count"] == 2
+        assert state["bulk_substation_count"] == 2

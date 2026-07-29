@@ -86,6 +86,12 @@ export-api: ## Regenerate the static API snapshot the published site serves
 poll: ## Refresh the observatory dataset from public sources, then report what changed
 	$(PY) scripts/observatory/poll.py
 
+.PHONY: poll-grid
+poll-grid: ## Refresh only the national substation and power-plant layer
+	$(PY) scripts/observatory/fetch_grid.py
+	$(PY) scripts/observatory/assign_grid_regions.py
+	$(PY) scripts/observatory/build_site_data.py
+
 .PHONY: poll-offline
 poll-offline: ## Rebuild the observatory's derived files without touching the network
 	$(PY) scripts/observatory/poll.py --skip-fetch

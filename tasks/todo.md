@@ -509,3 +509,69 @@ checkable against the data rather than merely consistent with it.
 Not verified: nothing was ever looked at. The Chrome extension is not
 connected, so the check was structural — rendered HTML, heading outlines,
 the link graph, the contrast audit — and never visual.
+
+## Reaching other counties, and drawing the grid
+
+Two gaps a reader hit immediately. A county page had no way to reach another
+county — you went back to a 323-row index and found it. And the map titled
+"interactive infrastructure map" covered one Arizona valley: 175 substations,
+because they came from the Postgres stack, which reads two counties.
+
+- [x] Region picker on every region page: a select reaching all 323, plus a
+      server-rendered peer row of the counties in the same state.
+- [x] National grid layer — 48,132 substations at 69 kV+ and 17,193 generating
+      plants, fetched into the Postgres-free observatory pipeline.
+- [x] Layers load on demand: 65,325 points is not something to make every
+      reader download to look at data centres.
+- [x] `make poll-grid`, `--skip-grid`, docs and limitations updated.
+
+### What the measurements decided
+
+Nothing here was sized by guess. The voltage threshold, the tile size and the
+decision to fetch rather than inline all came from a number taken first.
+
+- An anchored voltage regex returned 25,082 substations; the corrected one
+  returns 48,132. 15,069 are tagged exactly 69.0 kV — the most common value in
+  the set, and the one the first version discarded in silence.
+- `power=generator` is 22,854 elements in Virginia alone: single turbines and
+  panel roofs. `power=plant` is the facility, and only that is collected.
+- Inlining 323 region options into 324 pages would have cost ~16 KB each;
+  fetching the published regions.json costs one cached request. The peer row
+  alone took county-51107 from 91 KB to 96 KB.
+- The grid GeoJSON is 11 MB raw, 1.3 MB gzipped. Committing it looked like it
+  would double the repository; after `git gc` the whole of `.git` is 6.5 MB,
+  because this data packs about eight to one.
+
+### Still open
+
+- [ ] Grid coverage is OpenStreetMap's, so a substation whose mapper left the
+      voltage tag blank is absent entirely, and that absence tracks mapping
+      effort rather than what is built.
+- [ ] Proximity is not connection. Nothing here shows that a facility beside a
+      500 kV substation has contracted anything from it.
+- [ ] The map layers are verified by test and by reading rendered HTML, never
+      by looking at them — no browser was available in this session.
+
+### Making the grid answer something
+
+The grid shipped as a map layer and nothing else read it. Every region page
+could say how many data centres were in a county and nothing about whether the
+county could carry another.
+
+- [x] `assign_grid_regions.py` — 65,325 assets summarised into county and state
+      totals offline, against the same Census boundaries the facilities use.
+- [x] Region pages carry substation count, bulk count, highest voltage and
+      generating capacity.
+
+The 230 kV split is the whole point. A raw count ranks a county with forty
+69 kV yards above one with a single 500 kV substation, which is backwards for a
+load measured in hundreds of megawatts. Loudoun is 64 of 67 substations at
+230 kV or above with 500 kV present, against 33% bulk across Virginia — the
+densest data-centre county in the world sits on an almost entirely
+bulk-transmission grid. That fell out of joining the two datasets rather than
+being asserted.
+
+Unknowns are carried, not folded in: a plant with no capacity tag is counted
+separately rather than summed as zero, and the 2,898 assets falling in no US
+county are dropped rather than attached to the nearest one, which would invent
+grid capacity in a real place.

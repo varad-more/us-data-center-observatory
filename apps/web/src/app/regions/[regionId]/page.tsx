@@ -204,6 +204,68 @@ export default async function RegionPage({
         ) : null}
       </section>
 
+      {region?.substation_count !== undefined ? (
+        <section className="card">
+          <div className="card-header">
+            <h2 className="card-title">What the grid here looks like</h2>
+            <span className="card-note">reported by OSM contributors</span>
+          </div>
+          <div className="grid grid-4">
+            <div className="metric">
+              <div className="metric-label">Substations</div>
+              <div className="metric-value num">
+                {region.substation_count.toLocaleString()}
+              </div>
+              <div className="metric-sub">69 kV and above</div>
+            </div>
+            <div className="metric">
+              <div className="metric-label">Bulk substations</div>
+              <div className="metric-value num">
+                {(region.bulk_substation_count ?? 0).toLocaleString()}
+              </div>
+              <div className="metric-sub">230 kV and above</div>
+            </div>
+            <div className="metric">
+              <div className="metric-label">Highest voltage</div>
+              <div className="metric-value num">{region.max_voltage_kv ?? "—"}</div>
+              <div className="metric-sub">
+                kV, present in this {region.kind === "county" ? "county" : "state"}
+              </div>
+            </div>
+            <div className="metric">
+              <div className="metric-label">Generating capacity</div>
+              <div className="metric-value num">
+                {Math.round(region.plant_capacity_mw ?? 0).toLocaleString()}
+              </div>
+              <div className="metric-sub">
+                MW across {(region.plant_count ?? 0).toLocaleString()}{" "}
+                {region.plant_count === 1 ? "plant" : "plants"}
+              </div>
+            </div>
+          </div>
+          <p className="small" style={{ marginTop: "0.75rem" }}>
+            A facility drawing hundreds of megawatts connects at bulk transmission
+            voltage, so the second figure matters more than the first: forty 69 kV yards
+            are not a substitute for one 500 kV substation.
+            {(region.plants_without_capacity ?? 0) > 0 ? (
+              <>
+                {" "}
+                {region.plants_without_capacity?.toLocaleString()} of the plants here
+                carry no capacity tag, so the megawatt total is a floor rather than the
+                region&apos;s output.
+              </>
+            ) : null}
+          </p>
+          <p className="small muted" style={{ marginBottom: 0 }}>
+            <strong>Proximity is not connection.</strong> Nothing here shows that any
+            facility has contracted power from any of these substations — that is settled
+            by interconnection filings Helios cannot read, and in several regions those
+            queues now run for years. A county with no substations shown has not been
+            shown to have none; it may simply have none mapped.
+          </p>
+        </section>
+      ) : null}
+
       {named.length > 0 ? (
         <section className="card">
           <div className="card-header">

@@ -49,7 +49,7 @@ const NAV_GROUPS = [
       { href: "/", label: "Overview" },
       { href: "/growth", label: "Growth" },
       { href: "/regions", label: "Regions" },
-      { href: "/observatory-map", label: "US map" },
+      { href: "/observatory-map", label: "US infrastructure" },
       { href: "/changes", label: "Changes" },
     ],
   },

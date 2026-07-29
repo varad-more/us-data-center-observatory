@@ -21,6 +21,8 @@ here always means real movement.
 | `regions.csv` | one row per county and state | Facility counts, total footprint, and the allocated share of national electricity and water. |
 | `region_series.csv` | region × month | Cumulative facility count and footprint per region per month. |
 | `national_energy.csv` | one row per year and scenario | LBNL's published US data-centre electricity and water totals, historical and projected. |
+| `grid.csv` | one row per OSM element | Transmission substations at 69 kV and above, and generating plants: identity, coordinates, highest voltage, fuel source and rated capacity where a mapper recorded them. Context for where a large load can physically go. |
+| `grid_regions.csv` | one row per county and state | Substation counts split at 230 kV, the highest voltage present, and generating capacity where mappers recorded it. The grid context for a siting question. |
 | `poll_log.csv` | one row per poll | What each refresh changed. |
 
 `.cache/` holds raw per-tile API payloads so an interrupted fetch resumes rather

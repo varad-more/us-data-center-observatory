@@ -30,6 +30,10 @@ export const observatoryMetaSchema = z.object({
   facility_count: z.number(),
   region_count: z.number(),
   series_count: z.number(),
+  // Optional so a dataset built before the grid layer existed still validates
+  // rather than failing the build on a field it could not have carried.
+  substation_count: z.number().optional(),
+  plant_count: z.number().optional(),
   national_mw: z.number(),
   national_reference_year: z.number(),
   total_footprint_m2: z.number(),
@@ -48,6 +52,15 @@ export const regionSchema = z.object({
   footprint_m2: z.number(),
   est_mw: z.number(),
   est_gal_per_day: z.number(),
+  // Grid context, present only for regions the grid stage has placed assets in.
+  // Absent rather than zero, so "no substations mapped here" stays
+  // distinguishable from "the grid dataset has not been built".
+  substation_count: z.number().optional(),
+  bulk_substation_count: z.number().optional(),
+  max_voltage_kv: z.number().optional(),
+  plant_count: z.number().optional(),
+  plant_capacity_mw: z.number().optional(),
+  plants_without_capacity: z.number().optional(),
 });
 
 export type Region = z.infer<typeof regionSchema>;

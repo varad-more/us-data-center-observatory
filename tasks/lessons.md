@@ -339,3 +339,23 @@ owes that domain's concepts too. Derive the explanatory figures from the
 committed data at build time so the teaching text cannot drift from the tables
 beside it — the footprint spread quoted as the reason for weighting by area was
 263:1, not the 30:1 carried over from a single county's numbers.
+
+## An effect that sets state it depends on cancels its own work
+
+The grid layer fetched on demand. The effect guarding that fetch listed
+`gridState` in its dependencies and set it to "loading" on its first line, so
+React re-ran the effect immediately, the re-run's cleanup flipped the
+`cancelled` flag, and every handler on the in-flight request became a no-op.
+The layer would have loaded never. Worse, the failure path was cancelled too,
+so the map sat on "loading grid…" indefinitely and reported nothing.
+
+Nothing structural caught it. Types passed, lint passed, the build produced all
+351 pages, the rendered HTML was correct, and the file was served. It was found
+only by a component test that clicked the control and looked for the layer.
+
+**How to apply:** an effect must not write state that appears in its own
+dependency array. Carry "already started" in a ref, which does not take part in
+the comparison. More generally, when a feature cannot be verified by looking at
+it, write the test that exercises the interaction rather than trusting that
+every static check passing means it works — those checks all pass on a feature
+that does nothing at all.
