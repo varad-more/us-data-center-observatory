@@ -117,6 +117,8 @@ export const changeSchema = z.object({
   kind: z.enum(["creation", "deletion"]),
   state: z.string(),
   county_fips: z.string(),
+  name: z.string().default(""),
+  county_name: z.string().default(""),
 });
 
 export type Change = z.infer<typeof changeSchema>;
@@ -201,4 +203,35 @@ export function getRegionSeries(regionId: string): Promise<RegionSeries | null> 
 /** Convenience wrapper for the national series, which the growth page leads on. */
 export function getNationalSeries(): Promise<RegionSeries | null> {
   return getRegionSeries("national:US");
+}
+
+/** Turn `county:51107` into the `county-51107` used in URLs and file names. */
+export function regionSlug(regionId: string): string {
+  return regionId.replace(":", "-");
+}
+
+/** Reverse of {@link regionSlug}. */
+export function regionIdFromSlug(slug: string): string {
+  return slug.replace("-", ":");
+}
+
+/**
+ * Facilities belonging to one region.
+ *
+ * Counties match on FIPS and states on the two-letter code, so a county's
+ * facilities are necessarily a subset of its state's. That overlap is the
+ * reason nothing on the site ever adds a county total to a state total.
+ */
+export async function getRegionFacilities(
+  regionId: string,
+): Promise<FacilityCollection["features"]> {
+  const [kind, value] = regionId.split(":");
+  const collection = await getFacilities();
+  if (kind === "county") {
+    return collection.features.filter((f) => f.properties.county_fips === value);
+  }
+  if (kind === "state") {
+    return collection.features.filter((f) => f.properties.state === value);
+  }
+  return collection.features;
 }

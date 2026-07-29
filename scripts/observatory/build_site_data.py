@@ -179,6 +179,16 @@ def main(argv: list[str] | None = None) -> int:
     if series:
         series_count = build_series_files(series, args.out / "series")
 
+    # Names come from the current snapshot, so an appearance is usually named and
+    # a removal usually is not - the facility is gone from the map by the time
+    # anyone reads this. That asymmetry is honest and is left visible.
+    names = {(f["osm_type"], f["osm_id"]): f.get("name", "") for f in facilities}
+    county_names = {
+        r["fips"]: f"{r['name']}, {r['state']}"
+        for r in regions
+        if r.get("region_kind") == "county" and r.get("fips")
+    }
+
     recent = sorted(
         (e for e in events if e.get("event_kind") in {"creation", "deletion"}),
         key=lambda e: str(e["event_date"]),
@@ -194,6 +204,8 @@ def main(argv: list[str] | None = None) -> int:
                     "kind": e["event_kind"],
                     "state": e.get("state", ""),
                     "county_fips": e.get("county_fips", ""),
+                    "name": names.get((e["osm_type"], e["osm_id"]), ""),
+                    "county_name": county_names.get(e.get("county_fips", ""), ""),
                 }
                 for e in recent
             ]

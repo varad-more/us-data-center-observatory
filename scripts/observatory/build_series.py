@@ -92,9 +92,18 @@ def build(
     # region -> period -> [net count change, net footprint change]
     deltas: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
 
+    # OpenStreetMap predates this window, so some elements were created before
+    # the history begins and deleted inside it. Decrementing for those subtracts
+    # a facility the series never added, and the count goes negative - which it
+    # did, reading -1 data centres through 2012-2014. A removal only counts when
+    # the matching creation was also observed.
+    created = {(e["osm_type"], e["osm_id"]) for e in events if e.get("event_kind") == "creation"}
+
     for event in events:
         direction = PRESENCE_EVENTS.get(event.get("event_kind", ""))
         if direction is None:
+            continue
+        if direction < 0 and (event["osm_type"], event["osm_id"]) not in created:
             continue
         period = _month(event["event_date"])
         area = footprints.get((event["osm_type"], event["osm_id"]), 0.0)

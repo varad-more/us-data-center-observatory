@@ -82,6 +82,14 @@ export-api: ## Regenerate the static API snapshot the published site serves
 	$(PY) scripts/export_static_api.py
 	$(PY) scripts/verify_static_export.py
 
+.PHONY: poll
+poll: ## Refresh the observatory dataset from public sources, then report what changed
+	$(PY) scripts/observatory/poll.py
+
+.PHONY: poll-offline
+poll-offline: ## Rebuild the observatory's derived files without touching the network
+	$(PY) scripts/observatory/poll.py --skip-fetch
+
 .PHONY: registry
 registry: ## Print the source registry, including inaccessible sources
 	$(VENV)/bin/helios registry-show

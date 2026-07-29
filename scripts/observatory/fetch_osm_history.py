@@ -52,6 +52,11 @@ from _common import (
 
 OUT_PATH = DATA_DIR / "events.csv"
 FACILITIES_PATH = DATA_DIR / "facilities.csv"
+
+# Written only when a full backfill has covered every facility-bearing tile.
+# Its absence forces a full run, which is the safe default: asking for too much
+# history costs time, asking for too little loses years without saying so.
+COMPLETE_MARKER = DATA_DIR / ".cache" / "osm-history" / "BACKFILL_COMPLETE"
 CACHE_NAMESPACE = "osm-history"
 DEFAULT_TILE_DEGREES = 5.0
 
@@ -178,6 +183,11 @@ def fetch(
     # Keyed by element + timestamp + kind so overlapping tile edges cannot record
     # the same edit twice.
     by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    # A deletion arrives with no geometry, and the tile that holds the element's
+    # earlier edits may not have been read yet, so they are resolved at the end
+    # against every coordinate seen anywhere.
+    last_known: dict[tuple[str, str], tuple[float, float]] = {}
+    pending_deletions: list[tuple[str, str, str]] = []
     unknown = 0
     missing_occupied = 0
     missing_empty = 0
@@ -230,10 +240,27 @@ def fetch(
                 unknown += 1
                 continue
             coordinates = (feature.get("geometry") or {}).get("coordinates") or []
-            if len(coordinates) != 2:
+            timestamp = str(properties.get("@timestamp") or "")
+
+            if len(coordinates) == 2:
+                # Remember where this element was, so a later deletion of it can
+                # still be placed in a county.
+                last_known[(osm_type, osm_id)] = (
+                    float(coordinates[0]),
+                    float(coordinates[1]),
+                )
+            elif kind == "deletion":
+                # ohsome returns no centroid for a deletion: by then the element
+                # is gone and has no geometry to report. Dropping these for want
+                # of a coordinate is how every removal disappeared from an
+                # earlier version, leaving counts that could only ever rise.
+                pending_deletions.append((osm_type, osm_id, timestamp))
+                added += 1
+                continue
+            else:
                 unknown += 1
                 continue
-            timestamp = str(properties.get("@timestamp") or "")
+
             key = (osm_type, osm_id, timestamp, kind)
             if key in by_key:
                 continue
@@ -252,6 +279,33 @@ def fetch(
             f"  [{index:>3}/{len(tiles)}] {label:<16} {len(features):>5} contributions, "
             f"+{added} new ({source})"
         )
+
+    # Place the deletions now that every tile has contributed whatever it knew
+    # about where these elements used to be.
+    unplaced = 0
+    for osm_type, osm_id, timestamp in pending_deletions:
+        position = last_known.get((osm_type, osm_id))
+        key = (osm_type, osm_id, timestamp, "deletion")
+        if key in by_key:
+            continue
+        by_key[key] = {
+            "osm_type": osm_type,
+            "osm_id": osm_id,
+            "event_date": _to_date(timestamp),
+            "event_kind": "deletion",
+            # An element deleted before any edit this window saw has no known
+            # position. The removal is still recorded - it is real, and dropping
+            # it would inflate the count - but it cannot be attributed to a
+            # county, and assign_regions will leave its region columns empty.
+            "lat": fmt_coord(position[1]) if position else "",
+            "lon": fmt_coord(position[0]) if position else "",
+            "county_fips": "",
+            "state": "",
+        }
+        if position is None:
+            unplaced += 1
+    if unplaced:
+        print(f"  {unplaced} removals could not be placed: no earlier edit recorded a position")
 
     # A handful of unusable contributions is normal; a majority means the request
     # itself is wrong. This exact check would have caught asking ohsome for
@@ -321,7 +375,14 @@ def main(argv: list[str] | None = None) -> int:
     # the tail, then merge. The overlap window re-requests the last few days on
     # purpose: ohsome's extract lags real time, so the most recent days of a
     # previous run may have been incomplete when it ran.
-    if args.full or not existing:
+    #
+    # Switching to incremental is gated on a marker written only when a full
+    # backfill actually completed - never on events.csv merely existing. An
+    # earlier version keyed off the file, and a partial 46-row file was enough
+    # to put every later run into incremental mode, so the backfill could never
+    # finish: each run asked for the last five weeks and reported the remaining
+    # fourteen years as already covered.
+    if args.full or not existing or not COMPLETE_MARKER.exists():
         start = HISTORY_START
         mode = "full backfill"
     elif args.since:
@@ -389,6 +450,14 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     written = write_csv(args.out, FIELDNAMES, rows)
+    if start == HISTORY_START:
+        # Only a run that asked for the whole window and got every
+        # facility-bearing tile may license later incremental runs.
+        COMPLETE_MARKER.parent.mkdir(parents=True, exist_ok=True)
+        COMPLETE_MARKER.write_text(
+            f"Full backfill {HISTORY_START} to {available_to} completed.\n", encoding="utf-8"
+        )
+
     counts: dict[str, int] = {}
     for row in rows:
         counts[str(row["event_kind"])] = counts.get(str(row["event_kind"]), 0) + 1

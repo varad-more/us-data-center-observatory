@@ -35,6 +35,7 @@ const NAV = [
   { href: "/", label: "Observatory" },
   { href: "/growth", label: "Growth" },
   { href: "/regions", label: "Regions" },
+  { href: "/changes", label: "Changes" },
   { href: "/observatory-map", label: "National map" },
   { href: "/map", label: "Site map" },
   { href: "/sites", label: "Sites" },

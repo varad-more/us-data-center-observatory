@@ -19,14 +19,18 @@ interface ExportMeta {
   site_count: number;
 }
 
-async function readMeta(): Promise<ExportMeta | null> {
+interface ObservatoryMeta {
+  facility_count: number;
+}
+
+async function readJson<T>(...segments: string[]): Promise<T | null> {
   // Read from disk at build time; a static export has no server at runtime.
   try {
     const raw = await fs.readFile(
-      path.join(process.cwd(), "public", "api", "meta.json"),
+      path.join(process.cwd(), ...segments),
       "utf-8",
     );
-    return JSON.parse(raw) as ExportMeta;
+    return JSON.parse(raw) as T;
   } catch {
     return null;
   }
@@ -44,18 +48,26 @@ function formatExportDate(iso: string): string | null {
 }
 
 export async function DemoDataBanner() {
-  const meta = await readMeta();
+  const [meta, observatory] = await Promise.all([
+    readJson<ExportMeta>("public", "api", "meta.json"),
+    readJson<ObservatoryMeta>("public", "data", "meta.json"),
+  ]);
   if (!meta) return null;
 
   const exportedOn = formatExportDate(meta.generated_at);
 
   return (
     <div className="demo-banner" role="note">
-      <strong>Static snapshot.</strong>{" "}
-      This site serves {meta.site_count} sites exported from the Helios pipeline
-      {exportedOn ? ` on ${exportedOn}` : ""}. Every score and assertion class was
-      produced by the same code that runs against live public records — but this is a
-      point-in-time export, not a live view. See{" "}
+      <strong>Static snapshot.</strong> This site serves two different things:{" "}
+      {observatory ? `${observatory.facility_count.toLocaleString()} ` : ""}data
+      centres reported by OpenStreetMap contributors nationwide, and{" "}
+      {meta.site_count}
+      {exportedOn
+        ? ` sites Helios infers from Arizona parcel records, exported on ${exportedOn}.`
+        : " sites Helios infers from Arizona parcel records."}{" "}
+      The first is a map of
+      what has been recorded; the second is an argued hypothesis with an
+      evidence chain. This is a point-in-time export, not a live view. See{" "}
       <a href={`${API_BASE}/meta.json`}>meta.json</a> or the{" "}
       <Link href="/methodology">methodology</Link>.
     </div>
