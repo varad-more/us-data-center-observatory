@@ -14,8 +14,23 @@ vi.mock("react-map-gl/maplibre", () => ({
   default: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="map">{children}</div>
   ),
-  Layer: ({ id, layout }: { id: string; layout?: { visibility?: string } }) => (
-    <div data-testid={`layer-${id}`} data-visibility={layout?.visibility ?? "visible"} />
+  Layer: ({
+    id,
+    layout,
+    paint,
+    filter,
+  }: {
+    id: string;
+    layout?: { visibility?: string };
+    paint?: Record<string, unknown>;
+    filter?: unknown;
+  }) => (
+    <div
+      data-testid={`layer-${id}`}
+      data-visibility={layout?.visibility ?? "visible"}
+      data-paint={JSON.stringify(paint ?? {})}
+      data-filter={JSON.stringify(filter ?? null)}
+    />
   ),
   Source: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   NavigationControl: () => null,
@@ -62,8 +77,43 @@ describe("ObservatoryMap", () => {
     // data centres. If this regresses the cost is silent - the map still works,
     // it just costs everyone megabytes.
     expect(fetch).not.toHaveBeenCalled();
-    expect(screen.getByTestId("layer-facility-point")).toBeInTheDocument();
+    expect(screen.getByTestId("layer-facility-building-point")).toBeInTheDocument();
+    expect(screen.getByTestId("layer-facility-other-point")).toBeInTheDocument();
     expect(screen.queryByTestId("layer-substation-point")).toBeNull();
+  });
+
+  it("keeps land and construction geometry out of the building-area scale", () => {
+    render(<ObservatoryMap facilities={FACILITIES} />);
+
+    expect(
+      screen.getByTestId("layer-facility-building-point"),
+    ).toHaveAttribute("data-paint", expect.stringContaining("footprint_m2"));
+    expect(
+      screen.getByTestId("layer-facility-other-point"),
+    ).not.toHaveAttribute("data-paint", expect.stringContaining("footprint_m2"));
+  });
+
+  it("does not treat an unclassified feature as a building", () => {
+    render(<ObservatoryMap facilities={FACILITIES} />);
+
+    const filterOf = (id: string) =>
+      JSON.parse(screen.getByTestId(id).getAttribute("data-filter") ?? "null");
+
+    // `get` on a missing property yields null. Matching on equality keeps an
+    // unclassified feature out of the area-sized layer, and the inequality puts
+    // it in the fixed-size one. A `has`-based fallback would do the opposite and
+    // silently restore the land-as-floor-plate conflation this split exists to
+    // remove.
+    expect(filterOf("layer-facility-building-point")).toEqual([
+      "==",
+      ["get", "site_class"],
+      "building",
+    ]);
+    expect(filterOf("layer-facility-other-point")).toEqual([
+      "!=",
+      ["get", "site_class"],
+      "building",
+    ]);
   });
 
   it("fetches the published grid once a grid layer is switched on", async () => {
@@ -100,7 +150,11 @@ describe("ObservatoryMap", () => {
     await screen.findByTestId("layer-substation-point");
 
     fireEvent.click(screen.getByRole("button", { name: /data centres/i }));
-    expect(screen.getByTestId("layer-facility-point")).toHaveAttribute(
+    expect(screen.getByTestId("layer-facility-building-point")).toHaveAttribute(
+      "data-visibility",
+      "none",
+    );
+    expect(screen.getByTestId("layer-facility-other-point")).toHaveAttribute(
       "data-visibility",
       "none",
     );
@@ -113,6 +167,7 @@ describe("ObservatoryMap", () => {
 
     // An empty map here would read as a finding about the United States.
     expect(await screen.findByText(/grid layer could not be loaded/i)).toBeInTheDocument();
-    expect(screen.getByTestId("layer-facility-point")).toBeInTheDocument();
+    expect(screen.getByTestId("layer-facility-building-point")).toBeInTheDocument();
+    expect(screen.getByTestId("layer-facility-other-point")).toBeInTheDocument();
   });
 });

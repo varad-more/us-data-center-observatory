@@ -142,6 +142,7 @@ class StageEvidenceKind(StrEnum):
 
     # --- utility ---
     UTILITY_SERVICE_INQUIRY = "utility_service_inquiry"
+    LARGE_LOAD_SERVICE_CONTRACT = "large_load_service_contract"
     TRANSMISSION_FILING = "transmission_filing"
     SUBSTATION_APPLICATION = "substation_application"
     DEDICATED_SUBSTATION_PROXIMITY = "dedicated_substation_proximity"

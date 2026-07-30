@@ -74,6 +74,7 @@ def main() -> int:
 
     for name in (
         "sources.json",
+        "large-load-filings.json",
         "meta.json",
         "sites.geojson",
         "analytics/stages.json",
@@ -104,9 +105,34 @@ def main() -> int:
     _check_assertion_classes(records, f"{FLAGSHIP} evidence")
     _check_assertion_classes(flagship.get("estimates", []), f"{FLAGSHIP} estimates")
 
+    large_load_payload = _load(API_DIR / "large-load-filings.json")
+    assert isinstance(large_load_payload, dict)
+    large_load_filings = large_load_payload.get("items", [])
+    if not large_load_filings:
+        raise VerificationError("large-load-filings.json publishes no filing records.")
+    for filing in large_load_filings:
+        if filing.get("geometry") is not None:
+            raise VerificationError(
+                "A large-load filing publishes geometry without parcel-level evidence."
+            )
+        if filing.get("load_assertion_class") != "reported":
+            raise VerificationError("A published contracted-load value is not marked reported.")
+        digest = filing.get("source", {}).get("content_sha256")
+        if not isinstance(digest, str) or len(digest) != 64:
+            raise VerificationError(
+                "A large-load filing is missing a complete source content digest."
+            )
+        source_url = filing.get("source", {}).get("source_url")
+        if not isinstance(source_url, str) or "example.invalid" in source_url:
+            raise VerificationError(
+                "A large-load filing publishes a fixture placeholder instead of "
+                "the official source URL."
+            )
+
     print(
         f"OK: {len(sites)} sites published; {FLAGSHIP} carries "
-        f"{len(records)} evidence records with valid assertion classes."
+        f"{len(records)} evidence records with valid assertion classes; "
+        f"{len(large_load_filings)} large-load filing(s) retain source provenance."
     )
     return 0
 

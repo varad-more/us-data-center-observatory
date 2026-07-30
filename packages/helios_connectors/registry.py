@@ -360,6 +360,68 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         ),
         tags=("utility", "substation"),
     ),
+    SourceRegistryEntry(
+        slug="ferc-large-load-interconnection",
+        name="FERC Large-Load Interconnection Proceedings (RM26-4)",
+        agency="Federal Energy Regulatory Commission",
+        jurisdiction="United States — six FERC-jurisdictional RTO/ISO regions",
+        category=SourceCategory.UTILITY_AND_REGULATORY,
+        base_url="https://www.ferc.gov/rm26-4",
+        access_method=AccessMethod.HTML_PAGE,
+        connector_status=ConnectorStatus.PLANNED,
+        update_frequency="event-driven",
+        geographic_coverage=("PJM, MISO, SPP, CAISO, ISO New England, and NYISO footprints"),
+        historical_coverage=(
+            "RM26-4 opened 23 October 2025; six tailored section 206 proceedings "
+            "opened 18 June 2026."
+        ),
+        reliability_score=1.0,
+        access_limitation=(
+            "The proceedings and orders are public, but they do not yet provide a "
+            "uniform machine-readable dataset of proposed large loads, network "
+            "upgrades, or costs across the six RTO/ISO regions. Helios has no "
+            "current interconnection coverage from this source."
+        ),
+        notes=(
+            "FERC directed each of the six regional operators to justify or reform "
+            "its tariff through a tailored proceeding. The NYISO order specifically "
+            "describes a proposed searchable public location for aggregate large-load "
+            "additions, planned Network Upgrades, and cost estimates. Outcomes and "
+            "publication formats remain pending, so this entry records a dated "
+            "coverage gap rather than an ingestible feed."
+        ),
+        tags=("large-load", "interconnection", "network-upgrades", "costs"),
+    ),
+    SourceRegistryEntry(
+        slug="mpsc-large-load-contracts",
+        name="Michigan PSC Large-Load Contract Disclosures",
+        agency="Michigan Public Service Commission",
+        jurisdiction="Michigan",
+        category=SourceCategory.UTILITY_AND_REGULATORY,
+        base_url=(
+            "https://www.michigan.gov/mpsc/commission/events/2025/12/18/~/link.aspx"
+            "?_id=5F5E5CA34D71466696AB507F9571E9FC&_z=z"
+        ),
+        access_method=AccessMethod.HTML_PAGE,
+        connector_status=ConnectorStatus.IMPLEMENTED,
+        update_frequency="event-driven",
+        rate_limit_per_second=0.5,
+        geographic_coverage="Michigan; currently one site-specific order in Washtenaw County",
+        historical_coverage="Curated official Commission disclosures from December 2025 onward.",
+        reliability_score=1.0,
+        known_schema_issues=(
+            "Commission news pages are prose rather than a docket API. Discovery is "
+            "a reviewed URL list, and each new page shape requires a recorded fixture "
+            "and parser contract before it is published."
+        ),
+        notes=(
+            "The first record is Case U-21990. It reports a contracted load and "
+            "township, not a street address or parcel, so Helios publishes no geometry."
+        ),
+        connector_slug="mpsc-large-load-contracts",
+        connector_entry_point=("helios_connectors.mpsc_large_load:MpscLargeLoadConnector"),
+        tags=("large-load", "service-contract", "reported-load", "data-center"),
+    ),
     # ------------------------------------------------------------ corporate --
     SourceRegistryEntry(
         slug="az-corporation-commission-entity-search",
@@ -421,7 +483,7 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
             "has no connector, because a fixture-backed stub would have implied a "
             "capability Helios does not have."
         ),
-        tags=("satellite", "future-phase"),
+        tags=("satellite",),
     ),
     # -------------------------------------------------------------- water ----
     SourceRegistryEntry(
@@ -436,7 +498,7 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
         geographic_coverage="Arizona, including the Phoenix Active Management Area",
         historical_coverage="Long historical series for groundwater and withdrawals.",
         notes="Needed before any water-use scenario is published. Deferred.",
-        tags=("water", "future-phase"),
+        tags=("water",),
     ),
     SourceRegistryEntry(
         slug="usgs-county-water-use",

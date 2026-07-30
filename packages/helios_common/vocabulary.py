@@ -154,9 +154,6 @@ class ConnectorStatus(StrEnum):
     a connector that has not been written yet; this one is never coming, and a
     reader of the registry must not be left expecting it."""
 
-    DEGRADED = "degraded"
-    DISABLED = "disabled"
-
 
 __all__ = [
     "AccessMethod",

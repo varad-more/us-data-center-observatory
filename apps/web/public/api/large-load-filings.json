@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "evidence_id": "57a357b9-aca3-412b-968d-77a115c20aa9",
+      "docket_number": "U-21990",
+      "decision_date": "2025-12-18",
+      "decision_status": "conditionally_approved",
+      "utility_name": "DTE Electric Co.",
+      "customer_name": "Green Chile Ventures LLC",
+      "parent_company_name": "Oracle Corp.",
+      "project_type": "data_center",
+      "reported_load_mw": 1383.0,
+      "load_assertion_class": "reported",
+      "location_name": "Saline Township",
+      "county_name": "Washtenaw County",
+      "state_code": "MI",
+      "location_precision": "township",
+      "geometry": null,
+      "summary": "MPSC conditionally approved DTE Electric service contracts for Green Chile Ventures' reported 1,383 MW data center in Saline Township.",
+      "snippet": "Among those protections, the Commission conditioned approval on requiring DTE Electric to be responsible for any costs to serve the 1,383- megawatt (MW) data center in Saline Township that it is unable to recover from Green Chile Ventures LLC, a subsidiary of the tech company Oracle Corp.",
+      "snippet_locator": "official disclosure; approval conditions",
+      "evidence_assertion_class": "extracted",
+      "source": {
+        "document_id": "9bddb44f-9b70-4959-875a-f3a32de3f042",
+        "document_version_id": "efe058cc-9584-4d24-8101-d272fed03325",
+        "source_slug": "mpsc-large-load-contracts",
+        "source_name": "Michigan PSC Large-Load Contract Disclosures",
+        "agency": "Michigan Public Service Commission",
+        "source_url": "https://www.michigan.gov/mpsc/commission/events/2025/12/18/~/link.aspx?_id=5F5E5CA34D71466696AB507F9571E9FC&_z=z",
+        "retrieved_at": "2026-07-25T21:30:00Z",
+        "content_sha256": "939a81d232eb82cffe851c9f4c51c018e29af30ec9ca5ba15d8ed3d9a8103ea6",
+        "parser_version": "0.1.0",
+        "attribution_text": null
+      }
+    }
+  ],
+  "note": "These are filing-level records. A named township is not an exact facility location, so records without parcel evidence carry no geometry."
+}

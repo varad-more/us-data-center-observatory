@@ -9,6 +9,7 @@ import {
   areaConsumptionSchema,
   detectionLagSchema,
   featureCollectionSchema,
+  largeLoadFilingListSchema,
   nationalCoverageSchema,
   provenanceSchema,
   regionListSchema,
@@ -152,6 +153,10 @@ export function listSources() {
   return request("/sources", sourceListSchema);
 }
 
+export function listLargeLoadFilings() {
+  return request("/large-load-filings", largeLoadFilingListSchema);
+}
+
 export function getStageDistribution() {
   return request("/analytics/stages", stageDistributionSchema);
 }
@@ -198,4 +203,3 @@ export function sitesCsvUrl(): string {
 export function sitesGeoJsonUrl(): string {
   return `${API_BASE}/sites.geojson`;
 }
-

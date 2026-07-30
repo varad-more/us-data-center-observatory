@@ -325,6 +325,29 @@ class TestIdempotency:
         assert summaries[1].items_unchanged == 1
         assert summaries[1].evidence_created == 0
 
+    def test_unchanged_document_refreshes_its_checkable_source_url(
+        self,
+        registered_sources: Session,
+        store: FilesystemEvidenceStore,
+    ) -> None:
+        """Replay must not leave a fixture placeholder on the logical document."""
+        for source_url in (
+            "https://example.invalid/recorded",
+            "https://public.example.test/document",
+        ):
+            connector = _replay(
+                MaricopaAssessorConnector,
+                ("maricopa_assessor", "east_valley_data_centers.json"),
+                "parcel-query:test:offset:0",
+                source_url=source_url,
+            )
+            IngestionPipeline(registered_sources, connector, store, mode="fixture").run()
+
+        document = registered_sources.scalars(select(SourceDocument)).one()
+        version = registered_sources.scalars(select(DocumentVersion)).one()
+        assert document.source_url == "https://public.example.test/document"
+        assert version.source_url == "https://example.invalid/recorded"
+
     def test_changed_content_creates_a_second_version(
         self,
         registered_sources: Session,

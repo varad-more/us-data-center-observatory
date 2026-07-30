@@ -7,6 +7,7 @@
  * and an inferred polygon as the same sort of thing.
  */
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { ObservatoryMap } from "@/components/ObservatoryMap";
 import { getFacilities, getObservatoryMeta } from "@/lib/observatory";
@@ -23,8 +24,8 @@ export default async function ObservatoryMapPage() {
     getObservatoryMeta(),
   ]);
 
-  const withFootprint = facilities.features.filter(
-    (feature) => feature.properties.footprint_m2 > 0,
+  const buildings = facilities.features.filter(
+    (feature) => feature.properties.site_class === "building",
   ).length;
   const withOperator = facilities.features.filter((feature) =>
     Boolean(feature.properties.operator),
@@ -64,11 +65,13 @@ export default async function ObservatoryMapPage() {
           <div className="metric-sub">all with coordinates</div>
         </div>
         <div className="metric">
-          <div className="metric-label">With footprint</div>
+          <div className="metric-label">Mapped as buildings</div>
           <div className="metric-value num">
-            {Math.round((100 * withFootprint) / facilities.features.length)}%
+            {Math.round((100 * buildings) / facilities.features.length)}%
           </div>
-          <div className="metric-sub">building outline mapped</div>
+          <div className="metric-sub">
+            {buildings.toLocaleString()} with a floor plate
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">With operator</div>
@@ -94,6 +97,18 @@ export default async function ObservatoryMapPage() {
         layer can tell you what has been recorded; it cannot tell you what
         exists.
       </div>
+
+      {(meta.construction_count ?? 0) > 0 ? (
+        <div className="notice">
+          <strong>
+            {meta.construction_count?.toLocaleString()} records are mapped as under
+            construction.
+          </strong>{" "}
+          They use fixed-size marks here because construction area is not building floor
+          area, and they receive no operating-load estimate.{" "}
+          <Link href="/construction">See the construction signal</Link>.
+        </div>
+      ) : null}
 
       {hasGrid ? (
         <section className="card">

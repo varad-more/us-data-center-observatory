@@ -389,6 +389,38 @@ class SourceListResponse(HeliosModel):
     coverage_summary: dict[str, int]
 
 
+class LargeLoadFilingResponse(HeliosModel):
+    """A site-specific utility filing carrying a reported contracted load."""
+
+    evidence_id: UUID
+    docket_number: str
+    decision_date: date
+    decision_status: str
+    utility_name: str
+    customer_name: str
+    parent_company_name: str | None
+    project_type: str
+    reported_load_mw: float
+    load_assertion_class: str
+    location_name: str
+    county_name: str
+    state_code: str
+    location_precision: str
+    geometry: None = None
+    summary: str
+    snippet: str
+    snippet_locator: str | None
+    evidence_assertion_class: str
+    source: SourceReference
+
+
+class LargeLoadFilingListResponse(HeliosModel):
+    """Published state-regulator filings with reported large-load values."""
+
+    items: list[LargeLoadFilingResponse]
+    note: str
+
+
 class ConnectorRunResponse(HeliosModel):
     """Telemetry for one connector run."""
 

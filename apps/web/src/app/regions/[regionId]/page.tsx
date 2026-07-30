@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 
 import { MappingGrowthChart } from "@/components/MappingGrowthChart";
 import { RegionPicker } from "@/components/RegionPicker";
+import { facilityClassLabel } from "@/lib/facilityPresentation";
 import {
   getRegionFacilities,
   getRegionSeries,
@@ -309,8 +310,8 @@ export default async function RegionPage({
       {named.length > 0 ? (
         <section className="card">
           <div className="card-header">
-            <h2 className="card-title">Largest named facilities</h2>
-            <span className="card-note">by mapped footprint</span>
+            <h2 className="card-title">Largest named mapped records</h2>
+            <span className="card-note">by mapped area</span>
           </div>
           <div className="table-scroll">
             <table className="table">
@@ -318,7 +319,8 @@ export default async function RegionPage({
                 <tr>
                   <th>Name</th>
                   <th>Operator</th>
-                  <th className="num">Footprint m²</th>
+                  <th>Mapped as</th>
+                  <th className="num">Mapped area m²</th>
                   <th className="num">Share MW</th>
                   <th>First mapped</th>
                 </tr>
@@ -332,8 +334,11 @@ export default async function RegionPage({
                         <span className="muted">not recorded</span>
                       )}
                     </td>
+                    <td>{facilityClassLabel(facility.properties.site_class)}</td>
                     <td className="num">
-                      {facility.properties.footprint_m2.toLocaleString()}
+                      {facility.properties.footprint_m2 > 0
+                        ? facility.properties.footprint_m2.toLocaleString()
+                        : "—"}
                     </td>
                     <td className="num">
                       {facility.properties.est_mw?.toFixed(1) ?? "—"}
@@ -350,9 +355,11 @@ export default async function RegionPage({
           </div>
           <p className="small muted" style={{ marginBottom: 0 }}>
             &ldquo;First mapped&rdquo; is when OpenStreetMap recorded the facility, not
-            when it was built — OpenStreetMap carries no construction dates. The megawatt
-            column is this building&apos;s footprint share of a reported national total,
-            not a measurement of it.
+            when it was built — OpenStreetMap carries no construction dates. Mapped area
+            means a building floor plate, campus boundary, or construction polygon
+            according to the &ldquo;Mapped as&rdquo; column; those quantities are never
+            added together. The megawatt column appears only for buildings and is their
+            floor-area share of a reported national total, not a measurement.
           </p>
         </section>
       ) : null}

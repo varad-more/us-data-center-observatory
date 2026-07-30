@@ -234,6 +234,8 @@ jobs:
         npm run build
         test -f out/sites.html
         test -f out/sites/AZ-MESA-001.html
+        test -f out/large-load-filings.html
+        test -f out/api/large-load-filings.json
         test -f out/.nojekyll
 
   # ─────────────────────────────── Infrastructure ────────────────────────────

@@ -4,12 +4,14 @@
  * Every mapped US data centre, at its actual coordinates, over the grid that
  * has to carry them.
  *
- * Circles are sized by building footprint rather than drawn uniformly, because
- * footprint is the one physical quantity in the dataset and because uniform
- * dots would imply that a 12,000 m² colocation suite and a 426,000 m²
- * hyperscale campus are the same object. The area-to-radius mapping uses a
- * square root so that circle *area* tracks footprint; scaling radius directly
- * would exaggerate the largest sites by their own factor again.
+ * Building circles are sized by floor plate rather than drawn uniformly,
+ * because a 12,000 m² colocation suite and a 426,000 m² machine hall are not
+ * the same object. Campus land boundaries and areas mapped as under
+ * construction are fixed-size marks: their square metres measure a different
+ * physical thing and must not enter the building scale. The area-to-radius
+ * mapping uses a square root so that circle *area* tracks floor plate; scaling
+ * radius directly would exaggerate the largest buildings by their own factor
+ * again.
  *
  * The grid layers answer the question the data-centre layer provokes: these
  * things need hundreds of megawatts, so where can that actually be delivered?
@@ -35,6 +37,10 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 import { basemapStyle } from "@/components/InfrastructureMap";
 import { useTheme } from "@/components/ThemeToggle";
+import {
+  formatMappedArea,
+  type FacilitySiteClass,
+} from "@/lib/facilityPresentation";
 import type { FacilityCollection } from "@/lib/observatory";
 import { DATA_BASE } from "@/lib/regionPath";
 
@@ -81,13 +87,6 @@ interface PopupState {
   latitude: number;
   kind: "facility" | "substation" | "plant";
   properties: Record<string, unknown>;
-}
-
-function formatArea(value: unknown): string {
-  const area = typeof value === "number" ? value : 0;
-  if (!area) return "footprint not mapped";
-  if (area >= 1e6) return `${(area / 1e6).toFixed(2)} km² footprint`;
-  return `${Math.round(area).toLocaleString()} m² footprint`;
 }
 
 export function ObservatoryMap({ facilities }: { facilities: FacilityCollection }) {
@@ -139,7 +138,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
 
   const interactiveLayerIds = useMemo(() => {
     const ids: string[] = [];
-    if (enabled.facilities) ids.push("facility-point");
+    if (enabled.facilities) {
+      ids.push("facility-building-point", "facility-other-point");
+    }
     if (grid && enabled.substations) ids.push("substation-point");
     if (grid && enabled.plants) ids.push("plant-point");
     return ids;
@@ -271,12 +272,17 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
 
           <Source id="observatory-facilities" type="geojson" data={facilities as never}>
             <Layer
-              id="facility-point"
+              id="facility-building-point"
               type="circle"
+              // Only an explicit `building` is sized by area. A missing class is
+              // an unknown, and an unknown is not a building: sizing it here
+              // would let unclassified land back into the floor-plate scale.
+              filter={["==", ["get", "site_class"], "building"]}
               layout={{ visibility: enabled.facilities ? "visible" : "none" }}
               paint={{
-                // sqrt of footprint, so drawn area tracks real area. The stops are
-                // in metres: 0 m² gets the floor radius, 400,000 m² the ceiling.
+                // sqrt of floor plate, so drawn area tracks building area. The
+                // stops are in metres: 0 m² gets the floor radius, 400,000 m²
+                // the ceiling.
                 "circle-radius": [
                   "interpolate",
                   ["linear"],
@@ -290,6 +296,23 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                 "circle-opacity": 0.5,
                 "circle-stroke-width": 0.5,
                 "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+              }}
+            />
+            <Layer
+              id="facility-other-point"
+              type="circle"
+              // Everything else, including an unclassified feature: `get` on a
+              // missing property yields null, which is != "building".
+              filter={["!=", ["get", "site_class"], "building"]}
+              layout={{ visibility: enabled.facilities ? "visible" : "none" }}
+              paint={{
+                // A land parcel or construction polygon is not a floor plate.
+                // Fixed radii keep its mapped area out of the building scale.
+                "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 2.5, 9, 6],
+                "circle-color": ASSET_COLOUR.facility[theme],
+                "circle-opacity": 0.35,
+                "circle-stroke-width": 1.25,
+                "circle-stroke-color": ASSET_COLOUR.facility[theme],
               }}
             />
           </Source>
@@ -312,7 +335,10 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                       <div className="muted">operator not recorded</div>
                     )}
                     <div className="small">
-                      {formatArea(popup.properties.footprint_m2)}
+                      {formatMappedArea(
+                        popup.properties.footprint_m2,
+                        popup.properties.site_class as FacilitySiteClass | undefined,
+                      )}
                     </div>
                     {popup.properties.first_seen ? (
                       <div className="small">

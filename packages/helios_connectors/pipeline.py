@@ -276,6 +276,9 @@ class IngestionPipeline:
             )
         )
         document.last_seen_at = raw.retrieved_at
+        # The logical record keeps a current checkable URL, while each immutable
+        # version retains the URL used for that historical fetch.
+        document.source_url = raw.item.url
         if existing is not None:
             # Identical bytes: nothing new happened. This is the mechanism that
             # makes repeated ingestion produce no duplicate source records.

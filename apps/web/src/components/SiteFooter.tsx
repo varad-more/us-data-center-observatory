@@ -103,6 +103,12 @@ export async function SiteFooter() {
                 <Link href="/regions">Regions</Link>
               </li>
               <li>
+                <Link href="/construction">Mapped construction</Link>
+              </li>
+              <li>
+                <Link href="/large-load-filings">Large-load filings</Link>
+              </li>
+              <li>
                 <Link href="/observatory-map">US map</Link>
               </li>
               <li>

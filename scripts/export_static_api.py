@@ -113,6 +113,7 @@ def main() -> int:
 
     print("Exporting reference data...")
     _export_endpoint(client, "/sources", "sources.json")
+    _export_endpoint(client, "/large-load-filings", "large-load-filings.json")
     _export_endpoint(client, "/regions", "regions.json")
     _export_endpoint(client, "/analytics/stages", "analytics/stages.json")
     _export_endpoint(client, "/analytics/provenance", "analytics/provenance.json")

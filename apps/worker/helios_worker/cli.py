@@ -29,6 +29,7 @@ from helios_connectors.azcc_edocket import AzccEdocketConnector
 from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
+from helios_connectors.mpsc_large_load import MpscLargeLoadConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
 from helios_connectors.registry import SOURCE_REGISTRY, registry_coverage_summary
@@ -83,6 +84,7 @@ CONNECTORS: dict[str, Any] = {
     "usgs-county-water-use": UsgsCountyWaterConnector,
     "eia-state-electricity-sales": EiaStateElectricityConnector,
     "eia-state-generation-capacity": EiaStateGenerationCapacityConnector,
+    "mpsc-large-load-contracts": MpscLargeLoadConnector,
 }
 
 AREA_TOTAL_SCOPES: dict[str, dict[str, Any]] = {
@@ -564,6 +566,7 @@ def _ingest_live() -> None:
         "usgs-county-water-use",
         "eia-state-electricity-sales",
         "eia-state-generation-capacity",
+        "mpsc-large-load-contracts",
     ):
         try:
             ingest(slug)

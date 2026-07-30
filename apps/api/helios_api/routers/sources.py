@@ -18,13 +18,17 @@ from helios_api.schemas import (
     ConnectorRunResponse,
     DocumentResponse,
     DocumentVersionResponse,
+    LargeLoadFilingListResponse,
+    LargeLoadFilingResponse,
     SourceListResponse,
+    SourceReference,
     SourceResponse,
 )
 from helios_api.serializers import serialize_document_version
 from helios_domain.models import (
     ConnectorRun,
     DocumentVersion,
+    EvidenceRecord,
     Source,
     SourceConnector,
     SourceDocument,
@@ -90,6 +94,111 @@ def list_sources(session: DbSession) -> SourceListResponse:
         )
 
     return SourceListResponse(items=items, coverage_summary=coverage)
+
+
+def _evidence_fields(evidence: EvidenceRecord) -> dict[str, dict[str, object]]:
+    """Index the normalized field payload stored on one evidence record."""
+    values = evidence.normalized_values or {}
+    fields = values.get("fields")
+    if not isinstance(fields, list):
+        return {}
+    return {
+        str(field["name"]): field
+        for field in fields
+        if isinstance(field, dict) and field.get("name")
+    }
+
+
+def _required_evidence_value(
+    fields: dict[str, dict[str, object]], evidence_id: UUID, name: str
+) -> object:
+    """Return one normalized field value, failing on corrupt published evidence."""
+    field = fields.get(name)
+    if field is None or "value" not in field:
+        raise RuntimeError(f"Large-load evidence {evidence_id} is missing required field {name!r}")
+    return field["value"]
+
+
+def _required_evidence_float(
+    fields: dict[str, dict[str, object]], evidence_id: UUID, name: str
+) -> float:
+    """Return one numeric normalized field without silently coercing booleans."""
+    raw = _required_evidence_value(fields, evidence_id, name)
+    if isinstance(raw, bool) or not isinstance(raw, int | float | str):
+        raise RuntimeError(f"Large-load evidence {evidence_id} field {name!r} is not numeric")
+    return float(raw)
+
+
+@router.get(
+    "/large-load-filings",
+    response_model=LargeLoadFilingListResponse,
+    summary="State-regulator filings with reported large loads",
+)
+def list_large_load_filings(session: DbSession) -> LargeLoadFilingListResponse:
+    """Return site-specific load disclosures without inventing exact geometry."""
+    evidence_rows = session.scalars(
+        select(EvidenceRecord)
+        .where(EvidenceRecord.evidence_kind == "large_load_service_contract")
+        .order_by(EvidenceRecord.observed_at.desc(), EvidenceRecord.id)
+    ).all()
+
+    items: list[LargeLoadFilingResponse] = []
+    for evidence in evidence_rows:
+        document = evidence.document
+        source = document.source
+        version = session.get(DocumentVersion, evidence.document_version_id)
+        if version is None:
+            continue
+        fields = _evidence_fields(evidence)
+        load_field = fields.get("reported_load_mw") or {}
+        parent_field = fields.get("parent_company_name") or {}
+        items.append(
+            LargeLoadFilingResponse(
+                evidence_id=evidence.id,
+                docket_number=str(_required_evidence_value(fields, evidence.id, "docket_number")),
+                decision_date=evidence.observed_at,
+                decision_status="conditionally_approved",
+                utility_name=str(_required_evidence_value(fields, evidence.id, "utility_name")),
+                customer_name=str(_required_evidence_value(fields, evidence.id, "customer_name")),
+                parent_company_name=(
+                    str(parent_field["value"]) if parent_field.get("value") else None
+                ),
+                project_type="data_center",
+                reported_load_mw=_required_evidence_float(fields, evidence.id, "reported_load_mw"),
+                load_assertion_class=str(load_field.get("assertion_class") or "unknown"),
+                location_name=str(_required_evidence_value(fields, evidence.id, "location_name")),
+                county_name=str(_required_evidence_value(fields, evidence.id, "county_name")),
+                state_code=str(_required_evidence_value(fields, evidence.id, "state_code")),
+                location_precision=str(
+                    _required_evidence_value(fields, evidence.id, "location_precision")
+                ),
+                geometry=None,
+                summary=evidence.summary,
+                snippet=evidence.snippet or "",
+                snippet_locator=evidence.snippet_locator,
+                evidence_assertion_class=evidence.assertion_class,
+                source=SourceReference(
+                    document_id=document.id,
+                    document_version_id=version.id,
+                    source_slug=source.slug,
+                    source_name=source.name,
+                    agency=source.agency,
+                    source_url=document.source_url,
+                    retrieved_at=version.retrieved_at,
+                    content_sha256=version.content_sha256,
+                    parser_version=version.parser_version,
+                    attribution_text=source.attribution_text,
+                ),
+            )
+        )
+
+    return LargeLoadFilingListResponse(
+        items=items,
+        note=(
+            "These are filing-level records. A named township is not an exact "
+            "facility location, so records without parcel evidence carry no geometry."
+        ),
+    )
 
 
 @router.get(

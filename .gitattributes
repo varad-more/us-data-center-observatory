@@ -1,0 +1,3 @@
+# Recorded public-source bytes are immutable evidence. Preserve the upstream
+# HTML exactly, including whitespace that would be an error in authored files.
+fixtures/mpsc_large_load/*.html whitespace=-blank-at-eol

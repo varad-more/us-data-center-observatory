@@ -26,6 +26,10 @@ from helios_connectors.area_totals import (
 )
 from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
+from helios_connectors.mpsc_large_load import (
+    MPSC_U_21990_URL,
+    MpscLargeLoadConnector,
+)
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.pipeline import IngestionPipeline
 from helios_connectors.registry import SOURCE_REGISTRY
@@ -65,6 +69,12 @@ def api_client(registered_sources: Session, settings, monkeypatch) -> Iterator[T
             ("eia_generation", "existcapacity_annual.xlsx"),
             "capacity",
             states=("AZ",),
+        ),
+        _replay(
+            MpscLargeLoadConnector,
+            ("mpsc_large_load", "u-21990.html"),
+            "mpsc:U-21990:2025-12-18",
+            source_url=MPSC_U_21990_URL,
         ),
     ):
         IngestionPipeline(registered_sources, connector, store, mode="fixture").run()
@@ -325,6 +335,29 @@ class TestSourceRegistry:
         payload = api_client.get("/sources").json()
         assert payload["coverage_summary"]
         assert payload["coverage_summary"].get("implemented", 0) >= 2
+
+
+class TestLargeLoadFilings:
+    def test_publishes_reported_load_with_document_provenance(self, api_client: TestClient) -> None:
+        response = api_client.get("/large-load-filings")
+        assert response.status_code == 200
+        payload = response.json()
+        assert len(payload["items"]) == 1
+
+        filing = payload["items"][0]
+        assert filing["docket_number"] == "U-21990"
+        assert filing["reported_load_mw"] == 1383.0
+        assert filing["load_assertion_class"] == "reported"
+        assert filing["source"]["source_slug"] == "mpsc-large-load-contracts"
+        assert filing["source"]["source_url"].startswith("https://www.michigan.gov/mpsc/")
+        assert len(filing["source"]["content_sha256"]) == 64
+
+    def test_township_location_never_becomes_exact_geometry(self, api_client: TestClient) -> None:
+        filing = api_client.get("/large-load-filings").json()["items"][0]
+        assert filing["location_precision"] == "township"
+        assert filing["location_name"] == "Saline Township"
+        assert filing["geometry"] is None
+        assert "no geometry" in api_client.get("/large-load-filings").json()["note"]
 
 
 class TestAnalytics:

@@ -339,6 +339,36 @@ export const sourceListSchema = z.object({
   coverage_summary: z.record(z.number()),
 });
 
+export const largeLoadFilingSchema = z.object({
+  evidence_id: z.string(),
+  docket_number: z.string(),
+  decision_date: z.string(),
+  decision_status: z.string(),
+  utility_name: z.string(),
+  customer_name: z.string(),
+  parent_company_name: z.string().nullable(),
+  project_type: z.string(),
+  reported_load_mw: z.number(),
+  load_assertion_class: assertionClassSchema,
+  location_name: z.string(),
+  county_name: z.string(),
+  state_code: z.string(),
+  location_precision: z.string(),
+  geometry: z.null(),
+  summary: z.string(),
+  snippet: z.string(),
+  snippet_locator: z.string().nullable(),
+  evidence_assertion_class: assertionClassSchema,
+  source: sourceReferenceSchema,
+});
+
+export type LargeLoadFiling = z.infer<typeof largeLoadFilingSchema>;
+
+export const largeLoadFilingListSchema = z.object({
+  items: z.array(largeLoadFilingSchema),
+  note: z.string(),
+});
+
 export const regionSchema = z.object({
   slug: z.string(),
   name: z.string(),

@@ -1,9 +1,9 @@
 {
-  "total_evidence_records": 557,
-  "with_document_version": 557,
-  "with_snippet": 557,
-  "with_locator": 557,
-  "with_observation_date": 557,
+  "total_evidence_records": 558,
+  "with_document_version": 558,
+  "with_snippet": 558,
+  "with_locator": 558,
+  "with_observation_date": 558,
   "completeness_ratio": 1.0,
   "note": "An evidence record counts as complete only when it cites an immutable document version, quotes a snippet, names a locator within that document, and carries an observation date."
 }

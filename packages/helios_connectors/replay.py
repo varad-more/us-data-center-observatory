@@ -36,6 +36,7 @@ from helios_connectors.azcc_edocket import AzccEdocketConnector, default_fixture
 from helios_connectors.epa_echo import HOSTING_NAICS_QUERY, EpaEchoAirConnector
 from helios_connectors.maricopa_assessor import MaricopaAssessorConnector
 from helios_connectors.mesa_permits import MesaBuildingPermitsConnector
+from helios_connectors.mpsc_large_load import MPSC_U_21990_URL, MpscLargeLoadConnector
 from helios_connectors.osm_power import OsmPowerConnector
 from helios_connectors.types import (
     DateRange,
@@ -81,6 +82,7 @@ def load_fixture_bytes(*parts: str) -> bytes:
 _FIXTURE_MIME_TYPES: dict[str, str] = {
     ".json": "application/json",
     ".csv": "text/csv",
+    ".html": "text/html",
     ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 }
 
@@ -101,6 +103,7 @@ def replay_connector(
     native_id: str,
     *,
     payload: bytes | None = None,
+    source_url: str = "https://example.invalid/recorded",
     **kwargs: Any,
 ) -> BaseConnector:
     """Build a connector that replays a recorded payload instead of fetching.
@@ -115,6 +118,9 @@ def replay_connector(
         native_id: Stable source-native identifier for the recorded item. Held
             constant across runs so re-ingesting an unchanged fixture is a no-op.
         payload: Raw bytes to replay instead of reading ``fixture_parts``.
+        source_url: Public URL of the recorded document. The placeholder default
+            remains available to low-level tests, while product fixtures must
+            publish their real URL through ``FIXTURE_REPLAY_SOURCE_URLS``.
         **kwargs: Forwarded to the connector constructor.
 
     Returns:
@@ -129,7 +135,7 @@ def replay_connector(
                 items=[
                     SourceItem(
                         source_native_id=native_id,
-                        url="https://example.invalid/recorded",
+                        url=source_url,
                         title="Recorded fixture",
                         document_type="fixture",
                     )
@@ -196,6 +202,11 @@ FIXTURE_REPLAYS: dict[str, tuple[type[BaseConnector], tuple[str, ...], str]] = {
         ("eia_generation", "existcapacity_annual.xlsx"),
         "eia:capacity:states:latest",
     ),
+    "mpsc-large-load-contracts": (
+        MpscLargeLoadConnector,
+        ("mpsc_large_load", "u-21990.html"),
+        "mpsc:U-21990:2025-12-18",
+    ),
 }
 
 FIXTURE_REPLAY_KWARGS: dict[str, dict[str, Any]] = {
@@ -208,6 +219,11 @@ FIXTURE_REPLAY_KWARGS: dict[str, dict[str, Any]] = {
         "state": None,
     },
 }
+
+FIXTURE_REPLAY_SOURCE_URLS: dict[str, str] = {
+    "mpsc-large-load-contracts": MPSC_U_21990_URL,
+}
+"""Public document URLs retained by fixture replay for published provenance."""
 
 NATIONAL_FIXTURES: dict[str, str] = {
     "epa-echo-air-facilities": "epa-echo-air-facilities-national",
@@ -232,6 +248,9 @@ FIXTURE_INGEST_ORDER: tuple[str, ...] = (
     "usgs-county-water-use",
     "eia-state-electricity-sales",
     "eia-state-generation-capacity",
+    # A filing-level record with township precision; it intentionally creates
+    # no site or map geometry.
+    "mpsc-large-load-contracts",
     # Fixture-only in production; no replay wrapper needed.
     "azcc-edocket",
 )
@@ -264,7 +283,11 @@ def build_fixture_connector(slug: str, **kwargs: Any) -> BaseConnector:
 
     connector_cls, fixture_parts, native_id = FIXTURE_REPLAYS[slug]
     return replay_connector(
-        connector_cls, fixture_parts, native_id, **{**FIXTURE_REPLAY_KWARGS.get(slug, {}), **kwargs}
+        connector_cls,
+        fixture_parts,
+        native_id,
+        source_url=FIXTURE_REPLAY_SOURCE_URLS.get(slug, "https://example.invalid/recorded"),
+        **{**FIXTURE_REPLAY_KWARGS.get(slug, {}), **kwargs},
     )
 
 
@@ -273,6 +296,7 @@ __all__ = [
     "FIXTURE_INGEST_ORDER",
     "FIXTURE_REPLAYS",
     "FIXTURE_REPLAY_KWARGS",
+    "FIXTURE_REPLAY_SOURCE_URLS",
     "NATIONAL_FIXTURES",
     "FixtureNotFoundError",
     "build_fixture_connector",

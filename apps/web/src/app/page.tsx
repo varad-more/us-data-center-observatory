@@ -347,12 +347,29 @@ export default async function Home() {
               count, floor area or allocated load. Each has its own page and its own curve.
             </p>
           </Link>
+          <Link href="/construction" className="guide-card">
+            <h3>Mapped construction</h3>
+            <p>
+              The {meta.construction_count?.toLocaleString() ?? "—"} records contributors
+              currently mark as under construction — a forward signal kept separate from
+              operating power and water estimates.
+            </p>
+          </Link>
+          <Link href="/large-load-filings" className="guide-card">
+            <h3>Large-load filings</h3>
+            <p>
+              Site-specific utility-regulator decisions that report a contracted
+              electricity load, kept separate from operating consumption and mapped
+              only at the precision the filing supports.
+            </p>
+          </Link>
           <Link href="/observatory-map" className="guide-card">
             <h3>The national map</h3>
             <p>
               All {meta.facility_count.toLocaleString()} facilities at their mapped
-              coordinates, each circle sized so its drawn area tracks the real building
-              footprint.
+              coordinates. Building circles scale by floor plate; campus boundaries and
+              construction records stay fixed-size so land area cannot masquerade as
+              building area.
             </p>
           </Link>
           <Link href="/changes" className="guide-card">
