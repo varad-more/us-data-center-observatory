@@ -6,6 +6,229 @@ Ivory default with a dark toggle; assertion class re-encoded as an ordinal ramp
 plus a border treatment. Repo rename deferred; the US-scope data expansion is a
 separate program.
 
+## Codebase review and cleanup
+
+Asked for a review of what is done and what remains, plus a cleanup. The repo
+was not in the state `tasks/handoff.md` recorded: 56 files sat staged and
+uncommitted, holding four separate bodies of work.
+
+- [x] Split the staged blob into four self-contained commits, each buildable on
+      its own. The nav entries in `layout.tsx`, `SiteFooter.tsx` and `page.tsx`
+      had to be split by hand so no commit links to a page that does not exist
+      yet.
+- [x] `ObservatoryMap` sized a feature with no `site_class` as a building. All
+      1,853 published features carry the class today, so the branch was
+      unreachable — but the default was backwards, and an unknown is not a
+      building. Both layers now partition on `!= "building"`, and a test pins it.
+- [x] Delete nine public helpers with a definition, an `__all__` entry and no
+      caller. Keep `OrganizationRelationship`: `0001_initial_schema.py` creates
+      the table, so removing the model would be schema drift.
+- [x] Remove `packages/helios_remote_sensing`, which held only stale bytecode
+      and was never tracked.
+- [x] Correct four statements in this file that the work below had already
+      superseded — the Virginia 2,255 MW figure, and "nothing yet reads" the
+      construction records.
+
+### Review
+
+Verified on the final tree: `make lint`, `make typecheck` (mypy 58 files +
+tsc), `make test-unit` 234 passed, `make test-web` 31 passed.
+
+**`make test` was not run.** Docker is unavailable on this machine, so the
+integration and contract suites that need PostGIS on 5433 have not executed
+locally — including `tests/contract/test_mpsc_large_load_connector.py`, which is
+new. CI runs them. Anyone pushing this is trusting CI for that half.
+
+The intermediate commits were verified by construction rather than by checking
+each one out: every split file's earlier state is a strict subset of its final
+state with no dangling identifier. The registry-tag commit was the exception and
+was run directly — 7 passed.
+
+Still not done, and still the top item: nobody has looked at any of these pages
+in a browser.
+
+## Construction signal and visual audit
+
+Started after the 2026-07-29 handoff. The first browser pass covered the live
+landing page, a county page with both campus and construction exclusions, and
+the national map at desktop and phone widths. It exposed one remaining version
+of the footprint conflation: the map and the named-facility table still called
+every polygon area a building footprint.
+
+- [x] Size only building marks by floor plate on the national map; draw land
+      parcels and construction records at a fixed size.
+- [x] Label each mapped area for the physical thing it measures in map popups
+      and region tables.
+- [x] Correct the national map's "building outline mapped" percentage so it
+      counts buildings, not every polygon with an area.
+- [x] Publish the 45 records mapped as under construction as a forward signal,
+      without turning their mapped area into MW or their first OSM appearance
+      into a construction-start date.
+- [x] Link the new surface from the landing page, navigation, and footer.
+- [x] Prove the map interaction, web tests, typecheck, lint, static export, and
+      representative desktop/mobile layouts.
+
+### Review
+
+The live visual audit covered the landing page, Maricopa County and the national
+map before implementation. The new static export was then checked at desktop
+width and 390 × 844: the construction page has no page-level horizontal
+overflow, its two wide tables scroll inside their cards, and the corrected map
+renders and still loads its grid on demand.
+
+The defect was broader than one table label. The national map reported 93% as
+"building outline mapped" by counting every record with any polygon area, even
+though only 1,506 of 1,853 records (81%) are buildings. It also used campus land
+and construction area to size those marks. Both now use `site_class`: buildings
+scale by floor plate, everything else is a fixed-size point, and popups name the
+quantity they display.
+
+The new `/construction` surface publishes 45 current construction-tagged
+records across 20 counties and 15 states. It names the 23.01 km² total as mapped
+construction geometry, assigns no MW or water, and describes `first_seen` only
+as the record's first appearance in retained map history.
+
+Verification:
+
+- `make lint` — pass
+- `make typecheck` — pass
+- `make test-unit` — 225 passed, 199 deselected
+- `make test-web` — 26 passed
+- `make audit-contrast` — every light and dark pair clears its floor
+- `make build-web` — 352 static pages generated, including `/construction`
+
+## Show source registry notes
+
+The registry, database, API schema, static export and frontend Zod schema already
+carry `source.notes`. The sources page is the only layer that discards it, which
+leaves ADWR's stated deferral reason and several source-specific interpretation
+notes invisible.
+
+- [x] Render registry notes separately from access limitations.
+- [x] Add a component test proving both fields survive when a source has both.
+- [x] Verify the committed static payload already carries ADWR's note, so no
+      database-backed re-export is needed.
+- [x] Run web lint, typecheck, tests and the static build.
+
+### Review
+
+`apps/web/public/api/sources.json` already carries eleven non-empty registry
+notes, including ADWR's "Needed before any water-use scenario is published.
+Deferred." The API router and Zod schema both already require the field. The
+only change needed was to stop dropping it in the source-entry component.
+
+Notes now render as contextual registry prose, while an `access_limitation`
+keeps its own caution notice. They are not aliases: one explains why a source
+matters or how to read it; the other explains why Helios cannot access it.
+
+Verification:
+
+- web lint — pass
+- web typecheck — pass
+- web tests — 28 passed, including both note-only and note-plus-limitation cases
+- static build — 352 pages generated
+
+## Register the federal large-load interconnection gap
+
+FERC opened RM26-4 in October 2025 and issued six tailored RTO/ISO show-cause
+orders on 18 June 2026. Those proceedings are primary evidence that future
+large-load study and cost data may become public, but they are not a uniform
+machine-readable dataset today. The NYISO order is the specific order that
+describes a searchable public location for aggregate requests, network upgrades,
+and cost estimates; the registry must not generalize that exact remedy to all
+six operators.
+
+- [x] Add the FERC proceeding as a planned utility/regulatory source, dated and
+      linked to the official RM26-4 page.
+- [x] Expose each source's publisher URL from the rendered registry, rather
+      than carrying `base_url` only in JSON.
+- [x] State that the six orders are tailored and that no uniform ingestible
+      regional dataset exists yet.
+- [x] Add an honesty test that prevents the planned proceeding from acquiring a
+      connector or being described as current coverage.
+- [x] Regenerate the published source catalog through registry sync and the
+      static API exporter.
+- [x] Verify backend and web behavior, then close the two corresponding
+      candidate/cleaning items below.
+
+### Review
+
+The registry and generated `/sources` payload now carry 18 entries. FERC is
+listed as `planned`, with no connector, no successful run and zero documents.
+Its public note separates the six tailored proceedings from the more specific
+NYISO publication proposal, while its access limitation says plainly that
+Helios has no current interconnection coverage.
+
+The source was synced into the fixture database and exported through the real
+API rather than added by hand to `sources.json`. The rendered `/sources` page
+links the official proceeding and shows both the registry note and access
+limitation.
+
+Verification:
+
+- `make check` against PostGIS on port 5433 — 427 backend tests and 28 web tests
+  passed; lint and both typecheckers passed
+- `make export-api` — 13 sites and 18 sources exported; snapshot verifier passed
+- `make audit-contrast` — every light and dark pair clears its floor
+- `make build-web` — 352 static pages generated
+- `git diff --check` — pass
+
+## Publish a state large-load filing
+
+The first bounded state-PUC implementation is Michigan MPSC Case U-21990. The
+Commission's 18 December 2025 disclosure names DTE Electric, Green Chile
+Ventures, Saline Township and a 1,383 MW contracted data-centre load. It is a
+site-specific primary regulatory statement, unlike Pennsylvania's statewide
+model tariff, but it locates the project only to a township. Helios should
+publish the filing and the reported number without inventing a parcel or map
+point.
+
+- [x] Register the MPSC disclosure as an implemented, fixture-replayable public
+      source.
+- [x] Parse the recorded official page into one cited large-load service
+      contract, preserving the 1,383 MW text and its reported assertion class.
+- [x] Publish filing-level API and web output with township location precision,
+      immutable document provenance and no inferred geometry.
+- [x] Add connector, API and frontend contract tests for the epistemic and
+      location invariants.
+- [x] Rebuild the fixture database and static export, visually inspect the new
+      surface, and run the complete verification suite.
+
+### Review
+
+MPSC U-21990 is now a first-class filing record rather than an Arizona site or
+national map point. The connector replays the captured official Commission
+page through the production parser, emits one `large_load_service_contract`
+evidence record, preserves 1,383 MW as `reported`, and carries Saline Township
+as the most specific location with no geometry.
+
+`GET /large-load-filings` and the new `/large-load-filings` page publish the
+docket, named contracting parties, stated parent relationship, decision date,
+reported load, exact source snippet, retrieval time and content digest. The
+page explicitly distinguishes contracted demand from operating consumption,
+generation capacity and available grid capacity. It does not call Oracle the
+operator.
+
+Browser inspection caught a fixture placeholder URL in the first rendered
+draft. Fixture replay now retains the official MPSC URL, unchanged-document
+ingestion refreshes the logical document's checkable URL while preserving each
+immutable version URL, and static verification rejects a placeholder URL. The
+same inspection caught and removed a duplicated “County” label. At a 1280 px
+viewport the page has no horizontal overflow.
+
+Verification:
+
+- `make check` against PostGIS on port 5433 — 436 backend tests and 30 web tests
+  passed; lint and both typecheckers passed
+- static export verifier — 13 Arizona sites plus one provenance-complete
+  large-load filing; no filing geometry; official source URL retained
+- `make audit-contrast` — every light and dark pair clears its floor
+- `make build-web` — 353 static pages generated, including
+  `/large-load-filings`
+- in-app browser DOM and layout inspection — official link, assertion badge,
+  township precision and no-point notice all rendered; no horizontal overflow
+- `git diff --check` — pass
+
 ## Plan
 
 - [x] **Tokens and typeface** — warm ivory ground, `light-dark()` throughout,
@@ -271,12 +494,12 @@ survived contact with the field.
       over 100 MW; Pennsylvania created a dedicated large-load tariff. These are
       primary filings carrying a **reported** MW figure attached to a named
       site — the exact epistemic object track 1 wanted, reachable today.
-- [ ] **Register FERC RM26-4 as a planned source.** On 18 June 2026 FERC issued
-      show cause orders to all six RTOs/ISOs and directed them to publish
-      large-load network upgrade projects and costs on a *searchable platform*,
-      plus aggregated large-load requests per transmission zone. Nothing to
-      build yet; a registry entry citing the docket makes the gap visible and
-      dated, which is what the registry is for.
+- [x] **Register FERC RM26-4 as a planned source.** On 18 June 2026 FERC issued
+      tailored show-cause orders to all six jurisdictional RTOs/ISOs. The NYISO
+      order specifically proposed publication of large-load network upgrades,
+      costs and zonal aggregates in a searchable location. Nothing to ingest
+      uniformly yet; a registry entry citing the docket makes the gap visible
+      and dated, which is what the registry is for.
 - [ ] **GASB 77 tax abatement disclosures.** Every state and local government
       must disclose taxes abated in its annual financial statements. No tracker
       ties public cost to a specific site, and 14 states do not disclose
@@ -299,14 +522,16 @@ survived contact with the field.
 
 ### Cleaning, sorted by whether a reader is misled
 
-- [ ] `source.notes` renders nowhere, so ADWR's stated deferral reason is held
+- [x] `source.notes` renders nowhere, so ADWR's stated deferral reason is held
       and invisible — the same defect just fixed one field over.
-- [ ] The interconnection gap is asserted in `limitations.md` twice,
+- [x] The interconnection gap is asserted in `limitations.md` twice,
       `methodology.md`, the analytics caveat and two source comments, and the
       registry says nothing. The page built to show gaps omits the biggest one.
-- [ ] Two `future-phase` tag values in `registry.py` — last of the phase naming.
-- [ ] `ConnectorStatus.DEGRADED` and `DISABLED` are statuses no code can
-      produce. Either derive them from `last_success_at` or drop them.
+- [x] Two `future-phase` tag values in `registry.py` — removed rather than
+      renamed, because `PLANNED` already carries delivery posture and tags should
+      describe the source.
+- [x] `ConnectorStatus.DEGRADED` and `DISABLED` were statuses no code could
+      produce. Dropped them and closed the vocabulary with a reachability test.
 - [ ] Three stale claims in "Known, not addressed" above: the Node-20 actions
       are already on v5–v7, and three of the four "phase leftovers" are clean.
 
@@ -447,9 +672,12 @@ Validated against a direct ohsome query made before any of the code existed:
 - [ ] 203 of 1,853 facilities have no `first_seen`: mapped before the retained
       history, so they are on the map but not in any curve. Each region page
       states its own gap rather than hiding it.
-- [ ] Virginia is allocated 2,255 MW where JLARC puts Northern Virginia alone
-      near 4,100 MW. Footprint under-weights dense multi-storey halls. This is
-      the weakest link in the power model and is documented as such.
+- [ ] Superseded, kept for the record: Virginia was allocated 2,255 MW against
+      JLARC's ~4,100 MW for Northern Virginia alone, and this was read as
+      footprint under-weighting dense multi-storey halls. The cause was the
+      pooled-area defect, not storeys; allocating on building floor area put
+      Virginia at 4,972 MW. See the measured table below. What remains open is
+      the opposite error: regions mapped campus-first are now understated.
 - [ ] Facility coverage is unmeasurable. No authoritative count of US data
       centres exists to compare 1,853 against.
 
@@ -550,7 +778,9 @@ decision to fetch rather than inline all came from a number taken first.
 - [ ] Proximity is not connection. Nothing here shows that a facility beside a
       500 kV substation has contracted anything from it.
 - [ ] The map layers are verified by test and by reading rendered HTML, never
-      by looking at them — no browser was available in this session.
+      by looking at them. No session so far has had a browser connected, so
+      nothing in the suite would catch a CSS break or a map that fails to
+      paint on a phone.
 
 ### Making the grid answer something
 
@@ -637,7 +867,11 @@ invisible error for a smaller stated one.
 - [ ] A campus mapped only as a land parcel contributes nothing to its county.
       Estimating it would need a floor-area-to-parcel ratio, which is a
       coefficient this project has no measured basis for and will not invent.
-- [ ] 45 sites are mapped as under construction. That is a genuine forward
-      signal — where capacity is being built — and nothing yet reads it.
-- [ ] Still nobody has *looked* at any of these pages. The browser extension was
-      not connected in this session either.
+- [x] 45 sites are mapped as under construction. That is a genuine forward
+      signal — where capacity is being built — and until `/construction` it was
+      measured, counted and then ignored. The page states the signal's limits:
+      contributor-reported status, a date that is when the record appeared in
+      map history rather than when construction began, and no entry into the
+      operating-load allocation.
+- [ ] Still nobody has *looked* at any of these pages. No session so far has had
+      the browser extension connected.

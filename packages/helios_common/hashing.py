@@ -11,27 +11,10 @@ import hashlib
 import json
 from typing import Any
 
-_CHUNK = 1 << 20
-
 
 def content_sha256(payload: bytes) -> str:
     """Return the hex SHA-256 of a byte payload."""
     return hashlib.sha256(payload).hexdigest()
-
-
-def stream_sha256(stream: Any) -> str:
-    """Hash a file-like object without loading it fully into memory.
-
-    Args:
-        stream: Any object exposing ``read(size)`` returning bytes.
-
-    Returns:
-        Hex SHA-256 digest.
-    """
-    digest = hashlib.sha256()
-    while chunk := stream.read(_CHUNK):
-        digest.update(chunk)
-    return digest.hexdigest()
 
 
 def stable_json_hash(value: Any) -> str:

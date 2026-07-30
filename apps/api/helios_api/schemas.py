@@ -58,19 +58,6 @@ class PageMeta(HeliosModel):
 # ------------------------------------------------------------------ sites --
 
 
-class AssertedValue(HeliosModel):
-    """A value paired with how it was established.
-
-    Used wherever a client might otherwise mistake an inference for a reading.
-    """
-
-    value: Any = None
-    assertion_class: str = Field(
-        description="reported | extracted | calculated | inferred | predicted | unknown"
-    )
-    detail: str | None = None
-
-
 class SiteSummary(HeliosModel):
     """A site as it appears in lists and on the map."""
 
@@ -715,7 +702,6 @@ __all__ = [
     "AnalyticsStagesResponse",
     "AreaConsumptionResponse",
     "AreaTotalResponse",
-    "AssertedValue",
     "ConnectorRunResponse",
     "DependencyResponse",
     "DocumentResponse",

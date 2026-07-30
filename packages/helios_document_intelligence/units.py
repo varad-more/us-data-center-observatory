@@ -237,11 +237,6 @@ def acres_from_sqft(sqft: float) -> float:
     return sqft / SQFT_PER_ACRE
 
 
-def sqft_from_acres(acres: float) -> float:
-    """Convert acres to square feet."""
-    return acres * SQFT_PER_ACRE
-
-
 def parse_voltage_list(raw: str | None) -> list[float]:
     """Parse an OpenStreetMap ``voltage`` tag into kilovolts.
 
@@ -280,5 +275,4 @@ __all__ = [
     "extract_quantities",
     "parse_number",
     "parse_voltage_list",
-    "sqft_from_acres",
 ]

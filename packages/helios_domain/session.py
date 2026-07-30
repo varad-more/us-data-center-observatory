@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Generator, Iterator
 from contextlib import contextmanager
 
-from sqlalchemy import Engine, create_engine, event, text
+from sqlalchemy import Engine, create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 
 from helios_common.config import Settings, get_settings
@@ -62,15 +62,6 @@ def get_session_factory() -> sessionmaker[Session]:
     return _session_factory
 
 
-def reset_engine() -> None:
-    """Dispose of the cached engine. Used by tests that switch databases."""
-    global _engine, _session_factory
-    if _engine is not None:
-        _engine.dispose()
-    _engine = None
-    _session_factory = None
-
-
 @contextmanager
 def session_scope() -> Iterator[Session]:
     """Provide a transactional scope, committing on success and rolling back on error."""
@@ -92,16 +83,3 @@ def get_session() -> Generator[Session, None, None]:
         yield session
     finally:
         session.close()
-
-
-def ensure_postgis(engine: Engine) -> None:
-    """Create the extensions Helios relies on.
-
-    Idempotent, and safe to call at migration time.
-
-    Args:
-        engine: Engine connected to the target database.
-    """
-    with engine.begin() as connection:
-        connection.execute(text("CREATE EXTENSION IF NOT EXISTS postgis"))
-        connection.execute(text("CREATE EXTENSION IF NOT EXISTS pg_trgm"))

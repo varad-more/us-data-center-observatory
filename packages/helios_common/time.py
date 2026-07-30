@@ -26,20 +26,6 @@ def utcnow() -> datetime:
     return datetime.now(tz=UTC)
 
 
-def ensure_utc(value: datetime) -> datetime:
-    """Attach UTC to a naive datetime, or convert an aware one.
-
-    Args:
-        value: Datetime that may or may not carry a timezone.
-
-    Returns:
-        The equivalent instant in UTC.
-    """
-    if value.tzinfo is None:
-        return value.replace(tzinfo=UTC)
-    return value.astimezone(UTC)
-
-
 def from_epoch_millis(value: int | float | None) -> datetime | None:
     """Convert an ArcGIS-style epoch timestamp to UTC.
 
@@ -82,23 +68,3 @@ def parse_flexible_date(raw: str | None, *, dayfirst: bool = False) -> date | No
     except (ValueError, OverflowError, TypeError):
         return None
     return parsed.date()
-
-
-def parse_flexible_datetime(raw: str | None) -> datetime | None:
-    """Parse a timestamp from unpredictable formatting, normalised to UTC."""
-    if raw is None or not raw.strip():
-        return None
-    try:
-        parsed = dateutil_parser.parse(raw.strip())
-    except (ValueError, OverflowError, TypeError):
-        return None
-    return ensure_utc(parsed)
-
-
-def as_date(value: datetime | date | None) -> date | None:
-    """Reduce a datetime to a calendar date, passing through dates and ``None``."""
-    if value is None:
-        return None
-    if isinstance(value, datetime):
-        return value.date()
-    return value

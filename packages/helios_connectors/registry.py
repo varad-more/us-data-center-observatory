@@ -14,12 +14,8 @@ of leaving users to assume the absence of evidence means the absence of activity
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING
 
 from helios_common.vocabulary import AccessMethod, ConnectorStatus, SourceCategory
-
-if TYPE_CHECKING:
-    from collections.abc import Iterator
 
 
 @dataclass(frozen=True, slots=True)
@@ -612,11 +608,6 @@ SOURCE_REGISTRY: tuple[SourceRegistryEntry, ...] = (
 )
 
 
-def iter_registry() -> Iterator[SourceRegistryEntry]:
-    """Iterate over every declared source."""
-    return iter(SOURCE_REGISTRY)
-
-
 def get_entry(slug: str) -> SourceRegistryEntry:
     """Look up a registry entry by slug.
 
@@ -655,6 +646,5 @@ __all__ = [
     "SourceRegistryEntry",
     "get_entry",
     "implemented_entries",
-    "iter_registry",
     "registry_coverage_summary",
 ]

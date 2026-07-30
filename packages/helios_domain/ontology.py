@@ -214,17 +214,6 @@ class SiteRelationType(StrEnum):
     REPLACES = "REPLACES"
 
 
-class EvidenceRelationType(StrEnum):
-    """How one evidence record relates to another."""
-
-    SUPPORTS = "SUPPORTED_BY"
-    CONFIRMS = "CONFIRMS"
-    CONTRADICTS = "CONTRADICTS"
-    DERIVED_FROM = "DERIVED_FROM"
-    MENTIONED_IN = "MENTIONED_IN"
-    REPLACES = "REPLACES"
-
-
 class PermitCategory(StrEnum):
     """Normalised permit taxonomy across jurisdictions.
 
@@ -275,7 +264,6 @@ class SiteKind(StrEnum):
 
 __all__ = [
     "DevelopmentStage",
-    "EvidenceRelationType",
     "InfrastructureKind",
     "OrganizationRelationshipType",
     "OrganizationRole",
