@@ -6,6 +6,43 @@ Ivory default with a dark toggle; assertion class re-encoded as an ordinal ramp
 plus a border treatment. Repo rename deferred; the US-scope data expansion is a
 separate program.
 
+## Repository presentation: description, README, commit history
+
+- [x] Set the GitHub description and 16 topics. The repo is still **private**;
+      the Pages site is public. Making the repo public is a separate decision
+      and has not been taken.
+- [x] Rewrite `README.md`. It still described Helios as an Arizona-only parcel
+      study, so the observatory — the larger dataset by two orders of magnitude
+      — was invisible to anyone arriving from the repository page. Every figure
+      in the new text is read off `data/observatory/` and
+      `apps/web/public/data/meta.json`, not remembered.
+- [x] Squash 89 commits into 24 linear milestones. Built with `git commit-tree`
+      from each milestone's own tree rather than by rebase, so every commit is a
+      state the repo genuinely occupied and no conflict resolution invented one.
+      The `Merge pull request #2` commit is flattened; the graph has no merges.
+      Original author dates are preserved. A first pass at 14 was rejected as
+      too coarse — it buried the scoring split, the ECHO sweep and the
+      allocation fix inside larger commits.
+
+### Review
+
+`git diff <new-head> <old-head>` is empty, `git rev-list --parents` shows no
+commit with two parents, and each of the 24 commit trees hashes identically to
+the milestone tree it was built from. Re-verified on the rewritten tree:
+`make lint`, `make typecheck`, `make test-unit` 234 passed, `make test-web` 31
+passed.
+
+The pre-squash history is kept locally as branch `backup-pre-squash` and tag
+`backup/pre-squash`; neither is pushed. Deleting them discards the only copy of
+the 89-commit history, so leave them until the rewritten `main` has been live
+long enough to trust.
+
+One README claim was cut rather than published: nothing tests that a
+disappearance is never worded as a demolition. The wording is enforced by
+`apps/web/src/app/changes/page.tsx` and its comment, and the plan called for a
+test that was never written. A README about provenance is the last place to
+assert a gate that does not exist.
+
 ## Codebase review and cleanup
 
 Asked for a review of what is done and what remains, plus a cleanup. The repo
