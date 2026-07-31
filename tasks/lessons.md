@@ -402,3 +402,34 @@ result that had just moved in the direction I expected.
 field actually contains before branching on it — `Counter(tags.get(k))` over the
 real data takes seconds and would have shown `no` sitting there among the 21
 values. And be most suspicious of a new result exactly when it confirms the fix.
+
+## Determinism has to be checked from a clean checkout, not from mtimes
+
+The obvious gate for "is this derived file stale?" is comparing modification
+times against its input. It cannot work: git stores no mtimes, so every file in
+a fresh clone is equally new and the check passes on exactly the machine where
+it matters. The working version rebuilds and diffs the bytes.
+
+Getting there exposed the real defect. `meta.json` wrote a wall-clock
+`generated_at`, which meant every offline rebuild produced a diff — so the
+README's claim that "a poll with no upstream change produces no diff" had been
+false for as long as the field existed, and no gate could have been added
+without noticing.
+
+**How to apply:** before writing a check for a property, run the thing twice and
+confirm the property actually holds. One field of nondeterminism invalidates it
+entirely, and a timestamp is almost always that field. Ask what the value is
+*for* — nothing rendered `generated_at`, and the useful date was when the source
+was last contacted, which is stable.
+
+## Verify a negative result before trusting it
+
+The drift gate reported PASS on a deliberately mutated file. The mutation had
+not survived — `python` was not on PATH, the rebuild never ran, and the command
+exited 0 anyway. A green mutation test is a claim that the gate is broken, and
+it deserves the same scrutiny as a red one.
+
+**How to apply:** when a test fails to fail, check that the code under test ran
+at all before concluding anything about it. Echo the intermediate state — here,
+the value in the file before and after the rebuild — rather than only the final
+verdict.

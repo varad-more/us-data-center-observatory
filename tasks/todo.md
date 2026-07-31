@@ -37,12 +37,28 @@ step for them, and CI does not regenerate `apps/web/public/data/`. That is also
 exactly why the stale-series defect above could survive, so the trade has a
 cost and it has now been paid once.
 
+### Closed since
+
+- [x] **Nothing in CI regenerated derived data**, so an input change could leave
+      the published series stale again the same way. Now a job runs the offline
+      rebuild and diffs the result, failing the build on any drift. An mtime
+      comparison was the obvious shape and would have been wrong: git does not
+      record mtimes, so every file looks equally fresh in a clean checkout. The
+      content comparison works because the writers are byte-stable, which is a
+      property the project already guarantees and tests.
+- [x] **`meta.json` carried a wall-clock `generated_at`**, the one field that
+      changed on a run that changed nothing. It quietly falsified the
+      byte-stability claim and had to go before any drift gate could exist. Now
+      `last_polled`, read from the last `poll_log.csv` row.
+- [x] **The crawler's User-Agent pointed at a repository that does not exist.**
+      Volunteer-run APIs use that string to reach whoever is loading them.
+
 ### Still open
 
-Nothing regenerates derived data in CI, so a future input change can leave the
-published series stale again in the same way. A check that fails when
-`region_series.csv` is older than `events.csv` would have caught this in
-seconds. Not written — it needs a decision about where it runs.
+Making the repo public is still undecided, and a rename for discoverability is
+proposed but not chosen — `project-helios` matches nothing anyone would search.
+Renaming also moves the Pages URL, so the homepage link set on the repo has to
+move with it.
 
 ## Repository presentation: description, README, commit history
 
