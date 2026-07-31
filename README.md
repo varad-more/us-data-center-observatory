@@ -202,7 +202,8 @@ the allocation sums to the published national total; land and construction area
 never dilute the buildings; areas are computed on an equal-area projection, not
 naive degrees; no serializer ever emits a build date; the pre-2017 band renders
 whenever the series reaches back that far *and* stays off a series that does not;
-and a re-poll with no upstream change produces byte-identical CSVs.
+a facility leaving the map is worded as a removal and never as a closure; and a
+re-poll with no upstream change produces byte-identical CSVs.
 
 ---
 

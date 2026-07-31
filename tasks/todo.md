@@ -6,6 +6,44 @@ Ivory default with a dark toggle; assertion class re-encoded as an ordinal ramp
 plus a border treatment. Repo rename deferred; the US-scope data expansion is a
 separate program.
 
+## Repository audit
+
+Asked whether the repo is production-ready and whether anything in it is
+garbage. Two defects found, both shipped and both fixed here.
+
+- [x] **The published national growth curve was stale and 4% high.**
+      `region_series.csv` was written once and never rebuilt, while `events.csv`
+      later lost 155 unplaced rows. Because `_regions_of` only credits a county
+      when the row carries one, the loss fell entirely on `national:US` — 322 of
+      323 series were correct, and the wrong one was the headline. 1,736 against
+      a true 1,666 in June 2026.
+- [x] **`poll.py --skip-fetch` logged a poll it had not performed.** A row in
+      `poll_log.csv` asserting the source was checked, when nothing was
+      contacted.
+- [x] Test the wording gate the README had to disclaim: a disappearance renders
+      as "removed from OSM", never as closed, decommissioned or shut down.
+      Verified by mutation — swapping the label to "closed" fails the test.
+
+### What the audit found clean
+
+614 tracked files, no `__pycache__`, `.pyc`, `.DS_Store`, build output or editor
+leftovers among them. No `.env`, key material or credential-shaped strings. No
+`TODO`/`FIXME`/`XXX` markers. The only empty tracked files are `__init__.py`
+package markers, `.gitkeep` and `.nojekyll`. `.git` is 8.5 MB.
+
+393 of the 614 are generated payloads — 330 region series, 57 static API files,
+the observatory JSON. They are committed on purpose: GitHub Pages has no build
+step for them, and CI does not regenerate `apps/web/public/data/`. That is also
+exactly why the stale-series defect above could survive, so the trade has a
+cost and it has now been paid once.
+
+### Still open
+
+Nothing regenerates derived data in CI, so a future input change can leave the
+published series stale again in the same way. A check that fails when
+`region_series.csv` is older than `events.csv` would have caught this in
+seconds. Not written — it needs a decision about where it runs.
+
 ## Repository presentation: description, README, commit history
 
 - [x] Set the GitHub description and 16 topics. The repo is still **private**;
