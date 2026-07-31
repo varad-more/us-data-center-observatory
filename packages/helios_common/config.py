@@ -45,9 +45,16 @@ class Settings(BaseSettings):
     # ------------------------------------------------------------- ingestion --
     user_agent: str = (
         "ProjectHelios/0.1 (open public-infrastructure research; "
-        "+https://github.com/project-helios/helios)"
+        "+https://github.com/varad-more/project-helios)"
     )
-    """Identifies the crawler honestly, as required by our responsible-use policy."""
+    """Identifies the crawler honestly, as required by our responsible-use policy.
+
+    The URL has to resolve. Overpass, ohsome and ECHO are volunteer- or
+    agency-run, and this string is the only way an operator whose service Helios
+    is loading can find out who is doing it and ask them to stop. A User-Agent
+    pointing at a repository that does not exist is worse than none: it looks
+    like an attempt to appear accountable without being reachable.
+    """
 
     http_timeout_seconds: float = 60.0
     http_max_retries: int = 4

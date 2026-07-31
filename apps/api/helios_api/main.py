@@ -94,7 +94,7 @@ def create_app() -> FastAPI:
             {"name": "exports", "description": "CSV, GeoJSON, and verifiable evidence bundles."},
             {"name": "admin", "description": "Protected operational endpoints."},
         ],
-        contact={"name": "Project Helios", "url": "https://github.com/project-helios/helios"},
+        contact={"name": "Project Helios", "url": "https://github.com/varad-more/project-helios"},
         license_info={"name": "Apache-2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0"},
     )
 
