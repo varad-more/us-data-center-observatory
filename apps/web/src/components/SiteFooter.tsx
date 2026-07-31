@@ -78,9 +78,9 @@ export async function SiteFooter() {
             <p className="footer-mark">Helios</p>
             <p className="footer-blurb">
               Where data centres are, how fast they are arriving, and what they cost in
-              electricity and water — counted nationally from OpenStreetMap and, in one
-              Arizona valley, inferred in depth from parcel and permit records. Every
-              figure traces to the document it came from.
+              electricity and water. Counted nationally from OpenStreetMap, and in one
+              Arizona valley inferred in depth from parcel and permit records. Every
+              figure traces back to the document it came from.
             </p>
             {exportedOn && (
               <p className="freshness">

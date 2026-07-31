@@ -59,9 +59,9 @@ export default async function MapPage() {
         </div>
         <NationalFacilityMap facilities={facilities} />
         <p className="small muted">
-          <strong>{facilities.features.length}</strong> facilities. The density around
-          Northern Virginia is the point: it is the largest concentration of data-centre
-          capacity in the world, and Helios has built no sites there.
+          <strong>{facilities.features.length}</strong> facilities. Northern Virginia is
+          the largest concentration of data-centre capacity in the world, and Helios has
+          built no sites there. Worth sitting with before reading anything else here.
         </p>
       </section>
 

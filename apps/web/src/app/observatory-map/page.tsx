@@ -90,12 +90,11 @@ export default async function ObservatoryMapPage() {
       </div>
 
       <div className="notice">
-        <strong>Absence on this map is not evidence of absence.</strong>{" "}
-        OpenStreetMap is mapped by volunteers, and coverage is uneven: Northern
-        Virginia is mapped in detail because people there have mapped it. An
-        empty area may hold no data centres, or may simply hold no mappers. This
-        layer can tell you what has been recorded; it cannot tell you what
-        exists.
+        <strong>A blank patch here is not a finding.</strong> OpenStreetMap is
+        mapped by volunteers, and coverage follows them: Northern Virginia is
+        drawn in detail because people there have drawn it. An empty area may
+        hold no data centres. It may equally hold no mappers. What you are
+        looking at is the record, not the country.
       </div>
 
       {(meta.construction_count ?? 0) > 0 ? (
@@ -133,11 +132,10 @@ export default async function ObservatoryMapPage() {
             poor trade.
           </p>
           <p className="small" style={{ marginBottom: 0 }}>
-            Proximity is not connection. A data centre beside a 500 kV
-            substation may have no agreement to draw from it, and
-            interconnection queues in several regions now run for years. This
-            map shows what is near what; it does not show that power has been
-            contracted, and nothing here should be read as evidence that it has.
+            Proximity is not connection. A data centre sitting beside a 500 kV
+            substation may have no agreement to draw a single watt from it, and
+            interconnection queues in several regions now run for years. These
+            layers place things near each other. Read nothing further into it.
           </p>
         </section>
       ) : null}

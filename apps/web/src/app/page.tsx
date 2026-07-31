@@ -118,9 +118,9 @@ export default async function Home() {
         <h1>Where data centres are, and how fast they are arriving</h1>
         <p className="tagline">
           Helios tracks {meta.facility_count.toLocaleString()} data centres across the
-          United States — each at a real coordinate, each traceable to the public record
-          it came from — and plots how that number has grown, county by county, against
-          the electricity and water the country is reported to spend on them.
+          United States, each at a real coordinate and each traceable to the public
+          record it came from. It plots how that number has grown, county by county,
+          against the electricity and water the country is reported to spend on them.
         </p>
         <div className="button-row" style={{ marginTop: "1rem" }}>
           <Link className="button button-primary" href="/growth">
@@ -168,13 +168,13 @@ export default async function Home() {
       <div className="notice">
         <strong>Three kinds of number appear on this site, and they are not
         interchangeable.</strong>{" "}
-        A location is <AssertionBadge assertion="reported" /> — a contributor mapped it. A
-        date is <em>observed</em>: it is when OpenStreetMap first recorded the facility,
-        never when it was built, because OpenStreetMap carries no construction dates. A
-        megawatt figure is <AssertionBadge assertion="inferred" /> — a share of a national
-        total published by Lawrence Berkeley National Laboratory, divided up by building
-        floor area — and given only to facilities mapped as buildings, never to a campus
-        land parcel or a site still under construction.{" "}
+        A location is <AssertionBadge assertion="reported" />: a contributor mapped it.
+        A date is <em>observed</em>, meaning the month OpenStreetMap first recorded the
+        facility. Never the month it was built, because OpenStreetMap carries no
+        construction dates. A megawatt figure is <AssertionBadge assertion="inferred" />,
+        a share of a national total published by Lawrence Berkeley National Laboratory
+        and divided up by building floor area. Only facilities mapped as buildings get
+        one, never a campus land parcel and never a site still under construction.{" "}
         <Link href="/understand">What each of these means</Link>.
       </div>
 
@@ -231,9 +231,9 @@ export default async function Home() {
             </table>
           </div>
           <p className="card-note">
-            Concentration is the whole story of this industry: the densest county holds
-            more mapped data centres than most states. Megawatt figures are inferred
-            shares of a reported national total, not meter readings.
+            The densest county here holds more mapped data centres than most states.
+            Megawatt figures are inferred shares of a reported national total, not meter
+            readings.
           </p>
         </section>
 
@@ -311,8 +311,8 @@ export default async function Home() {
             <p className="small" style={{ marginBottom: 0 }}>
               LBNL&apos;s reference case puts {outlook?.year} at{" "}
               <strong>{outlook?.electricity_twh?.toLocaleString()} TWh</strong>. That is a{" "}
-              <AssertionBadge assertion="predicted" /> figure — a scenario, not a
-              measurement, and it is published as a range for good reason.
+              <AssertionBadge assertion="predicted" /> figure: a scenario, not a
+              measurement. LBNL publishes it as a range, and so does this site.
             </p>
           </div>
         </div>
@@ -400,9 +400,9 @@ export default async function Home() {
         </div>
         <p className="small">
           Everything above is a map of what has already been <em>recorded</em>. It cannot
-          see a project before someone maps it — which, in practice, is usually after the
-          building exists. The Arizona study is the opposite experiment: in one valley in
-          Maricopa County, Helios reads parcel transfers, permits, assessor
+          see a project before someone maps it, and in practice nobody maps a data centre
+          until the building is standing. The Arizona study is the opposite experiment. In
+          one valley in Maricopa County, Helios reads parcel transfers, permits, assessor
           classifications and utility filings, clusters them into candidate sites, and
           argues a confidence score for each with the evidence chain attached.
         </p>

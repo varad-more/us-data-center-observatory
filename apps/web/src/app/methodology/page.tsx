@@ -111,10 +111,10 @@ export default async function MethodologyPage() {
             edit to the map.
           </li>
           <li>
-            <strong>Coverage.</strong> No authoritative public count of US data centres
-            exists, so how much of reality these{" "}
-            {meta.facility_count.toLocaleString()} represent is unknown, not merely
-            unstated.
+            <strong>Coverage.</strong> There is no authoritative public count of US data
+            centres, so what fraction of reality these{" "}
+            {meta.facility_count.toLocaleString()} represent is anyone&apos;s guess,
+            including ours.
           </li>
           <li>
             <strong>Pre-2017 history.</strong> The tagging convention was barely used

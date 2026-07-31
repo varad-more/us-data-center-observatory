@@ -60,16 +60,16 @@ export default async function LargeLoadFilingsPage() {
 
       <div className="notice">
         <strong>This is a filing register, not a national project census.</strong>{" "}
-        Helios currently publishes only reviewed, site-specific state-regulator
-        disclosures that its connector can reproduce. A missing state or project
-        means it is outside this bounded source set—not that no large load exists.
+        Helios publishes only reviewed, site-specific state-regulator disclosures
+        that its connector can reproduce. A state or project missing from this page
+        falls outside the sources Helios reads. That is all it means.
       </div>
 
       <div className="notice">
-        <strong>Reported contracted load is not operating load.</strong> It is also
-        not generating capacity, a promise of grid availability, or proof that a
-        facility has been built. Township names remain township-level; Helios does
-        not invent coordinates from them.
+        <strong>Reported contracted load is not operating load.</strong> Nor is it
+        generating capacity, a promise of grid availability, or proof that anything
+        has been built. A filing that names a township is mapped to that township.
+        Helios does not manufacture a point from a place name.
       </div>
 
       {payload.items.length > 0 ? (

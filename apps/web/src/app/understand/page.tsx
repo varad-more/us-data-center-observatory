@@ -202,7 +202,7 @@ export default async function UnderstandPage() {
           enterprise room is large, and it is mostly cooling.
         </p>
         <p className="small" style={{ marginBottom: 0 }}>
-          Two cautions worth carrying. PUE is almost always self-reported and rarely
+          Two things to carry with you. PUE is almost always self-reported and rarely
           audited. And it is a <em>ratio</em>, so it improves when the computers work
           harder — a site can report a better PUE while consuming considerably more
           electricity in absolute terms. Nothing on this site is derived from a PUE
@@ -372,8 +372,8 @@ export default async function UnderstandPage() {
           </li>
           <li>
             <strong>How complete the {meta.facility_count.toLocaleString()} is.</strong>{" "}
-            No authoritative public count of US data centres exists to check it against,
-            so the coverage rate is genuinely unknown rather than merely unstated.
+            There is no authoritative public count of US data centres to check it
+            against. The coverage rate is not withheld here; nobody knows it.
           </li>
           <li>
             <strong>When anything was built.</strong> The growth curve is a record of

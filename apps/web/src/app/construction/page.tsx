@@ -162,9 +162,9 @@ export default async function ConstructionPage() {
           </table>
         </div>
         <p className="small muted" style={{ marginBottom: 0 }}>
-          States and counties overlap, so this table uses counties only. An empty county
-          has not been shown to have no construction; OpenStreetMap coverage follows
-          contributor activity.
+          States and counties overlap, so this table uses counties only. A county absent
+          from it has no construction <em>mapped</em>, which is a weaker statement than
+          having none.
         </p>
       </section>
 

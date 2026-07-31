@@ -23,10 +23,10 @@ export default async function SourcesPage() {
         <h1>Data-source registry</h1>
         <p className="muted" style={{ maxWidth: "62ch" }}>
           Every source Helios is permitted to read is declared here before any code fetches
-          from it, together with its licence, rate limit, and historical depth. Sources
-          Helios <em>cannot</em> read are listed too, with the reason. Publishing the gaps
-          is the point: a site with thin evidence may reflect a quiet project or a blocked
-          source, and only this page distinguishes them.
+          from it, together with its licence, rate limit, and historical depth. The sources
+          Helios <em>cannot</em> read are listed too, each with the reason. The gaps are
+          published deliberately: a site with thin evidence might be a quiet project or a
+          blocked source, and this is the only page that tells the two apart.
         </p>
       </div>
 

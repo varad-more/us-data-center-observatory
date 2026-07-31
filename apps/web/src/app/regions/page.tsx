@@ -69,9 +69,9 @@ export default async function RegionsPage() {
 
       <div className="notice" style={{ marginTop: "1rem" }}>
         <strong>A count here is a count of what has been mapped.</strong> A county showing
-        no data centres has not been shown to have none; it may simply have no one mapping
-        them. OpenStreetMap coverage is contributor-driven and uneven, and this page cannot
-        distinguish an empty county from an unmapped one.
+        zero has not been surveyed and found empty. Either nobody has mapped it or it
+        genuinely holds none, and this page cannot tell you which. OpenStreetMap coverage
+        follows contributor activity, and contributor activity is uneven.
       </div>
 
       <RegionTable regions={regions} />

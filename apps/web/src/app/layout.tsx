@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Helios",
   },
   description:
-    "From permit to power-on: transparent early-warning intelligence for AI infrastructure.",
+    "Where US data centres are, how fast they are arriving, and what they draw in electricity and water — counted from public records.",
 };
 
 /**

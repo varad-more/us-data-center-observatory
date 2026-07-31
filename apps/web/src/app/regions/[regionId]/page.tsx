@@ -299,10 +299,10 @@ export default async function RegionPage({
           </p>
           <p className="small muted" style={{ marginBottom: 0 }}>
             <strong>Proximity is not connection.</strong> Nothing here shows that any
-            facility has contracted power from any of these substations — that is settled
-            by interconnection filings Helios cannot read, and in several regions those
-            queues now run for years. A county with no substations shown has not been
-            shown to have none; it may simply have none mapped.
+            facility has contracted power from any of these substations. That gets
+            settled in interconnection filings Helios cannot read, and in several regions
+            those queues now run for years. A county showing no substations may have none
+            mapped rather than none standing.
           </p>
         </section>
       ) : null}

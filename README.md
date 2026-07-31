@@ -2,16 +2,16 @@
 
 **[View the live observatory →](https://varad-more.github.io/project-helios/)**
 
-Helios measures where data centres are, how many appear over time, and how much
-power and water they plausibly draw — from public records only, with every claim
-carrying the reason it can be believed.
+Helios counts US data centres, tracks how that count moves, and estimates the
+power and water they draw. Everything comes from public records, and every figure
+says what kind of claim it is.
 
-The rule that governs every surface: **an inferred value must never render like a
+One rule runs through all of it: **an inferred value must never render like a
 reported one, and an unknown is never a zero.**
 
 ---
 
-## Two datasets, deliberately separate
+## Two datasets, kept apart
 
 | | **National observatory** | **Arizona site model** |
 |---|---|---|
@@ -21,9 +21,9 @@ reported one, and an unknown is never a zero.**
 | Needs a database | no | yes |
 | Refresh | `make poll` | `make bootstrap && make export-api` |
 
-They share a vocabulary and a site, and nothing else. The observatory runs with
-no database and no credentials; the site model is the older, deeper study that
-the observatory grew out of.
+They share a vocabulary and a website. That is all. The observatory needs no
+database and no credentials. The site model is the older, deeper study the
+observatory grew out of.
 
 ---
 
@@ -39,33 +39,32 @@ the observatory grew out of.
 | `construction` — mapped as being built | 45 | **no** |
 
 Total mapped building footprint: 19,998,284 m². Only the 1,506 buildings are
-sized by area, because land area is not floor area — a 400,000 m² parcel with one
-shed on it is not a 400,000 m² data centre.
+sized by area. Land area is not floor area: a 400,000 m² parcel with one shed on
+it is not a 400,000 m² data centre.
 
 **Power and water** — LBNL reports 192 TWh of US data-centre electricity for
-2024, which is 21,918 MW of average draw. Helios allocates that national total
-across the buildings by floor-area share. The allocation sums back to the
-published figure exactly; a test enforces it. The result is an `inferred` upper
-bound per facility, never a meter reading. Leaders: Loudoun County VA at 239
-facilities and 3,034 MW; Virginia statewide at 405 facilities and 4,972 MW.
+2024, or 21,918 MW of average draw. Helios splits that national total across the
+buildings by floor-area share. The pieces add back up to the published figure
+exactly, and a test enforces it. What comes out is an `inferred` upper bound per
+facility, never a meter reading. Loudoun County VA leads at 239 facilities and
+3,034 MW; Virginia statewide, 405 facilities and 4,972 MW.
 
 **Time** — 4,309 OpenStreetMap edit events between 2015-07-11 and 2026-06-19:
-1,886 creations, 1,694 tag changes, 509 geometry changes, 220 deletions. This is
-a *mapping* curve, not a construction curve. OpenStreetMap carries no build
-dates, so Helios never claims one, and the pre-2017 stretch — when the tagging
-convention was still being adopted — is shaded and labelled as unqualified on
-every chart that shows it. A facility disappearing is reported as "removed from
-OpenStreetMap", never as demolished.
+1,886 creations, 1,694 tag changes, 509 geometry changes, 220 deletions. Read
+this as a *mapping* curve. OpenStreetMap carries no build dates, so Helios never
+claims one. The pre-2017 stretch, when the tagging convention was still being
+adopted, is shaded and labelled as unqualified on every chart that shows it. When
+a facility disappears, Helios says "removed from OpenStreetMap" — not demolished.
 
 **Grid** — 65,325 assets the facilities have to connect to: 48,132 substations
 and 17,193 power plants, joined to the same counties. Substation *capacity* is
 not published (FERC Form 715 is CEII-restricted), so Helios counts substations
 and does not estimate what they can carry.
 
-**Reported loads** — 1 utility filing where an operator's own load figure is on
-the public record: MPSC docket U-21990, DTE Electric, 1,383 MW in Saline
-Township, Michigan, conditionally approved 2025-12-18. This is the only number
-on the site that is `reported` at facility scale rather than inferred.
+**Reported loads** — one utility filing puts an operator's own load figure on the
+public record: MPSC docket U-21990, DTE Electric, 1,383 MW in Saline Township,
+Michigan, conditionally approved 2025-12-18. It is the only figure on the site
+that is `reported` at facility scale rather than inferred.
 
 ---
 
@@ -141,8 +140,8 @@ helios registry-show             # every declared source, including unreachable 
 ## Sources
 
 19 sources are declared in `packages/helios_connectors/registry.py`, including
-the ones Helios **cannot** reach — with the reason recorded, so a coverage gap
-stays visible instead of silently absent. The published
+the ones Helios **cannot** reach. Each unreachable one records why, so a coverage
+gap stays visible instead of silently absent. The published
 [sources page](https://varad-more.github.io/project-helios/sources/) shows the
 blocked and withdrawn ones alongside the live ones.
 
@@ -250,7 +249,7 @@ them rather than leaving them open.
 | [`docs/adr/`](docs/adr/) | Architecture decisions |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Setup, workflow, and invariants to preserve |
 
-**Deliberately absent:** Kafka, Kubernetes, trained ML models, and satellite
+**Left out on purpose:** Kafka, Kubernetes, trained ML models, satellite
 pipelines. See [ADR 0002](docs/adr/0002-no-kafka-no-kubernetes.md).
 
 ## License
