@@ -30,7 +30,11 @@ import { DATA_BASE } from "./regionPath";
 export { DATA_BASE, regionIdFromSlug, regionSlug } from "./regionPath";
 
 export const observatoryMetaSchema = z.object({
-  generated_at: z.string(),
+  // The date the sources were last contacted, not the date this file was
+  // written. A rebuild that fetched nothing must not look like a fresh poll,
+  // and a wall-clock value here would also be the only field that changes when
+  // nothing else did. Empty when the dataset has never been polled.
+  last_polled: z.string(),
   facility_count: z.number(),
   // Optional for the same reason as the grid fields: a dataset built before
   // buildings and land parcels were told apart carries neither.

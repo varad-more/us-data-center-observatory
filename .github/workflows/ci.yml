@@ -182,6 +182,48 @@ jobs:
         # next export puts straight back — permanent phantom drift.
         include-hidden-files: true
 
+  # ───────────── The observatory's derived files follow from their inputs ────
+  # The published national growth curve was once served from a region_series.csv
+  # written several commits before the events.csv it summarised. It overstated
+  # the count by about 4% for the length of the chart, and nothing failed,
+  # because nothing in CI rebuilds derived data.
+  #
+  # This is that missing check. Every stage below is offline and every writer is
+  # byte-stable, so a rebuild that changes a single byte means a committed file
+  # no longer follows from its inputs. Unlike the Arizona snapshot drift check
+  # above, this one fails the build: a stale series is a published wrong number,
+  # not a cosmetic difference.
+  observatory-derived:
+    name: "Observatory — derived files are current"
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - uses: actions/setup-python@v7
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -e ".[dev]"
+
+    - name: Rebuild every derived file, offline
+      run: python scripts/observatory/poll.py --skip-fetch
+
+    - name: Derived files must match a fresh rebuild
+      run: |
+        if git diff --quiet -- data/observatory apps/web/public/data; then
+          echo "Derived files match a fresh offline rebuild."
+          exit 0
+        fi
+        echo "::error::Derived observatory files do not follow from the committed CSVs."
+        echo "Run 'make poll-offline' and commit the result."
+        git diff --stat -- data/observatory apps/web/public/data
+        exit 1
+
   # ─────────────────────────────── Frontend (Node) ───────────────────────────
   frontend:
     name: "Frontend — ${{ matrix.check }}"

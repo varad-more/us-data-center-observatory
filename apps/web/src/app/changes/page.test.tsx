@@ -34,7 +34,7 @@ const CHANGES: Change[] = [
 ];
 
 const META = {
-  generated_at: "2026-07-29T07:40:13.688449+00:00",
+  last_polled: "2026-07-29",
   facility_count: 1853,
   region_count: 323,
   series_count: 330,

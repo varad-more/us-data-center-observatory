@@ -22,7 +22,6 @@ import contextlib
 import json
 import sys
 from collections import defaultdict
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +36,7 @@ REGIONS_PATH = DATA_DIR / "regions.csv"
 SERIES_PATH = DATA_DIR / "region_series.csv"
 EVENTS_PATH = DATA_DIR / "events.csv"
 NATIONAL_PATH = DATA_DIR / "national_energy.csv"
+POLL_LOG_PATH = DATA_DIR / "poll_log.csv"
 
 # How many of the most recent months of change the front page summarises.
 RECENT_MONTHS = 24
@@ -45,6 +45,25 @@ RECENT_MONTHS = 24
 # are omitted rather than sent as empty strings, which keeps the file smaller and
 # stops the UI from rendering a blank where it should render nothing.
 FACILITY_KEYS = ("name", "operator", "ref", "county_fips", "state", "first_seen")
+
+
+def _last_polled() -> str:
+    """The date the public sources were last actually contacted.
+
+    A wall-clock timestamp here would be the one field in the whole payload that
+    changes on a run that changed nothing, and it broke the property the rest of
+    the pipeline is built to have: identical inputs produce identical bytes, so a
+    diff always means real movement. It was also the less useful of the two
+    dates. A reader wants to know how current the data is, not when a script last
+    ran over it.
+
+    ``poll_log.csv`` gains a row only when a fetch really happened, so its last
+    entry answers that and is stable across rebuilds. An empty log means the
+    dataset has never been polled, which is reported as unknown rather than as
+    today.
+    """
+    log = read_csv(POLL_LOG_PATH)
+    return str(log[-1].get("polled_at", "")) if log else ""
 
 
 def _write(path: Path, payload: Any) -> int:
@@ -296,7 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     written["meta.json"] = _write(
         args.out / "meta.json",
         {
-            "generated_at": datetime.now(tz=UTC).isoformat(),
+            "last_polled": _last_polled(),
             "facility_count": len(facilities),
             "building_count": sum(1 for f in facilities if f.get("site_class") == "building"),
             "construction_count": sum(
