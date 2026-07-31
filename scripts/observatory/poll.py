@@ -165,7 +165,10 @@ def main(argv: list[str] | None = None) -> int:
     if len(disappeared) > 15:
         print(f"    ... and {len(disappeared) - 15} more")
 
-    if before:
+    # A rebuild is not a poll. With --skip-fetch nothing upstream was contacted,
+    # so a row here would read as "checked OpenStreetMap, nothing had changed"
+    # when the truth is that OpenStreetMap was never asked.
+    if before and not args.skip_fetch:
         log = read_csv(POLL_LOG_PATH)
         log.append(
             {
