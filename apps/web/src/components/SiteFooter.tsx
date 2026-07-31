@@ -74,7 +74,7 @@ export async function SiteFooter() {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-grid">
-          <div className="footer-brand">
+          <div>
             <p className="footer-mark">Helios</p>
             <p className="footer-blurb">
               Where data centres are, how fast they are arriving, and what they cost in
@@ -141,7 +141,7 @@ export async function SiteFooter() {
             </ul>
           </nav>
 
-          <div className="footer-col footer-sources">
+          <div className="footer-col">
             <h2>Where the records come from</h2>
             <ul>
               {feeding.map((source) => (
