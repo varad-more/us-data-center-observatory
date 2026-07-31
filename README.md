@@ -29,7 +29,7 @@ observatory grew out of.
 
 ## What is measured (snapshot of 2026-07-29)
 
-**Facilities** — 1,853 data centres OpenStreetMap records in the United States:
+**Facilities** — OpenStreetMap records 1,853 data centres in the United States:
 
 | Class | Count | Carries a power figure |
 |---|---:|---|
@@ -70,8 +70,8 @@ that is `reported` at facility scale rather than inferred.
 
 ## Assertion classes
 
-Every stored value carries one, surfaced verbatim through the API so the
-frontend never re-derives provenance:
+Every stored value carries one. The API passes it through unchanged, so the
+frontend never has to work out provenance for itself:
 
 | Class | Meaning |
 |---|---|
@@ -110,8 +110,9 @@ make poll-offline    # rebuild derived files with no network at all
 ```
 
 CSV is canonical and committed precisely so that `git diff` between two polls
-*is* the change log. The writers are byte-stable: a poll with no upstream change
-produces no diff, so any diff means real movement.
+*is* the change log. The writers are byte-stable, so a poll that found nothing
+new produces no diff and any diff means real movement. CI rebuilds the derived
+files on every push and fails if they no longer follow from the CSVs.
 
 ### The Arizona site model — needs Docker and Python 3.12+
 
@@ -207,13 +208,18 @@ make check           # everything CI runs: lint + typecheck + test + test-web
 make audit-contrast  # every interface colour pair against its WCAG floor
 ```
 
-The gates that matter are the epistemic ones, and each fails without its fix:
-the allocation sums to the published national total; land and construction area
-never dilute the buildings; areas are computed on an equal-area projection, not
-naive degrees; no serializer ever emits a build date; the pre-2017 band renders
-whenever the series reaches back that far *and* stays off a series that does not;
-a facility leaving the map is worded as a removal and never as a closure; and a
-re-poll with no upstream change produces byte-identical CSVs.
+Most of those are ordinary. A handful exist to catch the specific ways this
+project could mislead, and each one fails if you remove the thing it guards:
+
+- the allocation re-sums to the published national total
+- land and construction area never dilute the buildings
+- areas come off an equal-area projection, not naive degrees
+- no serializer emits a build date
+- the pre-2017 band renders whenever the series reaches that far back, and
+  stays off a series that does not
+- a facility leaving the map is worded as a removal, never a closure
+- a rebuild that fetched nothing produces byte-identical output, and CI fails
+  when a committed file stops following from the CSVs it was built from
 
 ---
 
@@ -255,7 +261,7 @@ them rather than leaving them open.
 | [`docs/architecture.md`](docs/architecture.md) | System layers and data flow |
 | [`docs/methodology.md`](docs/methodology.md) | How assertion classes, allocations and scores are derived |
 | [`docs/source-inventory.md`](docs/source-inventory.md) | Every source and its connector status |
-| [`docs/limitations.md`](docs/limitations.md) | Honest coverage gaps |
+| [`docs/limitations.md`](docs/limitations.md) | What this data cannot show, and why |
 | [`docs/risk-register.md`](docs/risk-register.md) | Known risks |
 | [`docs/adr/`](docs/adr/) | Architecture decisions |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Setup, workflow, and invariants to preserve |
