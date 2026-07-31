@@ -24,8 +24,9 @@ AZ) over Postgres + FastAPI, with an evidence chain and a scored confidence
 model. This is the older half. **It is not hosted anywhere** — `make export-api`
 writes a static snapshot and the published site serves that.
 
-The site is live at `https://varadmore.me/project-helios` (GitHub Pages, static
-export, `basePath` `/project-helios`). **The repo itself is currently PRIVATE.**
+The site is live at `https://us-data-center-observatory.varadmore.me` (GitHub
+Pages, static export, served from the host root so there is no `basePath`).
+**The repo itself is currently PRIVATE.**
 
 ---
 

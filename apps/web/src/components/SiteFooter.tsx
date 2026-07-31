@@ -136,7 +136,7 @@ export async function SiteFooter() {
                 <Link href="/sources">Data sources</Link>
               </li>
               <li>
-                <a href="https://github.com/varad-more/project-helios">Source on GitHub</a>
+                <a href="https://github.com/varad-more/us-data-center-observatory">Source on GitHub</a>
               </li>
             </ul>
           </nav>
@@ -178,7 +178,7 @@ export async function SiteFooter() {
             Berkeley National Laboratory. County boundaries from the US Census
             Bureau. Owner names
             classified as belonging to private individuals are redacted before storage.{" "}
-            <a href="https://github.com/varad-more/project-helios/blob/main/LICENSE">
+            <a href="https://github.com/varad-more/us-data-center-observatory/blob/main/LICENSE">
               Apache-2.0
             </a>
             .

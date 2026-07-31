@@ -33,7 +33,7 @@ What Helios produces, concretely:
 
 | Outcome | What it means in practice |
 |---|---|
-| **A published observatory** | Site profiles, timelines, a map and analytics at [varad-more.github.io/project-helios](https://varad-more.github.io/project-helios/) — every figure carrying its assertion class and resolving to the document it came from |
+| **A published observatory** | Site profiles, timelines, a map and analytics at [us-data-center-observatory.varadmore.me](https://us-data-center-observatory.varadmore.me/) — every figure carrying its assertion class and resolving to the document it came from |
 | **An immutable evidence store** | Content-addressed payload bytes with fetch dates. Any published claim traces back to the source bytes, and a new version is minted only when the document genuinely changed |
 | **A registry that publishes its own gaps** | Every source Helios reads *and* every source it cannot, with the reason. The absence of a site from Helios is a statement about coverage, never about the world |
 | **An explainable score** | Every contribution cites exactly one evidence row. `helios explain AZ-MESA-001` reconstructs the whole chain |

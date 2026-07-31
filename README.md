@@ -1,6 +1,6 @@
 # Helios — an observatory for US data-centre growth
 
-**[View the live observatory →](https://varad-more.github.io/project-helios/)**
+**[View the live observatory →](https://us-data-center-observatory.varadmore.me/)**
 
 Helios counts US data centres, tracks how that count moves, and estimates the
 power and water they draw. Everything comes from public records, and every figure
@@ -142,7 +142,7 @@ helios registry-show             # every declared source, including unreachable 
 19 sources are declared in `packages/helios_connectors/registry.py`, including
 the ones Helios **cannot** reach. Each unreachable one records why, so a coverage
 gap stays visible instead of silently absent. The published
-[sources page](https://varad-more.github.io/project-helios/sources/) shows the
+[sources page](https://us-data-center-observatory.varadmore.me/sources/) shows the
 blocked and withdrawn ones alongside the live ones.
 
 | Source | State |
@@ -165,6 +165,17 @@ control, and does not use commercial data-centre directories.
 ---
 
 ## The published site
+
+Live at **[us-data-center-observatory.varadmore.me](https://us-data-center-observatory.varadmore.me/)**,
+a GitHub Pages deployment on a custom subdomain. Two things follow from the
+custom domain and are easy to get wrong:
+
+- `apps/web/public/CNAME` holds the domain and is copied into every build. Pages
+  reads it on deploy; delete it and the site falls back to the `github.io` path.
+- The site is served from the **root** of that host, so there is no base path.
+  `NEXT_PUBLIC_BASE_PATH` is empty by default and the key is omitted from the
+  Next config entirely. A fork deploying to `<user>.github.io/<repo>` has to set
+  it to `/<repo>`, or every asset resolves one directory too high.
 
 GitHub Pages cannot run FastAPI, so the deployed site reads flat files. The
 observatory JSON is generated from the committed CSVs; the site-model JSON is

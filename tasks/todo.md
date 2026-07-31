@@ -53,12 +53,17 @@ cost and it has now been paid once.
 - [x] **The crawler's User-Agent pointed at a repository that does not exist.**
       Volunteer-run APIs use that string to reach whoever is loading them.
 
+- [x] **Renamed to `us-data-center-observatory`** and moved onto its own
+      subdomain, `us-data-center-observatory.varadmore.me`. `project-helios`
+      matched nothing anyone would search and collided with a NASA probe and a
+      Kubernetes operator. The custom domain also removed the base path: Pages
+      serves a custom domain from the host root, so the `/project-helios` prefix
+      every asset URL carried had to go, not merely change.
+
 ### Still open
 
-Making the repo public is still undecided, and a rename for discoverability is
-proposed but not chosen — `project-helios` matches nothing anyone would search.
-Renaming also moves the Pages URL, so the homepage link set on the repo has to
-move with it.
+Making the repo public is still undecided. Nothing ranks in search while it is
+private, so the rename buys nothing until that call is made.
 
 ## Repository presentation: description, README, commit history
 

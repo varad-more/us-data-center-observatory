@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     # ------------------------------------------------------------- ingestion --
     user_agent: str = (
         "ProjectHelios/0.1 (open public-infrastructure research; "
-        "+https://github.com/varad-more/project-helios)"
+        "+https://github.com/varad-more/us-data-center-observatory)"
     )
     """Identifies the crawler honestly, as required by our responsible-use policy.
 

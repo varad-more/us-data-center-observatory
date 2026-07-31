@@ -26,7 +26,7 @@ import {
 import fs from "fs/promises";
 import path from "path";
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "/project-helios";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export const API_BASE = process.env.NEXT_PUBLIC_API_BASE || `${BASE_PATH}/api`;
 
 export class ApiError extends Error {

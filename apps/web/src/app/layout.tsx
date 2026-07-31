@@ -11,7 +11,7 @@ import "./globals.css";
  * Fraunces carries the display voice; the interface stays on the system sans.
  *
  * Loaded through next/font/local rather than a hand-written @font-face because
- * the site is served under the /project-helios base path — next/font rewrites
+ * the site may be served under a base path — next/font rewrites
  * the URL and fingerprints the file, where a raw url() in globals.css would have
  * to hardcode the prefix and would break the moment the path changed.
  */

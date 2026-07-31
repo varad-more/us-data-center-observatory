@@ -8,8 +8,8 @@ and — most importantly — the invariants that make Helios trustworthy.
 The fastest useful loop needs no database and no credentials:
 
 ```bash
-git clone https://github.com/varad-more/project-helios.git
-cd project-helios
+git clone https://github.com/varad-more/us-data-center-observatory.git
+cd us-data-center-observatory
 
 python3.12 -m venv .venv
 .venv/bin/pip install -e ".[dev]"

@@ -133,7 +133,7 @@
 
   /* Serif for the voice, sans for the controls. --font-display is supplied by
      next/font/local in layout.tsx, which fingerprints the file and rewrites the
-     URL for the /project-helios base path; a hand-written @font-face here would
+     URL for whatever base path is configured; a hand-written @font-face here would
      have to hardcode that prefix. */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
