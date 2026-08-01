@@ -36,6 +36,7 @@ from _common import (
     FetchError,
     fmt_area,
     read_csv,
+    state_name,
     write_csv,
 )
 from fetch_osm_history import FIELDNAMES as EVENT_FIELDNAMES
@@ -259,7 +260,7 @@ def _build_regions(facilities: list[dict[str, str]], index: CountyIndex) -> list
             {
                 "region_id": f"state:{state}",
                 "region_kind": "state",
-                "name": state,
+                "name": state_name(state),
                 "state": state,
                 "fips": "",
                 **_region_totals(totals),

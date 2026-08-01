@@ -5,6 +5,8 @@ import Link from "next/link";
 import { DemoDataBanner } from "@/components/DemoDataBanner";
 import { SiteFooter } from "@/components/SiteFooter";
 import { THEME_INIT_SCRIPT, ThemeToggle } from "@/components/ThemeToggle";
+import { StructuredData } from "@/components/StructuredData";
+import { getNationalSeries, getObservatoryMeta } from "@/lib/observatory";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -96,13 +98,29 @@ const NAV_GROUPS = [
   },
 ];
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Read rather than hardcoded: a structured-data block that disagrees with the
+  // page it sits on is the same claim published twice, differently.
+  const [meta, series] = await Promise.all([
+    getObservatoryMeta(),
+    getNationalSeries(),
+  ]);
+
   return (
     <html lang="en" className={fraunces.variable} suppressHydrationWarning>
       <head>
         {/* Runs before first paint so a dark-mode reader never sees the ivory
             ground flash. Must be inline and blocking; see THEME_INIT_SCRIPT. */}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <StructuredData
+          siteUrl={SITE_URL}
+          facts={{
+            facilityCount: meta.facility_count,
+            lastPolled: meta.last_polled,
+            seriesFrom: series?.points[0]?.period ?? null,
+            seriesTo: series?.points[series.points.length - 1]?.period ?? null,
+          }}
+        />
       </head>
       <body>
         <div className="shell">

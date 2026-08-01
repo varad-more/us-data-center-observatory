@@ -184,6 +184,29 @@ export async function SiteFooter() {
             .
           </p>
         </div>
+
+        {/* Its own row rather than a third column in the bar above: the bar
+            carries disclaimers about the data, and a byline folded in beside
+            them reads as one more caveat instead of as authorship. */}
+        <div className="footer-byline">
+          <p>
+            Built and maintained by{" "}
+            <a href="https://varadmore.me" rel="author">
+              Varad More
+            </a>
+            <span className="byline-contact">
+              <a href="https://varadmore.me">varadmore.me</a> &middot;{" "}
+              <a href="https://github.com/varad-more">github.com/varad-more</a>
+            </span>
+          </p>
+          <p>
+            <a href="https://github.com/varad-more/us-data-center-observatory">
+              Read the source
+            </a>{" "}
+            &middot; <Link href="/methodology">How it is measured</Link> &middot;{" "}
+            <Link href="/sources">What it is measured from</Link>
+          </p>
+        </div>
       </div>
     </footer>
   );

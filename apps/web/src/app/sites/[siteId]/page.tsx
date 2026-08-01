@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -28,6 +29,29 @@ import type { Dependency, Parcel, SiteDetail } from "@/lib/types";
 export async function generateStaticParams() {
   const sites = await listSites({ limit: 500 });
   return sites.items.map((site) => ({ siteId: site.project_code }));
+}
+
+/**
+ * These pages had no metadata of their own, so all 13 shared the site-wide
+ * title and description and competed with each other in search results. The
+ * project code is the only public name a site has - Helios does not assert an
+ * operator - so it is what the title can honestly carry.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ siteId: string }>;
+}): Promise<Metadata> {
+  const { siteId } = await params;
+  const title = `${siteId} — suspected data-centre site`;
+  return {
+    title,
+    description:
+      `Parcel, permit and utility evidence for ${siteId}, a suspected data-centre ` +
+      `development in Arizona's East Valley. Every signal is dated and traced to ` +
+      `the public record it came from; the stage and confidence are inferred, not reported.`,
+    alternates: { canonical: `/sites/${siteId}/` },
+  };
 }
 
 const STAGE_COUNT = 9;

@@ -503,6 +503,35 @@ code,
   max-width: 62ch;
 }
 
+.footer-byline {
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+.footer-byline p {
+  margin: 0;
+}
+
+.footer-byline a[rel="author"] {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--brand);
+}
+
+.byline-contact {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.76rem;
+}
+
 /* ------------------------------------------------------------------- cards */
 
 .card {

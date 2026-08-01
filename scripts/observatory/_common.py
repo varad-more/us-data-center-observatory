@@ -43,6 +43,81 @@ CACHE_DIR = REPO_ROOT / "data" / "observatory" / ".cache"
 COORD_PRECISION = 6
 AREA_PRECISION = 1
 
+# State postal code to the name people actually use. The Census county file
+# carries only the code, so a state region used to be titled "VA" on its own
+# page and in search results - a page about Virginia that never says Virginia.
+# Kept here rather than fetched: it is 52 rows that have not changed since 1959
+# and a network call for them would be a new failure mode for nothing.
+STATE_NAMES: dict[str, str] = {
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "DC": "District of Columbia",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PA": "Pennsylvania",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming",
+    "AS": "American Samoa",
+    "GU": "Guam",
+    "MP": "Northern Mariana Islands",
+    "PR": "Puerto Rico",
+    "VI": "US Virgin Islands",
+}
+
+
+def state_name(code: str) -> str:
+    """Full name for a postal code, falling back to the code itself.
+
+    A code with no entry is returned unchanged rather than blanked: an
+    unrecognised territory should still name itself somehow, and a silent empty
+    string would put an unlabelled row in the regions table.
+    """
+    return STATE_NAMES.get(code, code)
+
+
 # The tag combinations that constitute a data centre in OpenStreetMap. The wiki
 # documents `telecom=data_center` as the primary tag, `building=data_center` for
 # purpose-built structures, and `industrial=data_centre` (British spelling) for

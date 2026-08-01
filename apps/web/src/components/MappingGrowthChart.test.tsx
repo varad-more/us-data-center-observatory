@@ -29,7 +29,7 @@ describe("MappingGrowthChart", () => {
 
     expect(container.querySelector('rect[fill="url(#unreliable-hatch)"]')).not.toBeNull();
     expect(container.querySelector("pattern#unreliable-hatch")).not.toBeNull();
-    expect(screen.getByText(/tag not yet in use/i)).toBeInTheDocument();
+    expect(screen.getByText(/undercounted/i)).toBeInTheDocument();
   });
 
   it("does not qualify a series that begins after the tag was adopted", () => {
@@ -40,7 +40,7 @@ describe("MappingGrowthChart", () => {
     // A band drawn over reliable years would disclaim data that needs no
     // disclaimer, which erodes the warning where it genuinely applies.
     expect(container.querySelector('rect[fill="url(#unreliable-hatch)"]')).toBeNull();
-    expect(screen.queryByText(/tag not yet in use/i)).toBeNull();
+    expect(screen.queryByText(/undercounted/i)).toBeNull();
   });
 
   it("describes itself to a screen reader as mapping, never as construction", () => {

@@ -41,9 +41,32 @@ export async function generateMetadata({
   const regions = await getRegions();
   const region = regions.find((r) => regionSlug(r.region_id) === regionId);
   const name = region ? region.name : "United States";
+
+  // Counties share names across states - there are 34 Washington Counties - so
+  // the title has to carry the state or a search result is ambiguous and two of
+  // these pages compete for the same query.
+  const place = region?.kind === "county" ? `${name}, ${region.state}` : name;
+
+  // The old title was the bare region name, which omitted the words anyone
+  // actually types. A reader searching "loudoun county data centers" was being
+  // offered a page titled "Loudoun County".
+  const title = `Data centres in ${place}`;
+
+  // Templated descriptions across 323 near-identical region pages read as
+  // duplicates. The counts make each one specific, and they are the figures a
+  // reader wants to see before deciding to click.
+  const description = region
+    ? `${region.facility_count.toLocaleString()} data centres mapped in ${place}, ` +
+      `with an inferred ${Math.round(region.est_mw).toLocaleString()} MW share of US ` +
+      `data-centre electricity. Counted from OpenStreetMap and public records, ` +
+      `with when each was first mapped.`
+    : "Data centres mapped across the United States, county by county, with the electricity and water they draw.";
+
   return {
-    title: name,
-    description: `Data centres recorded in OpenStreetMap in ${name}, over time, with the region's share of national data-centre electricity and water.`,
+    title,
+    description,
+    alternates: { canonical: `/regions/${regionId}/` },
+    openGraph: { title, description, url: `/regions/${regionId}/` },
   };
 }
 

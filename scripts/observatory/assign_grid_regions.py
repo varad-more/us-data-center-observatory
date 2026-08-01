@@ -34,7 +34,7 @@ import sys
 from collections import defaultdict
 from typing import Any
 
-from _common import DATA_DIR, FetchError, read_csv, write_csv
+from _common import DATA_DIR, FetchError, read_csv, state_name, write_csv
 from assign_regions import BOUNDARIES_PATH, CountyIndex, _assign
 
 GRID_PATH = DATA_DIR / "grid.csv"
@@ -133,7 +133,7 @@ def build(grid: list[dict[str, str]], index: CountyIndex) -> list[dict[str, Any]
             {
                 "region_id": f"state:{state}",
                 "region_kind": "state",
-                "name": state,
+                "name": state_name(state),
                 "state": state,
                 "fips": "",
                 **totals,

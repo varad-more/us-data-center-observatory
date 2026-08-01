@@ -120,9 +120,16 @@ export function MappingGrowthChart({ points }: { points: SeriesPoint[] }) {
         <path d={area} className="chart-area" />
         <path d={line} className="chart-line" />
 
+        {/* Names what the band does to the numbers, not just what caused it.
+            "tag not yet in use" left a reader to work out which tag, and whether
+            that made the count too high or too low; the answer is that it is too
+            low, which is the only thing they need before reading the curve. */}
         {shadeWidth > 24 && (
           <text x={PAD_L + 6} y={PAD_T + 14} className="chart-tick">
-            tag not yet in use
+            <tspan x={PAD_L + 6}>undercounted:</tspan>
+            <tspan x={PAD_L + 6} dy="12">
+              the tag was new
+            </tspan>
           </text>
         )}
 
