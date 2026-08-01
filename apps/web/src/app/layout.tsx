@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DemoDataBanner } from "@/components/DemoDataBanner";
 import { SiteFooter } from "@/components/SiteFooter";
 import { THEME_INIT_SCRIPT, ThemeToggle } from "@/components/ThemeToggle";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /**
@@ -22,13 +23,35 @@ const fraunces = localFont({
   weight: "100 900",
 });
 
+const DESCRIPTION =
+  "Where US data centres are, how fast they are arriving, and what they draw in electricity and water — counted from public records.";
+
 export const metadata: Metadata = {
+  // Absolute origin for canonical and Open Graph URLs. Without it Next emits
+  // relative og:url values, which are ignored, and every share of any page
+  // resolves to whatever host pasted it.
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Helios Open AI Infrastructure Observatory",
     template: "%s | Helios",
   },
-  description:
-    "Where US data centres are, how fast they are arriving, and what they draw in electricity and water — counted from public records.",
+  description: DESCRIPTION,
+  // A link to this site is most often pasted into a chat window, and without
+  // these it unfurls as a bare URL. Neither block sets a title: a literal one
+  // here wins over the page's own, which made every shared county page announce
+  // itself as the site index. Omitting it lets the title template above resolve,
+  // so a shared /regions/county-51107 unfurls as "Loudoun County | Helios".
+  openGraph: {
+    type: "website",
+    siteName: "Helios Open AI Infrastructure Observatory",
+    description: DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    description: DESCRIPTION,
+  },
 };
 
 /**
