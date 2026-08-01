@@ -104,6 +104,13 @@ export default async function Home() {
     (p) => p.series_kind === "projection" && p.year === 2030 && p.scenario === "reference",
   );
 
+  // The year the plotted curve actually starts, read off the series itself.
+  // A typed year here said 2012, which is where the ohsome query window opens,
+  // not where the data does - the first observed edit is 2015-07. The heading
+  // and the chart's own aria-label consequently gave a reader and a screen
+  // reader two different ranges for the same picture.
+  const seriesFrom = series?.points[0]?.period.slice(0, 4) ?? null;
+
   // Derived rather than typed, so it cannot drift from the figures beside it
   // when a new LBNL year is added to the CSV.
   const growthMultiple =
@@ -180,7 +187,9 @@ export default async function Home() {
 
       <section className="card">
         <div className="card-header">
-          <h2 className="card-title">Data centres on the map, 2012 to today</h2>
+          <h2 className="card-title">
+            Data centres on the map{seriesFrom ? `, ${seriesFrom} to today` : ""}
+          </h2>
           <Link href="/growth" className="small">
             Full series and national energy &rarr;
           </Link>
@@ -335,9 +344,9 @@ export default async function Home() {
           <Link href="/growth" className="guide-card">
             <h3>Growth over time</h3>
             <p>
-              How many data centres the map has recorded each month since 2012, beside the
-              national electricity and water totals — and why the two series must never be
-              divided into each other.
+              How many data centres the map has recorded each month, beside the national
+              electricity and water totals — and why the two series must never be divided
+              into each other.
             </p>
           </Link>
           <Link href="/regions" className="guide-card">
