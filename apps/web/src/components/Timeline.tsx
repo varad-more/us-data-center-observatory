@@ -69,6 +69,22 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
   );
 }
 
+/**
+ * Whether an evidence URL is one that can never be opened.
+ *
+ * Fixture replay stamps `https://example.invalid/recorded` on evidence whose
+ * real URL was not retained, and RFC 2606 reserves `.invalid` precisely so it
+ * can never resolve. Offering "View original evidence" against one promises the
+ * reader a document that does not exist — the same failure as a contact URL
+ * pointing at a repository that is not there, and a worse one here, because
+ * checkable provenance is the claim this project rests on. The sha256 beside it
+ * still pins the exact bytes, which is what Helios can stand behind for a
+ * fixture.
+ */
+function isUnreachable(url: string): boolean {
+  return /^https?:\/\/[^/?#]*\.invalid\b/i.test(url);
+}
+
 function EvidenceProvenance({
   evidence,
 }: {
@@ -85,9 +101,13 @@ function EvidenceProvenance({
         <span>
           <span className="muted">Source:</span> {evidence.source.source_name}
         </span>
-        <a href={evidence.source.source_url} target="_blank" rel="noreferrer">
-          View original evidence
-        </a>
+        {isUnreachable(evidence.source.source_url) ? (
+          <span className="muted">Recorded fixture — no source URL retained</span>
+        ) : (
+          <a href={evidence.source.source_url} target="_blank" rel="noreferrer">
+            View original evidence
+          </a>
+        )}
         <span className="muted">
           Retrieved {new Date(evidence.source.retrieved_at).toISOString().slice(0, 10)}
         </span>
