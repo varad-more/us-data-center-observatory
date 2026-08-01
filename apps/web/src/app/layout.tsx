@@ -34,7 +34,11 @@ export const metadata: Metadata = {
   // resolves to whatever host pasted it.
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Helios Open AI Infrastructure Observatory",
+    // The homepage is the one page whose title the template never touches, so it
+    // has to carry its own search terms. It used to lead with the brand, which is
+    // the one string nobody types - every other page now leads with "Data centres
+    // in <place>". Kept under 60 characters so a result page shows all of it.
+    default: "US data centres: where they are and what they draw | Helios",
     template: "%s | Helios",
   },
   description: DESCRIPTION,
@@ -45,7 +49,7 @@ export const metadata: Metadata = {
   // so a shared /regions/county-51107 unfurls as "Loudoun County | Helios".
   openGraph: {
     type: "website",
-    siteName: "Helios Open AI Infrastructure Observatory",
+    siteName: "Helios US AI Infrastructure Observatory",
     description: DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
@@ -131,7 +135,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="site-header-inner">
               <Link href="/" className="brand">
                 <span className="brand-mark">HELIOS</span>
-                <span className="brand-tag">Open AI Infrastructure Observatory</span>
+                <span className="brand-tag">US AI Infrastructure Observatory</span>
               </Link>
               <nav className="nav" aria-label="Primary">
                 {NAV_GROUPS.map((group) => (

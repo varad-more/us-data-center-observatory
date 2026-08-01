@@ -28,7 +28,7 @@ from helios_domain.session import get_engine
 logger = get_logger(__name__)
 
 DESCRIPTION = """
-**Helios Open AI Infrastructure Observatory** - transparent early-warning
+**Helios US AI Infrastructure Observatory** - transparent early-warning
 intelligence for AI infrastructure development.
 
 Helios assembles public records into an evidence-backed, temporal view of how

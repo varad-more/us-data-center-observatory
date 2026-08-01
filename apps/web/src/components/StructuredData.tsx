@@ -37,7 +37,7 @@ export function StructuredData({ siteUrl, facts }: { siteUrl: string; facts: Dat
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: `${siteUrl}/`,
-      name: "Helios Open AI Infrastructure Observatory",
+      name: "Helios US AI Infrastructure Observatory",
       description:
         "Where US data centres are, how fast they are arriving, and what they draw in electricity and water — counted from public records.",
       inLanguage: "en",
@@ -58,7 +58,7 @@ export function StructuredData({ siteUrl, facts }: { siteUrl: string; facts: Dat
       isAccessibleForFree: true,
       creator: {
         "@type": "Organization",
-        name: "Helios Open AI Infrastructure Observatory",
+        name: "Helios US AI Infrastructure Observatory",
         url: siteUrl,
       },
       spatialCoverage: { "@type": "Place", name: "United States" },

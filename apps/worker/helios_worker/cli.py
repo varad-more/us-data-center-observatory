@@ -56,7 +56,7 @@ from helios_scoring.service import recalculate_site
 
 app = typer.Typer(
     name="helios",
-    help="Helios Open AI Infrastructure Observatory - operational CLI.",
+    help="Helios US AI Infrastructure Observatory - operational CLI.",
     no_args_is_help=True,
     add_completion=False,
 )

@@ -79,7 +79,7 @@ class Settings(BaseSettings):
     was free to disagree with the region it named."""
 
     # ------------------------------------------------------------------- api --
-    api_title: str = "Helios Open AI Infrastructure Observatory API"
+    api_title: str = "Helios US AI Infrastructure Observatory API"
     api_version: str = "0.1.0"
     api_cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3000"])
     api_default_page_size: int = 50

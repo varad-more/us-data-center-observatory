@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "helios"
 version = "0.1.0"
-description = "Helios Open AI Infrastructure Observatory - evidence-backed detection of hyperscale data-center development"
+description = "Helios US AI Infrastructure Observatory - evidence-backed detection of hyperscale data-center development"
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "Apache-2.0" }

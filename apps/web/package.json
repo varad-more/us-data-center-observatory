@@ -2,7 +2,7 @@
   "name": "@helios/web",
   "version": "0.1.0",
   "private": true,
-  "description": "Helios Open AI Infrastructure Observatory - web interface",
+  "description": "Helios US AI Infrastructure Observatory - web interface",
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
