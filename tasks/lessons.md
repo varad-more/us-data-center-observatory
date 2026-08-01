@@ -433,3 +433,31 @@ it deserves the same scrutiny as a red one.
 at all before concluding anything about it. Echo the intermediate state — here,
 the value in the file before and after the rebuild — rather than only the final
 verdict.
+
+## "CI is green" is not "I proofread it"
+
+I had reported the repo verified and production-ready. A proofread then found
+three defects that every check passes over, because none of them is a thing a
+check was ever written to look at:
+
+- The front page titled its chart "2012 to today" while the series starts
+  2015-07. 2012 is `HISTORY_START`, the ohsome query window. The chart's own
+  `aria-label` derived the real range, so a sighted reader and a screen-reader
+  user got two different answers from one figure.
+- 114 links across 13 pages read "View original evidence" and pointed at
+  `https://example.invalid/recorded`, a TLD reserved so it can never resolve.
+- A limitations heading announced two gaps and its paragraph described one.
+
+All three are agreement failures between prose and the thing the prose
+describes. Tests assert what the code does; they do not read the sentence beside
+the number and ask whether it is still true. Hardcoded values in copy are where
+this collects, because they are written once against a dataset that then moves.
+
+**How to apply:** proofreading is its own pass, and it reads the *rendered*
+output, not the source — 351 built pages scanned for `undefined`, `NaN`,
+placeholder text and dead hosts is a minute's work and is the only view that
+matches what a reader sees. Grep copy for hardcoded years and counts and check
+each against the data; prefer deriving them, as the LBNL growth multiple on the
+same page already does. And when a component computes a description twice —
+once visibly, once for assistive tech — diff the two, because a disagreement
+there is a defect that reviews and screenshots both miss.
