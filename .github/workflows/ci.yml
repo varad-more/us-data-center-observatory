@@ -274,11 +274,22 @@ jobs:
       if: matrix.check == 'build'
       run: |
         npm run build
-        test -f out/sites.html
-        test -f out/sites/AZ-MESA-001.html
-        test -f out/large-load-filings.html
+        # Directory form, because trailingSlash emits <route>/index.html - that
+        # is what lets Pages answer /sources/ as well as /sources. Kept in step
+        # with the same assertions in pages.yml; the two guard the same layout
+        # from different sides, so a change to one that skips the other leaves a
+        # build that passes here and cannot deploy.
+        test -f out/index.html
+        test -f out/sites/index.html
+        test -f out/sites/AZ-MESA-001/index.html
+        test -f out/large-load-filings/index.html
+        test -f out/regions/county-51107/index.html
         test -f out/api/large-load-filings.json
+        test -f out/sitemap.xml
+        test -f out/robots.txt
         test -f out/.nojekyll
+        # No route may regress to the flat layout while the rest use directories.
+        ! find out -mindepth 2 -name '*.html' ! -name 'index.html' | grep .
 
   # ─────────────────────────────── Infrastructure ────────────────────────────
   terraform:

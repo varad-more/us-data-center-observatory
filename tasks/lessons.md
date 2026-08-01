@@ -461,3 +461,23 @@ each against the data; prefer deriving them, as the LBNL growth multiple on the
 same page already does. And when a component computes a description twice —
 once visibly, once for assistive tech — diff the two, because a disagreement
 there is a defect that reviews and screenshots both miss.
+
+## Changing the shape of an artefact means re-reading whatever asserts its shape
+
+`trailingSlash: true` moves every route from `<route>.html` to
+`<route>/index.html`. Verifying the new build is not enough — 352 pages, every
+internal link resolving, CNAME emitted, assets at `/_next`, all correct — because
+`test -f out/sites.html` is asserted *twice* outside the build, once in
+`pages.yml` and once in `ci.yml`. Fixing the copy that failed first leaves the
+other one to fail next.
+
+A build-shape change has a blast radius wider than the build: deploy guards,
+path assertions in CI, anything that hardcodes a filename. Verifying the new
+output is right is a different question from asking what else in the repo holds
+an opinion about the old output — and the answer is rarely one place.
+
+**How to apply:** after changing an output layout, grep the *whole repo* for a
+distinctive fragment of the old shape (`out/sites.html`) rather than opening the
+file that complained, and run every workflow's assertions locally before
+pushing. They are a handful of `test -f` lines that execute in a second, and
+they are exactly what would otherwise stop CI three minutes later.

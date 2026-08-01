@@ -51,12 +51,24 @@ jobs:
       - name: Verify the build pre-rendered site routes
         working-directory: apps/web
         run: |
+          # Directory form, because trailingSlash emits <route>/index.html. That
+          # is what lets Pages answer /sources/ as well as /sources; the flat
+          # <route>.html layout these paths used to name answered only the bare
+          # form and 404'd every trailing-slash URL, including the one the README
+          # publishes. This step is what caught the change, so keep it pinned to
+          # the layout actually being served.
           test -f out/index.html
-          test -f out/sites.html
-          test -f out/sites/AZ-MESA-001.html
-          test -f out/large-load-filings.html
+          test -f out/sites/index.html
+          test -f out/sites/AZ-MESA-001/index.html
+          test -f out/large-load-filings/index.html
+          test -f out/regions/county-51107/index.html
           test -f out/api/large-load-filings.json
+          test -f out/sitemap.xml
+          test -f out/robots.txt
+          test -f out/CNAME
           test -f out/.nojekyll
+          # No route may regress to the flat layout while the rest use directories.
+          ! find out -mindepth 2 -name '*.html' ! -name 'index.html' | grep .
 
       - uses: actions/upload-pages-artifact@v5
         with:

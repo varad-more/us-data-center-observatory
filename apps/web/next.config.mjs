@@ -17,6 +17,13 @@ const nextConfig = {
   // Omitted entirely when empty: Next treats basePath: "" as a configured value
   // and warns, where an absent key is the documented way to say "serve at root".
   ...(basePath ? { basePath } : {}),
+  // Emit every route as <route>/index.html rather than <route>.html. GitHub
+  // Pages resolves a bare /growth to either layout, but only the directory form
+  // also answers /growth/ - and without it every trailing-slash URL on the site
+  // returned 404, including the /sources/ link the README itself publishes. A
+  // trailing slash is not a typo a reader can be expected to avoid: browsers
+  // add one, and so does anyone copying a path out of a citation.
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
