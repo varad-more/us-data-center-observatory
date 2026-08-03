@@ -24,6 +24,14 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import Link from "next/link";
 import type { FeatureCollection } from "@/lib/types";
 import { useTheme } from "@/components/ThemeToggle";
+import {
+  BASEMAP_PAINT,
+  MAP_PAPER,
+  MAP_SUBSTATION,
+  MAP_UNPLACED,
+  STAGE_RAMP,
+  stageColourExpression,
+} from "@/lib/mapPalette";
 
 const EAST_VALLEY_VIEW = {
   longitude: -111.72,
@@ -32,67 +40,9 @@ const EAST_VALLEY_VIEW = {
 };
 
 /**
- * Development stage is an ordered scale — land speculation through to operating —
- * so it is drawn as a sequential ramp rather than as nine unrelated hues. The
- * previous rainbow (sky, cyan, violet, amber, orange, red, gold, pink) implied
- * that stage 3 and stage 4 were different kinds of thing rather than adjacent
- * points on one progression.
- *
- * Dark runs the same steps reversed, so "further along" always resolves to the
- * higher-contrast end against whichever ground is behind it.
- *
- * These mirror --seq-1..7 in globals.css but are declared here as literals
- * because MapLibre paint expressions take colour values, not var() references,
- * and a custom property holding light-dark() does not resolve through
- * getComputedStyle.
- */
-const STAGE_RAMP: Record<"light" | "dark", string[]> = {
-  //     0        1        2        3        4        5        6        7        8
-  light: [
-    "#dbe2fa",
-    "#c2cdf6",
-    "#a7b6ef",
-    "#8ba0e8",
-    "#6f8ce2",
-    "#5274d8",
-    "#3f5cc4",
-    "#2c419b",
-    "#1c2a6b",
-  ],
-  dark: [
-    "#1c2a6b",
-    "#25358a",
-    "#2c419b",
-    "#3f5cc4",
-    "#5274d8",
-    "#6f8ce2",
-    "#8ba0e8",
-    "#b4c2f2",
-    "#dbe2fa",
-  ],
-};
-
-/** Stages with no match — a site Helios has not placed on the scale at all. */
-const STAGE_UNPLACED = { light: "#b6ad99", dark: "#4a453c" };
-
-/**
- * Builds the MapLibre `match` expression from the ramp, so the legend below and
- * the polygons here cannot drift apart. They were previously two hardcoded lists
- * of the same hex values.
- */
-function stageColourExpression(theme: "light" | "dark"): unknown[] {
-  const ramp = STAGE_RAMP[theme];
-  return [
-    "match",
-    ["get", "stage"],
-    ...ramp.flatMap((colour, stage) => [stage, colour]),
-    STAGE_UNPLACED[theme],
-  ];
-}
-
-/**
- * A dark basemap under an ivory page reads as a hole punched in the paper, so
- * the tiles follow the theme.
+ * The basemap follows the theme, and is retinted toward the paper it sits on.
+ * CARTO's positron is near-white; dropped straight onto chart paper it read as a
+ * hole punched in the page.
  */
 export function basemapStyle(theme: "light" | "dark") {
   const variant = theme === "dark" ? "dark_all" : "light_all";
@@ -110,12 +60,16 @@ export function basemapStyle(theme: "light" | "dark") {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       },
     },
-    layers: [{ id: "basemap", type: "raster" as const, source: "carto" }],
+    layers: [
+      {
+        id: "basemap",
+        type: "raster" as const,
+        source: "carto",
+        paint: BASEMAP_PAINT[theme],
+      },
+    ],
   };
 }
-
-/** Substations are context, not the subject, so they take a neutral mark. */
-const SUBSTATION_COLOUR = { light: "#2a4fae", dark: "#7d97ee" };
 
 interface PopupState {
   longitude: number;
@@ -180,7 +134,11 @@ export function InfrastructureMap({
         <ScaleControl position="bottom-left" />
 
         {/* Substations render first so site polygons sit above them. */}
-        <Source id="infrastructure" type="geojson" data={infrastructure as never}>
+        <Source
+          id="infrastructure"
+          type="geojson"
+          data={infrastructure as never}
+        >
           <Layer
             id="substation-point"
             type="circle"
@@ -196,10 +154,10 @@ export function InfrastructureMap({
                 500,
                 9,
               ],
-              "circle-color": SUBSTATION_COLOUR[theme],
+              "circle-color": MAP_SUBSTATION[theme],
               "circle-opacity": 0.6,
               "circle-stroke-width": 1,
-              "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+              "circle-stroke-color": MAP_PAPER[theme],
             }}
           />
         </Source>
@@ -256,26 +214,37 @@ function SitePopup({ properties }: { properties: Record<string, unknown> }) {
     <div className="map-popup">
       <strong>{String(properties.project_code ?? "Unknown site")}</strong>
       <div>
-        Stage {String(properties.stage)} &middot; {String(properties.stage_label)}
+        Stage {String(properties.stage)} &middot;{" "}
+        {String(properties.stage_label)}
       </div>
       <div>Confidence {confidence.toFixed(0)}%</div>
       <div>
-        {properties.total_acres ? `${Number(properties.total_acres).toFixed(1)} acres` : "—"}
+        {properties.total_acres
+          ? `${Number(properties.total_acres).toFixed(1)} acres`
+          : "—"}
         {" · "}
         {String(properties.evidence_count ?? 0)} evidence records
       </div>
-      <Link href={`/sites/${String(properties.project_code)}`}>Open site profile</Link>
+      <Link href={`/sites/${String(properties.project_code)}`}>
+        Open site profile
+      </Link>
     </div>
   );
 }
 
-function SubstationPopup({ properties }: { properties: Record<string, unknown> }) {
+function SubstationPopup({
+  properties,
+}: {
+  properties: Record<string, unknown>;
+}) {
   const voltage = properties.max_voltage_kv;
   return (
     <div className="map-popup">
       <strong>{String(properties.name ?? "Unnamed substation")}</strong>
       <div>Operator: {String(properties.operator_name ?? "not recorded")}</div>
-      <div>Voltage: {voltage ? `${Number(voltage).toFixed(0)} kV` : "not recorded"}</div>
+      <div>
+        Voltage: {voltage ? `${Number(voltage).toFixed(0)} kV` : "not recorded"}
+      </div>
       {typeof properties.osm_url === "string" && (
         <a href={properties.osm_url} target="_blank" rel="noreferrer">
           View in OpenStreetMap
@@ -309,21 +278,24 @@ export function MapLegend() {
       <span className="legend-item muted">Stage</span>
       {LEGEND_STAGES.map((entry) => (
         <span key={entry.stage} className="legend-item">
-          <span className="legend-swatch" style={{ background: ramp[entry.stage] }} />
+          <span
+            className="legend-swatch"
+            style={{ background: ramp[entry.stage] }}
+          />
           {entry.label}
         </span>
       ))}
       <span className="legend-item">
         <span
           className="legend-swatch"
-          style={{ background: STAGE_UNPLACED[theme] }}
+          style={{ background: MAP_UNPLACED[theme] }}
         />
         Not placed on the scale
       </span>
       <span className="legend-item">
         <span
           className="legend-swatch"
-          style={{ background: SUBSTATION_COLOUR[theme], borderRadius: "50%" }}
+          style={{ background: MAP_SUBSTATION[theme], borderRadius: "50%" }}
         />
         Substation (size by voltage)
       </span>

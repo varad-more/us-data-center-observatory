@@ -39,7 +39,10 @@ export function ScoreExplanation({ prediction }: { prediction: Prediction }) {
 
       <div>
         {prediction.explanations.map((explanation) => (
-          <div className="contribution" key={`${explanation.rule_id}-${explanation.evidence_record_id ?? "none"}`}>
+          <div
+            className="contribution"
+            key={`${explanation.rule_id}-${explanation.evidence_record_id ?? "none"}`}
+          >
             <div
               className={`contribution-weight ${
                 explanation.applied_weight >= 0 ? "positive" : "negative"
@@ -54,9 +57,9 @@ export function ScoreExplanation({ prediction }: { prediction: Prediction }) {
                 <div className="contribution-detail">{explanation.detail}</div>
               )}
               <div className="contribution-math">
-                base {explanation.base_weight.toFixed(0)} &times; extraction confidence{" "}
-                {explanation.confidence_multiplier.toFixed(2)} &times; recency{" "}
-                {explanation.recency_multiplier.toFixed(2)}
+                base {explanation.base_weight.toFixed(0)} &times; extraction
+                confidence {explanation.confidence_multiplier.toFixed(2)}{" "}
+                &times; recency {explanation.recency_multiplier.toFixed(2)}
               </div>
             </div>
           </div>
@@ -66,10 +69,11 @@ export function ScoreExplanation({ prediction }: { prediction: Prediction }) {
       <p className="card-note">
         Scored by <code>{prediction.model_name}</code> version{" "}
         <code>{prediction.model_version}</code> on{" "}
-        {new Date(prediction.calculated_at).toISOString().slice(0, 10)}, using evidence
-        available as of {prediction.as_of_date}. Weights are domain-reasoned starting
-        points, not values fitted to outcomes; calibration is deferred until a historical
-        backtest exists to calibrate against.
+        {new Date(prediction.calculated_at).toISOString().slice(0, 10)}, using
+        evidence available as of {prediction.as_of_date}. Weights are
+        domain-reasoned starting points, not values fitted to outcomes;
+        calibration is deferred until a historical backtest exists to calibrate
+        against.
       </p>
     </div>
   );

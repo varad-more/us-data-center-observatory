@@ -1,28 +1,42 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Link from "next/link";
 
 import { DemoDataBanner } from "@/components/DemoDataBanner";
 import { SiteFooter } from "@/components/SiteFooter";
-import { THEME_INIT_SCRIPT, ThemeToggle } from "@/components/ThemeToggle";
+import { SiteNav } from "@/components/SiteNav";
+import { THEME_INIT_SCRIPT } from "@/components/ThemeToggle";
 import { StructuredData } from "@/components/StructuredData";
 import { getNationalSeries, getObservatoryMeta } from "@/lib/observatory";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
+import "./recorder.css";
 
 /**
- * Fraunces carries the display voice; the interface stays on the system sans.
+ * The site's two faces.
  *
- * Loaded through next/font/local rather than a hand-written @font-face because
- * the site may be served under a base path — next/font rewrites
- * the URL and fingerprints the file, where a raw url() in globals.css would have
- * to hardcode the prefix and would break the moment the path changed.
+ * Archivo carries the margin plates: a grotesque drawn from the American gothics
+ * that set newspaper decks and signage, with a width axis, which is what lets a
+ * label plate compress to fit its column instead of wrapping or shipping a
+ * second file. Azeret Mono carries every measured value — monospace here is
+ * measurement notation, not a costume for "technical": these are readings off an
+ * instrument, and they have to align in a column to be compared.
+ *
+ * Fraunces used to carry the display voice on the fourteen routes that were not
+ * the front page. There are no such routes now, so it is not loaded: an unused
+ * variable font is 70 KB the reader downloads to render nothing.
  */
-const fraunces = localFont({
-  src: "./fonts/fraunces-latin-var.woff2",
-  variable: "--font-fraunces",
+const archivo = localFont({
+  src: "./fonts/archivo-latin-var.woff2",
+  variable: "--font-archivo",
   display: "swap",
-  weight: "100 900",
+  weight: "400 800",
+});
+
+const azeret = localFont({
+  src: "./fonts/azeret-mono-latin-var.woff2",
+  variable: "--font-azeret",
+  display: "swap",
+  weight: "300 700",
 });
 
 const DESCRIPTION =
@@ -60,49 +74,11 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Grouped rather than flat, because the site serves two different datasets and
- * a single ten-item strip gave a reader no way to tell which was which. The
- * groups are the actual division in the data: what OpenStreetMap reports
- * nationally, what Helios infers about one Arizona valley, and the reference
- * material explaining both.
- *
- * The two map entries used to read "National map" and "Site map" side by side.
- * "Site map" meant the Arizona parcel view, but it reads as a sitemap; both are
- * now named after the thing they actually draw.
- */
-const NAV_GROUPS = [
-  {
-    label: "Observatory",
-    items: [
-      { href: "/", label: "Overview" },
-      { href: "/growth", label: "Growth" },
-      { href: "/regions", label: "Regions" },
-      { href: "/construction", label: "Construction" },
-      { href: "/large-load-filings", label: "Large loads" },
-      { href: "/observatory-map", label: "US infrastructure" },
-      { href: "/changes", label: "Changes" },
-    ],
-  },
-  {
-    label: "Arizona study",
-    items: [
-      { href: "/sites", label: "Sites" },
-      { href: "/map", label: "Parcel map" },
-      { href: "/analytics", label: "Analytics" },
-    ],
-  },
-  {
-    label: "Reference",
-    items: [
-      { href: "/understand", label: "Basics" },
-      { href: "/methodology", label: "Methods" },
-      { href: "/sources", label: "Sources" },
-    ],
-  },
-];
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   // Read rather than hardcoded: a structured-data block that disagrees with the
   // page it sits on is the same claim published twice, differently.
   const [meta, series] = await Promise.all([
@@ -111,7 +87,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   ]);
 
   return (
-    <html lang="en" className={fraunces.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${azeret.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Runs before first paint so a dark-mode reader never sees the ivory
             ground flash. Must be inline and blocking; see THEME_INIT_SCRIPT. */}
@@ -127,30 +107,45 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
+        <div
+          hidden
+          dangerouslySetInnerHTML={{
+            __html: `<!--
+IMPECCABLE DIRECTION CONTRACT · seed 133091bd
+
+THESIS: A flat trace and blank paper are different facts. This front page is a
+strip-chart recorder because it is the only instrument whose paper already draws
+that difference; it refuses the KPI-tile dashboard, which renders "measured, zero"
+and "not measured" identically.
+
+OWN-WORLD: Process-recorder chart paper (#dde3d6) ruled in printed rust, smoked
+drum (#1a1815) in dark. Three validated pen inks, fixed order, never cycled.
+Tractor-feed perforations down both edges. Archivo margin plates in tracked caps,
+Azeret Mono for every reading. Stamps, not pills. Neatlines, not cards.
+
+STORY: The visitor sees three channels on one time base, understands within
+seconds that one is reported and one is projected, and learns that 347 facilities
+carry no power figure at all — then goes to a region, the method, or the source.
+
+FIRST VIEWPORT: A full-width header band carries the title, the lede and the
+instrument parameter strip. Below it the sheet splits: margin plate with the pen
+assignments and the crosshair readout on the left, three channels on the right,
+the pre-2017 dead band hatched across all of them, and the "chart ends" rule
+where the count's paper runs out. The chart itself is the invitation; the primary
+action sits one scroll down under the claims sheet.
+
+FORM: Chart Recorder, candidate 6 of the grounded list, seed key 133091bd.
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the
+finish review, the verdict, and DESIGN.md
+-->`,
+          }}
+        />
         <div className="shell">
           <a href="#main" className="skip-link">
             Skip to content
           </a>
-          <header className="site-header">
-            <div className="site-header-inner">
-              <Link href="/" className="brand">
-                <span className="brand-mark">HELIOS</span>
-                <span className="brand-tag">US AI Infrastructure Observatory</span>
-              </Link>
-              <nav className="nav" aria-label="Primary">
-                {NAV_GROUPS.map((group) => (
-                  <ul key={group.label} className="nav-group" aria-label={group.label}>
-                    {group.items.map((item) => (
-                      <li key={item.href}>
-                        <Link href={item.href}>{item.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                ))}
-                <ThemeToggle />
-              </nav>
-            </div>
-          </header>
+          <SiteNav />
 
           <DemoDataBanner />
 

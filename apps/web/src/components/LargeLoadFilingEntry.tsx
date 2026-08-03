@@ -5,23 +5,20 @@ function label(value: string): string {
   return value.replace(/_/g, " ");
 }
 
-export function LargeLoadFilingEntry({
-  filing,
-}: {
-  filing: LargeLoadFiling;
-}) {
+export function LargeLoadFilingEntry({ filing }: { filing: LargeLoadFiling }) {
   const digest = filing.source.content_sha256.slice(0, 12);
 
   return (
     <article className="card">
       <div className="card-header">
         <div>
-          <p className="eyebrow">
+          <h2 className="card-title">{filing.utility_name} service contract</h2>
+          {/* Under the title, not above it. The agency and docket are how this
+              record is cited, which is provenance — and provenance reads after
+              the thing it belongs to. */}
+          <p className="card-source">
             {filing.source.agency} · docket {filing.docket_number}
           </p>
-          <h2 className="card-title">
-            {filing.utility_name} service contract
-          </h2>
         </div>
         <StatusPill tone="positive">{label(filing.decision_status)}</StatusPill>
       </div>
@@ -78,9 +75,9 @@ export function LargeLoadFilingEntry({
       <div className="notice" style={{ marginTop: "1rem" }}>
         <strong>Township-level filing record; no site point published.</strong>{" "}
         The regulator names {filing.location_name}, but this record contains no
-        parcel evidence or exact geometry. The load is contracted demand reported
-        in a regulatory decision—not measured consumption, generating capacity,
-        or available grid capacity.
+        parcel evidence or exact geometry. The load is contracted demand
+        reported in a regulatory decision—not measured consumption, generating
+        capacity, or available grid capacity.
       </div>
 
       <p>{filing.summary}</p>

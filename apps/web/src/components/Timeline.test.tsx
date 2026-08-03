@@ -50,23 +50,38 @@ function entryWithSourceUrl(source_url: string): TimelineEntry {
 
 describe("Timeline evidence provenance", () => {
   it("links evidence that has a reachable source document", () => {
-    render(<Timeline entries={[entryWithSourceUrl("https://mcassessor.maricopa.gov/parcel/1")]} />);
-
-    expect(screen.getByRole("link", { name: "View original evidence" })).toHaveAttribute(
-      "href",
-      "https://mcassessor.maricopa.gov/parcel/1",
+    render(
+      <Timeline
+        entries={[
+          entryWithSourceUrl("https://mcassessor.maricopa.gov/parcel/1"),
+        ]}
+      />,
     );
+
+    expect(
+      screen.getByRole("link", { name: "View original evidence" }),
+    ).toHaveAttribute("href", "https://mcassessor.maricopa.gov/parcel/1");
   });
 
   it("offers no link for a replayed fixture, and says why", () => {
-    render(<Timeline entries={[entryWithSourceUrl("https://example.invalid/recorded")]} />);
+    render(
+      <Timeline
+        entries={[entryWithSourceUrl("https://example.invalid/recorded")]}
+      />,
+    );
 
-    expect(screen.queryByRole("link", { name: "View original evidence" })).toBeNull();
+    expect(
+      screen.queryByRole("link", { name: "View original evidence" }),
+    ).toBeNull();
     expect(screen.getByText(/Recorded fixture/)).toBeInTheDocument();
   });
 
   it("still pins the bytes with a hash when the document is unreachable", () => {
-    render(<Timeline entries={[entryWithSourceUrl("https://example.invalid/recorded")]} />);
+    render(
+      <Timeline
+        entries={[entryWithSourceUrl("https://example.invalid/recorded")]}
+      />,
+    );
 
     expect(screen.getByText(/^sha256:/)).toBeInTheDocument();
   });

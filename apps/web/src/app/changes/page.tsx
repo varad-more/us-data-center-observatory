@@ -16,6 +16,7 @@
 import type { Metadata } from "next";
 
 import { getChanges, getObservatoryMeta } from "@/lib/observatory";
+import { ScrollArea } from "@/components/ScrollArea";
 
 export const metadata: Metadata = {
   title: "Changes",
@@ -24,7 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ChangesPage() {
-  const [changes, meta] = await Promise.all([getChanges(), getObservatoryMeta()]);
+  const [changes, meta] = await Promise.all([
+    getChanges(),
+    getObservatoryMeta(),
+  ]);
 
   const appeared = changes.filter((c) => c.kind === "creation");
   const removed = changes.filter((c) => c.kind === "deletion");
@@ -36,8 +40,8 @@ export default async function ChangesPage() {
         <div>
           <h1>Changes</h1>
           <p className="muted small" style={{ margin: 0 }}>
-            The {changes.length.toLocaleString()} most recent times a data centre
-            appeared in or was removed from OpenStreetMap
+            The {changes.length.toLocaleString()} most recent times a data
+            centre appeared in or was removed from OpenStreetMap
             {latest ? `, through ${latest}` : ""}.
           </p>
         </div>
@@ -46,12 +50,16 @@ export default async function ChangesPage() {
       <div className="grid grid-4">
         <div className="metric">
           <div className="metric-label">Appeared</div>
-          <div className="metric-value num">{appeared.length.toLocaleString()}</div>
+          <div className="metric-value num">
+            {appeared.length.toLocaleString()}
+          </div>
           <div className="metric-sub">in this window</div>
         </div>
         <div className="metric">
           <div className="metric-label">Removed from OSM</div>
-          <div className="metric-value num">{removed.length.toLocaleString()}</div>
+          <div className="metric-value num">
+            {removed.length.toLocaleString()}
+          </div>
           <div className="metric-sub">not necessarily demolished</div>
         </div>
         <div className="metric">
@@ -71,10 +79,11 @@ export default async function ChangesPage() {
       </div>
 
       <div className="notice">
-        <strong>A removal is not a demolition.</strong> OpenStreetMap reports a deletion
-        when an element stops matching the data-centre filter. That happens when a
-        building genuinely leaves the map, and equally when a contributor retags it. This
-        page can tell you the map changed; it cannot tell you the world did.
+        <strong>A removal is not a demolition.</strong> OpenStreetMap reports a
+        deletion when an element stops matching the data-centre filter. That
+        happens when a building genuinely leaves the map, and equally when a
+        contributor retags it. This page can tell you the map changed; it cannot
+        tell you the world did.
       </div>
 
       <section className="card">
@@ -82,7 +91,7 @@ export default async function ChangesPage() {
           <h2 className="card-title">Recent edits</h2>
           <span className="card-note">newest first</span>
         </div>
-        <div className="table-scroll">
+        <ScrollArea className="table-scroll" label="Recent edits, scrollable">
           <table className="table">
             <thead>
               <tr>
@@ -105,11 +114,15 @@ export default async function ChangesPage() {
                           : "pill pill-caution"
                       }
                     >
-                      {change.kind === "creation" ? "appeared" : "removed from OSM"}
+                      {change.kind === "creation"
+                        ? "appeared"
+                        : "removed from OSM"}
                     </span>
                   </td>
                   <td>
-                    {change.name || <span className="muted">no longer on the map</span>}
+                    {change.name || (
+                      <span className="muted">no longer on the map</span>
+                    )}
                   </td>
                   <td className="small">
                     {change.county_name || change.state || (
@@ -129,10 +142,11 @@ export default async function ChangesPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollArea>
         <p className="small muted" style={{ marginBottom: 0 }}>
-          Every row links to the element on openstreetmap.org, where its full edit history
-          is public. Dates are when the edit was made, not when anything was built.
+          Every row links to the element on openstreetmap.org, where its full
+          edit history is public. Dates are when the edit was made, not when
+          anything was built.
         </p>
       </section>
     </div>

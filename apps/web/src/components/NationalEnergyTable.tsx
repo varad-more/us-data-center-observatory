@@ -13,12 +13,19 @@
  * matching one dataset's staleness to another's is worse than showing the gap.
  */
 import type { NationalEnergyPoint } from "@/lib/observatory";
+import { ScrollArea } from "@/components/ScrollArea";
 
 function assertionPill(point: NationalEnergyPoint): string {
-  return point.assertion_class === "reported" ? "pill pill-positive" : "pill pill-caution";
+  return point.assertion_class === "reported"
+    ? "pill pill-positive"
+    : "pill pill-caution";
 }
 
-export function NationalEnergyTable({ points }: { points: NationalEnergyPoint[] }) {
+export function NationalEnergyTable({
+  points,
+}: {
+  points: NationalEnergyPoint[];
+}) {
   const historical = points.filter((p) => p.series_kind === "historical");
   const projected = points.filter((p) => p.series_kind === "projection");
   const latest = historical.filter((p) => p.electricity_twh !== null).at(-1);
@@ -34,13 +41,19 @@ export function NationalEnergyTable({ points }: { points: NationalEnergyPoint[] 
       <div className="grid grid-4">
         <div className="metric">
           <div className="metric-label">Electricity</div>
-          <div className="metric-value num">{latest?.electricity_twh ?? "—"}</div>
+          <div className="metric-value num">
+            {latest?.electricity_twh ?? "—"}
+          </div>
           <div className="metric-sub">TWh in {latest?.year ?? "—"}</div>
         </div>
         <div className="metric">
           <div className="metric-label">Water</div>
-          <div className="metric-value num">{latestWater?.water_bgal ?? "—"}</div>
-          <div className="metric-sub">billion gallons in {latestWater?.year ?? "—"}</div>
+          <div className="metric-value num">
+            {latestWater?.water_bgal ?? "—"}
+          </div>
+          <div className="metric-sub">
+            billion gallons in {latestWater?.year ?? "—"}
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">Growth</div>
@@ -56,14 +69,18 @@ export function NationalEnergyTable({ points }: { points: NationalEnergyPoint[] 
         <div className="metric">
           <div className="metric-label">2030 forecast</div>
           <div className="metric-value num">
-            {projected.find((p) => p.year === 2030 && p.scenario === "reference")
-              ?.electricity_twh ?? "—"}
+            {projected.find(
+              (p) => p.year === 2030 && p.scenario === "reference",
+            )?.electricity_twh ?? "—"}
           </div>
           <div className="metric-sub">TWh, reference case</div>
         </div>
       </div>
 
-      <div className="table-scroll">
+      <ScrollArea
+        className="table-scroll"
+        label="National electricity and water by year, scrollable"
+      >
         <table className="table">
           <thead>
             <tr>
@@ -81,21 +98,27 @@ export function NationalEnergyTable({ points }: { points: NationalEnergyPoint[] 
                 <td className="mono">{point.year}</td>
                 <td className="num">{point.electricity_twh ?? "—"}</td>
                 <td className="num">{point.water_bgal ?? "—"}</td>
-                <td>{point.scenario || (point.series_kind === "historical" ? "—" : "")}</td>
                 <td>
-                  <span className={assertionPill(point)}>{point.assertion_class}</span>
+                  {point.scenario ||
+                    (point.series_kind === "historical" ? "—" : "")}
+                </td>
+                <td>
+                  <span className={assertionPill(point)}>
+                    {point.assertion_class}
+                  </span>
                 </td>
                 <td className="small muted">{point.source}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollArea>
 
       <p className="small muted" style={{ marginBottom: 0 }}>
-        Years without a published figure are absent rather than interpolated. LBNL states
-        these particular years as numbers; the gaps between them are not filled in here,
-        because a straight line drawn through two real points is not a third real point.
+        Years without a published figure are absent rather than interpolated.
+        LBNL states these particular years as numbers; the gaps between them are
+        not filled in here, because a straight line drawn through two real
+        points is not a third real point.
       </p>
     </section>
   );

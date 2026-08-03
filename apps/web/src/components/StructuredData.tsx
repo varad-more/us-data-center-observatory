@@ -31,7 +31,13 @@ function serialise(payload: unknown): string {
   return JSON.stringify(payload).replace(/</g, "\\u003c");
 }
 
-export function StructuredData({ siteUrl, facts }: { siteUrl: string; facts: DatasetFacts }) {
+export function StructuredData({
+  siteUrl,
+  facts,
+}: {
+  siteUrl: string;
+  facts: DatasetFacts;
+}) {
   const graph = [
     {
       "@type": "WebSite",

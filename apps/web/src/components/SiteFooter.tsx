@@ -77,10 +77,11 @@ export async function SiteFooter() {
           <div>
             <p className="footer-mark">Helios</p>
             <p className="footer-blurb">
-              Where data centres are, how fast they are arriving, and what they cost in
-              electricity and water. Counted nationally from OpenStreetMap, and in one
-              Arizona valley inferred in depth from parcel and permit records. Every
-              figure traces back to the document it came from.
+              Where data centres are, how fast they are arriving, and what they
+              cost in electricity and water. Counted nationally from
+              OpenStreetMap, and in one Arizona valley inferred in depth from
+              parcel and permit records. Every figure traces back to the
+              document it came from.
             </p>
             {exportedOn && (
               <p className="freshness">
@@ -136,7 +137,9 @@ export async function SiteFooter() {
                 <Link href="/sources">Data sources</Link>
               </li>
               <li>
-                <a href="https://github.com/varad-more/us-data-center-observatory">Source on GitHub</a>
+                <a href="https://github.com/varad-more/us-data-center-observatory">
+                  Source on GitHub
+                </a>
               </li>
             </ul>
           </nav>
@@ -167,17 +170,18 @@ export async function SiteFooter() {
 
         <div className="footer-bar">
           <p>
-            Helios infers development activity from public records. Confidence scores are
-            model output, not fact. Helios does not assert the identity of any facility
-            operator unless a direct filing establishes it.
+            Helios infers development activity from public records. Confidence
+            scores are model output, not fact. Helios does not assert the
+            identity of any facility operator unless a direct filing establishes
+            it.
           </p>
           <p>
-            Parcel data courtesy of Maricopa County Assessor / Maricopa County GIS. Data
-            centre locations, footprints and edit history &copy; OpenStreetMap
-            contributors, ODbL. National electricity and water totals from Lawrence
-            Berkeley National Laboratory. County boundaries from the US Census
-            Bureau. Owner names
-            classified as belonging to private individuals are redacted before storage.{" "}
+            Parcel data courtesy of Maricopa County Assessor / Maricopa County
+            GIS. Data centre locations, footprints and edit history &copy;
+            OpenStreetMap contributors, ODbL. National electricity and water
+            totals from Lawrence Berkeley National Laboratory. County boundaries
+            from the US Census Bureau. Owner names classified as belonging to
+            private individuals are redacted before storage.{" "}
             <a href="https://github.com/varad-more/us-data-center-observatory/blob/main/LICENSE">
               Apache-2.0
             </a>
@@ -203,8 +207,8 @@ export async function SiteFooter() {
             <a href="https://github.com/varad-more/us-data-center-observatory">
               Read the source
             </a>{" "}
-            &middot; <Link href="/methodology">How it is measured</Link> &middot;{" "}
-            <Link href="/sources">What it is measured from</Link>
+            &middot; <Link href="/methodology">How it is measured</Link>{" "}
+            &middot; <Link href="/sources">What it is measured from</Link>
           </p>
         </div>
       </div>

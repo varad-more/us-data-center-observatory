@@ -27,6 +27,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 import type { FeatureCollection } from "@/lib/types";
 import { basemapStyle } from "@/components/InfrastructureMap";
+import { MAP_FACILITY, MAP_PAPER } from "@/lib/mapPalette";
 import { useTheme } from "@/components/ThemeToggle";
 
 const CONTINENTAL_US_VIEW = {
@@ -36,7 +37,7 @@ const CONTINENTAL_US_VIEW = {
 };
 
 /** One mark, one meaning. Not the stage ramp: nothing here carries a stage. */
-const FACILITY_COLOUR = { light: "#8a5a09", dark: "#e0913f" };
+const FACILITY_COLOUR = MAP_FACILITY;
 
 interface PopupState {
   longitude: number;
@@ -44,7 +45,11 @@ interface PopupState {
   properties: Record<string, unknown>;
 }
 
-export function NationalFacilityMap({ facilities }: { facilities: FeatureCollection }) {
+export function NationalFacilityMap({
+  facilities,
+}: {
+  facilities: FeatureCollection;
+}) {
   const [popup, setPopup] = useState<PopupState | null>(null);
   const theme = useTheme();
 
@@ -83,11 +88,19 @@ export function NationalFacilityMap({ facilities }: { facilities: FeatureCollect
             paint={{
               // Grows only slightly with zoom: at national scale the cluster
               // matters, and at state scale the individual record does.
-              "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 3, 8, 6],
+              "circle-radius": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                3,
+                3,
+                8,
+                6,
+              ],
               "circle-color": FACILITY_COLOUR[theme],
               "circle-opacity": 0.55,
               "circle-stroke-width": 0.5,
-              "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+              "circle-stroke-color": MAP_PAPER[theme],
             }}
           />
         </Source>
@@ -101,12 +114,21 @@ export function NationalFacilityMap({ facilities }: { facilities: FeatureCollect
             maxWidth="320px"
           >
             <div className="map-popup">
-              <strong>{String(popup.properties.name ?? "Unnamed facility")}</strong>
-              <div>{String(popup.properties.jurisdiction ?? "location not recorded")}</div>
-              <div>NAICS {String(popup.properties.naics ?? "not recorded")}</div>
+              <strong>
+                {String(popup.properties.name ?? "Unnamed facility")}
+              </strong>
+              <div>
+                {String(
+                  popup.properties.jurisdiction ?? "location not recorded",
+                )}
+              </div>
+              <div>
+                NAICS {String(popup.properties.naics ?? "not recorded")}
+              </div>
               <p className="small muted" style={{ marginBottom: 0 }}>
-                Reported by EPA ECHO. A permitted air facility carrying a hosting NAICS
-                code — not a Helios site, and not a confirmed data centre.
+                Reported by EPA ECHO. A permitted air facility carrying a
+                hosting NAICS code — not a Helios site, and not a confirmed data
+                centre.
               </p>
             </div>
           </Popup>

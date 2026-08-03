@@ -19,11 +19,16 @@ export const metadata: Metadata = {
 };
 
 export default async function RegionsPage() {
-  const [regions, meta] = await Promise.all([getRegions(), getObservatoryMeta()]);
+  const [regions, meta] = await Promise.all([
+    getRegions(),
+    getObservatoryMeta(),
+  ]);
 
   const counties = regions.filter((r) => r.kind === "county");
   const states = regions.filter((r) => r.kind === "state");
-  const topCounty = [...counties].sort((a, b) => b.facility_count - a.facility_count)[0];
+  const topCounty = [...counties].sort(
+    (a, b) => b.facility_count - a.facility_count,
+  )[0];
 
   return (
     <div className="stack">
@@ -31,9 +36,9 @@ export default async function RegionsPage() {
         <div>
           <h1>Regions</h1>
           <p className="muted small" style={{ margin: 0 }}>
-            {meta.facility_count.toLocaleString()} data centres that OpenStreetMap
-            records in the United States, placed in {counties.length} counties across{" "}
-            {states.length} states.
+            {meta.facility_count.toLocaleString()} data centres that
+            OpenStreetMap records in the United States, placed in{" "}
+            {counties.length} counties across {states.length} states.
           </p>
         </div>
       </div>
@@ -41,7 +46,9 @@ export default async function RegionsPage() {
       <div className="grid grid-4">
         <div className="metric">
           <div className="metric-label">Mapped facilities</div>
-          <div className="metric-value num">{meta.facility_count.toLocaleString()}</div>
+          <div className="metric-value num">
+            {meta.facility_count.toLocaleString()}
+          </div>
           <div className="metric-sub">reported by OSM contributors</div>
         </div>
         <div className="metric">
@@ -60,7 +67,9 @@ export default async function RegionsPage() {
         </div>
         <div className="metric">
           <div className="metric-label">Densest county</div>
-          <div className="metric-value num">{topCounty?.facility_count ?? 0}</div>
+          <div className="metric-value num">
+            {topCounty?.facility_count ?? 0}
+          </div>
           <div className="metric-sub">
             {topCounty ? `${topCounty.name}, ${topCounty.state}` : "—"}
           </div>
@@ -68,10 +77,11 @@ export default async function RegionsPage() {
       </div>
 
       <div className="notice" style={{ marginTop: "1rem" }}>
-        <strong>A count here is a count of what has been mapped.</strong> A county showing
-        zero has not been surveyed and found empty. Either nobody has mapped it or it
-        genuinely holds none, and this page cannot tell you which. OpenStreetMap coverage
-        follows contributor activity, and contributor activity is uneven.
+        <strong>A count here is a count of what has been mapped.</strong> A
+        county showing zero has not been surveyed and found empty. Either nobody
+        has mapped it or it genuinely holds none, and this page cannot tell you
+        which. OpenStreetMap coverage follows contributor activity, and
+        contributor activity is uneven.
       </div>
 
       <RegionTable regions={regions} />

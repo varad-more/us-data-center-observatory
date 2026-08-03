@@ -31,9 +31,13 @@ function coveragePill(row: StateCoverage): string {
 
 export function NationalCoveragePanel({ data }: { data: NationalCoverage }) {
   const rows = [...data.items].sort(
-    (a, b) => b.facility_count - a.facility_count || a.state_code.localeCompare(b.state_code),
+    (a, b) =>
+      b.facility_count - a.facility_count ||
+      a.state_code.localeCompare(b.state_code),
   );
-  const unread = rows.filter((row) => row.facility_count > 0 && row.site_count === 0);
+  const unread = rows.filter(
+    (row) => row.facility_count > 0 && row.site_count === 0,
+  );
 
   return (
     <section className="card">
@@ -47,12 +51,18 @@ export function NationalCoveragePanel({ data }: { data: NationalCoverage }) {
       <div className="grid grid-4">
         <div className="metric">
           <div className="metric-label">Reported facilities</div>
-          <div className="metric-value num">{data.facility_total.toLocaleString()}</div>
-          <div className="metric-sub">EPA records, {data.states_with_facilities} states</div>
+          <div className="metric-value num">
+            {data.facility_total.toLocaleString()}
+          </div>
+          <div className="metric-sub">
+            EPA records, {data.states_with_facilities} states
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">Helios sites</div>
-          <div className="metric-value num">{data.site_total.toLocaleString()}</div>
+          <div className="metric-value num">
+            {data.site_total.toLocaleString()}
+          </div>
           <div className="metric-sub">
             built from parcels, {data.states_with_sites}{" "}
             {data.states_with_sites === 1 ? "state" : "states"}
@@ -71,7 +81,9 @@ export function NationalCoveragePanel({ data }: { data: NationalCoverage }) {
       </div>
 
       <div className="notice" style={{ marginTop: "1rem" }}>
-        <strong>These two columns are not comparable, and must not be added.</strong>{" "}
+        <strong>
+          These two columns are not comparable, and must not be added.
+        </strong>{" "}
         {data.note}
       </div>
 
@@ -89,7 +101,9 @@ export function NationalCoveragePanel({ data }: { data: NationalCoverage }) {
             <tr key={row.state_code}>
               <td className="mono">{row.state_code}</td>
               <td className="num">{row.facility_count.toLocaleString()}</td>
-              <td className="num">{row.site_count > 0 ? row.site_count : "—"}</td>
+              <td className="num">
+                {row.site_count > 0 ? row.site_count : "—"}
+              </td>
               <td>
                 <span className={coveragePill(row)}>{coverageLabel(row)}</span>
               </td>
@@ -99,9 +113,9 @@ export function NationalCoveragePanel({ data }: { data: NationalCoverage }) {
       </table>
 
       <p className="small muted" style={{ marginBottom: 0 }}>
-        A dash is not zero data centres. It is zero <em>Helios</em> sites, which means no
-        county in that state has been read. Building sites needs parcel geometry and
-        ownership, published county by county and often not at all.
+        A dash is not zero data centres. It is zero <em>Helios</em> sites, which
+        means no county in that state has been read. Building sites needs parcel
+        geometry and ownership, published county by county and often not at all.
       </p>
     </section>
   );

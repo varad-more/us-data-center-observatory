@@ -15,7 +15,8 @@ import type { Estimate } from "@/lib/types";
 
 function format(value: number, unit: string): string {
   // GPD figures run to the hundreds of thousands; MW rarely past four digits.
-  const rounded = unit === "GPD" ? Math.round(value) : Math.round(value * 10) / 10;
+  const rounded =
+    unit === "GPD" ? Math.round(value) : Math.round(value * 10) / 10;
   return rounded.toLocaleString("en-US");
 }
 
@@ -27,11 +28,25 @@ const REDUNDANT_KEYS = new Set([
 ]);
 
 function humanise(key: string): string {
-  return key.replace(/_/g, " ").replace(/\bmw\b/gi, "MW").replace(/\bgal\b/gi, "gal");
+  return key
+    .replace(/_/g, " ")
+    .replace(/\bmw\b/gi, "MW")
+    .replace(/\bgal\b/gi, "gal");
 }
 
-export function EstimateRange({ estimate, label }: { estimate: Estimate; label: string }) {
-  const { lower_value: lower, likely_value: likely, upper_value: upper, unit } = estimate;
+export function EstimateRange({
+  estimate,
+  label,
+}: {
+  estimate: Estimate;
+  label: string;
+}) {
+  const {
+    lower_value: lower,
+    likely_value: likely,
+    upper_value: upper,
+    unit,
+  } = estimate;
 
   if (likely === null) {
     return (
@@ -48,9 +63,14 @@ export function EstimateRange({ estimate, label }: { estimate: Estimate; label: 
   const hasBand = lower !== null && upper !== null && upper > lower;
   // Where the likely value sits within its own band, as a percentage. Rarely the
   // midpoint: the power band is skewed because 2 MW/acre sits low in a 1-4 range.
-  const likelyOffset = hasBand ? ((likely - lower) / (upper - lower)) * 100 : 50;
+  const likelyOffset = hasBand
+    ? ((likely - lower) / (upper - lower)) * 100
+    : 50;
 
-  const note = typeof estimate.assumptions.note === "string" ? estimate.assumptions.note : null;
+  const note =
+    typeof estimate.assumptions.note === "string"
+      ? estimate.assumptions.note
+      : null;
   const coefficients = Object.entries(estimate.assumptions).filter(
     ([key]) => key !== "note" && !REDUNDANT_KEYS.has(key),
   );
@@ -63,7 +83,8 @@ export function EstimateRange({ estimate, label }: { estimate: Estimate; label: 
       </div>
 
       <p className="estimate-value">
-        <strong className="num">{format(likely, unit)}</strong> <span>{unit}</span>
+        <strong className="num">{format(likely, unit)}</strong>{" "}
+        <span>{unit}</span>
       </p>
 
       {hasBand && (
@@ -73,7 +94,10 @@ export function EstimateRange({ estimate, label }: { estimate: Estimate; label: 
             role="img"
             aria-label={`Range ${format(lower, unit)} to ${format(upper, unit)} ${unit}, likely ${format(likely, unit)}`}
           >
-            <span className="estimate-band-marker" style={{ left: `${likelyOffset}%` }} />
+            <span
+              className="estimate-band-marker"
+              style={{ left: `${likelyOffset}%` }}
+            />
           </div>
           <p className="estimate-bounds">
             <span className="num">{format(lower, unit)}</span>

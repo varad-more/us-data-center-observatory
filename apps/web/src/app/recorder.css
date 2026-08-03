@@ -1,0 +1,1039 @@
+/**
+ * The recorder world.
+ *
+ * The front page is a strip-chart recorder: pre-printed paper advancing under
+ * a set of inked pens. The reason this form and not another is that a chart
+ * recorder is the only instrument whose native grammar already draws the
+ * distinction this whole project exists to hold. On chart paper a flat trace
+ * means "measured, and nothing happened" and blank paper means "not measured",
+ * and the two are unmistakable. Every other chart type renders both as zero.
+ *
+ * Three more properties of the form do real work here:
+ *
+ *   - Chart speed is printed in the margin by convention, so the warning that
+ *     this is a record of mapping and not of building sits where a reader of
+ *     this instrument already looks for the terms of the measurement.
+ *   - A pen against its stop is the native picture of an upper bound, which is
+ *     exactly what every megawatt figure on this site is.
+ *   - One pen per channel means reported, inferred and predicted each get their
+ *     own ink without any of them being invented for the occasion.
+ *
+ * Scoped entirely under `.recorder`. The other fourteen routes keep the
+ * inherited system until this one is rolled out, so nothing here may leak: the
+ * only selectors that reach outside are the `body:has(.recorder)` rules that
+ * re-skin the shared header and footer, and they are inert on every page that
+ * does not carry the class.
+ */
+
+.recorder {
+  background: var(--pp-paper);
+  color: var(--pp-ink);
+  font-family: var(--pp-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* The front page takes the whole width. The shared container is a reading
+   measure for prose pages, and paper does not have a reading measure. */
+body:has(.recorder) main.container {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- the paper */
+
+/* Pre-printed divisions. Minor every 9px, major every 54px, both axes, exactly
+   as a chart is ruled. The gradient is the paper, not a texture laid over it:
+   the traces are drawn on top in SVG and land on the same divisions. */
+.pp-paper-field {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--pp-rule-major) 0 1px,
+      transparent 1px 54px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--pp-rule-major) 0 1px,
+      transparent 1px 54px
+    ),
+    repeating-linear-gradient(
+      to right,
+      var(--pp-rule-minor) 0 1px,
+      transparent 1px 9px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--pp-rule-minor) 0 1px,
+      transparent 1px 9px
+    );
+}
+
+/* -------------------------------------------------------------- header band */
+
+/* The chart's printed header, running the full width above the first sheet.
+   It started life inside the margin plate and made the sheet unreadable: the
+   plate ran to eight hundred pixels of title and parameters beside a five
+   hundred pixel chart, so the right-hand three quarters of the first viewport
+   was blank paper that meant nothing. A chart's header belongs across the top
+   of the sheet, which is also the only place the title has room to be a title. */
+.pp-headband {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.4rem 3rem;
+  align-items: end;
+  padding: 2.7rem 1.6rem 1.6rem;
+  border-bottom: 1px solid var(--pp-neatline);
+}
+
+@media (max-width: 900px) {
+  .pp-headband {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.9rem 0.9rem 1.3rem;
+    gap: 1.1rem;
+  }
+}
+
+.pp-headband .pp-plate-title {
+  font-size: clamp(2.3rem, 5.4vw, 4.15rem);
+  margin: 0;
+}
+
+.pp-headband .pp-lede {
+  max-width: 46ch;
+  margin-top: 1rem;
+}
+
+/* Parameters read across rather than down here: printed at the head of a chart
+   they are a strip, and a strip also lets the block sit on the title's baseline
+   instead of towering beside it. */
+.pp-param-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.4rem, 1fr));
+  gap: 0.9rem 1.4rem;
+  margin: 0;
+  border-top: 1px solid var(--pp-hairline);
+  padding-top: 0.9rem;
+}
+
+.pp-param-strip > div {
+  display: grid;
+  gap: 0.14rem;
+}
+
+.pp-param-strip dt {
+  font-size: 0.5625rem;
+  font-weight: 640;
+  font-stretch: 88%;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+}
+
+.pp-param-strip dd {
+  margin: 0;
+  font-family: var(--pp-mono);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--pp-ink);
+}
+
+/* ----------------------------------------------------------------- a sheet */
+
+/* One channel group on the roll: its margin plate on the left, its plotted
+   area on the right. The margin is where the instrument declares the terms of
+   its own measurement, so it is never decorative and never empty. */
+.pp-sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 15.5rem) minmax(0, 1fr);
+  gap: 0;
+  border-bottom: 1px solid var(--pp-neatline);
+}
+
+.pp-sheet:last-of-type {
+  border-bottom: 0;
+}
+
+.pp-margin {
+  padding: 1.6rem 1.3rem 1.9rem;
+  background: var(--pp-paper-plate);
+}
+
+/* Beneath the shared header, whose height is declared in globals.css. It was a
+   constant here for a while, measured at one width and wrong at the rest. */
+@media (min-width: 901px) {
+  .pp-margin {
+    position: sticky;
+    top: var(--header-h);
+    align-self: start;
+  }
+}
+
+/* Every plot column is ruled paper. The margin plates are not: on a real chart
+   the header block is printed over the ruling, and keeping the ruling off the
+   prose is what stops the text columns reading as busy. */
+.pp-plot {
+  padding: 1.6rem 1.5rem 1.9rem;
+  min-width: 0;
+  border-left: 1px solid var(--pp-neatline);
+  background-image:
+    repeating-linear-gradient(to right, var(--pp-rule-major) 0 1px, transparent 1px 54px),
+    repeating-linear-gradient(to bottom, var(--pp-rule-major) 0 1px, transparent 1px 54px),
+    repeating-linear-gradient(to right, var(--pp-rule-minor) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(to bottom, var(--pp-rule-minor) 0 1px, transparent 1px 9px);
+}
+
+/* A section title, sized as a plate heading rather than as the page title. */
+.pp-sheet-title {
+  font-family: var(--pp-sans);
+  font-weight: 780;
+  font-stretch: 84%;
+  letter-spacing: -0.005em;
+  line-height: 1.08;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--pp-ink);
+  text-wrap: balance;
+}
+
+@media (max-width: 900px) {
+  .pp-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pp-margin {
+    border-bottom: 1px solid var(--pp-neatline);
+    padding-bottom: 1.3rem;
+  }
+  .pp-plot {
+    border-left: 0;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}
+
+/* A sheet that runs the full width: prose that needs a reading measure rather
+   than a column, and the plot sheet, which was cramped into two-thirds of the
+   page while its margin carried 358 pixels of nothing. */
+.pp-sheet-wide {
+  border-bottom: 1px solid var(--pp-neatline);
+}
+
+.pp-wide-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.2rem 3rem;
+  align-items: start;
+  padding: 1.7rem 1.6rem 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .pp-wide-head {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.4rem 0.9rem 1.2rem;
+  }
+}
+
+.pp-wide-body {
+  padding: 1.5rem 1.6rem 1.9rem;
+  border-top: 1px solid var(--pp-hairline);
+  background-image:
+    repeating-linear-gradient(to right, var(--pp-rule-major) 0 1px, transparent 1px 54px),
+    repeating-linear-gradient(to bottom, var(--pp-rule-major) 0 1px, transparent 1px 54px),
+    repeating-linear-gradient(to right, var(--pp-rule-minor) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(to bottom, var(--pp-rule-minor) 0 1px, transparent 1px 9px);
+}
+
+/* The map is the sheet's subject, so it takes the width - but past about
+   1180px it stops gaining anything and only gets taller. */
+.pp-wide-body .pp-map {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* This plate keeps its ruling, unlike the version that had no coastline. The
+   ruling's nine-pixel minor is the same frequency as the grid stipple, and two
+   grids at one pitch interfere rather than layer - which is what turned the
+   country into a printing artefact on graph paper. The land is opaque now, so
+   the ruling never meets the stipple: it shows through the ocean and the
+   margins and stops at the coast, which is what ruled paper under a plate has
+   always done. */
+
+/* On a phone the sheet was giving a quarter of its width to card padding, and
+   the sheet is the page. Every mark is already at its smallest here, so the
+   drawing takes the full plate and only the vertical padding stays. */
+@media (max-width: 900px) {
+  .pp-sheet-map .pp-wide-body {
+    padding-inline: 0;
+  }
+}
+
+.pp-measure { max-width: 68ch; }
+
+/* --------------------------------------------------------------- plate type */
+
+/* Margin lettering: small, tracked, upper case. This is instrument silkscreen,
+   which is a real typographic register and not a stylistic tic — every label on
+   a recorder's panel is set this way because it has to survive being read at an
+   angle in bad light. */
+.pp-label {
+  font-family: var(--pp-sans);
+  font-size: 0.6875rem;
+  font-weight: 620;
+  font-stretch: 88%;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+  margin: 0;
+}
+
+.pp-plate-title {
+  font-family: var(--pp-sans);
+  font-weight: 780;
+  font-stretch: 82%;
+  letter-spacing: -0.008em;
+  line-height: 1.02;
+  font-size: clamp(2.1rem, 4.6vw, 3.25rem);
+  text-transform: uppercase;
+  margin: 0.55rem 0 0;
+  color: var(--pp-ink);
+  text-wrap: balance;
+}
+
+.pp-lede {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--pp-ink-2);
+  max-width: 34ch;
+  margin: 0.9rem 0 0;
+}
+
+.pp-note {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--pp-ink-muted);
+  max-width: 70ch;
+  margin: 0.75rem 0 0;
+}
+
+.pp-note strong {
+  color: var(--pp-ink-2);
+  font-weight: 650;
+}
+
+.pp-num {
+  font-family: var(--pp-mono);
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ----------------------------------------------------- the parameter block */
+
+/* The instrument header: station, chart speed, range, pen assignments. Every
+   row here is a real parameter of the chart beside it. A plate carrying invented
+   parameters would be the exact failure this world is most exposed to. */
+.pp-params {
+  margin: 1.4rem 0 0;
+  border-top: 1px solid var(--pp-hairline);
+}
+
+.pp-param {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 0.75rem;
+  align-items: baseline;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--pp-hairline);
+}
+
+.pp-param dt {
+  font-size: 0.625rem;
+  font-weight: 620;
+  font-stretch: 88%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+}
+
+.pp-param dd {
+  margin: 0;
+  font-family: var(--pp-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--pp-ink);
+  text-align: right;
+}
+
+/* ------------------------------------------------------------ pen assignment */
+
+.pp-pens {
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+/* The map key reads across when the sheet does. */
+.pp-pens-row {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem 1.6rem;
+}
+
+.pp-pen {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  align-items: start;
+  gap: 0.6rem;
+}
+
+/* The swatch is a drawn nib stroke rather than a filled chip: a chip is a
+   legend, a stroke is the mark the reader is about to meet on the paper. */
+.pp-pen-nib {
+  height: 0.72rem;
+  align-self: center;
+  border-radius: 1px;
+}
+
+.pp-pen-1 .pp-pen-nib { background: var(--pen-1); height: 3px; }
+.pp-pen-2 .pp-pen-nib { background: var(--pen-2); height: 3px; }
+.pp-pen-3 .pp-pen-nib { background: var(--pen-3); height: 3px; }
+
+.pp-pen-3 .pp-pen-nib {
+  /* Pen 3 carries the projection as well as the record, and the projection is
+     drawn broken. The legend shows the same break so the reader meets the
+     convention before they meet the trace. */
+  background: repeating-linear-gradient(
+    to right,
+    var(--pen-3) 0 5px,
+    transparent 5px 9px
+  );
+}
+
+.pp-pen > span:last-child {
+  display: grid;
+  gap: 0.06rem;
+}
+
+.pp-pen-name {
+  font-size: 0.75rem;
+  font-weight: 640;
+  line-height: 1.25;
+  color: var(--pp-ink);
+}
+
+.pp-pen-meta {
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+  font-weight: 620;
+}
+
+/* --------------------------------------------------------------- the readout */
+
+/* The one moving part. A multi-channel chart is read by laying a straightedge
+   across every channel at once and reading each pen off it, so the crosshair
+   spans all channels and this panel is slaved to it. Not a metric tile: it has
+   no value of its own, only the value under the cursor. */
+.pp-readout {
+  margin-top: 1.25rem;
+  padding: 0.75rem 0.85rem 0.85rem;
+  background: var(--pp-paper-deep);
+  border: 1px solid var(--pp-neatline);
+}
+
+.pp-readout-when {
+  font-family: var(--pp-mono);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--pp-ink);
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+.pp-readout-rows {
+  margin: 0.6rem 0 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.pp-readout-row {
+  display: grid;
+  grid-template-columns: 0.55rem minmax(0, 1fr);
+  gap: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--pp-hairline);
+}
+
+.pp-readout-row:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.pp-readout-row span {
+  color: var(--pp-ink-muted);
+  line-height: 1.3;
+}
+
+.pp-readout-row b {
+  grid-column: 2;
+  font-size: 0.875rem;
+}
+
+.pp-readout-row i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  align-self: center;
+}
+
+.pp-readout-row b {
+  font-family: var(--pp-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--pp-ink);
+}
+
+.pp-readout-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.625rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+  font-weight: 620;
+}
+
+/* ------------------------------------------------------------- chart internals */
+
+.pp-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  touch-action: pan-y;
+}
+
+.pp-chart:focus-visible {
+  outline: 2px solid var(--pen-2);
+  outline-offset: 3px;
+}
+
+.pp-grid-minor { stroke: var(--pp-rule-minor); stroke-width: 1; }
+.pp-grid-major { stroke: var(--pp-rule-major); stroke-width: 1; }
+.pp-neatline { stroke: var(--pp-neatline); stroke-width: 1; fill: none; }
+.pp-zero { stroke: var(--pp-ink-muted); stroke-width: 1; }
+
+.pp-tick {
+  font-family: var(--pp-mono);
+  font-size: 9.5px;
+  fill: var(--pp-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-channel-name {
+  font-family: var(--pp-sans);
+  font-size: 9.5px;
+  font-weight: 680;
+  font-stretch: 88%;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  fill: var(--pp-ink-2);
+}
+
+/* Traces. 1.6px: thin enough that the printed divisions stay readable
+   underneath, which is the whole point of ruling the paper. */
+.pp-trace {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.pp-trace-1 { stroke: var(--pen-1); }
+
+.pp-stack-fill { fill: var(--pen-1); fill-opacity: 0.22; stroke: none; }
+.pp-trace-2 { stroke: var(--pen-2); }
+.pp-trace-3 { stroke: var(--pen-3); }
+
+.pp-trace-projected {
+  stroke-dasharray: 5 4;
+}
+
+.pp-band {
+  fill: var(--pen-3);
+  opacity: 0.13;
+}
+
+.pp-fill-1 { fill: var(--pen-1); }
+.pp-fill-2 { fill: var(--pen-2); }
+.pp-fill-3 { fill: var(--pen-3); }
+
+/* The dead band: the stretch where the instrument was not yet trustworthy.
+   Hatched rather than greyed, because grey reads as "less" and hatching reads
+   as "do not read this", which is the actual instruction. */
+.pp-hatch-line {
+  stroke: var(--pp-ink-muted);
+  stroke-width: 0.75;
+  opacity: 0.55;
+}
+
+.pp-deadband-edge {
+  stroke: var(--pp-ink-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.pp-deadband-label {
+  font-family: var(--pp-sans);
+  font-size: 9px;
+  font-weight: 700;
+  font-stretch: 85%;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  fill: var(--pp-ink-2);
+}
+
+/* The crosshair: a straightedge laid across every channel at once. */
+.pp-crosshair {
+  stroke: var(--pp-ink);
+  stroke-width: 1;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.pp-crosshair-dot {
+  stroke: var(--pp-paper);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------ stacked traces */
+
+/* The helicorder wall. A seismic network shows every station at one shared gain
+   so that a big event on one is visibly bigger than a quiet day on another;
+   the same rule here is what makes Loudoun's shape mean something. */
+.pp-stack {
+  display: grid;
+  gap: 0;
+}
+
+.pp-stack-row {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid var(--pp-hairline);
+}
+
+.pp-stack-row:last-child { border-bottom: 0; }
+
+.pp-stack-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pp-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The region name is the row's only control, and at the row's own line height it
+   was a 14px-tall target against a 24px floor (WCAG 2.2 SC 2.5.8).
+
+   The padding grows the link's box and the row grows with it, which is the whole
+   trick: pulling the height back with a negative margin looks equivalent and is
+   not, because `.pp-stack-name` clips its overflow for the ellipsis and hit
+   testing follows the clip. The target would have been clipped straight back to
+   14px while measuring 24. */
+.pp-stack-name a {
+  color: inherit;
+  text-decoration-color: var(--pp-hairline);
+  display: inline-block;
+  padding-block: 0.32rem;
+}
+.pp-stack-name a:hover { text-decoration-color: currentColor; }
+
+.pp-stack-name span {
+  color: var(--pp-ink-muted);
+  font-weight: 500;
+}
+
+.pp-stack-value {
+  font-family: var(--pp-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--pp-ink-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pp-stack-trace { display: block; width: 100%; height: 38px; }
+
+.pp-stack-axis { border-bottom: 0; padding-top: 0.15rem; }
+
+.pp-stack-axis-track { position: relative; display: block; height: 0.9rem; }
+
+.pp-stack-axis-year {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-family: var(--pp-mono);
+  font-size: 0.625rem;
+  color: var(--pp-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .pp-stack-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.15rem;
+  }
+  .pp-stack-trace { grid-column: 1 / -1; }
+}
+
+/* ------------------------------------------------------------- pen-stop bars */
+
+/* An allocated megawatt figure is an upper bound, and a bar with a free end
+   reads as a measurement. These bars terminate in a stop mark for that reason:
+   it is the picture of a pen that has reached the end of its travel. */
+.pp-bars { display: grid; gap: 0.42rem; margin: 0; padding: 0; list-style: none; }
+
+.pp-bar-row {
+  display: grid;
+  grid-template-columns: minmax(0, 10.5rem) minmax(0, 1fr) 5.5rem;
+  gap: 0.9rem;
+  align-items: center;
+  font-size: 0.8125rem;
+}
+
+.pp-bar-track { position: relative; height: 0.85rem; }
+
+.pp-bar-fill {
+  position: absolute;
+  inset-block: 0.16rem;
+  left: 0;
+  background: var(--pen-2);
+  opacity: 0.85;
+}
+
+/* The stop mark stands proud of the bar at both ends, because a bar with a
+   flush end reads as a measurement that happened to land there and this one is
+   a ceiling the pen ran into. */
+.pp-bar-stop {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--pp-ink);
+}
+
+.pp-bar-value {
+  font-family: var(--pp-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--pp-ink-2);
+}
+
+@media (max-width: 640px) {
+  .pp-bar-row { grid-template-columns: minmax(0, 1fr) 4.5rem; }
+  .pp-bar-track { grid-column: 1 / -1; }
+}
+
+/* --------------------------------------------------------- the unruled block */
+
+/* Facilities that carry no power figure at all. Drawn as paper with no ruling
+   on it, because that is what "not measured" looks like on this instrument and
+   a zero-height bar is what it must never look like. */
+.pp-unruled {
+  border: 1px dashed var(--pp-ink-muted);
+  background: var(--pp-paper-deep);
+  padding: 0.7rem 0.85rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.pp-unruled-count {
+  font-family: var(--pp-mono);
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--pp-ink);
+  letter-spacing: -0.03em;
+}
+
+/* --------------------------------------------------------------- event marks */
+
+.pp-events { list-style: none; margin: 0.9rem 0 0; padding: 0; display: grid; }
+
+.pp-event {
+  display: grid;
+  grid-template-columns: 5.4rem 1.1rem minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: baseline;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--pp-hairline);
+  font-size: 0.8125rem;
+}
+
+.pp-event:last-child { border-bottom: 0; }
+
+.pp-event-date {
+  font-family: var(--pp-mono);
+  font-size: 0.75rem;
+  color: var(--pp-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The marker glyph: a deflection up for an arrival, down for a removal. Shape
+   carries the fact and colour only grades it, so a reader who cannot separate
+   the two inks still reads the two events correctly. */
+.pp-event-mark { display: block; }
+.pp-event-mark path { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.pp-event-up path { stroke: var(--pen-1); }
+.pp-event-down path { stroke: var(--pp-ink-muted); }
+
+.pp-event-what { color: var(--pp-ink); min-width: 0; }
+.pp-event-what span { color: var(--pp-ink-muted); }
+.pp-event-what em { font-style: normal; color: var(--pp-ink-muted); }
+
+/* ---------------------------------------------------------------- plot sheet */
+
+.pp-sheet-map { position: relative; }
+
+.pp-map { display: block; width: 100%; height: auto; }
+
+/* The land: reference geography, so it is drawn in the paper's own colours and
+   never in a pen. A plate laid on the ruled sheet - opaque, so the ruling stops
+   at the coast - with the neatline every other frame on the roll is drawn in.
+   Two earlier versions had no land at all and asked the grid stipple to carry
+   the country's shape; a density field cannot, because the shape of a country
+   is not a thing that was measured. */
+.pp-map-land {
+  fill: var(--pp-paper-plate);
+  stroke: var(--pp-neatline);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+/* The grid underlay. Width and opacity are set per path by the component, one
+   path per density weight, so neither is declared here — a `stroke-width` or an
+   `opacity` at this level would flatten the field back into a lattice. Round
+   caps, because each mark is a zero-length stroke standing in for a disc. */
+.pp-map-grid-mark {
+  fill: none;
+  stroke: var(--pp-ink-muted);
+  stroke-linecap: round;
+}
+
+/* Pen 1, the same ink a data centre is drawn in on every other map on the site
+   and in every count on the front page. It was pen 2 here, which made the one
+   surface where facilities and grid appear together the one surface where a
+   facility was not the colour a reader had just learned. */
+.pp-map-building { fill: var(--pen-1); fill-opacity: 0.66; }
+
+/* Buildings on the sheet, drawn as round-capped zero-length strokes so one
+   path carries a whole size bucket. */
+.pp-map-building-mark {
+  fill: none;
+  stroke: var(--pen-1);
+  stroke-opacity: 0.66;
+  stroke-linecap: round;
+}
+/* A facility that is located and counted and carries no power figure. It takes
+   `--unmeasured-edge`, the token the rest of the site already uses for exactly
+   this - it was `--pp-ink-muted`, which is the underlay's own ink, so a data
+   centre with no figure was drawn in the colour of the substations behind it.
+   Open rather than filled because the ring is the claim: there is something
+   here, and no number for it. */
+.pp-map-nofigure {
+  fill: none;
+  stroke: var(--unmeasured-edge);
+  stroke-width: 1.1;
+}
+/* The inset's frame, and its ground. Filled with the paper rather than left
+   transparent: the box sits over the Gulf, and the mainland's own grid marks
+   were showing through it, putting Louisiana substations inside Puerto Rico.
+   The fill belongs here and not on the element - a `fill` presentation
+   attribute loses to any class rule, so `fill: none` here silently won. */
+.pp-map-neatline {
+  stroke: var(--pp-neatline);
+  stroke-width: 1;
+  fill: var(--pp-paper);
+}
+
+.pp-map-inset-label {
+  font-family: var(--pp-sans);
+  font-size: 8px;
+  font-weight: 680;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--pp-ink-muted);
+}
+
+/* ------------------------------------------------------------------- tables */
+
+.pp-table-wrap { overflow-x: auto; margin-top: 1rem; }
+
+.pp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.pp-table th {
+  text-align: left;
+  font-size: 0.625rem;
+  font-weight: 640;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+  padding: 0 0.7rem 0.4rem 0;
+  border-bottom: 1px solid var(--pp-neatline);
+  white-space: nowrap;
+}
+
+.pp-table td {
+  padding: 0.38rem 0.7rem 0.38rem 0;
+  border-bottom: 1px solid var(--pp-hairline);
+  color: var(--pp-ink-2);
+}
+
+.pp-table td:first-child { color: var(--pp-ink); }
+.pp-table .pp-col-num { text-align: right; font-family: var(--pp-mono); font-variant-numeric: tabular-nums; }
+.pp-table a { color: inherit; text-decoration-color: var(--pp-hairline); }
+.pp-table a:hover { text-decoration-color: currentColor; }
+
+/* -------------------------------------------------------------- claim stamps */
+
+/* A rubber stamp rather than a coloured pill. The distinction it carries —
+   reported against inferred against predicted — is the one thing on this page
+   that must never be mistaken for decoration, and a stamp is the mark a reader
+   already associates with a claim someone stood behind. */
+/* The word is set in ink and the claim's colour is carried by the edge and a
+   dot. Setting the label itself in the pen colour put a 9px green word on green
+   paper at 4.05:1, under the 4.5 floor that size owes - and it also broke the
+   house rule that colour grades a fact and never states it. Three signals now
+   carry the distinction: the word, the edge, and the dot. */
+.pp-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--pp-sans);
+  font-size: 0.5625rem;
+  font-weight: 720;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.4rem;
+  border: 1px solid var(--stamp-hue, var(--pp-ink-muted));
+  border-radius: 1px;
+  white-space: nowrap;
+  vertical-align: 0.08em;
+  color: var(--pp-ink-2);
+}
+
+.pp-stamp::before {
+  content: "";
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: var(--stamp-hue, var(--pp-ink-muted));
+}
+
+.pp-stamp-reported { --stamp-hue: var(--pen-3); }
+.pp-stamp-inferred { --stamp-hue: var(--pen-2); }
+.pp-stamp-predicted { --stamp-hue: var(--pen-1); }
+.pp-stamp-observed { --stamp-hue: var(--pp-ink-muted); }
+
+/* ------------------------------------------------------------------- index */
+
+/* The rest of the site, presented as the other charts in the same series.
+   Ruled rows rather than a grid of equal cards: a card grid says every one of
+   these is the same weight, and an index says they are a list you scan. */
+/* Two columns at desktop: eight single-file rows left the sheet twice as tall
+   as it needed to be and its margin plate empty for most of that. */
+.pp-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.2rem;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .pp-index { grid-template-columns: minmax(0, 1fr); }
+}
+
+.pp-index-item {
+  display: block;
+  padding: 0.72rem 0.3rem 0.72rem 0;
+  border-bottom: 1px solid var(--pp-hairline);
+  text-decoration: none;
+  color: inherit;
+  /* Background and an inset rule only. Sliding the row with padding-left
+     animated a layout property, which reflows the whole list on every hover. */
+  transition: background-color 140ms ease-out, box-shadow 140ms ease-out;
+}
+
+.pp-index-item:hover,
+.pp-index-item:focus-visible {
+  background: var(--pp-paper-plate);
+  box-shadow: inset 2px 0 0 var(--pen-2);
+  outline: none;
+}
+
+.pp-index-name {
+  display: block;
+  font-weight: 650;
+  font-size: 0.9375rem;
+  color: var(--pp-ink);
+}
+
+.pp-index-what {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--pp-ink-muted);
+  margin-top: 0.1rem;
+  max-width: 62ch;
+}
+
+/* ------------------------------------------------------------------ buttons */
+
+.pp-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+
+.pp-button {
+  font-family: var(--pp-sans);
+  font-size: 0.6875rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--pp-neatline);
+  background: transparent;
+  color: var(--pp-ink);
+  text-decoration: none;
+  border-radius: 1px;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+.pp-button:hover { background: var(--pp-ink); color: var(--pp-paper); }
+.pp-button:focus-visible { outline: 2px solid var(--pen-2); outline-offset: 2px; }
+
+.pp-button-primary {
+  background: var(--pp-ink);
+  color: var(--pp-paper);
+  border-color: var(--pp-ink);
+}
+
+.pp-button-primary:hover { background: var(--pen-2); border-color: var(--pen-2); color: #fff; }
+
+/* ------------------------------------------------------------------- links */
+
+/* ------------------------------------------------------------------- motion */
+
+/* One authored moment, and it belongs to the crosshair: the readout counts to
+   the value under the cursor rather than snapping, the way a slaved digital
+   display settles. Everything else on this page is still paper. */
+@media (prefers-reduced-motion: reduce) {
+  .pp-index-item { transition: none; }
+  .pp-button { transition: none; }
+}

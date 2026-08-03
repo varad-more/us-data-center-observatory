@@ -32,7 +32,9 @@ vi.mock("react-map-gl/maplibre", () => ({
       data-filter={JSON.stringify(filter ?? null)}
     />
   ),
-  Source: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  Source: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   NavigationControl: () => null,
   Popup: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
@@ -62,7 +64,10 @@ const GRID = {
 };
 
 beforeEach(() => {
-  vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => GRID }));
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue({ ok: true, json: async () => GRID }),
+  );
 });
 
 afterEach(() => {
@@ -73,24 +78,32 @@ describe("ObservatoryMap", () => {
   it("does not download the grid until someone asks for it", () => {
     render(<ObservatoryMap facilities={FACILITIES} />);
 
-    // 65,325 points is not something to fetch for a reader who came to look at
+    // 62,427 points is not something to fetch for a reader who came to look at
     // data centres. If this regresses the cost is silent - the map still works,
     // it just costs everyone megabytes.
     expect(fetch).not.toHaveBeenCalled();
-    expect(screen.getByTestId("layer-facility-building-point")).toBeInTheDocument();
-    expect(screen.getByTestId("layer-facility-other-point")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("layer-facility-building-point"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("layer-facility-other-point"),
+    ).toBeInTheDocument();
     expect(screen.queryByTestId("layer-substation-point")).toBeNull();
   });
 
   it("keeps land and construction geometry out of the building-area scale", () => {
     render(<ObservatoryMap facilities={FACILITIES} />);
 
-    expect(
-      screen.getByTestId("layer-facility-building-point"),
-    ).toHaveAttribute("data-paint", expect.stringContaining("footprint_m2"));
+    expect(screen.getByTestId("layer-facility-building-point")).toHaveAttribute(
+      "data-paint",
+      expect.stringContaining("footprint_m2"),
+    );
     expect(
       screen.getByTestId("layer-facility-other-point"),
-    ).not.toHaveAttribute("data-paint", expect.stringContaining("footprint_m2"));
+    ).not.toHaveAttribute(
+      "data-paint",
+      expect.stringContaining("footprint_m2"),
+    );
   });
 
   it("does not treat an unclassified feature as a building", () => {
@@ -121,10 +134,12 @@ describe("ObservatoryMap", () => {
     fireEvent.click(screen.getByRole("button", { name: /substations/i }));
 
     await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-    expect(String((fetch as never as ReturnType<typeof vi.fn>).mock.calls[0][0])).toMatch(
-      /\/data\/grid\.geojson$/,
-    );
-    expect(await screen.findByTestId("layer-substation-point")).toBeInTheDocument();
+    expect(
+      String((fetch as never as ReturnType<typeof vi.fn>).mock.calls[0][0]),
+    ).toMatch(/\/data\/grid\.geojson$/);
+    expect(
+      await screen.findByTestId("layer-substation-point"),
+    ).toBeInTheDocument();
   });
 
   it("downloads the grid only once for both grid layers", async () => {
@@ -166,8 +181,14 @@ describe("ObservatoryMap", () => {
     fireEvent.click(screen.getByRole("button", { name: /substations/i }));
 
     // An empty map here would read as a finding about the United States.
-    expect(await screen.findByText(/grid layer could not be loaded/i)).toBeInTheDocument();
-    expect(screen.getByTestId("layer-facility-building-point")).toBeInTheDocument();
-    expect(screen.getByTestId("layer-facility-other-point")).toBeInTheDocument();
+    expect(
+      await screen.findByText(/grid layer could not be loaded/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("layer-facility-building-point"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("layer-facility-other-point"),
+    ).toBeInTheDocument();
   });
 });

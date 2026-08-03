@@ -14,6 +14,7 @@
  * polyline, not a reason to take a dependency.
  */
 import type { SeriesPoint } from "@/lib/observatory";
+import { ScrollArea } from "@/components/ScrollArea";
 
 const VIEW_W = 760;
 const VIEW_H = 260;
@@ -49,7 +50,10 @@ export function MappingGrowthChart({ points }: { points: SeriesPoint[] }) {
     if (i === 0) {
       steps.push(`M ${px} ${y(point.count)}`);
     } else {
-      steps.push(`L ${px} ${y(points[i - 1].count)}`, `L ${px} ${y(point.count)}`);
+      steps.push(
+        `L ${px} ${y(points[i - 1].count)}`,
+        `L ${px} ${y(point.count)}`,
+      );
     }
   });
   const line = steps.join(" ");
@@ -58,101 +62,116 @@ export function MappingGrowthChart({ points }: { points: SeriesPoint[] }) {
   const unreliableUntil = points.findIndex((p) => p.period >= RELIABLE_FROM);
   const shadeWidth = unreliableUntil > 0 ? x(unreliableUntil) - PAD_L : 0;
 
-  const ticks = [0, Math.round(max / 2), max].filter((v, i, a) => a.indexOf(v) === i);
+  const ticks = [0, Math.round(max / 2), max].filter(
+    (v, i, a) => a.indexOf(v) === i,
+  );
   const labelEvery = Math.max(1, Math.ceil(points.length / 8));
   const first = points[0];
   const last = points[points.length - 1];
 
   return (
     <figure className="chart">
-      <svg
-        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
-        className="chart-svg"
-        role="img"
-        aria-label={`Data centres recorded in OpenStreetMap, rising from ${first.count} in ${first.period} to ${last.count} in ${last.period}. Values before ${RELIABLE_FROM} are unreliable because the tagging convention was not yet in common use.`}
+      <ScrollArea
+        className="chart-scroll"
+        label="Data centres recorded in OpenStreetMap over time, scrollable chart"
       >
-        <defs>
-          <pattern
-            id="unreliable-hatch"
-            width="6"
-            height="6"
-            patternUnits="userSpaceOnUse"
-            patternTransform="rotate(45)"
-          >
-            <line x1="0" y1="0" x2="0" y2="6" className="chart-hatch" />
-          </pattern>
-        </defs>
+        <svg
+          viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+          className="chart-svg"
+          role="img"
+          aria-label={`Data centres recorded in OpenStreetMap, rising from ${first.count} in ${first.period} to ${last.count} in ${last.period}. Values before ${RELIABLE_FROM} are unreliable because the tagging convention was not yet in common use.`}
+        >
+          <defs>
+            <pattern
+              id="unreliable-hatch"
+              width="6"
+              height="6"
+              patternUnits="userSpaceOnUse"
+              patternTransform="rotate(45)"
+            >
+              <line x1="0" y1="0" x2="0" y2="6" className="chart-hatch" />
+            </pattern>
+          </defs>
 
-        {shadeWidth > 0 && (
-          <g>
-            <rect
-              x={PAD_L}
-              y={PAD_T}
-              width={shadeWidth}
-              height={plotH}
-              fill="url(#unreliable-hatch)"
-            />
-            <rect
-              x={PAD_L}
-              y={PAD_T}
-              width={shadeWidth}
-              height={plotH}
-              className="chart-shade"
-            />
-          </g>
-        )}
+          {shadeWidth > 0 && (
+            <g>
+              <rect
+                x={PAD_L}
+                y={PAD_T}
+                width={shadeWidth}
+                height={plotH}
+                fill="url(#unreliable-hatch)"
+              />
+              <rect
+                x={PAD_L}
+                y={PAD_T}
+                width={shadeWidth}
+                height={plotH}
+                className="chart-shade"
+              />
+            </g>
+          )}
 
-        {ticks.map((tick) => (
-          <g key={tick}>
-            <line
-              x1={PAD_L}
-              x2={VIEW_W - PAD_R}
-              y1={y(tick)}
-              y2={y(tick)}
-              className="chart-grid"
-            />
-            <text x={PAD_L - 7} y={y(tick) + 3.5} className="chart-tick" textAnchor="end">
-              {tick.toLocaleString()}
-            </text>
-          </g>
-        ))}
+          {ticks.map((tick) => (
+            <g key={tick}>
+              <line
+                x1={PAD_L}
+                x2={VIEW_W - PAD_R}
+                y1={y(tick)}
+                y2={y(tick)}
+                className="chart-grid"
+              />
+              <text
+                x={PAD_L - 7}
+                y={y(tick) + 3.5}
+                className="chart-tick"
+                textAnchor="end"
+              >
+                {tick.toLocaleString()}
+              </text>
+            </g>
+          ))}
 
-        <path d={area} className="chart-area" />
-        <path d={line} className="chart-line" />
+          <path d={area} className="chart-area" />
+          <path d={line} className="chart-line" />
 
-        {/* Names what the band does to the numbers, not just what caused it.
+          {/* Names what the band does to the numbers, not just what caused it.
             "tag not yet in use" left a reader to work out which tag, and whether
             that made the count too high or too low; the answer is that it is too
             low, which is the only thing they need before reading the curve. */}
-        {shadeWidth > 24 && (
-          <text x={PAD_L + 6} y={PAD_T + 14} className="chart-tick">
-            <tspan x={PAD_L + 6}>undercounted:</tspan>
-            <tspan x={PAD_L + 6} dy="12">
-              the tag was new
-            </tspan>
-          </text>
-        )}
-
-        {points.map((point, i) =>
-          i % labelEvery === 0 || i === points.length - 1 ? (
-            <text
-              key={point.period}
-              x={x(i)}
-              y={VIEW_H - 10}
-              className="chart-tick"
-              textAnchor={i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"}
-            >
-              {point.period.slice(0, 4)}
+          {shadeWidth > 24 && (
+            <text x={PAD_L + 6} y={PAD_T + 14} className="chart-tick">
+              <tspan x={PAD_L + 6}>undercounted:</tspan>
+              <tspan x={PAD_L + 6} dy="12">
+                the tag was new
+              </tspan>
             </text>
-          ) : null,
-        )}
-      </svg>
+          )}
+
+          {points.map((point, i) =>
+            i % labelEvery === 0 || i === points.length - 1 ? (
+              <text
+                key={point.period}
+                x={x(i)}
+                y={VIEW_H - 10}
+                className="chart-tick"
+                textAnchor={
+                  i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"
+                }
+              >
+                {point.period.slice(0, 4)}
+              </text>
+            ) : null,
+          )}
+        </svg>
+      </ScrollArea>
       <figcaption className="chart-caption">
-        Data centres recorded in OpenStreetMap at the end of each month. The hatched
-        stretch is before <strong>{RELIABLE_FROM}</strong>, when{" "}
-        <code>telecom=data_center</code> was not yet in common use — the near-zero
-        readings there describe the tag, not the country. This is a count of what has
-        been mapped, and OpenStreetMap carries no construction dates.
+        Data centres recorded in OpenStreetMap at the end of each month. The
+        hatched stretch is before <strong>{RELIABLE_FROM}</strong>, when{" "}
+        <code>telecom=data_center</code> was not yet in common use — the
+        near-zero readings there describe the tag, not the country. This is a
+        count of what has been mapped, and OpenStreetMap carries no construction
+        dates.
       </figcaption>
     </figure>
   );

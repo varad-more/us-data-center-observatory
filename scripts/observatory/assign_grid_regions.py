@@ -36,6 +36,7 @@ from typing import Any
 
 from _common import DATA_DIR, FetchError, read_csv, state_name, write_csv
 from assign_regions import BOUNDARIES_PATH, CountyIndex, _assign
+from fetch_grid import FIELDNAMES as GRID_FIELDNAMES
 
 GRID_PATH = DATA_DIR / "grid.csv"
 OUT_PATH = DATA_DIR / "grid_regions.csv"
@@ -164,6 +165,14 @@ def main(argv: list[str] | None = None) -> int:
     index = CountyIndex(BOUNDARIES_PATH)
     print(f"Placing {len(grid)} grid assets against {len(index.geometries)} counties")
     _assign(grid, index, "grid")
+
+    # Written back, not just used and dropped. The assignment is the only record
+    # of which of these assets are in the United States - the fetch boxes reach
+    # into Mexico and Canada - and every downstream consumer needs that answer.
+    # Keeping it in memory meant the county totals were right while the
+    # published point layer and the headline count were quietly national plus
+    # 1,300 substations in Sonora and Ontario.
+    write_csv(args.grid, GRID_FIELDNAMES, grid)
 
     rows = build(grid, index)
     counties = [r for r in rows if r["region_kind"] == "county"]

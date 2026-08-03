@@ -971,3 +971,407 @@ invisible error for a smaller stated one.
       operating-load allocation.
 - [ ] Still nobody has *looked* at any of these pages. No session so far has had
       the browser extension connected.
+
+## Review — the primary rail, and what reviewing it exposed
+
+Measured with CDP device-metrics emulation across ten widths and both themes,
+not assessed from a screenshot. Every claim below has a number behind it.
+
+### The rail itself
+
+- [x] **Nothing was ever marked current.** `.nav a[aria-current="page"]` had a
+      rule in `globals.css` and no element ever matched it: nothing computed the
+      active link, and `trailingSlash: true` would have defeated a raw
+      comparison anyway (`/growth/` vs the href `/growth`). Thirteen links looked
+      identical on all fifteen routes. Fixed by a `SiteNav` client component with
+      `normalisePath`; `/regions/county-51107/` now marks Regions as the section
+      with a weaker signal, and does not claim it as the page.
+- [x] **The group labels existed only for screen readers.** Three `aria-label`s
+      on three `<ul>`s. The reason for grouping thirteen links — two different
+      datasets and the reference material for both — was invisible on screen.
+      They are printed now, above each bank, as an instrument's plate labels.
+- [x] **`--pp-header-h` was a frozen constant against a variable header.** 106px
+      declared; the real header ranged 106–190px as the rail wrapped to four
+      rows. The recorder's sticky margin plates slid up underneath it. Height is
+      now `--header-h` in `globals.css`, both tiers are fixed, and the rail
+      collapses to a disclosure before it can wrap. Measured 105px expanded and
+      57px collapsed, exactly as declared, at every width tested.
+- [x] **21px hit targets**, below WCAG 2.2 SC 2.5.8's 24×24 floor. Now 26px on
+      the rail and 40px in the collapsed panel; every focusable element in the
+      header clears the floor.
+- [x] **Four ragged rows and 190px of sticky header on a phone** — a fifth of the
+      viewport spent before the page began. Now a 57px bar and an absolutely
+      positioned panel, so opening it cannot change the header's height.
+      Escape closes it, navigation closes it, and it carries `aria-expanded` and
+      `aria-controls`.
+
+### What the second pass found beyond the rail
+
+- [x] **The ivory palette was rendering on the recorder's paper.** `--accent` on
+      eight body links, twenty-eight footer links and the skip link;
+      `--ink-muted` on seventeen footer elements; `--ink-1` inherited from `body`
+      by every unnamed element in the shared header. Closed at the cause rather
+      than per component: `:where()`-scoped catch-alls for links, and
+      `color: var(--pp-ink)` on the recorder body so inherited text starts from
+      paper ink. A fourteen-token sweep across desktop, collapsed and open, in
+      both themes, is clean.
+- [x] **The focus ring failed WCAG in dark mode on every route.** It was drawn in
+      `--accent-solid`, which the palette defines as "the fill to put white text
+      on" — as a ring against the ground it measured **2.15:1 on the page and
+      1.98:1 on a panel**, against the 3:1 that SC 1.4.11 and 2.4.13 owe a focus
+      indicator. Now `--accent` (the mark colour, 5.07–6.72:1 across every ground
+      in both themes), and `--pen-2` on the recorder, which is what that page's
+      own chart and buttons already focus in. Five pairs added to
+      `audit_contrast.py` so it cannot regress.
+- [x] **A green "live" dot beside a static-snapshot date.** The freshness dot took
+      `--good` onto the plate: a fourth hue encoding nothing, reading as a health
+      light on a page whose banner says the export is point-in-time. Now muted
+      paper ink — decoration beside a date that already states the case.
+- [x] **`--header-h` was 1px out at both breakpoints** (104/58 declared against
+      105/57 measured), because the sum omitted the header's bottom rule.
+      Corrected, and `headerHeight.test.ts` now re-adds the declared row heights
+      from the stylesheet text and fails if anyone changes one without the sum.
+      Mutation-tested both ways.
+
+### Gate
+
+`make lint`, `make typecheck`, `make test-unit` (234 passed), `make
+audit-contrast` (every pair clears its floor), `npm run typecheck`, `npm run
+lint`, `npx vitest run` (73 passed across 14 files), `npm run build` (352 pages).
+Homepage 75 kB gzipped, stylesheet 18 kB gzipped. The fourteen ivory routes were
+re-measured at both widths: same heights, same collapse, correct current and
+section marks, and no paper token defined on any of them.
+
+## One world across the whole site
+
+The front page had been redesigned into the recorder world and the other fourteen
+routes were left on the inherited ivory system. Documented as deliberate; in use
+it read as two half-finished sites, and the ivory routes were built from the
+exact page structures the recorder world's own brief had refused.
+
+Rolled the world out rather than patching either side.
+
+### What was measured before deciding
+
+| Finding | Value |
+|---|---|
+| Body copy line length across the site | **148–229 characters** (floor is 65–75) |
+| Prose column on `/methodology`, `/understand`, `/sources` | 880px pinned to the **left** of a 1400px page |
+| Numeric column headings | Rendered in the reading face, sentence case, because `.table .num` outranked `.table th` |
+| Sortable column headings | `text-transform` lost — `font: inherit` does not carry it, and a `<button>` defaults to `none` |
+| Table on a 390px screen | Did not scroll; compressed. "LBNL 2024 Report" got 61px, wrapped to four lines, every row stood 74px tall |
+| Ivory values surviving in the built CSS after the change | **0** |
+
+### The architecture
+
+One token layer change, then targeted form work. `globals.css` is eighteen
+hundred lines of *structure* addressing tokens, so retargeting `:root` moved the
+whole site onto chart paper in a single edit, and the rest of the work was
+changing what a handful of classes mean rather than where they are used. The
+markup barely moved: five `.eyebrow` deletions and two chart wrappers.
+
+`recorder.css` lost its token block and its 40 `body:has(.recorder)` chrome
+overrides — those are the site's own header and footer now, merged into
+`globals.css` one rule per selector. It kept only what is about a plotted sheet.
+
+### Fixed
+
+- [x] Cards as page structure → neatlined sheets. Tile rows → parameter strips.
+      Eyebrows deleted. Badges → stamps. `border-left: 3px` notice → a ruled
+      caution. Card grid → index rows. Boxed confidence bands → a reading in the
+      measurement face under a rule carrying its step.
+- [x] `--measure: 72ch`, enforced on the text and not on the container, so one
+      page can hold a full-width table and a readable paragraph. Prose containers
+      centred and sized so a section rule ends with the column it opens.
+- [x] Links are ink with a hairline underline. Sorted column and current nav page
+      now carry the same pen-1 rule — one mark for "this is the reading being
+      drawn".
+- [x] Charts adopt pen 1 at 1.6px with mono axis labels, so the ink a reader
+      learns on the front page means the same thing on `/growth` and `/analytics`.
+- [x] Perforated roll edges moved to `.shell`: one continuous roll, not one page
+      that looks like an instrument and fourteen that do not.
+- [x] Scroll floors on tables and plots, because a column has a width below which
+      it stops being a column.
+- [x] A five-step stamp-edge ramp re-solved for the new ground: monotonic,
+      3.19 → 9.29:1 in both themes. Fraunces dropped — 70 KB of font rendering
+      nothing.
+
+### Gate
+
+`make audit-contrast` (every pair clears its floor, both themes), `make lint`,
+`make typecheck`, `npm run typecheck`, `npm run lint`, `npx vitest run` (73
+across 14 files), `npm run build` (352 pages). Impeccable's design detector
+returns clean on the changed files. Home page 75 KB gzipped, two font files
+instead of three. Header geometry re-verified across ten widths; the collapsed
+nav still opens, traps nothing, and closes on Escape.
+
+## The maps were left behind by the roll-out
+
+Reported as "the map of US has disappeared". It had not: it was rendering, in the
+palette the rest of the site had stopped using.
+
+### What the report actually was
+
+The three map components each carried their own copy of the ivory palette as
+literals — and `InfrastructureMap.tsx` said so in a comment: *"These mirror
+--seq-1..7 in globals.css but are declared here as literals."* The reason is
+real (MapLibre paint expressions take resolved colours, and a custom property
+holding `light-dark()` does not resolve through `getComputedStyle`), but moving
+the stylesheet onto chart paper left all three copies behind:
+
+- every facility kept `--caution` amber, a hue that now grades nothing
+- every mark's halo painted the retired `#faf8f3` as a near-white ring on sage
+- substations and plants kept the old accent and status greens
+- the nine-step stage choropleth kept a ramp mixed for a page that no longer
+  exists
+- the CARTO basemap sat in the page as a near-white rectangle
+
+### Fixed at the class, not the instance
+
+`lib/mapPalette.ts` holds one copy. `mapPalette.test.ts` parses `globals.css` and
+fails if any value stops matching its token, and additionally asserts the ramp is
+monotonic, that dark is the exact reverse of light, and that every mark clears
+3:1 against the paper it is drawn on. 10 tests.
+
+- [x] Data centres take pen 1, substations pen 2, plants pen 3 — the same fixed
+      assignment as every other surface, so the ink a reader learns on the front
+      page means the same thing on a map.
+- [x] Basemap made translucent over the paper rather than tinted toward it.
+      Tinting first produced grey land inside a sage page; letting the sheet show
+      through is the truthful version of the same idea.
+- [x] MapLibre's control chrome re-skinned as a ruled plate. Every selector is
+      prefixed `.map-container` because MapLibre's stylesheet is imported by the
+      component and lands after `globals.css` — at equal specificity its white
+      rounded card won, on a smoked drum.
+
+### Two things worth recording about the investigation
+
+The first screenshots showed a blank map, then a map filling only the left third.
+Both were my harness: headless Chrome runs with `--disable-gpu`, so `webgl2` was
+false, and under software rendering the tiles need ~25 s. Relaunching with
+SwiftShader and waiting properly showed a complete, correct map. A worktree build
+of HEAD confirmed `.map-container` was byte-identical and neither map component
+had been touched — the geometry was never the bug.
+
+### Gate
+
+`make audit-contrast` green in both themes, `npm run typecheck`, `npm run lint`,
+`npx vitest run` (83 across 15 files), `npm run build`, Impeccable's detector
+clean on `src`. A sweep for all 25 retired palette literals across every `.ts`,
+`.tsx` and `.css` in `src` returns one hit, inside a comment describing the bug.
+
+## The country on the front page was a lattice, not a map
+
+The reported symptom was "the US map has disappeared". It had not disappeared and
+it was not the MapLibre work: the front page's plot sheet is a server-rendered
+SVG that draws the country out of 64,848 substations and power plants, and three
+faults were stacked on it.
+
+- [x] `binToGrid` threw the count away. It returned one mark per occupied cell
+      and de-duplicated the rest, so 3,922 cells drew 3,922 identical dashes on a
+      nine-unit pitch. That is a regular mesh whose only shape is its outer edge —
+      not a country. It now returns `[x, y, count]` and the mark is weighted by
+      how much grid is in the cell, which is what makes the eastern seaboard, the
+      Ohio valley and the California coast appear. The counts run 1–278 with a
+      median of 9, so the scale is logarithmic; linear puts nine cells in ten at
+      the lightest weight and gives the lattice straight back.
+- [x] The sheet was ruled behind the drawing. `.pp-wide-body` paints chart paper
+      at a 9px minor pitch and the stipple sits on a 9-unit pitch that renders at
+      10.6px. Two grids one pixel apart in frequency do not layer, they interfere,
+      and the map read as a printing artefact. The map's plate gives up its
+      ruling; it keeps the perforation and the neatline.
+- [x] Facilities were drawn in pen 2. Every other map on the site had just moved
+      to pen 1, so the single surface where facilities and grid appear together
+      was the one surface where a data centre was not the colour the reader had
+      learned two screens earlier. Now pen 1, and the legend swatches follow
+      because they share the class.
+
+Three smaller faults the fix exposed:
+
+- [x] The underlay's heaviest cells drew as heavily as a large data centre —
+      context outweighing subject. Ceiling lowered.
+- [x] A facility with no power figure was drawn in `--pp-ink-muted`, the
+      underlay's own ink, so it read as a substation. It takes
+      `--unmeasured-edge` now, which is the token the rest of the site already
+      uses for exactly this.
+- [x] The Puerto Rico inset had no fill, so mainland marks showed through it and
+      Louisiana substations appeared inside the box. Setting `fill` on the
+      element did nothing: a presentation attribute loses to any class rule, and
+      `.pp-map-neatline` declared `fill: none`. Same specificity trap as
+      `.table .num` over `.table th`. Fixed at the class.
+- [x] On a phone the sheet gave a quarter of its width to card padding. The
+      drawing takes the full plate below 900px; only the vertical padding stays.
+
+### Guard
+
+`binToGrid` now has two tests it did not have: one asserting the per-cell counts,
+one asserting the counts sum to the number of points, so binning cannot silently
+drop an asset. The first is the one that bites — the old behaviour passes every
+test that only checks how many cells came back.
+
+### Gate
+
+`make audit-contrast` green in both themes, `npm run typecheck`, `npm run lint`,
+`npx vitest run` (85 across 15 files), `npm run build`. Verified at 1440 and 390
+in both themes, plus a 3× zoom on the inset corner.
+
+## Site-wide review: what a measurement pass found that screenshots did not
+
+Ran a probe over 16 routes × 2 widths × 2 themes, checking target sizes, contrast
+against composited backgrounds, heading order, duplicate ids, accessible names,
+landmarks, keyboard reach into scroll containers, and text overflow. Then read
+every finding in source before touching anything, which is what separated the
+five real defects from the two false positives.
+
+### The one that was not a visual defect at all
+
+- [x] **127 of 323 regions printed a zero that was false or unknown.** The
+      footprint and megawatt columns ran `toFixed(2)` and `Math.round` over three
+      situations that mean three different things. 53 regions hold only points
+      and campus boundaries — no building, so no floor plate was measured and
+      there is nothing to take a share of the national total; those showed
+      `0.00 km²` and `0 MW`. 74 more have a real footprint under 5,000 m² that
+      rounds away, and 15 a real allocation under half a megawatt. This is the
+      site's own cardinal rule broken in its widest table, and it was invisible
+      to every screenshot because a zero looks like data.
+
+      `formatRegionFootprintKm2` / `formatRegionMw` now render an em dash for
+      unmeasured and `<0.01` / `<1` for small-but-real, so the two can never
+      print the same string. Applied to the table, the region page's four
+      metrics, and the region page's meta description — a search result was the
+      one place "0 MW" travelled without its column heading to qualify it.
+      Four tests, including one that asserts a small measurement and an absent
+      one do not render alike.
+
+### WCAG 2.2 SC 2.5.8, four failures
+
+- [x] Column sort buttons were 15px tall. They now claim the header cell's own
+      padding box. The active-column mark moved from an inset box-shadow to an
+      underline, because a shadow sits at the bottom of the button and would have
+      drifted eight pixels the moment the control grew a hit area.
+- [x] Homepage region links were 14px. Padding grows the link's box and the row
+      grows with it — pulling the height back with a negative margin measures 24
+      and hits 14, because `.pp-stack-name` clips its overflow for the ellipsis
+      and hit testing follows the clip.
+- [x] Footer links: 14px tall on a **23.5px** pitch. The spacing exception needs
+      24, so this failed by half a pixel.
+- [x] `<summary>` disclosures were 19.7px.
+
+### WCAG 2.1.1, keyboard
+
+- [x] Nine scroll containers were mouse-only. Two of them hold a single `<svg>`
+      and nothing focusable, so a keyboard user could not reach the right-hand
+      half of the plot at all. New `ScrollArea` puts them in the tab order with
+      `role="region"` and a name, and they get a focus ring drawn inside the box.
+      Proved with a real Tab walk: 23 tabs to the regions table, `:focus-visible`
+      matching, ring measured.
+
+### MapLibre chrome, again, in two more places
+
+- [x] The attribution was still a white pill with black text in dark mode.
+      MapLibre writes its base rule as `.maplibregl-ctrl.maplibregl-ctrl-attrib`
+      and its collapsed state as `.maplibregl-ctrl-attrib.maplibregl-compact` —
+      two classes each, both later in the bundle — so the single-class override
+      tied and lost. Same defect as the control group, one selector deeper.
+- [x] **Every popup on the site was still MapLibre's white card.** Those rules
+      were never prefixed at all. Also only four of the eight tip anchors were
+      covered, and MapLibre picks a diagonal anchor whenever a mark is near an
+      edge, which on a national map is most of them.
+
+### Two findings that were not defects
+
+The search input reads as unnamed to a naive probe and has a proper wrapping
+`<label>` with `.sr-only` text. The map attribution measured 2.5:1 because the
+probe read `color(srgb 0.83 …)` as 0-255; composited properly it is 5.7:1 light
+and 7.5:1 dark. Both were checked in source before anything was changed.
+
+### Gate
+
+`npm run typecheck`, `npm run lint`, `npx vitest run` (89 across 15 files),
+`npm run build`, `make audit-contrast` green in both themes, and the probe
+re-run: zero contrast failures, zero overflow, zero heading jumps, all five
+scroll containers keyboard-reachable. The remaining small-target entries are
+inline links inside sentences, which SC 2.5.8 exempts.
+
+## The plot sheet still had no US map, and why the third attempt was different
+
+The first two attempts tuned the marks. The third stopped and asked what the
+marks could possibly be asked to do.
+
+### The finding
+
+**A density field cannot draw a country.** The sheet had no coastline by design —
+the stated idea was that the shape would emerge from 65,325 substations and
+power plants, so every mark on the plate would be a record rather than
+decoration. It does not emerge. The grid follows population, and there is
+nothing in Nevada to stipple, so Nevada had no edge. No weighting curve, cell
+size or opacity ramp was going to produce one, because the shape of a country
+is not a thing that was measured.
+
+- [x] Dissolve the committed county boundaries into a contiguous-state coastline
+      and draw it in the paper's own hairline, never in a pen. It is reference
+      geography, and the sheet now says so in its copy: the coastline is the one
+      thing on the plate that was not measured.
+- [x] Source it from `data/reference/counties.geojson`, the same file that
+      decides which county every facility belongs to, so the shape a reader
+      recognises and the shape the data was assigned against cannot drift.
+- [x] Fit the sheet's extent to the land instead of to the grid. Fitting to the
+      data meant a new substation in Maine could move every facility on the
+      sheet.
+
+Edge de-duplication is the obvious way to dissolve a clean topology and it does
+not work here: the county file was generalised server-side per feature, so
+adjacent counties do not share vertices and 78,016 interior segments look like
+coastline. `unary_union` after `buffer(0)` heals it in one line.
+
+### The lattice, and the thing that made it visible
+
+- [x] The grid layer was binned to a nine-unit cell and read as a halftone
+      screen printed over the map. The cause is occupancy, not weighting: a
+      lattice is invisible while sparsely filled and unmistakable once it is
+      not, and at nine units the populated half of the country had something in
+      nearly every cell. At four units the same assets occupy 30% and the
+      quantisation stops being a pattern the eye can find.
+- [x] 17,500 interior rings in the dissolved outline, every one a sliver where
+      two counties disagree about a shared border. The largest traces 110 km of
+      the Kansas–Nebraska line at 2 km wide — too big for an area threshold, and
+      it drew as a stray dash across Kansas. Counties tile their states, water
+      included, so a hole in the union can never be a lake. All interiors are
+      dropped, and the docstring says why rather than tuning a number.
+
+### A truth defect found while looking at a visual one
+
+**2,898 of the 65,325 grid assets are not in the United States.** The Overpass
+boxes reach into Sonora, Chihuahua, Ontario and the Gulf. The per-county totals
+were always right because they are keyed on the county assignment — but
+`assign_grid_regions.py` computed that assignment, used it, and threw it away,
+so the two surfaces that read the raw rows published it unfiltered: the map drew
+Mexican substations on a plate captioned "the contiguous states", and the front
+page counted them in a national total.
+
+- [x] `assign_grid_regions.py` writes the assignment back to `grid.csv`, the way
+      the facility snapshot already carries `county_fips` and `state`.
+- [x] `build_grid` and the meta counts publish only assigned rows. 65,325 →
+      62,427. A test asserts an unassigned row is not published.
+
+### Weight
+
+Adding a coastline and tripling the grid marks should have cost 45 KB gzipped.
+It ended up 9 KB *lighter* than before either change, because the encoding was
+the larger win: sorting the marks row-major took the grid layer from 35 KB
+gzipped to 30, and writing the gap to the previous mark instead of its position
+took it to 10. The page is 426 KB raw / **72 KB gzipped**, down from 520 / 124.
+
+### Gate
+
+`npm run typecheck`, `npm run lint`, `npx vitest run` (92 across 15 files),
+`npm run build`, `make lint`, `make test` (299 passed), `make audit-contrast`
+green in both themes. `build_basemap.py`, `assign_grid_regions.py` and
+`build_site_data.py` re-run byte-identical, so a `git diff` still means real
+movement. Verified visually at 1440 light, 1440 dark and 390 phone.
+
+**Not re-run:** the 16-route browser probe. I killed the long-lived headless
+Chrome with a `pkill` and it will not stay alive in this sandbox. Structure was
+checked instead on the built HTML for five routes (one `h1`, one `main`, no
+heading jumps, no duplicate ids, no unnamed `svg[role=img]`); target sizes and
+composited contrast were not re-measured.

@@ -18,7 +18,7 @@
  * Substations are sized by voltage and plants by generating capacity, both
  * ordinal quantities carried by size along a single hue each.
  *
- * The grid is fetched only when asked for. It is 65,325 points against the
+ * The grid is fetched only when asked for. It is 62,427 points against the
  * facility layer's 1,853 - eleven megabytes - and loading it with the page
  * would make everyone pay for a layer most readers never open. Colour here is categorical - three
  * asset types, not a scale - and every colour is labelled in the legend, so
@@ -36,6 +36,12 @@ import Map, {
 import "maplibre-gl/dist/maplibre-gl.css";
 
 import { basemapStyle } from "@/components/InfrastructureMap";
+import {
+  MAP_FACILITY,
+  MAP_PAPER,
+  MAP_PLANT,
+  MAP_SUBSTATION,
+} from "@/lib/mapPalette";
 import { useTheme } from "@/components/ThemeToggle";
 import {
   formatMappedArea,
@@ -60,14 +66,18 @@ const CONTINENTAL_US_VIEW = {
  * grades nothing on its own.
  */
 const ASSET_COLOUR = {
-  facility: { light: "#8a5a09", dark: "#e0913f" },
-  substation: { light: "#2a4fae", dark: "#7d97ee" },
-  plant: { light: "#3d7a33", dark: "#68a458" },
+  facility: MAP_FACILITY,
+  substation: MAP_SUBSTATION,
+  plant: MAP_PLANT,
 } as const;
 
 type LayerKey = "facilities" | "substations" | "plants";
 
-const LAYERS: { key: LayerKey; label: string; asset: keyof typeof ASSET_COLOUR }[] = [
+const LAYERS: {
+  key: LayerKey;
+  label: string;
+  asset: keyof typeof ASSET_COLOUR;
+}[] = [
   { key: "facilities", label: "Data centres", asset: "facility" },
   { key: "substations", label: "Substations 69 kV+", asset: "substation" },
   { key: "plants", label: "Power plants", asset: "plant" },
@@ -89,7 +99,11 @@ interface PopupState {
   properties: Record<string, unknown>;
 }
 
-export function ObservatoryMap({ facilities }: { facilities: FacilityCollection }) {
+export function ObservatoryMap({
+  facilities,
+}: {
+  facilities: FacilityCollection;
+}) {
   const [popup, setPopup] = useState<PopupState | null>(null);
   const [enabled, setEnabled] = useState<Record<LayerKey, boolean>>({
     facilities: true,
@@ -97,7 +111,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
     plants: false,
   });
   const [grid, setGrid] = useState<GridFeatureCollection | null>(null);
-  const [gridState, setGridState] = useState<"idle" | "loading" | "failed">("idle");
+  const [gridState, setGridState] = useState<"idle" | "loading" | "failed">(
+    "idle",
+  );
   const theme = useTheme();
 
   const wantsGrid = enabled.substations || enabled.plants;
@@ -180,7 +196,10 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
               className={enabled[layer.key] ? "chip chip-active" : "chip"}
               aria-pressed={enabled[layer.key]}
               onClick={() =>
-                setEnabled((prev) => ({ ...prev, [layer.key]: !prev[layer.key] }))
+                setEnabled((prev) => ({
+                  ...prev,
+                  [layer.key]: !prev[layer.key],
+                }))
               }
             >
               <span
@@ -234,21 +253,39 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                     ["linear"],
                     ["zoom"],
                     3,
-                    ["interpolate", ["linear"], ["sqrt", ["coalesce", ["get", "capacity_mw"], 0]], 0, 1.6, 45, 6],
+                    [
+                      "interpolate",
+                      ["linear"],
+                      ["sqrt", ["coalesce", ["get", "capacity_mw"], 0]],
+                      0,
+                      1.6,
+                      45,
+                      6,
+                    ],
                     9,
-                    ["interpolate", ["linear"], ["sqrt", ["coalesce", ["get", "capacity_mw"], 0]], 0, 3, 45, 16],
+                    [
+                      "interpolate",
+                      ["linear"],
+                      ["sqrt", ["coalesce", ["get", "capacity_mw"], 0]],
+                      0,
+                      3,
+                      45,
+                      16,
+                    ],
                   ],
                   "circle-color": ASSET_COLOUR.plant[theme],
                   "circle-opacity": 0.45,
                   "circle-stroke-width": 0.4,
-                  "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+                  "circle-stroke-color": MAP_PAPER[theme],
                 }}
               />
               <Layer
                 id="substation-point"
                 type="circle"
                 filter={["==", ["get", "kind"], "substation"]}
-                layout={{ visibility: enabled.substations ? "visible" : "none" }}
+                layout={{
+                  visibility: enabled.substations ? "visible" : "none",
+                }}
                 paint={{
                   // Voltage is ordinal, so it is carried by size along one hue.
                   // 69 kV floor, 765 kV ceiling - the highest in service.
@@ -257,20 +294,40 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                     ["linear"],
                     ["zoom"],
                     3,
-                    ["interpolate", ["linear"], ["get", "voltage_kv"], 69, 1.4, 765, 5],
+                    [
+                      "interpolate",
+                      ["linear"],
+                      ["get", "voltage_kv"],
+                      69,
+                      1.4,
+                      765,
+                      5,
+                    ],
                     9,
-                    ["interpolate", ["linear"], ["get", "voltage_kv"], 69, 3, 765, 14],
+                    [
+                      "interpolate",
+                      ["linear"],
+                      ["get", "voltage_kv"],
+                      69,
+                      3,
+                      765,
+                      14,
+                    ],
                   ],
                   "circle-color": ASSET_COLOUR.substation[theme],
                   "circle-opacity": 0.45,
                   "circle-stroke-width": 0.4,
-                  "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+                  "circle-stroke-color": MAP_PAPER[theme],
                 }}
               />
             </Source>
           ) : null}
 
-          <Source id="observatory-facilities" type="geojson" data={facilities as never}>
+          <Source
+            id="observatory-facilities"
+            type="geojson"
+            data={facilities as never}
+          >
             <Layer
               id="facility-building-point"
               type="circle"
@@ -288,14 +345,30 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                   ["linear"],
                   ["zoom"],
                   3,
-                  ["interpolate", ["linear"], ["sqrt", ["get", "footprint_m2"]], 0, 2, 640, 7],
+                  [
+                    "interpolate",
+                    ["linear"],
+                    ["sqrt", ["get", "footprint_m2"]],
+                    0,
+                    2,
+                    640,
+                    7,
+                  ],
                   9,
-                  ["interpolate", ["linear"], ["sqrt", ["get", "footprint_m2"]], 0, 4, 640, 24],
+                  [
+                    "interpolate",
+                    ["linear"],
+                    ["sqrt", ["get", "footprint_m2"]],
+                    0,
+                    4,
+                    640,
+                    24,
+                  ],
                 ],
                 "circle-color": ASSET_COLOUR.facility[theme],
                 "circle-opacity": 0.5,
                 "circle-stroke-width": 0.5,
-                "circle-stroke-color": theme === "dark" ? "#131210" : "#faf8f3",
+                "circle-stroke-color": MAP_PAPER[theme],
               }}
             />
             <Layer
@@ -308,7 +381,15 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
               paint={{
                 // A land parcel or construction polygon is not a floor plate.
                 // Fixed radii keep its mapped area out of the building scale.
-                "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 2.5, 9, 6],
+                "circle-radius": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  3,
+                  2.5,
+                  9,
+                  6,
+                ],
                 "circle-color": ASSET_COLOUR.facility[theme],
                 "circle-opacity": 0.35,
                 "circle-stroke-width": 1.25,
@@ -328,7 +409,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
               <div className="map-popup">
                 {popup.kind === "facility" ? (
                   <>
-                    <strong>{String(popup.properties.name ?? "Unnamed facility")}</strong>
+                    <strong>
+                      {String(popup.properties.name ?? "Unnamed facility")}
+                    </strong>
                     {popup.properties.operator ? (
                       <div>{String(popup.properties.operator)}</div>
                     ) : (
@@ -337,7 +420,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                     <div className="small">
                       {formatMappedArea(
                         popup.properties.footprint_m2,
-                        popup.properties.site_class as FacilitySiteClass | undefined,
+                        popup.properties.site_class as
+                          | FacilitySiteClass
+                          | undefined,
                       )}
                     </div>
                     {popup.properties.first_seen ? (
@@ -346,8 +431,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                       </div>
                     ) : null}
                     <p className="small muted" style={{ marginBottom: 0 }}>
-                      Location reported by OpenStreetMap contributors. Any date is when
-                      the map recorded this facility, not when it was built.
+                      Location reported by OpenStreetMap contributors. Any date
+                      is when the map recorded this facility, not when it was
+                      built.
                     </p>
                   </>
                 ) : (
@@ -361,7 +447,9 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                       )}
                     </strong>
                     <div className="small">
-                      {popup.kind === "substation" ? "Substation" : "Generating plant"}
+                      {popup.kind === "substation"
+                        ? "Substation"
+                        : "Generating plant"}
                       {popup.properties.source
                         ? ` · ${String(popup.properties.source)}`
                         : ""}
@@ -373,16 +461,19 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
                     ) : null}
                     {popup.properties.capacity_mw ? (
                       <div className="small">
-                        {Number(popup.properties.capacity_mw).toLocaleString()} MW rated
+                        {Number(popup.properties.capacity_mw).toLocaleString()}{" "}
+                        MW rated
                       </div>
                     ) : null}
                     {popup.properties.operator ? (
-                      <div className="small">{String(popup.properties.operator)}</div>
+                      <div className="small">
+                        {String(popup.properties.operator)}
+                      </div>
                     ) : null}
                     <p className="small muted" style={{ marginBottom: 0 }}>
-                      Reported by OpenStreetMap contributors. Voltage and capacity are
-                      whatever a mapper recorded, and neither is a measurement Helios
-                      made.
+                      Reported by OpenStreetMap contributors. Voltage and
+                      capacity are whatever a mapper recorded, and neither is a
+                      measurement Helios made.
                     </p>
                   </>
                 )}
@@ -394,7 +485,8 @@ export function ObservatoryMap({ facilities }: { facilities: FacilityCollection 
 
       {gridState === "failed" ? (
         <p className="small muted">
-          The grid layer could not be loaded. The data centres above are unaffected.
+          The grid layer could not be loaded. The data centres above are
+          unaffected.
         </p>
       ) : null}
     </div>

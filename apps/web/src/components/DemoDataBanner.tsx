@@ -65,10 +65,9 @@ export async function DemoDataBanner() {
       {exportedOn
         ? ` sites Helios infers from Arizona parcel records, exported on ${exportedOn}.`
         : " sites Helios infers from Arizona parcel records."}{" "}
-      The first is a map of
-      what has been recorded; the second is an argued hypothesis with an
-      evidence chain. This is a point-in-time export, not a live view. See{" "}
-      <a href={`${API_BASE}/meta.json`}>meta.json</a> or the{" "}
+      The first is a map of what has been recorded; the second is an argued
+      hypothesis with an evidence chain. This is a point-in-time export, not a
+      live view. See <a href={`${API_BASE}/meta.json`}>meta.json</a> or the{" "}
       <Link href="/methodology">methodology</Link>.
     </div>
   );

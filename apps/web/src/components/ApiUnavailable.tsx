@@ -22,8 +22,8 @@ export function ApiUnavailable({ error }: { error: unknown }) {
         <p className="small muted">Start the whole stack:</p>
         <div className="snippet">docker compose up --build</div>
         <p className="small muted" style={{ marginTop: "0.75rem" }}>
-          Or, if you are running the backend directly, apply migrations and load real
-          public records:
+          Or, if you are running the backend directly, apply migrations and load
+          real public records:
         </p>
         <div className="snippet">
           {[

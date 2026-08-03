@@ -80,7 +80,10 @@ export default async function SiteDetailPage({ params }: PageProps) {
   let mapSites;
   let infrastructure;
   try {
-    [site, timeline] = await Promise.all([getSite(siteId), getTimeline(siteId)]);
+    [site, timeline] = await Promise.all([
+      getSite(siteId),
+      getTimeline(siteId),
+    ]);
     const bbox = boundingBoxFor(site);
     [mapSites, infrastructure] = await Promise.all([
       getMapSites(bbox),
@@ -104,8 +107,8 @@ export default async function SiteDetailPage({ params }: PageProps) {
               <span className="mono">{site.project_code}</span>
             </h1>
             <p className="muted" style={{ margin: 0 }}>
-              {site.jurisdiction ?? "Unknown jurisdiction"}, {site.county} County,
-              Arizona &middot; {site.site_kind.replace(/_/g, " ")}{" "}
+              {site.jurisdiction ?? "Unknown jurisdiction"}, {site.county}{" "}
+              County, Arizona &middot; {site.site_kind.replace(/_/g, " ")}{" "}
               <AssertionBadge assertion={site.site_kind_assertion} />
             </p>
           </div>
@@ -116,7 +119,10 @@ export default async function SiteDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <StageTrack stage={site.current_stage} label={site.current_stage_label} />
+        <StageTrack
+          stage={site.current_stage}
+          label={site.current_stage_label}
+        />
       </header>
 
       <div className="grid grid-4">
@@ -142,7 +148,9 @@ export default async function SiteDetailPage({ params }: PageProps) {
         <Metric
           label="Estimated load"
           value={(() => {
-            const power = site.estimates?.find((e) => e.estimate_type === "power_capacity");
+            const power = site.estimates?.find(
+              (e) => e.estimate_type === "power_capacity",
+            );
             if (!power || power.likely_value === null) return "Not established";
             // The headline carries the band, not the midpoint. A single figure
             // here would read as measured; the range is the honest summary.
@@ -208,7 +216,9 @@ export default async function SiteDetailPage({ params }: PageProps) {
             <section className="card">
               <div className="card-header">
                 <h2 className="card-title">Estimated demand</h2>
-                <span className="card-note">none of this is a filed figure</span>
+                <span className="card-note">
+                  none of this is a filed figure
+                </span>
               </div>
               {site.estimates
                 .filter((e) => ESTIMATE_LABELS[e.estimate_type])
@@ -247,7 +257,10 @@ export default async function SiteDetailPage({ params }: PageProps) {
           {site.attributions.length > 0 && (
             <section className="card">
               <h2 className="card-title">Attribution</h2>
-              <ul className="small muted" style={{ paddingLeft: "1.1rem", margin: 0 }}>
+              <ul
+                className="small muted"
+                style={{ paddingLeft: "1.1rem", margin: 0 }}
+              >
                 {site.attributions.map((attribution) => (
                   <li key={attribution}>{attribution}</li>
                 ))}
@@ -267,7 +280,11 @@ export default async function SiteDetailPage({ params }: PageProps) {
 function StageTrack({ stage, label }: { stage: number; label: string }) {
   return (
     <div>
-      <div className="stage-track" role="img" aria-label={`Development stage ${stage}: ${label}`}>
+      <div
+        className="stage-track"
+        role="img"
+        aria-label={`Development stage ${stage}: ${label}`}
+      >
         {Array.from({ length: STAGE_COUNT }, (_, index) => (
           <span
             key={index}
@@ -290,8 +307,9 @@ function OrganizationList({ site }: { site: SiteDetail }) {
   if (site.organizations.length === 0) {
     return (
       <p className="muted small">
-        No organization is recorded as holding title. Owner names classified as private
-        individuals are redacted before storage and produce no organization record.
+        No organization is recorded as holding title. Owner names classified as
+        private individuals are redacted before storage and produce no
+        organization record.
       </p>
     );
   }
@@ -299,7 +317,14 @@ function OrganizationList({ site }: { site: SiteDetail }) {
     <div className="stack">
       {site.organizations.map((organization) => (
         <div key={organization.id}>
-          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
             <strong>{organization.canonical_name}</strong>
             {organization.organization_type && (
               <StatusPill>{organization.organization_type}</StatusPill>
@@ -314,7 +339,10 @@ function OrganizationList({ site }: { site: SiteDetail }) {
             )}
           </div>
           {organization.shell_indicators.length > 0 && (
-            <ul className="small muted" style={{ paddingLeft: "1.1rem", margin: "0.25rem 0" }}>
+            <ul
+              className="small muted"
+              style={{ paddingLeft: "1.1rem", margin: "0.25rem 0" }}
+            >
               {organization.shell_indicators.map((indicator) => (
                 <li key={indicator}>{indicator}</li>
               ))}
@@ -357,7 +385,9 @@ function ParcelTable({ parcels }: { parcels: Parcel[] }) {
                   {parcel.apn_formatted ?? parcel.apn}
                 </a>
               ) : (
-                <span className="mono">{parcel.apn_formatted ?? parcel.apn}</span>
+                <span className="mono">
+                  {parcel.apn_formatted ?? parcel.apn}
+                </span>
               )}
             </td>
             <td className="small">
@@ -391,8 +421,9 @@ function DependencyList({ dependencies }: { dependencies: Dependency[] }) {
   if (dependencies.length === 0) {
     return (
       <p className="muted small">
-        No infrastructure dependencies have been matched. This means none were found within
-        the search radius, not that the site has no grid connection.
+        No infrastructure dependencies have been matched. This means none were
+        found within the search radius, not that the site has no grid
+        connection.
       </p>
     );
   }
@@ -402,11 +433,21 @@ function DependencyList({ dependencies }: { dependencies: Dependency[] }) {
     <div className="stack">
       {shown.map((dependency) => (
         <div key={dependency.id}>
-          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
             <strong className="small">{dependency.label}</strong>
             <AssertionBadge assertion={dependency.assertion_class} />
             {dependency.is_blocking && (
-              <StatusPill tone="caution" title="Close enough that a dedicated connection is plausible.">
+              <StatusPill
+                tone="caution"
+                title="Close enough that a dedicated connection is plausible."
+              >
                 Likely dedicated
               </StatusPill>
             )}
@@ -414,7 +455,8 @@ function DependencyList({ dependencies }: { dependencies: Dependency[] }) {
           <div className="small muted">
             {dependency.distance_meters !== null &&
               `${dependency.distance_meters.toFixed(0)} m away`}
-            {dependency.voltage_kv && ` · ${dependency.voltage_kv.toFixed(0)} kV`}
+            {dependency.voltage_kv &&
+              ` · ${dependency.voltage_kv.toFixed(0)} kV`}
             {dependency.operator_name && ` · ${dependency.operator_name}`}
             {` · match confidence ${(dependency.confidence * 100).toFixed(0)}%`}
           </div>
@@ -426,8 +468,8 @@ function DependencyList({ dependencies }: { dependencies: Dependency[] }) {
         </p>
       )}
       <p className="card-note">
-        Dependencies are inferred from spatial proximity. A nearby substation makes a
-        connection practical; it is not evidence that one exists.
+        Dependencies are inferred from spatial proximity. A nearby substation
+        makes a connection practical; it is not evidence that one exists.
       </p>
     </div>
   );

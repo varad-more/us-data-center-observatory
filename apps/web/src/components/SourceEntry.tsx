@@ -12,14 +12,25 @@ const STATUS_TONE: Record<string, "positive" | "caution" | "neutral"> = {
 
 export function SourceEntry({ source }: { source: Source }) {
   return (
-    <div style={{ borderTop: "1px solid var(--border)", paddingTop: "0.75rem" }}>
-      <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+    <div
+      style={{ borderTop: "1px solid var(--border)", paddingTop: "0.75rem" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: "0.5rem",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
         <strong>
           <a href={source.base_url} target="_blank" rel="noreferrer">
             {source.name}
           </a>
         </strong>
-        <StatusPill tone={STATUS_TONE[source.connector_status ?? "planned"] ?? "neutral"}>
+        <StatusPill
+          tone={STATUS_TONE[source.connector_status ?? "planned"] ?? "neutral"}
+        >
           {(source.connector_status ?? "planned").replace(/_/g, " ")}
         </StatusPill>
         {source.contains_personal_data && (
@@ -66,13 +77,19 @@ export function SourceEntry({ source }: { source: Source }) {
       </dl>
 
       {source.notes && (
-        <p className="small muted" style={{ marginTop: "0.5rem", marginBottom: 0 }}>
+        <p
+          className="small muted"
+          style={{ marginTop: "0.5rem", marginBottom: 0 }}
+        >
           <strong>Registry note.</strong> {source.notes}
         </p>
       )}
 
       {source.access_limitation && (
-        <div className="notice" style={{ marginTop: "0.5rem", marginBottom: 0 }}>
+        <div
+          className="notice"
+          style={{ marginTop: "0.5rem", marginBottom: 0 }}
+        >
           <strong>Access limitation.</strong> {source.access_limitation}
         </div>
       )}

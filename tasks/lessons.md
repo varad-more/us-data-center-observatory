@@ -481,3 +481,149 @@ distinctive fragment of the old shape (`out/sites.html`) rather than opening the
 file that complained, and run every workflow's assertions locally before
 pushing. They are a handful of `test -f` lines that execute in a second, and
 they are exactly what would otherwise stop CI three minutes later.
+
+## `git checkout --` is a destructive command on a file with uncommitted work
+
+While mutation-testing a guard, I mutated `globals.css` with `sed`/`python`, then
+"cleaned up" with `git checkout -- src/app/globals.css`. That does not undo the
+mutation — it discards *everything* uncommitted in that file, and a session's
+worth of unreviewed header work went with it. Recovery took a transcript replay
+of every Edit call plus a compiled-CSS diff against the last build to prove the
+reconstruction was exact.
+
+The mistake was not the mutation. It was reaching for a command whose scope is
+"the file" when what I wanted was scope "my last change". The two are identical
+only when the file is otherwise clean, and this file had not been clean all day.
+
+**How to apply:** before mutating a file to check that a test bites, copy it to
+the scratchpad and restore with `cp`, never with `git`. Reserve `git checkout --`,
+`git restore`, `git stash` and `git reset --hard` for files `git status` shows as
+unmodified — and on this repo, where nothing is committed until the user has
+reviewed it locally, treat every one of them as needing the same confirmation a
+delete would.
+
+## "The map is broken" does not mean the map component is broken
+
+I was shown a screenshot of a missing US map, found three retired-palette bugs in
+the three MapLibre components, fixed them, verified them, and reported the map
+fixed. The screenshot was of none of those. It was the front page's plot sheet —
+a server-rendered SVG in `components/recorder/PlotSheet.tsx` that draws the
+country out of binned grid assets and deliberately has no basemap and no map
+engine at all.
+
+The tell was in the screenshot and I read past it: the marks were blue, and I had
+just changed every MapLibre facility to rust. A mark in the old colour after the
+fix means the surface is not the one that was fixed.
+
+**Rule: before diagnosing, identify the exact component that rendered the pixels
+in front of you.** Grep the visible copy from the screenshot — the string
+"gets an inset" found the file in one command. Do that first, not after forming a
+theory from the component names that seem relevant.
+
+## A presentation attribute loses to any class rule
+
+`<rect className="pp-map-neatline" fill="var(--pp-paper)">` did nothing, because
+`.pp-map-neatline` declared `fill: none` and presentation attributes sit below
+every CSS rule in the cascade. Same family as `.table .num` beating `.table th`.
+Set SVG paint in the class, not on the element, whenever a class already touches
+that property.
+
+## Two grids at the same pitch interfere, they do not layer
+
+A stipple on a nine-unit pitch over chart paper ruled at nine pixels read as one
+piece of graph paper with a printing fault. Any repeating background under a
+drawing that is itself repetitive needs its frequency checked against the
+drawing's, or the drawing disappears into it.
+
+## Check the probe before believing the probe
+
+Two of seven findings in the site-wide audit were the measuring instrument, not
+the site: a contrast reading of 2.5:1 that came from parsing `color(srgb 0.83 …)`
+as 0-255, and an "unnamed input" that has a wrapping `<label>` the probe never
+looked for. Both would have produced a confident, wrong fix.
+
+**Rule: read every finding in source before editing.** A probe locates; it does
+not diagnose. The cost of checking is one grep and it caught 2 in 7.
+
+## A zero is the hardest defect to see
+
+The regions table printed `0.00` and `0` for 127 of 323 rows and looked perfect
+in every screenshot, because a zero renders like data. It was found by reading
+the CSV behind one odd-looking row — 32 facilities, 0.00 km², 2 MW — not by
+looking at the page.
+
+When a column is derived, check what it renders for the empty case, the
+rounds-to-zero case and the genuinely-zero case, and confirm those three produce
+three different strings. On this project that is the cardinal rule; anywhere
+else it is still the difference between "none" and "not measured".
+
+## Enlarging a hit area inside a clipping ancestor does nothing
+
+`padding-block` plus a matching negative `margin-block` is the standard trick for
+growing a target without moving the layout. Inside an ancestor with
+`overflow: hidden` it silently fails: the padding extends past the ancestor's
+box, gets clipped, and hit testing follows the clip. It measures 24px in
+`getBoundingClientRect` and still hits at 14. Let the parent grow instead, or
+move the clipping.
+
+## Two failed fixes mean the approach is wrong, not the parameters
+
+The plot sheet was asked twice to show a US map and twice I tuned the marks —
+weighting, cell size, opacity, colour. Both rounds were real improvements to
+real defects and neither could have worked, because the sheet was asking a
+density field to draw a coastline.
+
+When the second attempt at something fails, stop fixing and ask what the
+mechanism can produce at its best. If the honest answer does not include the
+thing being asked for, no third parameter will help. The tell here was
+available from the start: the west half of the sheet had no marks to tune.
+
+## The obvious dissolve is wrong when the source was generalised per feature
+
+De-duplicating shared edges is the textbook way to dissolve a polygon mesh, and
+it silently produces garbage when adjacent polygons do not share vertices. This
+county file was generalised server-side per feature: 78,016 interior segments
+appeared exactly once and drew as coastline, filling the country solid.
+
+Check the assumption before writing the algorithm — count how many segments
+appear twice. If it is not nearly all of them, the topology is not clean and
+`unary_union` (after `buffer(0)`) is the answer, not edge matching.
+
+## A regular lattice is an occupancy problem, not a weighting problem
+
+Binned marks read as a printed halftone screen whenever occupancy approaches
+100%, and as an honest stipple when it is around a third. Changing the weights,
+sizes and opacities does not move that; changing the cell size does. Same marks,
+same data, 9 units → unmistakable grid, 4 units → geography.
+
+## An assignment computed and thrown away will be recomputed wrongly downstream
+
+`assign_grid_regions.py` did the point-in-polygon for every grid asset, used it
+for the county totals, and never persisted it. The totals were right forever;
+the map and the headline count read the raw rows and published 2,898 Mexican and
+Canadian substations as American ones for as long as the file existed.
+
+If a stage derives the answer to a question other stages will also ask, write it
+to the file. The alternative is not "they recompute it" — it is that they use a
+cheaper wrong proxy, here a lat/lon bounding box that cannot tell Sonora from
+Arizona.
+
+## Sort before you compress, then send deltas
+
+Two changes, no visual difference, 35 KB gzipped → 10 KB. Sorting marks into
+row-major order costs one line and gets a quarter of it, because neighbours then
+share long string prefixes. Writing the gap to the previous mark rather than its
+absolute position gets the rest, because in that order almost every gap is one
+or two digits.
+
+On a closed ring, accumulate the deltas from what was actually written, not from
+the ideal coordinate. Rounding each delta independently drifts, and over 867
+vertices the end of the ring visibly misses its start.
+
+## Do not pkill the browser you are still verifying with
+
+A `pkill -f remote-debugging-port=9222` cleared the headless Chrome that had
+served every screenshot and probe this session, and it would not restart under
+the sandbox. The visual checks were already done; the 16-route accessibility
+probe was not, and could not be recovered. Kill the process you started only
+when the work that needs it is finished.

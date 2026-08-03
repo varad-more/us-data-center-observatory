@@ -11,9 +11,9 @@ describe("AssertionBadge", () => {
 
     rerender(<AssertionBadge assertion="inferred" />);
     expect(screen.getByTestId("badge-inferred")).toHaveTextContent("Inferred");
-    expect(screen.getByTestId("badge-inferred").getAttribute("title") || "").toMatch(
-      /may be wrong/i,
-    );
+    expect(
+      screen.getByTestId("badge-inferred").getAttribute("title") || "",
+    ).toMatch(/may be wrong/i);
   });
 
   /**
@@ -52,7 +52,9 @@ describe("AssertionBadge", () => {
       const { unmount } = render(
         <AssertionBadge assertion={assertion as AssertionClass} />,
       );
-      expect(screen.getByTestId(`badge-${assertion}`).dataset.evidenceBasis).toBe(basis);
+      expect(
+        screen.getByTestId(`badge-${assertion}`).dataset.evidenceBasis,
+      ).toBe(basis);
       unmount();
     }
   });
@@ -71,7 +73,9 @@ describe("AssertionBadge", () => {
 
     for (const assertion of vocabulary) {
       const { unmount } = render(<AssertionBadge assertion={assertion} />);
-      expect(screen.getByTestId(`badge-${assertion}`).dataset.evidenceBasis).toBeDefined();
+      expect(
+        screen.getByTestId(`badge-${assertion}`).dataset.evidenceBasis,
+      ).toBeDefined();
       unmount();
     }
   });
@@ -94,7 +98,9 @@ describe("AssertionBadge", () => {
     );
 
     rerender(<AssertionBadge assertion="predicted" />);
-    expect(screen.getByTestId("badge-predicted").dataset.evidenceBasis).toBe("derived");
+    expect(screen.getByTestId("badge-predicted").dataset.evidenceBasis).toBe(
+      "derived",
+    );
   });
 });
 
@@ -103,6 +109,8 @@ describe("ConfidenceBadge", () => {
     render(<ConfidenceBadge confidence={41.2} band="moderate" />);
     const el = screen.getByTestId("confidence-badge");
     expect(el).toHaveTextContent("41%");
-    expect(el.getAttribute("title") || "").toMatch(/not a probability of existence/i);
+    expect(el.getAttribute("title") || "").toMatch(
+      /not a probability of existence/i,
+    );
   });
 });

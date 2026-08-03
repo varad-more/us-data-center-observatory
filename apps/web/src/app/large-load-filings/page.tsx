@@ -21,12 +21,11 @@ export default async function LargeLoadFilingsPage() {
     <div className="stack">
       <div className="card-header">
         <div>
-          <p className="eyebrow">Primary utility-regulator filings</p>
           <h1>Reported large-load filings</h1>
           <p className="tagline">
-            Site-specific public decisions that name a large electricity request.
-            Each record keeps the regulator&apos;s words, the reported load class,
-            and the location precision together.
+            Site-specific public decisions that name a large electricity
+            request. Each record keeps the regulator&apos;s words, the reported
+            load class, and the location precision together.
           </p>
         </div>
       </div>
@@ -59,17 +58,20 @@ export default async function LargeLoadFilingsPage() {
       </div>
 
       <div className="notice">
-        <strong>This is a filing register, not a national project census.</strong>{" "}
-        Helios publishes only reviewed, site-specific state-regulator disclosures
-        that its connector can reproduce. A state or project missing from this page
-        falls outside the sources Helios reads. That is all it means.
+        <strong>
+          This is a filing register, not a national project census.
+        </strong>{" "}
+        Helios publishes only reviewed, site-specific state-regulator
+        disclosures that its connector can reproduce. A state or project missing
+        from this page falls outside the sources Helios reads. That is all it
+        means.
       </div>
 
       <div className="notice">
-        <strong>Reported contracted load is not operating load.</strong> Nor is it
-        generating capacity, a promise of grid availability, or proof that anything
-        has been built. A filing that names a township is mapped to that township.
-        Helios does not manufacture a point from a place name.
+        <strong>Reported contracted load is not operating load.</strong> Nor is
+        it generating capacity, a promise of grid availability, or proof that
+        anything has been built. A filing that names a township is mapped to
+        that township. Helios does not manufacture a point from a place name.
       </div>
 
       {payload.items.length > 0 ? (

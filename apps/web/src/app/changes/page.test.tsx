@@ -72,7 +72,9 @@ describe("ChangesPage", () => {
 
     // The disclaimer is the other half: without it a reader is left to infer
     // that a row labelled "removed" means the building is gone.
-    expect(screen.getByText(/a removal is not a demolition/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/a removal is not a demolition/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/not necessarily demolished/i)).toBeInTheDocument();
   });
 
@@ -89,7 +91,9 @@ describe("ChangesPage", () => {
     await renderPage();
 
     expect(
-      screen.getByText(/dates are when the edit was made, not when anything was built/i),
+      screen.getByText(
+        /dates are when the edit was made, not when anything was built/i,
+      ),
     ).toBeInTheDocument();
   });
 });

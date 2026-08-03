@@ -95,7 +95,9 @@ export function RegionPicker({
         className="control-select"
         value={currentId}
         disabled={!ready}
-        onChange={(event) => router.push(`/regions/${regionSlug(event.target.value)}`)}
+        onChange={(event) =>
+          router.push(`/regions/${regionSlug(event.target.value)}`)
+        }
       >
         {ready ? (
           <>

@@ -1,150 +1,200 @@
 /**
  * Helios design tokens and base styles.
  *
- * Colour in this interface carries meaning — it distinguishes reported facts
- * from inferences and marks how far a project has progressed — so decorative
- * colour would dilute the only signal the reader needs to read quickly.
+ * One material for the whole site: process-recorder chart paper. The home page
+ * proved the world and the other fourteen routes ran a warm ivory system beside
+ * it, which meant a reader crossing from the front page to a region page changed
+ * paper, typeface and chart language in one click. The boundary was documented
+ * as deliberate; in use it read as two half-finished sites.
  *
- * Two rules govern every value below, and they are the reason the palette looks
- * as narrow as it does:
+ * So the tokens below are the recorder's, promoted from `body:has(.recorder)` to
+ * the root. Every component rule in this file — tables, badges, plates, the
+ * footer — keeps its structure and changes material. `recorder.css` keeps only
+ * what is genuinely about a plotted sheet: the rulings, the pens, the crosshair.
  *
- *   1. Colour is never the sole carrier of a fact. Every badge, pill and swatch
+ * Three rules govern every value here:
+ *
+ *   1. Colour is never the sole carrier of a fact. Every stamp, pill and swatch
  *      sits beside a word that already states the case. Colour grades it; the
  *      word establishes it.
  *   2. Ordinal quantities get a sequential ramp, not a set of unrelated hues.
  *      Assertion class and construction stage are both ordered scales, so both
  *      run along one hue. A rainbow would imply categories where there is a
  *      progression.
+ *   3. Absence is never a step of that ramp. A weak reading and no reading are
+ *      different claims, and this project exists to keep them apart.
  *
- * Contrast floors are held explicitly: 4.5:1 for anything that is read as text,
- * 3:1 for anything that is read as a mark. Where a value sits below the text
- * floor it is used only as a fill or an edge, never as ink.
+ * Contrast floors are held explicitly: 4.5:1 for anything read as text, 3:1 for
+ * anything read as a mark. `make audit-contrast` checks every pair below against
+ * its floor and fails the build; nothing here is asserted by eye.
  */
 
 :root {
   color-scheme: light dark;
 
-  /* Warm ivory rather than neutral grey. This interface is mostly text and thin
-     rules on a large empty field, so the field's temperature is most of the
-     character it has. The ink is warmed to match — a pure black on ivory reads
-     as a printing error rather than as black. */
-  --page: light-dark(#faf8f3, #131210);
-  --surface-1: light-dark(#fefdfa, #1d1b17);
-  --surface-2: light-dark(#f4f1e8, #24211c);
+  /* Chart paper, and in dark a smoked drum. Not an inversion: a recorder's night
+     drum is soot with its rulings showing as scratches catching lamplight, which
+     is a different material rather than the same one photographed in negative.
+     Light is the default because of the use scene — a laptop in a lit office. */
+  --page: light-dark(#dde3d6, #1a1815);
+  --surface-1: light-dark(#d4dbcb, #211e1a);
+  --surface-2: light-dark(#cbd3c1, #262320);
 
-  --ink-1: light-dark(#17150f, #faf7f0);
-  --ink-2: light-dark(#514c40, #c9c1b0);
+  --ink-1: light-dark(#232420, #ede7d9);
+  --ink-2: light-dark(#4e4f45, #b5ae9e);
 
-  /* Carries every eyebrow, table header, axis label and hint on the site — all
-     of it near 11-12px, so all of it owes 4.5:1 rather than 3:1. Still clearly
-     lighter than --ink-2, which is what preserves the hierarchy. */
-  --ink-muted: light-dark(#6d6759, #948b78);
+  /* Carries every label, tick and caption at 10-12px, so it owes the 4.5 text
+     floor against the *plate*, not just against open paper. */
+  --ink-muted: light-dark(#565850, #948e80);
 
-  --border: light-dark(rgba(23, 21, 15, 0.11), rgba(250, 247, 240, 0.11));
-  /* A visible hairline, for rules that separate rather than enclose. */
-  --rule: light-dark(rgba(23, 21, 15, 0.16), rgba(250, 247, 240, 0.17));
-  --axis: light-dark(#c8c1af, #3d3931);
+  /* Two weights of rule, and the difference is structural. A hairline separates
+     rows inside one block; a neatline is the edge of a printed block. Drawing
+     both at one weight is most of what made the inherited pages read as a stack
+     of boxes rather than as a sheet. */
+  --border: light-dark(rgba(35, 36, 32, 0.16), rgba(237, 231, 217, 0.14));
+  --rule: light-dark(rgba(35, 36, 32, 0.42), rgba(237, 231, 217, 0.32));
+  --axis: light-dark(#8e9686, #514c44);
 
-  /* Single mark hue. Indigo rather than a warm tone: the ground is already warm,
-     and a warm mark on a warm field has to shout to separate. */
-  --accent: light-dark(#2f5fd0, #7d97ee);
+  /* The pens. Validated as a categorical set against each ground: every pair
+     clears the CVD separation floor and the normal-vision floor, and all three
+     clear 3:1 against the paper they are drawn on. Assigned in fixed order and
+     never cycled — pen 1 is always the count, whatever else is on the sheet. */
+  --pen-1: light-dark(#b03a26, #de5c39);
+  --pen-2: light-dark(#4a4ebf, #7c7ddd);
+  --pen-3: light-dark(#0f7a55, #2fa277);
 
-  /* The fill to put white text on. --accent is a *mark* colour, held to 3:1 as a
-     mark; under white text it owes 4.5:1 and does not reach it in either theme,
-     so filled controls take this instead. */
-  --accent-solid: light-dark(#2a4fae, #33468f);
-  /* Fixed rather than light-dark(), because --accent-solid is a dark blue in
-     both themes. */
+  /* The single mark hue is pen 2. One ink for "this is interactive" keeps the
+     other two pens meaning what they mean on a chart. */
+  --accent: var(--pen-2);
+
+  /* The fill to put white text on. --accent is a *mark* colour held to 3:1; under
+     white text it owes 4.5:1 and does not reach it, so filled controls take this
+     instead. Fixed in both themes because it is a dark indigo in both. */
+  --accent-solid: light-dark(#39399e, #3b3d92);
   --on-accent: #fff;
 
-  /* Link text, held to the 4.5:1 text floor rather than the 3:1 mark floor. */
-  --link: light-dark(#2a4fae, #93a9f2);
+  /* Links are ink with a hairline underline, not a colour. On a page whose whole
+     argument is that colour grades a claim, spending a hue on "you may click
+     this" competes with the pens for the reader's attention — and a table of 276
+     county links rendered in accent turns the densest page on the site blue. */
+  --link: var(--ink-1);
 
-  /* Helios is the sun; the amber is the project's identity. It is deliberately
-     confined to the wordmark and the hero rule — decoration that encodes
-     nothing. The moment it grades a value it becomes a second data hue, which
-     is the thing this palette exists to avoid.
+  /* The wordmark is ink. The amber it used to carry was decoration that encoded
+     nothing, and on paper it read as a fourth pen. */
+  --brand: var(--ink-1);
 
-     The light value is two steps darker than it looks like it wants to be: at
-     #a8620a the wordmark measured 4.48:1, which fails the text floor by a
-     hair. It is arguably large text and owed only 3:1, but a value that close to
-     the line is not worth the argument. */
-  --brand: light-dark(#a6610a, #f0a63c);
+  /* Sequential ramp, along pen 2's hue. Dark runs the same steps in reverse so
+     that "more" always resolves to the higher-contrast end against whichever
+     ground is behind it. */
+  --seq-1: light-dark(#c3cadb, #23284f);
+  --seq-2: light-dark(#a5aecd, #2d3470);
+  --seq-3: light-dark(#8189bd, #3c439c);
+  --seq-4: light-dark(#6167b2, #5a5fc0);
+  --seq-5: light-dark(#4a4ebf, #8189bd);
+  --seq-6: light-dark(#383a95, #a5aecd);
+  --seq-7: light-dark(#282a6b, #c3cadb);
 
-  /* Sequential ramp. Dark runs the same steps in reverse so that "more" always
-     resolves to the higher-contrast end against whichever ground is behind it. */
-  --seq-1: light-dark(#dbe2fa, #1c2a6b);
-  --seq-2: light-dark(#b4c2f2, #2c419b);
-  --seq-3: light-dark(#8ba0e8, #3f5cc4);
-  --seq-4: light-dark(#5f7ddc, #5f7ddc);
-  --seq-5: light-dark(#3f5cc4, #8ba0e8);
-  --seq-6: light-dark(#2c419b, #b4c2f2);
-  --seq-7: light-dark(#1c2a6b, #dbe2fa);
+  /* "Not established" must read as unmeasured, never as a faint step of the ramp.
+     It is paper the pen never reached, so it is mixed from the paper. */
+  --unmeasured: light-dark(#c8cfbe, #2b2823);
+  /* The edge is a meaningful mark — the border of the `unknown` stamp and of the
+     legend's no-data swatch — so it owes 3:1, not whatever looked tasteful. */
+  --unmeasured-edge: light-dark(#727663, #6d715f);
 
-  /* "Not established" must read as unmeasured, never as a faint step of the
-     ramp. A weak value and an absent value are different claims, and Helios's
-     `unknown` assertion class exists precisely to keep them apart. */
-  --unmeasured: light-dark(#e8e3d7, #2b2823);
-  /* The edge is a meaningful mark — it is the border of the `unknown` badge and
-     of the legend's no-data swatch — so it owes 3:1, not whatever looked
-     tasteful. The obvious warm greys measured 2.19 and 1.81. */
-  --unmeasured-edge: light-dark(#9e9277, #6d6659);
-
-  /* Assertion badge edges.
+  /* Claim-stamp edges.
    *
-   * These do not reuse --seq-* directly, and that is the point. The border is
-   * one of the three channels that keep an inferred value from looking reported,
-   * so every step of it owes the 3:1 mark floor — but the pale end of the
-   * sequential ramp measures 1.73 and 2.49 against a panel. Reusing the ramp
-   * would have made the two weakest badges' borders invisible and quietly
-   * collapsed the encoding back to fill colour alone.
-   *
-   * Solved instead across the legal band, 3.05:1 to 9.5:1, so the scale stays
-   * monotonic and every step stays visible. The fill below still carries the
-   * finer gradation, because a fill sits under a legible label and owes nothing.
+   * These do not reuse --seq-* directly, and that is the point. The edge is one
+   * of the three channels that keep an inferred value from looking reported, so
+   * every step owes the 3:1 mark floor — but the pale end of the sequential ramp
+   * does not reach it against a plate. Reusing the ramp would have made the two
+   * weakest stamps' edges invisible and quietly collapsed the encoding back to
+   * fill colour alone, on a site whose first principle is that it must not.
    */
-  --assert-edge-predicted: light-dark(#7c8fd7, #4460c5);
-  --assert-edge-inferred: light-dark(#5d76cd, #6179ce);
-  --assert-edge-calculated: light-dark(#3f5cc4, #8093d8);
-  --assert-edge-extracted: light-dark(#334da7, #9aa9e0);
-  --assert-edge-reported: light-dark(#2a3f89, #b4c0e8);
+  --assert-edge-predicted: light-dark(#676ec7, #5d63c3);
+  --assert-edge-inferred: light-dark(#4e55bd, #777ccd);
+  --assert-edge-calculated: light-dark(#3d44a4, #8f94d6);
+  --assert-edge-extracted: light-dark(#313684, #a6a9de);
+  --assert-edge-reported: light-dark(#252a65, #bdbfe6);
 
-  /* Status pair. Decoration beside a word that already states the case — never
-     the sole carrier of a fact, and never a series colour. */
-  --good: light-dark(#3d7a33, #68a458);
-  --critical: light-dark(#b8422f, #dc7259);
-  --caution: light-dark(#8a5a09, #e0913f);
+  /* Status pair, drawn from the pens so the page has no fourth and fifth hue.
+     Decoration beside a word that already states the case — never the sole
+     carrier of a fact, and never a series colour. */
+  --good: var(--pen-3);
+  --critical: var(--pen-1);
+  --caution: light-dark(#8a5a09, #d69340);
 
-  --warn-bg: light-dark(#fdf6e6, #2c2517);
-  --warn-border: light-dark(#e5c877, #6f5d26);
+  --warn-bg: light-dark(#d8d9c0, #2a2619);
+  --warn-border: light-dark(#a2955f, #6b5c2b);
 
-  /* Elevation. Two steps only: panels sit on the page, and things that float
-     over content sit above panels.
+  /* Paper does not cast a shadow onto itself, so there is one elevation step and
+     it belongs to the single thing that genuinely floats: the collapsed nav panel
+     over the page. Everything else separates with a rule. */
+  --shadow-tint-1: light-dark(rgba(35, 36, 32, 0.10), rgba(0, 0, 0, 0.38));
+  --shadow-1: none;
+  --shadow-2: 0 12px 24px -12px var(--shadow-tint-1);
 
-     `light-dark()` is a <color> function, so it cannot wrap a whole shadow list
-     — only the colours inside one. Splitting the tint out keeps the geometry
-     shared and lets the themes differ where they need to: a soft warm grey on
-     ivory, and something near black in dark, because a light shadow on a dark
-     ground conveys no depth at all. */
-  --shadow-tint-1: light-dark(rgba(23, 21, 15, 0.05), rgba(0, 0, 0, 0.34));
-  --shadow-tint-2: light-dark(rgba(23, 21, 15, 0.07), rgba(0, 0, 0, 0.42));
-  --shadow-1: 0 1px 2px var(--shadow-tint-1), 0 4px 12px var(--shadow-tint-1);
-  --shadow-2: 0 2px 6px var(--shadow-tint-2), 0 14px 34px var(--shadow-tint-2);
+  /* Archivo for the voice and the interface both. A grotesque drawn from the
+     American gothics that set newspaper decks and signage; the width axis lets a
+     label plate compress to fit its column rather than wrap or ship a second
+     file. Azeret Mono carries every measured value — monospace here is
+     measurement notation, not a costume for "technical": these are readings off
+     an instrument and they have to align in a column to be compared.
 
-  /* Serif for the voice, sans for the controls. --font-display is supplied by
-     next/font/local in layout.tsx, which fingerprints the file and rewrites the
-     URL for whatever base path is configured; a hand-written @font-face here would
-     have to hardcode that prefix. */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+     Both are loaded through next/font/local in layout.tsx, which fingerprints the
+     file and rewrites the URL for whatever base path is configured; a
+     hand-written @font-face here would have to hardcode that prefix. */
+  --font-sans: var(--font-archivo), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-azeret), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: var(--font-archivo), system-ui, -apple-system, sans-serif;
 
-  /* Text selection, tinted from the accent so a dragged selection belongs to the
-     page, and kept pale enough that --ink-1 on top of it still clears 4.5:1. */
-  --selection: light-dark(#c9d6f7, #33468f);
+  /* Text selection, tinted from the paper so a dragged selection stays on the
+     same material, and kept pale enough that --ink-1 on top still clears 4.5:1. */
+  --selection: light-dark(#b6c3a8, #38406a);
 
-  --radius: 6px;
-  --radius-lg: 12px;
+  /* Printed blocks have corners. One pixel is the press registration, not a
+     rounded card. */
+  --radius: 1px;
+  --radius-lg: 1px;
+
+  /* The reading measure, and it is enforced rather than hoped for.
+   *
+   * Measured across the site before this existed: body copy ran at 148 to 229
+   * characters a line, because the container was 1400px wide and nothing under
+   * it capped anything. At that width a reader's eye loses the start of the next
+   * line on every return sweep, which is the specific reason the 65-75 range
+   * exists. The wide container is right for a table of 276 counties and wrong
+   * for a paragraph, so the cap goes on the paragraph. */
+  --measure: 72ch;
+}
+
+/* The plot's own names.
+ *
+ * `recorder.css` addresses these tokens in some two hundred rules. They used to
+ * be a second palette declared on `body:has(.recorder)`; now that the whole site
+ * is printed on this paper they are aliases, kept because renaming two hundred
+ * rules would change nothing a reader sees. The three that are not aliases are
+ * the printed grid and the marker, which exist only on a plotted sheet. */
+:root {
+  --pp-paper: var(--page);
+  --pp-paper-plate: var(--surface-1);
+  --pp-paper-deep: var(--surface-2);
+  --pp-ink: var(--ink-1);
+  --pp-ink-2: var(--ink-2);
+  --pp-ink-muted: var(--ink-muted);
+  --pp-hairline: var(--border);
+  --pp-neatline: var(--rule);
+  --pp-mono: var(--font-mono);
+  --pp-sans: var(--font-sans);
+
+  /* The printed ruling. Rust in light because that is the ink chart paper is
+     actually printed in; a dim amber in dark, because a smoked drum shows its
+     rulings as scratches catching lamplight rather than as printing. */
+  --pp-rule-minor: light-dark(rgba(180, 98, 60, 0.075), rgba(196, 138, 74, 0.055));
+  --pp-rule-major: light-dark(rgba(180, 98, 60, 0.19), rgba(196, 138, 74, 0.13));
+
+  /* The event marker's own ink, deliberately the same red as pen 1: an arrival
+     and the count going up are the same fact recorded twice. */
+  --pp-marker: var(--pen-1);
 }
 
 /* The toggle writes one of these onto <html>. They must win in both directions,
@@ -182,7 +232,7 @@ html::-webkit-scrollbar {
 
 html::-webkit-scrollbar-thumb {
   background: var(--axis);
-  border-radius: 6px;
+  border-radius: var(--radius);
   border: 3px solid transparent;
   background-clip: content-box;
 }
@@ -199,61 +249,104 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Underlined by default, in a hairline rather than in the ink of the word. A
+   link that announces itself only on hover is a link a reader has to go looking
+   for; a link set in a colour spends a hue that this palette needs for grading
+   claims. The rule the whole site reads by: colour states nothing, so the
+   underline has to. Components that are already unmistakably interactive — the
+   nav rail, buttons, index rows — turn it off individually. */
 a {
   color: var(--link);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--border);
+  text-underline-offset: 0.16em;
+  transition: text-decoration-color 120ms ease-out;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
+/* --accent, not --accent-solid. The solid variant is defined as "the fill to put
+   white text on" and is a dark navy in dark mode; drawn as a ring against the
+   ground rather than as a fill under white text it measured 2.15:1 on the page
+   and 1.98:1 on a panel, failing the 3:1 that SC 1.4.11 and 2.4.13 owe a focus
+   indicator. --accent is the mark colour, already held to the mark floor: 5.07
+   to 6.72:1 across every ground in both themes. */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--accent-solid);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 3px;
+  border-radius: var(--radius);
+  outline-color: var(--pen-2);
 }
 
-/* Headings carry the voice, so they take the serif. Controls, labels and data
-   stay on the system sans, which costs nothing to load and is already tuned for
-   small sizes on each platform. */
+/* Two registers, and the split is the instrument's own.
+ *
+ * A plate title is silkscreened on the panel: heavy, condensed, upper case — it
+ * names the sheet you are looking at. h1 and h2 are plate titles. Below that the
+ * page is prose, and prose set in tracked caps is unreadable, so h3 and h4 stay
+ * sentence case in the same face at a normal width.
+ *
+ * The width axis is doing real work: at 82% a five-word title holds one line at
+ * 3.25rem where the normal width would wrap to two and halve the size. */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  line-height: 1.2;
   margin: 0 0 0.5rem;
-  font-weight: 600;
-  letter-spacing: -0.014em;
   color: var(--ink-1);
-}
-
-h1,
-h2,
-h3 {
   text-wrap: balance;
 }
 
+h1,
+h2 {
+  font-weight: 780;
+  text-transform: uppercase;
+  line-height: 1.04;
+}
+
 h1 {
-  font-size: clamp(2rem, 4.2vw, 2.85rem);
-  letter-spacing: -0.024em;
+  font-size: clamp(2.1rem, 4.6vw, 3.25rem);
+  font-stretch: 82%;
+  letter-spacing: -0.008em;
   margin-bottom: 0.75rem;
 }
 
 h2 {
   font-size: 1.5rem;
+  font-stretch: 84%;
+  letter-spacing: -0.005em;
+  line-height: 1.08;
+  /* More space above a heading than below it: the gap is what assigns the
+     heading to the block it introduces rather than to the one it follows. */
+  margin-top: 2.4rem;
+}
+
+h3,
+h4 {
+  font-weight: 680;
+  line-height: 1.25;
+  letter-spacing: -0.006em;
+  margin-top: 1.6rem;
 }
 
 h3 {
   font-size: 1.12rem;
-  letter-spacing: -0.008em;
 }
 
 h4 {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
+}
+
+/* A heading that opens a block has nothing above it to separate from. */
+h2:first-child,
+h3:first-child,
+h4:first-child {
+  margin-top: 0;
 }
 
 p {
@@ -292,24 +385,101 @@ code,
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+/* The tractor-feed edge, running the full length of every page.
+ *
+ * Chart paper is perforated down both sides so the drum can pull it through at a
+ * constant rate, and the constant rate is the entire reason a strip chart can be
+ * read as time at all. It ran down the front page only, which made the front
+ * page a different object from the rest of the site rather than the first sheet
+ * of one roll. Now it runs behind the header and past the footer, because that
+ * is what a continuous roll does. */
+.shell::before,
+.shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 26px;
+  background:
+    radial-gradient(circle at 13px 9px, var(--surface-2) 0 3.1px, transparent 3.4px)
+      0 0 / 26px 18px repeat-y,
+    var(--surface-1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shell::before {
+  left: 0;
+  border-right: 1px solid var(--border);
+}
+
+.shell::after {
+  right: 0;
+  border-left: 1px solid var(--border);
+}
+
+@media (max-width: 720px) {
+  .shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .shell::before,
+  .shell::after {
+    width: 14px;
+    background:
+      radial-gradient(circle at 7px 9px, var(--surface-2) 0 2.2px, transparent 2.5px)
+        0 0 / 14px 18px repeat-y,
+      var(--surface-1);
+  }
+}
+
+/* The header's height is declared, not discovered.
+ *
+ * The recorder's margin plates stick underneath it, and anything that sticks
+ * below a sticky header needs its height as a number. Letting the content decide
+ * it meant the number was measured once at one width and wrong at every other:
+ * the rail wrapped from one row to four between 1180px and 390px while the
+ * constant stayed at 106, and the plates slid up under the header by the
+ * difference. So the two rows are given fixed heights, this variable is their
+ * sum, and the rail collapses to a disclosure at the width where it would
+ * otherwise have to wrap. Both values live here; nothing else may guess them.
+ *
+ * Each value is the rows plus the bottom rule, because what sticks below the
+ * header has to clear the line as well as the content: 52 + 52 + 1 expanded,
+ * 56 + 1 collapsed. Measured, not assumed. */
+:root {
+  --header-h: 105px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-h: 57px;
+  }
 }
 
 .site-header {
-  border-bottom: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--page) 88%, transparent);
-  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--pp-neatline);
+  background: var(--pp-paper-plate);
   position: sticky;
   top: 0;
   z-index: 20;
+  /* No blur: it is a compositing layer filtering what sits behind an opaque
+     plate, inherited from a translucent header this world does not have. */
+  backdrop-filter: none;
 }
 
 .site-header-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
   flex-wrap: wrap;
 }
 
@@ -317,7 +487,8 @@ code,
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  color: var(--ink-1);
+  height: 52px;
+  color: var(--pp-ink);
 }
 
 .brand:hover {
@@ -325,88 +496,233 @@ code,
 }
 
 .brand-mark {
-  font-family: var(--font-display);
-  font-weight: 600;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 800;
   font-size: 1.2rem;
   letter-spacing: 0.02em;
-  color: var(--brand);
+  color: var(--pp-ink);
+  font-stretch: 80%;
 }
 
 .brand-tag {
-  color: var(--ink-muted);
-  font-size: 0.78rem;
+  color: var(--pp-ink-muted);
+  font-size: 0.625rem;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 620;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
+/* Anchored to the right edge rather than trailing the last link. Sitting at the
+   end of the nav flow, the theme control read as a fourteenth destination. */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 52px;
+  margin-left: auto;
+}
+
+/* The rail is three labelled banks, not one strip. Two things carry the
+   division: a rule that runs the full height of the row, and the bank's printed
+   name above its links. The name used to exist only as an `aria-label`, so the
+   whole reason for the grouping was invisible on screen. */
 .nav {
   display: flex;
-  gap: 0.25rem;
-  flex-wrap: wrap;
-  align-items: center;
+  align-items: stretch;
+  flex-basis: 100%;
+  height: 52px;
 }
 
-/* The nav is three labelled groups, not one strip. The rule between them is the
-   only thing telling a reader that "Regions" and "Sites" index different
-   datasets, so it is a real separator rather than extra gap: at these type sizes
-   whitespace alone did not read as a boundary. */
-.nav-group {
+.nav-bank {
   display: flex;
-  gap: 0.25rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-bank + .nav-bank {
+  margin-left: 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--rule);
+  border-left-color: var(--pp-hairline);
+}
+
+.nav-bank-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pp-ink-muted);
+  padding-left: 8px;
+  white-space: nowrap;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+}
+
+.nav-bank-items {
+  display: flex;
   align-items: center;
+  gap: 1px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.nav-group + .nav-group {
-  margin-left: 0.5rem;
-  padding-left: 0.65rem;
-  border-left: 1px solid var(--rule);
-}
-
-/* Wrapped onto its own line, a left edge points at nothing. */
-@media (max-width: 900px) {
-  .nav-group + .nav-group {
-    margin-left: 0;
-    padding-left: 0;
-    border-left: 0;
-  }
-}
-
 .nav a {
-  color: var(--ink-2);
-  font-size: 0.86rem;
-  padding: 5px 9px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  /* WCAG 2.2 target size: the previous 21px box failed the 24px floor. */
+  min-height: 26px;
+  padding: 0 8px;
+  color: var(--pp-ink-2);
+  font-size: 0.6875rem;
+  border-radius: 0;
+  white-space: nowrap;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .nav a:hover {
-  color: var(--ink-1);
-  background: var(--surface-1);
+  color: var(--pp-ink);
+  background: var(--pp-paper-deep);
   text-decoration: none;
 }
 
+/* The page you are on, and the section you are inside. Both rules existed for
+   the first of these and neither ever matched: nothing emitted `aria-current`,
+   so thirteen links looked identical on all fifteen routes. The section state is
+   weaker on purpose — "/regions" is where you are when you are reading a county,
+   but it is not the page. */
 .nav a[aria-current="page"] {
-  color: var(--ink-1);
-  background: var(--surface-2);
+  color: var(--pp-ink);
+  background: transparent;
+  box-shadow: inset 0 -2px 0 var(--pen-1);
+  border-radius: 5px 5px 0 0;
+  font-weight: 700;
   text-decoration: none;
 }
 
-.theme-toggle {
-  font-family: inherit;
-  font-size: 0.8rem;
-  color: var(--ink-2);
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-left: 0.25rem;
+.nav a[data-section] {
+  color: var(--pp-ink-2);
+  box-shadow: inset 0 -2px 0 var(--pp-hairline);
+  border-radius: 5px 5px 0 0;
+  text-decoration: none;
 }
 
-.theme-toggle:hover {
-  color: var(--ink-1);
-  border-color: var(--axis);
+.theme-toggle,
+.nav-toggle {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: 0.625rem;
+  color: var(--pp-ink-2);
+  background: transparent;
+  border: 1px solid var(--pp-neatline);
+  border-radius: 1px;
+  /* 28px, over WCAG 2.2's 24px floor with room to spare: these are the smallest
+     controls on the page. */
+  min-height: 28px;
+  padding: 0 10px;
+  cursor: pointer;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.theme-toggle:hover,
+.nav-toggle:hover {
+  color: var(--pp-paper);
+  border-color: var(--pp-ink);
+  background: var(--pp-ink);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* Below the width where thirteen links fit on one row, the rail becomes a
+   disclosure. It used to wrap instead — four ragged rows and 190px of sticky
+   header on a phone, a fifth of the viewport spent before the page began. The
+   open panel is positioned rather than in flow, so opening it does not shove the
+   page down and does not invalidate --header-h. */
+@media (max-width: 1024px) {
+  .brand,
+  .header-tools {
+    height: 56px;
+  }
+
+  /* Below this the positioning line and the two controls cannot share a row, and
+     the line wraps — which doubles the height of a header whose whole job at
+     this width is to be short. The mark carries the identity on its own. */
+  @media (max-width: 620px) {
+    .brand-tag {
+      display: none;
+    }
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    height: auto;
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    padding: 0.5rem 1.5rem 1rem;
+    background: var(--page);
+    border-bottom: 1px solid var(--rule);
+    /* The panel is the page colour over the page, so without a cast edge its
+       bottom boundary is a hairline against identical ground. */
+    box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.28);
+  }
+
+  .nav[data-open="true"] {
+    display: flex;
+  }
+
+  .nav-bank + .nav-bank {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .nav-bank-label {
+    padding-left: 10px;
+    padding-bottom: 2px;
+  }
+
+  .nav-bank-items {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav a {
+    min-height: 40px;
+    padding: 0 10px;
+    font-size: 0.92rem;
+    border-radius: var(--radius);
+  }
+
+  /* An underline on a full-width row reads as a divider, not as a state. */
+  .nav a[aria-current="page"],
+  .nav a[data-section] {
+    box-shadow: inset 2px 0 0 var(--accent-solid);
+    border-radius: var(--radius);
+  }
+
+  .nav a[data-section] {
+    box-shadow: inset 2px 0 0 var(--rule);
+  }
 }
 
 .container {
@@ -417,18 +733,50 @@ code,
   flex: 1;
 }
 
+/* A document column, centred. It was 880px pinned to the left edge of a 1400px
+   page, which left a third of every prose page as dead field and made the text
+   look like it had failed to load the rest of itself. */
+/* Sized to the measure, not beyond it. At 60rem the section rules ran 260px past
+   the last word of every paragraph under them, which made a finished column look
+   like text that had failed to load. */
 .container-narrow {
-  max-width: 880px;
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+/* Prose runs to a measure; data runs to the page.
+ *
+ * A chart, a table and a map are read by scanning across, so they take whatever
+ * width the page has. A sentence is read by returning to the left edge, so it
+ * takes the measure. Capping the text rather than the container is what lets one
+ * page hold both — which is most pages here.
+ *
+ * The front page is exempt: it sets its own measures against a plotted sheet,
+ * and its margin plates are already narrower than this. */
+main :is(p, li, dd, blockquote, details):not(.recorder *) {
+  max-width: var(--measure);
+}
+
+/* Things that are laid out rather than read: a strip value, a table cell, a
+   figure caption under a full-width chart, the sheet's own note. */
+main :is(.metric, .metric-label, .metric-value, .metric-sub) p,
+main :is(td, th) :is(p, li),
+main .card-note,
+main .chart-caption,
+main .kv dd,
+main .legend p {
+  max-width: none;
 }
 
 /* ------------------------------------------------------------------ footer */
 
 .site-footer {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--pp-neatline);
   margin-top: 3rem;
   padding: 2rem 1.5rem 1.25rem;
-  color: var(--ink-2);
+  color: var(--pp-ink-2);
   font-size: 0.84rem;
+  background: var(--pp-paper-plate);
 }
 
 .footer-inner {
@@ -444,10 +792,13 @@ code,
 }
 
 .footer-mark {
-  font-family: var(--font-display);
+  font-family: var(--font-archivo), system-ui, sans-serif;
   font-size: 1.05rem;
-  color: var(--brand);
+  color: var(--pp-ink);
   margin: 0 0 0.4rem;
+  font-weight: 800;
+  font-stretch: 82%;
+  text-transform: uppercase;
 }
 
 .footer-blurb {
@@ -456,11 +807,11 @@ code,
 }
 
 .footer-col h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-archivo), system-ui, sans-serif;
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.11em;
-  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  color: var(--pp-ink-muted);
   margin: 0 0 0.6rem;
   font-weight: 600;
 }
@@ -471,9 +822,19 @@ code,
   padding: 0;
 }
 
+/* 23.5px of pitch between footer links, which is the one number that mattered
+   and the one nobody would have guessed. WCAG 2.2 SC 2.5.8 lets a target under
+   24px pass if an undisturbed 24px circle on it clears its neighbours' — at 14px
+   tall on a 23.5px pitch this missed by half a pixel, and the fix costs a row of
+   leading in a footer that had room for it. */
 .footer-col li {
   margin-bottom: 0.35rem;
   line-height: 1.45;
+}
+
+.footer-col li a {
+  display: inline-block;
+  padding-block: 0.3rem;
 }
 
 .footer-col li span {
@@ -521,9 +882,10 @@ code,
 }
 
 .footer-byline a[rel="author"] {
-  font-family: var(--font-display);
+  font-family: var(--font-archivo), system-ui, sans-serif;
   font-size: 0.95rem;
-  color: var(--brand);
+  color: var(--pen-2);
+  font-weight: 720;
 }
 
 .byline-contact {
@@ -532,35 +894,65 @@ code,
   font-size: 0.76rem;
 }
 
-/* ------------------------------------------------------------------- cards */
+/* ------------------------------------------------------------------ sheets */
 
+/* A sheet, not a card.
+ *
+ * Every page on this site was a stack of rounded panels with a shadow, which is
+ * the one page structure this project's own design brief refuses: same-size
+ * boxes say every block weighs the same, and a shadow says a block is floating
+ * above the page. Neither is true here. A recorder prints its blocks on the
+ * paper and separates them with a neatline — a single ruled edge, heavier at the
+ * top where the block begins, so a reader scanning down sees where each one
+ * starts without counting borders.
+ *
+ * The class name stays `.card` because it is on 20 files and renaming it is
+ * churn that changes nothing a reader sees. What it means has changed.
+ */
 .card {
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.1rem 1.25rem;
-  margin-bottom: 1rem;
-  box-shadow: var(--shadow-1);
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 1.1rem 0 1.6rem;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+/* Consecutive sheets share one rule between them. */
+.card + .card {
+  padding-top: 1.1rem;
 }
 
 .card-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
   flex-wrap: wrap;
 }
 
+/* The sheet's own plate title, in the same silkscreen register as h2 but sized
+   to sit inside a block rather than open one. */
 .card-title {
   margin: 0;
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 760;
+  font-stretch: 86%;
+  letter-spacing: 0.008em;
+  text-transform: uppercase;
+  color: var(--ink-1);
 }
 
 .card-note {
   color: var(--ink-muted);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 620;
+  font-stretch: 88%;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
   margin: 0;
 }
 
@@ -575,10 +967,6 @@ code,
 
 .grid-3 {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.grid-4 {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .split {
@@ -615,18 +1003,45 @@ code,
  * fill and the edge.
  */
 
+/* A stamp, not a pill.
+ *
+ * The distinction these carry — reported against inferred against predicted — is
+ * the one thing on this site that must never be mistaken for decoration, and a
+ * stamp is the mark a reader already associates with a claim someone stood
+ * behind. The rounded tinted pill read as a tag.
+ *
+ * Three channels carry the class, and that redundancy is the point: the word,
+ * the edge colour, and the edge's stroke pattern. Any one of them can be lost —
+ * to greyscale, to print, to colour vision deficiency — and the claim survives.
+ */
 .badge {
-  display: inline-block;
-  padding: 0.1rem 0.45rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.16rem 0.4rem;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 0.5625rem;
+  font-weight: 720;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
   white-space: nowrap;
+  vertical-align: 0.08em;
   cursor: help;
-  color: var(--ink-1);
-  border: 1px solid transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--badge-edge, var(--border));
+  background: transparent;
+}
+
+/* The dot repeats the edge colour at a size that survives a 9px row: an edge one
+   pixel wide is a hard mark to compare across a column of forty. */
+.badge::before {
+  content: "";
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: var(--badge-edge, var(--ink-muted));
+  flex: none;
 }
 
 /* The observed/derived split is stated once, keyed off the attribute the
@@ -654,28 +1069,23 @@ code,
 /* Ramp position carries degree only. Strongest claim sits at the high-contrast
    end of the scale in both themes. */
 .badge-reported {
-  background: color-mix(in srgb, var(--seq-6) 26%, var(--surface-1));
-  border-color: var(--assert-edge-reported);
+  --badge-edge: var(--assert-edge-reported);
 }
 
 .badge-extracted {
-  background: color-mix(in srgb, var(--seq-5) 20%, var(--surface-1));
-  border-color: var(--assert-edge-extracted);
+  --badge-edge: var(--assert-edge-extracted);
 }
 
 .badge-calculated {
-  background: color-mix(in srgb, var(--seq-4) 16%, var(--surface-1));
-  border-color: var(--assert-edge-calculated);
+  --badge-edge: var(--assert-edge-calculated);
 }
 
 .badge-inferred {
-  background: color-mix(in srgb, var(--seq-3) 14%, var(--surface-1));
-  border-color: var(--assert-edge-inferred);
+  --badge-edge: var(--assert-edge-inferred);
 }
 
 .badge-predicted {
-  background: color-mix(in srgb, var(--seq-2) 12%, var(--surface-1));
-  border-color: var(--assert-edge-predicted);
+  --badge-edge: var(--assert-edge-predicted);
 }
 
 /* Outside the ramp entirely. Rendering "explicitly not established" as the
@@ -686,45 +1096,58 @@ code,
   border-color: var(--unmeasured-edge);
 }
 
+/* A confidence reading and the word for it. It was a bordered box in a table
+   cell, which is a card inside a row — and the box implied a category where the
+   number is a continuum. Now the reading is set in the measurement face and the
+   band it falls in is stated beside it, with the ordinal position carried by a
+   rule under the figure rather than by an edge around the pair. */
 .band {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.35rem;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  border: 1px solid var(--border);
-  color: var(--ink-1);
+  gap: 0.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
   cursor: help;
+  white-space: nowrap;
 }
 
 .band strong {
-  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-1);
+  box-shadow: inset 0 -2px 0 var(--band-hue, var(--unmeasured-edge));
 }
 
 .band-very-low {
-  border-color: var(--unmeasured-edge);
-  background: var(--unmeasured);
+  --band-hue: var(--unmeasured-edge);
 }
 .band-low {
-  border-color: var(--seq-2);
+  --band-hue: var(--assert-edge-predicted);
 }
 .band-moderate {
-  border-color: var(--seq-3);
+  --band-hue: var(--assert-edge-inferred);
 }
 .band-high {
-  border-color: var(--seq-5);
+  --band-hue: var(--assert-edge-calculated);
 }
 .band-very-high {
-  border-color: var(--seq-6);
-  background: color-mix(in srgb, var(--seq-6) 14%, var(--surface-1));
+  --band-hue: var(--assert-edge-reported);
 }
 
 .pill {
   display: inline-block;
-  padding: 0.12rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
+  padding: 0.14rem 0.42rem;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 660;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   border: 1px solid var(--border);
   color: var(--ink-2);
   cursor: help;
@@ -788,62 +1211,108 @@ code,
   margin: 0;
 }
 
+/* An instrument parameter strip, not a row of hero-metric tiles.
+ *
+ * The tile row is the dashboard template this project exists to argue against:
+ * a big number in a bordered box renders "measured, and the answer is zero" and
+ * "never measured" identically, which is the exact confusion the assertion
+ * classes are built to prevent. It also spends the widest, highest band of every
+ * page on four numbers that are mostly context for the table underneath.
+ *
+ * A recorder prints its parameters as a strip under a rule at the head of the
+ * chart: the label small and tracked, the value in the measurement face, the
+ * whole block sitting on the title's baseline instead of towering beside it.
+ * Same information, a fifth of the vertical space, and no box implying that a
+ * value exists inside it.
+ */
 .metric {
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.85rem 1rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.16rem;
+  align-content: start;
 }
 
 .metric-label {
   color: var(--ink-muted);
-  font-size: 0.71rem;
+  font-size: 0.5625rem;
+  font-weight: 640;
+  font-stretch: 88%;
   text-transform: uppercase;
-  letter-spacing: 0.11em;
-  margin-bottom: 0.3rem;
+  letter-spacing: 0.13em;
+  margin-bottom: 0;
 }
 
 .metric-value {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.1;
+  font-family: var(--font-mono);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.2;
   letter-spacing: -0.02em;
+  color: var(--ink-1);
 }
 
 .metric-sub {
   color: var(--ink-muted);
-  font-size: 0.76rem;
-  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  margin-top: 0;
 }
 
-/* Eyebrow — the small uppercase label that sits above a heading. */
-.eyebrow {
-  font-size: 0.71rem;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
+/* Provenance under a sheet title: which agency, which docket. Set as the sheet's
+   note is, so a reader learns one register for "where this came from". */
+.card-source {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: -0.01em;
   color: var(--ink-muted);
-  margin: 0 0 0.4rem;
-  font-weight: 600;
 }
 
+/* The strip these sit in. `.grid-4` was a row of auto-fitting tile columns; as a
+   strip it keeps the same auto-fit but loses the gutters that only existed to
+   hold boxes apart, and gains the rule that makes it read as printed at the head
+   of the block rather than floating above it. */
+.grid-4 {
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+  margin-bottom: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem 1.6rem;
+}
+
+/* The lede under a plate title. Measure held near 60ch — the inherited 64ch on a
+   1400px page produced a line a reader loses their place in. */
 .tagline {
   color: var(--ink-2);
-  font-size: 1.02rem;
-  max-width: 64ch;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  max-width: 58ch;
 }
 
 /* The hero is the one place the page is allowed to breathe. Everything below it
    is dense by intent — this is a records interface — so the contrast between the
    two is what makes the density read as deliberate rather than as clutter. */
+/* The printed header of the sheet. It is the one place the page is allowed to
+   breathe: everything below it is dense by intent — this is a records interface
+   — so the contrast between the two is what makes the density read as deliberate
+   rather than as clutter. */
 .hero {
-  padding: 1.25rem 0 0.5rem;
+  padding: 2.4rem 0 1.4rem;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.6rem;
 }
 
 .hero h1 {
   max-width: 18ch;
+}
+
+/* A parameter strip inside the header sits under the title's own rule, not under
+   a second one. */
+.hero .grid-4 {
+  margin-top: 1.4rem;
 }
 
 /* ---------------------------------------------------------------- timeline */
@@ -903,11 +1372,14 @@ code,
   margin: 0 0 0.4rem;
 }
 
+/* A quoted fragment of a source document. The left rule is a quotation marker,
+   not a card accent — it marks where someone else's words begin — so it stays,
+   at a hairline, in ink rather than in the mark hue. */
 .snippet {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--seq-4);
-  border-radius: 4px;
+  background: var(--surface-1);
+  border: 0;
+  border-left: 1px solid var(--rule);
+  border-radius: 0;
   padding: 0.5rem 0.7rem;
   font-family: var(--font-mono);
   font-size: 0.76rem;
@@ -948,18 +1420,25 @@ code,
 .chart-tick {
   fill: var(--ink-muted);
   font-size: 10px;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
+/* Pen 1, at the weight the front page draws it. The count is pen 1 wherever it
+   appears on this site — the pens are assigned in fixed order and never cycled,
+   so a reader who learns the ink on the home page keeps it here. The wash under
+   the trace stays faint enough that the paper's printed divisions read through
+   it; a solid fill turns a measurement into a poster. */
 .chart-area {
-  fill: color-mix(in srgb, var(--seq-4) 22%, transparent);
+  fill: color-mix(in srgb, var(--pen-1) 8%, transparent);
 }
 
 .chart-line {
   fill: none;
-  stroke: var(--seq-6);
-  stroke-width: 2;
+  stroke: var(--pen-1);
+  stroke-width: 1.6;
   stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .chart-caption {
@@ -1039,7 +1518,7 @@ code,
 .estimate-band {
   position: relative;
   height: 7px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   background: linear-gradient(
     to right,
     color-mix(in srgb, var(--seq-4) 22%, var(--surface-1)),
@@ -1112,31 +1591,86 @@ code,
 .table th {
   text-align: left;
   color: var(--ink-muted);
-  font-weight: 600;
-  font-size: 0.71rem;
+  font-family: var(--font-display);
+  font-weight: 660;
+  font-stretch: 88%;
+  font-size: 0.625rem;
   text-transform: uppercase;
-  letter-spacing: 0.11em;
-  padding: 0.4rem 0.6rem;
+  letter-spacing: 0.12em;
+  padding: 0.55rem 0.6rem;
   border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
 }
 
 .table td {
-  padding: 0.5rem 0.6rem;
+  padding: 0.52rem 0.6rem;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
 
 .table tbody tr:hover {
-  background: var(--surface-2);
+  background: var(--surface-1);
+}
+
+/* Readings, so they are set in the measurement face and aligned down the column.
+   This is what the mono face is for; nothing else on the page gets it — and in
+   particular not the column heading above it, which is a label. Scoped to `td`
+   for that reason: as `.table .num` it outranked `.table th` and put three of
+   four column titles in mono sentence case beside one in tracked caps. */
+.table td.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 .table .num {
   text-align: right;
 }
 
-/* Wide tables scroll inside their own box rather than pushing the page sideways. */
-.table-scroll {
+/* A column of 276 underlined county names is a column of noise. Inside a table
+   the row itself is the affordance, so the underline drops to the hairline and
+   comes back under the cursor. */
+.table a {
+  text-decoration-color: transparent;
+}
+
+.table tbody tr:hover a,
+.table a:hover,
+.table a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+/* Wide tables and charts scroll inside their own box rather than pushing the page
+   sideways — and the min-width is what makes that true. Without it the table did
+   not scroll at all: it compressed, and on a 390px screen "LBNL 2024 Report" was
+   handed 61px and wrapped to four lines, so every row of a ten-row table stood
+   74px tall. A column has a width below which it stops being a column. */
+.table-scroll,
+.chart-scroll {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* These carry `tabindex="0"` so the arrow keys can scroll them — see
+   `ScrollArea`. A tab stop that shows nothing is worse than no tab stop, so the
+   ring is drawn inside the box: an outline outside would sit under the
+   neighbouring rule and read as a misprint. */
+.table-scroll:focus-visible,
+.chart-scroll:focus-visible {
+  outline: 2px solid var(--pen-2);
+  outline-offset: -2px;
+}
+
+.table-scroll > .table {
+  min-width: 34rem;
+}
+
+/* Same argument for a time series: below about this width the axis labels
+   collide and the trace stops being readable as a shape. The floor is on the
+   plot, not on the figure — inside the figure the caption would inherit it and
+   run off the edge of a phone. */
+.chart-scroll > .chart-svg {
+  min-width: 30rem;
 }
 
 /* ------------------------------------------------------- score explanation */
@@ -1203,7 +1737,115 @@ code,
 /* MapLibre's popup ships a white card with near-black text, which is a bright
    rectangle punched into the dark theme. Both the card and its little arrow have
    to be restyled, or the arrow stays white and points at nothing. */
-.maplibregl-popup-content {
+/* The map is printed on the sheet, so the sheet is what sits behind the tiles.
+   The basemap is drawn translucent over this rather than tinted toward it. */
+.map-container,
+.maplibregl-map,
+.maplibregl-canvas-container {
+  background: var(--page);
+}
+
+/* MapLibre ships its controls as white rounded cards with a drop shadow — one
+   more interface arriving inside this one, and in dark mode a white card on a
+   smoked drum.
+   
+   Every selector here is prefixed with `.map-container` on purpose. MapLibre's
+   own stylesheet is imported by the map component, which puts it after
+   globals.css in the bundle, so at equal specificity it wins and the card stayed
+   white. The ancestor makes these rules win on specificity instead of on order,
+   which is the only version of this that survives a bundler change. */
+.map-container .maplibregl-ctrl-group {
+  background: var(--surface-1);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.map-container .maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--border);
+}
+
+.map-container .maplibregl-ctrl-group button {
+  width: 30px;
+  height: 30px;
+  background: transparent;
+}
+
+.map-container .maplibregl-ctrl-group button:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+/* The glyphs are inline SVG data URIs carrying a hardcoded near-black fill, so
+   on the dark drum they are ink on ink. Recolouring inside a data URI is not
+   reachable from CSS; inverting is, and on a two-value glyph it is exact. */
+:root[data-theme="dark"] .map-container .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .map-container .maplibregl-ctrl-icon {
+    filter: invert(1);
+  }
+}
+
+/* Attribution is a licence requirement and stays legible, but it is not a
+   floating white card on a printed sheet.
+
+   `.maplibregl-ctrl-attrib` alone was not enough. MapLibre writes its own base
+   rule as `.maplibregl-ctrl.maplibregl-ctrl-attrib` and its collapsed state as
+   `.maplibregl-ctrl-attrib.maplibregl-compact`, both two classes, both later in
+   the bundle — so a single-class override tied and lost, and in dark the
+   attribution stayed a white pill with black text at 2.2:1. Every selector below
+   carries `.map-container` plus MapLibre's own second class, which wins on
+   specificity rather than on order. */
+.map-container .maplibregl-ctrl.maplibregl-ctrl-attrib,
+.map-container .maplibregl-ctrl-attrib.maplibregl-compact,
+.map-container .maplibregl-ctrl-attrib.maplibregl-compact-show {
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  border-radius: var(--radius);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+
+.map-container .maplibregl-ctrl-attrib a {
+  color: var(--ink-2);
+}
+
+/* The "i" that opens the collapsed attribution: a white disc carrying a
+   near-black glyph baked into a data URI, so it needs the same inversion the
+   navigation glyphs get. */
+.map-container .maplibregl-ctrl-attrib-button,
+.map-container
+  .maplibregl-ctrl-attrib.maplibregl-compact-show
+  .maplibregl-ctrl-attrib-button {
+  background-color: transparent;
+}
+
+:root[data-theme="dark"] .map-container .maplibregl-ctrl-attrib-button {
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .map-container .maplibregl-ctrl-attrib-button {
+    filter: invert(1);
+  }
+}
+
+.map-container .maplibregl-ctrl-scale {
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  border: 1px solid var(--rule);
+  border-top: 0;
+  border-radius: 0;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+}
+
+/* The popup, on the same terms. These rules were unprefixed and therefore tied
+   with MapLibre's own at one class and lost on order, so every popup on the site
+   was still opening as MapLibre's white card. */
+.map-container .maplibregl-popup-content {
   background: var(--surface-1);
   color: var(--ink-1);
   border: 1px solid var(--border);
@@ -1212,26 +1854,37 @@ code,
   padding: 0.6rem 0.75rem;
 }
 
-.maplibregl-popup-anchor-top .maplibregl-popup-tip {
+/* All eight anchors, not the four cardinal ones. MapLibre picks a diagonal
+   anchor whenever the mark is near an edge of the viewport - which is most of
+   the time on a national map - and the four that were missing kept a white
+   arrow pointing at nothing. */
+.map-container :is(.maplibregl-popup-anchor-top, .maplibregl-popup-anchor-top-left, .maplibregl-popup-anchor-top-right)
+  .maplibregl-popup-tip {
   border-bottom-color: var(--surface-1);
 }
-.maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+.map-container :is(.maplibregl-popup-anchor-bottom, .maplibregl-popup-anchor-bottom-left, .maplibregl-popup-anchor-bottom-right)
+  .maplibregl-popup-tip {
   border-top-color: var(--surface-1);
 }
-.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+.map-container .maplibregl-popup-anchor-left .maplibregl-popup-tip {
   border-right-color: var(--surface-1);
 }
-.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+.map-container .maplibregl-popup-anchor-right .maplibregl-popup-tip {
   border-left-color: var(--surface-1);
 }
 
-.maplibregl-popup-close-button {
+/* 24x24 for the close control: it is the only way out of a popup on a touch
+   screen, and MapLibre ships it at the size of its glyph. */
+.map-container .maplibregl-popup-close-button {
+  width: 26px;
+  height: 26px;
   color: var(--ink-muted);
   font-size: 1.1rem;
-  padding: 0 0.3rem;
+  line-height: 1;
+  padding: 0;
 }
 
-.maplibregl-popup-close-button:hover {
+.map-container .maplibregl-popup-close-button:hover {
   background: transparent;
   color: var(--ink-1);
 }
@@ -1246,48 +1899,68 @@ code,
   margin-bottom: 0.2rem;
 }
 
+/* A printed caution on the sheet. The 3px accent bar down its left side was the
+   card-with-a-coloured-edge tell, and it spent the mark hue on a block that says
+   the same thing in words in its first four bold ones. A caution on an
+   instrument is set in a ruled box on the paper, which is what this is. */
 .notice {
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-top: 1px solid var(--rule);
   background: var(--surface-1);
-  border-radius: var(--radius);
-  padding: 0.75rem 0.9rem;
-  font-size: 0.85rem;
+  border-radius: 0;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
   color: var(--ink-2);
   margin-bottom: 1rem;
+  /* The caution is prose. Its text sits directly in the block on several pages,
+     so the measure goes on the block rather than on a paragraph that is not
+     always there. Padding is added so the text inside still reaches it. */
+  max-width: calc(var(--measure) + 1.8rem);
 }
 
 .notice strong {
   color: var(--ink-1);
 }
 
+/* Panel controls: silkscreened caps in a ruled box, filling with ink on hover
+   rather than tinting. Matches the front page's own buttons exactly, which is
+   the whole point of there being one world. */
 .button {
   display: inline-block;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 0.9rem;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface-1);
+  border: 1px solid var(--rule);
+  background: transparent;
   color: var(--ink-1);
-  font-family: inherit;
-  font-size: 0.82rem;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
-  box-shadow: var(--shadow-1);
+  box-shadow: none;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
 }
 
 .button:hover {
-  border-color: var(--axis);
+  background: var(--ink-1);
+  color: var(--page);
   text-decoration: none;
 }
 
 .button-primary {
-  background: var(--accent-solid);
-  border-color: var(--accent-solid);
-  color: var(--on-accent);
+  background: var(--ink-1);
+  border-color: var(--ink-1);
+  color: var(--page);
 }
 
 .button-primary:hover {
+  background: var(--accent-solid);
   border-color: var(--accent-solid);
-  filter: brightness(1.08);
+  color: var(--on-accent);
+  filter: none;
 }
 
 .button-row {
@@ -1308,10 +1981,15 @@ code,
   margin-top: 0.75rem;
 }
 
+/* A disclosure is a control, and at its own line height it was 19.7px against
+   the 24px floor. The padding is vertical only: the summary is already a full-
+   width block, so height was the only failing dimension. */
 details summary {
   cursor: pointer;
   color: var(--ink-2);
   font-size: 0.82rem;
+  padding-block: 0.22rem;
+  min-height: 24px;
 }
 
 .legend {
@@ -1331,13 +2009,16 @@ details summary {
 .legend-swatch {
   width: 12px;
   height: 12px;
-  border-radius: 3px;
+  border-radius: 1px;
   border: 1px solid var(--rule);
 }
 
 .skip-link {
   position: absolute;
   left: -9999px;
+  background: var(--pp-ink);
+  color: var(--pp-paper);
+  border-radius: 1px;
 }
 
 .skip-link:focus {
@@ -1359,24 +2040,31 @@ details summary {
  * below it.
  */
 .demo-banner {
-  max-width: 1400px;
-  margin: 1rem auto 0;
-  padding: 0.75rem 1rem;
-  background: var(--warn-bg);
-  border: 1px solid var(--warn-border);
-  border-radius: var(--radius);
-  color: var(--ink-2);
-  font-size: 0.85rem;
-  line-height: 1.5;
+  max-width: none;
+  margin: 0;
+  padding: 0.5rem 1.6rem 0.55rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--pp-ink-muted);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  border-bottom: 1px solid var(--pp-hairline);
+  font-family: var(--font-archivo), system-ui, sans-serif;
 }
 
 .demo-banner strong {
-  color: var(--ink-1);
+  color: var(--pp-ink-2);
+  font-weight: 660;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.625rem;
 }
 
 .demo-banner a {
-  color: var(--link);
+  color: inherit;
   text-decoration: underline;
+  text-decoration-color: var(--pp-hairline);
 }
 
 /* Freshness line — a dot beside a date. The dot is decoration; the date beside
@@ -1393,7 +2081,7 @@ details summary {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--good);
+  background: var(--pp-ink-muted);
   flex: none;
 }
 
@@ -1428,25 +2116,38 @@ details summary {
 }
 
 .chip {
-  font: inherit;
-  font-size: 0.82rem;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  font-weight: 660;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   background: transparent;
   color: var(--ink-2);
   cursor: pointer;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
 }
 
 .chip:hover {
-  border-color: var(--accent);
+  border-color: var(--rule);
+  background: var(--surface-1);
   color: var(--ink-1);
 }
 
+/* Filled with ink, not with the mark hue. A saturated indigo block was the only
+   one on the page and it read as a button from another interface; the selected
+   state of a panel switch is the one that has been pressed in. */
 .chip-active {
-  background: var(--accent-solid);
-  border-color: var(--accent-solid);
-  color: #fff;
+  background: var(--ink-1);
+  border-color: var(--ink-1);
+  color: var(--page);
+}
+
+.chip-active:hover {
+  background: var(--ink-1);
+  color: var(--page);
 }
 
 .control-search input {
@@ -1454,7 +2155,7 @@ details summary {
   font-size: 0.85rem;
   padding: 0.35rem 0.6rem;
   border: 1px solid var(--rule);
-  border-radius: 4px;
+  border-radius: var(--radius);
   background: transparent;
   color: var(--ink-1);
   min-width: 14rem;
@@ -1524,25 +2225,49 @@ details summary {
   text-decoration: none;
 }
 
+/* `font: inherit` does not carry text-transform or letter-spacing, and a button
+   defaults to neither. Three of four column headings were rendering sentence
+   case beside one in tracked caps, because only the un-sortable one was not a
+   button. */
+/* The sort control is the whole header cell, not the word inside it.
+
+   At `padding: 0` the button was 15px tall against a 24px floor (WCAG 2.2
+   SC 2.5.8), so a column header was a hairline to hit — worst on the touch
+   screens where the table is hardest to read anyway. The padding claims the
+   cell's own padding box and the matching negative margin gives it back, so the
+   hit area grows and the ruled grid does not move by a pixel. */
 .th-sort {
   font: inherit;
   font-weight: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
   color: inherit;
   background: none;
   border: 0;
-  padding: 0;
+  padding: 0.5rem 0.5625rem;
+  margin: -0.5rem -0.5625rem;
+  min-height: 24px;
   cursor: pointer;
   text-align: inherit;
 }
 
 .th-sort:hover {
-  color: var(--accent);
+  color: var(--ink-1);
 }
 
+/* The column the table is sorted by, marked the way this world marks the reading
+   currently being drawn: an inked rule under it, in pen 1, with the word left in
+   text ink. Same mark as the nav rail's current page, for the same reason. */
+/* Drawn on the text rather than on the button box. It used to be an inset
+   box-shadow, which sat at the bottom of the button — fine when the button was
+   exactly as tall as its word, and eight pixels adrift the moment the control
+   grew a hit area. An underline tracks the word at any padding. */
 .th-sort-active {
-  color: var(--accent);
+  color: var(--ink-1);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-color: var(--pen-1);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* ------------------------------------------------------ wayfinding on home */
@@ -1554,42 +2279,60 @@ details summary {
  * is a section of the site, so the description is part of what the reader is
  * choosing between, not decoration around a link.
  */
+/* Ruled rows, not a grid of equal cards. A card grid says every one of these
+   weighs the same; an index says they are a list you scan. Two columns, because
+   eight single-file rows made the block twice as tall as it needed to be. */
 .guide-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.2rem;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .guide-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .guide-card {
   display: block;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface-2);
-  color: var(--ink-2);
+  padding: 0.72rem 0.3rem 0.72rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  /* Background and an inset rule only. Sliding the row with padding animates a
+     layout property, which reflows the whole list on every hover. */
+  transition: background-color 140ms ease-out, box-shadow 140ms ease-out;
 }
 
-.guide-card:hover {
-  border-color: var(--accent);
+.guide-card:hover,
+.guide-card:focus-visible {
+  background: var(--surface-1);
+  box-shadow: inset 2px 0 0 var(--accent);
+  outline: none;
   text-decoration: none;
 }
 
 .guide-card h3 {
-  margin: 0 0 0.3rem;
-  font-size: 1rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink-1);
 }
 
-/* The arrow is decoration; the heading text already names the destination. */
-.guide-card h3::after {
-  content: " →";
-  color: var(--accent);
-}
-
 .guide-card p {
-  margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.5;
+  margin: 0.1rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-muted);
+  max-width: 62ch;
 }
 
 /* A short list of dated events. Rules between rows rather than bullets, to match
@@ -1639,4 +2382,39 @@ details summary {
     font-size: 0.75em;
     color: #555;
   }
+}
+
+/* ------------------------------------------------ chrome: rail and plate */
+
+@media (max-width: 1024px) {
+  .nav {
+    background: var(--pp-paper-plate);
+    border-bottom: 1px solid var(--pp-neatline);
+  }
+
+  .nav-bank + .nav-bank {
+    border-top-color: var(--pp-hairline);
+  }
+
+  .nav a[aria-current="page"] {
+    box-shadow: inset 2px 0 0 var(--pen-1);
+  }
+
+  .nav a[data-section] {
+    box-shadow: inset 2px 0 0 var(--pp-hairline);
+  }
+}
+
+.demo-banner a:hover {
+  color: var(--pp-ink);
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 900px) {
+  .demo-banner { padding-left: 0.9rem; padding-right: 0.9rem; }
+}
+
+.footer-bar,
+.footer-byline {
+  border-top-color: var(--pp-hairline);
 }

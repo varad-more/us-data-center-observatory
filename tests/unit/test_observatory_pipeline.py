@@ -461,6 +461,8 @@ class TestGridGeoJson:
             "capacity_mw": "",
             "lat": "38.123456789",
             "lon": "-77.987654321",
+            "county_fips": "51107",
+            "state": "VA",
         }
         row.update(over)
         return row
@@ -489,6 +491,16 @@ class TestGridGeoJson:
 
     def test_skips_a_row_with_an_unusable_position(self) -> None:
         assert build_grid([self._row(lat="")])["features"] == []
+
+    def test_leaves_out_assets_that_are_not_in_the_united_states(self) -> None:
+        """The Overpass boxes this is fetched with reach into Sonora, Chihuahua,
+        Ontario and the Gulf, and 2,898 of the 65,325 rows land outside every US
+        county. Publishing them drew Mexican substations on a map captioned "the
+        contiguous states" and counted them in a national total. An unassigned
+        row is the only record that an asset is out of scope."""
+        rows = [self._row(), self._row(osm_id="2", county_fips="", state="")]
+        features = build_grid(rows)["features"]
+        assert len(features) == 1
 
     def test_no_grid_data_is_a_valid_empty_layer(self) -> None:
         """The grid stage takes far longer than the rest of the pipeline, so the

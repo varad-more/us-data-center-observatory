@@ -94,6 +94,14 @@ FIELDNAMES = (
     "capacity_mw",
     "lat",
     "lon",
+    # Left blank here and filled by assign_grid_regions.py, the same way the
+    # facility snapshot carries them. The fetch bounding boxes reach into Sonora,
+    # Chihuahua, Ontario and the Gulf, so "which US county is this in" is also
+    # the answer to "is this in the United States at all" - 2,898 of these assets
+    # are in neither. Without the column, every consumer either re-runs the
+    # point-in-polygon or publishes Mexican substations as American ones.
+    "county_fips",
+    "state",
 )
 
 # `plant:output:electricity` is free text. These are the forms that appear in

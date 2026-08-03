@@ -15,7 +15,12 @@ import { notFound } from "next/navigation";
 
 import { MappingGrowthChart } from "@/components/MappingGrowthChart";
 import { RegionPicker } from "@/components/RegionPicker";
-import { facilityClassLabel } from "@/lib/facilityPresentation";
+import { ScrollArea } from "@/components/ScrollArea";
+import {
+  facilityClassLabel,
+  formatRegionFootprintKm2,
+  formatRegionMw,
+} from "@/lib/facilityPresentation";
 import {
   getRegionFacilities,
   getRegionSeries,
@@ -55,10 +60,17 @@ export async function generateMetadata({
   // Templated descriptions across 323 near-identical region pages read as
   // duplicates. The counts make each one specific, and they are the figures a
   // reader wants to see before deciding to click.
+  // A region with no mapped building gets no allocated share, and the sentence
+  // has to say that rather than say "0 MW" — a search result is the one place
+  // this claim travels without its column heading to qualify it.
+  const load =
+    region && region.building_count !== 0 && region.est_mw > 0
+      ? `with an inferred ${formatRegionMw(region)} MW share of US data-centre electricity`
+      : "none of which has a mapped building footprint, so no share of US data-centre electricity is allocated to it";
+
   const description = region
     ? `${region.facility_count.toLocaleString()} data centres mapped in ${place}, ` +
-      `with an inferred ${Math.round(region.est_mw).toLocaleString()} MW share of US ` +
-      `data-centre electricity. Counted from OpenStreetMap and public records, ` +
+      `${load}. Counted from OpenStreetMap and public records, ` +
       `with when each was first mapped.`
     : "Data centres mapped across the United States, county by county, with the electricity and water they draw.";
 
@@ -118,7 +130,10 @@ export default async function RegionPage({
   const peers = (
     region?.kind === "county"
       ? regions.filter(
-          (r) => r.kind === "county" && r.state === region.state && r.region_id !== id,
+          (r) =>
+            r.kind === "county" &&
+            r.state === region.state &&
+            r.region_id !== id,
         )
       : region?.kind === "state"
         ? regions.filter((r) => r.kind === "county" && r.state === region.state)
@@ -163,7 +178,10 @@ export default async function RegionPage({
               className="chip"
             >
               {peer.name}
-              <span className="muted"> {peer.facility_count.toLocaleString()}</span>
+              <span className="muted">
+                {" "}
+                {peer.facility_count.toLocaleString()}
+              </span>
             </Link>
           ))}
           {region?.kind === "county" ? (
@@ -191,54 +209,71 @@ export default async function RegionPage({
         <div className="metric">
           <div className="metric-label">Floor area</div>
           <div className="metric-value num">
-            {region ? (region.footprint_m2 / 1e6).toFixed(2) : "—"}
+            {region ? formatRegionFootprintKm2(region) : "—"}
           </div>
           <div className="metric-sub">
-            km² across {(region?.building_count ?? 0).toLocaleString()} buildings
+            {region?.building_count === 0
+              ? "no building footprint mapped here"
+              : `km² across ${(region?.building_count ?? 0).toLocaleString()} buildings`}
           </div>
         </div>
         <div className="metric">
           <div className="metric-label">Share of US load</div>
           <div className="metric-value num">
-            {region ? Math.round(region.est_mw).toLocaleString() : "—"}
+            {region ? formatRegionMw(region) : "—"}
           </div>
-          <div className="metric-sub">MW, inferred upper bound</div>
+          <div className="metric-sub">
+            {region?.building_count === 0
+              ? "no floor area to allocate a share from"
+              : "MW, inferred upper bound"}
+          </div>
         </div>
         <div className="metric">
           <div className="metric-label">Water</div>
           <div className="metric-value num">
-            {region ? (region.est_gal_per_day / 1e6).toFixed(2) : "—"}
+            {/* Water rides on the same footprint allocation as the megawatts,
+                so it is unmeasured in exactly the same cases. */}
+            {region && region.building_count !== 0 && region.est_gal_per_day > 0
+              ? (region.est_gal_per_day / 1e6).toFixed(2)
+              : "—"}
           </div>
-          <div className="metric-sub">million gal/day, inferred</div>
+          <div className="metric-sub">
+            {region?.building_count === 0
+              ? "no floor area to allocate water from"
+              : "million gal/day, inferred"}
+          </div>
         </div>
       </div>
 
       {unmeasured > 0 ? (
         <div className="notice">
           <strong>
-            {unmeasured.toLocaleString()} of these {mapped.toLocaleString()} are not
-            mapped as buildings, so no power figure is estimated for them.
+            {unmeasured.toLocaleString()} of these {mapped.toLocaleString()} are
+            not mapped as buildings, so no power figure is estimated for them.
           </strong>{" "}
           {siteCount > 0 ? (
             <>
               {siteCount.toLocaleString()}{" "}
-              {siteCount === 1 ? "is a campus boundary" : "are campus boundaries"} covering{" "}
-              {(region!.site_area_m2! / 1e6).toFixed(2)} km² of land
+              {siteCount === 1
+                ? "is a campus boundary"
+                : "are campus boundaries"}{" "}
+              covering {(region!.site_area_m2! / 1e6).toFixed(2)} km² of land
               {constructionCount > 0 ? ", and " : ". "}
             </>
           ) : null}
           {constructionCount > 0 ? (
             <>
               {constructionCount.toLocaleString()}{" "}
-              {constructionCount === 1 ? "is a site" : "are sites"} mapped as under
-              construction.{" "}
+              {constructionCount === 1 ? "is a site" : "are sites"} mapped as
+              under construction.{" "}
             </>
           ) : null}
           The megawatt figure above divides a national total by{" "}
-          <em>building floor area</em>, and the area of a land parcel is not floor area.
-          A site still being built consumed none of the electricity that total measures.
-          Both are counted here and left out of the estimate rather than folded into it,
-          so this region&apos;s load is understated by however much those{" "}
+          <em>building floor area</em>, and the area of a land parcel is not
+          floor area. A site still being built consumed none of the electricity
+          that total measures. Both are counted here and left out of the
+          estimate rather than folded into it, so this region&apos;s load is
+          understated by however much those{" "}
           {unmeasured === 1 ? "represents" : "represent"}.
         </div>
       ) : null}
@@ -251,19 +286,22 @@ export default async function RegionPage({
         {series ? (
           <MappingGrowthChart points={series.points} />
         ) : (
-          <p className="muted small">No mapping history recorded for this region.</p>
+          <p className="muted small">
+            No mapping history recorded for this region.
+          </p>
         )}
 
         {undated > 0 ? (
           <div className="notice">
             <strong>
-              {undated.toLocaleString()} of these {mapped.toLocaleString()} facilities do
-              not appear in the curve.
+              {undated.toLocaleString()} of these {mapped.toLocaleString()}{" "}
+              facilities do not appear in the curve.
             </strong>{" "}
             The chart counts facilities whose appearance was observed in
-            OpenStreetMap&apos;s edit history; one mapped before 2012 has no creation edit
-            to observe. The two numbers answer different questions — how many are on the
-            map now, and how many were watched arriving — and neither is wrong.
+            OpenStreetMap&apos;s edit history; one mapped before 2012 has no
+            creation edit to observe. The two numbers answer different questions
+            — how many are on the map now, and how many were watched arriving —
+            and neither is wrong.
           </div>
         ) : null}
       </section>
@@ -291,9 +329,12 @@ export default async function RegionPage({
             </div>
             <div className="metric">
               <div className="metric-label">Highest voltage</div>
-              <div className="metric-value num">{region.max_voltage_kv ?? "—"}</div>
+              <div className="metric-value num">
+                {region.max_voltage_kv ?? "—"}
+              </div>
               <div className="metric-sub">
-                kV, present in this {region.kind === "county" ? "county" : "state"}
+                kV, present in this{" "}
+                {region.kind === "county" ? "county" : "state"}
               </div>
             </div>
             <div className="metric">
@@ -308,24 +349,26 @@ export default async function RegionPage({
             </div>
           </div>
           <p className="small" style={{ marginTop: "0.75rem" }}>
-            A facility drawing hundreds of megawatts connects at bulk transmission
-            voltage, so the second figure matters more than the first: forty 69 kV yards
-            are not a substitute for one 500 kV substation.
+            A facility drawing hundreds of megawatts connects at bulk
+            transmission voltage, so the second figure matters more than the
+            first: forty 69 kV yards are not a substitute for one 500 kV
+            substation.
             {(region.plants_without_capacity ?? 0) > 0 ? (
               <>
                 {" "}
-                {region.plants_without_capacity?.toLocaleString()} of the plants here
-                carry no capacity tag, so the megawatt total is a floor rather than the
-                region&apos;s output.
+                {region.plants_without_capacity?.toLocaleString()} of the plants
+                here carry no capacity tag, so the megawatt total is a floor
+                rather than the region&apos;s output.
               </>
             ) : null}
           </p>
           <p className="small muted" style={{ marginBottom: 0 }}>
-            <strong>Proximity is not connection.</strong> Nothing here shows that any
-            facility has contracted power from any of these substations. That gets
-            settled in interconnection filings Helios cannot read, and in several regions
-            those queues now run for years. A county showing no substations may have none
-            mapped rather than none standing.
+            <strong>Proximity is not connection.</strong> Nothing here shows
+            that any facility has contracted power from any of these
+            substations. That gets settled in interconnection filings Helios
+            cannot read, and in several regions those queues now run for years.
+            A county showing no substations may have none mapped rather than
+            none standing.
           </p>
         </section>
       ) : null}
@@ -336,7 +379,10 @@ export default async function RegionPage({
             <h2 className="card-title">Largest named mapped records</h2>
             <span className="card-note">by mapped area</span>
           </div>
-          <div className="table-scroll">
+          <ScrollArea
+            className="table-scroll"
+            label="Largest named mapped records, scrollable"
+          >
             <table className="table">
               <thead>
                 <tr>
@@ -357,7 +403,9 @@ export default async function RegionPage({
                         <span className="muted">not recorded</span>
                       )}
                     </td>
-                    <td>{facilityClassLabel(facility.properties.site_class)}</td>
+                    <td>
+                      {facilityClassLabel(facility.properties.site_class)}
+                    </td>
                     <td className="num">
                       {facility.properties.footprint_m2 > 0
                         ? facility.properties.footprint_m2.toLocaleString()
@@ -375,14 +423,15 @@ export default async function RegionPage({
                 ))}
               </tbody>
             </table>
-          </div>
+          </ScrollArea>
           <p className="small muted" style={{ marginBottom: 0 }}>
-            &ldquo;First mapped&rdquo; is when OpenStreetMap recorded the facility, not
-            when it was built — OpenStreetMap carries no construction dates. Mapped area
-            means a building floor plate, campus boundary, or construction polygon
-            according to the &ldquo;Mapped as&rdquo; column; those quantities are never
-            added together. The megawatt column appears only for buildings and is their
-            floor-area share of a reported national total, not a measurement.
+            &ldquo;First mapped&rdquo; is when OpenStreetMap recorded the
+            facility, not when it was built — OpenStreetMap carries no
+            construction dates. Mapped area means a building floor plate, campus
+            boundary, or construction polygon according to the &ldquo;Mapped
+            as&rdquo; column; those quantities are never added together. The
+            megawatt column appears only for buildings and is their floor-area
+            share of a reported national total, not a measurement.
           </p>
         </section>
       ) : null}

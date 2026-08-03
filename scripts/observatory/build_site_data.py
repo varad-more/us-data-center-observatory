@@ -115,6 +115,14 @@ def build_facilities(
 def build_grid(rows: list[dict[str, str]]) -> Any:
     """Build the GeoJSON point layer for substations and generating plants.
 
+    Only assets inside a US county are published. The Overpass boxes this was
+    fetched with reach into Sonora, Chihuahua, Ontario and the Gulf, and 2,898
+    of the 65,325 rows are outside every county in the file - so an unfiltered
+    layer draws Mexican and Canadian substations on a map captioned "the
+    contiguous states", and counts them in a national total. The county totals
+    were always right, because they are keyed on the assignment; the map and the
+    headline figure were the two surfaces that read the raw rows.
+
     Coordinates are cut to five decimals - about a metre - because this layer is
     read at national zoom and the sixth decimal would add roughly 40 KB across
     42,000 points to place a substation no more accurately than its own fence.
@@ -124,6 +132,8 @@ def build_grid(rows: list[dict[str, str]]) -> Any:
     """
     features = []
     for row in rows:
+        if not row.get("county_fips"):
+            continue
         try:
             lon, lat = round(float(row["lon"]), 5), round(float(row["lat"]), 5)
         except (KeyError, ValueError):
@@ -323,8 +333,16 @@ def main(argv: list[str] | None = None) -> int:
             ),
             "region_count": len(regions),
             "series_count": series_count,
-            "substation_count": sum(1 for r in grid if r.get("kind") == "substation"),
-            "plant_count": sum(1 for r in grid if r.get("kind") == "plant"),
+            # US only, on the same test the published layer uses. Every page
+            # that prints these calls them the grid the American facilities
+            # connect to, and 2,898 of the raw rows are in Mexico, Canada or
+            # offshore.
+            "substation_count": sum(
+                1 for r in grid if r.get("kind") == "substation" and r.get("county_fips")
+            ),
+            "plant_count": sum(
+                1 for r in grid if r.get("kind") == "plant" and r.get("county_fips")
+            ),
             "national_mw": round(national_mw),
             "national_reference_year": int(latest["year"]),
             "total_footprint_m2": round(total_area),

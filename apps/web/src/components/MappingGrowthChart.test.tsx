@@ -24,10 +24,14 @@ function series(periods: string[]): SeriesPoint[] {
 describe("MappingGrowthChart", () => {
   it("hatches and labels the stretch that must not be read as history", () => {
     const { container } = render(
-      <MappingGrowthChart points={series(["2013-01", "2015-01", "2020-01", "2024-01"])} />,
+      <MappingGrowthChart
+        points={series(["2013-01", "2015-01", "2020-01", "2024-01"])}
+      />,
     );
 
-    expect(container.querySelector('rect[fill="url(#unreliable-hatch)"]')).not.toBeNull();
+    expect(
+      container.querySelector('rect[fill="url(#unreliable-hatch)"]'),
+    ).not.toBeNull();
     expect(container.querySelector("pattern#unreliable-hatch")).not.toBeNull();
     expect(screen.getByText(/undercounted/i)).toBeInTheDocument();
   });
@@ -39,7 +43,9 @@ describe("MappingGrowthChart", () => {
 
     // A band drawn over reliable years would disclaim data that needs no
     // disclaimer, which erodes the warning where it genuinely applies.
-    expect(container.querySelector('rect[fill="url(#unreliable-hatch)"]')).toBeNull();
+    expect(
+      container.querySelector('rect[fill="url(#unreliable-hatch)"]'),
+    ).toBeNull();
     expect(screen.queryByText(/undercounted/i)).toBeNull();
   });
 

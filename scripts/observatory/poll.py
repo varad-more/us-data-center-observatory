@@ -18,6 +18,7 @@ Stages::
     assign_regions       place it in a county   (offline)
     build_series         growth per region      (offline)
     allocate_power       share of national load (offline)
+    build_basemap        the coastline the sheet is drawn on (offline)
     build_site_data      JSON for the site      (offline)
 
 The history stage is the slow one and it is allowed to be incomplete: it caches
@@ -114,6 +115,10 @@ def main(argv: list[str] | None = None) -> int:
     stages.append(("assign_grid_regions.py", []))
     stages.append(("build_series.py", []))
     stages.append(("allocate_power.py", []))
+    # Reference geography, not observation: it depends only on the committed
+    # county file, so it is here to keep a fresh checkout one command from a
+    # buildable site rather than because a poll could change it.
+    stages.append(("build_basemap.py", []))
     stages.append(("build_site_data.py", []))
 
     failed: list[str] = []

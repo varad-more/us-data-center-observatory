@@ -15,6 +15,11 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 
 import type { Region } from "@/lib/observatory";
+import { ScrollArea } from "@/components/ScrollArea";
+import {
+  formatRegionFootprintKm2,
+  formatRegionMw,
+} from "@/lib/facilityPresentation";
 
 type SortKey = "name" | "facility_count" | "footprint_m2" | "est_mw";
 type Scope = "all" | "county" | "state";
@@ -64,7 +69,11 @@ export function RegionTable({ regions }: { regions: Region[] }) {
               aria-pressed={scope === value}
               onClick={() => setScope(value)}
             >
-              {value === "all" ? "Both" : value === "county" ? "Counties" : "States"}
+              {value === "all"
+                ? "Both"
+                : value === "county"
+                  ? "Counties"
+                  : "States"}
             </button>
           ))}
         </div>
@@ -79,7 +88,10 @@ export function RegionTable({ regions }: { regions: Region[] }) {
         </label>
       </div>
 
-      <div className="table-scroll">
+      <ScrollArea
+        className="table-scroll"
+        label="Regions by facility count, scrollable"
+      >
         <table className="table">
           <thead>
             <tr>
@@ -100,7 +112,9 @@ export function RegionTable({ regions }: { regions: Region[] }) {
                 >
                   <button
                     type="button"
-                    className={sort === column.key ? "th-sort th-sort-active" : "th-sort"}
+                    className={
+                      sort === column.key ? "th-sort th-sort-active" : "th-sort"
+                    }
                     onClick={() => setSort(column.key)}
                   >
                     {column.label}
@@ -120,22 +134,29 @@ export function RegionTable({ regions }: { regions: Region[] }) {
                     <span className="muted small">, {region.state}</span>
                   ) : null}
                 </td>
-                <td className="num">{region.facility_count.toLocaleString()}</td>
-                <td className="num">{(region.footprint_m2 / 1e6).toFixed(2)}</td>
-                <td className="num">{Math.round(region.est_mw).toLocaleString()}</td>
+                <td className="num">
+                  {region.facility_count.toLocaleString()}
+                </td>
+                <td className="num">{formatRegionFootprintKm2(region)}</td>
+                <td className="num">{formatRegionMw(region)}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollArea>
 
-      {rows.length === 0 ? <p className="muted small">No region matches that filter.</p> : null}
+      {rows.length === 0 ? (
+        <p className="muted small">No region matches that filter.</p>
+      ) : null}
 
       <p className="small muted" style={{ marginBottom: 0 }}>
-        Counties and states both appear, and they overlap — a county&apos;s facilities are
-        also counted in its state. Never add the two together. The megawatt column is a
-        share of a reported national total allocated by building footprint, not a
-        measurement of these buildings.
+        Counties and states both appear, and they overlap — a county&apos;s
+        facilities are also counted in its state. Never add the two together.
+        The megawatt column is a share of a reported national total allocated by
+        building footprint, not a measurement of these buildings. An em dash
+        means nothing was measured to allocate from: every facility there is a
+        point or a campus boundary with no building footprint, which is not the
+        same as a footprint of zero.
       </p>
     </section>
   );

@@ -22,11 +22,12 @@ export default async function SourcesPage() {
       <div>
         <h1>Data-source registry</h1>
         <p className="muted" style={{ maxWidth: "62ch" }}>
-          Every source Helios is permitted to read is declared here before any code fetches
-          from it, together with its licence, rate limit, and historical depth. The sources
-          Helios <em>cannot</em> read are listed too, each with the reason. The gaps are
-          published deliberately: a site with thin evidence might be a quiet project or a
-          blocked source, and this is the only page that tells the two apart.
+          Every source Helios is permitted to read is declared here before any
+          code fetches from it, together with its licence, rate limit, and
+          historical depth. The sources Helios <em>cannot</em> read are listed
+          too, each with the reason. The gaps are published deliberately: a site
+          with thin evidence might be a quiet project or a blocked source, and
+          this is the only page that tells the two apart.
         </p>
       </div>
 
@@ -67,7 +68,9 @@ export default async function SourcesPage() {
                 </td>
                 <td className="small">{region.counties.join(", ")}</td>
                 <td>
-                  <StatusPill tone={region.coverage === "active" ? "positive" : "neutral"}>
+                  <StatusPill
+                    tone={region.coverage === "active" ? "positive" : "neutral"}
+                  >
                     {region.coverage}
                   </StatusPill>
                 </td>

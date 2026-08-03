@@ -32,7 +32,12 @@ export type EvidenceBasis = "observed" | "derived" | "unestablished";
 
 const ASSERTION_META: Record<
   AssertionClass,
-  { label: string; description: string; className: string; basis: EvidenceBasis }
+  {
+    label: string;
+    description: string;
+    className: string;
+    basis: EvidenceBasis;
+  }
 > = {
   reported: {
     label: "Reported",
@@ -64,7 +69,8 @@ const ASSERTION_META: Record<
   },
   predicted: {
     label: "Predicted",
-    description: "Model output about a future or unobserved state. Not an observation.",
+    description:
+      "Model output about a future or unobserved state. Not an observation.",
     className: "badge badge-predicted",
     basis: "derived",
   },
@@ -91,13 +97,14 @@ export function AssertionBadge({ assertion }: { assertion: AssertionClass }) {
   );
 }
 
-const BAND_META: Record<ConfidenceBand, { label: string; className: string }> = {
-  very_low: { label: "Very low", className: "band band-very-low" },
-  low: { label: "Low", className: "band band-low" },
-  moderate: { label: "Moderate", className: "band band-moderate" },
-  high: { label: "High", className: "band band-high" },
-  very_high: { label: "Very high", className: "band band-very-high" },
-};
+const BAND_META: Record<ConfidenceBand, { label: string; className: string }> =
+  {
+    very_low: { label: "Very low", className: "band band-very-low" },
+    low: { label: "Low", className: "band band-low" },
+    moderate: { label: "Moderate", className: "band band-moderate" },
+    high: { label: "High", className: "band band-high" },
+    very_high: { label: "Very high", className: "band band-very-high" },
+  };
 
 export function ConfidenceBadge({
   confidence,

@@ -99,7 +99,9 @@ export function ThemeToggle() {
     }
     // Marks that resolve their colour from the surface — the map basemap, chiefly
     // — cannot observe a CSS custom property change, so they are told directly.
-    window.dispatchEvent(new CustomEvent("helios:themechange", { detail: next }));
+    window.dispatchEvent(
+      new CustomEvent("helios:themechange", { detail: next }),
+    );
   }
 
   const next = theme === "dark" ? "light" : "dark";

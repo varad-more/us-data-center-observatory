@@ -37,10 +37,14 @@ describe("SourceEntry", () => {
     render(<SourceEntry source={SOURCE} />);
 
     expect(
-      screen.getByRole("link", { name: "Arizona Department of Water Resources Data" }),
+      screen.getByRole("link", {
+        name: "Arizona Department of Water Resources Data",
+      }),
     ).toHaveAttribute("href", "https://example.com");
     expect(screen.getByText("Registry note.")).toBeInTheDocument();
-    expect(screen.getByText(/Needed before any water-use scenario/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Needed before any water-use scenario/),
+    ).toBeInTheDocument();
   });
 
   it("keeps a note and an access limitation as separate statements", () => {

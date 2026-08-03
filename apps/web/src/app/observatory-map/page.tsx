@@ -100,11 +100,11 @@ export default async function ObservatoryMapPage() {
       {(meta.construction_count ?? 0) > 0 ? (
         <div className="notice">
           <strong>
-            {meta.construction_count?.toLocaleString()} records are mapped as under
-            construction.
+            {meta.construction_count?.toLocaleString()} records are mapped as
+            under construction.
           </strong>{" "}
-          They use fixed-size marks here because construction area is not building floor
-          area, and they receive no operating-load estimate.{" "}
+          They use fixed-size marks here because construction area is not
+          building floor area, and they receive no operating-load estimate.{" "}
           <Link href="/construction">See the construction signal</Link>.
         </div>
       ) : null}

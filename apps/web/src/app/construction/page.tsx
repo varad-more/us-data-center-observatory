@@ -9,6 +9,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ScrollArea } from "@/components/ScrollArea";
 import { openStreetMapElementUrl } from "@/lib/facilityPresentation";
 import {
   getFacilities,
@@ -73,7 +74,6 @@ export default async function ConstructionPage() {
     <div className="stack">
       <div className="card-header">
         <div>
-          <p className="eyebrow">United States · current OpenStreetMap snapshot</p>
           <h1>Mapped as under construction</h1>
           <p className="muted small" style={{ margin: 0 }}>
             {construction.length.toLocaleString()} data-centre records that contributors
@@ -130,7 +130,7 @@ export default async function ConstructionPage() {
           <h2 className="card-title">Where construction is mapped</h2>
           <span className="card-note">counties, not added to their states</span>
         </div>
-        <div className="table-scroll">
+        <ScrollArea className="table-scroll" label="Where construction is mapped, scrollable">
           <table className="table">
             <thead>
               <tr>
@@ -160,7 +160,7 @@ export default async function ConstructionPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollArea>
         <p className="small muted" style={{ marginBottom: 0 }}>
           States and counties overlap, so this table uses counties only. A county absent
           from it has no construction <em>mapped</em>, which is a weaker statement than
@@ -173,7 +173,7 @@ export default async function ConstructionPage() {
           <h2 className="card-title">The mapped records</h2>
           <span className="card-note">largest mapped area first</span>
         </div>
-        <div className="table-scroll">
+        <ScrollArea className="table-scroll" label="The mapped records, scrollable">
           <table className="table">
             <thead>
               <tr>
@@ -239,7 +239,7 @@ export default async function ConstructionPage() {
               })}
             </tbody>
           </table>
-        </div>
+        </ScrollArea>
         <p className="small muted" style={{ marginBottom: 0 }}>
           “First mapped” is observed history for the data-centre record. A record can be
           edited into or out of the construction class later, so the date does not

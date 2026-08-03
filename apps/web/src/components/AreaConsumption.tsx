@@ -102,7 +102,8 @@ function TotalsTable({ totals }: { totals: AreaTotal[] }) {
               <span className="muted"> · {total.area_kind}</span>
             </td>
             <td className="num">
-              {format(total.value)} <span className="muted small">{total.unit}</span>
+              {format(total.value)}{" "}
+              <span className="muted small">{total.unit}</span>
             </td>
             <td className="num">{total.reference_year}</td>
             <td className="small muted">{total.source_name}</td>
@@ -118,9 +119,12 @@ function Comparison({ share }: { share: HeliosShare }) {
   // band reads as uncertainty rather than as a decorative bar.
   const span = share.inferred_upper - share.inferred_lower;
   const offset =
-    span > 0 ? ((share.inferred_likely - share.inferred_lower) / span) * 100 : 50;
+    span > 0
+      ? ((share.inferred_likely - share.inferred_lower) / span) * 100
+      : 50;
 
-  const note = typeof share.assumptions.note === "string" ? share.assumptions.note : null;
+  const note =
+    typeof share.assumptions.note === "string" ? share.assumptions.note : null;
 
   return (
     <div className="estimate">
@@ -146,7 +150,10 @@ function Comparison({ share }: { share: HeliosShare }) {
               share.share_upper_pct,
             )}, likely ${formatShare(share.share_likely_pct)}`}
           >
-            <span className="estimate-band-marker" style={{ left: `${offset}%` }} />
+            <span
+              className="estimate-band-marker"
+              style={{ left: `${offset}%` }}
+            />
           </div>
           <p className="estimate-bounds">
             <span className="num">{formatShare(share.share_lower_pct)}</span>
@@ -157,9 +164,9 @@ function Comparison({ share }: { share: HeliosShare }) {
       )}
 
       <p className="estimate-method">
-        {share.sites_counted} site{share.sites_counted === 1 ? "" : "s"} totalling{" "}
-        <span className="num">{format(share.inferred_likely)}</span> {share.unit}.{" "}
-        {share.method}.
+        {share.sites_counted} site{share.sites_counted === 1 ? "" : "s"}{" "}
+        totalling <span className="num">{format(share.inferred_likely)}</span>{" "}
+        {share.unit}. {share.method}.
       </p>
 
       <details className="estimate-assumptions">
@@ -179,9 +186,10 @@ export function AreaConsumptionPanel({ data }: { data: AreaConsumption }) {
           <h2 className="card-title">Regional consumption</h2>
         </div>
         <div className="notice" style={{ marginBottom: 0 }}>
-          <strong>No published totals for {data.region_name}.</strong> Helios has not
-          ingested county water or state electricity figures for this region, so its
-          per-site estimates here have no measured denominator to sit against.
+          <strong>No published totals for {data.region_name}.</strong> Helios
+          has not ingested county water or state electricity figures for this
+          region, so its per-site estimates here have no measured denominator to
+          sit against.
         </div>
       </section>
     );
@@ -191,7 +199,9 @@ export function AreaConsumptionPanel({ data }: { data: AreaConsumption }) {
     <>
       <section className="card">
         <div className="card-header">
-          <h2 className="card-title">What {data.region_name} already uses and can generate</h2>
+          <h2 className="card-title">
+            What {data.region_name} already uses and can generate
+          </h2>
           <span className="card-note">
             <AssertionBadge assertion="reported" /> measured and published
           </span>
@@ -209,7 +219,9 @@ export function AreaConsumptionPanel({ data }: { data: AreaConsumption }) {
       {data.comparisons.length > 0 && (
         <section className="card">
           <div className="card-header">
-            <h2 className="card-title">Helios&rsquo;s sites against those totals</h2>
+            <h2 className="card-title">
+              Helios&rsquo;s sites against those totals
+            </h2>
             <span className="card-note">
               <AssertionBadge assertion="inferred" /> derived from acreage
             </span>

@@ -37,8 +37,8 @@ export default async function GrowthPage() {
         <div>
           <h1>Growth</h1>
           <p className="muted small" style={{ margin: 0 }}>
-            What has appeared on the map over time, and what the country is reported to
-            consume.
+            What has appeared on the map over time, and what the country is
+            reported to consume.
           </p>
         </div>
       </div>
@@ -53,14 +53,14 @@ export default async function GrowthPage() {
           <MappingGrowthChart points={series.points} />
         ) : (
           <div className="notice">
-            <strong>The growth series has not been built yet.</strong> It comes from
-            replaying OpenStreetMap&apos;s full edit history through the ohsome API, which
-            is a slow, volunteer-run service; the backfill is resumable and has not
-            finished. Run{" "}
-            <code>python scripts/observatory/fetch_osm_history.py</code> followed by{" "}
-            <code>python scripts/observatory/build_series.py</code> to produce it. Nothing
-            is drawn here in the meantime, because a partial history would understate
-            every year it touched.
+            <strong>The growth series has not been built yet.</strong> It comes
+            from replaying OpenStreetMap&apos;s full edit history through the
+            ohsome API, which is a slow, volunteer-run service; the backfill is
+            resumable and has not finished. Run{" "}
+            <code>python scripts/observatory/fetch_osm_history.py</code>{" "}
+            followed by <code>python scripts/observatory/build_series.py</code>{" "}
+            to produce it. Nothing is drawn here in the meantime, because a
+            partial history would understate every year it touched.
           </div>
         )}
       </section>
@@ -69,22 +69,25 @@ export default async function GrowthPage() {
 
       <section className="card">
         <div className="card-header">
-          <h2 className="card-title">Why these two series must not be divided</h2>
+          <h2 className="card-title">
+            Why these two series must not be divided
+          </h2>
         </div>
         <p className="small">
-          It is tempting to divide reported national electricity by the mapped facility
-          count and call the result the power of an average data centre. That number would
-          be meaningless. The numerator covers every data centre in the United States; the
-          denominator covers only the {meta.facility_count.toLocaleString()} that
-          OpenStreetMap happens to know about. Their ratio measures mapping coverage at
-          least as much as it measures anything physical.
+          It is tempting to divide reported national electricity by the mapped
+          facility count and call the result the power of an average data
+          centre. That number would be meaningless. The numerator covers every
+          data centre in the United States; the denominator covers only the{" "}
+          {meta.facility_count.toLocaleString()} that OpenStreetMap happens to
+          know about. Their ratio measures mapping coverage at least as much as
+          it measures anything physical.
         </p>
         <p className="small" style={{ marginBottom: 0 }}>
-          The same caution applies to the per-region megawatt figures elsewhere on this
-          site. Those allocate the national total across mapped facilities by building
-          footprint, so they are shares of a reported quantity — and upper bounds, since
-          the facilities nobody has mapped have their consumption handed to the ones that
-          have been.
+          The same caution applies to the per-region megawatt figures elsewhere
+          on this site. Those allocate the national total across mapped
+          facilities by building footprint, so they are shares of a reported
+          quantity — and upper bounds, since the facilities nobody has mapped
+          have their consumption handed to the ones that have been.
         </p>
       </section>
     </div>
