@@ -20,6 +20,8 @@ import {
   facilityClassLabel,
   formatRegionFootprintKm2,
   formatRegionMw,
+  nationalTotals,
+  type RegionTotals,
 } from "@/lib/facilityPresentation";
 import {
   getRegionFacilities,
@@ -111,12 +113,17 @@ export default async function RegionPage({
   const observed = series?.points.at(-1)?.count ?? 0;
   const undated = mapped - observed;
 
+  // `region` still drives the labels and the navigation, where being national
+  // genuinely is a different case. The figures are the same figures either way.
+  const totals: RegionTotals | undefined =
+    region ?? (isNational ? nationalTotals(regions) : undefined);
+
   // Facilities carrying no power estimate, because what was mapped is a land
   // parcel or a site under construction rather than a building. Reported rather
   // than absorbed: without this the megawatt figure looks like a full account of
   // the region, and in a county mapped campus-first it is nowhere near one.
-  const siteCount = region?.site_count ?? 0;
-  const constructionCount = region?.construction_count ?? 0;
+  const siteCount = totals?.site_count ?? 0;
+  const constructionCount = totals?.construction_count ?? 0;
   const unmeasured = siteCount + constructionCount;
 
   const named = [...facilities]
@@ -209,21 +216,21 @@ export default async function RegionPage({
         <div className="metric">
           <div className="metric-label">Floor area</div>
           <div className="metric-value num">
-            {region ? formatRegionFootprintKm2(region) : "—"}
+            {totals ? formatRegionFootprintKm2(totals) : "—"}
           </div>
           <div className="metric-sub">
-            {region?.building_count === 0
+            {totals?.building_count === 0
               ? "no building footprint mapped here"
-              : `km² across ${(region?.building_count ?? 0).toLocaleString()} buildings`}
+              : `km² across ${(totals?.building_count ?? 0).toLocaleString()} buildings`}
           </div>
         </div>
         <div className="metric">
           <div className="metric-label">Share of US load</div>
           <div className="metric-value num">
-            {region ? formatRegionMw(region) : "—"}
+            {totals ? formatRegionMw(totals) : "—"}
           </div>
           <div className="metric-sub">
-            {region?.building_count === 0
+            {totals?.building_count === 0
               ? "no floor area to allocate a share from"
               : "MW, inferred upper bound"}
           </div>
@@ -233,12 +240,12 @@ export default async function RegionPage({
           <div className="metric-value num">
             {/* Water rides on the same footprint allocation as the megawatts,
                 so it is unmeasured in exactly the same cases. */}
-            {region && region.building_count !== 0 && region.est_gal_per_day > 0
-              ? (region.est_gal_per_day / 1e6).toFixed(2)
+            {totals && totals.building_count !== 0 && totals.est_gal_per_day > 0
+              ? (totals.est_gal_per_day / 1e6).toFixed(2)
               : "—"}
           </div>
           <div className="metric-sub">
-            {region?.building_count === 0
+            {totals?.building_count === 0
               ? "no floor area to allocate water from"
               : "million gal/day, inferred"}
           </div>
@@ -257,7 +264,8 @@ export default async function RegionPage({
               {siteCount === 1
                 ? "is a campus boundary"
                 : "are campus boundaries"}{" "}
-              covering {(region!.site_area_m2! / 1e6).toFixed(2)} km² of land
+              covering {((totals?.site_area_m2 ?? 0) / 1e6).toFixed(2)} km² of
+              land
               {constructionCount > 0 ? ", and " : ". "}
             </>
           ) : null}

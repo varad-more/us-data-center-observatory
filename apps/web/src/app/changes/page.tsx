@@ -89,7 +89,12 @@ export default async function ChangesPage() {
       <section className="card">
         <div className="card-header">
           <h2 className="card-title">Recent edits</h2>
-          <span className="card-note">newest first</span>
+          {/* The counts above are over the whole window; the table is cut to
+              200 rows. Saying so is the difference between a sample and a
+              claim that the window is 200 edits long. */}
+          <span className="card-note">
+            newest 200 of {changes.length.toLocaleString()}
+          </span>
         </div>
         <ScrollArea className="table-scroll" label="Recent edits, scrollable">
           <table className="table">

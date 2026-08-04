@@ -13,9 +13,9 @@ Stages::
 
     fetch_osm_snapshot   what exists now        (Overpass, ~2 min)
     fetch_grid           substations & plants   (Overpass, ~30 min)
-    assign_grid_regions  grid totals per county (offline)
     fetch_osm_history    when it was mapped     (ohsome, slow, resumable)
     assign_regions       place it in a county   (offline)
+    assign_grid_regions  grid totals per county (offline)
     build_series         growth per region      (offline)
     allocate_power       share of national load (offline)
     build_basemap        the coastline the sheet is drawn on (offline)
@@ -45,6 +45,19 @@ from _common import DATA_DIR, read_csv, write_csv
 HERE = Path(__file__).resolve().parent
 FACILITIES_PATH = DATA_DIR / "facilities.csv"
 POLL_LOG_PATH = DATA_DIR / "poll_log.csv"
+
+# Stages allowed to fail without abandoning the run. build_series cannot succeed
+# until the history backfill has completed at least once, and the two grid stages
+# are slow, resumable, and leave the previous layer in place. Everything else
+# failing means the published dataset would be built from something incomplete.
+TOLERATED_FAILURES = frozenset(
+    {
+        "build_series.py",
+        "fetch_osm_history.py",
+        "fetch_grid.py",
+        "assign_grid_regions.py",
+    }
+)
 
 POLL_FIELDNAMES = (
     "polled_at",
@@ -125,14 +138,7 @@ def main(argv: list[str] | None = None) -> int:
     for script, extra in stages:
         if not _run(script, extra):
             failed.append(script)
-            # build_series is expected to fail until the history backfill has
-            # completed at least once. That is not a reason to abandon the rest.
-            if script not in {
-                "build_series.py",
-                "fetch_osm_history.py",
-                "fetch_grid.py",
-                "assign_grid_regions.py",
-            }:
+            if script not in TOLERATED_FAILURES:
                 break
 
     after = _snapshot_ids()
@@ -192,7 +198,11 @@ def main(argv: list[str] | None = None) -> int:
         print(f"\n  stages that did not complete: {', '.join(failed)}")
 
     print("\nNext: review `git diff data/observatory`, then commit and push to deploy.")
-    return 1 if failed and "assign_regions.py" in failed else 0
+    # This is the command that gates a deploy, so anything that was not on the
+    # tolerated list has to be able to fail it. The previous form named a single
+    # stage, which meant build_site_data.py could fall over and this still
+    # reported success.
+    return 1 if any(script not in TOLERATED_FAILURES for script in failed) else 0
 
 
 if __name__ == "__main__":

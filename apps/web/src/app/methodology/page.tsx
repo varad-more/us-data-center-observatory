@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getObservatoryMeta } from "@/lib/observatory";
+import { getObservatoryMeta, getRegions } from "@/lib/observatory";
 
 export const metadata = {
   title: "Methodology and limitations",
@@ -9,7 +9,20 @@ export const metadata = {
 };
 
 export default async function MethodologyPage() {
-  const meta = await getObservatoryMeta();
+  const [meta, regions] = await Promise.all([
+    getObservatoryMeta(),
+    getRegions(),
+  ]);
+
+  // Read rather than typed in. The two figures below are the outcome of the
+  // correction this section describes, so they change with every poll, and a
+  // hardcoded pair is right until the moment nobody is watching. The
+  // surrounding narrative figures stay literal on purpose: they describe what
+  // the *old* model produced and no longer appear in any file.
+  const mw = (regionId: string) =>
+    Math.round(
+      regions.find((r) => r.region_id === regionId)?.est_mw ?? 0,
+    ).toLocaleString();
 
   return (
     <div className="stack container-narrow">
@@ -105,8 +118,9 @@ export default async function MethodologyPage() {
           1,020 MW.
         </p>
         <p className="small" style={{ marginBottom: 0 }}>
-          Weighting building floor area alone moves Loudoun County to 3,034 MW
-          and Virginia to 4,972 MW, which is consistent with that independent
+          Weighting building floor area alone moves Loudoun County to{" "}
+          {mw("county:51107")} MW and Virginia to {mw("state:VA")} MW, which is
+          consistent with that independent
           figure where the old result was not. The correction cuts both ways and
           is not a claim of accuracy: the discarded parcels are real facilities
           whose load is now attributed to buildings elsewhere, so regions mapped

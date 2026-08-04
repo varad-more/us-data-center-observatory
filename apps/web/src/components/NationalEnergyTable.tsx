@@ -28,8 +28,22 @@ export function NationalEnergyTable({
 }) {
   const historical = points.filter((p) => p.series_kind === "historical");
   const projected = points.filter((p) => p.series_kind === "projection");
-  const latest = historical.filter((p) => p.electricity_twh !== null).at(-1);
-  const latestWater = historical.filter((p) => p.water_bgal !== null).at(-1);
+
+  // Sorted rather than taken off the ends of the file. Both the growth multiple
+  // and the years under it are derived from the first and last rows, so CSV
+  // order would decide what this claims; the front page sorts for the same
+  // figure and the two must not be able to disagree.
+  const byYear = (a: NationalEnergyPoint, b: NationalEnergyPoint) =>
+    a.year - b.year;
+  const electricity = historical
+    .filter((p) => p.electricity_twh !== null)
+    .sort(byYear);
+  const latest = electricity.at(-1);
+  const earliest = electricity[0];
+  const latestWater = historical
+    .filter((p) => p.water_bgal !== null)
+    .sort(byYear)
+    .at(-1);
 
   return (
     <section className="card">
@@ -58,12 +72,14 @@ export function NationalEnergyTable({
         <div className="metric">
           <div className="metric-label">Growth</div>
           <div className="metric-value num">
-            {latest && historical[0]?.electricity_twh
-              ? `${(latest.electricity_twh! / historical[0].electricity_twh!).toFixed(1)}×`
+            {latest && earliest && earliest !== latest
+              ? `${(latest.electricity_twh! / earliest.electricity_twh!).toFixed(1)}×`
               : "—"}
           </div>
           <div className="metric-sub">
-            {historical[0]?.year}–{latest?.year}
+            {latest && earliest && earliest !== latest
+              ? `${earliest.year}–${latest.year}`
+              : "one measured year"}
           </div>
         </div>
         <div className="metric">

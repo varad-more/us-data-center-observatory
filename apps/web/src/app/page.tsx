@@ -121,6 +121,13 @@ export default async function Home() {
 
   const counties = regions.filter((r) => r.kind === "county");
   const states = regions.filter((r) => r.kind === "state");
+
+  // The grid layer is built by a stage that can fail without taking the rest of
+  // the poll with it, so this page has to read correctly before it has ever run
+  // — the same guard /observatory-map already carries. Summing the two counts
+  // straight into the sentence printed "0 substations and power plants", which
+  // is not a fact this dataset is short of but a claim about the United States.
+  const gridAssets = (meta.substation_count ?? 0) + (meta.plant_count ?? 0);
   const points = series?.points ?? [];
   const lastAdvance = points[points.length - 1]?.period ?? "2026-06";
 
@@ -142,6 +149,16 @@ export default async function Home() {
     (a, b) => a - b,
   );
 
+  // Only the years that carry both edges. Defaulting a missing scenario to zero
+  // drew a value nobody published, in the same ink as the ones LBNL did: the fan
+  // would collapse to the axis at that year and open again after it, which reads
+  // as a forecast of nothing rather than as an absent forecast. The reference
+  // line below has always dropped its nulls rather than zeroing them.
+  const bandYears = projectionYears.filter(
+    (year) =>
+      scenarioAt(year, "low") !== null && scenarioAt(year, "high") !== null,
+  );
+
   // The fan opens from the last measured year, which is where LBNL opens it.
   const band = latestPower
     ? [
@@ -150,10 +167,10 @@ export default async function Home() {
           lo: latestPower.electricity_twh!,
           hi: latestPower.electricity_twh!,
         },
-        ...projectionYears.map((year) => ({
+        ...bandYears.map((year) => ({
           t: atYear(year),
-          lo: scenarioAt(year, "low") ?? 0,
-          hi: scenarioAt(year, "high") ?? 0,
+          lo: scenarioAt(year, "low")!,
+          hi: scenarioAt(year, "high")!,
         })),
       ]
     : [];
@@ -526,12 +543,16 @@ export default async function Home() {
           <div>
             <h2 className="pp-sheet-title">The sheet itself</h2>
             <p className="pp-note">
-              Every mapped facility, over the{" "}
-              {(
-                (meta.substation_count ?? 0) + (meta.plant_count ?? 0)
-              ).toLocaleString()}{" "}
-              substations and power plants they have to connect to. The
-              coastline under them is drawn in the paper&apos;s own hairline
+              {gridAssets > 0 ? (
+                <>
+                  Every mapped facility, over the{" "}
+                  {gridAssets.toLocaleString()} substations and power plants
+                  they have to connect to.
+                </>
+              ) : (
+                "Every mapped facility."
+              )}{" "}
+              The coastline under them is drawn in the paper&apos;s own hairline
               rather than in a pen, because it is the one thing on this sheet
               that was not measured: it is dissolved from the same county
               boundaries that decide which county each facility belongs to.
@@ -625,7 +646,7 @@ export default async function Home() {
               {
                 href: "/observatory-map",
                 name: "The national map",
-                what: "All 1,853 facilities, interactive, with the grid layer underneath.",
+                what: `All ${meta.facility_count.toLocaleString()} facilities, interactive, with the grid layer underneath.`,
               },
               {
                 href: "/sources",

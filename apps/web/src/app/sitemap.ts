@@ -34,13 +34,21 @@ const STATIC_ROUTES = [
   "/large-load-filings",
   "/observatory-map",
   "/changes",
-  "/sites",
-  "/map",
-  "/analytics",
   "/understand",
   "/methodology",
   "/sources",
 ];
+
+/**
+ * The Arizona study's index pages.
+ *
+ * These are built either way — without the snapshot they render the
+ * unavailable notice rather than 404ing — which is why they were listed
+ * unconditionally. But a sitemap is a claim that a URL is worth fetching, and
+ * three pages whose entire content is "this dataset is not available here" are
+ * not. They are listed on the same condition as the per-site pages below.
+ */
+const ARIZONA_ROUTES = ["/sites", "/map", "/analytics"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [meta, regions] = await Promise.all([getObservatoryMeta(), getRegions()]);
@@ -53,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const urls = [
     ...STATIC_ROUTES,
+    ...(sites ? ARIZONA_ROUTES : []),
     `/regions/${regionSlug("national:US")}`,
     ...regions.map((region) => `/regions/${regionSlug(region.region_id)}`),
     ...(sites?.items ?? []).map((site) => `/sites/${site.project_code}`),

@@ -156,6 +156,23 @@ def build_grid(rows: list[dict[str, str]]) -> Any:
     return {"type": "FeatureCollection", "features": features}
 
 
+def grid_is_unassigned(grid: list[dict[str, str]]) -> bool:
+    """True when grid.csv holds rows and not one of them was ever placed.
+
+    fetch_grid.py writes the assignment columns blank and assign_grid_regions.py
+    is the only stage that fills them, so a successful fetch followed by a failed
+    assignment leaves a complete grid.csv that publishes as an empty layer and a
+    national count of zero. Nothing downstream can tell that state apart from a
+    country with no substations in it - the map draws nothing, the front page
+    prints "0 substations and power plants", and the poll exits successfully.
+
+    Rows legitimately carry no county: 2,898 of the 65,325 are in Sonora,
+    Chihuahua, Ontario or the Gulf, outside every county in the file. So the test
+    is whether *any* row was placed, not whether every row was.
+    """
+    return bool(grid) and not any(row.get("county_fips") for row in grid)
+
+
 def _grid_fields(row: dict[str, str] | None) -> dict[str, Any]:
     """Return a region's grid summary, or nothing at all when it has none."""
     if not row:
@@ -208,6 +225,13 @@ def main(argv: list[str] | None = None) -> int:
         raise FetchError(
             "facilities.csv and regions.csv must exist. Run the fetch and assign "
             "stages before building site data."
+        )
+
+    if grid_is_unassigned(grid):
+        raise FetchError(
+            f"{GRID_PATH.name} has {len(grid)} rows and not one carries a county. "
+            "Run assign_grid_regions.py: publishing now would put '0 substations "
+            "and power plants' on the front page."
         )
 
     historical = [r for r in national if r.get("series_kind") == "historical"]

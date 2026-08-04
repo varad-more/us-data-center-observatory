@@ -54,6 +54,12 @@ const PAD = 18;
  */
 const CONUS = { lonMin: -125, lonMax: -66.5, latMin: 24, latMax: 49.5 };
 
+const inConus = (lon: number, lat: number) =>
+  lon >= CONUS.lonMin &&
+  lon <= CONUS.lonMax &&
+  lat >= CONUS.latMin &&
+  lat <= CONUS.latMax;
+
 interface Facility {
   lon: number;
   lat: number;
@@ -99,21 +105,19 @@ export async function PlotSheet() {
   // main extent would push the conic 900 miles southeast and shrink the country
   // to make room for two facilities; dropping it would contradict the coverage
   // this site states everywhere else.
-  const mainland = facilities.filter((f) => f.state !== "PR");
+  //
+  // The main set is cut to the same box as the grid below, not to "not Puerto
+  // Rico". Under the old test a facility mapped in Alaska or Hawaii projected
+  // to a point outside the viewBox, so the sheet clipped it away silently while
+  // still counting it in the label underneath. There is none today — which is a
+  // fact about the dataset, not a property of this component.
+  const mainland = facilities.filter((f) => inConus(f.lon, f.lat));
   const offshore = facilities.filter((f) => f.state === "PR");
 
   const mainlandProjected = mainland.map((f) => albersUsa(f.lon, f.lat));
 
   const conusGrid = gridGeo.features
-    .filter((f) => {
-      const [lon, lat] = f.geometry.coordinates;
-      return (
-        lon >= CONUS.lonMin &&
-        lon <= CONUS.lonMax &&
-        lat >= CONUS.latMin &&
-        lat <= CONUS.latMax
-      );
-    })
+    .filter((f) => inConus(f.geometry.coordinates[0], f.geometry.coordinates[1]))
     .map((f) =>
       albersUsa(f.geometry.coordinates[0], f.geometry.coordinates[1]),
     );
@@ -204,6 +208,34 @@ export async function PlotSheet() {
 
   const buildings = placed.filter((p) => p.facility.hasFigure);
   const others = placed.filter((p) => !p.facility.hasFigure);
+
+  /**
+   * The description, counted from what is actually on the paper.
+   *
+   * It used to open with `facilities.length` and then break the total down
+   * using the mainland sets, so it claimed 1,853 and its two parts summed to
+   * 1,851 — the two Puerto Rico facilities were in the total and in neither
+   * part. A sighted reader never sees that arithmetic. A screen-reader user has
+   * nothing else, so the one description on offer has to add up.
+   */
+  const drawn = [...mainland, ...offshore];
+  const drawnBuildings = drawn.filter((f) => f.hasFigure).length;
+  const offSheet = facilities.length - drawn.length;
+  const description = [
+    "A map of the contiguous United States, with an inset for Puerto Rico. ",
+    `${drawn.length.toLocaleString()} mapped data centres`,
+    // Absent rather than zero: an empty grid layer means the stage that builds
+    // it has not run, and "over 0 substations" would read as a finding about
+    // the United States instead.
+    conusGrid.length > 0
+      ? ` plotted over ${conusGrid.length.toLocaleString()} substations and power plants.`
+      : ".",
+    ` ${drawnBuildings.toLocaleString()} are buildings and carry an allocated power figure;`,
+    ` ${(drawn.length - drawnBuildings).toLocaleString()} are campuses, bare points or sites under construction and carry none.`,
+    offSheet > 0
+      ? ` ${offSheet.toLocaleString()} more are mapped outside the area this sheet covers and are not drawn.`
+      : "",
+  ].join("");
   const maxFootprint = Math.max(
     ...buildings.map((p) => p.facility.footprint),
     1,
@@ -244,7 +276,7 @@ export async function PlotSheet() {
       className="pp-map"
       viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
       role="img"
-      aria-label={`A map of the contiguous United States. ${facilities.length.toLocaleString()} mapped data centres plotted over ${conusGrid.length.toLocaleString()} substations and power plants. ${buildings.length.toLocaleString()} are buildings and carry an allocated power figure; ${others.length.toLocaleString()} are campuses, bare points or sites under construction and carry none.`}
+      aria-label={description}
     >
       {/* Reference geography, drawn in the paper's hairline rather than in a
           pen: the coastline is where the measurements sit, not one of them. */}

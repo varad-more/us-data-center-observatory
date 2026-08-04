@@ -16,13 +16,18 @@ import pytest
 SCRIPTS = Path(__file__).resolve().parents[2] / "scripts" / "observatory"
 sys.path.insert(0, str(SCRIPTS))
 
+import poll  # noqa: E402
 from _common import BoundingBox, tile, us_tiles, write_csv  # noqa: E402
 from allocate_power import main as allocate_main  # noqa: E402
 from assign_grid_regions import _accumulate, _blank_totals  # noqa: E402
 from assign_grid_regions import build as grid_build  # noqa: E402
 from assign_regions import _blank_region, _fold, _region_totals  # noqa: E402
 from build_series import _month_range, build  # noqa: E402
-from build_site_data import build_facilities, build_grid  # noqa: E402
+from build_site_data import (  # noqa: E402
+    build_facilities,
+    build_grid,
+    grid_is_unassigned,
+)
 from fetch_grid import VOLTAGE_PATTERN  # noqa: E402
 from fetch_grid import capacity_mw as grid_capacity  # noqa: E402
 from fetch_grid import max_voltage_v as grid_max_voltage  # noqa: E402
@@ -507,6 +512,65 @@ class TestGridGeoJson:
         site has to build before it has ever run - and the map's fetch needs a
         valid empty collection rather than a 404 to interpret."""
         assert build_grid([]) == {"type": "FeatureCollection", "features": []}
+
+
+class TestUnassignedGridGate:
+    """The one state that publishes a wrong number and reports success.
+
+    fetch_grid.py writes the assignment columns blank; assign_grid_regions.py is
+    the only stage that fills them, and poll.py lets it fail without stopping.
+    Replaying that against the real data produced a 0-byte grid.geojson, a
+    published substation_count of 0, and exit code 0 - so the front page would
+    have announced that the United States has no substations in it.
+    """
+
+    def _row(self, fips: str) -> dict[str, str]:
+        return {"kind": "substation", "county_fips": fips, "state": "VA" if fips else ""}
+
+    def test_a_fetched_but_unassigned_grid_is_caught(self) -> None:
+        assert grid_is_unassigned([self._row(""), self._row("")]) is True
+
+    def test_one_assigned_row_is_enough(self) -> None:
+        """2,898 rows are in Mexico, Canada or the Gulf and carry no county by
+        design, so a blank cell is not evidence the stage failed. Only every
+        cell being blank is."""
+        assert grid_is_unassigned([self._row(""), self._row("51107")]) is False
+
+    def test_no_grid_at_all_is_not_a_failure(self) -> None:
+        """A fresh checkout that has never run the 30-minute grid fetch still
+        has to build, and build_grid already emits a valid empty layer for it."""
+        assert grid_is_unassigned([]) is False
+
+
+class TestPollExitCode:
+    """`make poll` is the command the docs say to run before deploying, so its
+    exit code is the last automatic check between a broken stage and a live
+    site. It used to name one stage - `assign_regions.py` - which meant
+    build_site_data.py could fall over and the run still reported success."""
+
+    def _poll(self, monkeypatch: pytest.MonkeyPatch, failing: str) -> int:
+        def fake_run(script: str, extra: list[str] | None = None) -> bool:
+            return script != failing
+
+        monkeypatch.setattr(poll, "_run", fake_run)
+        # --skip-fetch keeps this offline and stops it appending to poll_log.csv:
+        # a test run is not a poll.
+        return poll.main(["--skip-fetch"])
+
+    def test_a_failed_build_fails_the_run(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        assert self._poll(monkeypatch, "build_site_data.py") == 1
+
+    def test_a_failed_allocation_fails_the_run(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        assert self._poll(monkeypatch, "allocate_power.py") == 1
+
+    def test_a_tolerated_stage_does_not(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """build_series cannot succeed until the history backfill has run once,
+        and the grid stages leave the previous layer in place. Failing the run
+        on those would make the exit code mean nothing on an ordinary day."""
+        assert self._poll(monkeypatch, "build_series.py") == 0
+
+    def test_every_stage_succeeding_is_still_zero(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        assert self._poll(monkeypatch, "") == 0
 
 
 class TestGridRegionTotals:

@@ -1375,3 +1375,163 @@ Chrome with a `pkill` and it will not stay alive in this sandbox. Structure was
 checked instead on the built HTML for five routes (one `h1`, one `main`, no
 heading jumps, no duplicate ids, no unnamed `svg[role=img]`); target sizes and
 composited contrast were not re-measured.
+
+---
+
+# Fix plan for the staff review
+
+Fifteen findings, grouped into five commits. Order matters: the pipeline guard
+(A) is what makes the UI guards (B) unreachable rather than merely quiet, and
+the national-region fix (C) depends on nothing.
+
+## A. The pipeline stops publishing a grid layer it did not build
+
+The headline finding. `fetch_grid.py` writes `county_fips`/`state` blank,
+`assign_grid_regions.py` is the only stage that fills them, and it sits in
+`poll.py`'s tolerated-failure set — so a failed assignment publishes
+`grid.geojson` with zero features, `substation_count: 0`, and exit code 0.
+Proved with a fixture: blanking the column on all 65,325 rows produced a 0-byte
+layer and a successful run.
+
+- [x] `build_site_data.py`: after the existing `facilities and regions` guard,
+      refuse to publish when `grid` has rows and none carries a `county_fips`.
+      One choke point, all three surfaces (`grid.geojson`, `substation_count`,
+      `plant_count`) route through it.
+- [x] `poll.py`: hoist the tolerated set to a module constant and return
+      `1 if any(s not in TOLERATED for s in failed) else 0`. Today only
+      `assign_regions.py` can fail the run — `build_site_data.py`,
+      `allocate_power.py`, `build_basemap.py` and `fetch_osm_snapshot.py` all
+      exit 0 on failure. With the guard above, a failed grid assignment now
+      surfaces as a failed `build_site_data.py`, which is not tolerated.
+- [x] `poll.py` docstring: the stage list has `assign_grid_regions` before
+      `fetch_osm_history`/`assign_regions`; the code runs it after.
+- [x] Test: an unassigned `grid.csv` raises rather than publishing zeros.
+      Mutation check — remove the guard and the test must fail.
+
+## B. The front page stops asserting numbers it cannot support
+
+- [x] `page.tsx:529` — `(meta.substation_count ?? 0) + (meta.plant_count ?? 0)`
+      renders "0 substations and power plants" when the layer is missing. Take
+      the `hasGrid` shape already in `observatory-map/page.tsx:34-40`, which
+      carries a comment naming this exact risk, and drop the clause when there
+      is no grid rather than printing a zero.
+- [x] `page.tsx:628` — hardcoded "All 1,853 facilities". The only number on
+      that page not read from `meta`. → `meta.facility_count`.
+- [x] `page.tsx:155` — `scenarioAt(year, "low") ?? 0` draws a fabricated zero
+      for any projection year missing a low or high scenario. Filter
+      `projectionYears` to years carrying both, rather than defaulting. Latent
+      today; reachable by adding a reference-only row to `national_energy.csv`.
+- [x] `PlotSheet.tsx:247` — the aria-label claims 1,853 total and its parts sum
+      to 1,851. It mixes `facilities.length` (all) with `buildings`/`others`
+      (mainland only). Count the label from the same set it describes.
+- [x] `PlotSheet.tsx:102` — facilities are split `PR`/not-`PR` while the grid is
+      bounds-filtered to CONUS, so an AK or HI facility would be clipped off the
+      sheet and still counted in its label. Filter both against the same box.
+- [x] `methodology/page.tsx:108` — "moves Loudoun County to 3,034 MW and
+      Virginia to 4,972 MW", present tense, hardcoded. Exact against
+      `regions.json` today, which is why nobody will notice when it stops. Read
+      the two figures, or name their vintage.
+
+## C. `/regions/national-US/` uses the national figures it already has
+
+Every metric-sub branches on `region?.building_count === 0`, and `region` is
+`undefined` on the national page, so the built HTML says "km² across **0
+buildings**" and leaves three metrics as uncaptioned dashes — while
+`meta.json` carries all of it.
+
+- [x] Synthesise the national row by summing the `kind === "state"` rows the
+      page already loads. Verified to reconcile exactly: 1,853 facilities,
+      1,506 buildings, 21,918 MW, 47.7 M gal/day — the same figures as
+      `meta.json`. Every existing branch then works unchanged, including the
+      `region!.site_area_m2!` assertions at line 260.
+- [x] Keep `isNational` for the label branches (`subtitle`, `currentLabel`,
+      `peerLabel`) so the page still reads "National" and not "State".
+- [x] Do **not** publish the row into `regions.json` — it would surface in the
+      regions table and the picker, which is a product decision, not this fix.
+
+## D. Smaller ones
+
+- [x] `changes/page.tsx:43` claims "The 500 most recent times"; line 106 renders
+      `slice(0, 200)`. 200 rows verified in the built HTML.
+- [x] `RecorderChart.tsx:191` — `role="img"` plus `tabIndex={0}` plus an
+      aria-label instructing arrow keys the widget cannot receive in browse
+      mode. Either make it a real `application`/listbox-style widget or drop the
+      instruction; the lazy correct answer is to drop it.
+- [x] `NationalEnergyTable.tsx:61` assumes CSV row order (`historical[0]`) where
+      `page.tsx:129` sorts explicitly for the same value, and prints a year
+      range under a dash.
+- [x] `ObservatoryMap.tsx:131` latches `requested.current` before the fetch, so
+      a failed grid fetch never retries — toggling the layer leaves "grid layer
+      unavailable" until reload. Reset it on failure.
+- [x] `sitemap.ts` lists `/sites`, `/map` and `/analytics` unconditionally while
+      `sites/[siteId]` is guarded on the Arizona snapshot being present.
+
+## E. Needs a decision, not a fix
+
+- [ ] `state:AK` and `state:HI` grid summaries are computed into
+      `grid_regions.csv` and reach no page, because `build_site_data.py:240`
+      left-joins grid onto *facility* regions. Publishing them means region rows
+      with `facility_count: 0`, which changes what the regions table and picker
+      are for. Raised earlier and never answered — not started.
+
+## Gate
+
+From the repo root, per commit:
+
+    make lint
+    .venv/bin/python -m pytest -m "unit or contract"    # 234 today
+    npm --prefix apps/web run typecheck
+    npm --prefix apps/web test                          # 92 across 15 files
+    npm --prefix apps/web run build                     # 351 routes
+    make audit-contrast
+
+Plus, for A: re-run `build_site_data.py` and confirm it is byte-identical, so
+`git diff data/observatory` still means real movement; and replay the blanked-
+`county_fips` fixture to confirm the guard now fires where it previously
+published zeros. For C: grep the built `regions/national-US/index.html` for
+"0 buildings" — it must be gone, and the three dashes must be real figures.
+
+Push once, at the end. `pages.yml` deploys `main` on push.
+
+### What landed
+
+One commit rather than five: the seven defects are one review, and splitting a
+guard from the surface it protects would put half the fix in each half of the
+history.
+
+The pipeline gate is the part worth recording. Replaying the original fixture —
+`grid.csv` complete, every `county_fips` blanked — used to produce a 0-byte
+`grid.geojson`, a published `substation_count` of 0 and exit code 0. It now
+stops:
+
+    GUARD FIRED: grid.csv has 65325 rows and not one carries a county.
+
+`poll.py`'s exit code was mutation-checked rather than asserted: with
+`build_site_data.py` failing it returns 1, and adding that script to
+`TOLERATED_FAILURES` in a live interpreter flips the same run to 0, so the
+return value genuinely consults the set.
+
+The national page now reads `20.00 km² across 1,506 buildings`, `21,918 MW` and
+`47.67 million gal/day`, which reconciles with `meta.json` to the metre. The
+plot sheet's description sums: 1,506 + 347 = 1,853.
+
+The projection band was checked by putting a reference-only 2035 row into the
+published payload and rebuilding: the band ends at 2030 with three forward
+points instead of reaching 2035 at zero. The row was then reverted.
+
+Gate: `make lint` clean, `make test` 306 passed / 138 skipped (the skips are the
+Postgres integration tests; local Homebrew pg on 5432 has no `helios` role),
+`npm run typecheck` clean, 95 vitest across 15 files, `npm run build` 350 routes,
+`make audit-contrast` all pairs clear. `build_site_data.py` re-runs
+byte-identical, so `git diff data/observatory` still means real movement.
+
+**Correction to the gate in the plan above:** `pytest -m "unit or contract"`
+does not cover `tests/unit/test_observatory_pipeline.py` — that file carries no
+marker, so the marker-filtered run silently deselects all 72 of its tests,
+including the new ones. `make test` is the command that runs them.
+
+### Still open
+
+- The front page quotes 62,427 grid assets in prose and the plate below it draws
+  61,983. Both are honest — the plate is cut to the contiguous box — but they sit
+  a paragraph apart and nothing explains the gap. Raised before, not fixed here.

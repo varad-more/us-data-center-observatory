@@ -147,6 +147,11 @@ export function ObservatoryMap({
         // Say so rather than leaving an empty map that looks like a country
         // with no substations in it.
         setGridState("failed");
+        // Release the latch on failure only. It exists to stop the effect
+        // re-issuing a fetch that is already in flight; holding it after a
+        // failure meant a dropped connection was permanent, and toggling the
+        // layer off and on — the obvious thing to try — could never retry.
+        requested.current = false;
       });
   }, [wantsGrid]);
 

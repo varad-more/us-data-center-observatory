@@ -194,11 +194,16 @@ export function RecorderChart({
           className="pp-chart"
           tabIndex={0}
           role="img"
+          // The arrow keys do move the cursor, and the label used to say so.
+          // But `role="img"` puts this in a screen reader's browse mode, where
+          // the reader takes the arrows to move through the document — so the
+          // one audience the label is written for is the one audience that
+          // cannot follow it. The description carries every channel's figures
+          // in text, which is the content; the cursor is a convenience for
+          // sighted keyboard users, who need no instruction to try an arrow.
           aria-label={`Three channels on one time base from ${formatPeriod(fromPeriod)} to ${formatPeriod(toPeriod)}. ${channels
             .map((c) => `${c.name}, ${c.unit}, ${c.claim}`)
-            .join(
-              ". ",
-            )}. Use the left and right arrow keys to move the cursor.`}
+            .join(". ")}.`}
           onPointerMove={handlePointer}
           onPointerLeave={() => setCursor(null)}
           onKeyDown={handleKey}

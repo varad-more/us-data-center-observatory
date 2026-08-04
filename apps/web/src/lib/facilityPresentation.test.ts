@@ -5,8 +5,10 @@ import {
   formatMappedArea,
   formatRegionFootprintKm2,
   formatRegionMw,
+  nationalTotals,
   openStreetMapElementUrl,
 } from "./facilityPresentation";
+import type { Region } from "./observatory";
 
 describe("facility geometry presentation", () => {
   it("names the physical quantity instead of calling every area a footprint", () => {
@@ -82,5 +84,67 @@ describe("facility geometry presentation", () => {
       "https://www.openstreetmap.org/way/154213519",
     );
     expect(openStreetMapElementUrl("not-an-element")).toBeNull();
+  });
+});
+
+/**
+ * `regions.json` carries no national row, so the United States page used to
+ * fall through every optional-chained region field and publish "km² across 0
+ * buildings" — a measured 19,998,284 m² across 1,506 buildings rendered as a
+ * zero, which is the one thing this project exists not to do.
+ */
+describe("national totals", () => {
+  const region = (over: Partial<Region>): Region => ({
+    region_id: "state:VA",
+    kind: "state",
+    name: "Virginia",
+    state: "VA",
+    fips: "51",
+    facility_count: 0,
+    footprint_m2: 0,
+    est_mw: 0,
+    est_gal_per_day: 0,
+    ...over,
+  });
+
+  it("adds the states up", () => {
+    const totals = nationalTotals([
+      region({ building_count: 300, footprint_m2: 1_000, est_mw: 40 }),
+      region({
+        region_id: "state:AZ",
+        state: "AZ",
+        building_count: 200,
+        footprint_m2: 500,
+        est_mw: 60,
+        est_gal_per_day: 12,
+      }),
+    ]);
+    expect(totals.building_count).toBe(500);
+    expect(totals.footprint_m2).toBe(1_500);
+    expect(totals.est_mw).toBe(100);
+    expect(totals.est_gal_per_day).toBe(12);
+  });
+
+  it("counts each facility once, not once per region it belongs to", () => {
+    // Counties are inside states, so summing both would double the country.
+    const totals = nationalTotals([
+      region({ building_count: 300, est_mw: 40 }),
+      region({
+        region_id: "county:51107",
+        kind: "county",
+        name: "Loudoun County",
+        fips: "51107",
+        building_count: 250,
+        est_mw: 33,
+      }),
+    ]);
+    expect(totals.building_count).toBe(300);
+    expect(totals.est_mw).toBe(40);
+  });
+
+  it("treats an absent optional field as absent rather than failing on it", () => {
+    const totals = nationalTotals([region({ footprint_m2: 10, est_mw: 2 })]);
+    expect(totals.building_count).toBe(0);
+    expect(totals.site_area_m2).toBe(0);
   });
 });
