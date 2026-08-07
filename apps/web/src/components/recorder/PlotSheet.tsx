@@ -46,11 +46,15 @@ const PAD = 18;
 /**
  * The contiguous states, in degrees.
  *
- * The grid layer covers Alaska and Hawaii — 358 assets out past 165° west — and
- * the sheet is fitted to the lower 48, so those would land off the paper. Cut
- * them in geographic space, which says what is meant; the previous guard was a
- * magic number in projection units and dropped 121 points of the 358 it was
- * aimed at.
+ * The grid layer is national and the sheet is fitted to the lower 48, so
+ * everything outside that box would land off the paper: 444 assets today, being
+ * Hawaii's 211, Alaska's 118 and Puerto Rico's 115. Cut them in geographic
+ * space, which says what is meant; the previous guard was a magic number in
+ * projection units and dropped a third of the points it was aimed at.
+ *
+ * Puerto Rico's inset carries its two facilities and not its grid, because the
+ * inset is fitted to those two points and a stipple of 115 assets across an
+ * island 170 km wide would be a solid block at that scale.
  */
 const CONUS = { lonMin: -125, lonMax: -66.5, latMin: 24, latMax: 49.5 };
 

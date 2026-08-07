@@ -8,6 +8,7 @@ ways it can go quietly wrong all look like plausible output.
 
 from __future__ import annotations
 
+import csv
 import sys
 from pathlib import Path
 
@@ -915,3 +916,46 @@ class TestFacilityPowerKeys:
 
     def test_a_construction_site_carries_no_power_key(self) -> None:
         assert "est_mw" not in self._properties("construction")
+
+
+class TestOffSheetGrid:
+    """The front page names the places whose grid the plot sheet leaves out.
+
+    ``PlotSheet.tsx`` fits the sheet to the lower 48 and cuts the grid layer to
+    a geographic box, so the count in the prose above the sheet (national) and
+    the count the sheet is drawn from (contiguous) are different numbers by
+    design. The page now says which places make up the difference, and that
+    sentence is a claim about the data rather than about the component: if a
+    grid asset ever lands outside the box from a fourth place, the page is
+    wrong and nothing else would notice.
+
+    The box is duplicated from the component deliberately. It is the assertion
+    under test, not a shared constant -- a copy that has to be edited in step
+    is the point, because editing the box is exactly what would falsify the
+    sentence.
+    """
+
+    CONUS = {"lon_min": -125.0, "lon_max": -66.5, "lat_min": 24.0, "lat_max": 49.5}
+
+    def _off_sheet(self) -> dict[str, int]:
+        path = Path(__file__).resolve().parents[2] / "data" / "observatory" / "grid.csv"
+        with path.open(encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+
+        counts: dict[str, int] = {}
+        for row in rows:
+            # Unassigned rows never reach the published layer at all; the gate
+            # in build_site_data.py refuses to publish them.
+            if not row["county_fips"]:
+                continue
+            lon, lat = float(row["lon"]), float(row["lat"])
+            inside = (
+                self.CONUS["lon_min"] <= lon <= self.CONUS["lon_max"]
+                and self.CONUS["lat_min"] <= lat <= self.CONUS["lat_max"]
+            )
+            if not inside:
+                counts[row["state"]] = counts.get(row["state"], 0) + 1
+        return counts
+
+    def test_only_alaska_hawaii_and_puerto_rico_are_off_the_sheet(self) -> None:
+        assert set(self._off_sheet()) == {"AK", "HI", "PR"}

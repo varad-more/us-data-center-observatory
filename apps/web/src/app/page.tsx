@@ -545,9 +545,9 @@ export default async function Home() {
             <p className="pp-note">
               {gridAssets > 0 ? (
                 <>
-                  Every mapped facility, over the{" "}
-                  {gridAssets.toLocaleString()} substations and power plants
-                  they have to connect to.
+                  Every mapped facility, over the substations and power plants
+                  they have to connect to — {gridAssets.toLocaleString()}{" "}
+                  nationally.
                 </>
               ) : (
                 "Every mapped facility."
@@ -559,9 +559,12 @@ export default async function Home() {
               Everything in ink is a record.
             </p>
             <p className="pp-note">
-              The sheet covers the contiguous states. Alaska and Hawaii carry
+              The sheet covers the contiguous states, so it draws the contiguous
+              share of that total rather than all of it. Alaska and Hawaii carry
               grid assets and no mapped data centres, so they are off it rather
-              than empty on it; Puerto Rico, which has two, gets an inset.
+              than empty on it; Puerto Rico&apos;s two facilities get an inset,
+              and its grid, like theirs, stays off the paper. The figure the
+              sheet itself is drawn from is in its description.
             </p>
           </div>
           <div>
