@@ -3,8 +3,12 @@ import Link from "next/link";
 import { AssertionBadge, ConfidenceBadge } from "@/components/AssertionBadge";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { listSites, sitesCsvUrl, sitesGeoJsonUrl } from "@/lib/api";
+import { routeMeta } from "@/lib/site";
 
-export const metadata = { title: "Sites" };
+export const metadata = {
+  title: "Sites",
+  ...routeMeta("/sites/"),
+};
 
 export default async function SitesPage() {
   let sites;

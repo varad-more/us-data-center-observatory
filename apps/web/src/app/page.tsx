@@ -24,6 +24,7 @@
 import fs from "fs/promises";
 import path from "path";
 
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import {
@@ -47,6 +48,33 @@ import {
   regionSlug,
   type Region,
 } from "@/lib/observatory";
+import { OG_IMAGE, routeMeta } from "@/lib/site";
+
+/**
+ * The front page inherits its title and description from the layout, which
+ * writes them for exactly this page. What it cannot inherit is its own address:
+ * `routeMeta` is per-route by construction, so without this the one URL most
+ * likely to be shared was the one with no canonical and no `og:url`.
+ *
+ * The card lives here rather than in the layout so that it stays on this route
+ * alone. `summary_large_image` is declared beside the image it needs: X renders
+ * no card at all for a link with no image, so the two only mean anything
+ * together, and a route that has neither is no worse off than it was. The
+ * handle sits with them for the same reason — X prints it as the card's
+ * attribution line, so on a route with no card it would render nowhere.
+ */
+const route = routeMeta("/");
+
+export const metadata: Metadata = {
+  ...route,
+  openGraph: { ...route.openGraph, images: [OG_IMAGE] },
+  twitter: {
+    card: "summary_large_image",
+    images: [OG_IMAGE.url],
+    site: "@VaradMore1",
+    creator: "@VaradMore1",
+  },
+};
 
 /** The paper the sheet is printed on runs from here to here. */
 const CHART_FROM = "2014-01";

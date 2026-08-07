@@ -4,8 +4,12 @@ import { InfrastructureMap, MapLegend } from "@/components/InfrastructureMap";
 import { NationalFacilityMap } from "@/components/NationalFacilityMap";
 import { ApiUnavailable } from "@/components/ApiUnavailable";
 import { getMapFacilities, getMapInfrastructure, getMapSites } from "@/lib/api";
+import { routeMeta } from "@/lib/site";
 
-export const metadata = { title: "Infrastructure map" };
+export const metadata = {
+  title: "Infrastructure map",
+  ...routeMeta("/map/"),
+};
 
 export default async function MapPage() {
   let sites;

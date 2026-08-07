@@ -12,6 +12,7 @@ import type { Metadata } from "next";
 
 import { MappingGrowthChart } from "@/components/MappingGrowthChart";
 import { NationalEnergyTable } from "@/components/NationalEnergyTable";
+import { routeMeta } from "@/lib/site";
 import {
   getNationalEnergy,
   getNationalSeries,
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   title: "Growth",
   description:
     "Data centres recorded in OpenStreetMap over time, beside the reported national electricity and water totals.",
+  ...routeMeta("/growth/"),
 };
 
 export default async function GrowthPage() {

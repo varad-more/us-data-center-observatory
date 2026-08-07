@@ -1,11 +1,13 @@
 import Link from "next/link";
 
 import { getObservatoryMeta, getRegions } from "@/lib/observatory";
+import { routeMeta } from "@/lib/site";
 
 export const metadata = {
   title: "Methodology and limitations",
   description:
     "How the national observatory and the Arizona site model each produce their figures, and what neither can see.",
+  ...routeMeta("/methodology/"),
 };
 
 export default async function MethodologyPage() {

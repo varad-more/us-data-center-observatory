@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 
 import { LargeLoadFilingEntry } from "@/components/LargeLoadFilingEntry";
 import { listLargeLoadFilings } from "@/lib/api";
+import { routeMeta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Large-load filings",
   description:
     "Site-specific utility-regulator filings carrying reported large-load values, with source documents and honest location precision.",
+  ...routeMeta("/large-load-filings/"),
 };
 
 export default async function LargeLoadFilingsPage() {

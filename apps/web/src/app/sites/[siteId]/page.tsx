@@ -22,6 +22,7 @@ import {
   getTimeline,
   listSites,
 } from "@/lib/api";
+import { routeMeta } from "@/lib/site";
 import type { Dependency, Parcel, SiteDetail } from "@/lib/types";
 
 // Routes are keyed on project_code, not the database UUID, so a published URL
@@ -50,7 +51,7 @@ export async function generateMetadata({
       `Parcel, permit and utility evidence for ${siteId}, a suspected data-centre ` +
       `development in Arizona's East Valley. Every signal is dated and traced to ` +
       `the public record it came from; the stage and confidence are inferred, not reported.`,
-    alternates: { canonical: `/sites/${siteId}/` },
+    ...routeMeta(`/sites/${siteId}/`),
   };
 }
 

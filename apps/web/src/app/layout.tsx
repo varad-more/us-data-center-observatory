@@ -7,7 +7,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { THEME_INIT_SCRIPT } from "@/components/ThemeToggle";
 import { StructuredData } from "@/components/StructuredData";
 import { getNationalSeries, getObservatoryMeta } from "@/lib/observatory";
-import { SITE_URL } from "@/lib/site";
+import { OG_BASE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "./recorder.css";
 
@@ -57,21 +57,14 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   // A link to this site is most often pasted into a chat window, and without
-  // these it unfurls as a bare URL. Neither block sets a title: a literal one
-  // here wins over the page's own, which made every shared county page announce
-  // itself as the site index. Omitting it lets the title template above resolve,
-  // so a shared /regions/county-51107 unfurls as "Loudoun County | Helios".
-  openGraph: {
-    type: "website",
-    siteName: "Helios US AI Infrastructure Observatory",
-    description: DESCRIPTION,
-    url: SITE_URL,
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary",
-    description: DESCRIPTION,
-  },
+  // these it unfurls as a bare URL. Neither block sets a title, a description or
+  // a URL: a literal one here wins over the page's own rather than standing in
+  // for it, which is how every route but the regions came to announce the front
+  // page's blurb under its own name, and to give the front page's address as its
+  // own. Left unset, each resolves from the route's own `title` and
+  // `description` above, so a shared /regions/county-51107 unfurls as "Data
+  // centres in Loudoun County, VA" with Loudoun's counts under it.
+  openGraph: OG_BASE,
 };
 
 export default async function RootLayout({

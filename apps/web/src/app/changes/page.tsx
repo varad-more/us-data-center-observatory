@@ -16,12 +16,14 @@
 import type { Metadata } from "next";
 
 import { getChanges, getObservatoryMeta } from "@/lib/observatory";
+import { routeMeta } from "@/lib/site";
 import { ScrollArea } from "@/components/ScrollArea";
 
 export const metadata: Metadata = {
   title: "Changes",
   description:
     "Data centres that recently appeared in or were removed from OpenStreetMap, with the date each edit was made.",
+  ...routeMeta("/changes/"),
 };
 
 export default async function ChangesPage() {

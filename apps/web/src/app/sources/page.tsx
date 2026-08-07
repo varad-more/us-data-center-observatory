@@ -3,8 +3,12 @@ import { SourceEntry } from "@/components/SourceEntry";
 import { StatusPill } from "@/components/AssertionBadge";
 import { listRegions, listSources } from "@/lib/api";
 import type { Source } from "@/lib/types";
+import { routeMeta } from "@/lib/site";
 
-export const metadata = { title: "Data sources" };
+export const metadata = {
+  title: "Data sources",
+  ...routeMeta("/sources/"),
+};
 
 export default async function SourcesPage() {
   let sources;

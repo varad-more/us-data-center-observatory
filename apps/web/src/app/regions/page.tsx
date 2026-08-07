@@ -11,11 +11,13 @@ import type { Metadata } from "next";
 
 import { RegionTable } from "@/components/RegionTable";
 import { getObservatoryMeta, getRegions } from "@/lib/observatory";
+import { routeMeta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Regions",
   description:
     "Mapped data centres by US county and state, with each region's share of national data-centre electricity and water.",
+  ...routeMeta("/regions/"),
 };
 
 export default async function RegionsPage() {

@@ -10,6 +10,20 @@ import {
   getStageGrowth,
   getProvenanceCompleteness,
 } from "@/lib/api";
+import { routeMeta } from "@/lib/site";
+
+/**
+ * This route exported no metadata at all, so it fell all the way through to the
+ * layout's defaults and published the front page's title verbatim — two URLs in
+ * the sitemap making the same claim about themselves, which is the one thing a
+ * title is for. It is the Arizona study's analytics, and it says so.
+ */
+export const metadata = {
+  title: "Arizona study analytics",
+  description:
+    "Coverage, detection lag, stage distribution and provenance completeness for the East Valley site model — how much of what it claims it can show its working for.",
+  ...routeMeta("/analytics/"),
+};
 
 function formatDays(days: number | null): string {
   if (days === null) return "—";

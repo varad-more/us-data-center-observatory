@@ -23,11 +23,13 @@ import {
   getObservatoryMeta,
 } from "@/lib/observatory";
 import { ScrollArea } from "@/components/ScrollArea";
+import { routeMeta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Understanding data centres",
   description:
     "What a data centre contains, why electricity decides where one gets built, why cooling spends water, and how to read every figure Helios publishes.",
+  ...routeMeta("/understand/"),
 };
 
 /**

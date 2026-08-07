@@ -1,0 +1,24 @@
+<!--
+  The tab mark: one pen's trace on the drum.
+
+  There was no icon at all, so every tab and every Google result showed the
+  browser's blank-page glyph. It is drawn on the smoked-drum ink rather than on
+  the paper because a favicon is composited over a tab strip that is itself
+  light in one theme and dark in the other, and only the dark ground holds its
+  shape on both.
+
+  One pen, not three: at 16px the three-channel legend the site actually draws
+  collapses into a hamburger. The rising trace stays a trace.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Helios">
+  <rect width="32" height="32" rx="5" fill="#232420" />
+  <path d="M4 24h24" stroke="#565850" stroke-width="1.5" />
+  <path
+    d="M5 22 L11 20 L15 21 L19 12 L23 9 L27 6"
+    fill="none"
+    stroke="#de5c39"
+    stroke-width="3.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

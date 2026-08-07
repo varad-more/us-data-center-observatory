@@ -2,7 +2,12 @@
 
 Every tunable lives here so that no module reaches for ``os.environ`` directly
 and no credential is ever written into source. Defaults are chosen so that a
-fresh checkout runs against the Docker Compose stack without a ``.env`` file.
+fresh checkout runs against ``make db-up`` without a ``.env`` file.
+
+``make db-up`` is the whole local stack: one ``postgis/postgis`` container on
+:5432. This used to say "the Docker Compose stack", which the repository has
+not had since the layout was simplified -- a fresh contributor following it
+went looking for a compose file that is not there.
 """
 
 from __future__ import annotations

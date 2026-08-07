@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import { ScrollArea } from "@/components/ScrollArea";
 import { openStreetMapElementUrl } from "@/lib/facilityPresentation";
+import { routeMeta } from "@/lib/site";
 import {
   getFacilities,
   getObservatoryMeta,
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   title: "Mapped construction",
   description:
     "US data-centre records that OpenStreetMap contributors currently mark as under construction, kept separate from operating-load estimates.",
+  ...routeMeta("/construction/"),
 };
 
 export default async function ConstructionPage() {

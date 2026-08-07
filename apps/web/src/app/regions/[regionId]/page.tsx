@@ -30,6 +30,7 @@ import {
   regionIdFromSlug,
   regionSlug,
 } from "@/lib/observatory";
+import { routeMeta } from "@/lib/site";
 
 export async function generateStaticParams() {
   const regions = await getRegions();
@@ -76,11 +77,18 @@ export async function generateMetadata({
       `with when each was first mapped.`
     : "Data centres mapped across the United States, county by county, with the electricity and water they draw.";
 
+  const route = routeMeta(`/regions/${regionId}/`);
+
   return {
     title,
     description,
-    alternates: { canonical: `/regions/${regionId}/` },
-    openGraph: { title, description, url: `/regions/${regionId}/` },
+    ...route,
+    // The one route that restates the title and blurb on the card itself. These
+    // 324 pages are the ones anybody actually shares, and a county page
+    // unfurling under the site's generic lede wastes the only line a reader
+    // reads. Spread over `route.openGraph`, not instead of it, or the site name,
+    // the locale and the card image go with it.
+    openGraph: { ...route.openGraph, title, description },
   };
 }
 

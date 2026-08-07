@@ -11,11 +11,13 @@ import Link from "next/link";
 
 import { ObservatoryMap } from "@/components/ObservatoryMap";
 import { getFacilities, getObservatoryMeta } from "@/lib/observatory";
+import { routeMeta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "National infrastructure map",
   description:
     "Every US data centre recorded in OpenStreetMap, drawn over the transmission substations and generating plants that have to supply them.",
+  ...routeMeta("/observatory-map/"),
 };
 
 export default async function ObservatoryMapPage() {
