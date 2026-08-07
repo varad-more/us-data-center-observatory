@@ -1535,3 +1535,40 @@ including the new ones. `make test` is the command that runs them.
 - The front page quotes 62,427 grid assets in prose and the plate below it draws
   61,983. Both are honest — the plate is cut to the contiguous box — but they sit
   a paragraph apart and nothing explains the gap. Raised before, not fixed here.
+
+## Closing the front page's two grid counts
+
+Fixed the item above. The gap was never in the numbers — both are derived and
+both were right — it was that the page put a national figure directly above a
+contiguous drawing and left the reader to guess which was wrong.
+
+Three things changed, one of them not on the original ticket. The prose labels
+its figure national. The paragraph explaining the contiguous cut now says the
+cut applies to the grid too, and stops implying Puerto Rico is exempt from it:
+the inset carries PR's two facilities and not its 115 grid assets, which the
+old wording read as covering. And `PlotSheet.tsx`'s docstring claimed 358
+assets off the paper "past 165° west" — stale (444 today) and never an accurate
+description of a four-sided box, which is what actually puts Puerto Rico
+outside it.
+
+The measured split, from `grid.csv`: 62,427 assigned nationally, 61,983 inside
+the box, 444 out — HI 211, AK 118, PR 115.
+
+The test asserts the off-sheet set is exactly {AK, HI, PR} rather than
+reconciling the counts, because reconciling them is arithmetic on one
+function's own output and passes whatever the data says. It duplicates the
+CONUS box deliberately: the box is the assertion under test, so a copy that
+has to be edited in step is the point. Mutation-checked by moving `lon_min`
+from -125 to -120, which turns the three states into six and fails it.
+
+Gate: `make lint` clean, `make test` 307 passed / 138 skipped (the skips are
+the Postgres integration tests — local Homebrew pg on 5432 has no `helios`
+role), `npm run typecheck` clean, 95 vitest across 15 files, `npm run build`
+clean, `make audit-contrast` all pairs clear. The built `index.html` was read
+back: prose reads "62,427 nationally", the sheet's own description reads
+"61,983 substations and power plants". No data file changed, so the rebuild
+diff gate is untouched.
+
+### Still open
+
+- Nothing carried over from the item above.
