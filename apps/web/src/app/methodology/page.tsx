@@ -156,10 +156,16 @@ export default async function MethodologyPage() {
             does as readily as a teardown.
           </li>
           <li>
-            <strong>203 facilities&apos; arrival.</strong> They were mapped
-            before the retained history begins, so they appear in the counts but
-            in no curve. Each region page states its own gap rather than hiding
-            it.
+            <strong>
+              {(meta.undated_count ?? 0).toLocaleString()} facilities&apos;
+              arrival.
+            </strong>{" "}
+            The retained edit history has no creation event for them: they were
+            mapped before it begins in 2012, or after its latest edit
+            {meta.history_end ? ` on ${meta.history_end}` : ""}, while the
+            facility snapshot was taken on {meta.last_polled}. They appear in
+            the counts but in no curve, and each region page states its own gap
+            rather than hiding it.
           </li>
         </ul>
       </section>

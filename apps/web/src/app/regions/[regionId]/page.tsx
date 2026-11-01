@@ -432,7 +432,7 @@ export default async function RegionPage({
                     </td>
                     <td className="mono small">
                       {facility.properties.first_seen ?? (
-                        <span className="muted">before 2012</span>
+                        <span className="muted">not in edit history</span>
                       )}
                     </td>
                   </tr>

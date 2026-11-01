@@ -66,7 +66,7 @@ that have been mapped, so every per-facility figure is an upper bound. A campus
 mapped as a land parcel and a site mapped as under construction keep their
 measured area and receive no megawatt figure at all, which means their load is
 carried by buildings elsewhere. Floor area is a proxy for capacity and an
-imperfect one: it gives Virginia 4,972 MW where Virginia's JLARC study puts
+imperfect one: it gives Virginia 4,958 MW where Virginia's JLARC study puts
 Northern Virginia alone near 4,100 MW.
 
 ## Sources

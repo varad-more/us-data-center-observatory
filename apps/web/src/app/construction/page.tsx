@@ -226,7 +226,7 @@ export default async function ConstructionPage() {
                     </td>
                     <td className="mono small">
                       {properties.first_seen ?? (
-                        <span className="muted">before retained history</span>
+                        <span className="muted">not in edit history</span>
                       )}
                     </td>
                     <td>

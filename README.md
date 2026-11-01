@@ -16,7 +16,7 @@ reported one, and an unknown is never a zero.**
 | | **National observatory** | **Arizona site model** |
 |---|---|---|
 | Question | How many data centres, where, growing how fast | What is being built on *this* parcel, and how sure are we |
-| Grain | 1,853 facilities · 276 counties · 45 states + DC + PR | 13 sites in the East Valley, Maricopa County |
+| Grain | 1,988 facilities · 290 counties · 46 states + DC + PR | 13 sites in the East Valley, Maricopa County |
 | Storage | committed CSV → JSON → static site | PostGIS + FastAPI, exported to a static snapshot |
 | Needs a database | no | yes |
 | Refresh | `make poll` | `make bootstrap && make export-api` |
@@ -27,18 +27,18 @@ observatory grew out of.
 
 ---
 
-## What is measured (snapshot of 2026-07-29)
+## What is measured (facilities polled 2026-11-02)
 
-**Facilities** — OpenStreetMap records 1,853 data centres in the United States:
+**Facilities** — OpenStreetMap records 1,988 data centres in the United States:
 
 | Class | Count | Carries a power figure |
 |---|---:|---|
-| `building` — a mapped structure with a floor plate | 1,506 | yes |
-| `site` — a campus mapped as land, not as buildings | 174 | **no** |
-| `point` — a location with no geometry at all | 128 | **no** |
-| `construction` — mapped as being built | 45 | **no** |
+| `building` — a mapped structure with a floor plate | 1,586 | yes |
+| `site` — a campus mapped as land, not as buildings | 196 | **no** |
+| `point` — a location with no geometry at all | 129 | **no** |
+| `construction` — mapped as being built | 77 | **no** |
 
-Total mapped building footprint: 19,998,284 m². Only the 1,506 buildings are
+Total mapped building footprint: 21,190,227 m². Only the 1,586 buildings are
 sized by area. Land area is not floor area: a 400,000 m² parcel with one shed on
 it is not a 400,000 m² data centre.
 
@@ -46,8 +46,8 @@ it is not a 400,000 m² data centre.
 2024, or 21,918 MW of average draw. Helios splits that national total across the
 buildings by floor-area share. The pieces add back up to the published figure
 exactly, and a test enforces it. What comes out is an `inferred` upper bound per
-facility, never a meter reading. Loudoun County VA leads at 239 facilities and
-3,034 MW; Virginia statewide, 405 facilities and 4,972 MW.
+facility, never a meter reading. Loudoun County VA leads at 245 facilities and
+3,042 MW; Virginia statewide, 420 facilities and 4,958 MW.
 
 **Time** — 4,309 OpenStreetMap edit events between 2015-07-11 and 2026-06-19:
 1,886 creations, 1,694 tag changes, 509 geometry changes, 220 deletions. Read
@@ -55,9 +55,14 @@ this as a *mapping* curve. OpenStreetMap carries no build dates, so Helios never
 claims one. The pre-2017 stretch, when the tagging convention was still being
 adopted, is shaded and labelled as unqualified on every chart that shows it. When
 a facility disappears, Helios says "removed from OpenStreetMap" — not demolished.
+The 2026-11-02 poll could not refresh this history (the ohsome API timed out on
+the dense eastern tiles), so it still ends 2026-06-19, and 355 facilities have
+no first-seen date: mapped before the history begins in 2012, or after it ends.
 
-**Grid** — 65,325 assets the facilities have to connect to: 48,132 substations
-and 17,193 power plants, joined to the same counties. Substation *capacity* is
+**Grid** — 62,427 assets the facilities have to connect to: 46,086 substations
+and 16,341 power plants in US counties. The rows in Mexico, Canada and offshore
+are excluded. This layer is unchanged from the previous poll, because Overpass
+returned errors for it on 2026-11-02. Substation *capacity* is
 not published (FERC Form 715 is CEII-restricted), so Helios counts substations
 and does not estimate what they can carry.
 

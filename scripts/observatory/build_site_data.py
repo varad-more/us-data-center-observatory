@@ -367,6 +367,12 @@ def main(argv: list[str] | None = None) -> int:
             "plant_count": sum(
                 1 for r in grid if r.get("kind") == "plant" and r.get("county_fips")
             ),
+            # A facility with no first_seen has no creation event in the
+            # retained window: it was mapped before the window opens, or after
+            # its latest edit, which lags the facility snapshot. Pages quote
+            # both bounds rather than calling every such facility "before 2012".
+            "undated_count": sum(1 for f in facilities if not f.get("first_seen")),
+            "history_end": max((e["event_date"] for e in events), default=""),
             "national_mw": round(national_mw),
             "national_reference_year": int(latest["year"]),
             "total_footprint_m2": round(total_area),

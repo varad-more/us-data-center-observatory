@@ -46,6 +46,10 @@ export const observatoryMetaSchema = z.object({
   // rather than failing the build on a field it could not have carried.
   substation_count: z.number().optional(),
   plant_count: z.number().optional(),
+  // Facilities with no creation event in the retained edit history, and the
+  // date of that history's latest edit. Optional: older datasets carry neither.
+  undated_count: z.number().optional(),
+  history_end: z.string().optional(),
   national_mw: z.number(),
   national_reference_year: z.number(),
   total_footprint_m2: z.number(),

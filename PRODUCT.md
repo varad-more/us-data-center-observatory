@@ -52,7 +52,7 @@ Two datasets share a vocabulary and a website and nothing else:
 | | National observatory | Arizona site model |
 |---|---|---|
 | Question | How many, where, growing how fast | What is being built on *this* parcel, and how sure are we |
-| Grain | 1,853 facilities · 323 regions · 45 states + DC + PR | 13 candidate sites, East Valley, Maricopa County |
+| Grain | 1,988 facilities · 338 regions · 46 states + DC + PR | 13 candidate sites, East Valley, Maricopa County |
 | Storage | committed CSV → JSON → static site | PostGIS + FastAPI, exported to a static snapshot |
 | Database | none | required |
 
@@ -71,9 +71,9 @@ from the CSVs it was built from.
 unchanged: `reported`, `extracted`, `calculated`, `inferred`, `predicted`,
 `unknown`. An `unknown` renders as absent, **never as zero**.
 
-**Facility classes** — only `building` (1,506) carries a power or water figure.
-`site` (174, a campus mapped as land), `point` (128, no geometry), and
-`construction` (45) are counted and mapped but given no load figure at all. Land
+**Facility classes** — only `building` (1,586) carries a power or water figure.
+`site` (196, a campus mapped as land), `point` (129, no geometry), and
+`construction` (77) are counted and mapped but given no load figure at all. Land
 area is not floor area.
 
 **The time axis is a mapping curve, not a construction curve.** 4,309 OSM edit
@@ -117,7 +117,7 @@ Real, committed, and already generated — no figure on this site needs inventin
   footprint, est_mw, est_gal_per_day, substation and plant counts, max voltage),
   `series/*.json` (330 monthly series: national, per state, per county),
   `national_energy.json` (LBNL historical + low/reference/high projections to
-  2030), `changes.json`, `facilities.geojson` (1,853), `grid.geojson` (62,427
+  2030), `changes.json`, `facilities.geojson` (1,988), `grid.geojson` (62,427
   assets, US only), `basemap.json` (the dissolved contiguous-state coastline),
   `meta.json`.
 - `apps/web/public/api/` — the Arizona study: sites, stages, analytics, sources.
