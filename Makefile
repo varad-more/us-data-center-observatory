@@ -96,6 +96,10 @@ poll-grid: ## Refresh only the national substation and power-plant layer
 poll-offline: ## Rebuild the observatory's derived files without touching the network
 	$(PY) scripts/observatory/poll.py --skip-fetch
 
+.PHONY: tableau
+tableau: ## Rebuild the Tableau workbook from the committed CSVs (needs pip install -e ".[tableau]")
+	$(PY) scripts/observatory/build_tableau_workbook.py
+
 .PHONY: registry
 registry: ## Print the source registry, including inaccessible sources
 	$(VENV)/bin/helios registry-show

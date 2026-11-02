@@ -119,6 +119,14 @@ CSV is canonical and committed precisely so that `git diff` between two polls
 new produces no diff and any diff means real movement. CI rebuilds the derived
 files on every push and fails if they no longer follow from the CSVs.
 
+### The Tableau workbook
+
+[`tableau/us-data-center-observatory.twbx`](tableau/) holds the same dataset as
+five Tableau dashboards: where the facilities are, where the national load lands
+by state and county against the grid, how the map grew, and what is under
+construction. It opens in Tableau Desktop or Tableau Public. Rebuild it after a
+poll with `pip install -e ".[tableau]" && make tableau`.
+
 ### The Arizona site model — needs Docker and Python 3.12+
 
 ```bash
@@ -234,6 +242,7 @@ project could mislead, and each one fails if you remove the thing it guards:
 |---|---|
 | `data/observatory/` | the canonical CSVs — facilities, events, regions, series, grid |
 | `scripts/observatory/` | fetch, assign, allocate, build — one stage per file, all resumable |
+| `tableau/` | the generated Tableau workbook |
 | `apps/web` | Next.js + MapLibre, static export |
 | `apps/api` | FastAPI read APIs + token-gated admin routes |
 | `apps/worker` | the `helios` CLI |

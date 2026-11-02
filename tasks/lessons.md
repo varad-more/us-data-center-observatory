@@ -627,3 +627,30 @@ served every screenshot and probe this session, and it would not restart under
 the sandbox. The visual checks were already done; the 16-route accessibility
 probe was not, and could not be recovered. Kill the process you started only
 when the work that needs it is finished.
+
+## `pkill -f` takes a regex, and an app path is full of metacharacters
+
+`pkill -f "/Applications/Tableau Public (Apple silicon).app/..."` matched
+nothing, because the parentheses are a group, not literal text. Every "fresh"
+test therefore reused one Tableau process, and the user's screen filled with
+stacked "Unable to complete action" dialogs, which they had to point out. The
+`while pgrep` guard that was meant to wait for the exit used the same pattern,
+so it passed instantly and hid the failure.
+
+**How to apply:** kill an app by its exact process name (`pkill -x "Tableau
+Public"`), confirm it is gone with the same matcher before relaunching, and
+give each run a unique file name so a log line cannot be credited to the
+wrong run.
+
+## A published schema is not the program that loads the file
+
+The workbook validated against Tableau's official 2026.2 XSD and was still
+rejected by Tableau Public 2026.3's loader, for four unrelated constructs the
+XSD itself requires or permits. The reference that actually worked was the
+sample workbook shipped inside the app, which is in a different dialect.
+
+**How to apply:** when generating a file another program consumes, test it
+against that program, and copy the dialect of a file that program itself
+produced. Design the bisection as one batch of variants run together.
+Changing one thing per launch cost the user a dozen windows and their
+patience.

@@ -1572,3 +1572,61 @@ diff gate is untouched.
 ### Still open
 
 - Nothing carried over from the item above.
+
+## Refresh the observatory and publish a Tableau viewer
+
+Asked to update the stats with the latest results, then to add a Tableau
+workbook that shows the dataset properly, as two commits dated 2026-10-31 and
+2026-11-01, pushed.
+
+- [x] Check LBNL for anything newer than 192 TWh for 2024. The 2025 Update
+      (June 2026) is already in `national_energy.csv`, and it calls 2024 its last
+      historical year. The "430 TWh" in secondary coverage is IEA's 2030 figure.
+- [x] `make poll`. The snapshot succeeded on all 13 tiles: 1,853 → 1,988
+      facilities, 167 appeared and 32 were removed from OSM, most of them
+      Loudoun points redrawn as polygons. The grid fetch (Overpass 502/504) and
+      the history backfill (ohsome timeouts) did not complete, so both layers
+      stay as they were. A six-hour retry of the history reached 39 of 99 tiles
+      and was stopped; its cache resumes the next run.
+- [x] Stop calling every undated facility "before 2012". With the history
+      ending 2026-06-19 and the snapshot taken 2026-11-02, 163 of the 355
+      undated facilities are newer than the history, not older. `meta.json` now
+      carries `undated_count` and `history_end`, and the pages quote both bounds.
+- [x] Re-derive every figure in README, PRODUCT, limitations and the data
+      README. The README's grid line had quoted the raw 65,325 rows, Mexico and
+      Canada included. It now gives the 62,427 the site uses.
+- [x] `scripts/observatory/build_tableau_workbook.py` → `make tableau` →
+      `tableau/us-data-center-observatory.twbx`: five dashboards over five
+      Hyper extracts.
+- [x] The project's rules live in calculated fields: unknown is null, never 0;
+      MW is captioned inferred; removals read "removed from OpenStreetMap".
+- [x] Unit tests: every field, formula, zone and window resolves; the dialect
+      and extract rules hold; null guards are mutation-checked.
+- [x] Opened in Tableau Public 2026.3: DOM load ok, all five extracts connect
+      and validate, no error logged, no error dialog.
+
+### Review
+
+The published 2026.2 schema was necessary and not sufficient. A workbook valid
+against it was rejected by Tableau Public's loader four separate ways: the 26.x
+envelope, `<ManifestByVersion/>`, `<explain-data>`, and the data source
+`<layout>` element. It also needs extracts, not live CSVs. Each of these was
+found by bisection against Tableau's own log, and the workbook is now written
+in the dialect of the sample workbook the app ships with.
+
+Gate: `ruff`, `black`, `mypy` clean; `pytest -m "unit or contract"` 250 passed;
+the 73 observatory pipeline tests pass when run by path; web typecheck, lint
+and 95 tests pass; `npm run build` produces 371 pages; a fresh
+`poll.py --skip-fetch` reproduces every derived file byte for byte.
+
+Not verified: that each sheet *draws*. Screen capture was revoked mid-session
+and Tableau issued no view queries while unwatched, so the render was not seen.
+`make test` (PostGIS) was not run; nothing under `packages/` or `apps/api/`
+changed.
+
+### Still open
+
+- `tests/unit/test_observatory_pipeline.py` has no `unit` marker, so CI's unit
+  job and `make test-unit` never run its 73 tests.
+- The history backfill needs a run on a day ohsome answers; then
+  `make poll-offline && make tableau`.
