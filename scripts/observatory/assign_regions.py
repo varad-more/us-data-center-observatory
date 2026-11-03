@@ -307,12 +307,18 @@ def main(argv: list[str] | None = None) -> int:
     outside = [f for f in facilities if not f.get("county_fips")]
     if outside:
         facilities = [f for f in facilities if f.get("county_fips")]
-        events = [e for e in events if e.get("county_fips")]
         sample = ", ".join(f["name"] for f in outside if f["name"])[:90]
         print(
             f"  dropped       {len(outside)} facilities in no US county "
             f"(the fetch box overlaps Canada){': ' + sample + '...' if sample else ''}"
         )
+    # Filtered on their own, not only when a facility was. An offline rebuild
+    # reads a facility file that is already US-only, so a history refresh alone
+    # once carried 156 Toronto, Montreal and Monterrey edits into the US series.
+    foreign = len(events) - sum(1 for e in events if e.get("county_fips"))
+    if foreign:
+        events = [e for e in events if e.get("county_fips")]
+        print(f"  dropped       {foreign} events in no US county")
 
     earliest = _first_seen(events)
     dated = 0

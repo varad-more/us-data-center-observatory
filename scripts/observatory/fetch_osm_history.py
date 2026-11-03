@@ -60,6 +60,11 @@ COMPLETE_MARKER = DATA_DIR / ".cache" / "osm-history" / "BACKFILL_COMPLETE"
 CACHE_NAMESPACE = "osm-history"
 DEFAULT_TILE_DEGREES = 5.0
 
+# ohsome's /metadata declares a 600 s server-side timeout. The shared default
+# of 300 s abandoned dense tiles the server was still answering, so a full
+# backfill could never get past them.
+OHSOME_TIMEOUT = 660.0
+
 # OpenStreetMap's ODbL-compliant history begins in 2007, but the data-centre
 # tagging conventions post-date that by a decade. Starting at the beginning is
 # deliberate: the flat early stretch is evidence about the tag, and cropping it
@@ -219,6 +224,7 @@ def fetch(
                     # unusable. Requesting only `tags` produced exactly that.
                     "properties": "tags,contributionTypes",
                 },
+                timeout=OHSOME_TIMEOUT,
                 label=f"tile {label}",
             )
             write_cache(CACHE_NAMESPACE, cache_key, payload)
@@ -294,9 +300,9 @@ def fetch(
             "event_date": _to_date(timestamp),
             "event_kind": "deletion",
             # An element deleted before any edit this window saw has no known
-            # position. The removal is still recorded - it is real, and dropping
-            # it would inflate the count - but it cannot be attributed to a
-            # county, and assign_regions will leave its region columns empty.
+            # position. It is written here, but it cannot be placed in a US
+            # county, so assign_regions drops it with every other out-of-scope
+            # row: the tiles reach Toronto, and so might it.
             "lat": fmt_coord(position[1]) if position else "",
             "lon": fmt_coord(position[0]) if position else "",
             "county_fips": "",

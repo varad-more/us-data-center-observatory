@@ -76,8 +76,8 @@ unchanged: `reported`, `extracted`, `calculated`, `inferred`, `predicted`,
 `construction` (77) are counted and mapped but given no load figure at all. Land
 area is not floor area.
 
-**The time axis is a mapping curve, not a construction curve.** 4,309 OSM edit
-events, 2015-07-11 to 2026-06-19. The pre-2017 stretch, when the tagging
+**The time axis is a mapping curve, not a construction curve.** 4,623 OSM edit
+events, 2015-07-11 to 2026-07-27. The pre-2017 stretch, when the tagging
 convention was still being adopted, must be shaded and labelled as unqualified on
 every chart that reaches back that far — enforced by a test.
 

@@ -9,6 +9,7 @@ ways it can go quietly wrong all look like plausible output.
 from __future__ import annotations
 
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -17,6 +18,7 @@ import pytest
 SCRIPTS = Path(__file__).resolve().parents[2] / "scripts" / "observatory"
 sys.path.insert(0, str(SCRIPTS))
 
+import assign_regions  # noqa: E402
 import poll  # noqa: E402
 from _common import BoundingBox, tile, us_tiles, write_csv  # noqa: E402
 from allocate_power import main as allocate_main  # noqa: E402
@@ -35,6 +37,8 @@ from fetch_grid import max_voltage_v as grid_max_voltage  # noqa: E402
 from fetch_grid import normalise as grid_normalise  # noqa: E402
 from fetch_osm_history import _kind_of, _split_osm_id  # noqa: E402
 from fetch_osm_snapshot import _ring_area_m2, normalise, site_class  # noqa: E402
+
+pytestmark = pytest.mark.unit
 
 
 class TestGeodesicArea:
@@ -305,6 +309,80 @@ class TestTiling:
     def test_tile_size_must_be_positive(self) -> None:
         with pytest.raises(ValueError, match="positive"):
             tile(BoundingBox(0.0, 0.0, 1.0, 1.0), 0.0)
+
+
+class TestRegionScope:
+    """In scope means inside a US county. The tiles also cover Toronto."""
+
+    def test_a_foreign_edit_is_dropped_when_every_facility_is_domestic(
+        self, tmp_path: Path
+    ) -> None:
+        """An offline rebuild reads a facility file that is already US-only. The
+        events were once filtered only when a facility was, so a history refresh
+        on its own carried 156 Canadian and Mexican edits into the US series."""
+        county = [[-78.0, 38.5], [-77.0, 38.5], [-77.0, 39.5], [-78.0, 39.5], [-78.0, 38.5]]
+        boundaries = tmp_path / "counties.geojson"
+        feature = {
+            "geometry": {"type": "Polygon", "coordinates": [county]},
+            "properties": {"fips": "51107", "name": "Loudoun County", "state": "VA"},
+        }
+        boundaries.write_text(json.dumps({"features": [feature]}))
+        facilities, events = tmp_path / "facilities.csv", tmp_path / "events.csv"
+        write_csv(
+            facilities,
+            assign_regions.FACILITY_FIELDNAMES,
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "name": "",
+                    "operator": "",
+                    "operator_wikidata": "",
+                    "ref": "",
+                    "lat": "39.0",
+                    "lon": "-77.5",
+                    "footprint_m2": "100.0",
+                    "site_class": "building",
+                }
+            ],
+        )
+        write_csv(
+            events,
+            assign_regions.EVENT_FIELDNAMES,
+            [
+                {
+                    "osm_type": "way",
+                    "osm_id": "1",
+                    "event_date": "2020-01-01",
+                    "event_kind": "creation",
+                    "lat": "39.0",
+                    "lon": "-77.5",
+                },
+                {
+                    "osm_type": "way",
+                    "osm_id": "2",
+                    "event_date": "2020-01-01",
+                    "event_kind": "creation",
+                    "lat": "43.65",
+                    "lon": "-79.38",
+                },
+            ],
+        )
+        assign_regions.main(
+            [
+                "--boundaries",
+                str(boundaries),
+                "--facilities",
+                str(facilities),
+                "--events",
+                str(events),
+                "--regions",
+                str(tmp_path / "regions.csv"),
+            ]
+        )
+        with events.open() as handle:
+            kept = list(csv.DictReader(handle))
+        assert [(e["osm_id"], e["state"]) for e in kept] == [("1", "VA")]
 
 
 class TestDeterministicWrites:

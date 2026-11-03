@@ -49,15 +49,14 @@ exactly, and a test enforces it. What comes out is an `inferred` upper bound per
 facility, never a meter reading. Loudoun County VA leads at 245 facilities and
 3,042 MW; Virginia statewide, 420 facilities and 4,958 MW.
 
-**Time** — 4,309 OpenStreetMap edit events between 2015-07-11 and 2026-06-19:
-1,886 creations, 1,694 tag changes, 509 geometry changes, 220 deletions. Read
+**Time** — 4,623 OpenStreetMap edit events between 2015-07-11 and 2026-07-27:
+2,096 creations, 1,781 tag changes, 521 geometry changes, 225 deletions. Read
 this as a *mapping* curve. OpenStreetMap carries no build dates, so Helios never
 claims one. The pre-2017 stretch, when the tagging convention was still being
 adopted, is shaded and labelled as unqualified on every chart that shows it. When
 a facility disappears, Helios says "removed from OpenStreetMap" — not demolished.
-The 2026-11-02 poll could not refresh this history (the ohsome API timed out on
-the dense eastern tiles), so it still ends 2026-06-19, and 355 facilities have
-no first-seen date: mapped before the history begins in 2012, or after it ends.
+The history ends 2026-07-27, where ohsome's copy of OpenStreetMap stops, so the
+163 facilities with no first-seen date are all ones mapped since.
 
 **Grid** — 63,622 assets the facilities have to connect to: 47,047 substations
 and 16,575 power plants in US counties. The rows in Mexico, Canada and offshore
