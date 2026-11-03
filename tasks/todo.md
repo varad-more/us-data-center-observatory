@@ -1630,3 +1630,22 @@ changed.
   job and `make test-unit` never run its 73 tests.
 - The history backfill needs a run on a day ohsome answers; then
   `make poll-offline && make tableau`.
+
+## Retry the grid layer
+
+Asked to retry the power grid after the 2026-11-02 poll left it at July.
+
+- [x] Two `make poll-grid` runs stopped on Overpass 502/504s at tiles 16 and 18.
+      Each resumed from cache and wrote nothing partial. A bounded loop (8 tries,
+      2 minutes apart) completed all 28 tiles on its first attempt.
+- [x] Raw rows went 65,325 → 66,536, and US-assigned assets 62,427 → 63,622
+      (47,047 substations, 16,575 plants). Checked state by state: every
+      decrease is a handful of assets except Indiana plants, −56. Those are 69
+      unnamed solar polygons with no capacity tag that a mapper removed, so the
+      capacity effect is 0 MW. A mapping edit, not a dropped tile.
+- [x] README and PRODUCT grid figures; workbook rebuilt and opened in Tableau
+      Public (5 extracts validated, no error). Drift rebuild reproduces the
+      tree; 250 unit + 73 pipeline tests; 95 web tests; 371-page build.
+
+The history backfill is still the one layer at July, and the note above about
+it stands.

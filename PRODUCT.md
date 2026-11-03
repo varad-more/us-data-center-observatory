@@ -117,7 +117,7 @@ Real, committed, and already generated — no figure on this site needs inventin
   footprint, est_mw, est_gal_per_day, substation and plant counts, max voltage),
   `series/*.json` (330 monthly series: national, per state, per county),
   `national_energy.json` (LBNL historical + low/reference/high projections to
-  2030), `changes.json`, `facilities.geojson` (1,988), `grid.geojson` (62,427
+  2030), `changes.json`, `facilities.geojson` (1,988), `grid.geojson` (63,622
   assets, US only), `basemap.json` (the dissolved contiguous-state coastline),
   `meta.json`.
 - `apps/web/public/api/` — the Arizona study: sites, stages, analytics, sources.

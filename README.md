@@ -59,12 +59,11 @@ The 2026-11-02 poll could not refresh this history (the ohsome API timed out on
 the dense eastern tiles), so it still ends 2026-06-19, and 355 facilities have
 no first-seen date: mapped before the history begins in 2012, or after it ends.
 
-**Grid** — 62,427 assets the facilities have to connect to: 46,086 substations
-and 16,341 power plants in US counties. The rows in Mexico, Canada and offshore
-are excluded. This layer is unchanged from the previous poll, because Overpass
-returned errors for it on 2026-11-02. Substation *capacity* is
-not published (FERC Form 715 is CEII-restricted), so Helios counts substations
-and does not estimate what they can carry.
+**Grid** — 63,622 assets the facilities have to connect to: 47,047 substations
+and 16,575 power plants in US counties. The rows in Mexico, Canada and offshore
+are excluded. Substation *capacity* is not published (FERC Form 715 is
+CEII-restricted), so Helios counts substations and does not estimate what they
+can carry.
 
 **Reported loads** — one utility filing puts an operator's own load figure on the
 public record: MPSC docket U-21990, DTE Electric, 1,383 MW in Saline Township,
