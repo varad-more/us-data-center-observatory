@@ -1055,12 +1055,37 @@ def _dependencies(ds: DataSource, names: set[str]) -> list[Field]:
     return [fields[n] for n in sorted(seen)]
 
 
+def _shelved(sheet: Sheet) -> set[str]:
+    """Every instance a sheet places on a shelf other than Tooltip."""
+    on = {x.qualified for x in (*sheet.rows, *sheet.cols, *sheet.detail)}
+    on |= {e.qualified for e in (sheet.color, sheet.shape, sheet.text) if e}
+    return on | {p.qualified for p in sheet.label if isinstance(p, Use)}
+
+
+def _tooltip(sheet: Sheet) -> tuple[str | Use, ...]:
+    """The tooltip, with each dimension found on no other shelf taken as ATTR().
+
+    That is how Tableau writes a dimension dropped on Tooltip. Left bare, it is
+    rejected ("can't be displayed in Tooltips because it can't be converted to
+    a measure using ATTR()") and the sheet issues no query at all.
+    """
+    on = _shelved(sheet)
+    return tuple(
+        (
+            Use(p.ds, p.field, "Attribute", p.type)
+            if isinstance(p, Use) and p.derivation == "None" and p.qualified not in on
+            else p
+        )
+        for p in sheet.tooltip
+    )
+
+
 def _sheet_uses(sheet: Sheet) -> list[Use]:
     uses: list[Use] = [*sheet.rows, *sheet.cols, *sheet.detail]
     for enc in (sheet.color, sheet.shape, sheet.text):
         if enc:
             uses.append(enc)
-    uses.extend(p for p in (*sheet.tooltip, *sheet.label) if isinstance(p, Use))
+    uses.extend(p for p in (*_tooltip(sheet), *sheet.label) if isinstance(p, Use))
     uses.extend(f.use for f in sheet.filters)
     if sheet.sort:
         uses.extend(sheet.sort[:2])
@@ -1091,10 +1116,12 @@ def build_worksheet(parent: ET.Element, sheet: Sheet) -> None:
     table = _sub(ws, "table")
     view = _sub(table, "view")
     sources = _sub(view, "datasources")
-    if sheet.parameters:
-        _sub(sources, "datasource", name="Parameters")
+    # Order matters: Tableau takes the first entry as the sheet's primary
+    # source. With Parameters first, the sheet has no connection, and Tableau
+    # deletes it on open ("does not have a valid data source").
     _sub(sources, "datasource", caption=sheet.ds.caption, name=sheet.ds.name)
     if sheet.parameters:
+        _sub(sources, "datasource", name="Parameters")
         pdeps = _sub(view, "datasource-dependencies", datasource="Parameters")
         for param in sheet.parameters:
             _parameter_column(pdeps, param)
@@ -1171,16 +1198,19 @@ def build_worksheet(parent: ET.Element, sheet: Sheet) -> None:
         if isinstance(part, Use) and part.qualified not in on_shelf | placed:
             _sub(encodings, "text", column=part.qualified)
             placed.add(part.qualified)
-    for part in sheet.tooltip:
+    # Detail is claimed before Tooltip so a field on both stays in the level of
+    # detail; it reaches the tooltip text either way.
+    details = [d for d in sheet.detail if d.qualified not in on_shelf | placed]
+    placed |= {d.qualified for d in details}
+    tooltip = _tooltip(sheet)
+    for part in tooltip:
         if isinstance(part, Use) and part.qualified not in on_shelf | placed:
             _sub(encodings, "tooltip", column=part.qualified)
             placed.add(part.qualified)
-    for d in sheet.detail:
-        if d.qualified not in on_shelf | placed:
-            _sub(encodings, "lod", column=d.qualified)
-            placed.add(d.qualified)
-    if sheet.tooltip:
-        _formatted(_sub(pane, "customized-tooltip"), sheet.tooltip)
+    for d in details:
+        _sub(encodings, "lod", column=d.qualified)
+    if tooltip:
+        _formatted(_sub(pane, "customized-tooltip"), tooltip)
     if sheet.label:
         _formatted(_sub(pane, "customized-label"), sheet.label)
     if sheet.show_labels:
@@ -1522,10 +1552,13 @@ def build_windows(
     parent: ET.Element, dashboards: tuple[Dashboard, ...], sheets: tuple[Sheet, ...]
 ) -> None:
     windows = _sub(parent, "windows", **{"source-height": "30"})
-    for dash in dashboards:
-        win = _sub(
-            windows, "window", **{"class": "dashboard", "maximized": "true", "name": dash.name}
-        )
+    for i, dash in enumerate(dashboards):
+        # Tableau opens on the window marked maximized, and with every window
+        # marked it opened on the last: the text-only "About the data".
+        attrs = {"class": "dashboard", "name": dash.name}
+        if i == 0:
+            attrs["maximized"] = "true"
+        win = _sub(windows, "window", **attrs)
         points = _sub(win, "viewpoints")
         for z in sorted({z.sheet for z in _walk(dash.root) if z.kind == "sheet"}):
             _sub(points, "viewpoint", name=z)
@@ -1534,7 +1567,7 @@ def build_windows(
         win = _sub(
             windows,
             "window",
-            **{"class": "worksheet", "hidden": "true", "maximized": "true", "name": sheet.name},
+            **{"class": "worksheet", "hidden": "true", "name": sheet.name},
         )
         cards = _sub(win, "cards")
         left = _sub(_sub(cards, "edge", name="left"), "strip", size="160")

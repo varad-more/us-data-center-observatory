@@ -1649,3 +1649,52 @@ Asked to retry the power grid after the 2026-11-02 poll left it at July.
 
 The history backfill is still the one layer at July, and the note above about
 it stands.
+
+## Close the open items
+
+Asked to complete what the last two entries left open.
+
+- [x] `tests/unit/test_observatory_pipeline.py` carries `pytestmark = pytest.mark.unit`.
+      `pytest -m "unit or contract"` now runs 323 (was 250), also from a clean
+      checkout of HEAD.
+- [x] History backfill. Root cause of the stalls: the client gave up at 300 s
+      while ohsome's `/metadata` declares a 600 s server timeout, so the dense
+      tiles were abandoned mid-answer on every attempt. `OHSOME_TIMEOUT = 660`.
+      The 60 missing tiles then completed in one hour, with no failed request;
+      all 99 are cached and the backfill marker is written.
+- [x] The rebuild surfaced a second bug: `assign_regions` dropped out-of-scope
+      events only when some facility was also out of scope. A full poll always
+      has Canadian facilities to drop; an offline rebuild never does, so 156
+      Toronto, Montreal and Monterrey edits stayed in. Events are now filtered
+      on their own, with a test that fails on the old code.
+- [x] History: 4,623 events to 2026-07-27 (was 4,309 to 2026-06-19). Undated
+      facilities 355 → 163, and all 163 first appear after the 2026-07-29
+      snapshot, so every one was mapped after the history ends. README and
+      PRODUCT updated.
+- [x] Tableau render: open each dashboard frontmost, one window at a time, and
+      read which worksheets queried and whether anything errored. It found two
+      defects the earlier "clean load" had missed:
+      - "Mapped over time" listed Parameters as its first source. Tableau takes
+        the first as primary, raised a modal warning, and deleted the sheet.
+      - Eight sheets drew nothing. A bare dimension on Tooltip is invalid
+        (Tableau writes it as ATTR), and the tooltip loop also took detail
+        fields off Detail. Tableau logged it only as `InvalidField` messages.
+      - It opened on the text-only "About the data": every window was marked
+        maximized, and Tableau opens the last one so marked.
+      After the fix, all 14 worksheets query, every dashboard logs "Finished
+      rendering", and there is no warning or InvalidField. The old build, run
+      as a control in the same batch, reproduces both, and a no-sort copy
+      ruled out the computed sorts. Four new tests fail on the old generator.
+
+### Review
+
+Gate: `ruff`, `black`, `mypy` clean; `pytest -m "unit or contract"` 328 passed
+(250 at the start of the day); `poll.py --skip-fetch` reproduces all 351
+derived files byte for byte; web lint, typecheck and 95 tests pass; the static
+build produces 371 pages and passes CI's layout assertions; contrast audit
+clear. The committed workbook was opened once more in Tableau Public 2026.3: it
+opens on "Where they are", all six of its sheets query, no dialog, no
+InvalidField.
+
+Not covered: Tableau's render was verified from its log and window list, not
+by eye, because screen capture is blocked on this machine.

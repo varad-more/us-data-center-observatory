@@ -73,6 +73,38 @@ def test_every_data_source_is_an_extract(root: ET.Element) -> None:
         assert relation is not None and relation.get("table") == "[Extract].[Extract]"
 
 
+def test_every_worksheet_lists_its_real_data_source_first(root: ET.Element) -> None:
+    """Tableau treats the first listed source as primary. A sheet whose first
+    source is Parameters, which has no connection, is deleted on open with "The
+    worksheet does not have a valid data source". Found in Tableau Public 2026.3."""
+    real = {ds.name for ds in wb.DATASOURCES}
+    for sheet in root.iter("worksheet"):
+        listed = sheet.find("table/view/datasources")
+        assert listed is not None and len(listed), sheet.get("name")
+        assert listed[0].get("name") in real, (sheet.get("name"), listed[0].get("name"))
+
+
+def test_a_dimension_on_the_tooltip_shelf_is_an_attr(root: ET.Element) -> None:
+    """A bare dimension on Tooltip is rejected ("can't be converted to a measure
+    using ATTR()") and the sheet draws nothing. Tableau writes it as ATTR()."""
+    for sheet in root.iter("worksheet"):
+        for enc in sheet.iter("tooltip"):
+            assert "].[none:" not in enc.get("column", ""), (sheet.get("name"), enc.get("column"))
+
+
+def test_every_detail_field_stays_in_the_level_of_detail(root: ET.Element) -> None:
+    """A field on Detail and in the tooltip must stay on Detail: as a tooltip
+    alone it no longer splits the marks, and a map of facilities collapses."""
+    param = wb.build_parameter(wb.read_csv(wb.DATA_DIR / "region_series.csv"))
+    worksheets = {w.get("name"): w for w in root.iter("worksheet")}
+    for sheet in wb.build_sheets(param):
+        ws = worksheets[sheet.name]
+        placed = {e.get("column") for e in ws.iter() if e.tag in ("lod", "color", "shape", "text")}
+        placed |= {x.qualified for x in (*sheet.rows, *sheet.cols)}
+        for d in sheet.detail:
+            assert d.qualified in placed, (sheet.name, d.qualified)
+
+
 def test_every_formula_names_a_field_its_source_has(root: ET.Element) -> None:
     declared = _source_columns(root)
     for ds in root.find("datasources"):  # type: ignore[union-attr]
@@ -122,6 +154,15 @@ def test_every_zone_and_window_names_a_real_sheet(root: ET.Element) -> None:
     assert named == sheets | dashboards
     hidden = {w.get("name") for w in windows if w.get("hidden") == "true"}
     assert hidden == sheets, "every worksheet sits inside a dashboard tab"
+
+
+def test_it_opens_on_the_first_dashboard(root: ET.Element) -> None:
+    """Tableau opens on the window marked maximized. With every window marked,
+    it opened on the last one, the text-only "About the data"."""
+    windows = root.find("windows")
+    assert windows is not None
+    first = next(root.iter("dashboard")).get("name")
+    assert [w.get("name") for w in windows if w.get("maximized") == "true"] == [first]
 
 
 def test_a_removal_is_never_worded_as_a_demolition() -> None:

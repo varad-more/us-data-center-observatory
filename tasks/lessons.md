@@ -654,3 +654,21 @@ against that program, and copy the dialect of a file that program itself
 produced. Design the bisection as one batch of variants run together.
 Changing one thing per launch cost the user a dozen windows and their
 patience.
+
+## A clean log is not a clean open
+
+The workbook was reported as loading cleanly: DOM load ok, five data sources
+validated, no error event. Tableau Public was meanwhile showing a modal
+"Warning: the worksheet 'Mapped over time' contains errors ... will be removed",
+which it never writes to its log. The cause was order: the sheet listed
+Parameters before its real source, and Tableau takes the first as primary.
+Behind it, eight more sheets drew nothing: a bare dimension on Tooltip is
+invalid (Tableau writes it as `ATTR`), and that was logged only as a `msg`
+line starting `InvalidField`, never as an error event.
+
+**How to apply:** when an app's log is the evidence, also read its windows
+(`System Events` → names and static text of every window of the process), and
+run a deliberately broken copy as a control, so a silent check can be told
+apart from a blind one. "Loaded" is not "drew": require a query per
+worksheet (`qp-batch-summary` jobs name their `owner-worksheet`). When a unit test checks that references resolve, ask
+what else the consumer infers from the file, such as order.
